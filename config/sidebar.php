@@ -33,7 +33,11 @@ return [
             'sub_menu' => [
                 [
                     'url' => 'listregistrasipelanggan',
-                    'title' => 'List Registrasi Halal'
+                    'title' => 'List Registrasi Halal tes'
+                ],
+                 [
+                    'url' => 'listregistrasipelangganaktif',
+                    'title' => 'List Registrasi Aktif'
                 ],
                 // [
                 //     'url' => 'listpembayaranregistrasi',
@@ -125,6 +129,10 @@ return [
                 [
                     'url' => 'listregistrasipelanggan',
                     'title' => 'List Registrasi Halal'
+                ],
+                 [
+                    'url' => 'listregistrasipelangganaktif',
+                    'title' => 'List Registrasi Aktif tes'
                 ],
                 // [
                 //     'url' => 'listpembayaranregistrasi',

@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use App\Services\FileUploadServices;
 use App\Mail\KonfirmasiPembayaran;
+use App\Mail\ProgresStatus;
 use Illuminate\Support\Facades\Mail;
 use PDF;
 
@@ -55,13 +56,19 @@ class RegistrasiController extends Controller
         $dataJenis = JenisRegistrasi::all();
         return view('registrasi.listRegistrasi',compact('dataKelompok','dataJenis'));
     }
-    public function dataRegistrasiPelanggan(Request $request){
+    public function listRegistrasiPelangganAktif(){
+        $dataKelompok = KelompokProduk::all();
+        $dataJenis = JenisRegistrasi::all();
+        return view('registrasi.listRegistrasiAktif',compact('dataKelompok','dataJenis'));
+    }
+    public function dataRegistrasiPelangganAktif(Request $request){
         $gdata = $request->except('_token','_method');
         //start
         $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
-                 ->join('users','registrasi.id_user','=','users.id')
+                 //->join('users','registrasi.id_user','=','users.id')
+                 ->join('users','registrasi.id','=','users.registrasi_id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
 
         //filter condition
@@ -103,19 +110,66 @@ class RegistrasiController extends Controller
         return Datatables::of($xdata)->make();
     }
 
-    public function updateStatusRegistrasi($id,$no_registrasi,$status){
-        //get user name
+    public function dataRegistrasiPelanggan(Request $request){
+        $gdata = $request->except('_token','_method');
+        //start
+        $xdata = DB::table('registrasi')
+                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 //->join('users','registrasi.id','=','users.registrasi_id')
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
+
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['name'])){
+            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+        }
+        if(isset($gdata['perusahaan'])){
+            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+        }
+        if(isset($gdata['kelompok_produk'])){
+            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+        }
+        if(isset($gdata['tgl_registrasi'])){
+            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+        }
+        if(isset($gdata['jenis_registrasi'])){
+            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        }
+        if(isset($gdata['status_registrasi'])){
+            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
+        }
+        if(isset($gdata['metode_pembayaran'])){
+            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
+        }
+        if(isset($gdata['status_pembayaran'])){
+            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
+        }
+        if(isset($gdata['status'])){
+            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+        }
+
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
+    }
+
+
+       
+   
+
+
+    public function updateStatusRegistrasi($id,$no_registrasi,$id_user,$status){
+        
         $updater = Auth::user()->name;
 
-        //update status registrasi
-        // DB::table('registrasi')
-        // ->where('id', $id)
-        // ->update([
-        //     'status' => $status,
-        //     'updated_status_by' => $name
-        // ]);
-
         $model = new Registrasi();
+        $model2 = new User();
 
         try{
             DB::beginTransaction();
@@ -123,18 +177,56 @@ class RegistrasiController extends Controller
             $e->status = $status;
             $e->updated_status_by = $updater;
             $e->save();
-            DB::commit();
+            
+            
+            //DB::commit();
+            //Session::flash('success', ' '.$no_registrasi.' berhasil euyy!');
 
-            Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di update!');
+            // $dataUser = User::find($userId);
+            // $dataRegistrasi = Registrasi::find($id);
+            // Mail::to($dataUser->email)->send(new KonfirmasiPembayaran($dataUser,$dataRegistrasi));
+            if($status == '4' ||$status == '5' ||$status == '7' ||$status == '8' ||$status == '10' ||$status == '11' ||$status == '12' ||$status == '13' ||$status == '16' ||$status == '17' ||$status == '20' ||$status == '22' ||$status == '23' ||$status == '24' ||$status == '25'){
+
+
+                $u = $model2->find($id_user);
+            
+                    try{
+                        Mail::to($u->email)->send(new ProgresStatus($u, $status));
+                        //Session::flash('success', "data berhasil disimpan!");
+                        Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
+
+                        DB::commit();
+
+                    }catch(\Exception $u){
+
+                        Session::flash('error', $u->getMessage());
+                        //Session::flash('success', "data berhasil disimpan!");
+                        //$statusreg = $e->getMessage();
+
+                    }
+            }else{
+                DB::commit();
+                Session::flash('success', 'Data dengan nomor registrasi '.$no_registrasi.' berhasil diupdate');
+            }
+            
+            
+            //}
+                
+
+            //Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di update!');
         }catch (\Exception $e){
             DB::rollBack();
 
             Session::flash('error', $e->getMessage());
+
+           
         }
 
-        return redirect()->route('listregistrasipelanggan');
+        return redirect()->route('listregistrasipelangganaktif');
 
     }
+
+
 
     public function dataRegistrasiPelangganBayar(){
         $xdata = DB::table('registrasi')

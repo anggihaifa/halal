@@ -37,60 +37,81 @@
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="nav-item prev-button"><a href="#" data-click="prev-tab" class="nav-link text-primary"><i class="fa fa-arrow-left"></i></a></li>
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/has.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-1">
+								<img src="{{asset('/assets/img/halal/has.png')}}" width="40%" alt=""  /> 
+							</a>
+							
 							<a class="nav-link active" data-toggle="tab" href="#card-tab-1">Dokumen</a>
 						</li>
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/kantor.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-7">
+								<img src="{{asset('/assets/img/halal/kantor.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-7">Kantor Pusat</a>
 						</li>
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/menu.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-8">
+								<img src="{{asset('/assets/img/halal/menu.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-8">Menu Restoran</a>
 						</li>
 						@endif
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/fasilitas-1.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-2">
+								<img src="{{asset('/assets/img/halal/fasilitas-1.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-2">Fasilitas</a>
 						</li>
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 3 || $dataRegistrasi[0]['id_jenis_registrasi'] == 4 )
 						<li class="nav-item text-center">
 							@if($dataRegistrasi[0]['id_jenis_registrasi'] == 4)
-							<img src="{{asset('/assets/img/halal/servis.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-3">
+								<img src="{{asset('/assets/img/halal/servis.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-3">Servis</a>
 							@else
-							<img src="{{asset('/assets/img/halal/produk-1.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-3">
+								<img src="{{asset('/assets/img/halal/produk-1.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-3">Produk</a>
 							@endif
 						</li>
 						@endif
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/material-1.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-4">
+								<img src="{{asset('/assets/img/halal/material-1.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-4">Material</a>
 						</li>
 						@endif
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/matriks.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-5">
+								<img src="{{asset('/assets/img/halal/matriks.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-5">Matriks Produk</a>
 						</li>
 						@endif
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 3 )
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/penyembelih.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-9">
+								<img src="{{asset('/assets/img/halal/penyembelih.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-9">Jagal</a>
 						</li>
 						@endif
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/kuesioner.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-6">
+								<img src="{{asset('/assets/img/halal/kuesioner.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-6">Kuesioner SJPH</a>
 						</li>
 						<li class="nav-item next-button"><a href="#" data-click="next-tab" class="nav-link text-primary"><i class="fa fa-arrow-right"></i></a></li>
 					</ul>
 				</div>
-				<div class="card-body table-responsive">
+				<div class="card-body ">
 					<div class="tab-content p-0 m-0">
 						<div class="tab-pane fade active show" id="card-tab-1">
 							@php
@@ -129,12 +150,13 @@
 									<thead>
 										<tr>
 											<th width="1%" class="text-nowrap valign-middle text-center">No</th>
-											<th class=" valign-middle text-center">Nama Dokumen</th>
+											<th width="70%" class=" valign-middle text-center">Nama Dokumen</th>
 											<th width="1%" class="text-nowrap valign-middle text-center">File</th>
 											@if($dataHas !== null)
 											<th width="1%" class="text-nowrap valign-middle text-center">Status</th>
 											@endif
 											<th width="1%" class="text-nowrap valign-middle text-center">Keterangan</th>
+											<th width="30%" class="text-nowrap valign-middle text-center">Catatan</th>
 											<th width="1%" class="text-nowrap valign-middle text-center">Aksi</th>
 											
 										</tr>
@@ -148,20 +170,24 @@
 											<td class="">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_1" name="has_1" onchange="getValue('has_1')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
+											
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">2</td>
-											<td class="text-nowrap valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
+											<td class=" valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_2" name="has_2" onchange="getValue('has_2')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">3</td>
-											<td class="text-nowrap valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/Perpanjangan)</td>
+											<td class=" valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/Perpanjangan)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_3" name="has_3" onchange="getValue('has_3')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="even">
@@ -169,60 +195,69 @@
 											<td class="text-nowrap valign-middle">Flow process chart of halal certified products</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_4" name="has_4" onchange="getValue('has_4')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">5</td>
-											<td class="text-nowrap valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
+											<td class=" valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_5" name="has_5" onchange="getValue('has_5')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">6</td>
-											<td class="text-nowrap valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
+											<td class=" valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_6" name="has_6" onchange="getValue('has_6')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">7</td>
-											<td class="text-nowrap valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
+											<td class=" valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_7" name="has_7" onchange="getValue('has_7')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">8</td>
-											<td class="text-nowrap valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
+											<td class=" valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_8" name="has_8" onchange="getValue('has_8')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">9</td>
-											<td class="text-nowrap valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
+											<td class=" valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_9" name="has_9" onchange="getValue('has_9')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">10</td>
-											<td class="text-nowrap valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
+											<td class=" valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_10" name="has_10" onchange="getValue('has_10')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">11</td>
-											<td class="text-nowrap valign-middle">Bukti registrasi dari BPJPH</td>
+											<td class=" valign-middle">Bukti registrasi dari BPJPH</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_11" name="has_11" onchange="getValue('has_11')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">12</td>
-											<td class="text-nowrap valign-middle">Denah/ Tata letak ruang produksi</td>
+											<td class="valign-middle">Denah/ Tata letak ruang produksi</td>
 											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_12" name="has_12" onchange="getValue('has_12')"></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										</tr>
 									@else
@@ -231,158 +266,256 @@
 												<input type="text" name="id" value="{{$value['id']}}" readonly hidden>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">1</td>
-													<td class="text-nowrap valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_1" name="has_1" onchange="getValue('has_1')"></td>
+													<td class=" valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/ Pengembangan)</td>
+													<td   class=valign-middle text-center">
+														<input style="width:180px"type="file" id="has_1" name="has_1" onchange="getValue('has_1')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_1']])@endcomponent
+
 													@if($value['has_1'] !== null)
 														{!! $fieldSudah !!}
+														<td class=" mydiv  valign-middle">
+															{{$value['keterangan_has_1']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_1']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													
+												
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">2</td>
-													<td class="text-nowrap valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_2" name="has_2" onchange="getValue('has_2')"></td>
+													<td class=" valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
+													<td class="valign-middle text-center">
+														<input style="width:180px" type="file" id="has_2" name="has_2" onchange="getValue('has_2')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_2']])@endcomponent
 													@if($value['has_2'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_2']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class=" mydiv valign-middle">
+															{{$value['keterangan_has_2']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">3</td>
-													<td class="text-nowrap valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/Perpanjangan)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_3" name="has_3" onchange="getValue('has_3')"></td>
+													<td class="valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/ Perpanjangan)</td>
+													<td class="valign-middle text-center">
+														<input style="width:180px" type="file" id="has_3" name="has_3" onchange="getValue('has_3')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_3']])@endcomponent
 													@if($value['has_3'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_3']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class=" mydiv valign-middle">
+															{{$value['keterangan_has_3']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">4</td>
 													<td class="text-nowrap valign-middle">Flow process chart of halal certified products</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_4" name="has_4" onchange="getValue('has_4')"></td>
+													<td class="valign-middle text-center">
+														<input style="width:180px" type="file" id="has_4" name="has_4" onchange="getValue('has_4')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_4']])@endcomponent
 													@if($value['has_4'] !== null)
 														{!! $fieldSudah !!}
+														<td class=" mydiv valign-middle">
+															{{$value['keterangan_has_4']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_4']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">5</td>
-													<td class="text-nowrap valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_5" name="has_5" onchange="getValue('has_5')"></td>
+													<td class=" valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle text-center">
+														<input style="width:180px" type="file" id="has_5" name="has_5" onchange="getValue('has_5')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_5']])@endcomponent
 													@if($value['has_5'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_5']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_5']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">6</td>
-													<td class="text-nowrap valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_6" name="has_6" onchange="getValue('has_6')"></td>
+													<td class=" valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
+													<td class=" valign-middle text-center">
+														<input style="width:180px" type="file" id="has_6" name="has_6" onchange="getValue('has_6')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_6']])@endcomponent
 													@if($value['has_6'] !== null)
 														{!! $fieldSudah !!}
+														<td class=" mydiv valign-middle">
+															{{$value['keterangan_has_6']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_6']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">7</td>
-													<td class="text-nowrap valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_7" name="has_7" onchange="getValue('has_7')"></td>
+													<td class=" valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
+													<td class=" valign-middle text-center">
+														<input style="width:180px" type="file" id="has_7" name="has_7" onchange="getValue('has_7')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_7']])@endcomponent
 													@if($value['has_7'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_7']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_7']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">8</td>
-													<td class="text-nowrap valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_8" name="has_8" onchange="getValue('has_8')"></td>
+													<td class=" valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
+													<td class=" valign-middle text-center">
+														<input style="width:180px" type="file" id="has_8" name="has_8" onchange="getValue('has_8')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_8']])@endcomponent
 													@if($value['has_8'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_8']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_8']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">9</td>
-													<td class="text-nowrap valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_9" name="has_9" onchange="getValue('has_9')"></td>
+													<td class=" valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
+													<td class=" valign-middle text-center">
+														<input style="width:180px" type="file" id="has_9" name="has_9" onchange="getValue('has_9')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_9']])@endcomponent
 													@if($value['has_9'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_9']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_9']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">10</td>
-													<td class="text-nowrap valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_10" name="has_10" onchange="getValue('has_10')"></td>
+													<td class=" valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
+													<td class=" valign-middle text-center">
+														<input style="width:180px" type="file" id="has_10" name="has_10" onchange="getValue('has_10')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_10']])@endcomponent
 													@if($value['has_10'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_10']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_10']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">11</td>
-													<td class="text-nowrap valign-middle">Bukti registrasi dari BPJPH</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_11" name="has_11" onchange="getValue('has_11')"></td>
+													<td class=" valign-middle">Bukti registrasi dari BPJPH</td>
+													<td class="valign-middle text-center">
+														<input style="width:180px" type="file" id="has_11" name="has_11" onchange="getValue('has_11')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_11']])@endcomponent
 													@if($value['has_11'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_11']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_11']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">12</td>
-													<td class="text-nowrap valign-middle">Denah/ Tata letak ruang produksi</td>
-													<td class="text-nowrap valign-middle text-center"><input type="file" id="has_12" name="has_12" onchange="getValue('has_12')"></td>
+													<td class=" valign-middle">Denah/ Tata letak ruang produksi</td>
+													<td class=" valign-middle text-center">
+														<input style="width:180px" type="file" id="has_12" name="has_12" onchange="getValue('has_12')">
+													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_12']])@endcomponent
 													@if($value['has_12'] !== null)
 														{!! $fieldSudah !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_12']}}
+														</td>
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
+														<td class="mydiv valign-middle">
+															{{$value['keterangan_has_12']}}
+														</td>
 														{!! $buttonUnduhDisabled !!}
 													@endif
+												
 												</tr>
 											@endforeach()
 										@endif
@@ -597,7 +730,7 @@
 										<tbody>
 											<tr class="odd">
 												<td class="text-nowrap valign-middle text-center">1</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
 													Apakah perusahaan pemohon sertifikasi adalah distributor (bukan produsen/manufacturer)?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -613,7 +746,8 @@
 											</tr>
 											<tr class="even">
 												<td class="text-nowrap valign-middle text-center">2</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Jika jawaban pada poin 1 Ya, apakah perusahaan pemohon merupakan satu grup dengan produsen/manufacturer?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -629,7 +763,8 @@
 											</tr>
 											<tr class="odd">
 												<td class="text-nowrap valign-middle text-center">3</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Apakah perusahaan pemohon melakukan proses pelabelan ulang (relabeling) atau pengemasan ulang (repacking)?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -645,7 +780,8 @@
 											</tr>
 											<tr class="even">
 												<td class="text-nowrap valign-middle text-center">4</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Selain menghasilkan produk yang disertifikasi, apakah pabrik juga menghasilkan produk yang tidak disertifikasi?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -661,7 +797,8 @@
 											</tr>
 											<tr class="odd">
 												<td class="text-nowrap valign-middle text-center">5</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Jika jawaban pada poin 4 Ya, apakah ada penggunaan fasilitas produksi dan peralatan pembantu yang sama untuk produk yang disertifikasi dan produk yang tidak disertifikasi?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -699,7 +836,8 @@
 											<tbody>
 											<tr class="odd">
 												<td class="text-nowrap valign-middle text-center">1</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Apakah perusahaan pemohon sertifikasi adalah distributor (bukan produsen/manufacturer)?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -715,7 +853,8 @@
 											</tr>
 											<tr class="even">
 												<td class="text-nowrap valign-middle text-center">2</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Jika jawaban pada poin 1 Ya, apakah perusahaan pemohon merupakan satu grup dengan produsen/manufacturer?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -731,7 +870,8 @@
 											</tr>
 											<tr class="odd">
 												<td class="text-nowrap valign-middle text-center">3</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Apakah perusahaan pemohon melakukan proses pelabelan ulang (relabeling) atau pengemasan ulang (repacking)?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -747,7 +887,8 @@
 											</tr>
 											<tr class="even">
 												<td class="text-nowrap valign-middle text-center">4</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Selain menghasilkan produk yang disertifikasi, apakah pabrik juga menghasilkan produk yang tidak disertifikasi?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -763,7 +904,8 @@
 											</tr>
 											<tr class="odd">
 												<td class="text-nowrap valign-middle text-center">5</td>
-												<td class="text-nowrap valign-middle text-left">
+												<td class="valign-middle text-left">
+
 													Jika jawaban pada poin 4 Ya, apakah ada penggunaan fasilitas produksi dan peralatan pembantu yang sama untuk produk yang disertifikasi dan produk yang tidak disertifikasi?
 												</td>
 												<td class="text-nowrap valign-middle text-center">
@@ -825,6 +967,30 @@
 	<script src="{{asset('/assets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('/assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 	<script src="{{asset('/assets/js/demo/table-manage-default.demo.js')}}"></script>
+	<style>
+		.mydiv {
+		  display: table;
+		  table-layout: fixed;
+		  width: 100%; /* responsiveness */
+		  max-width: 180px;
+		  height: 56px;
+		  border: 1px solid; /* just for demo */
+		}
+
+		.mydiv span {
+		  display: table-cell;
+		  vertical-align: middle; 
+		  overflow: hidden;
+		  word-wrap: break-word; /* added */
+		}
+		input[type="file"] {
+		   
+		    white-space: normal;
+		    word-wrap: break-word;
+		    width: 200px;
+		    overflow: auto;
+		}
+	</style>
 	<script type="text/javascript">
 		$('#fasilitasTable').DataTable({
             columns:[

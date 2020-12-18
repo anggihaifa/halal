@@ -53,6 +53,39 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-xl-4 col-md-6">
+			@if($dataCurrent == null)
+			<div class="widget widget-stats bg-inverse animated zoomIn delay-5s">
+				<div class="stats-icon"><i class="ion-md-remove-circle-outline text-white"></i></div>
+				<div class="stats-info">
+					<h4>Notifikasi</h4>
+					<div><span>-</span></div>
+					<div><span>-</span></div>
+				</div>
+				<div class="stats-link">
+					<a href="javascript:;" target="_top"></a>
+				</div>
+			</div>
+			@else
+			<div class="widget widget-stats bg-red animated zoomIn delay-5s">
+				
+				<div class="stats-info">
+					<h4>Notifikasi</h4>
+					@foreach($dataCurrent as $key => $value)
+						
+						<div id="stat_val" style="display: none"><span>
+							{{$value['status']}}
+						</span></div>
+						<div id="notif_user"><span></span></div>
+							
+					@endforeach	
+				</div>
+			<div class="stats-link">
+				<a href="javascript:;" target="_top"></a>
+			</div>
+			</div>
+			@endif
+		</div>
         <div class="col-xl-3 col-md-6">
 			<div class="widget widget-stats bg-info animated zoomIn delay-3s">
 				<div class="stats-icon"><i class="ion-ios-document text-white"></i></div>
@@ -60,6 +93,7 @@
 					<h4>TOTAL REGISTRASI</h4>
 					<p>{{$totalRegistrasiUser}}</p>	
 				</div>
+
 				<div class="stats-link">
 					<a href="javascript:;" target="_top"></a>
 				</div>
@@ -86,8 +120,16 @@
 					@foreach($dataCurrent as $key => $value)
 							<div><span>{{$value['no_registrasi']}}</span></div>
 							<div><span>{{$value['jenis_registrasi']}}</span></div>
+							<!--
+							<div id="stat_val" style="display: none"><span>
+								{{$value['status']}}
+							</span></div>
+							<div id="status"><span></span></div>
+							-->
+								
 					@endforeach	
 				</div>
+				
 				<div class="stats-link">
 					<a href="javascript:;" target="_top"></a>
 				</div>
@@ -99,12 +141,23 @@
     
 @endsection
 @push('scripts')
+<script src="{{asset('/assets/js/checkData.js')}}"></script>
+<script>
+	function getProgress (data) {return checkProgress(data);}
+	function getNotif (data) {return notifProgress(data);}
+	data=document.getElementById("stat_val").textContent;
+	/*
+	document.getElementById("status").innerText = getProgress(data);
+	*/
+	document.getElementById("notif_user").innerText = getNotif(data);
+</script>
 
 <script>
     setTimeout(function(){
         $('#panelGreeting').fadeOut();  
     }, 5000);
 </script>
+
 
 @endpush
 

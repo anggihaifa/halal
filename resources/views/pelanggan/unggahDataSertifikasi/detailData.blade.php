@@ -39,54 +39,75 @@
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="nav-item prev-button"><a href="#" data-click="prev-tab" class="nav-link text-primary"><i class="fa fa-arrow-left"></i></a></li>
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/has.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-1">
+								<img src="{{asset('/assets/img/halal/has.png')}}" width="40%" alt=""  /> 
+							</a>
+							
 							<a class="nav-link active" data-toggle="tab" href="#card-tab-1">Dokumen</a>
 						</li>
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/kantor.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-7">
+								<img src="{{asset('/assets/img/halal/kantor.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-7">Kantor Pusat</a>
 						</li>
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/menu.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-8">
+								<img src="{{asset('/assets/img/halal/menu.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-8">Menu Restoran</a>
 						</li>
 						@endif
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/fasilitas-1.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-2">
+								<img src="{{asset('/assets/img/halal/fasilitas-1.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-2">Fasilitas</a>
 						</li>
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 3 || $dataRegistrasi[0]['id_jenis_registrasi'] == 4 )
 						<li class="nav-item text-center">
 							@if($dataRegistrasi[0]['id_jenis_registrasi'] == 4)
-							<img src="{{asset('/assets/img/halal/servis.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-3">
+								<img src="{{asset('/assets/img/halal/servis.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-3">Servis</a>
 							@else
-							<img src="{{asset('/assets/img/halal/produk-1.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-3">
+								<img src="{{asset('/assets/img/halal/produk-1.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-3">Produk</a>
 							@endif
 						</li>
 						@endif
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/material-1.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-4">
+								<img src="{{asset('/assets/img/halal/material-1.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-4">Material</a>
 						</li>
 						@endif
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/matriks.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-5">
+								<img src="{{asset('/assets/img/halal/matriks.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-5">Matriks Produk</a>
 						</li>
 						@endif
 						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 3 )
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/penyembelih.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-9">
+								<img src="{{asset('/assets/img/halal/penyembelih.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-9">Jagal</a>
 						</li>
 						@endif
 						<li class="nav-item text-center">
-							<img src="{{asset('/assets/img/halal/kuesioner.png')}}" width="40%" alt="" /> 
+							<a data-toggle="tab" href="#card-tab-6">
+								<img src="{{asset('/assets/img/halal/kuesioner.png')}}" width="40%" alt="" /> 
+							</a>
 							<a class="nav-link" data-toggle="tab" href="#card-tab-6">Kuesioner SJPH</a>
 						</li>
 						<li class="nav-item next-button"><a href="#" data-click="next-tab" class="nav-link text-primary"><i class="fa fa-arrow-right"></i></a></li>
@@ -133,11 +154,12 @@
 									<thead>
 										<tr>
 											<th width="1%" class="text-nowrap valign-middle text-center">No</th>
-											<th class=" valign-middle text-center">Nama Dokumen</th>
+											<th width="1%" class="text-nowrap valign-middle text-center">Nama Dokumen</th>
 											<th width="1%" class="text-nowrap valign-middle text-center">File</th>
 											@if($dataHas !== null)
 											<th class="text-nowrap valign-middle text-center" style="width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;</th>
 											@endif
+											<th width="20%" class="text-nowrap valign-middle text-center">Catatan</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -146,61 +168,85 @@
 										<input type="text" name="status" value="0" readonly hidden>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">1</td>
-											<td class="text-nowrap valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
+											<td class="valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">2</td>
-											<td class="text-nowrap valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
+											<td class="valign-middle" style="word-wrap:break-word">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
-										<tr class="odd">
+																			<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">3</td>
 											<td class="text-nowrap valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/Perpanjangan)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">4</td>
-											<td class="text-nowrap valign-middle">Flow process chart of halal certified products</td>
+											<td class=" valign-middle">Flow process chart of halal certified products</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">5</td>
-											<td class="text-nowrap valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
+											<td class="valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">6</td>
-											<td class="text-nowrap valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
+											<td class=" valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">7</td>
-											<td class="text-nowrap valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
+											<td class=" valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">8</td>
-											<td class="text-nowrap valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
+											<td class="valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
+
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">9</td>
-											<td class="text-nowrap valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
+											<td class="valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">10</td>
-											<td class="text-nowrap valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
+											<td class="valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">11</td>
-											<td class="text-nowrap valign-middle">Bukti registrasi dari BPJPH</td>
+											<td class="valign-middle">Bukti registrasi dari BPJPH</td>
+											
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">12</td>
-											<td class="text-nowrap valign-middle">Denah/ Tata letak ruang produksi</td>
+											<td class="valign-middle">Denah/ Tata letak ruang produksi</td>
 											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
 										</tr>
 									@else
 											@foreach($dataHas as $has => $value)
@@ -208,7 +254,7 @@
 												<input type="text" name="id" value="{{$value['id']}}" readonly hidden>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">1</td>
-													<td class="text-nowrap valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
+													<td class="valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
 													@if($value['has_1'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -221,10 +267,16 @@
 						                                    <option value="2" {{$value["status_has_1"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td >
+														<input class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value={{$value['keterangan_has_1']}}>
+														</input>
+														
+
+													</td>
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">2</td>
-													<td class="text-nowrap valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
+													<td class="valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
 													@if($value['has_2'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -236,6 +288,9 @@
 															<option value="1" {{$value["status_has_2"] == 1 ? 'selected' : ''}}>Approve</option>
 						                                    <option value="2" {{$value["status_has_2"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
+													</td>
+													<td >
+														<input type="text" class="form-control" name="keterangan_has_2" value={{$value["keterangan_has_2"]}} ></input>
 													</td>
 												</tr>
 												<tr class="odd">
@@ -253,10 +308,14 @@
 						                                    <option value="2" {{$value["status_has_3"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td >
+														<input type="text" class="form-control" name="keterangan_has_3" value={{$value['keterangan_has_3']}} >
+														</input>
+													</td>
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">4</td>
-													<td class="text-nowrap valign-middle">Flow process chart of halal certified products</td>
+													<td class="valign-middle">Flow process chart of halal certified products</td>
 													@if($value['has_4'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -269,10 +328,11 @@
 						                                    <option value="2" {{$value["status_has_4"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_4" value={{$value['keterangan_has_4']}} ></input></td>
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">5</td>
-													<td class="text-nowrap valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
 													@if($value['has_5'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -285,9 +345,10 @@
 						                                    <option value="2" {{$value["status_has_5"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control"  name="keterangan_has_5" value={{$value['keterangan_has_5']}}  ></input></td>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">6</td>
-													<td class="text-nowrap valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
+													<td class="valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
 													@if($value['has_6'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -300,10 +361,11 @@
 						                                    <option value="2" {{$value["status_has_6"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control"  name="keterangan_has_6" value={{$value['keterangan_has_6']}} ></input></td>
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">7</td>
-													<td class="text-nowrap valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
 													@if($value['has_7'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -316,9 +378,10 @@
 						                                    <option value="2" {{$value["status_has_7"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_7" value={{$value['keterangan_has_7']}} ></input></td>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">8</td>
-													<td class="text-nowrap valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
 													@if($value['has_8'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -331,10 +394,11 @@
 						                                    <option value="2" {{$value["status_has_8"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_8" value={{$value['keterangan_has_8']}} ></input></td>
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">9</td>
-													<td class="text-nowrap valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
 													@if($value['has_9'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -347,10 +411,11 @@
 						                                    <option value="2" {{$value["status_has_9"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_9" value={{$value['keterangan_has_9']}} ></input></td>
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">10</td>
-													<td class="text-nowrap valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
+													<td class=" valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
 													@if($value['has_10'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -363,10 +428,11 @@
 						                                    <option value="2" {{$value["status_has_10"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_10" value={{$value['keterangan_has_10']}}></input></td>
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">11</td>
-													<td class="text-nowrap valign-middle">Bukti registrasi dari BPJPH</td>
+													<td class="valign-middle">Bukti registrasi dari BPJPH</td>
 													@if($value['has_11'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -379,10 +445,11 @@
 						                                    <option value="2" {{$value["status_has_11"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_11" value={{$value['keterangan_has_11']}} ></input></td>
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">12</td>
-													<td class="text-nowrap valign-middle">Denah/ Tata letak ruang produksi</td>
+													<td class="valign-middle">Denah/ Tata letak ruang produksi</td>
 													@if($value['has_12'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -395,6 +462,7 @@
 						                                    <option value="2" {{$value["status_has_12"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_12" value={{$value['keterangan_has_12']}} ></input></td>
 												</tr>
 											@endforeach()
 										@endif
@@ -559,7 +627,7 @@
                                         <tbody>
                                             <tr class="odd">
                                                 <td class="text-nowrap valign-middle text-center">1</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class="valign-middle text-left">
                                                     Apakah perusahaan pemohon sertifikasi adalah distributor (bukan produsen/manufacturer)?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -575,7 +643,7 @@
                                             </tr>
                                             <tr class="even">
                                                 <td class="text-nowrap valign-middle text-center">2</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class="valign-middle text-left">
                                                     Jika jawaban pada poin 1 Ya, apakah perusahaan pemohon merupakan satu grup dengan produsen/manufacturer?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -591,7 +659,7 @@
                                             </tr>
                                             <tr class="odd">
                                                 <td class="text-nowrap valign-middle text-center">3</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class=" valign-middle text-left">
                                                     Apakah perusahaan pemohon melakukan proses pelabelan ulang (relabeling) atau pengemasan ulang (repacking)?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -607,7 +675,7 @@
                                             </tr>
                                             <tr class="even">
                                                 <td class="text-nowrap valign-middle text-center">4</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class=" valign-middle text-left">
                                                     Selain menghasilkan produk yang disertifikasi, apakah pabrik juga menghasilkan produk yang tidak disertifikasi?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -623,7 +691,7 @@
                                             </tr>
                                             <tr class="odd">
                                                 <td class="text-nowrap valign-middle text-center">5</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class=" valign-middle text-left">
                                                     Jika jawaban pada poin 4 Ya, apakah ada penggunaan fasilitas produksi dan peralatan pembantu yang sama untuk produk yang disertifikasi dan produk yang tidak disertifikasi?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -661,7 +729,7 @@
                                             <tbody>
                                             <tr class="odd">
                                                 <td class="text-nowrap valign-middle text-center">1</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class=" valign-middle text-left">
                                                     Apakah perusahaan pemohon sertifikasi adalah distributor (bukan produsen/manufacturer)?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -677,7 +745,7 @@
                                             </tr>
                                             <tr class="even">
                                                 <td class="text-nowrap valign-middle text-center">2</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class=" valign-middle text-left">
                                                     Jika jawaban pada poin 1 Ya, apakah perusahaan pemohon merupakan satu grup dengan produsen/manufacturer?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -693,7 +761,7 @@
                                             </tr>
                                             <tr class="odd">
                                                 <td class="text-nowrap valign-middle text-center">3</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class=" valign-middle text-left">
                                                     Apakah perusahaan pemohon melakukan proses pelabelan ulang (relabeling) atau pengemasan ulang (repacking)?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -709,7 +777,7 @@
                                             </tr>
                                             <tr class="even">
                                                 <td class="text-nowrap valign-middle text-center">4</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class=" valign-middle text-left">
                                                     Selain menghasilkan produk yang disertifikasi, apakah pabrik juga menghasilkan produk yang tidak disertifikasi?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -725,7 +793,7 @@
                                             </tr>
                                             <tr class="odd">
                                                 <td class="text-nowrap valign-middle text-center">5</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class=" valign-middle text-left">
                                                     Jika jawaban pada poin 4 Ya, apakah ada penggunaan fasilitas produksi dan peralatan pembantu yang sama untuk produk yang disertifikasi dan produk yang tidak disertifikasi?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">
@@ -741,7 +809,7 @@
                                             </tr>
                                             <tr class="even">
                                                 <td class="text-nowrap valign-middle text-center">6</td>
-                                                <td class="text-nowrap valign-middle text-left">
+                                                <td class="text-center valign-middle text-left">
                                                     Jika jawaban pada poin 5 Ya, apakah ada penggunaan bahan dari babi atau turunannya?
                                                 </td>
                                                 <td class="text-nowrap valign-middle text-center">

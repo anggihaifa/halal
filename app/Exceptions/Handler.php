@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
             //return view('auth/login',compact('sessionNotes'));
             return redirect()->route('login')->with('status',$sessionNotes);
         }
-
+        
 
         //return redirect()->route('login');
 

@@ -41,14 +41,28 @@
 		<ul class="nav">
 			@if ($sidebarSearch)
 			<li class="nav-search">
-        <input type="text" class="form-control" placeholder="Sidebar menu filter..." data-sidebar-search="true" />
+        		<input type="text" class="form-control" placeholder="Sidebar menu filter..." data-sidebar-search="true" />
 			</li>
 			@endif
 			<li class="nav-header">Navigation</li>
 			@php
+
+				function console_log($output, $with_script_tags = true) {
+				    $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . 
+				');';
+				    if ($with_script_tags) {
+				        $js_code = '<script>' . $js_code . '</script>';
+				    }
+				    echo $js_code;
+				}
+
+				//console_log($value); 
 				$currentUrl = (Request::path() != '/') ? '/'. Request::path() : '/';
 				
+				
+
 				function renderSubMenu($value, $currentUrl) {
+					//console_log($value); 
 					$subMenu = '';
 					$GLOBALS['sub_level'] += 1 ;
 					$GLOBALS['active'][$GLOBALS['sub_level']] = '';

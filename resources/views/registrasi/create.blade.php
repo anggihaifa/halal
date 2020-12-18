@@ -177,63 +177,6 @@
                                 </select>
                             </div>
 
-
-							<!-- <label class="col-lg-4 col-form-label">Biaya Registrasi</label>
-							<div class="col-lg-8">
-								<input name="biaya_registrasi" type="text" class="form-control" placeholder="" value="Rp 220,000" readonly />
-								<small class="f-s-12 text-grey-darker m-t-5">Sudah Termasuk PPN 10%</small>
-							</div>
-
-							<label class="col-lg-4 col-form-label">Metode Pembayaran</label>
-							<div class="col-lg-8">
-								<div class="radio radio-css radio-inline">
-									<input type="radio" name="metode_pembayaran" id="metodePembayaran1" value="tunai" checked />
-									<label for="metodePembayaran1">Tunai</label>
-								</div>
-								<div class="radio radio-css radio-inline">
-									<input type="radio" name="metode_pembayaran" id="metodePembayaran2" value="transfer" />
-									<label for="metodePembayaran2">Transfer</label>
-								</div>
-							</div>
-
-                            <label id="ltunai" class="col-lg-4 col-form-label">Cara Pembayaran Tunai</label>
-                            <div id="dtunai" class="col-lg-8">
-                                <div id="accordionTunai" class="accordion">
-                                    @foreach($dataTunai as $index => $value)
-                                        <div class="card">
-                                            <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapse{{$value['id']}}" style="cursor: pointer; padding: 2px 5px;">
-                                                <img class="animated bounceIn " src="{{asset('/assets/img/user/reg-info.png')}}" alt="" style="height: 30px;margin-right: 10px;">
-                                                <span class="faq-ask">{{ucwords($value['question'])}}</span>
-                                            </div>
-                                            <div id="collapse{{$value['id']}}" class="collapse" data-parent="#accordionTunai">
-                                                <div class="card-body">
-                                                    <?php echo html_entity_decode($value['answer'])?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <label id="ltransfer" class="col-lg-4 col-form-label">Cara Pembayaran Transfer</label>
-                            <div id="dtransfer" class="col-lg-8">
-                                <div id="accordionTransfer" class="accordion">
-                                    @foreach($dataTransfer as $index => $value)
-                                        <div class="card">
-                                            <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapse{{$value['id']}}" style="cursor: pointer; padding: 2px 5px">
-                                                <img class="animated bounceIn " src="{{asset('/assets/img/user/reg-info.png')}}" alt="" style="height: 30px;margin-right: 10px;">
-                                                <span class="faq-ask">{{ucwords($value['question'])}}</span>
-                                            </div>
-                                            <div id="collapse{{$value['id']}}" class="collapse" data-parent="#accordionTransfer">
-                                                <div class="card-body">
-                                                    <?php echo html_entity_decode($value['answer'])?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div> -->
-
 							<div class="col-md-12 offset-md-5">
 								<button type="submit" class="btn btn-sm btn-primary m-r-5">Kirim</button>
 								@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
@@ -264,11 +207,7 @@
         if(d < 10 ){ d = '0'+ d;}
         if(month < 10){ month = '0'+ month; }
         var todayFormat = y+"-"+month+"-"+d ;
-        /*$('#tgl_registrasi').datepicker({
-            format: "yyyy-mm-dd",
-            todayHighlight: true,
-            beforeShow: function(i) { if ($(i).attr('readonly')) { return false; } }
-        });*/
+
         $('#tgl_registrasi').val(todayFormat);
         $('#sh_berlaku').datepicker({
             format: "yyyy-mm-dd",
@@ -286,53 +225,10 @@
         var lshb = document.getElementById('lshb');
         var shb = document.getElementById('shb');
 
-        //cara pembayaran
-        // var metode = document.registerForm.metode_pembayaran;
-        // var ltunai = document.getElementById('ltunai');
-        // var dtunai = document.getElementById('dtunai');
-        // var ltransfer = document.getElementById('ltransfer');
-        // var dtransfer = document.getElementById('dtransfer');
-
-
         lsh.style.display = 'none';
         sh.style.display = 'none';
         lshb.style.display = 'none';
         shb.style.display = 'none';
-
-        // ltunai.style.display = 'block';
-        // dtunai.style.display = 'block';
-        // ltransfer.style.display = 'none';
-        // dtransfer.style.display = 'none';
-
-        //dokumen sjph
-        // var sjph = document.getElementById('status_sjph');
-        // var ljph0 = document.getElementById('lsjph0');
-        // var djph0 = document.getElementById('dsjph0');
-        // var ljph = document.getElementById('lsjph');
-        // var djph = document.getElementById('dsjph');
-
-        // ljph0.style.display = 'block';
-        // djph0.style.display = 'block';
-        // ljph.style.display = 'block';
-        // djph.style.display = 'block';
-
-        // document.getElementById("status_sjph").addEventListener("change", mySjph);
-
-        // function mySjph(){
-        //     if(sjph.value == "Belum Ada"){
-        //         ljph0.style.display = 'none';
-        //         djph0.style.display = 'none';
-        //         ljph.style.display = 'none';
-        //         djph.style.display = 'none';
-        //     }else{
-        //         ljph0.style.display = 'block';
-        //         djph0.style.display = 'block';
-        //         ljph.style.display = 'block';
-        //         djph.style.display = 'block';
-        //    }
-        // }
-
-
 
         for (var i = 0; i < reg.length; i++) {
             reg[i].addEventListener('change', function() {
@@ -350,22 +246,6 @@
             });
         }
 
-        //metode pembayaran
-        // for (var i = 0; i < metode.length; i++) {
-        //     metode[i].addEventListener('change', function() {
-        //         if (this.value == 'tunai') {
-        //             ltunai.style.display = 'block';
-        //             dtunai.style.display = 'block';
-        //             ltransfer.style.display = 'none';
-        //             dtransfer.style.display = 'none';
-        //         }else{
-        //             ltunai.style.display = 'none';
-        //             dtunai.style.display = 'none';
-        //             ltransfer.style.display = 'block';
-        //             dtransfer.style.display = 'block';
-        //         }
-        //     });
-        // }
 
 
         $('#no_tipe').attr('placeholder','No. KTP');

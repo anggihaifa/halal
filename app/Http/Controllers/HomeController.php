@@ -54,6 +54,7 @@ class HomeController extends Controller
         $dataPelanggan = count($checkUser);
         $dataRegistrasiAktif = count($checkRegistrasiActive);
         $totalRegistrasiUser = count($getTotalRegistrasiUser);
+        //$statusRegistrasiUser = count($getTotalRegistrasiUser);
         $dataDetailUser = json_decode($getDetailDataUser,true);
         if(isset($currentRegistrasi)){
             $dataCurrent = json_decode($currentRegistrasi,true);    

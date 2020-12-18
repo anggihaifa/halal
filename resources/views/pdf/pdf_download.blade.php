@@ -81,70 +81,12 @@
 	<img class="body-bg" src="{{ public_path('/assets/img/logo/sci-color.png') }}" alt="" >
 	<div class="forHeader">
 		<div class="inHeader">
-			<img class="logo-sucofindo" src="{{ public_path('/assets/img/logo/sci-color.png') }}" alt="" >	
+			<img class="logo-sucofindo" src="{{ public_path('/assets/img/logo/sci-color.png') }}" alt="" >
 			<div class="text-header">
 				<div>LEMBAGA PEMERIKSA HALAL</div>
 				<div>SUCOFINDO</div>
-			</div>	
+			</div>
 		</div>
-	</div>
-
-	<div>
-		<p>Pelanggan dengan nomor registrasi <b>{{$no_registrasi}}</b> telah terdaftar dalam sistem <b>LPH</b>SUCOFINDO untuk melakukan pembayaran registrasi secara 
-
-
-			<?php
-				if($data['metode_pembayaran'] == 'tunai'){
-					echo "tunai melalui kasir SUCOFINDO cabang".$kota;
-				}else{
-					echo "transfer";
-				}
-			?>
-			
-
-		</p>
-	</div>
-	<div class="isiData">
-		<table>
-			<tr>
-				<td>Nama Perusahaan</td>
-				<td>:</td>
-				<td><b>{{$perusahaan}}</b></td>
-			</tr>
-			<tr>
-				<td>Nama</td>
-				<td>:</td>
-				<td><b>{{$nama}}</b></td>
-			</tr>
-			<tr>
-				<td>{{strtoupper($data['tipe'])}}</td>
-				<td>:</td>
-				<td><b>{{$data['no_tipe']}}</b></td>
-			</tr>
-			<tr>
-				<td>Status Registrasi</td>
-				<td>:</td>
-				<td><b>{{ucwords($data['status_registrasi'])}}</b></td>
-			</tr>
-			<tr>
-				<td>Biaya Registrasi</td>
-				<td>:</td>
-				<td><b>{{$data['biaya_registrasi']}}</b></td>
-			</tr>
-			<tr>
-				<td>(Termasuk PPN)</td>
-				<td>:</td>
-				<td><b>(<i>Dua Ratus Dua Puluh Ribu Rupiah</i>)</b></td>
-			</tr>
-			
-		</table>
-	</div>
-	<br>
-	<br>
-	<br>
-	<div>
-		{{$kota}}, {{$data['tgl_registrasi']}}
 	</div>
 </body>
 </html>
-

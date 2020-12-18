@@ -32,8 +32,12 @@ Route::get('activate_registrasi/{token}','RegistrasiController@activeRegistrasi'
 //list registrasi pelanggan
 Route::get('list_registrasi_pelanggan','RegistrasiController@listRegistrasiPelanggan')->name('listregistrasipelanggan');
 Route::get('data_registrasi_pelanggan','RegistrasiController@dataRegistrasiPelanggan')->name('dataregistrasipelanggan');
+//list registrasi pelanggan aktif
+Route::get('list_registrasi_pelanggan_aktif','RegistrasiController@listRegistrasiPelangganAktif')->name('listregistrasipelangganaktif');
+Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistrasiPelangganAktif')->name('dataregistrasipelangganaktif');
+//
 
-Route::get('update_status_registrasi/{id}/{no_registrasi}/{status}','RegistrasiController@updateStatusRegistrasi');
+Route::get('update_status_registrasi/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusRegistrasi');
 
 Route::get('data_registrasi_pelanggan_bayar','RegistrasiController@dataRegistrasiPelangganBayar')->name('dataregistrasipelangganbayar');
 
@@ -116,8 +120,6 @@ Route::get('tambah_produk','RegistrasiController@createProduk')->name('tambahpro
 Route::post('store_produk','RegistrasiController@storeProduk')->name("storeproduk");
 Route::get('edit_produk/{id}','RegistrasiController@editProduk')->name('editproduk');
 Route::put('update_produk/{id}','RegistrasiController@updateProduk')->name('updateproduk');
-
-
 //dokumen has
 Route::post('store_dokumen_has','RegistrasiController@storeDokumenHas')->name("storedokumenhas");
 Route::get('delete_dokumen_has/{id}','RegistrasiController@deleteDokumenHas')->name('deletedokumenhas');

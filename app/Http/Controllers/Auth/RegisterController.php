@@ -138,7 +138,7 @@ class RegisterController extends Controller
                             $statusreg = "Data berhasil disimpan, silahkan verifikasi email anda untuk bisa login";
 
                             DB::commit();
-
+                                
         				}catch(\Exception $e){
 
         					//Session::flash('error', $e->getMessage());
