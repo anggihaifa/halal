@@ -16,6 +16,7 @@ use App\RegistrasiKU;
 use App\RegistrasiJasa;
 use App\RegistrasiJumlahProduksi;
 use App\DetailKU;
+use App\ProgressUser;
 use App\Models\Registrasi;
 use App\Models\System\User;
 use App\Models\Master\JenisRegistrasi;
@@ -431,6 +432,8 @@ class RegistrasiController extends Controller
             $model->kapasitas_produksi = $data['kapasitas_produksi'];
             $model->id_kelompok_produk = $data['id_kelompok_produk'];
 
+            $model->progress = 1;
+
             if($data['id_jenis_registrasi'] == 3){
                 $model->jenis_usaha = $data['jenis_usaha'];
                 $model->nama_jenis_usaha = $data['nama_jenis_usaha'];
@@ -508,7 +511,7 @@ class RegistrasiController extends Controller
             $model_regispemilik->email_pj = $data['email_pj'];
 
             $model_regispemilik->save();
-            DB::commit();
+            DB::commit();            
 
             if($data['id_jenis_registrasi'] == 1 || $data['id_jenis_registrasi'] == 5){
                 $model_regisdataproduk = new RegistrasiDataProduk();
@@ -693,7 +696,8 @@ class RegistrasiController extends Controller
                     );                    
                     RegistrasiLokasiLain::create($data2);
                 }
-            }            
+            }               
+
             
             // dd($data);
             // $model_regislokasilain->save();

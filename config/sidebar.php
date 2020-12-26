@@ -120,6 +120,11 @@ return [
                     
             ],
         ],
+        [
+            'icon' => 'ion-ios-home',
+            'title' => 'F.A.Q',
+            'url' => 'faq.index'
+        ],
     ],
     'menu3' => [
         [
@@ -229,6 +234,11 @@ return [
                     'title' => 'Pembayaran Sertifikasi Halal'
                 ],*/
             ],
+        ],
+        [
+            'icon' => 'ion-ios-home',
+            'title' => 'F.A.Q',
+            'url' => 'faq.index'
         ],
     ],
 ];
