@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Pembayaran Sertifikasi Halal')
+@section('title', 'Pelunasan Sertifikasi Halal')
 
 @push('css')
 	<link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css')}}" rel="stylesheet" />
@@ -9,7 +9,7 @@
 @section('content')
     <!-- begin breadcrumb -->
 	<ol class="breadcrumb float-xl-right">
-		<li class="breadcrumb-item">Registrasi</li>
+		<li class="breadcrumb-item">Pelunasan</li>
 		<li class="breadcrumb-item active">Pembayaran Sertifikasi Halal</li>
 	</ol>
 	<!-- end breadcrumb -->
@@ -32,7 +32,7 @@
 				<!-- end panel-heading -->
 				<!-- begin panel-body -->
 				<div class="panel-body panel-form">
-					<form action="{{route('registrasi.konfirmasipembayaran',["id" => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
+					<form action="{{route('registrasi.konfirmasiPelunasan',["id" => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
 						@csrf
 						@method('PUT')
 						<div class="form-group row" >
@@ -41,50 +41,61 @@
 								<input type="text" name="id" value="{{$data->id}}" hidden readonly>
 								<input type="text" class="form-control" name='no_registrasi' value="{{$data->no_registrasi}}" readonly/>
 							</div>
-							
-							<label class="col-lg-4 col-form-label">Tanggal Pembayaran</label>
+							<!-- <label class="col-lg-4 col-form-label">Metode Pembayaran</label> -->
+							<!-- <div class="col-lg-8">
+								<div class="radio radio-css radio-inline">
+									<input type="radio" name="metode_pembayaran" id="metodePembayaran1" value="tunai" {{ $data->metode_pembayaran == "tunai" ? 'checked' : 'disabled'}}  />
+									<label for="metodePembayaran1">Tunai</label>
+								</div>
+								 <div class="radio radio-css radio-inline">
+									<input type="radio" name="metode_pembayaran" id="metodePembayaran2" value="transfer" {{ $data->metode_pembayaran == "transfer" ? 'checked' : 'disabled'}} />
+									<label for="metodePembayaran2">Transfer</label>
+								</div> 
+							</div> -->
+							<label class="col-lg-4 col-form-label">Tanggal Pelunasan</label>
 							<div class="col-lg-8">
-								<input id="tanggal_tahap1" name="tanggal_tahap1" type="text" class="form-control" {{ $dataP->status_tahap1 == 1 ? 'disabled' : ''}} />
+								<input id="tgl_pelunasan" name="tgl_pelunasan" type="text" class="form-control" {{ $data->status_pelunasan == 1 ? 'disabled' : ''}} />
 							</div>
 							<label class="col-lg-4 col-form-label">Biaya Sertifikasi</label>
+							
 							<div class="col-lg-8">
-								<input type="text" class="form-control" value="Rp. {{ $dataP->nominal_tahap1}} " disabled/>
+								<input type="text" class="form-control" value="Rp. {{ $data->biaya_registrasi}} " disabled/>
 							</div>
-							@if($dataP->status_tahap1 == 1)
+							@if($data->status_pelunasan == 1)
 								<!--Auto Download-->
-								<label class="col-lg-4 col-form-label">Bukti Pembayaran</label>
+								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public//buktipembayaran/'.Auth::user()->id.'/'.$data->bb_tahap1 }}" download>{{$dataP->bb_tahap1}}</a>
+										<a href="{{url('') .Storage::url('public//buktipelunasan/'.Auth::user()->id.'/'.$data->bukti_pelunasan) }}" download>{{$data->bukti_pelunasan}}</a>
 									</div>
 								</div>
-								<label class="col-lg-4 col-form-label">Upload Bukti Pembayaran</label>
+								<label class="col-lg-4 col-form-label">Upload Bukti Pemlunasan</label>
 								<div class="col-lg-8">
-									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pembayaran masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
+									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pelunasan masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
 								</div>
-							@elseif($dataP->sstatus_tahap1 == 2)	
+							@elseif($data->status_pelunasan == 2)	
 								<!--Auto Download-->
-								<label class="col-lg-4 col-form-label">Bukti Pembayaran</label>
+								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$data->bb_>tahap1) }}" download>{{$dataP->bb_tahap1}}</a>
+										<a href="{{url('') .Storage::url('public/buktipelunasan/'.Auth::user()->id.'/'.$data->bukti_pelunasan) }}" download>{{$data->bukti_pelunasan}}</a>
 									</div>
 								</div>
-								<label class="col-lg-4 col-form-label">Bukti Konfirmasi Pembayaran Sertifikasi</label>
+								<label class="col-lg-4 col-form-label">Bukti Konfirmasi PelunasanSertifikasi</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/pembayaran/'.$data->bt_tahap1) }}" download>{{$dataP->bt_tahap1}}</a>
+											<a href="{{url('') .Storage::url('public/pelunasan/'.$data->inv_pelunasan) }}" download>{{$data->inv_pelunasan}}</a>
 									</div>
 								</div>
 							@else
-								<label class="col-lg-4 col-form-label">Upload Bukti Pembayaran</label>
+								<label class="col-lg-4 col-form-label">Upload Bukti Pelunasan</label>
 								<div class="col-lg-8">
-									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pembayaran masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
+									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pelunasan masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
 								</div>
 							@endif
 
 							
-								<label id="ltransfer" class="col-lg-4 col-form-label">Cara Pembayaran Transfer</label>
+								<label id="ltransfer" class="col-lg-4 col-form-label">Cara Pelunasan Transfer</label>
 	                            <div id="dtransfer" class="col-lg-8">
 	                                <div id="accordionTransfer" class="accordion">
 	                                    @foreach($dataTransfer as $index => $value)
@@ -110,11 +121,11 @@
 										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
 									@else -->
 										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
-										@if($dataP->status_tahap1 == 1)
+										@if($data->status_pelunasan == 1)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
-											<button type="submit" class="btn btn-sm btn-warning m-r-5" disabled>Pembayaran Sedang Diproses</button>
-										@elseif($dataP->status_tahap1 == 2)
-											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Pembayaran Sudah Dikonfirmasi</button>
+											<button type="submit" class="btn btn-sm btn-warning m-r-5" disabled>Pelunasan Sedang Diproses</button>
+										@elseif($data->status_pelunasan == 2)
+											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Pelunasan Sudah Dikonfirmasi</button>
 										@else
 											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
 										@endif								
@@ -137,11 +148,11 @@
     <script type="text/javascript">
     	//var date = new Date();
         var today = new Date();
-    	$('#tgl_pembayaran').datepicker({
+    	$('#tgl_pelunasan').datepicker({
             format: "yyyy-mm-dd",
             todayHighlight: true,
         });
-        $('#tgl_pembayaran').datepicker('setDate', today);
+        $('#tgl_pelunasan').datepicker('setDate', today);
     </script>
 
 @endpush

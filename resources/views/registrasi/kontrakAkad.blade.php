@@ -1,0 +1,265 @@
+@extends('layouts.default')
+
+@section('title', 'Kontrak Akad Sertifikasi Halal')
+
+@push('css')
+	<link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css')}}" rel="stylesheet" />
+@endpush
+
+@section('content')
+    <!-- begin breadcrumb -->
+	<ol class="breadcrumb float-xl-right">
+		<li class="breadcrumb-item">Registrasi</li>
+		<li class="breadcrumb-item active">Kontrak Akad Sertifikasi Halal</li>
+	</ol>
+	<!-- end breadcrumb -->
+	<!-- begin page-header -->
+	<h1 class="page-header">Kontrak Akad Sertifikasi Halal<small></small></h1>
+	<!-- end page-header -->
+	<!-- begin row -->
+	<div class="row">
+		<!-- begin col-12 -->
+		<div class="col-xl-12">
+            <!-- begin panel -->
+            <div class="panel panel-inverse" data-sortable-id="form-plugins-7">
+				<!-- begin panel-heading -->
+				<div class="panel-heading">
+					<h4 class="panel-title">Kontrak Akad Sertifikasi Halal</h4>
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+					</div>
+				</div>
+				<!-- end panel-heading -->
+				<!-- begin panel-body -->
+				<div class="panel-body panel-form">
+					<form action="{{route('registrasi.uploadfileakaduser',["id" => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
+						@csrf
+						@method('PUT')
+						<div class="form-group row" >
+							<label class="col-lg-4 col-form-label">No Registrasi</label>
+							<div class="col-lg-8">
+								<input type="text" name="id" value="{{$data->id}}" hidden readonly>
+								<input type="text" class="form-control" name='no_registrasi' value="{{$data->no_registrasi}}" readonly/>
+							</div>
+							
+							<label class="col-lg-4 col-form-label">Tanggal Akad</label>
+							<div class="col-lg-8">
+							@if($data->status_akad ==0 )
+
+								<input id="tgl_akad" name="tgl_akad" type="text" class="form-control"/>
+							@else
+								<input id="tgl_akad" name="tgl_akad" type="text" class="form-control" value={{ $data->status_akad}} readonly />
+							@endif
+							</div>
+							<label class="col-lg-4 col-form-label">Skala Usaha</label>
+							<div class="col-lg-8">
+								<input id="skala_usaha" class="form-control"  name="skala_usaha" value={{ $data->skala_usaha }} type="text" readonly/>
+                              
+                            </div>
+							
+							@if($data->skala_usaha == 'mikro')
+							<label class="col-lg-4 col-form-label">Mata Uang</label>
+							<div class="col-lg-8">
+								<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+	                        </div>           
+							
+
+							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
+							
+							<div class="col-lg-8">
+								<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="1,500,000 " readonly />
+							</div>
+							@elseif($data->skala_usaha == 'kecil')
+							<div class="col-lg-8">
+								<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+	                        </div>  
+
+							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
+							
+							<div class="col-lg-8">
+								<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="3,000,000 " readonly />
+							</div>
+							
+							@else
+							<label class="col-lg-12 col-form-label">Biaya Sertifikasi</label>
+							
+							<label class="col-lg-4 col-form-label">Mata Uang</label>
+							<div class="col-lg-8">
+								<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+	                        </div>  
+							
+
+
+							<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
+							<div class="col-lg-8">
+							@if ($data->status_akad == 0 || $data->status_akad == 1)
+								<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " />
+							@else
+								<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " disabled="" />
+							@endif 
+
+								
+							</div>
+								
+							<label class="col-lg-4 col-form-label">Biaya Pengujian</label>
+							<div class="col-lg-8">
+							@if ($data->status_akad == 0 || $data->status_akad == 1 )
+								<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" />
+							@else
+								<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" disabled="" />
+							@endif
+							</div>
+							<label class="col-lg-4 col-form-label">Biaya Sidang Fatwa</label>
+							<div class="col-lg-8">
+								@if ($data->status_akad == 0 || $data->status_akad == 1 )
+									<input id="biaya_fatwa" onchange="jml()" name="biaya_fatwa" type="text" class="form-control number-separator" />
+								@else
+									<input id="biaya_fatwa" onchange="jml()" name="biaya_fatwa" type="text" class="form-control number-separator" disabled="" />
+								@endif
+							</div>
+							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
+							<div class="col-lg-8">
+								<input id="total_biaya" name="total_biaya" type="text" class="form-control " value={{$data->total_biaya}} readonly />
+							</div>
+
+							@endif
+							@if($data->status_akad == 1)
+								<!--Auto Download-->
+							<label class="col-lg-4 col-form-label">Kontrak Akad</label>
+							<div id="sh" class="col-lg-8">
+								<div class="form-control" readonly>
+									<a href="{{url('') .Storage::url('public//buktiakad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
+								</div>
+							</div>
+							<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
+							<div class="col-lg-8">
+								<input type="file"  name="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="image/*" required />
+							</div>
+							
+							@elseif($data->status_akad==2 || $data->status_akad==3 )
+								
+
+							<label class="col-lg-4 col-form-label">Kontrak Akad</label>
+							<div id="sh" class="col-lg-8">
+								<div class="form-control" readonly>
+									<a href="{{url('') .Storage::url('public/bukti_akad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
+								</div>
+							</div>
+							@endif
+
+							
+								
+							
+							<div class="col-md-12 offset-md-5">
+								
+							
+							@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
+							@if($data->status_akad == 1)
+								<button  type = "sumbit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
+								<button   class="btn btn-sm btn-warning m-r-5" disabled="">Menunggu File Upload User</button>
+							@elseif($data->status_akad == 2)
+								<button type="submit" class="btn btn-sm btn-green m-r-5" disabled>Akad Sedang Diproses</button>
+							@elseif($data->status_akad == 3)
+								<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad Sudah Dikonfirmasi</button>
+							@elseif($data->status_akad == 0)
+								<button class="btn btn-sm btn-yellow m-r-5" disabled="">Menunggu File Kontrak Dari Admin</button>
+							@endif								
+								
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- end panel-body -->
+			</div>
+			<!-- end panel -->
+		</div>
+		<!-- end col-12 -->
+	</div>
+	<!-- end row -->
+@endsection
+
+@push('scripts')
+	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
+    <script type="text/javascript">
+    	//var date = new Date();
+        var today = new Date();
+    	$('#tgl_akad').datepicker({
+            format: "yyyy-mm-dd",
+            todayHighlight: true,
+        });
+        $('#tgl_akad').datepicker('setDate', today);
+
+
+        function jml(){
+
+    		 
+    		 var nominal1 = parseInt(removeCommas(document.getElementById('biaya_pemeriksaan').value)); 
+    		 var nominal2 = parseInt(removeCommas(document.getElementById('biaya_pengujian').value));
+    		 var nominal3 = parseInt(removeCommas(document.getElementById('biaya_fatwa').value));
+
+			
+			if (isNaN(nominal1)){
+
+				nominal1 = parseInt("0");
+				if (isNaN(nominal2)){
+
+					nominal2 = parseInt("0");
+				}else if (isNaN(nominal3)){
+
+					nominal3 = parseInt("0");
+
+				}
+
+			
+
+			}else if (isNaN(nominal2)){
+
+				nominal2 = parseInt("0");
+
+				if (isNaN(nominal1)){
+
+					nominal1 = parseInt("0");
+				}else if (isNaN(nominal3)){
+
+					nominal3 = parseInt("0");
+
+				}
+
+			}else if (isNaN(nominal3)){
+
+				nominal3 = parseInt("0");
+
+				if (isNaN(nominal2)){
+
+					nominal2 = parseInt("0");
+				}else if (isNaN(nominal1)){
+
+					nominal1 = parseInt("0");
+
+				}
+
+			}
+			var jumlah = nominal1+nominal2+nominal3;
+    		
+    		console.log(nominal1);
+    		console.log(nominal2);
+    		console.log(nominal3);
+    		//console.log(jumlah);
+			document.getElementById('total_biaya').value= jumlah;
+    	}
+    	function removeCommas(str) {
+		    while (str.search(",") >= 0) {
+		        str = (str + "").replace(',', '');
+		    }
+		    return str;
+		};
+		
+
+
+    </script>
+    <!--  <script src="{{asset('/assets/js/cleave.js')}}"></script> -->
+    <script src="{{asset('/assets/js/main.js')}}"></script>
+    
+   
+
+@endpush

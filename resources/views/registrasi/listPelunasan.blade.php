@@ -13,17 +13,17 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="#">Registrasi Halal</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Pembayaran Sertifikasi Halal</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Pelunasan Sertifikasi Halal</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Pembayaran Sertifikasi Halal  <small></small></h1>
+    <h1 class="page-header">List Pelunasan Sertifikasi Halal  <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Pembayaran Sertifikasi Halal</h4>
+            <h4 class="panel-title">List Pelunasan Sertifikasi Halal</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -63,20 +63,20 @@
                                             @component('components.inputfilter',['name'=> 'perusahaan','label' => 'Perusahaan'])@endcomponent   
 
                                             
-                                            <label class="col-lg-2 col-form-label">Status Pembayaran</label>
+                                            <label class="col-lg-2 col-form-label">Status Pelunasan</label>
                                             <div class="col-lg-4">
-                                                <select id="status_pembayaran" name="status_pembayaran" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
-                                                    <option value="" selected>--Pilih Status Pembayaran--</option>
+                                                <select id="status_pelunasan" name="status_pelunasan" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                    <option value="" selected>--Pilih Status Pelunasan--</option>
                                                     <option value="0">Belum Bayar</option>
                                                     <option value="1">Menunggu Konfirmasi</option>
                                                     <option value="2">Sudah Dikonfirmasi </option>
                                                 </select>
                                             </div>
 
-                                            <label class="col-lg-2 col-form-label">Metode Pembayaran</label>
+                                            <label class="col-lg-2 col-form-label">Metode Pelunasan</label>
                                             <div class="col-lg-4">
-                                                <select id="metode_pembayaran" name="metode_pembayaran" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
-                                                    <option value="" selected>--Pilih Metode Pembayaran--</option>
+                                                <select id="metode_pelunasan" name="metode_pelunasan" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                    <option value="" selected>--Pilih Metode Pelunasan--</option>
                                                     <option value="tunai">Tunai</option>
                                                     <option value="transfer">Transfer</option>
                                                 </select>
@@ -136,7 +136,7 @@
         var xTable = $('#table').DataTable({
 
             ajax:{
-                url:"{{route('datapembayaranregistrasi')}}",
+                url:"{{route('datapelunasanregistrasi')}}",
                 data:function(d){
                     d.no_registrasi = $('input[name=no_registrasi]').val();
                     d.name = $('input[name=name]').val();
@@ -144,10 +144,11 @@
                     
                     d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
 
+
                     
                     d.jenis_registrasi = $('#jenis_registrasi').val();
-                    d.metode_pembayaran = $('#metode_pembayaran').val();
-                    d.status_tahap1 = $('#status_tahap1').val();
+                    d.metode_pelunasan = $('#metode_pelunasan').val();
+                    d.status_pelunasan = $('#status_pelunasan').val();
                 }   
             },
             columns:[
@@ -177,7 +178,7 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        return `<a href="#" class="btn btn-white btn-xs">&nbsp;&nbsp;`+full.metode_pembayaran+`&nbsp;&nbsp;</a> `+ checkStatusPembayaran(full.status_tahap1)
+                        return `<a href="#" class="btn btn-white btn-xs">&nbsp;&nbsp;`+full.metode_pelunasan+`&nbsp;&nbsp;</a> `+ checkStatusPembayaran(full.status_pelunasan)
                     }
                 },
                 {
@@ -185,14 +186,14 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        if(full.metode_pembayaran == 'tunai'){
+                        if(full.metode_pelunasan == 'tunai'){
                             return `Tunai`
                         }else{
-                            if(full.status_tahap1 == 0 || full.status_tahap1 == null){
+                            if(full.status_pelunasan == 0 || full.status_pelunasan == null){
                             return `-`
-                            }else{
-                                return `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`    
-                            }    
+                        }else{
+                            return `<a href="{{ url('').Storage::url('public/buktipelunasan/`+full.id_user+`/`+full.bukti_pelunasan+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`    
+                        }    
                         }
                         
                         
@@ -206,17 +207,18 @@
 
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                            var status10 = (full.status == 10 ) ? dButton('Nominal Pembayaran Kurang'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Kurang</a>`;
+                            var status22 = (full.status == 22 ) ? dButton('Nominal Pelunasan Kurang'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/22" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pelunasan Kurang</a>`;
 
-                            var status11 = (full.status == 11 ) ? dButton('Nominal Pembayaran Lebih'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Lebih</a>`;
+                            var status23 = (full.status == 23 ) ? dButton('Nominal Pelunasan Lebih'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/23" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pelunasan Lebih</a>`;
 
-                            var status12 = (full.status == 12) ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pembayaran Gagal</a>`;
+                            var status24 = (full.status == 24) ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/24" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">pelunasan Gagal</a>`;
                            
-                            var konfirm = (full.status == 13) ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
+                            var konfirm = (full.status ==  25) ? dButton('Konfirmasi Pelunasan'):`<a href="{{url('konfirmasi_pelunasan_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pelunasan??')">Konfirmasi Pelunasan</a>`;
 
                            
 
-                        
+                        if(full.metode_pelunasan == 'tunai'){
+
                             return 
 
                             `<div class="btn-group m-r-5 show">
@@ -230,11 +232,43 @@
                                     <div class="dropdown-divider"></div>
 
                                     <div class="dropdown-button-title">Update Progress</div>`+
-                                        status10+status11+status12+konfirm+
+                                        status22+status23+status24+konfirm+
                                 `</div>
                             </div>`  
-                        
-                        
+                        }else{
+                            if(full.status_pelunasan == 0 || full.status_pelunasan == null){
+                                return `<div class="btn-group m-r-5 show">
+                                    <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                        <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
+
+                                        <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
+                                        <div class="dropdown-divider"></div>
+
+                                        <div class="dropdown-button-title">Update Progress</div>`+
+                                            status22+status23+status24+
+                                    `</div>
+                                </div>`    
+                            }else{
+                            return  `<div class="btn-group m-r-5 show">
+                                    <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                        <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
+
+                                        <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
+                                        <div class="dropdown-divider"></div>
+
+                                        <div class="dropdown-button-title">Update Progress</div>`+
+                                            status22+status23+status24+konfirm+
+                                    `</div>
+                                </div>`    
+                               
+                            }
+                        }
                         
                     }
                 }

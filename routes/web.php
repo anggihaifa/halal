@@ -35,6 +35,13 @@ Route::get('data_registrasi_pelanggan','RegistrasiController@dataRegistrasiPelan
 //list registrasi pelanggan aktif
 Route::get('list_registrasi_pelanggan_aktif','RegistrasiController@listRegistrasiPelangganAktif')->name('listregistrasipelangganaktif');
 Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistrasiPelangganAktif')->name('dataregistrasipelangganaktif');
+
+
+
+Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran');
+Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad');
+Route::get('update_status_pelunasan/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPelunasan');
+//
 //
 
 Route::get('update_status_registrasi/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusRegistrasi');
@@ -54,8 +61,46 @@ Route::get('konfirmasi_pembayaran_registrasi/{id}','RegistrasiController@konfirm
 
 //pembayaran registrasi
 Route::get('pembayaran_registrasi/{id}','RegistrasiController@pembayaranRegistrasi')->name('registrasi.pembayaranRegistrasi');
-Route::put('konfirmasi_pembayaran/{id}','RegistrasiController@konfirmasiPembayaran')->name('registrasi.konfirmasipembayaran');
+Route::put('konfirmasi_pembayaran/{id}','RegistrasiController@konfirmasiPembayaranUser')->name('registrasi.konfirmasipembayaran');
 Route::get('download','RegistrasiController@download');
+//Route::get('unduh_bukti_bayar/{id}','RegistrasiController@unduhBuktiBayar');
+
+
+//list konfirmasi pelunasan
+Route::get('list_pelunasan_registrasi','RegistrasiController@listPelunasanRegistrasi')->name('listpelunasanregistrasi');
+Route::get('data_pelunasan_registrasi','RegistrasiController@dataPelunasanRegistrasi')->name('datapelunasanregistrasi');
+Route::get('konfirmasi_pelunasan_registrasi/{id}','RegistrasiController@konfirmasiPelunasanRegistrasi');
+
+//pelunasan
+Route::get('pelunasan_registrasi/{id}','RegistrasiController@pelunasanRegistrasi')->name('registrasi.pelunasanRegistrasi');
+Route::put('konfirmasi_pelunasan/{id}','RegistrasiController@konfirmasiPelunasan')->name('registrasi.konfirmasiPelunasan');
+//Route::get('download','RegistrasiController@download');
+//Route::get('unduh_bukti_bayar/{id}','RegistrasiController@unduhBuktiBayar');
+
+
+//Akad
+//admin
+Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listakadadmin');
+Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin');
+Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin');
+Route::put('upload_file_akad_admin/{id}','RegistrasiController@uploadFileAkadAdmin')->name('registrasi.uploadfileakadadmin');
+Route::get('konfirmasi_akad_admin/{id}','RegistrasiController@konfirmasiAkadAdmin');
+
+//user
+Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser');
+Route::put('upload_file_akad_user/{id}','RegistrasiController@uploadFileAkadUser')->name('registrasi.uploadfileakaduser');
+
+
+//akad registrasi
+//Route::get('Akad_registrasi/{id}','RegistrasiController@akadRegistrasi')->name('registrasi.akadRegistrasi');
+
+
+
+
+Route::get('download','RegistrasiController@download');
+
+
+
 
 
 //unggah data sertifikasi - uds

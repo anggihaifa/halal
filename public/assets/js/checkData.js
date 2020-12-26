@@ -5,10 +5,19 @@ function checkStatus(data){
 }
 
 function checkStatusPembayaran(data){
-    return  (data==0)? '<a href="#" class="btn btn-grey btn-xs text-nowrap valign-middle">Belum Bayar</a>'
-        :(data==1)? '<a href="#" class="btn btn-warning btn-xs text-nowrap valign-middle">Menunggu Konfirmasi</a>'
-            :(data==2)? '<a href="#" class="btn btn-success btn-xs text-nowrap valign-middle">Sudah Dikonfirmasi</a>'
-                :'<a href="#" class="btn btn-grey btn-xs text-nowrap valign-middle">Belum Bayar</a>';
+    return  (data==0)? '<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Bayar</a>'
+        :(data==1)? '<a href="#" class="btn btn-warning btn-xs  valign-middle">Menunggu Konfirmasi</a>'
+            :(data==2)? '<a href="#" class="btn btn-success btn-xs valign-middle">Sudah Dikonfirmasi</a>'
+                :'<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Bayar</a>';
+            
+}
+function checkStatusAkad(data){
+    return  (data==0)? '<a href="#" class="btn btn-grey btn-xs valign-middle">Belum Akad</a>'
+        :(data==1)? '<a href="#" class="btn btn-warning btn-xs valign-middle">Menunggu Pelanggan Megupload Ulang Kontrak</a>'
+            :(data==2)? '<a href="#" class="btn btn-green btn-xs  valign-middle">Pelanggan Sudah Upload Ulang dan Menunggu Konfirmasi Admin</a>'
+                :(data==3)? '<a href="#" class="btn btn-success btn-xs  valign-middle">Admin Sudah Mengkonfirmasi File Kontrak</a>'
+                
+                    :'<a href="#" class="btn btn-grey btn-xs text-nowrap valign-middle">Belum Akad</a>';
             
 }
 function checkStatusFaq(data){
@@ -27,12 +36,12 @@ function checkProgress(data){
                             :(data==5)? 'Konfirmasi Data Berkas'
                                 :(data==6)? 'Akad'
                                     :(data==7)? 'Akad Gagal'
-                                         :(data==8)? 'Konfirmasi Akad'
+                                         :(data==8)? 'Akad Terkonfirmasi'
                                             :(data==9)? 'Pembayaran'
                                                 :(data==10)? 'Nominal Pembayaran Kurang'
                                                      :(data==11)? 'Nominal Pembayaran Lebih'
                                                         :(data==12)? 'Pembayaran Gagal'
-                                                            :(data==13)? 'Konfirmasi Pembayaran'
+                                                            :(data==13)? 'Pembayaran Terkonfirmasi'
                                                                 :(data==14)? 'Proses Audit Tahap 1'
                                                                     :(data==15)? 'Proses Audit Tahap 2'
                                                                         :(data==16)? 'Pelaporan Audit tahap 2'
@@ -44,11 +53,17 @@ function checkProgress(data){
                                                                                                 :(data==22)? 'Nominal Pelunasan Kurang'
                                                                                                     :(data==23)? 'Nominal Pelunasan Lebih'
                                                                                                         :(data==24)? 'Pelunasan Gagal'
-                                                                                                            :(data==25)? 'Konfirmasi Pelunasan'
+                                                                                                            :(data==25)? 'Pelunasan Terkonfirmasi'
                                                                                                                 :(data==26)? 'Proses Sertifikasi'
                                                                                                                     :(data==27)? 'Keputusan Halal/ Haram'
                                                                                                                         :(data==28)? 'Sertifikat Halal'
-                                                                                                                            :'-';
+                                                                                                                            :(data==29)? 'Cancel Order Unggah Data'
+                                                                                                                                :(data==30)? 'Cancel Order Pembayaran'
+                                                                                                                                    :(data==31)? 'Menunggu User Upload Akad'
+                                                                                                                                        :(data==34)? 'Menunggu Konfirmasi Akad'
+                                                                                                                                            :(data==32)? 'Menunggu Konfirmasi Pembayaran'
+                                                                                                                                                :(data==33)? 'Menunggu Konfirmasi Pelunasan'
+                                                                                                                                                :'-';
                                                                                      
 
 }
@@ -82,7 +97,13 @@ function notifProgress(data){
                                                                                                                 :(data==26)? 'Proses Sertifikasi'
                                                                                                                     :(data==27)? 'Keputusan Halal/ Haram'
                                                                                                                         :(data==28)? 'Sertifikat Halal'
-                                                                                                                            :'-';
+                                                                                                                            :(data==29)? 'Order dicancel dikarnakan dalam waktu 24 jam seteleah pendaftaran data berkas sertifikasi tidak dilengkapi'
+                                                                                                                                :(data==30)? 'Order dicancel dikarnakan dalam waktu 24 jam seteleah Akad. Anda tidak melakukan Pembayaran. Apabila menurut anda ini adalah kesalahan sillahkan mengontak custumore care kami di XXX-XXXXXX'
+                                                                                                                                        :(data==31)? 'Kontrak Akad Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo'
+                                                                                                                                            :(data==32)? 'Bukti Pembayaran Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
+                                                                                                                                                :(data==33)? 'Bukti Pelunasan Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
+                                                                                                                                             
+                                                                                                                                                    :'-';
 }
 /*
 function checkIcon(data){

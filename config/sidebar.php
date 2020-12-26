@@ -31,22 +31,29 @@ return [
             'url' => '#',
             'caret' => true,
             'sub_menu' => [
-                [
+                /*[
                     'url' => 'listregistrasipelanggan',
-                    'title' => 'List Registrasi Halal tes'
-                ],
+                    'title' => 'List Registrasi Halal '
+                ],*/
                  [
                     'url' => 'listregistrasipelangganaktif',
                     'title' => 'List Registrasi Aktif'
                 ],
-                // [
-                //     'url' => 'listpembayaranregistrasi',
-                //     'title' => 'Pembayaran Registrasi'
-                // ],
-                // [
-                //     'url' => 'listunggahdatasertifikasi',
-                //     'title' => 'Unggah Data Sertifikasi',
-                // ],
+                [
+                    'url' => 'listpembayaranregistrasi',
+                    'title' => 'List Pembayaran'
+                ],
+                
+                [
+                    'url' => 'listpelunasanregistrasi',
+                    'title' => 'List Pelunasan'
+                ],
+                 [
+                    'url' => 'listakadadmin',
+                    'title' => 'List Kontrak Akad'
+                ],
+
+               
             ],
         ],
         [
@@ -106,6 +113,11 @@ return [
                     'url' => 'registrasi.unggahDataSertifikasi',
                     'title' => 'Unggah Data Sertifikasi'
                 ],
+                /*[
+                    'url' => 'registrasi.pembayaranRegistrasi',
+                    'title' => 'Pembayaran Sertifikasi Halal'
+                ],*/
+                    
             ],
         ],
     ],
@@ -126,18 +138,26 @@ return [
             'url' => '#',
             'caret' => true,
             'sub_menu' => [
-                [
+               /* [
                     'url' => 'listregistrasipelanggan',
                     'title' => 'List Registrasi Halal'
-                ],
+                ],*/
                  [
                     'url' => 'listregistrasipelangganaktif',
-                    'title' => 'List Registrasi Aktif tes'
+                    'title' => 'List Registrasi Aktif'
                 ],
-                // [
-                //     'url' => 'listpembayaranregistrasi',
-                //     'title' => 'Pembayaran Registrasi'
-                // ],
+                 [
+                     'url' => 'listpembayaranregistrasi',
+                     'title' => 'Pembayaran Registrasi'
+                 ],
+                 [
+                    'url' => 'listpelunasanregistrasi',
+                    'title' => 'List Pelunasan'
+                ],
+                [
+                    'url' => 'listakadadmin',
+                    'title' => 'List Kontrak Akad'
+                ],
                 // [
                 //     'url' => 'listunggahdatasertifikasi',
                 //     'title' => 'Unggah Data Sertifikasi',
@@ -204,6 +224,10 @@ return [
                     'url' => 'registrasi.unggahDataSertifikasi',
                     'title' => 'Unggah Data Sertifikasi'
                 ],
+                /*[
+                    'url' => 'pembayaran_registrasi/107',
+                    'title' => 'Pembayaran Sertifikasi Halal'
+                ],*/
             ],
         ],
     ],

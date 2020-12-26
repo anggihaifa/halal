@@ -86,7 +86,7 @@
 		</div>
 	</div>
 	<div class="forTitle">
-		<span>TANDA BUKTI PEMBAYARAN REGISTRASI PRODUK HALAL</span>
+		<span>TANDA BUKTI PEMBAYARAN SERTIFIKASI PRODUK HALAL</span>
 	</div>	
 	</div>
 	<div>
@@ -147,12 +147,12 @@
 				<td><b>{{$registrasiData['skala_usaha']}}</b></td>
 			</tr>
 			<tr>
-				<td>Biaya Pendaftaran</td>
+				<td>Total Pembayaran</td>
 				<td>:</td>
-				<td>
-					<p><b>{{$registrasiData['biaya_registrasi']}}</b></p>
-					<p>( Dua Ratus Dua Puluh Ribu Rupiah)</p>
-				</td>
+				
+				td><b>{{$registrasiData['biaya_registrasi']}}</b></td>
+					
+				
 			</tr>
 		</table>
 	</div>

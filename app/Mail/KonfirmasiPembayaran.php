@@ -13,18 +13,24 @@ class KonfirmasiPembayaran extends Mailable
 
     public $user;
     public $registrasi;
-    
+    public $pembayaran;
+    public $status;
+   
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user,$registrasi)
+    public function __construct($registrasi,$user, $pembayaran, $status)
     {
         //
+
         $this->user = $user;
         $this->registrasi = $registrasi;
+         $this->pembayaran = $pembayaran;
+        $this->status = $status;
+        dd( $this);
     }
 
     /**
@@ -34,6 +40,9 @@ class KonfirmasiPembayaran extends Mailable
      */
     public function build()
     {
+        $this->subject('Progres Status');
+        //dd($this);
+
         return $this->view('mail.konfirmasipembayaran');
     }
 }

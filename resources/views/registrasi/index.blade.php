@@ -42,6 +42,8 @@
                     <th class="text-nowrap valign-middle text-center">Aktif/Non Aktif</th>
                     <th class="text-nowrap valign-middle text-center">Progress</th>
                     <th class="text-nowrap valign-middle text-center">Aksi</th>
+                    <th class="text-nowrap valign-middle text-center">hide1</th>
+                    <th class="text-nowrap valign-middle text-center">hide2</th>
                 </tr>
                 </thead>
             </table>
@@ -99,16 +101,49 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        // if(full.status_pembayaran == null || full.status_pembayaran == 0 || full.status_pembayaran == 1){
-                        //     return `<a href="{{url('detail_registrasi')}}/`+full.id+`" class="btn btn-primary btn-xs" >Detail</a> `+
-                        //         `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`" class="btn btn-info btn-xs" >Bayar</a>`
-                        // }else{
-                        //     return `<a href="{{url('detail_registrasi')}}/`+full.id+`" class="btn btn-primary btn-xs" >Detail</a> `
-                        // }
-                        return `<a href="{{url('detail_registrasi')}}/`+full.id+`" class="btn btn-primary btn-xs" >Detail</a> `
+                         
+                                
+                                   
+                                
+                                var akad = `<a href="{{url('upload_kontrak_akad_user')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
+
+                                var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayarann</a> `;
+                                var pelunasan = `<a href="{{url('pelunasan_registrasi')}}/`+full.id+`"  class="dropdown-item" >Pelunasan</a>` ;
+                                var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit</a>` ;
+                                var reportB = `<a href="{{url('report_berita_acara')}}/`+full.id+`"  class="dropdown-item" >Report Berita Acara</a>` ;
+
+
+                                   
+                                return `<div class="btn-group m-r-5 show">
+                                        <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
+                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                            <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
+
+                                            
+                                            <div class="dropdown-divider"></div>`+akad+pembayaran+pelunasan+reportA+reportB+
+                                        `</div>
+                                    </div>`
+                                      
+                                
+                            
+                        
                     }
-                }
+                },
+                {"data":"total_biaya"},
+                {"data":"status_pelunasan"}
             ],
+            "columnDefs": [
+                {
+                    "targets": [ 8,9 ],
+                    "visible": false,
+                    "searchable": false,
+
+
+                }
+            ],   
+
             processing:true,
             serverSide:true,
             ajax:"{{route('registrasi.datatable')}}",

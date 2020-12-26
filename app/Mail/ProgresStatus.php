@@ -12,6 +12,7 @@ class ProgresStatus extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+    public $registrasi;
     public $status;
 
     /**
@@ -19,11 +20,15 @@ class ProgresStatus extends Mailable
      *
      * @return void
      */
-    public function __construct($user, $status)
+    public function __construct($user,$registrasi, $pembayaran, $status)
     {
         //
+
         $this->user = $user;
-        $this->status=$status;
+        $this->registrasi = $registrasi;
+         $this->pembayaran = $pembayaran;
+        $this->status = $status;
+        //dd( $this);
     }
 
     /**
@@ -33,6 +38,8 @@ class ProgresStatus extends Mailable
      */
     public function build()
     {
+        
+        $this->subject('Progres Status');
         return $this->view('mail.progresstatus');
        // error_log("tes");
     }
