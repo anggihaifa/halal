@@ -834,7 +834,7 @@
 			</div>
 
 			<div class="col-md-12 offset-md-5">
-                @component('components.buttonback',['href' => route("listregistrasipelanggan")])@endcomponent
+                @component('components.buttonback',['href' => route("listregistrasipelangganaktif")])@endcomponent
             </div>
 			<!-- end card -->
 		</div>
