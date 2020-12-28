@@ -26,11 +26,12 @@ class KonfirmasiPembayaran extends Mailable
     {
         //
 
-        $this->user = $user;
+       
         $this->registrasi = $registrasi;
-         $this->pembayaran = $pembayaran;
+        $this->user = $user;
+        $this->pembayaran = $pembayaran;
         $this->status = $status;
-        dd( $this);
+       // dd( $this);
     }
 
     /**

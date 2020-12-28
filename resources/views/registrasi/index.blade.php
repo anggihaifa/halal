@@ -43,7 +43,6 @@
                     <th class="text-nowrap valign-middle text-center">Progress</th>
                     <th class="text-nowrap valign-middle text-center">Aksi</th>
                     <th class="text-nowrap valign-middle text-center">hide1</th>
-                    <th class="text-nowrap valign-middle text-center">hide2</th>
                 </tr>
                 </thead>
             </table>
@@ -107,7 +106,8 @@
                                 
                                 var akad = `<a href="{{url('upload_kontrak_akad_user')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
 
-                                var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayarann</a> `;
+                                var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayaran</a> `;
+                                var pembayaran2 = `<a href="{{url('pembayaran_tahap2')}}/`+full.id+`"  class="dropdown-item"> Pembayaran Tahap 2</a> `;
                                 var pelunasan = `<a href="{{url('pelunasan_registrasi')}}/`+full.id+`"  class="dropdown-item" >Pelunasan</a>` ;
                                 var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit</a>` ;
                                 var reportB = `<a href="{{url('report_berita_acara')}}/`+full.id+`"  class="dropdown-item" >Report Berita Acara</a>` ;
@@ -122,7 +122,7 @@
                                             <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
 
                                             
-                                            <div class="dropdown-divider"></div>`+akad+pembayaran+pelunasan+reportA+reportB+
+                                            <div class="dropdown-divider"></div>`+akad+pembayaran+pembayaran2+pelunasan+reportA+reportB+
                                         `</div>
                                     </div>`
                                       
@@ -132,11 +132,11 @@
                     }
                 },
                 {"data":"total_biaya"},
-                {"data":"status_pelunasan"}
+                
             ],
             "columnDefs": [
                 {
-                    "targets": [ 8,9 ],
+                    "targets": [ 8 ],
                     "visible": false,
                     "searchable": false,
 

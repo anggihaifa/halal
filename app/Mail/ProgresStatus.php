@@ -13,6 +13,7 @@ class ProgresStatus extends Mailable
 
     public $user;
     public $registrasi;
+    public $pembayaran;
     public $status;
 
     /**
@@ -20,12 +21,13 @@ class ProgresStatus extends Mailable
      *
      * @return void
      */
-    public function __construct($user,$registrasi, $pembayaran, $status)
+    public function __construct($registrasi, $user, $pembayaran, $status)
     {
         //
 
-        $this->user = $user;
+       
         $this->registrasi = $registrasi;
+         $this->user = $user;
          $this->pembayaran = $pembayaran;
         $this->status = $status;
         //dd( $this);

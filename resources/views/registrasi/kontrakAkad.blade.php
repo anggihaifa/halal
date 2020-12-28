@@ -32,7 +32,7 @@
 				<!-- end panel-heading -->
 				<!-- begin panel-body -->
 				<div class="panel-body panel-form">
-					<form action="{{route('registrasi.uploadfileakaduser',["id" => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
+					<form action="{{route('registrasi.uploadfileakaduser',['id' => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
 						@csrf
 						@method('PUT')
 						<div class="form-group row" >
@@ -60,18 +60,19 @@
 							@if($data->skala_usaha == 'mikro')
 							<label class="col-lg-4 col-form-label">Mata Uang</label>
 							<div class="col-lg-8">
-								<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+								<input id="mata_uang" name="mata_uang"  type="text" class="form-control"readonly  value={{$data->mata_uang}} />
 	                        </div>           
 							
 
 							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
 							
 							<div class="col-lg-8">
-								<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="1,500,000 " readonly />
+								<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="1,500,000" readonly />
 							</div>
 							@elseif($data->skala_usaha == 'kecil')
+							<label class="col-lg-4 col-form-label">Mata Uang</label>
 							<div class="col-lg-8">
-								<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+								<input id="mata_uang" name="mata_uang" type="text" class="form-control "  readonly  value={{$data->mata_uang}}/>
 	                        </div>  
 
 							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
@@ -85,17 +86,20 @@
 							
 							<label class="col-lg-4 col-form-label">Mata Uang</label>
 							<div class="col-lg-8">
-								<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+								<input id="mata_uang" name="mata_uang" type="text" class="form-control "  readonly value={{$data->mata_uang}}>
 	                        </div>  
 							
 
-
+<!-- 
+							
+							@if ($data->status_akad == 0 || $data->status_akad == 1)
 							<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
 							<div class="col-lg-8">
-							@if ($data->status_akad == 0 || $data->status_akad == 1)
 								<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " />
 							@else
-								<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " disabled="" />
+							<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
+							<div class="col-lg-8">
+								<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " />
 							@endif 
 
 								
@@ -116,10 +120,10 @@
 								@else
 									<input id="biaya_fatwa" onchange="jml()" name="biaya_fatwa" type="text" class="form-control number-separator" disabled="" />
 								@endif
-							</div>
+							</div> -->
 							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
 							<div class="col-lg-8">
-								<input id="total_biaya" name="total_biaya" type="text" class="form-control " value={{$data->total_biaya}} readonly />
+								<input id="total_biaya" name="total_biaya" type="text" class="form-control " readonly value={{$data->total_biaya}}  />
 							</div>
 
 							@endif

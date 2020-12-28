@@ -13,17 +13,17 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="#">Registrasi Halal</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Pembayaran Sertifikasi Halal</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Pembayaran Tahap 2</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Pembayaran Sertifikasi Halal  <small></small></h1>
+    <h1 class="page-header">List Pembayaran Tahap 2 <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Pembayaran Sertifikasi Halal</h4>
+            <h4 class="panel-title">List Pembayaran Tahap 2</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -136,7 +136,7 @@
         var xTable = $('#table').DataTable({
 
             ajax:{
-                url:"{{route('datapembayaranregistrasi')}}",
+                url:"{{route('datapembayarantahap2')}}",
                 data:function(d){
                     d.no_registrasi = $('input[name=no_registrasi]').val();
                     d.name = $('input[name=name]').val();
@@ -147,7 +147,7 @@
                     
                     d.jenis_registrasi = $('#jenis_registrasi').val();
                     d.metode_pembayaran = $('#metode_pembayaran').val();
-                    d.status_tahap1 = $('#status_tahap1').val();
+                    d.status_tahap2 = $('#status_tahap2').val();
                 }   
             },
             columns:[
@@ -171,7 +171,7 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        return checkStatusPembayaran(full.status_tahap1)
+                        return checkStatusPembayaran(full.status_tahap2)
                     }
                 },
                 {
@@ -180,10 +180,10 @@
                     "orderable":false,
                     "render":function (data,type,full,meta) {
                         
-                        if(full.status_tahap1 == 0 || full.status_tahap1 == null){
+                        if(full.status_tahap2 == 0 || full.status_tahap2 == null){
                         return `-`
                         }else{
-                            return `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`    
+                            return `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap2+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`    
                         }    
                         
                         
@@ -195,13 +195,13 @@
                     "render":function (data,type,full,meta) {
                         var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                        var status10 = (full.status == 10 ) ? dButton('Nominal Pembayaran Kurang'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Kurang</a>`;
+                        var status36 = (full.status == 36 ) ? dButton('Nominal Pembayaran Kurang'):`<a href="{{url('update_status_pembayaran_tahap2')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/36" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Kurang</a>`;
 
-                        var status11 = (full.status == 11 ) ? dButton('Nominal Pembayaran Lebih'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Lebih</a>`;
+                        var status37 = (full.status == 37 ) ? dButton('Nominal Pembayaran Lebih'):`<a href="{{url('update_status_pembayaran_tahap2')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/37" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Lebih</a>`;
 
-                        var status12 = (full.status == 12) ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pembayaran Gagal</a>`;
+                        var status38 = (full.status == 38) ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_pembayaran_tahap2')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/38" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pembayaran Gagal</a>`;
                        
-                        var konfirm = (full.status == 13) ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
+                        var konfirm = (full.status == 40) ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_tahap2')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
 
                         return `<div class="btn-group m-r-5 show">
                                 <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
@@ -212,7 +212,7 @@
                                         <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
                                         <div class="dropdown-divider"></div>
                                         <div class="dropdown-button-title">Update Progress</div>`+
-                                        status10+status11+status12+konfirm+`
+                                        status36+status37+status38+konfirm+`
                                     </div>
                                 </div>`
 

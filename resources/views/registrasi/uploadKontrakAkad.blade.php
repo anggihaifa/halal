@@ -1,4 +1,4 @@
-@extends('layouts.default')
+	@extends('layouts.default')
 
 @section('title', 'Kontrak Akad Sertifikasi Halal')
 
@@ -32,7 +32,7 @@
 				<!-- end panel-heading -->
 				<!-- begin panel-body -->
 				<div class="panel-body panel-form">
-					<form action="{{route('registrasi.uploadfileakadadmin',["id" => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
+					<form action="{{route('registrasi.uploadfileakadadmin',['id' => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
 						@csrf
 						@method('PUT')
 						<div class="form-group row" >
@@ -148,7 +148,7 @@
 								</div>
 								@else
 								<div class="col-lg-8">
-									<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+									<input id="mata_uang" name="mata_uang" type="text" class="form-control " readonly  value={{$data->mata_uang}} >
 		                        </div>   
 								@endif
 
@@ -158,10 +158,11 @@
 										<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="1,500,000 " readonly />
 									</div>
 							@elseif($data->skala_usaha == 'kecil')
-							@if($data->status_akad == 0 || $data->status_akad == 1  )
+							<label class="col-lg-4 col-form-label">Mata Uang</label>
+								@if($data->status_akad == 0 || $data->status_akad == 1  )
 								<div class="col-lg-8">
 
-									<select id="currency" name="currency" class="form-control selectpicker forSearch" data-size="10" data-live-search="true" data-style="btn-white" value={{$data->mata_uang}}>
+									<select id="mata_uang" name="mata_uang" class="form-control selectpicker forSearch" data-size="10" data-live-search="true" data-style="btn-white" value={{$data->mata_uang}}>
 	                                    <option value="" >--Pilih Mata Uang--</option>
 	                                    <option value="IDR" selected="selected">Indonesia Rupiah</option>
 										<option value="USD" >United States Dollars</option>
@@ -247,7 +248,7 @@
 								</div>
 								@else
 								<div class="col-lg-8">
-									<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+									<input id="mata_uang" name="mata_uang" type="text" class="form-control " readonly value={{$data->mata_uang}}  />
 		                        </div>       
 								@endif
 
@@ -261,9 +262,10 @@
 								<label class="col-lg-12 col-form-label">Biaya Sertifikasi</label>
 								
 								<label class="col-lg-4 col-form-label">Mata Uang</label>
-								<div class="col-lg-8">
+								
 								@if($data->status_akad == 0 || $data->status_akad == 1  )
-									<select id="mata_uang" name="mata_uang" class="form-control selectpicker forSearch" data-size="10" data-live-search="true" value={{$data->mata_uang}} data-style="btn-white">
+								<div class="col-lg-8">
+									<select id="mata_uang" name="mata_uang" class="form-control selectpicker forSearch" data-size="10" data-live-search="true" data-style="btn-white" value={{$data->mata_uang}} >
 	                                    <option value="" selected="selected">--Pilih Mata Uang--</option>
 	                                    <option value="IDR" >Indonesia Rupiah</option>
 										<option value="USD" >United States Dollars</option>
@@ -348,7 +350,7 @@
 									</select>
 								@else
 								<div class="col-lg-8">
-									<input id="mata_uang" name="mata_uang" type="text" class="form-control " value={{$data->mata_uang}} readonly />
+									<input id="mata_uang" name="mata_uang" type="text" class="form-control " readonly value={{$data->mata_uang}}  />
 		                        </div>   
 								@endif
 							</div>

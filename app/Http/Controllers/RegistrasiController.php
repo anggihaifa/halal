@@ -47,6 +47,8 @@ use App\Mail\ProgresStatus;
 use Illuminate\Support\Facades\Mail;
 use PDF;
 use Response;
+use DateTimeZone;
+use DateTime;   
 
 class RegistrasiController extends Controller
 {
@@ -211,7 +213,7 @@ class RegistrasiController extends Controller
 
                         DB::commit();
 
-                        Mail::to($u->email)->send(new ProgresStatus($u,$e,$p, $status));
+                        Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
 
                     }catch(\Exception $u){
 
@@ -2051,7 +2053,8 @@ class RegistrasiController extends Controller
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
 
-            
+            date_default_timezone_set('Asia/Jakarta');
+            $date = date("Y-m-d h:i:sa");
             $e->status = '8';
             $e->status_akad= 3;
             $e->updated_status_by = $updater;
@@ -2069,6 +2072,7 @@ class RegistrasiController extends Controller
                     $model3->id_registrasi = $e->id;
                     $model3->updated_by=$updater;
                     $model3->mata_uang = $e->mata_uang;
+                    $model3->tanggal_tahap1 = $date;
                     $model3->save();
                     }
                 elseif($e->total_biaya > 50000000){
@@ -2080,6 +2084,7 @@ class RegistrasiController extends Controller
                     $model3->id_registrasi = $e->id;
                     $model3->updated_by=$updater;
                     $model3->mata_uang = $e->mata_uang;
+                    $model3->tanggal_tahap1 = $date;
                     $model3->save();
                 }else{
                      //dd($e->total_biaya);
@@ -2088,12 +2093,13 @@ class RegistrasiController extends Controller
                     $model3->id_registrasi = $e->id;
                     $model3->updated_by=$updater;
                     $model3->mata_uang = $e->mata_uang;
-                     $model3->save();
+                    $model3->tanggal_tahap1 = $date;
+                    $model3->save();
 
                 }
                 $e->id_pembayaran = $model3->id;
                 $e->save();
-                 Mail::to($u->email)->send(new KonfirmasiPembayaran($u,$e,$model3, $e->status));
+                 Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$model3, $e->status));
            }else{
                 if($e->total_biaya >10000000 && $e->total_biaya <= 50000000){
                // dd($e->total_biaya);
@@ -2104,6 +2110,7 @@ class RegistrasiController extends Controller
                     $p->id_registrasi = $e->id;
                     $p->updated_by=$updater;
                     $p->mata_uang = $e->mata_uang;
+                    $p->tanggal_tahap1 = $date;
                     $p->save();
                     }
                 elseif($e->total_biaya > 50000000){
@@ -2115,6 +2122,7 @@ class RegistrasiController extends Controller
                     $p->id_registrasi = $e->id;
                     $p->updated_by=$updater;
                     $p->mata_uang = $e->mata_uang;
+                    $p->tanggal_tahap1 = $date;
                     $p->save();
                 }else{
                      //dd($e->total_biaya);
@@ -2123,9 +2131,10 @@ class RegistrasiController extends Controller
                     $p->id_registrasi = $e->id;
                     $p->updated_by=$updater;
                     $p->mata_uang = $e->mata_uang;
+                    $p->tanggal_tahap1 = $date;
                      $p->save();
                 }
-                 Mail::to($u->email)->send(new KonfirmasiPembayaran($u,$e,$p, $e->status));
+                 Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p, $e->status));
 
 
            }
@@ -2168,7 +2177,10 @@ class RegistrasiController extends Controller
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
 
-            $e->tanggal_akad = $data['tgl_akad'];
+            date_default_timezone_set('Asia/Jakarta');
+            $date = date("Y-m-d h:i:sa");
+
+            $e->tanggal_akad = $date;
             $e->status_akad = 1;
             $e->mata_uang = $data['mata_uang'];
             $e->status=31;
@@ -2315,7 +2327,7 @@ class RegistrasiController extends Controller
             
         
                 try{
-                    Mail::to($u->email)->send(new ProgresStatus($u,$e,$p, $status));
+                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
                     //Session::flash('success', "data berhasil disimpan!");
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
 
@@ -2370,21 +2382,28 @@ class RegistrasiController extends Controller
         $data = $request->except('_token','_method');
         //dd($data);
         $model = new Registrasi();
+        $model2 = new User();
+        $model3 = new Pembayaran();
 
         try{
             DB::beginTransaction();
             $e = $model->find($id);
-            $e->tanggal_pembayaran = $data['tgl_pembayaran'];
-            $e->status_pembayaran = 1;
+            $u = $model2->find($e->id_user);
+            $p = $model3->find($e->id_pembayaran);
+            $p->tanggal_tahap1 = $data['tanggal_tahap1'];
+            $p->status_tahap1 = 1;
+
             $e->status=32;
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
                 $filename = "BB".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                 $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                $e->bukti_pembayaran = $filename;
+                $p->bb_tahap1 = $filename;
             }
             $e->save();
+            $u->save();
+            $p->save();
             DB::commit();
 
             Session::flash('success', "Upload Bukti Pembayaran Berhasil");
@@ -2445,7 +2464,8 @@ class RegistrasiController extends Controller
         $e->updated_status_by = $updater;
         $e->save();
 
-        date_default_timezone_set('Indonesia/Jakarta');
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date("Y-m-d H:i:s");
 
 
         foreach ($getUserId as $key) {
@@ -2455,21 +2475,36 @@ class RegistrasiController extends Controller
             $getUser = User::find($userId);
             $getRegistrasi= Registrasi::find($id);
             $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi];
-            $fileName = $key->no_registrasi.'_BB_TAHAP1.pdf';
+            $fileName = $key->no_registrasi.'_BT_TAHAP1.pdf';
             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 
             // save
              Storage::put('public/pembayaran/'.$fileName, $pdf->output());
                 
-            $p->status_tahap1 = '2';
-            $p->bb_tahap1 = $fileName;
-            $p->tanggal_tahap1 = date_default_timezone_get();
-             $p->updated_at = date_default_timezone_get();
+            
+            if(parseInt($p->nominal_total) <10000000 ){
+                $p->status_tahap1 = '2';
+                $p->status_tahap2 = '1';
+                $p->bb_tahap2 = $p->bb_tahap1;
+                $p->status_tahap3 = '1';
+                $p->bb_tahap3 = $p->bb_tahap3;
+            }elseif(parseInt($p->nominal_total) >=10000000 && parseInt($p->nominal_total) < 50000000 ){
+               
+                $p->status_tahap2 = '1';
+                $p->bb_tahap2 = $p->bb_tahap1;
+            }else{
+                 $p->status_tahap1 = '2';
+            }
+
+            $p->bt_tahap1 = $fileName;
+            $p->tanggal_tahap1 = $tanggal;
+            //dd($p->tanggal_tahap1 );
+            $p->updated_at = $tanggal;
             $p->save();
 
-            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$status));
+            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$e->status));
             DB::commit();  
-;
+
         }
 
          Session::flash('success', "Pembayaran berhasil dikonfirmasi!");
@@ -2488,7 +2523,7 @@ class RegistrasiController extends Controller
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  //->join('users','registrasi.id_user','=','users.id')
                  ->join('users','registrasi.id','=','users.registrasi_id')
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1' )
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )
                  ->where('pembayaran.status_tahap1','0')
                          ->orWhere('pembayaran.status_tahap1','1')
                            ->orWhere('registrasi.status','11');
@@ -2552,11 +2587,11 @@ class RegistrasiController extends Controller
             $e->updated_status_by = $updater;
             $e->save();
             
-            if($status =='12'){
-                $p->status_tahap1 = '0';
+            if($status =='11'){
+                $p->status_tahap1 = '2';
                 $p->updated_by = $updater;
                 $p->save();
-            }elseif($status =='11' || $status =='10'){
+            }else{
                 $p->status_tahap1 = '0';
                 $p->updated_by = $updater;
                 $p->save();
@@ -2565,7 +2600,7 @@ class RegistrasiController extends Controller
            
         
                 try{
-                    Mail::to($u->email)->send(new ProgresStatus($u,$e,$p, $status));
+                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
                     //Session::flash('success', "data berhasil disimpan!");
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
 
@@ -2594,6 +2629,248 @@ class RegistrasiController extends Controller
 
 
 /////////////////////END of Pembayaran////////////////////////////////
+
+
+     //////////////Start Pembayaran Tahap2 ///////////////////////////   
+
+
+    //Pembayaran registrasi
+    public function pembayaranTahap2($id){
+        $data = Registrasi::find($id);
+        $dataP = Pembayaran::find($data->id_pembayaran);
+        //get Data from FAQ Transfer
+        $getTransfer =   DB::table('faq')
+                    ->where('status','transfer')
+                    ->get();
+        $dataTransfer = json_decode($getTransfer,true);
+        //get Data from FAQ Tunai
+        $getTunai =   DB::table('faq')
+                    ->where('status','tunai')
+                    ->get();
+        $dataTunai = json_decode($getTunai,true);
+        return view('registrasi.pembayaranTahap2',compact('data','dataP','dataTransfer','dataTunai'));
+    }
+
+    public function konfirmasiPembayaranUserTahap2(Request $request, $id){
+        $data = $request->except('_token','_method');
+        //dd($data);
+        $model = new Registrasi();
+        $model2 = new User();
+        $model3 = new Pembayaran();
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);
+            $u = $model2->find($e->id_user);
+            $p = $model3->find($e->id_pembayaran);
+            $p->tanggal_tahap2 = $data['tanggal_tahap2'];
+            $p->status_tahap2 = 1;
+
+            $e->status=39;
+            if($request->has("file")){
+                $file = $request->file("file");
+                $file = $data["file"];
+                $filename = "BB2".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                $p->bb_tahap2 = $filename;
+            }
+            $e->save();
+            $u->save();
+            $p->save();
+            DB::commit();
+
+            Session::flash('success', "Upload Bukti Pembayaran Berhasil");
+
+            
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+            $redirect = redirect()->route('registrasiHalal.index');
+            return $redirect;
+    }
+
+   
+
+    //list pembayaran registrasi
+    public function listPembayaranTahap2(){
+        $dataKelompok = KelompokProduk::all();
+        $dataJenis = JenisRegistrasi::all();
+        return view('registrasi.listPembayaranTahap2',compact('dataKelompok','dataJenis'));
+    }
+
+    
+    public function konfirmasiPembayaranTahap2($id){
+        //retrieve data
+        $getUserId = Registrasi::where('id','=',$id)->get();
+
+        $updater = Auth::user()->name;
+
+        $model = new Registrasi();
+        $model2 = new User();
+        $model3 = new Pembayaran();
+
+         DB::beginTransaction();
+        $e = $model->find($id);
+        $u = $model2->find($e->id_user);
+        $p = $model3->find($e->id_pembayaran);
+        $e->status = '40';
+        $e->updated_status_by = $updater;
+        $e->save();
+
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date("Y-m-d H:i:s");
+
+
+        foreach ($getUserId as $key) {
+            $userId = $key->id_user;
+
+            //create PDF File
+            $getUser = User::find($userId);
+            $getRegistrasi= Registrasi::find($id);
+            $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi];
+            $fileName = $key->no_registrasi.'_BT_TAHAP2.pdf';
+            $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+                
+            // save
+             Storage::put('public/pembayaran/'.$fileName, $pdf->output());
+                
+            $p->status_tahap2 = '2';
+            
+
+            $p->bt_tahap2 = $fileName;
+            $p->tanggal_tahap2 = $tanggal;
+            //dd($p->tanggal_tahap1 );
+            $p->updated_at = $tanggal;
+            $p->save();
+
+            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$e->status));
+            DB::commit();  
+
+        }
+
+         Session::flash('success', "Pembayaran Tahap 2 berhasil dikonfirmasi!");
+         $redirect = redirect()->route('listpembayarantahap2');
+         return $redirect;
+    }
+
+
+
+    public function dataPembayaranTahap2(Request $request){
+        $gdata = $request->except('_token','_method');
+        //start
+        $xdata = DB::table('registrasi')
+                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+                 //->join('users','registrasi.id_user','=','users.id')
+                 ->join('users','registrasi.id','=','users.registrasi_id')
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
+                 ->where('pembayaran.status_tahap2','0')
+                         ->orWhere('pembayaran.status_tahap2','1')
+                           ->orWhere('registrasi.status','14');
+                           
+
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['name'])){
+            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+        }
+        if(isset($gdata['perusahaan'])){
+            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+        }
+        if(isset($gdata['kelompok_produk'])){
+            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+        }
+        if(isset($gdata['tgl_registrasi'])){
+            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+        }
+        if(isset($gdata['jenis_registrasi'])){
+            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        }
+        if(isset($gdata['status_registrasi'])){
+            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
+        }
+        if(isset($gdata['metode_pembayaran'])){
+            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
+        }
+        if(isset($gdata['status_pembayaran'])){
+            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
+        }
+        if(isset($gdata['status'])){
+            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+        }
+
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
+    }
+
+
+
+    public function updateStatusPembayaranTahap2($id,$no_registrasi,$id_user,$status){
+        
+        $updater = Auth::user()->name;
+
+         $model = new Registrasi();
+        $model2 = new User();
+        $model3 = new Pembayaran();
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);
+            $u = $model2->find($e->id_user);
+            $p = $model3->find($e->id_pembayaran);
+            $e->status = $status;
+            $e->updated_status_by = $updater;
+            $e->save();
+            
+            if($status == 37){
+                $p->status_tahap2 = '2';
+                $p->updated_by = $updater;
+                $p->save();
+            }else{
+                $p->status_tahap2 = '0';
+                $p->updated_by = $updater;
+                $p->save();
+            }
+             
+        
+                try{
+                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
+                    //Session::flash('success', "data berhasil disimpan!");
+                    Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
+
+                    DB::commit();
+
+                }catch(\Exception $u){
+
+                    Session::flash('error', $u->getMessage());
+                    //Session::flash('success', "data berhasil disimpan!");
+                    //$statusreg = $e->getMessage();
+
+                }
+            
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+
+           
+        }
+
+        $redirect = redirect()->route('listpembayarantahap2');
+         return $redirect;
+
+    }
+
+
+/////////////////////END of Pembayaran tahap 2////////////////////////////////
 
 
 /////////////////////Start Pelunasan///////////////////////////////   
@@ -2731,7 +3008,7 @@ class RegistrasiController extends Controller
             
         
                 try{
-                    Mail::to($u->email)->send(new ProgresStatus($u,$e,$p, $status));
+                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
                     //Session::flash('success', "data berhasil disimpan!");
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
 
