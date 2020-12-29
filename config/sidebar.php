@@ -56,8 +56,14 @@ return [
                     'url' => 'listpelunasan',
                     'title' => 'List Pelunasan'
                 ],
-                 
-
+                 [
+                    'url' => 'listakadadmin',
+                    'title' => 'List Kontrak Akad'
+                ],
+                [   
+                    'url' => 'listberitaacara',       
+                    'title' => 'Report dan Berita Acara'                    
+                ],
                
             ],
         ],
@@ -78,9 +84,9 @@ return [
                 [
                     'url' => 'faq.index',
                     'title' => 'F.A.Q'
-                ]
+                ]                
             ],
-        ],
+        ],        
         [
             'icon' => 'fa fa-cog',
             'title' => 'Pengaturan',
@@ -246,9 +252,14 @@ return [
             ],
         ],
         [
-            'icon' => 'ion-ios-home',
+            'icon' => 'ion-ios-help-circle',
             'title' => 'F.A.Q',
             'url' => 'faq.index'
+        ],
+        [
+            'icon' => 'ion-ios-person',
+            'title' => 'Guideline',
+            'url' => 'guideline.index'
         ],
     ],
 ];

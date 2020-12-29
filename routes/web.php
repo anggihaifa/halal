@@ -3,6 +3,8 @@
 Route::get('','HomeController@home')->name('home.index');
 Route::get('home','HomeController@index')->name('home.index');
 
+Route::get('report','ReportController@index')->name('report.index');
+
 
 //user management
 Route::get('login','Auth\LoginController@login')->name("login");
@@ -61,7 +63,6 @@ Route::get('list_pembayaran_registrasi','RegistrasiController@listPembayaranRegi
 Route::get('data_pembayaran_registrasi','RegistrasiController@dataPembayaranRegistrasi')->name('datapembayaranregistrasi');
 Route::get('konfirmasi_pembayaran_registrasi/{id}','RegistrasiController@konfirmasiPembayaranRegistrasi');
 
-
 //pembayaran registrasi
 Route::get('pembayaran_registrasi/{id}','RegistrasiController@pembayaranRegistrasi')->name('registrasi.pembayaranRegistrasi');
 Route::put('konfirmasi_pembayaran/{id}','RegistrasiController@konfirmasiPembayaranUser')->name('registrasi.konfirmasipembayaran');
@@ -78,6 +79,10 @@ Route::get('konfirmasi_pembayaran_tahap2/{id}','RegistrasiController@konfirmasiP
 Route::get('pembayaran_tahap2/{id}','RegistrasiController@pembayaranTahap2')->name('registrasi.pembayarantahap2');
 Route::put('konfirmasi_pembayaran_user_tahap2/{id}','RegistrasiController@konfirmasiPembayaranUserTahap2')->name('registrasi.konfirmasipembayaranusertahap2');
 
+//report
+Route::get('report_audit/{id}','RegistrasiController@reportAudit')->name('registrasi.reportaudit');
+Route::get('report_berita_acara/{id}','RegistrasiController@reportBeritaAcara')->name('registrasi.reportberitaacara');
+// Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser');
 
 //list konfirmasi pelunasan
 Route::get('list_pelunasan','RegistrasiController@listPelunasan')->name('listpelunasan');
@@ -101,6 +106,21 @@ Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataak
 Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin');
 Route::put('upload_file_akad_admin/{id}','RegistrasiController@uploadFileAkadAdmin')->name('registrasi.uploadfileakadadmin');
 Route::get('konfirmasi_akad_admin/{id}','RegistrasiController@konfirmasiAkadAdmin');
+
+Route::put('acc_audit_admin/{id}','RegistrasiController@accAuditAdmin')->name('registrasi.accauditadmin');
+Route::put('acc_berita_acara_admin/{id}','RegistrasiController@accBeritaAcaraAdmin')->name('registrasi.accberitaacaraadmin');
+
+Route::get('upload_report_admin/{id}','RegistrasiController@uploadReportAdmin')->name('registrasi.uploadreportadmin');
+Route::put('upload_file_report_admin/{id}','RegistrasiController@uploadFileReportAdmin')->name('registrasi.uploadfilereportadmin');
+Route::get('upload_berita_acara_admin/{id}','RegistrasiController@uploadBeritaAcaraAdmin')->name('registrasi.uploadberitaacaraadmin');
+Route::put('upload_file_berita_acara_admin/{id}','RegistrasiController@uploadFileBeritaAcaraAdmin')->name('registrasi.uploadfileberitaacaraadmin');
+Route::get('kirim_ke_mui/{id}','RegistrasiController@kirimKeMUI')->name('registrasi.kirimkemui');
+Route::put('upload_file_mui/{id}','RegistrasiController@uploadFileMUI')->name('registrasi.uploadfilemui');
+
+Route::get('list_berita_acara','RegistrasiController@listBeritaAcara')->name('listberitaacara');
+Route::get('data_berita_acara_admin','RegistrasiController@dataBeritaAcaraAdmin')->name('databeritaacaraadmin');
+// Route::get('list_berita_acara2','RegistrasiController@listBeritaAcara2')->name('listberitaacara2');
+// Route::get('data_berita_acara_admin2','RegistrasiController@dataBeritaAcaraAdmin2')->name('databeritaacaraadmin2');
 
 //user
 Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser');
@@ -229,6 +249,9 @@ Route::prefix('master')->group(function (){
 
     Route::resource('faq','Master\FaqController');
     Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
+
+    Route::resource('guideline','Master\GuidelineController');
+    // Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
 });
 Route::get('faq_detail/{id}','Master\FaqController@faqDetail')->name('master.faq.detail');
 

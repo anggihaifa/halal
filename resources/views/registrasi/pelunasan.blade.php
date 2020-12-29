@@ -84,7 +84,27 @@
 								<label class="col-lg-4 col-form-label">Bukti Konfirmasi PelunasanSertifikasi</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/INV/'.$data->inv_pembayaran) }}" download>{{$data->Inv_pembayaran}}</a>
+											<a href="{{url('') .Storage::url('public/buktipembayaran/'.$dataP->bt_tahap3) }}" download>{{$dataP->bt_tahap3}}</a>
+									</div>
+								</div>
+							@elseif($dataP->status_tahap3 == 3)	
+								<!--Auto Download-->
+								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
+								<div id="sh" class="col-lg-8">
+									<div class="form-control" readonly>
+										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
+									</div>
+								</div>
+								<label class="col-lg-4 col-form-label">Bukti Konfirmasi PelunasanSertifikasi</label>
+								<div id="sh" class="col-lg-8">
+									<div class="form-control" readonly>
+											<a href="{{url('') .Storage::url('public/buktipembayaran/'.$dataP->bt_tahap3) }}" download>{{$dataP->bt_tahap3}}</a>
+									</div>
+								</div>
+								<label class="col-lg-4 col-form-label">Invoice Pelunasan</label>
+								<div id="sh" class="col-lg-8">
+									<div class="form-control" readonly>
+											<a href="{{url('') .Storage::url('public/INV/'.$data->inv_pembayaran) }}" download>{{$data->inv_pembayaran}}</a>
 									</div>
 								</div>
 							@else
