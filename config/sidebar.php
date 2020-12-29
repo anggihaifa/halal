@@ -84,7 +84,7 @@ return [
                 [
                     'url' => 'faq.index',
                     'title' => 'F.A.Q'
-                ]
+                ]                
             ],
         ],        
         [
@@ -252,9 +252,14 @@ return [
             ],
         ],
         [
-            'icon' => 'ion-ios-home',
+            'icon' => 'ion-ios-help-circle',
             'title' => 'F.A.Q',
             'url' => 'faq.index'
+        ],
+        [
+            'icon' => 'ion-ios-person',
+            'title' => 'Guideline',
+            'url' => 'guideline.index'
         ],
     ],
 ];

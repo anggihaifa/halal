@@ -246,6 +246,9 @@ Route::prefix('master')->group(function (){
 
     Route::resource('faq','Master\FaqController');
     Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
+
+    Route::resource('guideline','Master\GuidelineController');
+    // Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
 });
 Route::get('faq_detail/{id}','Master\FaqController@faqDetail')->name('master.faq.detail');
 
