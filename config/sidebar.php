@@ -52,7 +52,10 @@ return [
                     'url' => 'listakadadmin',
                     'title' => 'List Kontrak Akad'
                 ],
-
+                [   
+                    'url' => 'listberitaacara',       
+                    'title' => 'Report dan Berita Acara'                    
+                ],
                
             ],
         ],
@@ -75,7 +78,7 @@ return [
                     'title' => 'F.A.Q'
                 ]
             ],
-        ],
+        ],        
         [
             'icon' => 'fa fa-cog',
             'title' => 'Pengaturan',

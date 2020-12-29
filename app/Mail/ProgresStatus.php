@@ -26,7 +26,7 @@ class ProgresStatus extends Mailable
 
         $this->user = $user;
         $this->registrasi = $registrasi;
-         $this->pembayaran = $pembayaran;
+        $this->pembayaran = $pembayaran;
         $this->status = $status;
         //dd( $this);
     }

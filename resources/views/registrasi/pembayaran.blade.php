@@ -54,8 +54,8 @@
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Bukti Pembayaran</label>
 								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public//buktipembayaran/'.Auth::user()->id.'/'.$data->bb_tahap1 }}" download>{{$dataP->bb_tahap1}}</a>
+									<div class="form-control" readonly>										
+										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$data->bb_tahap1) }}" download>{{$dataP->bb_tahap1}}</a>
 									</div>
 								</div>
 								<label class="col-lg-4 col-form-label">Upload Bukti Pembayaran</label>

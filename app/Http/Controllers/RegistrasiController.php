@@ -2023,6 +2023,27 @@ class RegistrasiController extends Controller
         return view('registrasi.kontrakAkad',compact('data','dataTransfer','dataTunai'));
     }
 
+    public function uploadReportAdmin($id){
+        //dd($id);
+        $data = Registrasi::find($id);
+        
+        return view('registrasi.uploadreportadmin',compact('data'));
+    }
+
+    public function uploadBeritaAcaraAdmin($id){
+        //dd($id);
+        $data = Registrasi::find($id);
+        
+        return view('registrasi.uploadberitaacaraadmin',compact('data'));
+    }
+
+    public function kirimKeMUI($id){
+        //dd($id);
+        $data = Registrasi::find($id);
+        
+        return view('registrasi.kirimkemui',compact('data'));
+    }
+
 
 
     public function konfirmasiAkadAdmin($id){
@@ -2138,7 +2159,7 @@ class RegistrasiController extends Controller
 
             $redirect = redirect()->route('listakadadmin');
             return $redirect;
-    }
+    }    
    
 
 
@@ -2184,6 +2205,179 @@ class RegistrasiController extends Controller
             return $redirect;
     }
 
+    public function accAuditAdmin(Request $request, $id){
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+        $model = new Registrasi();
+        $model2 = new User();        
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);
+            $u = $model2->find($e->id_user);            
+            
+            $e->status_report = 2;            
+            
+            $e->save();
+            DB::commit();
+            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+            Session::flash('success', "Konfirmasi File Report Audit Berhasil");
+            
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+            $redirect = redirect()->route('registrasiHalal.index');            
+            return $redirect;
+    }
+
+    public function accBeritaAcaraAdmin(Request $request, $id){
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+        $model = new Registrasi();
+        $model2 = new User();        
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);
+            $u = $model2->find($e->id_user);            
+            
+            $e->status_berita_acara = 2;            
+            
+            $e->save();
+            DB::commit();
+            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+            Session::flash('success', "Konfirmasi File Berita Acara Berhasil");
+            
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+            $redirect = redirect()->route('registrasiHalal.index');            
+            return $redirect;
+    }    
+
+    public function uploadFileReportAdmin(Request $request, $id){
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+        $model = new Registrasi();
+        $model2 = new User();        
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);
+            $u = $model2->find($e->id_user);            
+
+            // $e->tanggal_akad = $data['tgl_akad'];
+            // $e->status_akad = 1;
+            // $e->mata_uang = $data['mata_uang'];
+            // $e->status=31;
+            $e->status_report=1;
+            // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
+            // $e->total_biaya = $data['total_biaya'];
+            if($request->has("file")){
+                $file = $request->file("file");
+                $file = $data["file"];
+                $filename = "REPORT-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/buktireport/".Auth::user()->id."/", $filename);
+                $e->file_report = $filename;
+            }
+            $e->save();
+            DB::commit();
+            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+            Session::flash('success', "Upload Dokumen Report Berhasil");
+
+            
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+            $redirect = redirect()->route('listberitaacara');
+            return $redirect;
+    }
+
+    public function uploadFileBeritaAcaraAdmin(Request $request, $id){
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+        $model = new Registrasi();
+        $model2 = new User();        
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);
+            $u = $model2->find($e->id_user);            
+
+            // $e->tanggal_akad = $data['tgl_akad'];
+            // $e->status_akad = 1;
+            // $e->mata_uang = $data['mata_uang'];
+            $e->status_berita_acara=1;
+            // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
+            // $e->total_biaya = $data['total_biaya'];
+            if($request->has("file")){
+                $file = $request->file("file");
+                $file = $data["file"];
+                $filename = "BERITA_ACARA-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/beritaacara/".Auth::user()->id."/", $filename);
+                $e->file_berita_acara = $filename;
+            }
+            $e->save();
+            DB::commit();
+            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+            Session::flash('success', "Upload Dokumen Berita Acara Berhasil");
+
+            
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+            $redirect = redirect()->route('listberitaacara');
+            return $redirect;
+    }
+
+    public function uploadFileMUI(Request $request, $id){
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+        $model = new Registrasi();
+        $model2 = new User();        
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);
+            $u = $model2->find($e->id_user); 
+            $e->status_mui=1;        
+            $e->status=20;
+            
+            if($request->has("file")){
+                $file = $request->file("file");
+                $file = $data["file"];
+                $filename = "HASIL_TINJAUAN_KOMITE-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/filemui/".Auth::user()->id."/", $filename);
+                $e->file_mui = $filename;
+            }
+            $e->save();
+            DB::commit();
+            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+            Session::flash('success', "Upload Hasil Tinjauan Komite Berhasil");
+
+            
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+            $redirect = redirect()->route('listberitaacara');
+            return $redirect;
+    }
+
     public function uploadFileAkadUser(Request $request, $id){
         $data = $request->except('_token','_method');
         //dd($data);
@@ -2222,6 +2416,12 @@ class RegistrasiController extends Controller
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
         return view('registrasi.listKontrakAkad',compact('dataKelompok','dataJenis'));
+    }
+
+    public function listBeritaAcara(){
+        $dataKelompok = KelompokProduk::all();
+        $dataJenis = JenisRegistrasi::all();
+        return view('registrasi.listBeritaAcara',compact('dataKelompok','dataJenis'));
     }
 
     public function dataAkadAdmin(Request $request){
@@ -2346,6 +2546,21 @@ class RegistrasiController extends Controller
         $dataTunai = json_decode($getTunai,true);
         return view('registrasi.pembayaran',compact('data','dataP','dataTransfer','dataTunai'));
     }
+
+    //report
+    public function reportAudit($id){        
+            //dd($id);
+            $data = Registrasi::find($id);
+            //get Data from FAQ Transfer            
+            return view('registrasi.reportAudit',compact('data'));
+    }
+
+    public function reportBeritaAcara($id){        
+        //dd($id);
+        $data = Registrasi::find($id);
+        //get Data from FAQ Transfer            
+        return view('registrasi.reportBeritaAcara',compact('data'));
+    }    
 
     public function konfirmasiPembayaranUser(Request $request, $id){
         $data = $request->except('_token','_method');
@@ -2474,6 +2689,58 @@ class RegistrasiController extends Controller
                          ->orWhere('pembayaran.status_tahap1','1')
                            ->orWhere('registrasi.status','11');
                            
+
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['name'])){
+            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+        }
+        if(isset($gdata['perusahaan'])){
+            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+        }
+        if(isset($gdata['kelompok_produk'])){
+            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+        }
+        if(isset($gdata['tgl_registrasi'])){
+            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+        }
+        if(isset($gdata['jenis_registrasi'])){
+            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        }
+        if(isset($gdata['status_registrasi'])){
+            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
+        }
+        if(isset($gdata['metode_pembayaran'])){
+            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
+        }
+        if(isset($gdata['status_pembayaran'])){
+            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
+        }
+        if(isset($gdata['status'])){
+            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+        }
+
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
+    }
+
+    public function dataBeritaAcaraAdmin(Request $request){
+        $gdata = $request->except('_token','_method');
+        //start                                
+
+        $xdata = DB::table('registrasi')
+                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 //->join('users','registrasi.id_user','=','users.id')
+                 ->join('users','registrasi.id','=','users.registrasi_id')
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                 ->where('registrasi.status','19')
+                 ->orWhere('registrasi.status','20');
 
         //filter condition
         if(isset($gdata['no_registrasi'])){

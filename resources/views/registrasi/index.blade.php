@@ -109,8 +109,8 @@
 
                                 var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayarann</a> `;
                                 var pelunasan = `<a href="{{url('pelunasan_registrasi')}}/`+full.id+`"  class="dropdown-item" >Pelunasan</a>` ;
-                                var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit</a>` ;
-                                var reportB = `<a href="{{url('report_berita_acara')}}/`+full.id+`"  class="dropdown-item" >Report Berita Acara</a>` ;
+                                var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit</a>`;
+                                var reportB = `<a href="{{url('report_berita_acara')}}/`+full.id+`"  class="dropdown-item" >Report Berita Acara</a>`;
 
 
                                    
