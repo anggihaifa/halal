@@ -199,7 +199,7 @@
                 },
                 {"data":"id_user"},
                 {"data":"no_registrasi"},
-                {"data":"nama_perusahaan"},
+                {"data":"perusahaan"},
                 {"data":"kelompok"},
                 {"data":"tgl_registrasi"},
                 {"data":"jenis"},

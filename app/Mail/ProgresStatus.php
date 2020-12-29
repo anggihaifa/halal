@@ -22,19 +22,14 @@ class ProgresStatus extends Mailable
      * @return void
      */
     public function __construct($registrasi, $user, $pembayaran, $status)
-    {
-        //
-
+    {        
        
         $this->registrasi = $registrasi;
-<<<<<<< HEAD
         $this->pembayaran = $pembayaran;
-=======
-         $this->user = $user;
-         $this->pembayaran = $pembayaran;
->>>>>>> e509d021d524c2de9eac58f9ef77affc1ae8fcd0
+        $this->user = $user;
+        $this->pembayaran = $pembayaran;
         $this->status = $status;
-        //dd( $this);
+        // dd( $this);
     }
 
     /**
@@ -47,7 +42,7 @@ class ProgresStatus extends Mailable
         
         $this->subject('Progres Status');
         return $this->view('mail.progresstatus');
-       // error_log("tes");
+        alert("disini");
     }
 
     

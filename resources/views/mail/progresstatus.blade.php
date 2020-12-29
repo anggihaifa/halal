@@ -71,7 +71,7 @@
             <h3 style="text-align: center">TERIMAKASIH SUDAH MELAKUKAN PENDAFTARAN SERTIFIKASI HALAL DI LPH PT. SUCOFINDO</h3>
     </div>
     
-    <div style="border-style: ridge; padding:10px 10px 10px 10px;">
+    <div style="border-style: ridge; padding:10px 10px 10px 10px;">    
     
     @if($registrasi['status']== '4')
 
@@ -325,6 +325,71 @@
 
              <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 1 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 1. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
              </p> 
+    @elseif($registrasi['status']== '16')
+    <h3 style="text-align: center">LAPORAN AUDIT TAHAP 2:</h3>                
+            <br/>
+            {{-- @if($registrasi['status_report']== '1' && $registrasi['status_berita_acara']== '1') --}}
+            <div>
+                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
+                   
+                    <tr>
+                        <th>ORDER {{$registrasi['no_registrasi']}} - LAPORAN AUDIT TAHAP 2 BERHASIL DIUPLOAD </th>
+                    </tr>             
+                              
+                     {{-- <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap1']}} </tr> --}}                     
+                     <tr style="text-align: center; vertical-align: middle;">Laporan audit tahap 2 dan berita acara audit tahap 2 dengan nomor referensi {{$registrasi['no_registrasi']}} sudah diupload. Silahkan cek Pada Menu Pelaporan dan Unduh File Laporan Audit dan Berita Acara Tahap 2, lalu Klik Konfirmasi.</tr>
+                    {{-- <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr> --}}
+                  
+                     
+                        
+                </table>
+            </div>
+            <p>
+                {{-- <button class="btn btn-green"><a href="{{url('') .Storage::url('public/pembayaran/'.$pembayaran['bt_tahap1']) }}">Unduh Laporan Audit Tahap 2</a></button> --}}
+                @if($registrasi['status_report']== '1')
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
+                @endif
+
+                @if($registrasi['status_berita_acara']== '1')
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
+                @endif
+            </p>
+
+             <p>Anda dapat meninjau order dan mengunduh bukti laporan audit tahap 2 dan berita acara tahap 2 anda di menu pelaporan pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu report audit dan report berita acara. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             </p>        
+             {{-- @php dd($registrasi['status']) @endphp       --}}
+    @elseif($registrasi['status']== '20')
+            <h3 style="text-align: center">KEPA MUI:</h3>                
+            <br/>
+            {{-- @if($registrasi['status_report']== '1' && $registrasi['status_berita_acara']== '1') --}}
+            <div>
+                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
+                   
+                    <tr>
+                        <th>ORDER {{$registrasi['no_registrasi']}} - LAPORAN AUDIT TAHAP 2 BERHASIL DIUPLOAD </th>
+                    </tr>             
+                              
+                     {{-- <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap1']}} </tr> --}}                     
+                     <tr style="text-align: center; vertical-align: middle;">Laporan audit tahap 2 dan berita acara audit tahap 2 dengan nomor referensi {{$registrasi['no_registrasi']}} sudah diupload. Silahkan cek Pada Menu Pelaporan dan Unduh File Laporan Audit dan Berita Acara Tahap 2, lalu Klik Konfirmasi.</tr>
+                    {{-- <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr> --}}
+                  
+                     
+                        
+                </table>
+            </div>
+            <p>
+                {{-- <button class="btn btn-green"><a href="{{url('') .Storage::url('public/pembayaran/'.$pembayaran['bt_tahap1']) }}">Unduh Laporan Audit Tahap 2</a></button> --}}
+                @if($registrasi['status_report']== '1')
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
+                @endif
+
+                @if($registrasi['status_berita_acara']== '1')
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
+                @endif
+            </p>
+
+             <p>Anda dapat meninjau order dan mengunduh bukti laporan audit tahap 2 dan berita acara tahap 2 anda di menu pelaporan pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu report audit dan report berita acara. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             </p>
     @elseif($registrasi['status']== '35')
 
             <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN TAHAP 2 ANDA :</h3>

@@ -176,12 +176,7 @@ class RegistrasiController extends Controller
 
         return Datatables::of($xdata)->make();
     }
-
-
-       
    
-
-
     public function updateStatusRegistrasi($id,$no_registrasi,$id_user,$status){
         
         $updater = Auth::user()->name;
@@ -242,10 +237,6 @@ class RegistrasiController extends Controller
         return redirect()->route('listregistrasipelangganaktif');
 
     }
-
-
-
-   
 
     //Registrasi Halal
     public function registrasiDatatable(){
@@ -2229,7 +2220,8 @@ class RegistrasiController extends Controller
             $e = $model->find($id);
             $u = $model2->find($e->id_user);            
             
-            $e->status_report = 2;            
+            $e->status_report = 2;
+            $e->status = 17;            
             
             $e->save();
             DB::commit();
@@ -2257,7 +2249,8 @@ class RegistrasiController extends Controller
             $e = $model->find($id);
             $u = $model2->find($e->id_user);            
             
-            $e->status_berita_acara = 2;            
+            $e->status_berita_acara = 2;          
+            $e->status = 17;
             
             $e->save();
             DB::commit();
@@ -2278,12 +2271,14 @@ class RegistrasiController extends Controller
         //dd($data);
 
         $model = new Registrasi();
-        $model2 = new User();        
+        $model2 = new User();
+        $model3 = new Pembayaran();
 
         try{
             DB::beginTransaction();
             $e = $model->find($id);
-            $u = $model2->find($e->id_user);            
+            $u = $model2->find($e->id_user); 
+            $p = $model3->find($e->id_pembayaran);           
 
             // $e->tanggal_akad = $data['tgl_akad'];
             // $e->status_akad = 1;
@@ -2301,9 +2296,9 @@ class RegistrasiController extends Controller
             }
             $e->save();
             DB::commit();
-            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
-            Session::flash('success', "Upload Dokumen Report Berhasil");
-
+            // dd($data);
+            Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+            // Session::flash('success', "Upload Dokumen Report Berhasil");            
             
         }catch (\Exception $e){
             DB::rollBack();
@@ -2315,16 +2310,17 @@ class RegistrasiController extends Controller
     }
 
     public function uploadFileBeritaAcaraAdmin(Request $request, $id){
-        $data = $request->except('_token','_method');
-        //dd($data);
+        $data = $request->except('_token','_method');        
 
         $model = new Registrasi();
-        $model2 = new User();        
+        $model2 = new User();
+        $model3 = new Pembayaran();      
 
         try{
             DB::beginTransaction();
             $e = $model->find($id);
-            $u = $model2->find($e->id_user);            
+            $u = $model2->find($e->id_user);  
+            $p = $model3->find($e->id_pembayaran); 
 
             // $e->tanggal_akad = $data['tgl_akad'];
             // $e->status_akad = 1;
@@ -2341,7 +2337,8 @@ class RegistrasiController extends Controller
             }
             $e->save();
             DB::commit();
-            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+            Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+            // dd($data);
             Session::flash('success', "Upload Dokumen Berita Acara Berhasil");
 
             
@@ -2359,12 +2356,14 @@ class RegistrasiController extends Controller
         //dd($data);
 
         $model = new Registrasi();
-        $model2 = new User();        
+        $model2 = new User();
+        $model3 = new Pembayaran();
 
         try{
             DB::beginTransaction();
             $e = $model->find($id);
             $u = $model2->find($e->id_user); 
+            $p = $model2->find($e->id_pembayaran); 
             $e->status_mui=1;        
             $e->status=20;
             
@@ -2377,8 +2376,8 @@ class RegistrasiController extends Controller
             }
             $e->save();
             DB::commit();
-            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
-            Session::flash('success', "Upload Hasil Tinjauan Komite Berhasil");
+            Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+            Session::flash('success', "Upload Hasil Tinjauan Komite Ke MUI Berhasil");
 
             
         }catch (\Exception $e){
@@ -2774,7 +2773,8 @@ class RegistrasiController extends Controller
                  //->join('users','registrasi.id_user','=','users.id')
                  ->join('users','registrasi.id','=','users.registrasi_id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                 ->where('registrasi.status','19')
+                 ->where('registrasi.status','16')
+                 ->orWhere('registrasi.status','17')
                  ->orWhere('registrasi.status','20');
 
         //filter condition

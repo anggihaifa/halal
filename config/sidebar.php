@@ -56,7 +56,6 @@ return [
                     'url' => 'listpelunasanregistrasi',
                     'title' => 'List Pelunasan'
                 ],
-<<<<<<< HEAD
                  [
                     'url' => 'listakadadmin',
                     'title' => 'List Kontrak Akad'
@@ -65,10 +64,6 @@ return [
                     'url' => 'listberitaacara',       
                     'title' => 'Report dan Berita Acara'                    
                 ],
-=======
-                 
-
->>>>>>> e509d021d524c2de9eac58f9ef77affc1ae8fcd0
                
             ],
         ],
