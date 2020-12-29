@@ -32,7 +32,7 @@
 				<!-- end panel-heading -->
 				<!-- begin panel-body -->
 				<div class="panel-body panel-form">
-					<form action="{{route('registrasi.konfirmasiPelunasan',["id" => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
+					<form action="{{route('registrasi.konfirmasipelunasanuser',["id" => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
 						@csrf
 						@method('PUT')
 						<div class="form-group row" >
@@ -54,37 +54,37 @@
 							</div> -->
 							<label class="col-lg-4 col-form-label">Tanggal Pelunasan</label>
 							<div class="col-lg-8">
-								<input id="tgl_pelunasan" name="tgl_pelunasan" type="text" class="form-control" {{ $data->status_pelunasan == 1 ? 'disabled' : ''}} />
+								<input id="tanggal_tahap3" name="tanggal_tahap3" type="text" class="form-control" {{ $dataP->status_tahap3 == 1 ? 'disabled' : ''}} />
 							</div>
 							<label class="col-lg-4 col-form-label">Biaya Sertifikasi</label>
 							
 							<div class="col-lg-8">
-								<input type="text" class="form-control" value="Rp. {{ $data->biaya_registrasi}} " disabled/>
+								<input type="text" class="form-control" value="Rp. {{ $dataP->nominal_tahap3}} " disabled/>
 							</div>
-							@if($data->status_pelunasan == 1)
+							@if($dataP->status_tahap3 == 1)
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public//buktipelunasan/'.Auth::user()->id.'/'.$data->bukti_pelunasan) }}" download>{{$data->bukti_pelunasan}}</a>
+										<a href="{{url('') .Storage::url('public//buktipelunasan/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
 									</div>
 								</div>
 								<label class="col-lg-4 col-form-label">Upload Bukti Pemlunasan</label>
 								<div class="col-lg-8">
 									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pelunasan masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
 								</div>
-							@elseif($data->status_pelunasan == 2)	
+							@elseif($dataP->status_tahap3 == 2)	
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/buktipelunasan/'.Auth::user()->id.'/'.$data->bukti_pelunasan) }}" download>{{$data->bukti_pelunasan}}</a>
+										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
 									</div>
 								</div>
 								<label class="col-lg-4 col-form-label">Bukti Konfirmasi PelunasanSertifikasi</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/pelunasan/'.$data->inv_pelunasan) }}" download>{{$data->inv_pelunasan}}</a>
+											<a href="{{url('') .Storage::url('public/INV/'.$data->inv_pembayaran) }}" download>{{$data->Inv_pembayaran}}</a>
 									</div>
 								</div>
 							@else
@@ -121,10 +121,10 @@
 										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
 									@else -->
 										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
-										@if($data->status_pelunasan == 1)
+										@if($dataP->status_tahap3 == 1)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
 											<button type="submit" class="btn btn-sm btn-warning m-r-5" disabled>Pelunasan Sedang Diproses</button>
-										@elseif($data->status_pelunasan == 2)
+										@elseif($dataP->status_tahap3 == 2)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Pelunasan Sudah Dikonfirmasi</button>
 										@else
 											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
@@ -148,11 +148,11 @@
     <script type="text/javascript">
     	//var date = new Date();
         var today = new Date();
-    	$('#tgl_pelunasan').datepicker({
+    	$('#tanggal_tahap3').datepicker({
             format: "yyyy-mm-dd",
             todayHighlight: true,
         });
-        $('#tgl_pelunasan').datepicker('setDate', today);
+        $('#tanggal_tahap3').datepicker('setDate', today);
     </script>
 
 @endpush

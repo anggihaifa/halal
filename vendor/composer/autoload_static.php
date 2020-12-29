@@ -640,6 +640,7 @@ class ComposerStaticInit376389b5eebaaf631a33f74a22744baf
         'App\\Models\\UnggahData\\MenuRestoran' => __DIR__ . '/../..' . '/app/Models/UnggahData/MenuRestoran.php',
         'App\\Models\\UnggahData\\Produk' => __DIR__ . '/../..' . '/app/Models/UnggahData/Produk.php',
         'App\\Models\\UnggahData\\UnggahDataSertifikasi' => __DIR__ . '/../..' . '/app/Models/UnggahData/UnggahDataSertifikasi.php',
+        'App\\ProgressUser' => __DIR__ . '/../..' . '/app/ProgressUser.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

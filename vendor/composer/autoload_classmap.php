@@ -75,6 +75,7 @@ return array(
     'App\\Models\\UnggahData\\MenuRestoran' => $baseDir . '/app/Models/UnggahData/MenuRestoran.php',
     'App\\Models\\UnggahData\\Produk' => $baseDir . '/app/Models/UnggahData/Produk.php',
     'App\\Models\\UnggahData\\UnggahDataSertifikasi' => $baseDir . '/app/Models/UnggahData/UnggahDataSertifikasi.php',
+    'App\\ProgressUser' => $baseDir . '/app/ProgressUser.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
