@@ -63,7 +63,13 @@ function checkProgress(data){
                                                                                                                                         :(data==34)? 'Menunggu Konfirmasi Akad'
                                                                                                                                             :(data==32)? 'Menunggu Konfirmasi Pembayaran'
                                                                                                                                                 :(data==33)? 'Menunggu Konfirmasi Pelunasan'
-                                                                                                                                                :'-';
+                                                                                                                                                    :(data==35)? 'Pembayaran Tahap 2'
+                                                                                                                                                        :(data==36)? 'Nominal Pembayaran Tahap2 Kurang'
+                                                                                                                                                            :(data==37)? 'Nominal Pembayaran Tahap2 Lebih'
+                                                                                                                                                                :(data==38)? 'Pembayaran Tahap2 Gagal'
+                                                                                                                                                                    :(data==39)? 'Menunggu Konfirmasi Pembayaran Tahap2'
+                                                                                                                                                                         :(data==40)? 'Pembayaran Tahap2 Terkonfirmasi'
+                                                                                                                                                                            :'-';
                                                                                      
 
 }
@@ -99,11 +105,13 @@ function notifProgress(data){
                                                                                                                         :(data==28)? 'Sertifikat Halal'
                                                                                                                             :(data==29)? 'Order dicancel dikarnakan dalam waktu 24 jam seteleah pendaftaran data berkas sertifikasi tidak dilengkapi'
                                                                                                                                 :(data==30)? 'Order dicancel dikarnakan dalam waktu 24 jam seteleah Akad. Anda tidak melakukan Pembayaran. Apabila menurut anda ini adalah kesalahan sillahkan mengontak custumore care kami di XXX-XXXXXX'
-                                                                                                                                        :(data==31)? 'Kontrak Akad Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo'
-                                                                                                                                            :(data==32)? 'Bukti Pembayaran Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
-                                                                                                                                                :(data==33)? 'Bukti Pelunasan Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
-                                                                                                                                             
-                                                                                                                                                    :'-';
+                                                                                                                                        :(data==31)? 'Kontrak Akad teah diunggah oleh admin LPH SUCOFINDO. Silahkan unduh kontrak akad lalu tanda tangani, selanjutnya silahkan upload ulang kontrak akad dalam waktu 1 x 24 jam'
+                                                                                                                                            
+                                                                                                                                            :(data==34)? 'Kontrak Akad Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo'
+                                                                                                                                                :(data==32)? 'Bukti Pembayaran Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
+                                                                                                                                                    :(data==33)? 'Bukti Pelunasan Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
+                                                                                                                                                 
+                                                                                                                                                        :'-';
 }
 /*
 function checkIcon(data){

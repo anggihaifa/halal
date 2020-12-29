@@ -282,52 +282,7 @@
 								@endforeach
 								
                                 
-                                <!-- @component('components.fordetail',['label' => 'Biaya Registrasi','value'=>$value['biaya_registrasi']])@endcomponent
-                                @component('components.fordetail',['label' => 'Metode Pembayaran','value'=>ucwords($value['metode_pembayaran'])])@endcomponent
                                 
-                                <label class="col-lg-4 col-form-label ">Invoice Registrasi</label>
-								<div id="sh" class="col-lg-8">
-										<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/registrasi/'.$value['inv_registrasi']) }}" download>{{$value['inv_registrasi']}}</a>
-										</div>
-								</div>
-
-                                @if($value['status_pembayaran'] == '1' || $value['status_pembayaran'] == '2' )
-									<label class="col-lg-4 col-form-label">Bukti Pembayaran</label>
-									<div id="sh" class="col-lg-8">
-										<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$value['bukti_pembayaran']) }}" download>{{$value['bukti_pembayaran']}}</a>
-										</div>
-									</div>
-								@endif
-								<label class="col-lg-4 col-form-label">Status Pembayaran</label>
-								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										@if($value['status_pembayaran'] == 2)
-											<span style="color: green;">Sudah Dikonfirmasi</span>
-										@elseif($value['status_pembayaran'] == 1)
-											<span style="color: orange;">Menunggu Konfirmasi</span>
-										@else
-											<span style="color: red;">Belum Bayar</span>
-										@endif
-									</div>
-								</div>
-
-								@if($value['inv_pembayaran'] == null)
-									<label class="col-lg-4 col-form-label">Invoice Pembayaran</label>
-									<div id="sh" class="col-lg-8">
-											<div class="form-control" readonly>
-												-
-											</div>
-									</div>
-								@else
-									<label class="col-lg-4 col-form-label">Invoice Pembayaran</label>
-									<div id="sh" class="col-lg-8">
-											<div class="form-control" readonly>
-												<a href="{{url('') .Storage::url('public/pembayaran/'.$value['inv_pembayaran']) }}" download>{{$value['inv_pembayaran']}}</a>
-											</div>
-									</div>
-								@endif -->
 								
 							<div class="col-md-12 offset-md-5">
 								@if(Auth::user()->usergroup_id == 1 ||  Auth::user()->usergroup_id == 3)

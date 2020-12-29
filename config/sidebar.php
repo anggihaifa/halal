@@ -40,14 +40,23 @@ return [
                     'title' => 'List Registrasi Aktif'
                 ],
                 [
+                    'url' => 'listakadadmin',
+                    'title' => 'List Kontrak Akad'
+                ],
+                [
                     'url' => 'listpembayaranregistrasi',
-                    'title' => 'List Pembayaran'
+                    'title' => 'List Pembayaran Tahap1'
+                ],
+                [
+                    'url' => 'listpembayarantahap2',
+                    'title' => 'List Pembayaran Tahap 2'
                 ],
                 
                 [
                     'url' => 'listpelunasanregistrasi',
                     'title' => 'List Pelunasan'
                 ],
+<<<<<<< HEAD
                  [
                     'url' => 'listakadadmin',
                     'title' => 'List Kontrak Akad'
@@ -56,6 +65,10 @@ return [
                     'url' => 'listberitaacara',       
                     'title' => 'Report dan Berita Acara'                    
                 ],
+=======
+                 
+
+>>>>>>> e509d021d524c2de9eac58f9ef77affc1ae8fcd0
                
             ],
         ],
@@ -154,17 +167,22 @@ return [
                     'url' => 'listregistrasipelangganaktif',
                     'title' => 'List Registrasi Aktif'
                 ],
-                 [
-                     'url' => 'listpembayaranregistrasi',
-                     'title' => 'Pembayaran Registrasi'
-                 ],
-                 [
-                    'url' => 'listpelunasanregistrasi',
-                    'title' => 'List Pelunasan'
-                ],
                 [
                     'url' => 'listakadadmin',
                     'title' => 'List Kontrak Akad'
+                ],
+                [
+                    'url' => 'listpembayaranregistrasi',
+                    'title' => 'List Pembayaran Tahap1'
+                ],
+                [
+                    'url' => 'listpembayarantahap2',
+                    'title' => 'List Pembayaran Tahap 2'
+                ],
+                
+                [
+                    'url' => 'listpelunasanregistrasi',
+                    'title' => 'List Pelunasan'
                 ],
                 // [
                 //     'url' => 'listunggahdatasertifikasi',

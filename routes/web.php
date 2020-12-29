@@ -41,6 +41,9 @@ Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistras
 
 
 Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran');
+
+Route::get('update_status_pembayaran_tahap2/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaranTahap2');
+
 Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad');
 Route::get('update_status_pelunasan/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPelunasan');
 //
@@ -64,7 +67,17 @@ Route::get('konfirmasi_pembayaran_registrasi/{id}','RegistrasiController@konfirm
 Route::get('pembayaran_registrasi/{id}','RegistrasiController@pembayaranRegistrasi')->name('registrasi.pembayaranRegistrasi');
 Route::put('konfirmasi_pembayaran/{id}','RegistrasiController@konfirmasiPembayaranUser')->name('registrasi.konfirmasipembayaran');
 Route::get('download','RegistrasiController@download');
-//Route::get('unduh_bukti_bayar/{id}','RegistrasiController@unduhBuktiBayar');
+
+
+//pembayaran tahap 2
+Route::get('list_pembayaran_tahap2','RegistrasiController@listPembayaranTahap2')->name('listpembayarantahap2');
+Route::get('data_pembayaran_Tahap2','RegistrasiController@dataPembayaranTahap2')->name('datapembayarantahap2');
+Route::get('konfirmasi_pembayaran_Tahap2/{id}','RegistrasiController@konfirmasiPembayaranTahap2');
+
+
+//pembayaran tahap 2
+Route::get('pembayaran_tahap2/{id}','RegistrasiController@pembayaranTahap2')->name('registrasi.pembayarantahap2');
+Route::put('konfirmasi_pembayaran_user_tahap2/{id}','RegistrasiController@konfirmasiPembayaranUserTahap2')->name('registrasi.konfirmasipembayaranusertahap2');
 
 //report
 Route::get('report_audit/{id}','RegistrasiController@reportAudit')->name('registrasi.reportaudit');
