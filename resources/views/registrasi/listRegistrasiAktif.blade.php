@@ -262,7 +262,6 @@
 
                          var status20 = (full.status == 20) ? dButton('Kirim Email ke MUI'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/20" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Kirim Email ke MUI</a>`;
 
-
                         var status21 = (full.status == 21 ) ? dButton('Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/21" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pelunasan</a>`;
 
                         /*var status22 = (full.status == 22 ) ? dButton('Nominal Pelunasan Kurang'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/22" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pelunasan Kurang</a>`;

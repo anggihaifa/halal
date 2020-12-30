@@ -449,7 +449,7 @@
                                                 <input type="radio" name="area_pemasaran" id="apinter" value="internasional" />
                                                 <label for="apinter">Internasional</label>
                                             </div>                                                          
-                                        </div>
+                                        </div>                                        
 
                                         <label class="col-4 col-form-label">Izin Edar</label><div class="col-lg-8"><div><input class="form-control" id="izinedar" name="izin_edar" type="text" label="Izin Edar" placeholder="Izin Edar"></div></div>
                                         <label class="col-4 col-form-label">Produk lain yang diproduksi/dilayani oleh organisasi diluar ruang lingkup sertifikasi yang diajukan, (jika ada):</label><div class="col-lg-8"><div><input class="form-control" id="produklain" name="produk_lain" type="text" label="Produk Lain" placeholder="Produk Lain"></div></div>
@@ -620,10 +620,10 @@
                                         @component('components.inputtext',['name'=> 'shift_1','label' => 'Shift 1','required'=>false,'placeholder'=>'Total karyawan'])@endcomponent
                                     </div>
                                     <div class="col-lg-2">
-                                        @component('components.inputtext',['name'=> 'shift_2','label' => 'Shift 1','required'=>false,'placeholder'=>'Total karyawan'])@endcomponent
+                                        @component('components.inputtext',['name'=> 'shift_2','label' => 'Shift 2','required'=>false,'placeholder'=>'Total karyawan'])@endcomponent
                                     </div>
                                     <div class="col-lg-2">
-                                        @component('components.inputtext',['name'=> 'shift_3','label' => 'Shift 1','required'=>false,'placeholder'=>'Total karyawan'])@endcomponent
+                                        @component('components.inputtext',['name'=> 'shift_3','label' => 'Shift 3','required'=>false,'placeholder'=>'Total karyawan'])@endcomponent
                                     </div>
                                 </div>
                             </div>
