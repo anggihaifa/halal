@@ -103,12 +103,12 @@
                                                     <option value="5">Konfirmasi Data Berkas</option>
                                                     <option value="6">Akad</option>
                                                     <option value="7">Akad Gagal</option>
-                                                    <option value="8">Konfirmasi Akad</option>
+                                                    <option value="8">Akad Terkonfirmasi</option>
                                                     <option value="9">Pembayaran</option>
                                                     <option value="10">Nominal Pembayaran Kurang</option>
                                                     <option value="11">Nominal Pembayaran Lebih</option>
                                                     <option value="12">Pembayaran Gagal</option>
-                                                    <option value="13">Konfirmasi Pembayaran</option>
+                                                    <option value="13">Pembayaran Terkonfirmasi</option>
 
                                                     <option value="14">Proses Audit Tahap 1</option>
                                                     <option value="15">Proses Audit Tahap 2</option>
@@ -121,12 +121,16 @@
                                                     <option value="22">Nominal Pelunasan Kurang</option>
                                                     <option value="23">Nominal Pelunasan Lebih</option>
                                                     <option value="24">Pelunasan Gagal</option>
-                                                    <option value="25">Konfirmasi Pelunasan</option>
+                                                    <option value="25">Pelunasan Terkonfirmasi</option>
                                                     <option value="26">Proses Sertifikasi</option>
                                                     <option value="27">Keputusan Halal/ Haram</option>
                                                     <option value="28">Sertifikat Halal</option>
-                                                    <option value="29">Cancel Order (Unggah Data)</option>
-                                                    <option value="30">Cancel Order </option>
+                                                    <option value="g">Pembayaran Tahap2</option>
+                                                    <option value="h">Nominal Pembayaran Tahap2 Kurang</option>
+                                                    <option value="i">Nominal Pembayaran Tahap2 Lebih</option>
+                                                    <option value="j">Pembayaran Tahap2 Gagal</option>
+                                                    <option value="l">Pembayaran Tahap2 Terkonfirmasi</option>
+                                                    
                                                 </select>
                                             </div>
                                             
@@ -233,9 +237,9 @@
                         
                         var status6 = (full.status == 6) ? dButton('Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Akad</a>`;
 
-                        var status7 = (full.status == 7) ? dButton('Akad Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.id_user+`/7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Akad Gagal</a>`;
+                       /* var status7 = (full.status == 7) ? dButton('Akad Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.id_user+`/7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Akad Gagal</a>`;
 
-                        var status8 = (full.status == 8) ? dButton('Konfirmasi Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Konfirmasi Akad</a>`;
+                        var status8 = (full.status == 8) ? dButton('Konfirmasi Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Konfirmasi Akad</a>`;*/
                         
                         var status9 = (full.status == 9 ) ? dButton('Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pembayaran</a>`;
 
@@ -248,13 +252,14 @@
                        /* var status13 = (full.status == 13) ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/13" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Konfirmasi Pembayaran</a>`;*/
 
                          var status14 = (full.status == 14) ? dButton('Proses Audit Tahap 1'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/14" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Proses Audit Tahap 1</a>`;
+                         var statusg = (full.status == 'g') ? dButton('Pembayaran Tahap2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/g" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pembayaran Tahap2</a>`;
 
                          var status15 = (full.status == 15) ? dButton('Proses Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/15" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Proses Audit Tahap 2</a>`;
 
                         
                         var status16 = (full.status == 16) ? dButton('Pelaporan Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/16" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pelaporan Audit Tahap 2</a>`;
 
-                        var status17 = (full.status == 17) ? dButton('Konfirmasi Berita Acara'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/17" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Konfirmasi Berita Acara</a>`;
+                        /*var status17 = (full.status == 17) ? dButton('Konfirmasi Berita Acara'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/17" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Konfirmasi Berita Acara</a>`;*/
                         
                         var status18 = (full.status == 18) ? dButton('Tinjauan Hasil Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/18" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Tinjauan Hasil Audit</a>`;
                         
@@ -281,9 +286,10 @@
                         
                         var status28 = (full.status == 28) ? dButton('Sertifikat Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/28" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Sertifikat Halal</a>`;
 
-                        var status29 = (full.status == 29) ? dButton('Cancel Order (Unggah Data)'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/29" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Cancel Order (Unggah Data)</a>`;
 
-                        var status30 = (full.status == 30) ? dButton('Cancel Order (Pembayaran)'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/30" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Cancel Order (Pembayaran)</a>`;
+                       /* var status29 = (full.status == 29) ? dButton('Cancel Order (Unggah Data)'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/29" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Cancel Order (Unggah Data)</a>`;
+
+                        var status30 = (full.status == 30) ? dButton('Cancel Order (Pembayaran)'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/30" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Cancel Order (Pembayaran)</a>`;*/
 
                         return `<div class="btn-group m-r-5 show">
                                 <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
@@ -296,7 +302,7 @@
                                     <div class="dropdown-divider"></div>
 
                                     <div class="dropdown-button-title">Update Progress</div>`+
-                                    status1+status2+status3+status4+status5+status6+status7+status8+status9+status14+status15+status16+status17+status18+status19+status20+status21+/*status22+status23+status24+status25+*/status26+status27+status28+
+                                    status1+status2+status3+status4+status5+status6/*+status7+status8*/+status9+status14+statusg+status15+status16/*+status17*/+status18+status19+status20+status21+/*status22+status23+status24+status25+*/status26+status27+status28+
                                 `</div>
                             </div>`
                     }

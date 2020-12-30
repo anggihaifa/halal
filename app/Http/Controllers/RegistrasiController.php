@@ -195,11 +195,33 @@ class RegistrasiController extends Controller
             $e->updated_status_by = $updater;
             $e->save();
             
-            
+            date_default_timezone_set('Asia/Jakarta');
+            $dl = date("Y-m-d H:i:s", strtotime('+24 hours'));
            
-            if($status == '4' ||$status == '5' ||$status == '7' ||$status == '8' ||$status == '10' ||$status == '11' ||$status == '12'  ||$status == '16' ||$status == '17' ||$status == '20' ||$status == '22' ||$status == '23' ||$status == '24' ||$status == '25'){
+            if($status == '4' ||$status == '5' ||$status == '7' ||$status == '8' ||$status == '10' ||$status == '11' ||$status == '12'  ||$status == '16' ||$status == '17' ||$status == '20' ||$status == '22' ||$status == '23' ||$status == '24' ||$status == '25' || $status == '2'||$status == '6' || $status == '9'||$status == 'g' || $status == '21'){
                 
-            
+                     if( $status == '2'){
+                        $e->dl_berkas = $dl;
+                        $e->save();
+
+                     }elseif( $status == '6'){
+                        $e->dl_akad = $dl;
+                        $e->save();
+
+                     }elseif( $status == '9'){
+                        $p->dl_tahap1 = $dl;
+                        $p->save();
+
+                     }elseif( $status == 'g'){
+                        $p->dl_tahap2 = $dl;
+                        $p->save();
+
+                     }elseif( $status == '21'){
+                        $p->dl_tahap3 = $dl;
+                        $p->save();
+
+                     }
+
                     try{
                         
                         //Session::flash('success', "data berhasil disimpan!");
@@ -3435,10 +3457,10 @@ class RegistrasiController extends Controller
     public function reminderEmail(){
 
 
-        date_default_timezone_set('Asia/Jakarta');
-        $date = date("Y-m-d h:i:sa", time()- 36*60*60) ;
+       /* date_default_timezone_set('Asia/Jakarta');
+        $date = date("Y-m-d h:i:sa") ;
         //dd($date);
-        $p = Pembayaran::where('tanggal_tahap1','>',$date)
+        $p = Pembayaran::where('dl_tahap1','<',$date)
                         ->where('status_reminder12','0')
                         ->get();
         //dd($p);
@@ -3458,7 +3480,7 @@ class RegistrasiController extends Controller
                 $p2->save();   
                 dispatch(new SendEmail($e,$u, $p2, 'r12'));
             }       
-        }      
+        }      */
     }
     
 
