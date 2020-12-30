@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Mail;
+namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Mail\ProgresStatus as ProgresStatus;
+use Mail;
 
-class ProgresStatus extends Mailable
+class SendEmail implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-   
     public $registrasi;
     public $user;
     public $pembayaran;
     public $status;
-
     /**
-     * Create a new message instance.
+     * Create a new job instance.
      *
      * @return void
      */
@@ -33,18 +34,13 @@ class ProgresStatus extends Mailable
     }
 
     /**
-     * Build the message.
+     * Execute the job.
      *
-     * @return $this
+     * @return void
      */
-    public function build()
+    public function handle()
     {
-        //dd( $this);
-        $this->subject('Progres Status');
-        return $this->view('mail.progresstatus');
-
-        //alert("disini");
+        //
+        Mail::to($user->email)->send(new ProgresStatus($registrasi,$user,$pembayaran, $status));
     }
-
-    
 }

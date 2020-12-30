@@ -137,7 +137,7 @@
 							</div>
 							<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 							<div class="col-lg-8">
-								<input type="file"  name="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="image/*" required />
+								<input type="file"  name="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required />
 							</div>
 							
 							@elseif($data->status_akad==2 || $data->status_akad==3 )

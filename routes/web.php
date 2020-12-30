@@ -58,6 +58,11 @@ Route::get('data_registrasi_pelanggan_bayar','RegistrasiController@dataRegistras
 Route::get('view_email','RegistrasiController@viewEmail')->name('view.email');
 
 
+
+//reminder email
+Route::get('reminder_email','RegistrasiController@reminderEmail'); 
+
+
 //list konfirmasi pembayaran
 Route::get('list_pembayaran_registrasi','RegistrasiController@listPembayaranRegistrasi')->name('listpembayaranregistrasi');
 Route::get('data_pembayaran_registrasi','RegistrasiController@dataPembayaranRegistrasi')->name('datapembayaranregistrasi');
@@ -72,7 +77,7 @@ Route::get('download','RegistrasiController@download');
 //pembayaran tahap 2
 Route::get('list_pembayaran_tahap2','RegistrasiController@listPembayaranTahap2')->name('listpembayarantahap2');
 Route::get('data_pembayaran_Tahap2','RegistrasiController@dataPembayaranTahap2')->name('datapembayarantahap2');
-Route::get('konfirmasi_pembayaran_Tahap2/{id}','RegistrasiController@konfirmasiPembayaranTahap2');
+Route::get('konfirmasi_pembayaran_tahap2/{id}','RegistrasiController@konfirmasiPembayaranTahap2');
 
 
 //pembayaran tahap 2
@@ -85,13 +90,16 @@ Route::get('report_berita_acara/{id}','RegistrasiController@reportBeritaAcara')-
 // Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser');
 
 //list konfirmasi pelunasan
-Route::get('list_pelunasan_registrasi','RegistrasiController@listPelunasanRegistrasi')->name('listpelunasanregistrasi');
-Route::get('data_pelunasan_registrasi','RegistrasiController@dataPelunasanRegistrasi')->name('datapelunasanregistrasi');
-Route::get('konfirmasi_pelunasan_registrasi/{id}','RegistrasiController@konfirmasiPelunasanRegistrasi');
+Route::get('list_pelunasan','RegistrasiController@listPelunasan')->name('listpelunasan');
+Route::get('data_pelunasan','RegistrasiController@dataPelunasan')->name('datapelunasan');
+Route::get('konfirmasi_pelunasan_admin/{id}','RegistrasiController@konfirmasiPelunasanAdmin');
 
 //pelunasan
-Route::get('pelunasan_registrasi/{id}','RegistrasiController@pelunasanRegistrasi')->name('registrasi.pelunasanRegistrasi');
-Route::put('konfirmasi_pelunasan/{id}','RegistrasiController@konfirmasiPelunasan')->name('registrasi.konfirmasiPelunasan');
+Route::get('pelunasan/{id}','RegistrasiController@pelunasan')->name('registrasi.pelunasan');
+Route::put('konfirmasi_pelunasan_user/{id}','RegistrasiController@konfirmasiPelunasanUser')->name('registrasi.konfirmasipelunasanuser');
+
+Route::get('upload_invoice/{id}','RegistrasiController@uploadInvoice')->name('registrasi.uploadinvoice');
+Route::put('upload_file_invoice/{id}','RegistrasiController@uploadFileInvoice')->name('registrasi.uploadfileinvoice');
 //Route::get('download','RegistrasiController@download');
 //Route::get('unduh_bukti_bayar/{id}','RegistrasiController@unduhBuktiBayar');
 

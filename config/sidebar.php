@@ -53,7 +53,7 @@ return [
                 ],
                 
                 [
-                    'url' => 'listpelunasanregistrasi',
+                    'url' => 'listpelunasan',
                     'title' => 'List Pelunasan'
                 ],
                  [
@@ -176,7 +176,7 @@ return [
                 ],
                 
                 [
-                    'url' => 'listpelunasanregistrasi',
+                    'url' => 'listpelunasan',
                     'title' => 'List Pelunasan'
                 ],
                 // [

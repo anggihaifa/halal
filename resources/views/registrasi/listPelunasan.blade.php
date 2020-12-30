@@ -105,14 +105,13 @@
                 <thead>
                 <tr>
                     <th class="text-nowrap valign-middle text-center">No</th>
-                    <th class="text-nowrap valign-middle text-center">Id User</th>
                     <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                     <th class="text-nowrap valign-middle text-center">Jenis </th>
                     <th class="text-nowrap valign-middle text-center">Pelanggan</th>
                     <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                     <th class="text-nowrap valign-middle text-center">Tanggal</th>
-                    <th class="text-nowrap valign-middle text-center">status</th>
-                    <th class="text-nowrap valign-middle text-center">Metode / Status Bayar</th>
+                    <th class="text-nowrap valign-middle text-center">Status</th>
+                    <th class="text-nowrap valign-middle text-center">Status Bayar</th>
                     <th class="text-nowrap valign-middle text-center">Bukti Bayar </th>
                     <th class="text-nowrap valign-middle text-center">Aksi</th>
                 </tr>
@@ -136,18 +135,15 @@
         var xTable = $('#table').DataTable({
 
             ajax:{
-                url:"{{route('datapelunasanregistrasi')}}",
+                url:"{{route('datapelunasan')}}",
                 data:function(d){
                     d.no_registrasi = $('input[name=no_registrasi]').val();
                     d.name = $('input[name=name]').val();
                     d.perusahaan = $('input[name=perusahaan]').val();
                     
                     d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
-
-
-                    
+ 
                     d.jenis_registrasi = $('#jenis_registrasi').val();
-                    d.metode_pelunasan = $('#metode_pelunasan').val();
                     d.status_pelunasan = $('#status_pelunasan').val();
                 }   
             },
@@ -160,9 +156,7 @@
                         return meta.row + 1;
                     }
                 },
-                {"data":"id_user"},
                 {"data":"no_registrasi"},
-
                 {"data":"jenis"},
                 {"data":"name"},
                 {"data":"perusahaan"},
@@ -178,7 +172,7 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        return `<a href="#" class="btn btn-white btn-xs">&nbsp;&nbsp;`+full.metode_pelunasan+`&nbsp;&nbsp;</a> `+ checkStatusPembayaran(full.status_pelunasan)
+                        return checkStatusPembayaran(full.status_tahap3)
                     }
                 },
                 {
@@ -186,14 +180,12 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        if(full.metode_pelunasan == 'tunai'){
-                            return `Tunai`
-                        }else{
-                            if(full.status_pelunasan == 0 || full.status_pelunasan == null){
+                        
+                        if(full.status_tahap3 == 0 || full.status_tahap3 == null){
                             return `-`
                         }else{
-                            return `<a href="{{ url('').Storage::url('public/buktipelunasan/`+full.id_user+`/`+full.bukti_pelunasan+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`    
-                        }    
+                            return `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap3+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`    
+                          
                         }
                         
                         
@@ -205,85 +197,41 @@
                     "orderable":false,
                     "render":function (data,type,full,meta) {
 
+                           
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
                             var status22 = (full.status == 22 ) ? dButton('Nominal Pelunasan Kurang'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/22" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pelunasan Kurang</a>`;
 
                             var status23 = (full.status == 23 ) ? dButton('Nominal Pelunasan Lebih'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/23" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pelunasan Lebih</a>`;
 
-                            var status24 = (full.status == 24) ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/24" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">pelunasan Gagal</a>`;
+                           /* var status24 = (full.status == 24) ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/24" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">pelunasan Gagal</a>`;*/
                            
-                            var konfirm = (full.status ==  25) ? dButton('Konfirmasi Pelunasan'):`<a href="{{url('konfirmasi_pelunasan_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pelunasan??')">Konfirmasi Pelunasan</a>`;
-
-                           
-
-                        if(full.metode_pelunasan == 'tunai'){
-
-                            return 
-
-                            `<div class="btn-group m-r-5 show">
-                                <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
-                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
-                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                    <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
-
-                                    <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
-                                    <div class="dropdown-divider"></div>
-
-                                    <div class="dropdown-button-title">Update Progress</div>`+
-                                        status22+status23+status24+konfirm+
-                                `</div>
-                            </div>`  
-                        }else{
-                            if(full.status_pelunasan == 0 || full.status_pelunasan == null){
-                                return `<div class="btn-group m-r-5 show">
-                                    <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
-                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                        <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
-
-                                        <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
-                                        <div class="dropdown-divider"></div>
-
-                                        <div class="dropdown-button-title">Update Progress</div>`+
-                                            status22+status23+status24+
-                                    `</div>
-                                </div>`    
-                            }else{
-                            return  `<div class="btn-group m-r-5 show">
-                                    <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
-                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                        <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
-
-                                        <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
-                                        <div class="dropdown-divider"></div>
-
-                                        <div class="dropdown-button-title">Update Progress</div>`+
-                                            status22+status23+status24+konfirm+
-                                    `</div>
-                                </div>`    
-                               
-                            }
-                        }
+                            var konfirm = (full.status ==  25) ? dButton('Konfirmasi Pelunasan'):`<a href="{{url('konfirmasi_pelunasan_admin')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pelunasan??')">Konfirmasi Pelunasan</a>`;
+                            var upload = `<a href="{{url('upload_invoice')}}/`+full.id+`"  class="dropdown-item" >Upload Invoice</a> `;
                         
+
+                            return `<div class="btn-group m-r-5 show">
+                                    <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                        <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
+
+                                        <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
+                                        <div class="dropdown-divider"></div>
+
+                                        <div class="dropdown-button-title">Update Progress</div>`+
+                                            status22+status23+konfirm+upload+
+                                    `</div>
+
+                                    </div>`  
+
+                            
+                       
                     }
                 }
             ],
-            "columnDefs": [
-                {
-                    "targets": [ 1 ],
-                    "visible": false,
-                    "searchable": false,
-
-                    "targets": [ 7 ],
-                    "visible": false,
-                    "searchable": false
-                }
-            ],   
+            
 
             processing:true,
             serverSide:true,
