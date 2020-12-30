@@ -2692,7 +2692,8 @@ class RegistrasiController extends Controller
             //create PDF File
             $getUser = User::find($userId);
             $getRegistrasi= Registrasi::find($id);
-            $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi];
+            $getPembayaran= Pembayaran::find($getRegistrasi->id_pembayaran);
+            $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi,'pembayaranData'=>$getPembayaran];
             $fileName = $key->no_registrasi.'_BT_TAHAP1.pdf';
             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 
@@ -3001,7 +3002,9 @@ class RegistrasiController extends Controller
             //create PDF File
             $getUser = User::find($userId);
             $getRegistrasi= Registrasi::find($id);
-            $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi];
+            $getPembayaran= Pembayaran::find($getRegistrasi->id_pembayaran);
+            $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi,'pembayaranData'=>$getPembayaran];
+            
             $fileName = $key->no_registrasi.'_BT_TAHAP2.pdf';
             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 
@@ -3244,7 +3247,9 @@ class RegistrasiController extends Controller
             //create PDF File
             $getUser = User::find($userId);
             $getRegistrasi= Registrasi::find($id);
-            $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi];
+            $getPembayaran= Pembayaran::find($getRegistrasi->id_pembayaran);
+            $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi,'pembayaranData'=>$getPembayaran];
+            
             $fileName = $key->no_registrasi.'_BT_TAHAP3.pdf';
             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 

@@ -56,10 +56,7 @@ return [
                     'url' => 'listpelunasan',
                     'title' => 'List Pelunasan'
                 ],
-                 [
-                    'url' => 'listakadadmin',
-                    'title' => 'List Kontrak Akad'
-                ],
+                 
                 [   
                     'url' => 'listberitaacara',       
                     'title' => 'Report dan Berita Acara'                    
@@ -179,10 +176,11 @@ return [
                     'url' => 'listpelunasan',
                     'title' => 'List Pelunasan'
                 ],
-                // [
-                //     'url' => 'listunggahdatasertifikasi',
-                //     'title' => 'Unggah Data Sertifikasi',
-                // ],
+                [   
+                    'url' => 'listberitaacara',       
+                    'title' => 'Report dan Berita Acara'                    
+                ],
+               
             ],
         ],
         [
