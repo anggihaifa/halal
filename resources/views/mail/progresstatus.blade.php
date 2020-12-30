@@ -91,7 +91,7 @@
 
     @endphp    
     
-    @if($registrasi['status']== '4')
+    @if($status== '4')
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH KEMBALI KELENGKAPAN BERKAS</h3>
         
@@ -101,7 +101,7 @@
         <b>Periksa catatan pada halaman unggah data sertifikasi dan periksa kembali berkas sebelum anda mengunggah kembali.<b>
         </p>
 
-    @elseif($registrasi['status']== '5')
+    @elseif($status== '5')
 
         <h3 style="text-align: center">SILAHKAN MELANJUTKAN PADA TAHAP SELANJUTNYA: AKAD</h3>
         
@@ -115,7 +115,7 @@
         </p>
         <br/>
 
-    @elseif($registrasi['status']== '7')
+    @elseif($status== '7')
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH KEMBALI FILE KONTRAK AKAD</h3>
         
@@ -128,7 +128,7 @@
             <button class="btn btn-green"><a href="{{url('')}}"> Menu Akad</a></button></p>
         <br/>
 
-    @elseif($registrasi['status']== '8')
+    @elseif($status== '8')
 
            
             <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN ANDA :</h3>
@@ -209,7 +209,7 @@
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
 
-     @elseif($registrasi['status']== '10')
+     @elseif($status== '10')
 
             <h3 style="text-align: center">PEMBAYARAN GAGAL</h3>
             
@@ -259,7 +259,7 @@
 
             <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
 
-    @elseif($registrasi['status']== '11')
+    @elseif($status== '11')
 
             <h3 style="text-align: center">PEMBAYARAN BERHASIL - NOMINAL BERLEBIH</h3>
             
@@ -281,7 +281,7 @@
             </div>
 
             <p><b>Notes :</b> Proses sertifikasi akan segera diproses. Silahkan tunggu 1 x 24 jam untuk pengembalian dana.</p>
-    @elseif($registrasi['status']== '12')
+    @elseif($status== '12')
 
             <h3 style="text-align: center">PROSES PEMBAYARAN GAGAL</h3>
             
@@ -307,7 +307,7 @@
              <p>Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
              </p>        
             
-    @elseif($registrasi['status']== '13')
+    @elseif($status== '13')
 
             <h3 style="text-align: center">PEMBAYARAN BERHASIL:</h3>
             
@@ -335,7 +335,7 @@
              <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 1 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 1. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
              </p> 
 
-     @elseif($registrasi['status']== '14')
+     @elseif($status== '14')
 
             <h3 style="text-align: center">AUDIT TAHAP 1: DALAM PROSES</h3>
             
@@ -361,7 +361,7 @@
 
 
 
-    @elseif($registrasi['status']== '16')
+    @elseif($status== '16')
     <h3 style="text-align: center">LAPORAN AUDIT TAHAP 2:</h3>                
             <br/>
             {{-- @if($registrasi['status_report']== '1' && $registrasi['status_berita_acara']== '1') --}}
@@ -393,8 +393,8 @@
 
              <p>Anda dapat meninjau order dan mengunduh bukti laporan audit tahap 2 dan berita acara tahap 2 anda di menu pelaporan pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu report audit dan report berita acara. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
              </p>        
-             {{-- @php dd($registrasi['status']) @endphp       --}}
-    @elseif($registrasi['status']== '20')
+             {{-- @php dd($status) @endphp       --}}
+    @elseif($status== '20')
             <h3 style="text-align: center">KEPADA MUI:</h3>                
             <br/>
             {{-- @if($registrasi['status_report']== '1' && $registrasi['status_berita_acara']== '1') --}}
@@ -428,7 +428,7 @@
              </p>
 
 
-    @elseif($registrasi['status']== 'g')
+    @elseif($status== 'g')
 
             <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN TAHAP 2 ANDA :</h3>
             
@@ -506,7 +506,7 @@
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
                  
 
-     @elseif($registrasi['status']== 'h')
+     @elseif($status== 'h')
    
         <h3 style="text-align: center">PEMBAYARAN TAHAP 2 GAGAL</h3>      
         <br/>
@@ -549,7 +549,7 @@
 
         <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
 
-    @elseif($registrasi['status']== 'i')
+    @elseif($status== 'i')
 
             <h3 style="text-align: center">PEMBAYARAN TAHAP 2 BERHASIL - NOMINAL BERLEBIH</h3>
             
@@ -571,7 +571,7 @@
             </div>
 
             <p><b>Notes :</b> Proses sertifikasi akan segera dilanjutkan. Silahkan tunggu 1 x 24 jam untuk pengembalian dana.</p>
-    @elseif($registrasi['status']== 'j')
+    @elseif($status== 'j')
 
             <h3 style="text-align: center">PROSES PEMBAYARAN TAHAP 2 GAGAL</h3>
             
@@ -597,7 +597,7 @@
              <p>Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
              </p>        
             
-    @elseif($registrasi['status']== 'l')
+    @elseif($status== 'l')
 
             <h3 style="text-align: center">PEMBAYARAN TAHAP 2 BERHASIL:</h3>
             
@@ -626,7 +626,7 @@
              </p>          
    
       
-    @elseif($registrasi['status']== 'c')
+    @elseif($status== 'c')
 
             <h3 style="text-align: center">SILAHKAN MENGUNGGAH FILE KONTRAK AKAD YANG SUDAH DITANDATANGANI</h3>
             
@@ -640,7 +640,7 @@
                 <button class="btn btn-green"><a href="{{url('')}}"> Menu Akad</a></button>
             </p>
             <br/>
-    @elseif($registrasi['status']== 'd')
+    @elseif($status== 'd')
 
             <h3 style="text-align: center">FILE BUKTI TRANSFER SUDAH DITERIMA. MENUNGGU KONFIRMASI ADMIN</h3>
             
@@ -650,7 +650,7 @@
                <p>Anda menerima email ini dikarenakan bukti transfer pembayaran tahap 1 telah diterima dan sedang menunggu konfirmasi dari Admin LPH PT.SUCOFINDO. Silahkan tunggu konfirmasi dari Admin LPH PT.SUCOFINDO paling lama dalam waktu 1 x 24 jam.</b>
                </p>
                
-     @elseif($registrasi['status']== '21')
+     @elseif($status== '21')
 
             <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN PELUNASAN ANDA :</h3>
             
@@ -728,7 +728,7 @@
                  <p><b>Notes :</b> Proses Sertifikasi akan segera dilanjutkan setelah Anda melakukan pembayaran</p>
 
 
-    @elseif($registrasi['status']== '22')
+    @elseif($status== '22')
    
         <h3 style="text-align: center">PEMBAYARAN PELUNASAN GAGAL</h3>      
         <br/>
@@ -772,7 +772,7 @@
         <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pelunasan.</p>           
                           
     
-     @elseif($registrasi['status']== '23')
+     @elseif($status== '23')
 
             <h3 style="text-align: center">PEMBAYARAN PELUNASAN BERHASIL - NOMINAL BERLEBIH</h3>
             
@@ -796,7 +796,7 @@
             <p><b>Notes :</b> Proses sertifikasi akan segera dilanjutkan. Silahkan tunggu 1 x 24 jam untuk pengembalian dana.</p>
      
             
-    @elseif($registrasi['status']== '25')
+    @elseif($status== '25')
 
             <h3 style="text-align: center">PEMBAYARAN PELUNASAN BERHASIL:</h3>
             

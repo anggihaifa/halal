@@ -48,6 +48,7 @@ use PDF;
 use Response;
 use DateTimeZone;
 use DateTime;   
+use App\Jobs\SendEmail;
 
 class RegistrasiController extends Controller
 {
@@ -3427,4 +3428,38 @@ class RegistrasiController extends Controller
 
 
 /////////////////////END of Pembayaran tahap 3////////////////////////////////
+
+
+    ////reminder email tahap1 12 jam
+
+    public function reminderEmail(){
+
+
+        date_default_timezone_set('Asia/Jakarta');
+        $date = date("Y-m-d h:i:sa", time()- 36*60*60) ;
+        //dd($date);
+        $p = Pembayaran::where('tanggal_tahap1','>',$date)
+                        ->where('status_reminder12','0')
+                        ->get();
+        //dd($p);
+
+         foreach($p as $p2)
+        {
+            $model = new Registrasi();
+            $model2 = new User();
+
+            DB::beginTransaction();
+            $e = $model->find($p2->id_registrasi);
+            $u = $model2->find($p2->id_user);
+            
+            if(is_null($p2) == 0){
+                //dd($p2);
+                $p2->status_reminder12 = 1;
+                $p2->save();   
+                dispatch(new SendEmail($e,$u, $p2, 'r12'));
+            }       
+        }      
+    }
+    
+
 }
