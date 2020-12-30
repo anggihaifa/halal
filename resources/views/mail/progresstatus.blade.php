@@ -74,31 +74,35 @@
     
     <div style="border-style: ridge; padding:10px 10px 10px 10px;">
 
-    @php
 
-        $input1 = $pembayaran['tanggal_tahap1']; 
-        $date1 = strtotime($input1); 
-        $dl_tahap1= date("Y-m-d H:i:s", strtotime('+24 hours', $date1));
+     @if($status== '2')
 
-        $input2 = $pembayaran['tanggal_tahap2']; 
-        $date2 = strtotime($input2); 
-        $dl_tahap2= date("Y-m-d H:i:s", strtotime('+24 hours', $date2));
+        
 
-        $input3 = $pembayaran['tanggal_tahap3']; 
-        $date3 = strtotime($input3); 
-        $dl_tahap3= date("Y-m-d H:i:s", strtotime('+24 hours', $date3));
+        <h3 style="text-align: center">SILAHKAN MENGUNGGAH BERKAS KELENGKAPAN SERTIFIKASI</h3>
+        
+        <br/>
+        
+        <p>Anda menerima email ini dikarenakan pendaftaran sertifikasi halal anda sudah diterima oleh Admin <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan unggah berkas kelengkapan sertifikasi pada menu unggah data berkas, lengkapi data selengkap mungkin lalu tunggu verifikasi dokumen oleh admin.  batas waktu pengunggahan kelengkapan dokumen adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_berkas']}} WIB/GMT+7 </p>
 
+        
+        <p>
+            <button class="btn btn-green"><a href="{{url('')}}">Akad</a></button>
+        </p>
+        <br/>  
 
-    @endphp    
+      @php
+       // dd($status);
+      @endphp
     
-    @if($status== '4')
+    @elseif($status== '4')
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH KEMBALI KELENGKAPAN BERKAS</h3>
         
         <br/>
         
         <p>Anda menerima email ini dikarenakan berkas registrasi yang anda unggah memerlukan beberapa perbaikan setelah melalui tahapan verifikasi berkas oleh Admin <b>LPH </b>PT.SUCOFINDO. <br\>
-        <b>Periksa catatan pada halaman unggah data sertifikasi dan periksa kembali berkas sebelum anda mengunggah kembali.<b>
+        <b>Periksa catatan pada halaman unggah data sertifikasi dan periksa kembali berkas sebelum anda mengunggah kembali. batas waktu pengunggahan kelengkapan dokumen adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_berkas']}} WIB/GMT+7.<b>
         </p>
 
     @elseif($status== '5')
@@ -115,13 +119,27 @@
         </p>
         <br/>
 
+     @elseif($status== '6')
+
+        <h3 style="text-align: center">SILAHKAN MENGUNGGAH FILE KONTRAK AKAD</h3>
+        
+        <br/>
+        
+        <p>Anda menerima email ini dikarenakan file kontrak akad telah diunggah oleh Admin <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan unggah kembali file kontrak akad yang sudah ditanda tangani dengan format pdf batas waktu pengunggahan kontrak akad adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_akad']}} WIB/GMT+7 </p>
+
+        
+        <p>
+            <button class="btn btn-green"><a href="{{url('')}}">Akad</a></button>
+        </p>
+        <br/>    
+
     @elseif($status== '7')
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH KEMBALI FILE KONTRAK AKAD</h3>
         
         <br/>
         
-        <p>Anda menerima email ini dikarenakan proses akad gagal dikarnakan file yang diupload oleh anda tidak benar/ rusak. Silahkan upload kembali file kontrak akad sertifikasi yang sudah anda tanda tangani. </p>
+        <p>Anda menerima email ini dikarenakan proses akad gagal dikarnakan file yang diupload oleh anda tidak benar/ rusak. Silahkan upload kembali file kontrak akad sertifikasi yang sudah anda tanda tangani. Batas waktu pengunggahan kontrak akad adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_akad']}} WIB/GMT+7 </p>
 
         
         <p>
@@ -130,8 +148,22 @@
 
     @elseif($status== '8')
 
+
+        <h3 style="text-align: center">FILE KONTRAK AKAD TELAH TERKONFIRMASI</h3>
+        
+        <br/>
+        
+        <p>Anda menerima email ini dikarenakan proses akad sudah selesai dan selanjutnya silahkan melanjutkan pada tahapan selanjutnya yaitu pembayaran tahap 1. </p>
+
+        
+        <p>
+            <button class="btn btn-green"><a href="{{url('')}}"> Menu Akad</a></button></p>
+        <br/>
            
-            <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN ANDA :</h3>
+            
+    @elseif($status== '9')
+    
+    <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN ANDA :</h3>
             
             <br/>
             <div style="border:solid; ">
@@ -169,7 +201,7 @@
                                 <b>{{$pembayaran['mata_uang']}} {{$pembayaran['nominal_tahap1']}} </b>
                             </td>
                             <td>
-                                <b>{{$dl_tahap1}} </b>
+                                <b>{{$pembayaran['dl_tahap1']}} </b>
                             </td>
                             
                         </tr>
@@ -191,7 +223,7 @@
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> Mandiri Syariah</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> XXXXXXXXXX</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$dl_tahap1}}</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
                      
                         
                 </table>
@@ -204,12 +236,12 @@
 
                  <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$dl_tahap1}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
 
-     @elseif($status== '10')
+    @elseif($status== '10')
 
             <h3 style="text-align: center">PEMBAYARAN GAGAL</h3>
             
@@ -244,7 +276,7 @@
                      <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b>PT SUCOFINDO</tr>
                      <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b>Bank Mandii Syariah</tr>
                      <tr style="text-align: center; vertical-align: middle;"><b>No Rekening: </b>XXXXXXXXXXXXXXXX</tr>
-                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b>{{$dl_tahap1}}</tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b>{{$pembayaran['dl_tahap1']}}</tr>
                     
                         
                 </table>
@@ -254,7 +286,7 @@
 
             <h3><b>PERHTIAN</b></h3>
 
-            <p>Mohon pembayaran diselesaikan sebelum {{$dl_tahap1}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
             </p>
 
             <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
@@ -296,7 +328,7 @@
                     </tr>             
                               
                      
-                    <tr style="text-align: center; vertical-align: middle;">Order Anda dengan nomor registrasi  {{$registrasi['no_registrasi']}} dari LPH Sucofindo telah dibatalkan. </tr>
+                    <tr style="text-align: center; vertical-align: middle;">Order Anda dengan nomor registrasi  {{$registrasi['no_registrasi']}} telah dibatalkan. </tr>
                   
                      
                         
@@ -347,7 +379,7 @@
                    
                     <tr>
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PROSES AUDIT TAHAP 1 </th>
-                        <th  >Audit tahap 1 sedang berlangsung silahkan tunggu 1 x 24 jam. setelah proses audit selesai silahkan lanjutkan pembayaran tahap 2 </th>
+                        <th  >Audit tahap 1 sedang berlangsung silahkan tunggu 1 x 24 jam. setelah proses audit selesai dan silahkan melanjutkan ke tahapan selanjutnya yaitu pembayaran tahap 2 </th>
                     </tr>             
                      
                         
@@ -465,7 +497,7 @@
                                 <b>{{$pembayaran['mata_uang']}} {{$pembayaran['nominal_tahap2']}} </b>
                             </td>
                             <td>
-                                <b>{{$dl_tahap2}} </b>
+                                <b>{{$pembayaran['dl_tahap2']}} </b>
                             </td>
                             
                         </tr>
@@ -487,7 +519,7 @@
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> Mandiri Syariah</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> XXXXXXXXXX</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$dl_tahap2}}</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$pembayaran['dl_tahap2']}}</tr>
                      
                         
                 </table>
@@ -500,7 +532,7 @@
 
                  <h3><b>PERHTIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$dl_tahap2}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
@@ -534,7 +566,7 @@
                  <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b>PT SUCOFINDO</tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b>Bank Mandii Syariah</tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>No Rekening: </b>XXXXXXXXXXXXXXXX</tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran TAHAP 2: </b>{{$dl_tahap2}}</tr>
+                 <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran TAHAP 2: </b>{{$pembayaran['dl_tahap2']}}</tr>
                 
                     
             </table>
@@ -544,7 +576,7 @@
 
         <h3><b>PERHTIAN</b></h3>
 
-        <p>Mohon pembayaran diselesaikan sebelum {{$dl_tahap2}}. Proses sertifikasi tidak dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+        <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Proses sertifikasi tidak dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
         </p>
 
         <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
@@ -687,7 +719,7 @@
                                 <b>{{$pembayaran['mata_uang']}} {{$pembayaran['nominal_tahap3']}} </b>
                             </td>
                             <td>
-                                <b>{{$dl_tahap3}} </b>
+                                <b>{{$pembayaran['dl_tahap3']}} </b>
                             </td>
                             
                         </tr>
@@ -709,7 +741,7 @@
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> Mandiri Syariah</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> XXXXXXXXXX</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$dl_tahap3}}</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$pembayaran['dl_tahap3']}}</tr>
                      
                         
                 </table>
@@ -722,7 +754,7 @@
 
                  <h3><b>PERHTIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$dl_tahap3}}. Proses tidak akan dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Proses tidak akan dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera dilanjutkan setelah Anda melakukan pembayaran</p>
@@ -756,7 +788,7 @@
                  <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b>PT SUCOFINDO</tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b>Bank Mandii Syariah</tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>No Rekening: </b>XXXXXXXXXXXXXXXX</tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Pelunasan: </b>{{$dl_tahap3}}</tr>
+                 <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Pelunasan: </b>{{$pembayaran['dl_tahap3']}}</tr>
                 
                     
             </table>
@@ -766,7 +798,7 @@
 
         <h3><b>PERHTIAN</b></h3>
 
-        <p>Mohon pembayaran diselesaikan sebelum {{$dl_tahap3}}. Proses sertifikasi tidak akan dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+        <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Proses sertifikasi tidak akan dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
         </p>
 
         <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pelunasan.</p>           

@@ -110,7 +110,15 @@ function notifProgress(data){
                                                                                                                                             :(data=='f')? 'Kontrak Akad Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo'
                                                                                                                                                 :(data=='d')? 'Bukti Pembayaran Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
                                                                                                                                                     :(data=='e')? 'Bukti Pelunasan Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
-                                                                                                                                                 
+                                                                                                                                                        :(data=='g')? 'Silahkan Upload Bukti Trasnfer Uang Muka Pada Menu Pembayaran Sesuai dengan Kontrak Akad'
+                                                                                                                                                            :(data=='h')? 'Nominal Pembayaran Uang Muka Pada Bukti Transfer Kurang Silahkan Upload Lagi Sejumlah Nominal Yang Kurang'
+                                                                                                                                                                 :(data=='i')? 'Nominal Pembayaran Uang Muka Pada Bukti Transfer Lebih Kami Akan Mengembalikan Kelebihan Uang Dalam 1 Hari Kerja'
+                                                                                                                                                                    :(data=='j')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
+                                                                                                                                                                        :(data=='k')? 'Bukti Pelunasan Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo'
+                                                                                                                                                                            :(data=='l')? 'Nominal Pembayaran Uang Muka Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
+                                                                                                                                                                                
+
+
                                                                                                                                                         :'-';
 }
 /*
