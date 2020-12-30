@@ -75,7 +75,9 @@
     <div style="border-style: ridge; padding:10px 10px 10px 10px;">
 
 
-     @elseif($status== '2')
+     @if($status== '2')
+
+        
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH BERKAS KELENGKAPAN SERTIFIKASI</h3>
         
@@ -87,9 +89,13 @@
         <p>
             <button class="btn btn-green"><a href="{{url('')}}">Akad</a></button>
         </p>
-        <br/>    
+        <br/>  
+
+      @php
+       // dd($status);
+      @endphp
     
-    @if($status== '4')
+    @elseif($status== '4')
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH KEMBALI KELENGKAPAN BERKAS</h3>
         

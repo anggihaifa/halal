@@ -81,13 +81,26 @@
 			<img class="logo-sucofindo" src="{{ public_path('/assets/img/logo/sci-color.png') }}" alt="" >	
 			<div class="text-header">
 				<div>LEMBAGA PEMERIKSA HALAL</div>
-				<div>SUCOFINDO</div>
+				<div>PT.SUCOFINDO</div>
 			</div>	
 		</div>
 	</div>
-	<div class="forTitle">
-		<span>TANDA BUKTI PEMBAYARAN SERTIFIKASI PRODUK HALAL</span>
-	</div>	
+	@if($registrasiData['status']=='13')
+		<div class="forTitle">
+			<span>TANDA BUKTI PEMBAYARAN TAHAP 1 SERTIFIKASI PRODUK HALAL</span>
+		</div>	
+	@elseif($registrasiData['status']=='l')
+		<div class="forTitle">
+			<span>TANDA BUKTI PEMBAYARAN TAHAP 2 SERTIFIKASI PRODUK HALAL</span>
+		</div>
+	@elseif($registrasiData['status']=='25')
+		<div class="forTitle">
+			<span>TANDA BUKTI PEMBAYARAN PELUNASAN SERTIFIKASI PRODUK HALAL</span>
+		</div>
+
+	@endif	
+
+
 	</div>
 	<div>
 		<table class="forData">
@@ -146,6 +159,33 @@
 				<td>:</td>
 				<td><b>{{$registrasiData['skala_usaha']}}</b></td>
 			</tr>
+
+		@if($registrasiData['status']=='13')
+			<tr>
+				<td>Nominal Pembayaran Tahap 1</td>
+				<td>:</td>
+				
+				td><b>{{$pembayaranData['nominal_tahap1']}}</b></td>
+			
+			</tr>
+		@elseif($registrasiData['status']=='l')
+			<tr>
+				<td>Nominal Pembayaran Tahap 2</td>
+				<td>:</td>
+				
+				td><b>{{$pembayaranData['nominal_tahap2']}}</b></td>
+			
+			</tr>
+		@elseif($registrasiData['status']=='25')
+			<tr>
+				<td>Nominal Pembayaran Pelunasan</td>
+				<td>:</td>
+				
+				td><b>{{$pembayaranData['nominal_tahap3']}}</b></td>
+			
+			</tr>
+
+		@endif	
 			<tr>
 				<td>Total Pembayaran</td>
 				<td>:</td>
