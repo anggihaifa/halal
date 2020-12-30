@@ -14,10 +14,10 @@ class SendEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $registrasi;
-    public $user;
-    public $pembayaran;
-    public $status;
+    protected $registrasi;
+    protected $user;
+    protected $pembayaran;
+    protected $status;
     /**
      * Create a new job instance.
      *
@@ -25,11 +25,13 @@ class SendEmail implements ShouldQueue
      */
     public function __construct($registrasi, $user, $pembayaran, $status)
     {        
-       
+        
         $this->registrasi = $registrasi;
         $this->user = $user;
         $this->pembayaran = $pembayaran;
         $this->status = $status;
+        //echo("berhasil");
+        //dd($this->pembayaran);
          //dd( $this);
     }
 
@@ -40,7 +42,8 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        //
-        Mail::to($user->email)->send(new ProgresStatus($registrasi,$user,$pembayaran, $status));
+        //echo("berhasil");
+        //dd($this->pembayaran);
+        Mail::to($this->user['email'])->send(new ProgresStatus($this->registrasi,$this->user,$this->pembayaran, $this->status));
     }
 }

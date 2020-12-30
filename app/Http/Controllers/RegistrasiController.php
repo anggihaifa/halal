@@ -3462,13 +3462,14 @@ class RegistrasiController extends Controller
     public function reminderEmail(){
 
 
-       /* date_default_timezone_set('Asia/Jakarta');
+        date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d h:i:sa") ;
         //dd($date);
-        $p = Pembayaran::where('dl_tahap1','<',$date)
+        /*$p = Pembayaran::where('dl_tahap1','<',$date)
                         ->where('status_reminder12','0')
-                        ->get();
+                        ->get();*/
         //dd($p);
+        $p = Pembayaran::all();
 
          foreach($p as $p2)
         {
@@ -3480,12 +3481,12 @@ class RegistrasiController extends Controller
             $u = $model2->find($p2->id_user);
             
             if(is_null($p2) == 0){
-                //dd($p2);
+                dd($p2);
                 $p2->status_reminder12 = 1;
                 $p2->save();   
                 dispatch(new SendEmail($e,$u, $p2, 'r12'));
             }       
-        }      */
+        }      
     }
     
 
