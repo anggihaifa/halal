@@ -82,12 +82,15 @@ class RegistrasiController extends Controller
     }
     public function dataRegistrasiPelangganAktif(Request $request){
         $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
         //start
         $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                  //->join('users','registrasi.id_user','=','users.id')
                  ->join('users','registrasi.id','=','users.registrasi_id')
+                 ->where('registrasi.kode_wilayah','=',$kodewilayah)
+                 ->where('registrasi.status_cancel','=',0)
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
 
         //filter condition
@@ -135,7 +138,7 @@ class RegistrasiController extends Controller
         $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
-                 ->join('users','registrasi.id_user','=','users.id')
+                 ->join('users','registrasi.id_user','=','users.id')                                  
                  //->join('users','registrasi.id','=','users.registrasi_id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
 
@@ -272,6 +275,7 @@ class RegistrasiController extends Controller
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok')
                  ->where('id_user','=',Auth::user()->id)
                  ->orderBy('registrasi.id','desc')
+                 ->where('registrasi.status_cancel','=',0)
                  ->get();
 
         //alert(Datatables::of($xdata));
@@ -507,9 +511,90 @@ class RegistrasiController extends Controller
             // $model->no_registrasi = $randomid;
             //$model->inv_registrasi = $fileName;
 
-            $model->id_user = Auth::user()->id;            
+            $model->id_user = Auth::user()->id;          
             $model->nama_perusahaan = $data['nama_perusahaan'];
-            $model->no_surat = $data['no_surat'];            
+
+            $nosurat = $data['no_surat'];
+            $expd = explode('-',$nosurat);
+
+            $kodewilayah = $expd[0];            
+
+            if($kodewilayah == '00'){
+                $provinsi = 'Pusat';
+            }else if($kodewilayah == '11'){
+                $provinsi = 'Aceh';
+            }else if($kodewilayah == '12'){
+                $provinsi = 'Sumatera Utara';
+            }else if($kodewilayah == '13'){
+                $provinsi = 'Sumatera Barat';
+            }else if($kodewilayah == '14'){
+                $provinsi = 'Riau';
+            }else if($kodewilayah == '15'){
+                $provinsi = 'Jambi';
+            }else if($kodewilayah == '16'){
+                $provinsi = 'Sumatera Selatan';
+            }else if($kodewilayah == '17'){
+                $provinsi = 'Bengkulu';
+            }else if($kodewilayah == '18'){
+                $provinsi = 'Lampung';
+            }else if($kodewilayah == '19'){
+                $provinsi = 'Bangka Belitung';
+            }else if($kodewilayah == '21'){
+                $provinsi = 'Kep.Riau';
+            }else if($kodewilayah == '31'){
+                $provinsi = 'DKI Jakarta';
+            }else if($kodewilayah == '32'){
+                $provinsi = 'Jawa Barat';
+            }else if($kodewilayah == '33'){
+                $provinsi = 'Jawa Tengah';
+            }else if($kodewilayah == '34'){
+                $provinsi = 'DI Yogyakarta';
+            }else if($kodewilayah == '35'){
+                $provinsi = 'Jawa Timur';
+            }else if($kodewilayah == '36'){
+                $provinsi = 'Banten';
+            }else if($kodewilayah == '51'){
+                $provinsi = 'Bali';
+            }else if($kodewilayah == '52'){
+                $provinsi = 'NTB';
+            }else if($kodewilayah == '53'){
+                $provinsi = 'NTT';
+            }else if($kodewilayah == '61'){
+                $provinsi = 'Kalimantan Barat';
+            }else if($kodewilayah == '62'){
+                $provinsi = 'Kalimantan Tengah';
+            }else if($kodewilayah == '63'){
+                $provinsi = 'Kalimantan Selatan';
+            }else if($kodewilayah == '64'){
+                $provinsi = 'Kalimantan Timur';
+            }else if($kodewilayah == '65'){
+                $provinsi = 'Kalimantan Utara';
+            }else if($kodewilayah == '71'){
+                $provinsi = 'Sulawesi Utara';
+            }else if($kodewilayah == '72'){
+                $provinsi = 'Sulawesi Tengah';
+            }else if($kodewilayah == '73'){
+                $provinsi = 'Sulawesi Selatan';
+            }else if($kodewilayah == '74'){
+                $provinsi = 'Sulawesi Tenggara';
+            }else if($kodewilayah == '75'){
+                $provinsi = 'Gorontalo';
+            }else if($kodewilayah == '76'){
+                $provinsi = 'Sulawesi Barat';
+            }else if($kodewilayah == '81'){
+                $provinsi = 'Maluku';
+            }else if($kodewilayah == '82'){
+                $provinsi = 'Maluku Utara';
+            }else if($kodewilayah == '91'){
+                $provinsi = 'Papua';
+            }else if($kodewilayah == '92'){
+                $provinsi = 'Papua Barat';
+            }else{
+                $provinsi = 'Tidak Terdaftar';
+            }
+
+            $model->kode_wilayah = $kodewilayah;
+            $model->no_surat = $data['no_surat'];
             $model->no_registrasi = $randomid;
             $model->tgl_registrasi = $data['tgl_registrasi'];
             $model->id_jenis_registrasi = $data['id_jenis_registrasi'];
@@ -2460,6 +2545,7 @@ class RegistrasiController extends Controller
 
     public function dataAkadAdmin(Request $request){
         $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
         //start
         $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
@@ -2467,7 +2553,9 @@ class RegistrasiController extends Controller
                  //->join('users','registrasi.id_user','=','users.id')
                  ->join('users','registrasi.id','=','users.registrasi_id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                 ->where('registrasi.status_akad','0')
+                 ->where('registrasi.status_cancel','=',0)
+                 ->where('registrasi.kode_wilayah',$kodewilayah)
+                 ->where('registrasi.status_akad','0')                 
                  
                      ->orWhere('registrasi.status_akad','1')
                        ->orWhere('registrasi.status_akad','2');
@@ -2735,6 +2823,7 @@ class RegistrasiController extends Controller
 
     public function dataPembayaranRegistrasi(Request $request){
         $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
         //start
         $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
@@ -2742,8 +2831,10 @@ class RegistrasiController extends Controller
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  //->join('users','registrasi.id_user','=','users.id')
                  ->join('users','registrasi.id','=','users.registrasi_id')
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )
-                 ->where('pembayaran.status_tahap1','0')
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
+                 ->where('registrasi.kode_wilayah',$kodewilayah)
+                 ->where('registrasi.status_cancel','=',0)
+                 ->where('pembayaran.status_tahap1','0')                 
                          ->orWhere('pembayaran.status_tahap1','1')
                            ->orWhere('registrasi.status','11');
                            
@@ -2789,6 +2880,7 @@ class RegistrasiController extends Controller
 
     public function dataBeritaAcaraAdmin(Request $request){
         $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
         //start                                
 
         $xdata = DB::table('registrasi')
@@ -2797,6 +2889,8 @@ class RegistrasiController extends Controller
                  //->join('users','registrasi.id_user','=','users.id')
                  ->join('users','registrasi.id','=','users.registrasi_id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                 ->where('registrasi.kode_wilayah',$kodewilayah)
+                 ->where('registrasi.status_cancel','=',0)
                  ->where('registrasi.status','16')
                  ->orWhere('registrasi.status','17')
                  ->orWhere('registrasi.status','20');
@@ -3034,6 +3128,7 @@ class RegistrasiController extends Controller
 
     public function dataPembayaranTahap2(Request $request){
         $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
         //start
         $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
@@ -3042,7 +3137,9 @@ class RegistrasiController extends Controller
                  //->join('users','registrasi.id_user','=','users.id')
                  ->join('users','registrasi.id','=','users.registrasi_id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
-                 ->where('pembayaran.status_tahap2','0')
+                 ->where('registrasi.kode_wilayah',$kodewilayah)
+                 ->where('registrasi.status_cancel','=',0)
+                 ->where('pembayaran.status_tahap2','0')                 
                          ->orWhere('pembayaran.status_tahap2','1')
                            ->orWhere('registrasi.status','14');
                            
@@ -3279,6 +3376,7 @@ class RegistrasiController extends Controller
 
     public function dataPelunasan(Request $request){
         $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
         //start
         $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
@@ -3287,6 +3385,8 @@ class RegistrasiController extends Controller
                  //->join('users','registrasi.id_user','=','users.id')
                  ->join('users','registrasi.id','=','users.registrasi_id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
+                 ->where('registrasi.status_cancel','=',0)
+                 ->where('registrasi.kode_wilayah',$kodewilayah)
                  ->where('pembayaran.status_tahap3','0')
                          ->orWhere('pembayaran.status_tahap3','1')
                          ->orWhere('pembayaran.status_tahap3','2');
