@@ -2090,7 +2090,7 @@ class RegistrasiController extends Controller
                // dd($e->total_biaya);
 
                     $model3->nominal_tahap1 = ((int)$e->total_biaya)/2;
-                    $model3->nominal_tahap2 = ((int)$e->total_biaya)/2;
+                    $model3->nominal_tahap3 = ((int)$e->total_biaya)/2;
                     $model3->nominal_total =((int)$e->total_biaya);
                     $model3->id_registrasi = $e->id;
                     $model3->updated_by=$updater;
@@ -2707,10 +2707,20 @@ class RegistrasiController extends Controller
                 $p->bb_tahap2 = $p->bb_tahap1;
                 $p->status_tahap3 = '1';
                 $p->bb_tahap3 = $p->bb_tahap3;
+
+                $p->reminder12_tahap2 = 1;
+                $p->reminder12_tahap3 = 1;
+
+                $p->reminder6_tahap2 = 1;
+                $p->reminder6_tahap3 = 1;
             }elseif(parseInt($p->nominal_total) >=10000000 && parseInt($p->nominal_total) < 50000000 ){
                
                 $p->status_tahap2 = '1';
                 $p->bb_tahap2 = $p->bb_tahap1;
+
+                $p->reminder12_tahap2 = 1;
+                $p->reminder6_tahap2 = 1;
+            
             }else{
                  $p->status_tahap1 = '2';
             }
@@ -3457,37 +3467,7 @@ class RegistrasiController extends Controller
 /////////////////////END of Pembayaran tahap 3////////////////////////////////
 
 
-    ////reminder email tahap1 12 jam
-
-    public function reminderEmail(){
-
-
-        date_default_timezone_set('Asia/Jakarta');
-        $date = date("Y-m-d h:i:sa") ;
-        //dd($date);
-        /*$p = Pembayaran::where('dl_tahap1','<',$date)
-                        ->where('status_reminder12','0')
-                        ->get();*/
-        //dd($p);
-        $p = Pembayaran::all();
-
-         foreach($p as $p2)
-        {
-            $model = new Registrasi();
-            $model2 = new User();
-
-            DB::beginTransaction();
-            $e = $model->find($p2->id_registrasi);
-            $u = $model2->find($p2->id_user);
-            
-            if(is_null($p2) == 0){
-                dd($p2);
-                $p2->status_reminder12 = 1;
-                $p2->save();   
-                dispatch(new SendEmail($e,$u, $p2, 'r12'));
-            }       
-        }      
-    }
+   
     
 
 }

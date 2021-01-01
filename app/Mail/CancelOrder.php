@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ReminderMail extends Mailable
+class CancelOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,13 +21,14 @@ class ReminderMail extends Mailable
      *
      * @return void
      */
-    public function __construct($registrasi,$user,$value,$status)
+    public function __construct($registrasi, $user, $pembayaran, $status)
     {
         $this->registrasi = $registrasi;
         $this->user = $user;
-        $this->pembayaran = $value;
+        $this->pembayaran = $pembayaran;
         $this->status = $status;
-    }
+       // dd($this);
+    }    
 
     /**
      * Build the message.
@@ -36,6 +37,7 @@ class ReminderMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.reminder');
+        //dd($this);
+        return $this->view('mail.cancelorder');
     }
 }

@@ -58,11 +58,6 @@ Route::get('data_registrasi_pelanggan_bayar','RegistrasiController@dataRegistras
 Route::get('view_email','RegistrasiController@viewEmail')->name('view.email');
 
 
-
-//reminder email
-Route::get('reminder_email','RegistrasiController@reminderEmail'); 
-
-
 //list konfirmasi pembayaran
 Route::get('list_pembayaran_registrasi','RegistrasiController@listPembayaranRegistrasi')->name('listpembayaranregistrasi');
 Route::get('data_pembayaran_registrasi','RegistrasiController@dataPembayaranRegistrasi')->name('datapembayaranregistrasi');

@@ -29,43 +29,128 @@ class ReminderController extends Controller
         try{            
             DB::beginTransaction();
             $p = Pembayaran::all();
-
+            //dd($p);
             foreach ($p as $key => $value) {
-                $tgl = $value->tanggal_tahap1;
-                $tgl2 = $value->dl_tahap1;                   
 
-                \Log::info(Carbon::parse($tgl2)." dan ".Carbon::now());
+                $e = $model->find($value->id_registrasi);
+                $u = $model2->find($e->id_user);
 
-                $time1 = Carbon::parse($tgl)->timestamp;
-                $time2 = Carbon::parse($tgl2)->timestamp;
-                $timenow = Carbon::now()->timestamp;
-                \Log::info($time2-$timenow);
-                
-                if($time2 - $timenow <= 43200){
-                    Mail::to("hamdanmiftahul@gmail.com")->send(new ReminderMail());
-                    \Log::info("sukseslnying");
-                }else{
-                    \Log::info("gagalnying");
-                }                
-            }            
+                if(is_null($value->dl_tahap1)==0){
 
-            // $e = $model->find($id);
-            // $u = $model2->find($e->id_user);
-            // $p = $model3->find($e->id_pembayaran);                                                
-            
-            
-            // date_default_timezone_set('Asia/Jakarta');
-            // $dl = date("Y-m-d H:i:s", strtotime('+24 hours'));               
-            
-            
-            // \Log::info("success");
-            // Mail::to($u->email)->send(new ReminderMail($e,$u,$p, $status));
+
+                    $tgl_1 = $value->tanggal_tahap1;
+                    $tgl2_1 = $value->dl_tahap1;
+
+                    //dd($tgl2_1);
+                    $time1 = Carbon::parse($tgl_1)->timestamp;
+                    $time2 = Carbon::parse($tgl2_1)->timestamp;
+                    $timenow = Carbon::now()->timestamp;
+
+                    
+                    if($time2 - $timenow <= 43200){
+                        //dd($p);
+                        
+                        if($value->reminder12_tahap1 == 0){
+                            
+                            $value->reminder12_tahap1 = 1;
+                            $value->save();
+                           //dd($p);
+                             DB::commit();
+                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r1_12'));
+                        
+                        }
+                       
+                    }if($time2 - $timenow <=21600){
+                        
+                        if($value->reminder6_tahap1 == 0){
+               
+                             $value->reminder6_tahap1 = 1;
+                             $value->save();
+                              DB::commit();
+                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r1_6'));
+                        \Log::info("sukses");
+                        }
+                        
+                                    
+
+                }if(is_null($value->dl_tahap2)==0){
+
+                    $tgl_2 = $value->tanggal_tahap2;
+                    $tgl2_2 = $value->dl_tahap2; 
+
+                    $time1_2 = Carbon::parse($tgl_2)->timestamp;
+                    $time2_2 = Carbon::parse($tgl2_2)->timestamp;
+                    $timenow_2 = Carbon::now()->timestamp;
+
+                    if($time2_2 - $timenow_2 <= 43200){
+                        if($value->reminder12_tahap2 == 0){
+
+                            $value->reminder12_tahap2 = 1;
+                            $value->save();
+                             DB::commit();
+                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_12'));
+                        
+                        }
+                        else{
+                           
+                        }
+                    }if($time2_2 - $timenow_2 <=21600){
+                        if($value->reminder6_tahap2 == 0){
+
+                            $value->reminder6_tahap2 = 1;
+                            $value->save();
+                             DB::commit();
+                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_6'));
+                       
+                        }
+                        else{
+                           
+                        }
+                    }      
+
+                }if(is_null($value->dl_tahap3)==0){
+
+                    $tgl_3 = $value->tanggal_tahap3;
+                    $tgl2_3 = $value->dl_tahap3; 
+
+                    $time1_3 = Carbon::parse($tgl_3)->timestamp;
+                    $time2_3 = Carbon::parse($tgl2_3)->timestamp;
+                    $timenow_3 = Carbon::now()->timestamp;
+
+
+                    if($time2_3 - $timenow_3 <= 43200){
+                        if($value->reminder12_tahap3 == 0){
+
+                            $value->reminder12_tahap3 = 1;
+                            $value->save();
+                             DB::commit();
+                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r3_12'));
+                        
+                        }
+                        else{
+                           
+                        }
+                    }if($time2_3 - $timenow_3 <=21600){
+                        if($value->reminder6_tahap3 == 0){
+
+                            $value->reminder6_tahap3 = 1;
+                            $value->save();
+                             DB::commit();
+                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r3_6'));
+                       
+                        }
+                        else{
+                           
+                        }
+                    }     
+
+                }    
+            }
+                        
             
         }catch (\Exception $e){
-            // \Log::error($e);
-            // DB::rollBack();
-            // Session::flash('error', $e->getMessage());           
-            \Log::info("failed");
+                     
+           
         }        
     }    
 }
