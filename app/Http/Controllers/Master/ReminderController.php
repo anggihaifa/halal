@@ -15,16 +15,19 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use App\Services\FileUploadServices;
 use App\Mail\KonfirmasiPembayaran;
+use App\Mail\CancelOrder;
 use App\Mail\ProgresStatus;
 use App\Mail\ReminderMail;
 use Carbon\Carbon;
 
 class ReminderController extends Controller
-{
+{      
     public function dataReminderPembayaran(Request $request){                
         $model = new Registrasi();
         $model2 = new User();
         $model3 = new Pembayaran();
+
+        //reminder
 
         try{            
             DB::beginTransaction();
@@ -59,7 +62,11 @@ class ReminderController extends Controller
                              Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r1_12'));
                         
                         }
-                       
+
+                        else{
+                            \Log::info("udh dikirim sebelumnya");
+                        }
+
                     }if($time2 - $timenow <=21600){
                         
                         if($value->reminder6_tahap1 == 0){
@@ -70,7 +77,11 @@ class ReminderController extends Controller
                              Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r1_6'));
                         \Log::info("sukses");
                         }
-                        
+
+                        else{
+                            \Log::info("udh dikirim sebelumnya");
+                        }
+
                                     
 
                 }if(is_null($value->dl_tahap2)==0){
@@ -89,10 +100,11 @@ class ReminderController extends Controller
                             $value->save();
                              DB::commit();
                              Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_12'));
+
                         
-                        }
-                        else{
-                           
+                        }else{
+                            \Log::info("udh dikirim sebelumnya");
+
                         }
                     }if($time2_2 - $timenow_2 <=21600){
                         if($value->reminder6_tahap2 == 0){
@@ -100,11 +112,11 @@ class ReminderController extends Controller
                             $value->reminder6_tahap2 = 1;
                             $value->save();
                              DB::commit();
-                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_6'));
-                       
-                        }
-                        else{
-                           
+                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_6'));                       
+                    
+                        }else{
+                            \Log::info("udh dikirim sebelumnya");
+
                         }
                     }      
 
@@ -125,10 +137,11 @@ class ReminderController extends Controller
                             $value->save();
                              DB::commit();
                              Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r3_12'));
+
                         
-                        }
-                        else{
-                           
+                        }else{
+                            \Log::info("udh dikirim sebelumnya");
+
                         }
                     }if($time2_3 - $timenow_3 <=21600){
                         if($value->reminder6_tahap3 == 0){
@@ -137,20 +150,18 @@ class ReminderController extends Controller
                             $value->save();
                              DB::commit();
                              Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r3_6'));
-                       
+                        }else{
+                            \Log::info("udh dikirim sebelumnya");
                         }
-                        else{
-                           
-                        }
-                    }     
-
-                }    
-            }
-                        
-            
+                    }
+                }         
+            }   
         }catch (\Exception $e){
                      
+
            
-        }        
-    }    
+            \Log::info("failed");
+        }  
+    }
+
 }

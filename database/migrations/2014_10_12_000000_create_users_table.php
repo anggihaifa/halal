@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('bumn_code');
+            $table->string('kode_wilayah');
             $table->rememberToken();
             $table->timestamps();
         });

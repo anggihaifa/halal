@@ -27,7 +27,7 @@ class CancelOrder extends Mailable
         $this->user = $user;
         $this->pembayaran = $pembayaran;
         $this->status = $status;
-       // dd($this);
+
     }    
 
     /**
@@ -37,7 +37,7 @@ class CancelOrder extends Mailable
      */
     public function build()
     {
-        //dd($this);
+
         return $this->view('mail.cancelorder');
     }
 }

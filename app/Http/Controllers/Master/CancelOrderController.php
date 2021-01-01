@@ -27,9 +27,10 @@ class CancelOrderController extends Controller
         $model2 = new User();
         $model3 = new Pembayaran();
 
+
         try{                      
         ////////Email Cancel Order///////  
-            
+                      
             DB::beginTransaction(); 
             $p = Pembayaran::all();
 
@@ -38,9 +39,11 @@ class CancelOrderController extends Controller
                 $u = $model2->find($e->id_user);
 
                 $tgl2 = $value->dl_tahap1;
+
                 $idregistrasi = $value->id_registrasi;    
 
                 date_default_timezone_set('Asia/Jakarta');            
+
                 
                 $time2 = Carbon::parse($tgl2)->timestamp;
                 $timenow = Carbon::now()->timestamp;                
@@ -49,6 +52,7 @@ class CancelOrderController extends Controller
                 if($timenow > $time2){                    
 
                     $model = new Registrasi();                                        
+
 
                     try { 
 
@@ -73,6 +77,7 @@ class CancelOrderController extends Controller
                     
                 }                                
             }    
+
             //cancel aberkas
             $e = Registrasi::all();
 
@@ -82,12 +87,14 @@ class CancelOrderController extends Controller
 
                 $tgl_berkas = $value2->dl_berkas;
                 date_default_timezone_set('Asia/Jakarta');
+      
                 
                 $time2 = Carbon::parse($value2->dl_berkas)->timestamp;
                 $timenow2 = Carbon::now()->timestamp;
                                 
                 // dd(Carbon::parse($value2->dl_berkas));
                 
+
                 //cancel pembayaran  
                            
                 if($timenow2 > $time2){   
@@ -105,8 +112,6 @@ class CancelOrderController extends Controller
                             //dd($timenow2);                       
                             Mail::to("$u->email")->send(new CancelOrder($value2,$u,$p,'berkas'));
                         } 
-                       
-
                                                 
                     } catch (\Exception $e) {
                         // \Log::error("Error".$e);
@@ -116,6 +121,7 @@ class CancelOrderController extends Controller
                     
                 }                                
             }  
+
 
              $e = Registrasi::all();
 
@@ -279,9 +285,7 @@ class CancelOrderController extends Controller
                     }     
 
                 }    
-            }
-
-           
+            }      
 
         }catch (\Exception $e){            
             DB::rollBack();

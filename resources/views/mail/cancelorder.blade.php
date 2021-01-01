@@ -74,23 +74,23 @@
     
     <div style="border-style: ridge; padding:10px 10px 10px 10px;">
 
+
      
     @if($status== 'berkas')
 
-
-        
-    
-    <h3 >ORDER ANDA DENGAN NOMOR REGISTRASI {{$registrasi['no_registrasi']}} - DIBATALKAN</h3>
+    <h3  style="text-align:center; align-content: center;">ORDER ANDA DENGAN NOMOR REGISTRASI {{$registrasi['no_registrasi']}} - DIBATALKAN</h3>
             
             <br/>
             <div >
                 <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
                    
                     <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - ORDER DIBATALKAN</th>
+                        <th style="text-align:center;" >ORDER {{$registrasi['no_registrasi']}} - ORDER DIBATALKAN</th>
                     </tr>             
                               
+
                      <tr style="text-align:center; vertical-align: middle;"><b>Order Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} telah dibatalkan karna anda melewati batas waktu pengisian berkas pada hari dan pukul {{$registrasi['dl_berkas']}}.</tr>
+
                    
                      
                         
@@ -98,23 +98,24 @@
             </div>
 
            
-                <p><b>Notes :</b> Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.</p>   
 
-     
+                <p><b>Notes :</b> Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.</p>           
     
    @elseif($status== 'akad')
     
-    <h3 >ORDER ANDA DENGAN NOMOR REGISTRASI {{$registrasi['no_registrasi']}} - DIBATALKAN</h3>
+   <h3  style="text-align:center; align-content: center;">ORDER ANDA DENGAN NOMOR REGISTRASI {{$registrasi['no_registrasi']}} - DIBATALKAN</h3>
             
             <br/>
             <div >
                 <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
                    
                     <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - ORDER DIBATALKAN</th>
-                    </tr>             
+                        <th style="text-align:center;" >ORDER {{$registrasi['no_registrasi']}} - ORDER DIBATALKAN</th>
+                    </tr>                 
                               
+
                      <tr style="text-align:center; vertical-align: middle;"><b>Order Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} telah dibatalkan karna anda melewati batas waktu pengisian kontrak akad pada hari dan pukul {{$registrasi['dl_akad']}}.</tr>
+
                    
                      
                         
@@ -126,15 +127,15 @@
 
     @elseif($status== 'pembayaran')
     
-    <h3 >ORDER ANDA DENGAN NOMOR REGISTRASI {{$registrasi['no_registrasi']}} - DIBATALKAN</h3>
+    <h3  style="text-align:center; align-content: center;">ORDER ANDA DENGAN NOMOR REGISTRASI {{$registrasi['no_registrasi']}} - DIBATALKAN</h3>
             
             <br/>
             <div >
                 <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
                    
                     <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - ORDER DIBATALKAN</th>
-                    </tr>             
+                        <th style="text-align:center;" >ORDER {{$registrasi['no_registrasi']}} - ORDER DIBATALKAN</th>
+                    </tr>                      
                               
                      <tr style="text-align:center; vertical-align: middle;"><b>Order Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} telah dibatalkan karna anda melewati batas waktu pembayaran pada hari dan pukul {{$pembayaran['dl_tahap1']}}.</tr>
                    
