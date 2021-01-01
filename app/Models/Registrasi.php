@@ -9,6 +9,10 @@ class Registrasi extends Model
 {
     protected $table = 'registrasi';
 
+    protected $fillable = [
+        'status_cancel'
+    ];
+
 
     protected $guarded = [
         'id'
