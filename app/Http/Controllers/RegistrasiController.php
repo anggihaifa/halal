@@ -203,6 +203,9 @@ class RegistrasiController extends Controller
                      if( $status == '2'){
                         $e->dl_berkas = $dl;
                         $e->save();
+                     }elseif( $status == '5'){
+                        $e->status_berkas = '1';
+                        $e->save();   
 
                      }elseif( $status == '6'){
                         $e->dl_akad = $dl;
@@ -1385,6 +1388,12 @@ class RegistrasiController extends Controller
             $e = $model->find($id);
             $e->fill($data);
             $e->check_by = Auth::user()->id;
+            if($data['status_has_1']==1 && $data['status_has_2']==1 && $data['status_has_3']==1 && $data['status_has_4']==1 && $data['status_has_5']==1 && $data['status_has_6']==1 && $data['status_has_7']==1 && $data['status_has_8']==1 && $data['status_has_9']==1 && $data['status_has_10']==1 && $data['status_has_11']==1 && $data['status_has_12']==1){
+
+                $e->status_berkas = 1;
+            }else{
+                 $e->status_berkas = 0;
+            }
             $e->save();
             DB::commit();
             Session::flash('success', "Status berhasil diupdate");
