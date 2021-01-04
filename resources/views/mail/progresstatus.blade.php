@@ -221,8 +221,8 @@
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap1']}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> Mandiri Syariah</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> XXXXXXXXXX</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
                      
                         
@@ -273,11 +273,11 @@
                     </tr>             
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['nominal_tahap1']}} </tr>
-                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b>PT SUCOFINDO</tr>
-                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b>Bank Mandii Syariah</tr>
-                     <tr style="text-align: center; vertical-align: middle;"><b>No Rekening: </b>XXXXXXXXXXXXXXXX</tr>
-                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b>{{$pembayaran['dl_tahap1']}}</tr>
-                    
+                     
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
                         
                 </table>
             </div>
@@ -517,8 +517,8 @@
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap2']}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> Mandiri Syariah</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> XXXXXXXXXX</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$pembayaran['dl_tahap2']}}</tr>
                      
                         
@@ -563,9 +563,9 @@
                 </tr>             
                           
                  <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['nominal_tahap2']}} </tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b>PT SUCOFINDO</tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b>Bank Mandii Syariah</tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>No Rekening: </b>XXXXXXXXXXXXXXXX</tr>
+                  <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran TAHAP 2: </b>{{$pembayaran['dl_tahap2']}}</tr>
                 
                     
@@ -738,9 +738,9 @@
                     </tr>             
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap3']}} </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> Mandiri Syariah</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> XXXXXXXXXX</tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$pembayaran['dl_tahap3']}}</tr>
                      
                         
@@ -785,9 +785,9 @@
                 </tr>             
                           
                  <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['nominal_tahap3']}} </tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b>PT SUCOFINDO</tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b>Bank Mandii Syariah</tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>No Rekening: </b>XXXXXXXXXXXXXXXX</tr>
+                 <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Pelunasan: </b>{{$pembayaran['dl_tahap3']}}</tr>
                 
                     
@@ -858,86 +858,7 @@
             </p>
 
              <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
-             </p>  
-    @elseif($status== 'r12')
-    
-    <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN ANDA :</h3>
-            
-            <br/>
-            <div style="border:solid; ">
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >Detail Order</th>
-                    </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><b>Order: </b> {{$registrasi['no_registrasi']}} </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Payment: </b> Transfer</tr>
-                     
-                        
-                </table>
-            </div>
-
-            <div style="border:solid; ">
-                <table style="width:100%; margin-top:10px;  border: 1px solid black;">
-                     
-                        <tr>
-                            <th><b>Deskripsi</b></th>
-                            <th><b>Total Biaya</b></th>
-                            <th><b>Batas Waktu</b></th>
-                        </tr>
-                         
-                    
-
-                    
-                        
-                        <tr style="text-align: center; vertical-align: middle;">
-                            <td>
-                                <b>Pembayaran Sertfikasi Halal dengan no. registrasi {{$registrasi['no_registrasi']}} </b>
-                            </td>
-                            <td>
-                                <b>{{$pembayaran['mata_uang']}} {{$pembayaran['nominal_tahap1']}} </b>
-                            </td>
-                            <td>
-                                <b>{{$pembayaran['dl_tahap1']}} </b>
-                            </td>
-                            
-                        </tr>
-
-                    
-                </table>
-               
-
-            </div>
-
-            <div>
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
-                    </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap1']}} </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> Mandiri Syariah</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> XXXXXXXXXX</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
-                     
-                        
-                </table>
-            </div>
-
-
-                 <p>Anda menerima email ini dikarenakan berkas kontrak akad anda telah disetujui oleh kami <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan lanjutkan pada tahapan selanjutnya yaitu Pembayaran pada menu registrasi halal. silahkan upload bukti transfer sesuai dengan nominal yang tertera </p>
-
-                 <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
-
-                 <h3><b>PERHATIAN</b></h3>
-
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
-                </p>
-
-                 <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>           
+             </p>    
     @else
 
        
