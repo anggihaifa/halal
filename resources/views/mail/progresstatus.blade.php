@@ -191,14 +191,18 @@
                          
                     
 
-                    
+                    @php
+
+                    $nominal1 = number_format($pembayaran['nominal_tahap1'],2,',','.');
+
+                    @endphp
                         
                         <tr style="text-align: center; vertical-align: middle;">
                             <td>
                                 <b>Pembayaran Sertfikasi Halal dengan no. registrasi {{$registrasi['no_registrasi']}} </b>
                             </td>
                             <td>
-                                <b>{{$pembayaran['mata_uang']}} {{$pembayaran['nominal_tahap1']}} </b>
+                                <b>{{$pembayaran['mata_uang']}} {{$nominal1}} </b>
                             </td>
                             <td>
                                 <b>{{$pembayaran['dl_tahap1']}} </b>
@@ -415,8 +419,8 @@
             <p>
                 
                 @if($registrasi['status_report']== '1')
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
-                @endif
+                <button class="btn btn-green" style="margin-bottom: 10px"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
+                @endif                
 
                 @if($registrasi['status_berita_acara']== '1')
                 <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
@@ -493,6 +497,7 @@
                             <td>
                                 <b>Pembayaran Tahap 2 Sertfikasi Halal dengan no. registrasi {{$registrasi['no_registrasi']}} </b>
                             </td>
+
                             <td>
                                 <b>{{$pembayaran['mata_uang']}} {{$pembayaran['nominal_tahap2']}} </b>
                             </td>

@@ -40,7 +40,7 @@
                             @component('components.inputemail',['name'=> 'email','label' => 'Email','required'=>true])@endcomponent
                             @component('components.inputtext',['name'=> 'username','label' => 'Username','required'=>true])@endcomponent
                             @component('components.inputtext',['name'=> 'name','label' => 'Name','required'=>true])@endcomponent
-                            @component('components.inputselect',['name'=>'usergroup_id','label'=>'Role','options'=>$userGroup,'labelKey'=>'usergroup','required'=>true])@endcomponent    
+                            @component('components.inputselect',['name'=>'usergroup_id','label'=>'Role','options'=>$userGroup,'labelKey'=>'usergroup','required'=>true])@endcomponent
                             @component('components.inputpassword2',['id'=>'password','name'=> 'password','label' => 'Password','required'=>true])@endcomponent
                             <label class="col-lg-4 col-form-label" id="lblx"></label>
                             <div class="col-lg-8" id="valx">
@@ -64,6 +64,46 @@
                                 <select name="status" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
                                     <option value="0" selected>Inactive</option>
                                     <option value="1">Active</option>
+                                </select>
+                            </div>                            
+                            <label class="col-lg-4 col-form-label">Wilayah</label>
+                            <div class="col-lg-8">
+                                <select name="kode_wilayah" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                    <option value="00" selected>Pusat</option>
+                                    <option value="11" selected>Aceh</option>
+                                    <option value="12" selected>Sumatera Utara</option>
+                                    <option value="13" selected>Sumatera Barat</option>
+                                    <option value="14" selected>Riau</option>
+                                    <option value="15" selected>Jambi</option>
+                                    <option value="16" selected>Sumatera Selatan</option>
+                                    <option value="17" selected>Bengkulu</option>
+                                    <option value="18" selected>Lampung</option>
+                                    <option value="19" selected>Bangka Belitung</option>
+                                    <option value="21" selected>Kep.Riau</option>
+                                    <option value="31" selected>DKI Jakarta</option>
+                                    <option value="32" selected>Jawa Barat</option>
+                                    <option value="33" selected>Jawa Tengah</option>
+                                    <option value="34" selected>DI Yogyakarta</option>
+                                    <option value="35" selected>Jawa Timur</option>
+                                    <option value="36" selected>Banten</option>
+                                    <option value="51" selected>Bali</option>
+                                    <option value="52" selected>NTB</option>
+                                    <option value="53" selected>NTT</option>
+                                    <option value="61" selected>Kalimantan Barat</option>
+                                    <option value="62" selected>Kalimantan Tengah</option>
+                                    <option value="63" selected>Kalimantan Selatan</option>
+                                    <option value="64" selected>Kalimantan Timur</option>
+                                    <option value="65" selected>Kalimantan Utara</option>
+                                    <option value="71" selected>Sulawesi Utara</option>
+                                    <option value="72" selected>Sulawesi Tengah</option>
+                                    <option value="73" selected>Sulawesi Selatan</option>
+                                    <option value="74" selected>Sulawesi Tenggara</option>
+                                    <option value="75" selected>Gorontalo</option>
+                                    <option value="76" selected>Sulawesi Barat</option>
+                                    <option value="81" selected>Maluku</option>
+                                    <option value="82" selected>Maluku Utara</option>
+                                    <option value="91" selected>Papua</option>
+                                    <option value="92" selected>Papua Barat</option>
                                 </select>
                             </div>
                             <div class="col-md-12 offset-md-5">

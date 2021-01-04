@@ -30,7 +30,7 @@
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
-        <div class="panel-body table-responsive">
+        <div class="panel-body table-responsive" style="min-height: 230px">
             <table id="table" class="table table-striped table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%">
                 <thead>
                 <tr>
@@ -109,8 +109,8 @@
                                 var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayaran</a> `;
                                 var pembayaran2 = `<a href="{{url('pembayaran_tahap2')}}/`+full.id+`"  class="dropdown-item"> Pembayaran Tahap 2</a> `;
                                 var pelunasan = `<a href="{{url('pelunasan')}}/`+full.id+`"  class="dropdown-item" >Pelunasan</a>` ;
-                                var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit</a>` ;
-                                var reportB = `<a href="{{url('report_berita_acara')}}/`+full.id+`"  class="dropdown-item" >Report Berita Acara</a>` ;
+                                var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit dan Berita Acara</a>` ;
+                                // var reportB = `<a href="{{url('report_berita_acara')}}/`+full.id+`"  class="dropdown-item" >Report Berita Acara</a>` ;
 
 
                                    
@@ -122,7 +122,7 @@
                                             <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
 
                                             
-                                            <div class="dropdown-divider"></div>`+akad+pembayaran+pembayaran2+pelunasan+reportA+reportB+
+                                            <div class="dropdown-divider"></div>`+akad+pembayaran+pembayaran2+pelunasan+reportA+
                                         `</div>
                                     </div>`
                                       

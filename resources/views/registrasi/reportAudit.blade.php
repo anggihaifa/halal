@@ -47,20 +47,27 @@
 									<div class="form-control" readonly>
 										<a href="{{url('') .Storage::url('public/report/'.Auth::user()->id.'/'.$data->file_report) }}" download>{{$data->file_report}}</a>
 									</div>
-							</div>                            																					
+							</div>  							
+														
+							<label class="col-lg-4 col-form-label">File Report Berita Acara</label>
+							<div id="sh" class="col-lg-8">
+									<div class="form-control" readonly>
+										<a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$data->file_berita_acara) }}" download>{{$data->file_berita_acara}}</a>
+									</div>
+							</div>                            																					                          																					
 								
 							
 								<div class="col-md-12 offset-md-5">
                                         @component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
-										@if($data->status_report == 0)											
+										@if($data->status_report == 0 and $data->status_berita_acara == 0)											
 											<button  class="btn btn-sm btn-warning m-r-5" disabled>Menunggu File Report Audit Dari Admin</button>
-										@elseif($data->status_report == 1)
+										@elseif($data->status_report == 1 and $data->status_berita_acara == 1)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
-										@elseif($data->status_report == 2)
+										@elseif($data->status_report == 2 and $data->status_berita_acara == 2)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Report Audit Sudah Dikonfirmasi</button>										
 										@endif								
 									
-								</div>
+								</div>								
 						</div>
 					</form>
 				</div>

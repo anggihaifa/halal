@@ -212,7 +212,7 @@
                                         <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
                                         <div class="dropdown-divider"></div>
                                         <div class="dropdown-button-title">Update Progress</div>`+
-                                        status10+status11+status12+konfirm+`
+                                        status10+status11+konfirm+`
                                     </div>
                                 </div>`
 

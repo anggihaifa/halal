@@ -520,81 +520,7 @@ class RegistrasiController extends Controller
             $nosurat = $data['no_surat'];
             $expd = explode('-',$nosurat);
 
-            $kodewilayah = $expd[0];            
-
-            if($kodewilayah == '00'){
-                $provinsi = 'Pusat';
-            }else if($kodewilayah == '11'){
-                $provinsi = 'Aceh';
-            }else if($kodewilayah == '12'){
-                $provinsi = 'Sumatera Utara';
-            }else if($kodewilayah == '13'){
-                $provinsi = 'Sumatera Barat';
-            }else if($kodewilayah == '14'){
-                $provinsi = 'Riau';
-            }else if($kodewilayah == '15'){
-                $provinsi = 'Jambi';
-            }else if($kodewilayah == '16'){
-                $provinsi = 'Sumatera Selatan';
-            }else if($kodewilayah == '17'){
-                $provinsi = 'Bengkulu';
-            }else if($kodewilayah == '18'){
-                $provinsi = 'Lampung';
-            }else if($kodewilayah == '19'){
-                $provinsi = 'Bangka Belitung';
-            }else if($kodewilayah == '21'){
-                $provinsi = 'Kep.Riau';
-            }else if($kodewilayah == '31'){
-                $provinsi = 'DKI Jakarta';
-            }else if($kodewilayah == '32'){
-                $provinsi = 'Jawa Barat';
-            }else if($kodewilayah == '33'){
-                $provinsi = 'Jawa Tengah';
-            }else if($kodewilayah == '34'){
-                $provinsi = 'DI Yogyakarta';
-            }else if($kodewilayah == '35'){
-                $provinsi = 'Jawa Timur';
-            }else if($kodewilayah == '36'){
-                $provinsi = 'Banten';
-            }else if($kodewilayah == '51'){
-                $provinsi = 'Bali';
-            }else if($kodewilayah == '52'){
-                $provinsi = 'NTB';
-            }else if($kodewilayah == '53'){
-                $provinsi = 'NTT';
-            }else if($kodewilayah == '61'){
-                $provinsi = 'Kalimantan Barat';
-            }else if($kodewilayah == '62'){
-                $provinsi = 'Kalimantan Tengah';
-            }else if($kodewilayah == '63'){
-                $provinsi = 'Kalimantan Selatan';
-            }else if($kodewilayah == '64'){
-                $provinsi = 'Kalimantan Timur';
-            }else if($kodewilayah == '65'){
-                $provinsi = 'Kalimantan Utara';
-            }else if($kodewilayah == '71'){
-                $provinsi = 'Sulawesi Utara';
-            }else if($kodewilayah == '72'){
-                $provinsi = 'Sulawesi Tengah';
-            }else if($kodewilayah == '73'){
-                $provinsi = 'Sulawesi Selatan';
-            }else if($kodewilayah == '74'){
-                $provinsi = 'Sulawesi Tenggara';
-            }else if($kodewilayah == '75'){
-                $provinsi = 'Gorontalo';
-            }else if($kodewilayah == '76'){
-                $provinsi = 'Sulawesi Barat';
-            }else if($kodewilayah == '81'){
-                $provinsi = 'Maluku';
-            }else if($kodewilayah == '82'){
-                $provinsi = 'Maluku Utara';
-            }else if($kodewilayah == '91'){
-                $provinsi = 'Papua';
-            }else if($kodewilayah == '92'){
-                $provinsi = 'Papua Barat';
-            }else{
-                $provinsi = 'Tidak Terdaftar';
-            }
+            $kodewilayah = $expd[0];                        
 
             $model->kode_wilayah = $kodewilayah;
             $model->no_surat = $data['no_surat'];
@@ -1462,6 +1388,7 @@ class RegistrasiController extends Controller
         $data = $request->except('_token','_method','status');
 
         $model = new DokumenHas();
+        $model2 = new Registrasi();
         $id_user = Auth::user()->id;
 
         // echo "<pre>";
@@ -1470,16 +1397,21 @@ class RegistrasiController extends Controller
 
         try{
             DB::beginTransaction();
-            $e = $model->find($id);
+            $e = $model->find($id);            
+            $f = $model2->find($e->id_registrasi);
+
             $e->fill($data);
             $e->check_by = Auth::user()->id;
             if($data['status_has_1']==1 && $data['status_has_2']==1 && $data['status_has_3']==1 && $data['status_has_4']==1 && $data['status_has_5']==1 && $data['status_has_6']==1 && $data['status_has_7']==1 && $data['status_has_8']==1 && $data['status_has_9']==1 && $data['status_has_10']==1 && $data['status_has_11']==1 && $data['status_has_12']==1){
 
                 $e->status_berkas = 1;
+                $f->status_berkas = 1;
             }else{
                  $e->status_berkas = 0;
+                 $f->status_berkas = 0;
             }
             $e->save();
+            $f->save();
             DB::commit();
             Session::flash('success', "Status berhasil diupdate");
         }catch (\Exception $e){
@@ -2299,7 +2231,7 @@ class RegistrasiController extends Controller
 
             $e->tanggal_akad = $date;
             $e->status_akad = 1;
-            $e->mata_uang = $data['mata_uang'];
+            $e->mata_uang = $data['mata_uang'];            
             $e->status='c';
             $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
             $e->total_biaya = $data['total_biaya'];
@@ -2307,7 +2239,7 @@ class RegistrasiController extends Controller
                 $file = $request->file("file");
                 $file = $data["file"];
                 $filename = "AKAD-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktiakad/".Auth::user()->id."/", $filename);
+                $file->storeAs("public/buktiakad/".$e->id_user."/", $filename);
                 $e->file_akad = $filename;
             }
             $e->save();
@@ -2328,22 +2260,22 @@ class RegistrasiController extends Controller
     public function accAuditAdmin(Request $request, $id){
         $data = $request->except('_token','_method');
         //dd($data);
-
         $model = new Registrasi();
         $model2 = new User();        
 
         try{
             DB::beginTransaction();
             $e = $model->find($id);
-            $u = $model2->find($e->id_user);            
+            $u = $model2->find($e->id_user);    
             
             $e->status_report = 2;
-            $e->status = 17;            
+            $e->status_berita_acara = 2;
+            $e->status = 17;       
             
             $e->save();
             DB::commit();
             // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
-            Session::flash('success', "Konfirmasi File Report Audit Berhasil");
+            Session::flash('success', "Konfirmasi File Report dan Berita Acara Audit Berhasil");
             
         }catch (\Exception $e){
             DB::rollBack();
@@ -2366,7 +2298,9 @@ class RegistrasiController extends Controller
             $e = $model->find($id);
             $u = $model2->find($e->id_user);            
             
-            $e->status_berita_acara = 2;          
+            $e->status_berita_acara = 2;
+
+
             $e->status = 17;
             
             $e->save();
@@ -2402,6 +2336,10 @@ class RegistrasiController extends Controller
             // $e->mata_uang = $data['mata_uang'];
             // $e->status=31;
             $e->status_report=1;
+
+            if($e->status_berita_acara==1){
+                $e->status=16;
+            }
             // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
             // $e->total_biaya = $data['total_biaya'];
             if($request->has("file")){
@@ -2414,7 +2352,9 @@ class RegistrasiController extends Controller
             $e->save();
             DB::commit();
             // dd($data);
-            Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+            if($e->status_berita_acara==1){
+                Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+            }
             // Session::flash('success', "Upload Dokumen Report Berhasil");            
             
         }catch (\Exception $e){
@@ -2443,8 +2383,9 @@ class RegistrasiController extends Controller
             // $e->status_akad = 1;
             // $e->mata_uang = $data['mata_uang'];
             $e->status_berita_acara=1;
-            // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
-            // $e->total_biaya = $data['total_biaya'];
+            if($e->status_report==1){
+                $e->status=16;
+            }
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
@@ -2454,7 +2395,10 @@ class RegistrasiController extends Controller
             }
             $e->save();
             DB::commit();
-            Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+
+            if($e->status_report==1){              
+                Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+            }            
             // dd($data);
             Session::flash('success', "Upload Dokumen Berita Acara Berhasil");
 
@@ -2626,8 +2570,8 @@ class RegistrasiController extends Controller
             $e->updated_status_by = $updater;
             $e->save();
             
-            if($status =='8'){
-                $e->status_pembayaran = '1';
+            if($status =='7'){
+                $e->status_akad = '1';
                 $e->save();
             }
             
@@ -2798,7 +2742,7 @@ class RegistrasiController extends Controller
              Storage::put('public/pembayaran/'.$fileName, $pdf->output());
                 
             
-            if(parseInt($p->nominal_total) <10000000 ){
+            if($p->nominal_total <10000000 ){
                 $p->status_tahap1 = '2';
                 $p->status_tahap2 = '1';
                 $p->bb_tahap2 = $p->bb_tahap1;
@@ -2833,7 +2777,7 @@ class RegistrasiController extends Controller
 
         }
 
-         Session::flash('success', "Pembayaran berhasil dikonfirmasi!");
+         Session::flash('success', "Pembayaran berhasil dikonfirmasi dan email telah dikirim!");
          $redirect = redirect()->route('listpembayaranregistrasi');
          return $redirect;
     }
@@ -2899,20 +2843,58 @@ class RegistrasiController extends Controller
 
     public function dataBeritaAcaraAdmin(Request $request){
         $gdata = $request->except('_token','_method');
-        $kodewilayah = Auth::user()->kode_wilayah;
+        $kodewilayah = Auth::user()->kode_wilayah;        
         //start                                
 
+        // $xdata = DB::table('registrasi')
+        //          ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+        //          ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+        //          //->join('users','registrasi.id_user','=','users.id')
+        //          ->join('users','registrasi.id','=','users.registrasi_id')                 
+        //          ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+        //          ->where('registrasi.status_cancel',0)
+        //          ->where('registrasi.kode_wilayah',$kodewilayah)
+        //          ->where('registrasi.status','15')
+        //          ->orWhere('registrasi.status','16')
+        //          ->orWhere('registrasi.status','17')
+        //          ->orWhere('registrasi.status','20');
+
         $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
-                 //->join('users','registrasi.id_user','=','users.id')
-                 ->join('users','registrasi.id','=','users.registrasi_id')
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                 ->where('registrasi.kode_wilayah',$kodewilayah)
-                 ->where('registrasi.status_cancel','=',0)
-                 ->where('registrasi.status','16')
-                 ->orWhere('registrasi.status','17')
-                 ->orWhere('registrasi.status','20');
+                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('users','registrasi.id','=','users.registrasi_id')                 
+                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                ->where(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=',15);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=',16);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=',17);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=',18);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=',19);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=',20);
+                });
+
 
         //filter condition
         if(isset($gdata['no_registrasi'])){

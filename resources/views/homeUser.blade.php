@@ -164,7 +164,7 @@
 						@elseif ($value['status'] == 4)
 							<li id="personal" class="warning"><strong>Perbaiki Data Berkas</strong></li>
 						@elseif ($value['status'] == 5)
-							<li id="personal" class="warning"><strong>Konfirmasi Data Berkas</strong></li>
+							<li id="personal" class="active"><strong>Konfirmasi Data Berkas</strong></li>
 						@elseif ($value['status'] > 5)
 							<li id="personal" class="active"><strong>Verifikasi Data</strong></li>
 						@elseif ($value['status'] == 'c' || $value['status'] == 'f')
