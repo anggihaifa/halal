@@ -468,11 +468,7 @@
 										@endif
 									</tbody>
 								</table>
-								<div >
-									@if($dataHas !== null)
-										<button type="submit" class="btn btn-md btn-lime m-r-5" style="position: absolute;right: 10px;margin-top: 10px;z-index: 100;">Submit</button>
-									@endif
-								</div>
+								
 							</form>	
 						</div>
 						<div class="tab-pane fade" id="card-tab-7">
@@ -833,8 +829,13 @@
 				</div>
 			</div>
 
-			<div class="col-md-12 offset-md-5">
+			<div class=" offset-md-5">
                 @component('components.buttonback',['href' => route("listregistrasipelangganaktif")])@endcomponent
+               
+				@if($dataHas !== null)
+					<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;">Submit</button>
+				@endif
+				
             </div>
 			<!-- end card -->
 		</div>
