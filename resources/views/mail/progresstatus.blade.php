@@ -54,13 +54,15 @@
         
     </style>
 
- @php
+@if(is_null($pembayaran)==0)
+     @php
 
-    $nominal1 = number_format($pembayaran['nominal_tahap1'],2,',','.');
-    $nominal2 = number_format($pembayaran['nominal_tahap2'],2,',','.');
-    $nominal3 = number_format($pembayaran['nominal_tahap3'],2,',','.');
+        $nominal1 = number_format($pembayaran['nominal_tahap1'],2,',','.');
+        $nominal2 = number_format($pembayaran['nominal_tahap2'],2,',','.');
+        $nominal3 = number_format($pembayaran['nominal_tahap3'],2,',','.');
 
-@endphp                   
+    @endphp 
+@endif                  
 
 <body class="body">
     <div style="border-style: ridge;" >
@@ -125,7 +127,9 @@
         </p>
         <br/>
 
-     @elseif($status== '6')
+    @elseif($status== '6')
+
+  
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH FILE KONTRAK AKAD</h3>
         

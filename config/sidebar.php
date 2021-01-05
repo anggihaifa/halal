@@ -51,15 +51,14 @@ return [
                     'url' => 'listpembayarantahap2',
                     'title' => 'List Pembayaran Tahap 2'
                 ],
-                
-                [
-                    'url' => 'listpelunasan',
-                    'title' => 'List Pelunasan'
-                ],
-                 
+     
                 [   
                     'url' => 'listberitaacara',       
                     'title' => 'Report dan Berita Acara'                    
+                ],
+                 [
+                    'url' => 'listpelunasan',
+                    'title' => 'List Pelunasan'
                 ],
                
             ],
@@ -170,15 +169,14 @@ return [
                 [
                     'url' => 'listpembayarantahap2',
                     'title' => 'List Pembayaran Tahap 2'
-                ],
-                
-                [
-                    'url' => 'listpelunasan',
-                    'title' => 'List Pelunasan'
-                ],
+                ], 
                 [   
                     'url' => 'listberitaacara',       
                     'title' => 'Report dan Berita Acara'                    
+                ],
+                 [
+                    'url' => 'listpelunasan',
+                    'title' => 'List Pelunasan'
                 ],
                
             ],
