@@ -247,7 +247,7 @@
                                     </div>
                                 </div>
                                 <input id="no_tipe" name="no_tipe" type="text" class="form-control ktp" placeholder="KTP"/>
-                                <input id="no_tipe2" name="no_tipe" type="text" class="form-control npwp" placeholder="NPWP"/>
+                                <input id="no_tipe2" name="no_tipe2" type="text" class="form-control npwp" placeholder="NPWP"/>
                             </div>
 
                             @component('components.inputtext',['name'=> 'jenis_izin','label' => 'Jenis Izin Usaha','required'=>true,'placeholder'=>'MD/ML/PIRT/TR/TI/DKL/SD/SI/CD/CL/CA//ITUP/ISUP/NKV/HC/CFS'])@endcomponent

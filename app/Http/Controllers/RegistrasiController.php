@@ -540,6 +540,7 @@ class RegistrasiController extends Controller
             $model->skala_usaha = $data['skala_usaha'];
             $model->tipe = $data['tipe'];
             $model->no_tipe = $data['no_tipe'];
+            $model->no_tipe2 = $data['no_tipe2'];
             $model->jenis_izin = $data['jenis_izin'];
             $model->jumlah_karyawan = $data['jumlah_karyawan'];
             $model->kapasitas_produksi = $data['kapasitas_produksi'];
