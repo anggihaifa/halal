@@ -122,8 +122,7 @@
                                                     <option value="26">Proses Sertifikasi</option>
                                                     <option value="27">Keputusan Halal/ Haram</option>
                                                     <option value="28">Sertifikat Halal</option>
-                                                    <option value="29">Cancel Order (Unggah Data)</option>
-                                                    <option value="30">Cancel Order </option>
+                                                    
                                                 </select>
                                             </div>
                                             
@@ -228,7 +227,11 @@
                                             <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
 
                                             
+<<<<<<< HEAD
                                             <div class="dropdown-divider"></div>`+upload+upload2+
+=======
+                                            <div class="dropdown-divider"></div>`+upload+upload2+/*mui+*/
+>>>>>>> 84203f606424aefef3d254ab6c4bed005632bcd1
                                         `</div>
                                     </div>`
                                 }else{
