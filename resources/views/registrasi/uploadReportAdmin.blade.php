@@ -60,7 +60,7 @@
 								<label class="col-lg-4 col-form-label">Report</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/bukti_report/'.Auth::user()->id.'/'.$data->file_report) }}" download>{{$data->file_report}}</a>
+										<a href="{{url('') .Storage::url('public/bukti_report/'.$data->id_user.'/'.$data->file_report) }}" download>{{$data->file_report}}</a>
 									</div>
 								</div>
 							@endif

@@ -393,7 +393,7 @@
 								<label class="col-lg-4 col-form-label">Kontrak Akad</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public//buktiakad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
+										<a href="{{url('') .Storage::url('public/buktiakad/'.$data->id_user.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
 									</div>
 								</div>
 								<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
@@ -413,7 +413,7 @@
 								<label class="col-lg-4 col-form-label">Kontrak Akad</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/bukti_akad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
+										<a href="{{url('') .Storage::url('public/bukti_akad/'.$data->id_user.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
 									</div>
 								</div>
 							@endif

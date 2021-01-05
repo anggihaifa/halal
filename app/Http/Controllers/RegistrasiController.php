@@ -2748,7 +2748,7 @@ class RegistrasiController extends Controller
             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 
             // save
-             Storage::put('public/pembayaran/'.$fileName, $pdf->output());
+             Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                 
             
             if($p->nominal_total <10000000 ){
@@ -2756,7 +2756,7 @@ class RegistrasiController extends Controller
                 $p->status_tahap2 = '1';
                 $p->bb_tahap2 = $p->bb_tahap1;
                 $p->status_tahap3 = '1';
-                $p->bb_tahap3 = $p->bb_tahap3;
+                $p->bb_tahap3 = $p->bb_tahap1;
 
                 $p->reminder12_tahap2 = 1;
                 $p->reminder12_tahap3 = 1;
@@ -3121,7 +3121,7 @@ class RegistrasiController extends Controller
             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 
             // save
-             Storage::put('public/pembayaran/'.$fileName, $pdf->output());
+             Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                 
             $p->status_tahap2 = '2';
             
@@ -3394,9 +3394,9 @@ class RegistrasiController extends Controller
             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 
             // save
-             Storage::put('public/pembayaran/'.$fileName, $pdf->output());
+             Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                 
-            $p->status_tahap3 = '2';
+            $p->status_tahap3 = '3';
             
 
             $p->bt_tahap3 = $fileName;
@@ -3411,7 +3411,7 @@ class RegistrasiController extends Controller
         }
 
          Session::flash('success', "Pembayaran Tahap 2 berhasil dikonfirmasi!");
-         $redirect = redirect()->route('listpembayarantahap2');
+         $redirect = redirect()->route('listpelunasan');
          return $redirect;
     }
 
@@ -3590,10 +3590,10 @@ class RegistrasiController extends Controller
             $date = date("Y-m-d h:i:sa");
 
             //$e->tanggal_akad = $date;
-            $p->status_tahap3 = 3;
+            $p->status_tahap3 = 2;
             $p->save();
             //$e->mata_uang = $data['mata_uang'];
-            $e->status=25;
+            // $e->status=25;
             ///$data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
            // $e->total_biaya = $data['total_biaya'];
             if($request->has("file")){

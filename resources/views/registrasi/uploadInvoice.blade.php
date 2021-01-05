@@ -52,15 +52,24 @@
 							<div class="col-lg-8">
 								<input type="file"  name="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required />
 							</div>
+
+							@if($dataP->status_tahap3 == 2)
+							<label class="col-lg-4 col-form-label">Invoice</label>
+							<div id="sh" class="col-lg-8">
+									<div class="form-control" readonly>
+										<a href="{{url('') .Storage::url('public/INV/'.$data->inv_pembayaran) }}" download>{{$data->inv_pembayaran}}</a>
+									</div>
+								</div>
+							@endif
 							
 							
 							<div class="col-md-12 offset-md-5">
 								
 							
-									@component('components.buttonback',['href' => route("listakadadmin")])@endcomponent	
-									@if($dataP->status_tahap3 == 2)
+									@component('components.buttonback',['href' => url()->previous()])@endcomponent	
+									@if($dataP->status_tahap3 == 1)
 										<button type="submit" class="btn btn-sm btn-success m-r-5" >Upload Invoice</button>
-									@elseif($dataP->status_tahap3 == 3)
+									@elseif($dataP->status_tahap3 == 2)
 										<button type="submit" class="btn btn-sm btn-yellow m-r-5" disabled>Invoice Sudah Berhasil diupload</button>
 									
 									@endif								

@@ -62,7 +62,7 @@
         $nominal3 = number_format($pembayaran['nominal_tahap3'],2,',','.');
 
     @endphp 
-@endif                    
+@endif                  
 
 <body class="body">
     <div style="border-style: ridge;" >
@@ -127,7 +127,9 @@
         </p>
         <br/>
 
-     @elseif($status== '6')
+    @elseif($status== '6')
+
+  
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH FILE KONTRAK AKAD</h3>
         
@@ -227,7 +229,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {$$nominal1}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {$$nominal1}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -280,7 +282,7 @@
                         <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN  </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$nominal1}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal1}} </tr>
                      
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
@@ -361,7 +363,7 @@
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TELAH DITERIMA </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal1}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal1}} </tr>
                     <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
                   
                      
@@ -369,7 +371,7 @@
                 </table>
             </div>
             <p>
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/pembayaran/'.$pembayaran['bt_tahap1']) }}">Unduh Bukti Pembayaran Tahap 1</a></button>
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap1']) }}">Unduh Bukti Pembayaran Tahap 1</a></button>
             </p>
 
              <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 1 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 1. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
@@ -423,11 +425,11 @@
             <p>
                 
                 @if($registrasi['status_report']== '1')
-                <button class="btn btn-green" style="margin-bottom: 10px"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
+                <button class="btn btn-green" style="margin-bottom: 10px"><a href="{{url('') .Storage::url('public/beritaacara/'.$user['id'].'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
                 @endif                
 
                 @if($registrasi['status_berita_acara']== '1')
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.$user['id'].'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
                 @endif
             </p>
 
@@ -456,11 +458,11 @@
             <p>
                 
                 @if($registrasi['status_report']== '1')
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.$user['id'].'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
                 @endif
 
                 @if($registrasi['status_berita_acara']== '1')
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.$user['id'].'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
                 @endif
             </p>
 
@@ -524,7 +526,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN TAHAP 2</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal2}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -571,7 +573,7 @@
                     <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN TAHAP 2  </th>
                 </tr>             
                           
-                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$nominal2}} </tr>
+                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
                   <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -652,7 +654,7 @@
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 TELAH DITERIMA </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal2}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
                     <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
                   
                      
@@ -660,7 +662,7 @@
                 </table>
             </div>
             <p>
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/pembayaran/'.$pembayaran['bt_tahap2']) }}">Unduh Bukti Pembayaran Tahap 2</a></button>
+                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap2']) }}">Unduh Bukti Pembayaran Tahap 2</a></button>
             </p>
 
              <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
@@ -746,7 +748,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN PELUNASAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal3}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
                      <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -793,7 +795,7 @@
                     <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN PELUNASAN </th>
                 </tr>             
                           
-                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$nominal3}} </tr>
+                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -851,7 +853,7 @@
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASN TELAH DITERIMA </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal3}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
                     <tr style="text-align: center; vertical-align: middle;">Pembayaran Pelunasan Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
                   
                      
@@ -859,12 +861,13 @@
                 </table>
             </div>
             <p>
-                <button class="btn btn-green" style="margin-right: 10px;"><a href="{{url('') .Storage::url('public/pembayaran/'.$pembayaran['bt_tahap23']) }}">Unduh Bukti Pembayaran Pelunasan</a></button>
+                <button class="btn btn-green" style="margin-right: 10px;"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap3']) }}">Unduh Bukti Pembayaran Pelunasan</a></button>
             </p>
-
-            <p>
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/INV/'.$registrasi['inv_pembayaran']) }}">Unduh Invoice Pelunasan</a></button>
-            </p>
+            @if(is_null($registrasi['inv_pembayaran'])==0)
+                <p>
+                    <button class="btn btn-green"><a href="{{url('') .Storage::url('public/INV/'.$registrasi['inv_pembayaran']) }}">Unduh Invoice Pelunasan</a></button>
+                </p>
+            @endif
 
              <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
              </p>    

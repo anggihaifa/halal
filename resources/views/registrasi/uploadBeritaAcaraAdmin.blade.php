@@ -60,7 +60,7 @@
 								<label class="col-lg-4 col-form-label">Berita Acara</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/beritaacara/'.Auth::user()->id.'/'.$data->file_berita_acara) }}" download>{{$data->file_berita_acara}}</a>
+										<a href="{{url('') .Storage::url('public/beritaacara/'.$data->id_user.'/'.$data->file_berita_acara) }}" download>{{$data->file_berita_acara}}</a>
 									</div>
 								</div>
 							@endif

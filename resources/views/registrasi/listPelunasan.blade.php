@@ -221,7 +221,7 @@
                                         <div class="dropdown-divider"></div>
 
                                         <div class="dropdown-button-title">Update Progress</div>`+
-                                            status22+status23+konfirm+upload+
+                                            status22+status23+upload+konfirm+
                                     `</div>
 
                                     </div>`  
