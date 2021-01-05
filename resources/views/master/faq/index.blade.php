@@ -14,7 +14,7 @@
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
-        <!-- begin panel-heading -->
+        <!-- begin panel-heading -->        
         <div class="panel-heading">
             <h4 class="panel-title">Master F.A.Q </h4>
             <div class="panel-heading-btn">
@@ -25,6 +25,19 @@
         <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body table-responsive">
+            @if($user['usergroup_id']==1)
+            <table id="table" class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="text-nowrap valign-middle text-center">No</th>
+                        <th class="text-nowrap valign-middle text-center">Pertanyaan</th>
+                        <th class="text-nowrap valign-middle text-center">Step</th>
+                        <th class="text-nowrap valign-middle text-center">Status</th>
+                        <th class="text-nowrap valign-middle text-center">Aksi</th>
+                    </tr>
+                </thead>
+            </table>
+            @else            
             <div class="modal-body" style="max-height:415px;overflow:auto;">
                     <div id="accordion" class="accordion">
                         @foreach($dataFaq as $index => $value)
@@ -43,6 +56,7 @@
                         @endforeach
                     </div>
                 </div>
+            @endif
         </div>
         <!-- end panel-body -->
     </div>

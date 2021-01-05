@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Master;
 
 use App\Models\Master\Faq;
+use App\Models\System\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,17 +11,21 @@ use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
 use App\Services\FileUploadServices;
+use Illuminate\Support\Facades\Auth;
 
 class FaqController extends Controller
 {
 	public function index(){
+        $id = Auth::user()->id;
+        $user = User::find($id);
+
         $getFaq =   DB::table('faq')
                     ->where('status','aktif')
                     ->orderBy('step','asc') 
                     ->get();
         $dataFaq = json_decode($getFaq,true);         
         // return view('auth/login', compact('dataFaq'));
-		return view('master.faq.index', compact('dataFaq'));
+		return view('master.faq.index', compact('dataFaq','user'));
 	}
 
 	public function datatable(){
