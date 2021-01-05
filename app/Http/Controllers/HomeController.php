@@ -21,6 +21,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $kodewilayah = Auth::user()->kode_wilayah;
+
         $checkRegistrasi =  DB::table('registrasi')->get();
         $checkUserActive =  DB::table('users')
                             ->where('status',1)
@@ -29,10 +31,14 @@ class HomeController extends Controller
         $checkUser =  DB::table('users')
                             ->where('usergroup_id',2)
                             ->get();                    
-        $checkRegistrasiActive =  DB::table('users')
-                            ->whereNotNull('registrasi_id')
-                            ->where('usergroup_id',2)
-                            ->get();    
+        $checkRegistrasiActive =  DB::table('registrasi')
+                                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                                 //->join('users','registrasi.id_user','=','users.id')
+                                 ->join('users','registrasi.id','=','users.registrasi_id')
+                                 ->where('registrasi.kode_wilayah','=',$kodewilayah)
+                                 ->where('registrasi.status_cancel','=',0)
+                                 ->get();
 
         $getDetailDataUser =  DB::table('users')
                             ->where('id',Auth::user()->id)
@@ -41,6 +47,7 @@ class HomeController extends Controller
 
         $getTotalRegistrasiUser = DB::table('registrasi')
                                     ->where('id_user',Auth::user()->id)
+                                    ->where('status_cancel',0)
                                     ->get();
         $currentRegistrasi = DB::table('users')
                             ->select('users.registrasi_id','registrasi.*','jenis_registrasi.jenis_registrasi')

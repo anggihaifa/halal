@@ -54,7 +54,15 @@
         
     </style>
 
-                    
+@if(is_null($pembayaran)==0)
+     @php
+
+        $nominal1 = number_format($pembayaran['nominal_tahap1'],2,',','.');
+        $nominal2 = number_format($pembayaran['nominal_tahap2'],2,',','.');
+        $nominal3 = number_format($pembayaran['nominal_tahap3'],2,',','.');
+
+    @endphp 
+@endif                  
 
 <body class="body">
     <div style="border-style: ridge;" >
@@ -119,7 +127,9 @@
         </p>
         <br/>
 
-     @elseif($status== '6')
+    @elseif($status== '6')
+
+  
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH FILE KONTRAK AKAD</h3>
         
@@ -191,11 +201,7 @@
                          
                     
 
-                    @php
-
-                    $nominal1 = number_format($pembayaran['nominal_tahap1'],2,',','.');
-
-                    @endphp
+                   
                         
                         <tr style="text-align: center; vertical-align: middle;">
                             <td>
@@ -223,7 +229,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap1']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {$$nominal1}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -276,7 +282,7 @@
                         <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN  </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['nominal_tahap1']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$nominal1}} </tr>
                      
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
@@ -357,7 +363,7 @@
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TELAH DITERIMA </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap1']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal1}} </tr>
                     <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
                   
                      
@@ -408,7 +414,7 @@
                         <th>ORDER {{$registrasi['no_registrasi']}} - LAPORAN AUDIT TAHAP 2 BERHASIL DIUPLOAD </th>
                     </tr>             
                               
-                     {{-- <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap1']}} </tr> --}}                     
+                                
                      <tr style="text-align: center; vertical-align: middle;">Laporan audit tahap 2 dan berita acara audit tahap 2 dengan nomor referensi {{$registrasi['no_registrasi']}} sudah diupload. Silahkan cek Pada Menu Pelaporan dan Unduh File Laporan Audit dan Berita Acara Tahap 2, lalu Klik Konfirmasi.</tr>
                     {{-- <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr> --}}
                   
@@ -441,9 +447,9 @@
                         <th>ORDER {{$registrasi['no_registrasi']}} - LAPORAN AUDIT TAHAP 2 BERHASIL DIUPLOAD </th>
                     </tr>             
                               
-                     {{-- <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap1']}} </tr> --}}                     
+                                      
                      <tr style="text-align: center; vertical-align: middle;">Laporan audit tahap 2 dan berita acara audit tahap 2 dengan nomor referensi {{$registrasi['no_registrasi']}} sudah diupload. Silahkan cek Pada Menu Pelaporan dan Unduh File Laporan Audit dan Berita Acara Tahap 2, lalu Klik Konfirmasi.</tr>
-                    {{-- <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr> --}}
+                   
                   
                      
                         
@@ -499,7 +505,7 @@
                             </td>
 
                             <td>
-                                <b>{{$pembayaran['mata_uang']}} {{$pembayaran['nominal_tahap2']}} </b>
+                                <b>{{$pembayaran['mata_uang']}} {{$nominal2}} </b>
                             </td>
                             <td>
                                 <b>{{$pembayaran['dl_tahap2']}} </b>
@@ -520,7 +526,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN TAHAP 2</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap2']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal2}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -567,7 +573,7 @@
                     <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN TAHAP 2  </th>
                 </tr>             
                           
-                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['nominal_tahap2']}} </tr>
+                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$nominal2}} </tr>
                   <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -648,7 +654,7 @@
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 TELAH DITERIMA </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap2']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal2}} </tr>
                     <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
                   
                      
@@ -721,7 +727,7 @@
                                 <b>Pembayaran Tahap 2 Sertfikasi Halal dengan no. registrasi {{$registrasi['no_registrasi']}} </b>
                             </td>
                             <td>
-                                <b>{{$pembayaran['mata_uang']}} {{$pembayaran['nominal_tahap3']}} </b>
+                                <b>{{$pembayaran['mata_uang']}} {{$nominal3}} </b>
                             </td>
                             <td>
                                 <b>{{$pembayaran['dl_tahap3']}} </b>
@@ -742,7 +748,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN PELUNASAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap3']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal3}} </tr>
                      <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -789,7 +795,7 @@
                     <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN PELUNASAN </th>
                 </tr>             
                           
-                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['nominal_tahap3']}} </tr>
+                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$nominal3}} </tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -847,7 +853,7 @@
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASN TELAH DITERIMA </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['nominal_tahap3']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$nominal3}} </tr>
                     <tr style="text-align: center; vertical-align: middle;">Pembayaran Pelunasan Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
                   
                      

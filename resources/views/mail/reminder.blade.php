@@ -55,7 +55,15 @@
     </style>
 
                     
+@if(is_null($pembayaran)==0)
+     @php
 
+        $nominal1 = number_format($pembayaran['nominal_tahap1'],2,',','.');
+        $nominal2 = number_format($pembayaran['nominal_tahap2'],2,',','.');
+        $nominal3 = number_format($pembayaran['nominal_tahap3'],2,',','.');
+
+    @endphp 
+@endif     
 <body class="body">
     <div style="border-style: ridge;" >
         <div>
@@ -104,7 +112,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$pembayaran['nominal_tahap1']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$nominal1}} </tr>
                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -154,7 +162,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$pembayaran['nominal_tahap1']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$nominal1}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -206,7 +214,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$pembayaran['nominal_tahap2']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$nominal2}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -257,7 +265,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$pembayaran['nominal_tahap2']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$nominal2}} </tr>
                   <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -310,7 +318,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$pembayaran['nominal_tahap3']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$nominal3}} </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
@@ -362,7 +370,7 @@
                         <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$pembayaran['nominal_tahap3']}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}}  {{$nominal3}} </tr>
                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri, Kantor Cabang Ragunan</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>

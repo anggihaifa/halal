@@ -74,6 +74,16 @@
 	}
 </style>
 
+@if(is_null($pembayaranData)==0)
+     @php
+
+        $nominal1 = number_format($pembayaranData['nominal_tahap1'],2,',','.');
+        $nominal2 = number_format($pembayaranData['nominal_tahap2'],2,',','.');
+        $nominal3 = number_format($pembayaranData['nominal_tahap3'],2,',','.');
+
+    @endphp 
+@endif     
+
 <body>
 	<img class="body-bg" src="{{ public_path('/assets/img/logo/sci-color.png') }}" alt="" >
 	<div class="forHeader">
@@ -165,7 +175,7 @@
 				<td>Nominal Pembayaran Tahap 1</td>
 				<td>:</td>
 				
-				td><b>{{$pembayaranData['nominal_tahap1']}}</b></td>
+				td><b>{{$pembayaranData['mata_uang']}} {{$nominal1}}</b></td>
 			
 			</tr>
 		@elseif($registrasiData['status']=='l')
@@ -173,7 +183,7 @@
 				<td>Nominal Pembayaran Tahap 2</td>
 				<td>:</td>
 				
-				td><b>{{$pembayaranData['nominal_tahap2']}}</b></td>
+				td><b>{{$pembayaranData['mata_uang']}} {{$nominal2}}</b></td>
 			
 			</tr>
 		@elseif($registrasiData['status']=='25')
@@ -181,19 +191,12 @@
 				<td>Nominal Pembayaran Pelunasan</td>
 				<td>:</td>
 				
-				td><b>{{$pembayaranData['nominal_tahap3']}}</b></td>
+				td><b>{{$pembayaranData['mata_uang']}} {{$nominal3}}</b></td>
 			
 			</tr>
 
 		@endif	
-			<tr>
-				<td>Total Pembayaran</td>
-				<td>:</td>
-				
-				td><b>{{$registrasiData['biaya_registrasi']}}</b></td>
-					
-				
-			</tr>
+			
 		</table>
 	</div>
 
