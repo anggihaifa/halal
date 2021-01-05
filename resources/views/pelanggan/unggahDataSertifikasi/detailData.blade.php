@@ -468,6 +468,15 @@
 										@endif
 									</tbody>
 								</table>
+								<div class=" offset-md-5">
+					                @component('components.buttonback',['href' => route("listregistrasipelangganaktif")])@endcomponent
+					                @if($dataHas !== null)
+										<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;">Submit</button>
+									@endif
+									
+					            </div>
+								
+									
 								
 							</form>	
 						</div>
@@ -829,14 +838,7 @@
 				</div>
 			</div>
 
-			<div class=" offset-md-5">
-                @component('components.buttonback',['href' => route("listregistrasipelangganaktif")])@endcomponent
-               
-				@if($dataHas !== null)
-					<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;">Submit</button>
-				@endif
-				
-            </div>
+			
 			<!-- end card -->
 		</div>
 		<!-- end panel-body -->

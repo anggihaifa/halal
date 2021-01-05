@@ -202,7 +202,7 @@ class RegistrasiController extends Controller
             date_default_timezone_set('Asia/Jakarta');
             $dl = date("Y-m-d H:i:s", strtotime('+24 hours'));
            
-            if($status == '4' ||$status == '5' ||$status == '7' ||$status == '8' ||$status == '10' ||$status == '11' ||$status == '12'  ||$status == '16' ||$status == '17' ||$status == '20' ||$status == '22' ||$status == '23' ||$status == '24' ||$status == '25' || $status == '2'||$status == '6' || $status == '9'||$status == 'g' || $status == '21'){
+            if($status == '4' ||$status == '5' ||$status == '7' ||$status == '8' ||$status == '10' ||$status == '11' ||$status == '12'  ||$status == '17' ||$status == '20' ||$status == '22' ||$status == '23' ||$status == '24' ||$status == '25' || $status == '2'||$status == '6' || $status == '9'||$status == 'g' || $status == '21'){
                 
                      if( $status == '2'){
                         $e->dl_berkas = $dl;
@@ -1391,6 +1391,8 @@ class RegistrasiController extends Controller
 
         $model = new DokumenHas();
         $model2 = new Registrasi();
+        $model3 = new User();
+        $model4 = new Pembayaran();
         $id_user = Auth::user()->id;
 
         // echo "<pre>";
@@ -1401,6 +1403,8 @@ class RegistrasiController extends Controller
             DB::beginTransaction();
             $e = $model->find($id);            
             $f = $model2->find($e->id_registrasi);
+            $u = $model3->find($f->id_user);
+            $p = $model4->find($f->id_pembayaran);
 
             $e->fill($data);
             $e->check_by = Auth::user()->id;
@@ -1408,13 +1412,20 @@ class RegistrasiController extends Controller
 
                 $e->status_berkas = 1;
                 $f->status_berkas = 1;
+                $f->status = 5;
+               
+
             }else{
                  $e->status_berkas = 0;
                  $f->status_berkas = 0;
+                 $f->status = 4;
+                
             }
+
             $e->save();
             $f->save();
             DB::commit();
+            Mail::to($u->email)->send(new ProgresStatus($u,$f,$p,$f->status));
             Session::flash('success', "Status berhasil diupdate");
         }catch (\Exception $e){
             DB::rollBack();
@@ -2156,7 +2167,7 @@ class RegistrasiController extends Controller
                // dd($e->total_biaya);
 
                     $p->nominal_tahap1 = ((int)$e->total_biaya)/2;
-                    $p->nominal_tahap2 = ((int)$e->total_biaya)/2;
+                    $p->nominal_tahap3 = ((int)$e->total_biaya)/2;
                     $p->nominal_total =((int)$e->total_biaya);
                     $p->id_registrasi = $e->id;
                     $p->updated_by=$updater;
@@ -2665,9 +2676,19 @@ class RegistrasiController extends Controller
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
-                $filename = "BB1-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                if(is_null($p->bb_tahap1)==0){
+
+                    $filename = "BB1kurang-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                    $p->bb_tahap1 = $filename;
+
+                }else{
+
+                    $filename = "BB1-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                 $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
                 $p->bb_tahap1 = $filename;
+                }
+               
             }
             $e->save();
             $u->save();
@@ -2763,8 +2784,10 @@ class RegistrasiController extends Controller
 
                 $p->reminder6_tahap2 = 1;
                 $p->reminder6_tahap3 = 1;
-            }elseif(parseInt($p->nominal_total) >=10000000 && parseInt($p->nominal_total) < 50000000 ){
-               
+
+            }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
+
+                $p->status_tahap1 = '2';     
                 $p->status_tahap2 = '1';
                 $p->bb_tahap2 = $p->bb_tahap1;
 
@@ -3054,9 +3077,20 @@ class RegistrasiController extends Controller
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
-                $filename = "BB2-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                $p->bb_tahap2 = $filename;
+                if(is_null($p->bb_tahap2)==0){
+
+                    $filename = "BB2kurang-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                    $p->bb_tahap2 = $filename;
+
+                }else{
+
+                    $filename = "BB2-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                    $p->bb_tahap2 = $filename;
+                }
+
+              
             }
             $e->save();
             $u->save();
@@ -3327,9 +3361,20 @@ class RegistrasiController extends Controller
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
-                $filename = "BB3-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                $p->bb_tahap3 = $filename;
+                if(is_null($p->bb_tahap2)==0){
+
+                    $filename = "BB3kurang-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                    $p->bb_tahap3 = $filename;
+
+                }else{
+
+                    $filename = "BB3-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                    $p->bb_tahap3 = $filename;
+
+                }
+               
             }
             $e->save();
             $u->save();

@@ -80,7 +80,7 @@
 
                             @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Perusahaan','required'=>true,'placeholder'=>'Nama Perusahaan'])@endcomponent
 
-                            @component('components.inputtext',['name'=> 'no_surat','id' => 'no_surat','label' => 'No. Surat Permohonan Sertifikasi','required'=>true,'placeholder'=>'32-2-0120-1005'])@endcomponent                            
+                            @component('components.inputtext',['name'=> 'no_surat','id' => 'no_surat','label' => 'No. Surat Permohonan Sertifikasi','required'=>true,'placeholder'=>'xx-x-xxxx-xxxx'])@endcomponent                            
 
                             <label id="lsh" class="col-lg-4 col-form-label">*Status Halal Sebelumnya</label>
                             <div id="sh" class="col-lg-8">
