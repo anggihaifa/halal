@@ -18,24 +18,31 @@
         <div class="panel-heading">
             <h4 class="panel-title">Master F.A.Q </h4>
             <div class="panel-heading-btn">
-                <a href="{{route('faq.create')}}" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
+                {{-- <a href="{{route('faq.create')}}" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Tambah Data</a> --}}
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body table-responsive">
-            <table id="table" class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-                <thead>
-                    <tr>
-                        <th class="text-nowrap valign-middle text-center">No</th>
-                        <th class="text-nowrap valign-middle text-center">Pertanyaan</th>
-                        <th class="text-nowrap valign-middle text-center">Step</th>
-                        <th class="text-nowrap valign-middle text-center">Status</th>
-                        <th class="text-nowrap valign-middle text-center">Aksi</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="modal-body" style="max-height:415px;overflow:auto;">
+                    <div id="accordion" class="accordion">
+                        @foreach($dataFaq as $index => $value)
+                            <!-- begin card -->
+                            <div class="card">
+                                <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapse{{$value['id']}}" style="cursor: pointer;">
+                                    <img class="animated bounceIn " src="{{asset('/assets/img/user/halal-ask-0.png')}}" alt="" style="height: 30px;margin-right: 10px;"> 
+                                    <span class="faq-ask">{{ucwords($value['question'])}}</span>
+                                </div>
+                                <div id="collapse{{$value['id']}}" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <?php echo html_entity_decode($value['answer'])?>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
         </div>
         <!-- end panel-body -->
     </div>

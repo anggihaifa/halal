@@ -228,7 +228,7 @@
                                             <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
 
                                             
-                                            <div class="dropdown-divider"></div>`+upload+upload2+mui+
+                                            <div class="dropdown-divider"></div>`+upload+upload2+
                                         `</div>
                                     </div>`
                                 }else{

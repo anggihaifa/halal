@@ -14,7 +14,13 @@ use App\Services\FileUploadServices;
 class FaqController extends Controller
 {
 	public function index(){
-		return view('master.faq.index');
+        $getFaq =   DB::table('faq')
+                    ->where('status','aktif')
+                    ->orderBy('step','asc') 
+                    ->get();
+        $dataFaq = json_decode($getFaq,true);         
+        // return view('auth/login', compact('dataFaq'));
+		return view('master.faq.index', compact('dataFaq'));
 	}
 
 	public function datatable(){
