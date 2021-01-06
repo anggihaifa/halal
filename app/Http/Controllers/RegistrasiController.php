@@ -2533,7 +2533,17 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=',7);
-                }) ;
+                }) 
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=','c');
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=','f');
+                });
                           
 
         //filter condition
@@ -2852,6 +2862,11 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=',12);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=','d');
                 });          
                            
 
@@ -3357,7 +3372,7 @@ class RegistrasiController extends Controller
             $p->tanggal_tahap3 = $data['tanggal_tahap3'];
             $p->status_tahap3 = 1;
 
-            $e->status=e;
+            $e->status='e';
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
@@ -3497,6 +3512,11 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=',24);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query->where('registrasi.status','=','e');
                 });
                
 
