@@ -112,7 +112,8 @@
                     <th class="text-nowrap valign-middle text-center">Tanggal</th>
                     <th class="text-nowrap valign-middle text-center">Status</th>
                     <th class="text-nowrap valign-middle text-center">Status Bayar</th>
-                    <th class="text-nowrap valign-middle text-center">Bukti Bayar </th>
+                    <th class="text-nowrap valign-middle text-center">Bukti Bayar</th>
+                    <th class="text-nowrap valign-middle text-center">Nominal</th>
                     <th class="text-nowrap valign-middle text-center">Aksi</th>
                 </tr>
                 </thead>
@@ -192,6 +193,19 @@
                     }
                 },
                 {
+                    "data":"nominal_tahap3",
+                    
+                    "searchable":false,
+                    "orderable":false,
+                    "render": function(data, type, row) {
+                        return Number(data).toLocaleString('id', {
+                          maximumFractionDigits: 2,
+                          style: 'currency',
+                          currency: 'IDR'
+                        });
+                    }
+                },
+                {
                     "data":null,
                     "searchable":false,
                     "orderable":false,
@@ -200,14 +214,15 @@
                            
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                            var status22 = (full.status == 22 ) ? dButton('Nominal Pelunasan Kurang'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/22" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pelunasan Kurang</a>`;
+                            var status22 = (full.status == 22 ) ? dButton('Nominal Pelunasan Kurang'):`<a href="{{url('kurang')}}/`+full.id+`/3" class="dropdown-item" >Nominal Pelunasan Kurang</a>`;
 
-                            var status23 = (full.status == 23 ) ? dButton('Nominal Pelunasan Lebih'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/23" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pelunasan Lebih</a>`;
+                            var status23 = (full.status == 23 ) ? dButton('Nominal Pelunasan Lebih'):`<a href="{{url('lebih')}}/`+full.id+`/3" class="dropdown-item">Nominal Pelunasan Lebih</a>`;
 
-                           /* var status24 = (full.status == 24) ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/24" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">pelunasan Gagal</a>`;*/
+                            var status24 = (full.status == 24) ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/24" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">pelunasan Gagal</a>`;
                            
-                            var konfirm = (full.status ==  25) ? dButton('Konfirmasi Pelunasan'):`<a href="{{url('konfirmasi_pelunasan_admin')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pelunasan??')">Konfirmasi Pelunasan</a>`;
-                            var upload = `<a href="{{url('upload_invoice')}}/`+full.id+`"  class="dropdown-item" >Upload Invoice</a> `;
+                            var konfirm = (full.status ==  25) ? dButton('Konfirmasi dan Upload Invoice'):`<a href="{{url('upload_invoice')}}/`+full.id+`" class="dropdown-item" >Konfirmasi dan Upload Invoice</a>`;
+
+                            var upload = `{{url('konfirmasi_pelunasan_admin')}}/`+full.id+`"  class="dropdown-item" >Konfirmasi dan Upload Invoice</a> `;
                         
 
                             return `<div class="btn-group m-r-5 show">
@@ -221,7 +236,7 @@
                                         <div class="dropdown-divider"></div>
 
                                         <div class="dropdown-button-title">Update Progress</div>`+
-                                            status22+status23+upload+konfirm+
+                                            status22+status23+status24+konfirm+
                                     `</div>
 
                                     </div>`  

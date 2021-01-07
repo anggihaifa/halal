@@ -398,13 +398,13 @@
 								</div>
 								<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 								<div class="col-lg-8">
-									<input type="file"  name="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required />
+									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/msword" required   onchange="getValue('file')/>
 								</div>
 							@elseif($data->status_akad == 0)	
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 								<div class="col-lg-8">
-									<input type="file"  name="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required />
+									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/msword" onchange="getValue('file')" required />
 								</div>
 								
 							@else
@@ -525,7 +525,25 @@
 		    return str;
 		};
 		
+	function getValue(y){
+    	const x  = document.getElementById(y);
 
+    	// var length = x.files[0];
+    	// console.log(length);
+
+        var getSize = x.files[0].size;
+        //var maxSize = 5120*1024;
+        var maxSize = 2048*1024;
+        var values = x.value;
+        var ext = values.split('.').pop();
+        if(getSize > maxSize){
+                alert("File terlalu besar, ukuran file maksimal 2MB");
+                x.value = "";
+                return false;
+        }
+
+          
+    }
 
     </script>
     <!--  <script src="{{asset('/assets/js/cleave.js')}}"></script> -->

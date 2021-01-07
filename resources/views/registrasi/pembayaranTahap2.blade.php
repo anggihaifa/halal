@@ -60,7 +60,7 @@
 								</div>
 								<label class="col-lg-4 col-form-label">Upload Bukti Pembayaran</label>
 								<div class="col-lg-8">
-									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pembayaran masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
+									<input type="file" id="file" name="file" oninvalid="this.setCustomValidity('File bukti pembayaran masih kosong')" oninput="setCustomValidity('')" onchange="getValue('file')" accept="image/*" required />
 								</div>
 							@elseif($dataP->status_tahap2 == 2)	
 								<!--Auto Download-->
@@ -79,7 +79,7 @@
 							@else
 								<label class="col-lg-4 col-form-label">Upload Bukti Pembayaran</label>
 								<div class="col-lg-8">
-									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pembayaran masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
+									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File bukti pembayaran masih kosong')" oninput="setCustomValidity('')" onchange="getValue('file')" accept="image/*" required />
 								</div>
 							@endif
 
@@ -110,13 +110,16 @@
 										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
 									@else -->
 										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
-										@if($dataP->status_tahap2 == 1)
-											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
-											<button type="submit" class="btn btn-sm btn-warning m-r-5" disabled>Pembayaran Sedang Diproses</button>
-										@elseif($dataP->status_tahap2 == 2)
+										
+										@if($dataP->status_tahap2 == 2)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Pembayaran Sudah Dikonfirmasi</button>
 										@else
 											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
+
+											@if($dataP->status_tahap2 == 1)
+												
+												<button type="submit" class="btn btn-sm btn-warning m-r-5" disabled>Pembayaran Sedang Diproses</button>
+											@endif
 										@endif								
 									<!-- @endif -->
 								</div>
@@ -142,6 +145,26 @@
             todayHighlight: true,
         });
         $('#tanggal_tahap2').datepicker('setDate', today);
+
+        function getValue(y){
+        	const x  = document.getElementById(y);
+
+        	// var length = x.files[0];
+        	// console.log(length);
+
+            var getSize = x.files[0].size;
+            //var maxSize = 5120*1024;
+            var maxSize = 2048*1024;
+            var values = x.value;
+            var ext = values.split('.').pop();
+            if(getSize > maxSize){
+                    alert("File terlalu besar, ukuran file maksimal 2MB");
+                    x.value = "";
+                    return false;
+            }
+
+          
+        }
     </script>
 
 @endpush

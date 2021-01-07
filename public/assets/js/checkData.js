@@ -101,7 +101,7 @@ function notifProgress(data){
                                                                                                     :(data==23)? 'Nominal Pelunasan Pada Bukti Transfer Lebih Kami Akan Mengembalikan Kelebihan Uang Dalam 1 Hari Kerja'
                                                                                                         :(data==24)? 'Pelunasan Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
                                                                                                             :(data==25)? 'Nominal Pelunasan Sesuai'
-                                                                                                                :(data==26)? 'Proses Sertifikasi'
+                                                                                                                :(data==26)? 'Proses Sertifikasi Sudah Selesai Silahkan Tunggu Pemberitahuan dari BPJPH Untuk Informasi Selanjutnya'
                                                                                                                     :(data==27)? 'Keputusan Halal/ Haram'
                                                                                                                         :(data==28)? 'Sertifikat Halal'
                                                                                                                             :(data.trim()=='a')? 'Order dicancel dikarnakan dalam waktu 24 jam seteleah pendaftaran data berkas sertifikasi tidak dilengkapi'

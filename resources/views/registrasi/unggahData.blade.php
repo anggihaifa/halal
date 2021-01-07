@@ -168,7 +168,7 @@
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">1</td>
 											<td class="">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_1" name="has_1" onchange="getValue('has_1')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_1" name="has_1" onchange="getValue('has_1')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											
@@ -177,7 +177,7 @@
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">2</td>
 											<td class=" valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_2" name="has_2" onchange="getValue('has_2')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_2" name="has_2" onchange="getValue('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -185,7 +185,7 @@
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">3</td>
 											<td class=" valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/Perpanjangan)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_3" name="has_3" onchange="getValue('has_3')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_3" name="has_3" onchange="getValue('has_3')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -193,7 +193,7 @@
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">4</td>
 											<td class="text-nowrap valign-middle">Flow process chart of halal certified products</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_4" name="has_4" onchange="getValue('has_4')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_4" name="has_4" onchange="getValue('has_4')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -201,14 +201,14 @@
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">5</td>
 											<td class=" valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_5" name="has_5" onchange="getValue('has_5')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_5" name="has_5" onchange="getValue('has_5')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">6</td>
 											<td class=" valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_6" name="has_6" onchange="getValue('has_6')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_6" name="has_6" onchange="getValue('has_6')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -216,14 +216,14 @@
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">7</td>
 											<td class=" valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_7" name="has_7" onchange="getValue('has_7')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_7" name="has_7" onchange="getValue('has_7')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">8</td>
 											<td class=" valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_8" name="has_8" onchange="getValue('has_8')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_8" name="has_8" onchange="getValue('has_8')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -231,7 +231,7 @@
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">9</td>
 											<td class=" valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_9" name="has_9" onchange="getValue('has_9')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_9" name="has_9" onchange="getValue('has_9')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -239,7 +239,7 @@
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">10</td>
 											<td class=" valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_10" name="has_10" onchange="getValue('has_10')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_10" name="has_10" onchange="getValue('has_10')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -247,7 +247,7 @@
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">11</td>
 											<td class=" valign-middle">Bukti registrasi dari BPJPH</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_11" name="has_11" onchange="getValue('has_11')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_11" name="has_11" onchange="getValue('has_11')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -255,7 +255,7 @@
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">12</td>
 											<td class="valign-middle">Denah/ Tata letak ruang produksi</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_12" name="has_12" onchange="getValue('has_12')"></td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_12" name="has_12" onchange="getValue('has_12')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -268,7 +268,7 @@
 													<td class="text-nowrap valign-middle text-center">1</td>
 													<td class=" valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/ Pengembangan)</td>
 													<td   class=valign-middle text-center">
-														<input style="width:180px"type="file" id="has_1" name="has_1" onchange="getValue('has_1')">
+														<input style="width:180px"type="file" id="has_1" name="has_1" onchange="getValue('has_1')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_1']])@endcomponent
 
@@ -291,7 +291,7 @@
 													<td class="text-nowrap valign-middle text-center">2</td>
 													<td class=" valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
 													<td class="valign-middle text-center">
-														<input style="width:180px" type="file" id="has_2" name="has_2" onchange="getValue('has_2')">
+														<input style="width:180px" type="file" id="has_2" name="has_2" onchange="getValue('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_2']])@endcomponent
 													@if($value['has_2'] !== null)
@@ -312,7 +312,7 @@
 													<td class="text-nowrap valign-middle text-center">3</td>
 													<td class="valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/ Perpanjangan)</td>
 													<td class="valign-middle text-center">
-														<input style="width:180px" type="file" id="has_3" name="has_3" onchange="getValue('has_3')">
+														<input style="width:180px" type="file" id="has_3" name="has_3" onchange="getValue('has_3')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_3']])@endcomponent
 													@if($value['has_3'] !== null)
@@ -333,7 +333,7 @@
 													<td class="text-nowrap valign-middle text-center">4</td>
 													<td class="text-nowrap valign-middle">Flow process chart of halal certified products</td>
 													<td class="valign-middle text-center">
-														<input style="width:180px" type="file" id="has_4" name="has_4" onchange="getValue('has_4')">
+														<input style="width:180px" type="file" id="has_4" name="has_4" onchange="getValue('has_4')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_4']])@endcomponent
 													@if($value['has_4'] !== null)
@@ -354,7 +354,7 @@
 													<td class="text-nowrap valign-middle text-center">5</td>
 													<td class=" valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
 													<td class="valign-middle text-center">
-														<input style="width:180px" type="file" id="has_5" name="has_5" onchange="getValue('has_5')">
+														<input style="width:180px" type="file" id="has_5" name="has_5" onchange="getValue('has_5')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_5']])@endcomponent
 													@if($value['has_5'] !== null)
@@ -374,7 +374,7 @@
 													<td class="text-nowrap valign-middle text-center">6</td>
 													<td class=" valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
 													<td class=" valign-middle text-center">
-														<input style="width:180px" type="file" id="has_6" name="has_6" onchange="getValue('has_6')">
+														<input style="width:180px" type="file" id="has_6" name="has_6" onchange="getValue('has_6')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_6']])@endcomponent
 													@if($value['has_6'] !== null)
@@ -395,7 +395,7 @@
 													<td class="text-nowrap valign-middle text-center">7</td>
 													<td class=" valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
 													<td class=" valign-middle text-center">
-														<input style="width:180px" type="file" id="has_7" name="has_7" onchange="getValue('has_7')">
+														<input style="width:180px" type="file" id="has_7" name="has_7" onchange="getValue('has_7')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_7']])@endcomponent
 													@if($value['has_7'] !== null)
@@ -415,7 +415,7 @@
 													<td class="text-nowrap valign-middle text-center">8</td>
 													<td class=" valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
 													<td class=" valign-middle text-center">
-														<input style="width:180px" type="file" id="has_8" name="has_8" onchange="getValue('has_8')">
+														<input style="width:180px" type="file" id="has_8" name="has_8" onchange="getValue('has_8')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_8']])@endcomponent
 													@if($value['has_8'] !== null)
@@ -436,7 +436,7 @@
 													<td class="text-nowrap valign-middle text-center">9</td>
 													<td class=" valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
 													<td class=" valign-middle text-center">
-														<input style="width:180px" type="file" id="has_9" name="has_9" onchange="getValue('has_9')">
+														<input style="width:180px" type="file" id="has_9" name="has_9" onchange="getValue('has_9')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_9']])@endcomponent
 													@if($value['has_9'] !== null)
@@ -457,7 +457,7 @@
 													<td class="text-nowrap valign-middle text-center">10</td>
 													<td class=" valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
 													<td class=" valign-middle text-center">
-														<input style="width:180px" type="file" id="has_10" name="has_10" onchange="getValue('has_10')">
+														<input style="width:180px" type="file" id="has_10" name="has_10" onchange="getValue('has_10')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_10']])@endcomponent
 													@if($value['has_10'] !== null)
@@ -478,7 +478,7 @@
 													<td class="text-nowrap valign-middle text-center">11</td>
 													<td class=" valign-middle">Bukti registrasi dari BPJPH</td>
 													<td class="valign-middle text-center">
-														<input style="width:180px" type="file" id="has_11" name="has_11" onchange="getValue('has_11')">
+														<input style="width:180px" type="file" id="has_11" name="has_11" onchange="getValue('has_11')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_11']])@endcomponent
 													@if($value['has_11'] !== null)
@@ -499,7 +499,7 @@
 													<td class="text-nowrap valign-middle text-center">12</td>
 													<td class=" valign-middle">Denah/ Tata letak ruang produksi</td>
 													<td class=" valign-middle text-center">
-														<input style="width:180px" type="file" id="has_12" name="has_12" onchange="getValue('has_12')">
+														<input style="width:180px" type="file" id="has_12" name="has_12" onchange="getValue('has_12')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_12']])@endcomponent
 													@if($value['has_12'] !== null)
@@ -665,7 +665,7 @@
 													<td class="text-nowrap valign-middle text-center">{{$data->no_registrasi}}</td>
 													<td class="text-nowrap valign-middle text-center"><input type="file" name="matriks_produk" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"></td>
 													{!! $fieldSudah !!}
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/MATRIKSPRODUK/'.$value['matriks_produk']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/MATRIKSPRODUK/'.$value['matriks_produk']) }}" class="btn btn-primary btn-xs" accept="application/vnd.ms-excel,application/msword,application/pdf,application/vnd.ms-excel, image/*"  download>unduh</a></td>
 												</tr>
 											@endforeach
 										@endif	
@@ -1303,7 +1303,7 @@
 
             var getSize = x.files[0].size;
             //var maxSize = 5120*1024;
-            var maxSize = 3072*1024;
+            var maxSize = 2048*1024;
             var values = x.value;
             var ext = values.split('.').pop();
             if(getSize > maxSize){

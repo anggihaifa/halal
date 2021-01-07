@@ -302,7 +302,7 @@
                                     <div class="dropdown-divider"></div>
 
                                     <div class="dropdown-button-title">Update Progress</div>`+
-                                    status1+status2+status3+status4+status5+status6/*+status7+status8*/+status9+status14+statusg+status15+status16/*+status17*/+status18+status19+status20+status21+/*status22+status23+status24+status25+*/status26+status27+status28+
+                                    status1+status2+status3+status4+status5+status6/*+status7+status8*/+status9+status14+statusg+status15+status16/*+status17*/+status18+status19+status20+status21+/*status22+status23+status24+status25+*/status26+/*status27+status28+*/
                                 `</div>
                             </div>`
                     }

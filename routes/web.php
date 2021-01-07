@@ -42,6 +42,10 @@ Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistras
 
 Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran');
 
+Route::put('update_status_lebih/{id}','RegistrasiController@updateStatusLebih')->name('registrasi.uploadlebih');
+
+Route::put('update_status_kurang/{id}','RegistrasiController@updateStatusKurang')->name('registrasi.uploadkurang');
+
 Route::get('update_status_pembayaran_tahap2/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaranTahap2');
 
 Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad');
@@ -87,13 +91,18 @@ Route::get('report_berita_acara/{id}','RegistrasiController@reportBeritaAcara')-
 //list konfirmasi pelunasan
 Route::get('list_pelunasan','RegistrasiController@listPelunasan')->name('listpelunasan');
 Route::get('data_pelunasan','RegistrasiController@dataPelunasan')->name('datapelunasan');
-Route::get('konfirmasi_pelunasan_admin/{id}','RegistrasiController@konfirmasiPelunasanAdmin');
+Route::put('konfirmasi_pelunasan_admin/{id}','RegistrasiController@konfirmasiPelunasanInvoiceAdmin')->name('registrasi.konfirmasiinvoice');;
 
 //pelunasan
 Route::get('pelunasan/{id}','RegistrasiController@pelunasan')->name('registrasi.pelunasan');
 Route::put('konfirmasi_pelunasan_user/{id}','RegistrasiController@konfirmasiPelunasanUser')->name('registrasi.konfirmasipelunasanuser');
 
 Route::get('upload_invoice/{id}','RegistrasiController@uploadInvoice')->name('registrasi.uploadinvoice');
+
+Route::get('lebih/{id}/{tahap}','RegistrasiController@lebih')->name('registrasi.lebih');
+Route::get('kurang/{id}/{tahap}','RegistrasiController@kurang')->name('registrasi.kurang');
+
+
 Route::put('upload_file_invoice/{id}','RegistrasiController@uploadFileInvoice')->name('registrasi.uploadfileinvoice');
 //Route::get('download','RegistrasiController@download');
 //Route::get('unduh_bukti_bayar/{id}','RegistrasiController@unduhBuktiBayar');

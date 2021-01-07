@@ -175,7 +175,7 @@
 				<td>Nominal Pembayaran Tahap 1</td>
 				<td>:</td>
 				
-				td><b>{{$pembayaranData['mata_uang']}} {{$nominal1}}</b></td>
+				<td><b>{{$pembayaranData['mata_uang']}} {{$nominal1}}</b></td>
 			
 			</tr>
 		@elseif($registrasiData['status']=='l')
@@ -183,7 +183,7 @@
 				<td>Nominal Pembayaran Tahap 2</td>
 				<td>:</td>
 				
-				td><b>{{$pembayaranData['mata_uang']}} {{$nominal2}}</b></td>
+				<td><b>{{$pembayaranData['mata_uang']}} {{$nominal2}}</b></td>
 			
 			</tr>
 		@elseif($registrasiData['status']=='25')
@@ -191,7 +191,7 @@
 				<td>Nominal Pembayaran Pelunasan</td>
 				<td>:</td>
 				
-				td><b>{{$pembayaranData['mata_uang']}} {{$nominal3}}</b></td>
+			<td><b>{{$pembayaranData['mata_uang']}} {{$nominal3}}</b></td>
 			
 			</tr>
 

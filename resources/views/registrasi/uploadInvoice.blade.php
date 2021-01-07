@@ -32,7 +32,7 @@
 				<!-- end panel-heading -->
 				<!-- begin panel-body -->
 				<div class="panel-body panel-form">
-					<form action="{{route('registrasi.uploadfileinvoice',['id' => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
+					<form action="{{route('registrasi.konfirmasiinvoice',['id' => $data->id])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
 						@csrf
 						@method('PUT')
 						<div class="form-group row" >
@@ -50,7 +50,7 @@
 
 							<label class="col-lg-4 col-form-label">Upload Invoice</label>
 							<div class="col-lg-8">
-								<input type="file"  name="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required />
+								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" onchange="getValue('file')" accept="application/pdf,application/msword" required />
 							</div>
 
 							@if($dataP->status_tahap3 == 2)
@@ -100,7 +100,26 @@
         $('#tanggal_tahap3').datepicker('setDate', today);
 
 
-       
+    function getValue(y){
+    	const x  = document.getElementById(y);
+
+    	// var length = x.files[0];
+    	// console.log(length);
+
+        var getSize = x.files[0].size;
+        //var maxSize = 5120*1024;
+        var maxSize = 2048*1024;
+        var values = x.value;
+        var ext = values.split('.').pop();
+        if(getSize > maxSize){
+                alert("File terlalu besar, ukuran file maksimal 2MB");
+                x.value = "";
+                return false;
+        }
+
+      
+    }
+  
     	
 
 

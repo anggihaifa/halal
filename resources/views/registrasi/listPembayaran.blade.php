@@ -114,6 +114,7 @@
                    <!--  <th class="text-nowrap valign-middle text-center">status</th> -->
                     <th class="text-nowrap valign-middle text-center">Status Bayar</th>
                     <th class="text-nowrap valign-middle text-center">Bukti Bayar </th>
+                    <th class="text-nowrap valign-middle text-center">Nominal</th>
                     <th class="text-nowrap valign-middle text-center">Aksi</th>
                 </tr>
                 </thead>
@@ -147,7 +148,7 @@
                     
                     d.jenis_registrasi = $('#jenis_registrasi').val();
                     d.metode_pembayaran = $('#metode_pembayaran').val();
-                    d.status_tahap1 = $('#status_tahap1').val();
+                  
                 }   
             },
             columns:[
@@ -191,13 +192,26 @@
                     }
                 },
                 {
+                    "data":"nominal_tahap1",
+                    
+                    "searchable":false,
+                    "orderable":false,
+                    "render": function(data, type, row) {
+                        return Number(data).toLocaleString('id', {
+                          maximumFractionDigits: 2,
+                          style: 'currency',
+                          currency: 'IDR'
+                        });
+                    }
+                },
+                {
                     "data":"null",
                     "render":function (data,type,full,meta) {
                         var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                        var status10 = (full.status == 10 ) ? dButton('Nominal Pembayaran Kurang'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Kurang</a>`;
+                        var status10 = (full.status == 10 ) ? dButton('Nominal Pembayaran Kurang'):`<a href="{{url('kurang')}}/`+full.id+`/1" class="dropdown-item" >Nominal Pembayaran Kurang</a>`;
 
-                        var status11 = (full.status == 11 ) ? dButton('Nominal Pembayaran Lebih'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Lebih</a>`;
+                        var status11 = (full.status == 11 ) ? dButton('Nominal Pembayaran Lebih'):`<a href="{{url('lebih')}}/`+full.id+`/1" class="dropdown-item">Nominal Pembayaran Lebih</a>`;
 
                         var status12 = (full.status == 12) ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pembayaran Gagal</a>`;
                        
@@ -212,7 +226,7 @@
                                         <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
                                         <div class="dropdown-divider"></div>
                                         <div class="dropdown-button-title">Update Progress</div>`+
-                                        status10+status11+konfirm+`
+                                        status10+status11+status12+konfirm+`
                                     </div>
                                 </div>`
 
@@ -238,6 +252,13 @@
         function dButton(x){
             var disableButton = `<a href="#" class="dropdown-item" style="color:#3dad55;">`+ x +` <i class="ion-ios-checkmark-circle" style='color:#1fe01f;'></i></a>`;
             return disableButton;
+        }
+
+        function popKurang() {
+            prompt("Berapa Nominal Kurangnya?", "kurang");
+        }
+        function popLebih() {
+            prompt("Berapa Nominal Lebihnya?", "lebih");
         }
     </script>
     <script src="{{asset('/assets/js/filterData.js')}}"></script>

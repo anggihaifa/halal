@@ -60,7 +60,7 @@
 							@if($data->skala_usaha == 'mikro')
 							<label class="col-lg-4 col-form-label">Mata Uang</label>
 							<div class="col-lg-8">
-								<input id="mata_uang" name="mata_uang"  type="text" class="form-control"readonly  value={{$data->mata_uang}} />
+								<input id="mata_uang" name="mata_uang"  type="text" class="form-control"readonly  value={{$data->mata_uang}} >
 	                        </div>           
 							
 
@@ -72,7 +72,7 @@
 							@elseif($data->skala_usaha == 'kecil')
 							<label class="col-lg-4 col-form-label">Mata Uang</label>
 							<div class="col-lg-8">
-								<input id="mata_uang" name="mata_uang" type="text" class="form-control "  readonly  value={{$data->mata_uang}}/>
+								<input id="mata_uang" name="mata_uang" type="text" class="form-control "  readonly  value={{$data->mata_uang}}>
 	                        </div>  
 
 							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
@@ -137,7 +137,7 @@
 							</div>
 							<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 							<div class="col-lg-8">
-								<input type="file"  name="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required />
+								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/msword" onchange="getValue('file')"required />
 							</div>
 							
 							@elseif($data->status_akad==2 || $data->status_akad==3 )
@@ -158,15 +158,19 @@
 								
 							
 							@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
-							@if($data->status_akad == 1)
+							@if($data->status_akad == 1 || $data->status_akad == 2)
 								<button  type = "sumbit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
-								<button   class="btn btn-sm btn-warning m-r-5" disabled="">Menunggu File Upload User</button>
-							@elseif($data->status_akad == 2)
-								<button type="submit" class="btn btn-sm btn-green m-r-5" disabled>Akad Sedang Diproses</button>
+								@if($data->status_akad == 1)
+									<button   class="btn btn-sm btn-warning m-r-5" disabled="">Menunggu File Upload User</button>
+								@else
+									<button type="submit" class="btn btn-sm btn-green m-r-5" disabled>Akad Sedang Diproses</button>
+								@endif
+							<!-- @elseif($data->status_akad == 2)
+								<button type="submit" class="btn btn-sm btn-green m-r-5" disabled>Akad Sedang Diproses</button> -->
 							@elseif($data->status_akad == 3)
 								<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad Sudah Dikonfirmasi</button>
 							@elseif($data->status_akad == 0)
-								<button class="btn btn-sm btn-yellow m-r-5" disabled="">Menunggu File Kontrak Dari Admin</button>
+								<button class="btn btn-sm btn-yellow m-r-5" disabled="">Menunggu File Kontrak Diupload oleh Admin</button>
 							@endif								
 								
 							</div>
@@ -257,6 +261,26 @@
 		    }
 		    return str;
 		};
+
+		function getValue(y){
+	    	const x  = document.getElementById(y);
+
+	    	// var length = x.files[0];
+	    	// console.log(length);
+
+	        var getSize = x.files[0].size;
+	        //var maxSize = 5120*1024;
+	        var maxSize = 2048*1024;
+	        var values = x.value;
+	        var ext = values.split('.').pop();
+	        if(getSize > maxSize){
+	                alert("File terlalu besar, ukuran file maksimal 2MB");
+	                x.value = "";
+	                return false;
+	        }
+
+	          
+	    }
 		
 
 

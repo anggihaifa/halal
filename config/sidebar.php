@@ -120,17 +120,17 @@ return [
                     'url' => 'registrasi.unggahDataSertifikasi',
                     'title' => 'Unggah Data Sertifikasi'
                 ],
-                /*[
-                    'url' => 'registrasi.pembayaranRegistrasi',
-                    'title' => 'Pembayaran Sertifikasi Halal'
-                ],*/
-                    
+                
             ],
         ],
         [
             'icon' => 'ion-ios-home',
             'title' => 'F.A.Q',
             'url' => 'faq.index'
+        ],
+        [    'icon' => 'ion-ios-person',
+            'title' => 'Guideline',
+            'url' => 'guideline.index'
         ],
     ],
     'menu3' => [
@@ -219,6 +219,16 @@ return [
                     'title' => 'Registrasi Halal'
                 ]
             ],
+        ],
+         [
+            'icon' => 'ion-ios-help-circle',
+            'title' => 'F.A.Q',
+            'url' => 'faq.index'
+        ],
+        [
+            'icon' => 'ion-ios-person',
+            'title' => 'Guideline',
+            'url' => 'guideline.index'
         ],
     ],
     'menu4' => [

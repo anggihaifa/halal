@@ -61,18 +61,16 @@
 							<div class="col-lg-8">
 								<input type="text" class="form-control" value="Rp. {{ $dataP->nominal_tahap3}} " disabled/>
 							</div>
-							@if($dataP->status_tahap3 == 1)
+							
+							@elseif($dataP->status_tahap3 == 1)	
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public//buktipelunasan/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
+										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
 									</div>
 								</div>
-								<label class="col-lg-4 col-form-label">Upload Bukti Pemlunasan</label>
-								<div class="col-lg-8">
-									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pelunasan masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
-								</div>
+								
 							@elseif($dataP->status_tahap3 == 2)	
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
@@ -81,21 +79,7 @@
 										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
 									</div>
 								</div>
-								<label class="col-lg-4 col-form-label">Invoice Pelunasan</label>
-								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/INV/'.$data->inv_pembayaran) }}" download>{{$data->inv_pembayaran}}</a>
-									</div>
-								</div>
-							@elseif($dataP->status_tahap3 == 3)	
-								<!--Auto Download-->
-								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
-								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
-									</div>
-								</div>
-								<label class="col-lg-4 col-form-label">Bukti Konfirmasi PelunasanSertifikasi</label>
+								<label class="col-lg-4 col-form-label">Bukti Konfirmasi Pelunasan Sertifikasi</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
 											<a href="{{url('') .Storage::url('public/buktipembayaran/'.$dataP->bt_tahap3) }}" download>{{$dataP->bt_tahap3}}</a>
@@ -110,7 +94,7 @@
 							@else
 								<label class="col-lg-4 col-form-label">Upload Bukti Pelunasan</label>
 								<div class="col-lg-8">
-									<input type="file"  name="file" oninvalid="this.setCustomValidity('File bukti pelunasan masih kosong')" oninput="setCustomValidity('')" onchange="getValue(this)" accept="image/*" required />
+									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File bukti pelunasan masih kosong')" oninput="setCustomValidity('')" onchange="getValue('file')" accept="image/*" required />
 								</div>
 							@endif
 
@@ -141,13 +125,15 @@
 										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
 									@else -->
 										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
-										@if($dataP->status_tahap3 == 1)
-											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
-											<button type="submit" class="btn btn-sm btn-warning m-r-5" disabled>Pelunasan Sedang Diproses</button>
-										@elseif($dataP->status_tahap3 == 2)
+										
+										@if($dataP->status_tahap3 == 2)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Pelunasan Sudah Dikonfirmasi</button>
 										@else
 											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
+
+											@if($dataP->status_tahap3 == 1)	
+												<button type="submit" class="btn btn-sm btn-warning m-r-5" disabled>Pelunasan Sedang Diproses</button>
+											@endif
 										@endif								
 									<!-- @endif -->
 								</div>
@@ -173,6 +159,26 @@
             todayHighlight: true,
         });
         $('#tanggal_tahap3').datepicker('setDate', today);
+
+        function getValue(y){
+        	const x  = document.getElementById(y);
+
+        	// var length = x.files[0];
+        	// console.log(length);
+
+            var getSize = x.files[0].size;
+            //var maxSize = 5120*1024;
+            var maxSize = 2048*1024;
+            var values = x.value;
+            var ext = values.split('.').pop();
+            if(getSize > maxSize){
+                    alert("File terlalu besar, ukuran file maksimal 2MB");
+                    x.value = "";
+                    return false;
+            }
+
+          
+        }
     </script>
 
 @endpush

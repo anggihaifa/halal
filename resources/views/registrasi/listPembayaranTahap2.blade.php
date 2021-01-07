@@ -107,13 +107,14 @@
                     <th class="text-nowrap valign-middle text-center">No</th>
                     <!-- <th class="text-nowrap valign-middle text-center">Id User</th> -->
                     <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
-                    <th class="text-nowrap valign-middle text-center">Jenis </th>
+                    <th class="text-nowrap valign-middle text-center">Jenis</th>
                     <th class="text-nowrap valign-middle text-center">Pelanggan</th>
                     <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                     <th class="text-nowrap valign-middle text-center">Tanggal</th>
                    <!--  <th class="text-nowrap valign-middle text-center">status</th> -->
                     <th class="text-nowrap valign-middle text-center">Status Bayar</th>
-                    <th class="text-nowrap valign-middle text-center">Bukti Bayar </th>
+                    <th class="text-nowrap valign-middle text-center">Bukti Bayar</th>
+                    <th class="text-nowrap valign-middle text-center">Nominal</th>
                     <th class="text-nowrap valign-middle text-center">Aksi</th>
                 </tr>
                 </thead>
@@ -191,13 +192,26 @@
                     }
                 },
                 {
+                    "data":"nominal_tahap2",
+                    
+                    "searchable":false,
+                    "orderable":false,
+                    "render": function(data, type, row) {
+                        return Number(data).toLocaleString('id', {
+                          maximumFractionDigits: 2,
+                          style: 'currency',
+                          currency: 'IDR'
+                        });
+                    }
+                },
+                {
                     "data":"null",
                     "render":function (data,type,full,meta) {
                         var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                        var status36 = (full.status == 'h' ) ? dButton('Nominal Pembayaran Kurang'):`<a href="{{url('update_status_pembayaran_tahap2')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/i" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Kurang</a>`;
+                        var status36 = (full.status == 'h' ) ? dButton('Nominal Pembayaran Kurang'):`<a href="{{url('kurang')}}/`+full.id+`/2" class="dropdown-item" >Nominal Pembayaran Kurang</a>`;
 
-                        var status37 = (full.status == 'i' ) ? dButton('Nominal Pembayaran Lebih'):`<a href="{{url('update_status_pembayaran_tahap2')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/i" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Nominal Pembayaran Lebih</a>`;
+                        var status37 = (full.status == 'i' ) ? dButton('Nominal Pembayaran Lebih'):`<a href="{{url('lebih')}}/`+full.id+`/2" class="dropdown-item">Nominal Pembayaran Lebih</a>`;
 
                         var status38 = (full.status == 'j') ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_pembayaran_tahap2')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/j" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pembayaran Gagal</a>`;
                        
@@ -212,7 +226,7 @@
                                         <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
                                         <div class="dropdown-divider"></div>
                                         <div class="dropdown-button-title">Update Progress</div>`+
-                                        status36+status37+konfirm+`
+                                        status36+status37+status38+konfirm+`
                                     </div>
                                 </div>`
 

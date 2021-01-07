@@ -316,7 +316,7 @@
 	/*
 	document.getElementById("status").innerText = getProgress(data);
 	*/
-	document.getElementById("notif_user").innerText = getNotif(data);
+	document.getElementById("notif_user").innerHTML = "<h6><b>"+getNotif(data)+"</h6></b>";
 </script>
 
 <script>
