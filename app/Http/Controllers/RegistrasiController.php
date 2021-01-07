@@ -102,9 +102,6 @@ class RegistrasiController extends Controller
         if(isset($gdata['no_registrasi'])){
             $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
         }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
-        }
         if(isset($gdata['perusahaan'])){
             $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
         }
@@ -119,12 +116,6 @@ class RegistrasiController extends Controller
         }
         if(isset($gdata['status_registrasi'])){
             $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['metode_pembayaran'])){
-            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
-        }
-        if(isset($gdata['status_pembayaran'])){
-            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
         }
         if(isset($gdata['status'])){
             $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
@@ -168,12 +159,6 @@ class RegistrasiController extends Controller
         }
         if(isset($gdata['status_registrasi'])){
             $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['metode_pembayaran'])){
-            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
-        }
-        if(isset($gdata['status_pembayaran'])){
-            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
         }
         if(isset($gdata['status'])){
             $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
@@ -2577,7 +2562,7 @@ class RegistrasiController extends Controller
                      $filename = "AKAD-".$e->count_akad."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                     $file->storeAs("public/buktiakad/".Auth::user()->id."/", $filename);
                     $e->file_akad = $filename;
-                    $e->count_akad = $e->count_akad+1;
+                    //$e->count_akad = $e->count_akad+1;
                 }
                 
                 
@@ -2664,20 +2649,10 @@ class RegistrasiController extends Controller
         if(isset($gdata['tgl_registrasi'])){
             $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
         }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
-        }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        
+       
         if(isset($gdata['status_akad'])){
             $xdata = $xdata->where('status_akad','=',$gdata['status_akad']);
         }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
-
         //end
         $xdata = $xdata
                  ->orderBy('registrasi.id','desc');
@@ -2815,7 +2790,7 @@ class RegistrasiController extends Controller
                     $filename = "BB1-".$p->count_tahap1."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                     $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
                     $p->bb_tahap1 = $filename;
-                    $p->count_tahap1 = $p->count_tahap1 +1;
+                    //$p->count_tahap1 = $p->count_tahap1 +1;
 
                 }    
                
@@ -3009,22 +2984,11 @@ class RegistrasiController extends Controller
         if(isset($gdata['tgl_registrasi'])){
             $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
         }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        
+        if(isset($gdata['status_tahap1'])){
+            $xdata = $xdata->where('status_tahap1','=',$gdata['status_tahap1']);
         }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['metode_pembayaran'])){
-            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
-        }
-        if(isset($gdata['status_pembayaran'])){
-            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
-
+        
         //end
         $xdata = $xdata
                  ->orderBy('registrasi.id','desc');
@@ -3095,12 +3059,6 @@ class RegistrasiController extends Controller
         }
         if(isset($gdata['status_registrasi'])){
             $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['metode_pembayaran'])){
-            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
-        }
-        if(isset($gdata['status_pembayaran'])){
-            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
         }
         if(isset($gdata['status'])){
             $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
@@ -3238,7 +3196,7 @@ class RegistrasiController extends Controller
                     $filename = "BB2-".$p->count_tahap2."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                     $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
                     $p->bb_tahap2 = $filename;
-                    $p->count_tahap2 = $p->count_tahap2+1;
+                    //$p->count_tahap2 = $p->count_tahap2+1;
                 }    
 
               
@@ -3395,21 +3353,11 @@ class RegistrasiController extends Controller
         if(isset($gdata['tgl_registrasi'])){
             $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
         }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+       
+        if(isset($gdata['status_tahap2'])){
+            $xdata = $xdata->where('status_tahap2','=',$gdata['status_tahap2']);
         }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['metode_pembayaran'])){
-            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
-        }
-        if(isset($gdata['status_pembayaran'])){
-            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
+    
 
         //end
         $xdata = $xdata
@@ -3542,7 +3490,7 @@ class RegistrasiController extends Controller
                     $filename = "BB3-".$p->count_tahap3."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                     $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
                     $p->bb_tahap3 = $filename;
-                    $p->count_tahap3 = $p->count_tahap3+1;
+                   // $p->count_tahap3 = $p->count_tahap3+1;
                 }    
                
             }
@@ -3708,21 +3656,12 @@ class RegistrasiController extends Controller
         if(isset($gdata['tgl_registrasi'])){
             $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
         }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        
+       
+        if(isset($gdata['status_tahap3'])){
+            $xdata = $xdata->where('status_tahap3','=',$gdata['status_tahap3']);
         }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['metode_pembayaran'])){
-            $xdata = $xdata->where('metode_pembayaran','=',$gdata['metode_pembayaran']);
-        }
-        if(isset($gdata['status_pembayaran'])){
-            $xdata = $xdata->where('status_pembayaran','=',$gdata['status_pembayaran']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
+        
 
         //end
         $xdata = $xdata

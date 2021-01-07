@@ -1,16 +1,19 @@
-@extends('layouts.default', ['boxedLayout' => true], ['sidebarLight' => true], ['sidebarWide' => true])
+@extends('layouts.default')
 
-@section('title', 'Pengguna')
+@section('title', 'Registrasi Halal')
 
 @push('css')
-    <link href="{{asset('/assets/css/animate.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css')}}" rel="stylesheet" />
 @endpush
 
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">List Registrasi Halal</a></li>
-        <li class="breadcrumb-item active"><a href="#">Input Report dan Berita Acara</a></li>
+        <li class="breadcrumb-item"><a href="#">Registrasi Halal</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Registrasi Aktif</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -100,13 +103,12 @@
                                                     <option value="5">Konfirmasi Data Berkas</option>
                                                     <option value="6">Akad</option>
                                                     <option value="7">Akad Gagal</option>
-                                                    <option value="8">Konfirmasi Akad</option>
+                                                    <option value="8">Akad Terkonfirmasi</option>
                                                     <option value="9">Pembayaran</option>
                                                     <option value="10">Nominal Pembayaran Kurang</option>
                                                     <option value="11">Nominal Pembayaran Lebih</option>
                                                     <option value="12">Pembayaran Gagal</option>
-                                                    <option value="13">Konfirmasi Pembayaran</option>
-
+                                                    <option value="13">Pembayaran Terkonfirmasi</option>
                                                     <option value="14">Proses Audit Tahap 1</option>
                                                     <option value="15">Proses Audit Tahap 2</option>
                                                     <option value="16">Pelaporan Audit Tahap 2</option>
@@ -118,10 +120,15 @@
                                                     <option value="22">Nominal Pelunasan Kurang</option>
                                                     <option value="23">Nominal Pelunasan Lebih</option>
                                                     <option value="24">Pelunasan Gagal</option>
-                                                    <option value="25">Konfirmasi Pelunasan</option>
+                                                    <option value="25">Pelunasan Terkonfirmasi</option>
                                                     <option value="26">Proses Sertifikasi</option>
                                                     <option value="27">Keputusan Halal/ Haram</option>
                                                     <option value="28">Sertifikat Halal</option>
+                                                    <option value="g">Pembayaran Tahap2</option>
+                                                    <option value="h">Nominal Pembayaran Tahap2 Kurang</option>
+                                                    <option value="i">Nominal Pembayaran Tahap2 Lebih</option>
+                                                    <option value="j">Pembayaran Tahap2 Gagal</option>
+                                                    <option value="l">Pembayaran Tahap2 Terkonfirmasi</option>
                                                     
                                                 </select>
                                             </div>

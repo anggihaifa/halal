@@ -73,15 +73,6 @@
                                                 </select>
                                             </div>
 
-                                            <label class="col-lg-2 col-form-label">Metode Pembayaran</label>
-                                            <div class="col-lg-4">
-                                                <select id="metode_pembayaran" name="metode_pembayaran" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
-                                                    <option value="" selected>--Pilih Metode Pembayaran--</option>
-                                                    <option value="tunai">Tunai</option>
-                                                    <option value="transfer">Transfer</option>
-                                                </select>
-                                            </div>
-
                                             <label class="col-lg-2 col-form-label">Tanggal Registrasi</label>
                                             <div class="col-lg-4">
                                                 <div class="input-group date">
@@ -105,13 +96,11 @@
                 <thead>
                 <tr>
                     <th class="text-nowrap valign-middle text-center">No</th>
-                    <!-- <th class="text-nowrap valign-middle text-center">Id User</th> -->
                     <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                     <th class="text-nowrap valign-middle text-center">Jenis</th>
                     <th class="text-nowrap valign-middle text-center">Pelanggan</th>
                     <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                     <th class="text-nowrap valign-middle text-center">Tanggal</th>
-                   <!--  <th class="text-nowrap valign-middle text-center">status</th> -->
                     <th class="text-nowrap valign-middle text-center">Status Bayar</th>
                     <th class="text-nowrap valign-middle text-center">Bukti Bayar</th>
                     <th class="text-nowrap valign-middle text-center">Nominal</th>
@@ -141,14 +130,10 @@
                 data:function(d){
                     d.no_registrasi = $('input[name=no_registrasi]').val();
                     d.name = $('input[name=name]').val();
-                    d.perusahaan = $('input[name=perusahaan]').val();
-                    
-                    d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
-
-                    
-                    d.jenis_registrasi = $('#jenis_registrasi').val();
-                    d.metode_pembayaran = $('#metode_pembayaran').val();
-                    d.status_tahap2 = $('#status_tahap2').val();
+                    d.perusahaan = $('input[name=perusahaan]').val();                   
+                    d.tgl_registrasi = $('input[name=tgl_registrasi]').val();                  
+                    d.kelompok_produk = $('#kelompok_produk').val();
+                    d.status_tahap2 = $('#status_pembayaran').val();
                 }   
             },
             columns:[

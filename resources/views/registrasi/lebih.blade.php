@@ -70,21 +70,21 @@
 								<label class="col-lg-4 col-form-label">Nominal Lebih</label>
 								<div class="col-lg-8">
 								
-									<input type="text" class="form-control" name='lebih_tahap1'/>
+									<input type="text" class="form-control" name='lebih_tahap1' required/>
 								</div>
 
 							@elseif($tahap == 2)
 								<label class="col-lg-4 col-form-label">Nominal Lebih</label>
 								<div class="col-lg-8">
 								
-									<input type="text" class="form-control" name='lebih_tahap2'/>
+									<input type="text" class="form-control" name='lebih_tahap2' required/>
 								</div>
 
 							@elseif($tahap == 3)
 								<label class="col-lg-4 col-form-label">Nominal Lebih</label>
 								<div class="col-lg-8">
 								
-									<input type="text" class="form-control" name='lebih_tahap3'/>
+									<input type="text" class="form-control" name='lebih_tahap3' required />
 								</div>
 
 							@endif

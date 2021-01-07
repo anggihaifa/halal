@@ -136,7 +136,7 @@
                     d.name = $('input[name=name]').val();
                     d.perusahaan = $('input[name=perusahaan]').val();               
                     d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
-                    d.jenis_registrasi = $('#jenis_registrasi').val();                  
+                     d.kelompok_produk = $('#kelompok_produk').val();          
                     d.status_akad = $('#status_akad').val();
                 }   
             },

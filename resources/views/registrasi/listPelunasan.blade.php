@@ -73,14 +73,7 @@
                                                 </select>
                                             </div>
 
-                                            <label class="col-lg-2 col-form-label">Metode Pelunasan</label>
-                                            <div class="col-lg-4">
-                                                <select id="metode_pelunasan" name="metode_pelunasan" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
-                                                    <option value="" selected>--Pilih Metode Pelunasan--</option>
-                                                    <option value="tunai">Tunai</option>
-                                                    <option value="transfer">Transfer</option>
-                                                </select>
-                                            </div>
+                                            
 
                                             <label class="col-lg-2 col-form-label">Tanggal Registrasi</label>
                                             <div class="col-lg-4">
@@ -89,8 +82,11 @@
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                 </div>
                                             </div>
+
                                             
-                                            <div>
+                                            
+                                            <div >
+                                                
                                                 @component('components.buttonsearch')@endcomponent
                                             </div>
                                         </div>
@@ -140,12 +136,11 @@
                 data:function(d){
                     d.no_registrasi = $('input[name=no_registrasi]').val();
                     d.name = $('input[name=name]').val();
-                    d.perusahaan = $('input[name=perusahaan]').val();
-                    
+                    d.perusahaan = $('input[name=perusahaan]').val();   
                     d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
- 
-                    d.jenis_registrasi = $('#jenis_registrasi').val();
-                    d.status_pelunasan = $('#status_pelunasan').val();
+                    d.kelompok_produk = $('#kelompok_produk').val();
+                    d.status_tahap3 = $('#status_pelunasan').val();
+                    
                 }   
             },
             columns:[

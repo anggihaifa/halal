@@ -45,7 +45,7 @@ return [
                 ],
                 [
                     'url' => 'listpembayaranregistrasi',
-                    'title' => 'List Pembayaran Tahap1'
+                    'title' => 'List Pembayaran Tahap 1'
                 ],
                 [
                     'url' => 'listpembayarantahap2',
@@ -164,7 +164,7 @@ return [
                 ],
                 [
                     'url' => 'listpembayaranregistrasi',
-                    'title' => 'List Pembayaran Tahap1'
+                    'title' => 'List Pembayaran Tahap 1'
                 ],
                 [
                     'url' => 'listpembayarantahap2',

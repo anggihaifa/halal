@@ -109,7 +109,6 @@
                                                     <option value="11">Nominal Pembayaran Lebih</option>
                                                     <option value="12">Pembayaran Gagal</option>
                                                     <option value="13">Pembayaran Terkonfirmasi</option>
-
                                                     <option value="14">Proses Audit Tahap 1</option>
                                                     <option value="15">Proses Audit Tahap 2</option>
                                                     <option value="16">Pelaporan Audit Tahap 2</option>
@@ -182,9 +181,7 @@
                 data:function(d){
                     d.no_registrasi = $('input[name=no_registrasi]').val();
                     d.perusahaan = $('input[name=perusahaan]').val();
-                    
                     d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
-
                     d.kelompok_produk = $('#kelompok_produk').val();
                     d.jenis_registrasi = $('#jenis_registrasi').val();
                     d.status_registrasi = $('#status_registrasi').val();

@@ -544,10 +544,10 @@
 			}
 			var jumlah = nominal1+nominal2+nominal3;
     		
-    		console.log(nominal1);
-    		console.log(nominal2);
-    		console.log(nominal3);
-    		console.log(jumlah);
+    		//console.log(nominal1);
+    		//console.log(nominal2);
+    		//console.log(nominal3);
+    		//console.log(jumlah);
 			const formatRupiah = (money) => {
 			return new Intl.NumberFormat('id-ID',
 				{ style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }
