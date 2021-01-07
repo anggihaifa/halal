@@ -382,7 +382,8 @@
 								</div>
 								<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
 								<div class="col-lg-8">
-									<input id="total_biaya" name="total_biaya" type="text" class="form-control " id="totalrupiah" value='{{number_format($data->total_biaya,0,",",".")}}' readonly />
+									<input id="total_biaya" type="text" class="form-control " id="totalrupiah" value='{{number_format($data->total_biaya,0,",",".")}}' readonly />
+									<input id="total_biaya2" name="total_biaya" type="text" class="form-control " id="totalrupiah" value='{{number_format($data->total_biaya,0,",",".")}}' readonly hidden/>
 								</div>
 
 							@endif
@@ -546,14 +547,15 @@
     		console.log(nominal1);
     		console.log(nominal2);
     		console.log(nominal3);
-    		//console.log(jumlah);
-			// const formatRupiah = (money) => {
-			// return new Intl.NumberFormat('id-ID',
-			// 	{ style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }
-			// ).format(money);
-			// }
-			// document.getElementById('total_biaya').value= formatRupiah(jumlah);
-			document.getElementById('total_biaya').value= jumlah;
+    		console.log(jumlah);
+			const formatRupiah = (money) => {
+			return new Intl.NumberFormat('id-ID',
+				{ style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }
+			).format(money);
+			}
+			document.getElementById('total_biaya2').value= jumlah;
+			document.getElementById('total_biaya').value= formatRupiah(jumlah);			
+			// document.getElementById('total_biaya').value= jumlah;
     	}
     	function removeCommas(str) {
 			str = str.split('.').join("");
