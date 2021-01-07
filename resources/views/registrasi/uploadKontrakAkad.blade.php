@@ -348,7 +348,7 @@
 									</select>
 								@else
 								<div class="col-lg-8">
-									<input id="mata_uang" name="mata_uang" type="text" class="form-control " readonly value={{$data->mata_uang}}  />
+									<input id="mata_uang" name="mata_uang" type="text" class="form-control " readonly value='{{$data->mata_uang}}'  />
 		                        </div>   
 								@endif
 							{{-- </div> --}}
@@ -356,7 +356,7 @@
 								<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
 								<div class="col-lg-8">
 									@if ($data->status_akad == 0 || $data->status_akad == 1)
-										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " />
+										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator"/>
 									@else
 										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " disabled="" />
 									@endif 
@@ -382,7 +382,7 @@
 								</div>
 								<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
 								<div class="col-lg-8">
-									<input id="total_biaya" name="total_biaya" type="text" class="form-control " value={{$data->total_biaya}} readonly />
+									<input id="total_biaya" name="total_biaya" type="text" class="form-control " id="totalrupiah" value='{{number_format($data->total_biaya,0,",",".")}}' readonly />
 								</div>
 
 							@endif
@@ -448,8 +448,42 @@
 @endsection
 
 @push('scripts')
-	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
-    <script type="text/javascript">
+	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>	
+
+    <script type="text/javascript">		
+		var rupiah1 = document.getElementById("biaya_pemeriksaan");
+		rupiah1.addEventListener('keyup', function(e){									
+			rupiah1.value = formatRupiah(this.value, 'Rp. ');			
+		});
+
+		var rupiah2 = document.getElementById("biaya_pengujian");
+		rupiah2.addEventListener('keyup', function(e){									
+			rupiah2.value = formatRupiah(this.value, 'Rp. ');			
+		});
+
+		var rupiah3 = document.getElementById("biaya_fatwa");
+		rupiah3.addEventListener('keyup', function(e){									
+			rupiah3.value = formatRupiah(this.value, 'Rp. ');			
+		});
+ 
+		/* Fungsi formatRupiah */
+		function formatRupiah(angka, prefix){			
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp.' + rupiah : '');
+		}
+		
     	//var date = new Date();
         var today = new Date();
     	$('#tgl_akad').datepicker({
@@ -460,9 +494,8 @@
 
 
         function jml(){
-
     		 
-    		 var nominal1 = parseInt(removeCommas(document.getElementById('biaya_pemeriksaan').value)); 
+    		 var nominal1 = parseInt(removeCommas(document.getElementById('biaya_pemeriksaan').value));			 
     		 var nominal2 = parseInt(removeCommas(document.getElementById('biaya_pengujian').value));
     		 var nominal3 = parseInt(removeCommas(document.getElementById('biaya_fatwa').value));
 
@@ -514,13 +547,18 @@
     		console.log(nominal2);
     		console.log(nominal3);
     		//console.log(jumlah);
+			// const formatRupiah = (money) => {
+			// return new Intl.NumberFormat('id-ID',
+			// 	{ style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }
+			// ).format(money);
+			// }
+			// document.getElementById('total_biaya').value= formatRupiah(jumlah);
 			document.getElementById('total_biaya').value= jumlah;
     	}
     	function removeCommas(str) {
-		    while (str.search(",") >= 0) {
-		        str = (str + "").replace(',', '');
-		    }
-		    return str;
+			str = str.split('.').join("");
+			str2 = str.split('Rp').join("");
+		    return str2;
 		};
 		
 

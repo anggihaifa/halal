@@ -2267,8 +2267,16 @@ class RegistrasiController extends Controller
             $e->status_akad = 1;
             $e->mata_uang = $data['mata_uang'];            
             $e->status='c';
-            $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
+            // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
+            // $z = str_replace('Rp', '', $data['total_biaya']);
+            // $a = str_replace(' ', '',$z);
+            // $b = str_replace('.', '', $a);
+            // $total = (int)$b;
+            // $a = $data['total_biaya'].split('.').join("");
+			// $total = $a.split('Rp').join("");
             $e->total_biaya = $data['total_biaya'];
+            // dd($data['total_biaya']);
+            // dd($e->total_biaya);            
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
