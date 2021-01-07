@@ -44,17 +44,17 @@
 							
 							<label class="col-lg-4 col-form-label">Tanggal Akad</label>
 							<div class="col-lg-8">
-							@if($data->status_akad ==0 )
+								@if($data->status_akad ==0 )
 
-								<input id="tgl_akad" name="tgl_akad" type="text" class="form-control"/>
-							@else
-								<input id="tgl_akad" name="tgl_akad" type="text" class="form-control" value={{ $data->status_akad}} readonly />
-							@endif
+									<input id="tgl_akad" name="tgl_akad" type="text" class="form-control"/>
+								@else
+									<input id="tgl_akad" name="tgl_akad" type="text" class="form-control" value={{ $data->status_akad}} readonly />
+								@endif
 							</div>
+
 							<label class="col-lg-4 col-form-label">Skala Usaha</label>
 							<div class="col-lg-8">
-								<input id="skala_usaha" class="form-control"  name="skala_usaha" value={{ $data->skala_usaha }} type="text" readonly/>
-                              
+								<input id="skala_usaha" class="form-control"  name="skala_usaha" value={{ $data->skala_usaha }} type="text" readonly/>                              
                             </div>
 							
 							@if($data->skala_usaha == 'mikro')
@@ -252,12 +252,10 @@
 		                        </div>       
 								@endif
 
-								<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
-								
+								<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>								
 									<div class="col-lg-8">
 										<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="3,000,000 " readonly />
-									</div>
-							
+									</div>							
 							@else
 								<label class="col-lg-12 col-form-label">Biaya Sertifikasi</label>
 								
@@ -353,7 +351,7 @@
 									<input id="mata_uang" name="mata_uang" type="text" class="form-control " readonly value={{$data->mata_uang}}  />
 		                        </div>   
 								@endif
-							</div>
+							{{-- </div> --}}
 
 								<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
 								<div class="col-lg-8">

@@ -18,6 +18,9 @@ use App\RegistrasiJumlahProduksi;
 use App\DetailKU;
 use App\Models\Registrasi;
 use App\Models\Pembayaran;
+use App\Models\Negara;
+use App\Models\Provinsi;
+use App\Models\Kabupaten;
 use App\Models\System\User;
 use App\Models\Master\JenisRegistrasi;
 use App\Models\Master\KelompokProduk;
@@ -56,7 +59,7 @@ class RegistrasiController extends Controller
     public function index(){
 
         if(Auth::user()->registrasi_id !== null){
-            $data = Registrasi::find(Auth::user()->registrasi_id);
+            $data = Registrasi::find(Auth::user()->registrasi_id);            
             return view('registrasi.index',compact('data'));
         }else{
             return view('registrasi.index');
@@ -186,7 +189,7 @@ class RegistrasiController extends Controller
         
         $updater = Auth::user()->name;
 
-         $model = new Registrasi();
+        $model = new Registrasi();
         $model2 = new User();
         $model3 = new Pembayaran();
 
@@ -456,6 +459,10 @@ class RegistrasiController extends Controller
     public function create(){
         $jenisRegistrasi = JenisRegistrasi::all();
         $kelompokProduk = KelompokProduk::all();
+
+        $dataNegara = Negara::all();
+        $dataProvinsi = Provinsi::all();
+        $dataKebupaten = Kabupaten::all();
         //get Data from FAQ Transfer
         $getTransfer =   DB::table('faq')
                     ->where('status','transfer')
@@ -466,7 +473,7 @@ class RegistrasiController extends Controller
                     ->where('status','tunai')
                     ->get();
         $dataTunai = json_decode($getTunai,true);
-        return view('registrasi.create', compact('jenisRegistrasi','kelompokProduk','dataTransfer','dataTunai'));
+        return view('registrasi.create', compact('jenisRegistrasi','kelompokProduk','dataTransfer','dataTunai','dataNegara','dataProvinsi','dataKebupaten'));
     }
 
     //function random generate
@@ -560,7 +567,7 @@ class RegistrasiController extends Controller
             $model->jenis_surat = $data['jenis_surat'];
             $model->nomor_surat = $data['nomor_surat'];
 
-            $model->status = 1 ;
+            $model->status = 1 ;            
             $model->save();
             DB::commit();                        
             
@@ -581,10 +588,17 @@ class RegistrasiController extends Controller
             }
             
             $model_regisalamat->id_registrasi = $idregis;
-            $model_regisalamat->alamat = $data['alamat_kantor'];
-            $model_regisalamat->kota = $data['kota_kantor'];
-            $model_regisalamat->provinsi = $data['provinsi_kantor'];
+            $model_regisalamat->alamat = $data['alamat_kantor'];            
             $model_regisalamat->negara = $data['negara_kantor'];
+            if($model_regisalamat->negara == 'Indonesia'){
+                $kota = Kabupaten::find($data['kota_kantor_domestik']);
+                $provinsi = Provinsi::find($data['provinsi_kantor_domestik']);
+                $model_regisalamat->kota_domestik = $kota->nama_kabupaten;                
+                $model_regisalamat->provinsi_domestik = $provinsi->nama_provinsi;                
+            }else{
+                $model_regisalamat->kota = $data['kota_pabrik'];
+                $model_regisalamat->provinsi = $data['provinsi_pabrik'];
+            }
             $model_regisalamat->telepon = $data['telepon_kantor'];
             $model_regisalamat->kodepos = $data['kodepos_kantor'];
             $model_regisalamat->email = $data['email_kantor'];
@@ -596,10 +610,17 @@ class RegistrasiController extends Controller
             DB::beginTransaction();
 
             $model_regispabrik->id_registrasi = $idregis;
-            $model_regispabrik->alamat = $data['alamat_pabrik'];
-            $model_regispabrik->kota = $data['kota_pabrik'];
-            $model_regispabrik->provinsi = $data['provinsi_pabrik'];
+            $model_regispabrik->alamat = $data['alamat_pabrik'];            
             $model_regispabrik->negara = $data['negara_pabrik'];
+            if($model_regispabrik->negara == 'Indonesia'){
+                $kota2 = Kabupaten::find($data['kota_kantor_domestik']);
+                $provinsi2 = Provinsi::find($data['provinsi_kantor_domestik']);
+                $model_regispabrik->kota_domestik = $kota2->nama_kabupaten;
+                $model_regispabrik->provinsi_domestik = $provinsi2->nama_provinsi;
+            }else{
+                $model_regispabrik->kota = $data['kota_pabrik'];
+                $model_regispabrik->provinsi = $data['provinsi_pabrik'];
+            }
             $model_regispabrik->telepon = $data['telepon_pabrik'];
             $model_regispabrik->kodepos = $data['kodepos_pabrik'];
             $model_regispabrik->email = $data['email_pabrik'];

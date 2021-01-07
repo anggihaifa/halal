@@ -72,7 +72,8 @@
 								@component('components.fordetail',['label' => 'Kepemilikan','value'=>$value['kepemilikan']])@endcomponent
 
                                 @component('components.fordetail',['label' => 'Skala Usaha','value'=>ucwords($value['skala_usaha'])])@endcomponent
-                                @component('components.fordetail',['label' => 'No. KTP/NPWP','value'=>$value['no_tipe']])@endcomponent
+                                @component('components.fordetail',['label' => 'No. KTP','value'=>$value['no_tipe']])@endcomponent
+								@component('components.fordetail',['label' => 'No. NPWP','value'=>$value['no_tipe2']])@endcomponent
                                 @component('components.fordetail',['label' => 'Jenis Izin Usaha','value'=>$value['jenis_izin']])@endcomponent
                                 @component('components.fordetail',['label' => 'Jumlah Karyawan','value'=>$value['jumlah_karyawan']])@endcomponent
                                 @component('components.fordetail',['label' => 'Kapasitas Produk','value'=>$value['kapasitas_produksi']])@endcomponent
@@ -83,11 +84,18 @@
 									<div class="col-lg-6 text-center"><h4>Alamat Utama</h4></div><div class="col-lg-6"></div>
 								@elseif ($value['jenis'] == "Industri Pengolahan")
 									<div class="col-lg-6 text-center"><h4>Alamat Kantor</h4></div><div class="col-lg-6"></div>
+								@else
+									<div class="col-lg-6 text-center"><h4>Alamat Kantor</h4></div><div class="col-lg-6"></div>
 								@endif
-								
-								@component('components.fordetail',['label' => 'Kota','value'=>$value2['kota']])@endcomponent
-								@component('components.fordetail',['label' => 'Provinsi','value'=>$value2['provinsi']])@endcomponent
+																
 								@component('components.fordetail',['label' => 'Negara','value'=>$value2['negara']])@endcomponent
+								@if ($value2['negara'] == 'Indonesia')
+									@component('components.fordetail',['label' => 'Provinsi','value'=>$value2['provinsi_domestik']])@endcomponent
+									@component('components.fordetail',['label' => 'Kota','value'=>$value2['kota_domestik']])@endcomponent
+								@else
+									@component('components.fordetail',['label' => 'Provinsi','value'=>$value2['provinsi']])@endcomponent
+									@component('components.fordetail',['label' => 'Kota','value'=>$value2['kota']])@endcomponent
+								@endif								
 								@component('components.fordetail',['label' => 'Telepon','value'=>$value2['telepon']])@endcomponent
 								@component('components.fordetail',['label' => 'Kode Pos','value'=>$value2['kodepos']])@endcomponent
 								@component('components.fordetail',['label' => 'Email','value'=>$value2['email']])@endcomponent
@@ -97,12 +105,19 @@
 									<div class="col-lg-6 text-center"><h4>Alamat RPH/U Lainnya</h4></div><div class="col-lg-6"></div>
 								@elseif ($value['jenis'] == "Industri Pengolahan")
 									<div class="col-lg-6 text-center"><h4>Alamat Pabrik</h4></div><div class="col-lg-6"></div>
+								@else
+									<div class="col-lg-6 text-center"><h4>Alamat Pabrik</h4></div><div class="col-lg-6"></div>
 								@endif
 
-								@component('components.fordetail',['label' => 'Alamat','value'=>$value3['alamat']])@endcomponent
-								@component('components.fordetail',['label' => 'Kota','value'=>$value3['kota']])@endcomponent
-								@component('components.fordetail',['label' => 'Provinsi','value'=>$value3['provinsi']])@endcomponent
+								@component('components.fordetail',['label' => 'Alamat','value'=>$value3['alamat']])@endcomponent																
 								@component('components.fordetail',['label' => 'Negara','value'=>$value3['negara']])@endcomponent
+								@if ($value3['negara'] == 'Indonesia')
+									@component('components.fordetail',['label' => 'Provinsi','value'=>$value3['provinsi_domestik']])@endcomponent
+									@component('components.fordetail',['label' => 'Kota','value'=>$value3['kota_domestik']])@endcomponent
+								@else
+									@component('components.fordetail',['label' => 'Provinsi','value'=>$value3['provinsi']])@endcomponent
+									@component('components.fordetail',['label' => 'Kota','value'=>$value3['kota']])@endcomponent
+								@endif																
 								@component('components.fordetail',['label' => 'Telepon','value'=>$value3['telepon']])@endcomponent
 								@component('components.fordetail',['label' => 'Kode Pos','value'=>$value3['kodepos']])@endcomponent
 								@component('components.fordetail',['label' => 'Email','value'=>$value3['email']])@endcomponent
