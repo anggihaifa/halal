@@ -286,4 +286,7 @@ Route::prefix('system')->group(function(){
     Route::resource('log','System\LogController');
     Route::get('log_datatable','System\LogController@datatable')->name('system.log.datatable');
 
+    Route::get('dependent_dropdown', 'DependentDropdownController@index')->name('dependent_dropdown.index');
+    Route::post('dependent_dropdown', 'DependentDropdownController@store')->name('dependent_dropdown.store');
+
 });

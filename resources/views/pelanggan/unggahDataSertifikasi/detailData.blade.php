@@ -268,7 +268,7 @@
 														</select>
 													</td>
 													<td >
-														<input class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value={{$value['keterangan_has_1']}}>
+														<input class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value='{{$value['keterangan_has_1']}}'>
 														</input>
 														
 
@@ -290,7 +290,7 @@
 														</select>
 													</td>
 													<td >
-														<input type="text" class="form-control" name="keterangan_has_2" value={{$value["keterangan_has_2"]}} ></input>
+														<input type="text" class="form-control" name="keterangan_has_2" value='{{$value["keterangan_has_2"]}}' ></input>
 													</td>
 												</tr>
 												<tr class="odd">
@@ -309,7 +309,7 @@
 														</select>
 													</td>
 													<td >
-														<input type="text" class="form-control" name="keterangan_has_3" value={{$value['keterangan_has_3']}} >
+														<input type="text" class="form-control" name="keterangan_has_3" value='{{$value['keterangan_has_3']}}' >
 														</input>
 													</td>
 												</tr>
@@ -328,7 +328,7 @@
 						                                    <option value="2" {{$value["status_has_4"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_4" value={{$value['keterangan_has_4']}} ></input></td>
+													<td ><input type="text" class="form-control" name="keterangan_has_4" value='{{$value['keterangan_has_4']}}' ></input></td>
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">5</td>
@@ -345,7 +345,7 @@
 						                                    <option value="2" {{$value["status_has_5"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control"  name="keterangan_has_5" value={{$value['keterangan_has_5']}}  ></input></td>
+													<td ><input type="text" class="form-control"  name="keterangan_has_5" value='{{$value['keterangan_has_5']}}'  ></input></td>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">6</td>
 													<td class="valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
@@ -361,7 +361,7 @@
 						                                    <option value="2" {{$value["status_has_6"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control"  name="keterangan_has_6" value={{$value['keterangan_has_6']}} ></input></td>
+													<td ><input type="text" class="form-control"  name="keterangan_has_6" value='{{$value['keterangan_has_6']}}' ></input></td>
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">7</td>
@@ -378,7 +378,7 @@
 						                                    <option value="2" {{$value["status_has_7"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_7" value={{$value['keterangan_has_7']}} ></input></td>
+													<td ><input type="text" class="form-control" name="keterangan_has_7" value='{{$value['keterangan_has_7']}}' ></input></td>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">8</td>
 													<td class="valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
@@ -394,7 +394,7 @@
 						                                    <option value="2" {{$value["status_has_8"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_8" value={{$value['keterangan_has_8']}} ></input></td>
+													<td ><input type="text" class="form-control" name="keterangan_has_8" value='{{$value['keterangan_has_8']}}' ></input></td>
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">9</td>
@@ -411,7 +411,7 @@
 						                                    <option value="2" {{$value["status_has_9"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_9" value={{$value['keterangan_has_9']}} ></input></td>
+													<td ><input type="text" class="form-control" name="keterangan_has_9" value='{{$value['keterangan_has_9']}}' ></input></td>
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">10</td>
@@ -428,7 +428,7 @@
 						                                    <option value="2" {{$value["status_has_10"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_10" value={{$value['keterangan_has_10']}}></input></td>
+													<td ><input type="text" class="form-control" name="keterangan_has_10" value='{{$value['keterangan_has_10']}}'></input></td>
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">11</td>
@@ -445,7 +445,7 @@
 						                                    <option value="2" {{$value["status_has_11"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_11" value={{$value['keterangan_has_11']}} ></input></td>
+													<td ><input type="text" class="form-control" name="keterangan_has_11" value='{{$value['keterangan_has_11']}}' ></input></td>
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">12</td>
@@ -462,7 +462,7 @@
 						                                    <option value="2" {{$value["status_has_12"] == 2 ? 'selected' : ''}}>Reject</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_12" value={{$value['keterangan_has_12']}} ></input></td>
+													<td ><input type="text" class="form-control" name="keterangan_has_12" value='{{$value['keterangan_has_12']}}' ></input></td>
 												</tr>
 											@endforeach()
 										@endif
