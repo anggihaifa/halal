@@ -96,10 +96,11 @@ class ProgresStatus extends Mailable
 
         }elseif($this->status == 15){
 
-             $this->subject('Registrasi Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Proses Audit Tahap 2');      
+             $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Proses Audit Tahap 2');      
 
         }elseif($this->status == 16){
             //
+            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Pelaporan Audit dan Berita Acara');      
             if($this->registrasi['status_report']== 1 && $this->registrasi['status_berita_acara']== 1){
 
                  $this->attach(public_path('storage/buktireport/'.$this->registrasi['id_user'].'/'.$this->registrasi['file_report']),[

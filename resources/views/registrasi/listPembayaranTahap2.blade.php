@@ -149,7 +149,7 @@
                 {"data":"no_registrasi"},
                 {"data":"jenis"},
                 {"data":"name"},
-                {"data":"perusahaan"},
+                {"data":"nama_perusahaan"},
                 {"data":"tgl_registrasi"},
                 {
                     

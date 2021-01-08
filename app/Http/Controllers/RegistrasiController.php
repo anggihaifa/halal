@@ -103,7 +103,7 @@ class RegistrasiController extends Controller
             $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
         }
         if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
         }
         if(isset($gdata['kelompok_produk'])){
             $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
@@ -146,7 +146,7 @@ class RegistrasiController extends Controller
             $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
         }
         if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
         }
         if(isset($gdata['kelompok_produk'])){
             $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
@@ -193,9 +193,9 @@ class RegistrasiController extends Controller
             $today= date('l');
             //dd($today);
             if($today == 'Friday'){
-                $dl = date("Y-m-d H:i:s", strtotime('+72 hours'));
+                $dl = date("Y-m-d", strtotime('+72 hours'))." 23:59:59";
             }else{
-                $dl = date("Y-m-d H:i:s", strtotime('+24 hours'));
+                $dl = date("Y-m-d", strtotime('+24 hours'))." 23:59:59";
             }
             
            
@@ -207,7 +207,7 @@ class RegistrasiController extends Controller
                        
                      }elseif( $status == '5'){
                         $e->status_berkas = '1';
-                           
+                        $p->save();   
 
                        
 
@@ -219,7 +219,7 @@ class RegistrasiController extends Controller
 
                      }elseif( $status == '9'){
                         $p->dl_tahap1 = $dl;
-                        
+                        $p->save();
 
                        
 
@@ -234,6 +234,7 @@ class RegistrasiController extends Controller
                             $p->dl_tahap2 = $dl;
                         }
                            
+                        $p->save();
                        
                         
 
@@ -241,14 +242,21 @@ class RegistrasiController extends Controller
                        
 
                         $p->dl_tahap3 = $dl;
+                        //$p->save();
                         $p->save();
-                       
                           
                    
-                    } 
-                        
+                    }elseif($status== '4'|| $status== '7' || $status== '8'){
 
-                $p->save();
+
+                    } else{
+
+                        $p->save();
+                    }
+                        
+                //dd($e);
+                
+                
                 $e->save();
                 $u->save();
                 //Session::flash('success', "data berhasil disimpan!");
@@ -2302,13 +2310,14 @@ class RegistrasiController extends Controller
             $e->mata_uang = $data['mata_uang'];            
             $e->status='c';
             // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
-            // $z = str_replace('Rp', '', $data['total_biaya']);
-            // $a = str_replace(' ', '',$z);
+            $z = str_replace('Rp', '', $data['total_biaya']);
+            $a = str_replace('.', '',$z);
             // $b = str_replace('.', '', $a);
             // $total = (int)$b;
             // $a = $data['total_biaya'].split('.').join("");
 			// $total = $a.split('Rp').join("");
-            $e->total_biaya = $data['total_biaya'];
+            $e->total_biaya = $a;
+            // $e->total_biaya = $data['total_biaya'];
             // dd($data['total_biaya']);
             // dd($e->total_biaya);            
             if($request->has("file")){
@@ -2641,7 +2650,7 @@ class RegistrasiController extends Controller
             $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
         }
         if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
         }
         if(isset($gdata['kelompok_produk'])){
             $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
@@ -2976,7 +2985,7 @@ class RegistrasiController extends Controller
             $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
         }
         if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
         }
         if(isset($gdata['kelompok_produk'])){
             $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
@@ -3046,7 +3055,7 @@ class RegistrasiController extends Controller
             $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
         }
         if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
         }
         if(isset($gdata['kelompok_produk'])){
             $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
@@ -3345,7 +3354,7 @@ class RegistrasiController extends Controller
             $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
         }
         if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
         }
         if(isset($gdata['kelompok_produk'])){
             $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
@@ -3648,7 +3657,7 @@ class RegistrasiController extends Controller
             $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
         }
         if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
         }
         if(isset($gdata['kelompok_produk'])){
             $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);

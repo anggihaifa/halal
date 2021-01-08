@@ -203,7 +203,7 @@
                 },
                 {"data":"id_user"},
                 {"data":"no_registrasi"},
-                {"data":"perusahaan"},
+                {"data":"nama_perusahaan"},
                 {"data":"kelompok"},
                 {"data":"tgl_registrasi"},
                 {"data":"jenis"},
