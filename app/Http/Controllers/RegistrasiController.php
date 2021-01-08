@@ -230,7 +230,7 @@ class RegistrasiController extends Controller
 
                         }else{
 
-                            dd($status);
+                            // dd($status);
                             $p->dl_tahap2 = $dl;
                         }
                            
@@ -3829,21 +3829,32 @@ class RegistrasiController extends Controller
         
             
             if($data['status'] =='11'){
-                $p->status_tahap1 = '2';
-                $p->lebih_tahap1 = $data['lebih_tahap1'];
+                $p->status_tahap1 = '2';                
+                $lebih1 = str_replace('.', '', $data['lebih_tahap1']);
+                $lebihTotal = str_replace('Rp', '', $lebih1);
+
+                $p->lebih_tahap1 = (int)$lebihTotal;                
                 $p->updated_by = $updater;
 
 
 
             }elseif($data['status'] =='i'){
                 $p->status_tahap2 = '2';
-                $p->lebih_tahap2 = $data['lebih_tahap2'];
+                $lebih2 = str_replace('.', '', $data['lebih_tahap2']);
+                $lebihTotal2 = str_replace('Rp', '', $lebih2);
+
+                $p->lebih_tahap2 = (int)$lebihTotal2;
+                // $p->lebih_tahap2 = $data['lebih_tahap2'];
                 $p->updated_by = $updater;
 
                 
             }elseif($data['status'] =='23'){
                 $p->status_tahap3 = '2';
-                $p->lebih_tahap3 = $data['lebih_tahap3'];
+                $lebih3 = str_replace('.', '', $data['lebih_tahap3']);
+                $lebihTotal3 = str_replace('Rp', '', $lebih3);
+
+                $p->lebih_tahap3 = (int)$lebihTotal3;
+                // $p->lebih_tahap3 = $data['lebih_tahap3'];
                 $p->updated_by = $updater;
                 
                 
@@ -3932,20 +3943,32 @@ class RegistrasiController extends Controller
             
             if($data['status'] =='10'){
                 $p->status_tahap1 = '0';
-                $p->kurang_tahap1 = $data['kurang_tahap1'];
+                $kurang1 = str_replace('.', '', $data['kurang_tahap1']);
+                $kurangTotal = str_replace('Rp', '', $kurang1);
+
+                $p->kurang_tahap1 = (int)$kurangTotal;                
+                // $p->kurang_tahap1 = $data['kurang_tahap1'];
                 $p->updated_by = $updater;
 
 
 
             }elseif($data['status'] =='h'){
                 $p->status_tahap2 = '0';
-                $p->kurang_tahap2 = $data['kurang_tahap2'];
+                $kurang2 = str_replace('.', '', $data['kurang_tahap2']);
+                $kurangTotal2 = str_replace('Rp', '', $kurang2);
+
+                $p->kurang_tahap2 = (int)$kurangTotal2;
+                // $p->kurang_tahap2 = $data['kurang_tahap2'];
                 $p->updated_by = $updater;
 
                 
             }elseif($data['status'] =='22'){
                 $p->status_tahap3 = '0';
-                $p->kurang_tahap3 = $data['kurang_tahap3'];
+                $kurang3 = str_replace('.', '', $data['kurang_tahap3']);
+                $kurangTotal3 = str_replace('Rp', '', $kurang3);
+
+                $p->kurang_tahap3 = (int)$kurangTotal3;
+                // $p->kurang_tahap3 = $data['kurang_tahap3'];
                 $p->updated_by = $updater;
                 
                 

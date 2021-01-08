@@ -45,7 +45,7 @@
 								<label class="col-lg-4 col-form-label">Nominal Pembayaran Tahap 1</label>
 								<div class="col-lg-8">
 									<input type="text" name="status" value="10" hidden readonly>
-									<input type="text" class="form-control" name='nominal_tahap1' value="{{$dataP->nominal_tahap1}}" readonly/>
+									<input type="text" class="form-control" name='nominal_tahap1' value="{{number_format($dataP->nominal_tahap1,0,",",".")}}" readonly/>
 								</div>
 
 							@elseif($tahap == 2)
@@ -53,14 +53,14 @@
 								<div class="col-lg-8">
 									
 									<input type="text" name="status" value="h" hidden readonly>
-									<input type="text" class="form-control" name='nominal_tahap2' value="{{$dataP->nominal_tahap2}}" readonly/>
+									<input type="text" class="form-control" name='nominal_tahap2' value="{{number_format($dataP->nominal_tahap2,0,",",".")}}" readonly/>
 								</div>
 
 							@elseif($tahap == 3)
 								<label class="col-lg-4 col-form-label">Nominal Pembayaran Tahap 3</label>
 								<div class="col-lg-8">
 									<input type="text" name="status" value="22" hidden readonly>
-									<input type="text" class="form-control" name='nominal_tahap3' value="{{$dataP->nominal_tahap3}}" readonly/>
+									<input type="text" class="form-control" name='nominal_tahap3' value="{{number_format($dataP->nominal_tahap3,0,",",".")}}" readonly/>
 								</div>
 
 							@endif
@@ -70,21 +70,21 @@
 								<label class="col-lg-4 col-form-label">Nominal Kurang</label>
 								<div class="col-lg-8">
 								
-									<input type="text" class="form-control" name='kurang_tahap1' required/>
+									<input type="text" class="form-control" name="kurang_tahap1" id="nominal_kurang1" required/>
 								</div>
 
 							@elseif($tahap == 2)
 								<label class="col-lg-4 col-form-label">Nominal Kurang</label>
 								<div class="col-lg-8">
 								
-									<input type="text" class="form-control" name='kurang_tahap2' required/>
+									<input type="text" class="form-control" name="kurang_tahap2" id="nominal_kurang2" required/>
 								</div>
 
 							@elseif($tahap == 3)
 								<label class="col-lg-4 col-form-label">Nominal Kurang</label>
 								<div class="col-lg-8">
 								
-									<input type="text" class="form-control" name='kurang_tahap3' required/>
+									<input type="text" class="form-control" name="kurang_tahap3" id="nominal_kurang3" required/>
 								</div>
 
 							@endif
@@ -114,10 +114,48 @@
 @endsection
 
 @push('scripts')
+<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
+
+<script type="text/javascript">
+		if(document.getElementById("nominal_kurang1")){
+			var rupiah1 = document.getElementById("nominal_kurang1");
+			rupiah1.addEventListener('keyup', function(e){									
+				rupiah1.value = formatRupiah(this.value, 'Rp. ');			
+			});
+		}else if(document.getElementById("nominal_kurang2")){
+			var rupiah2 = document.getElementById("nominal_kurang2");	
+			rupiah2.addEventListener('keyup', function(e){			
+				rupiah2.value = formatRupiah(this.value, 'Rp. ');			
+			});
+		}else if(document.getElementById("nominal_kurang3")){
+			var rupiah3 = document.getElementById("nominal_kurang3");
+			rupiah3.addEventListener('keyup', function(e){									
+				rupiah3.value = formatRupiah(this.value, 'Rp. ');			
+			});
+		}		
+
+		/* Fungsi formatRupiah */
+		function formatRupiah(angka, prefix){	
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp.' + rupiah : '');
+		}
+	</script>
+
 	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
 
     <script src="{{asset('/assets/js/main.js')}}"></script>
     
-   
 
 @endpush

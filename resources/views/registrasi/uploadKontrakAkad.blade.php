@@ -449,7 +449,7 @@
 @endsection
 
 @push('scripts')
-	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>	
+	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
 
     <script type="text/javascript">		
 		var rupiah1 = document.getElementById("biaya_pemeriksaan");
