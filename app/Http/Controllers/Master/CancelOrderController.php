@@ -32,9 +32,9 @@ class CancelOrderController extends Controller
         ////////Email Cancel Order///////  
                       
             DB::beginTransaction(); 
-            $p = Pembayaran::all();
+            //$p = Pembayaran::all();
 
-            foreach ($p as $key => $value) {     
+            /*foreach ($p as $key => $value) {     
                 $e = $model->find($value->id_registrasi);
                 $u = $model2->find($e->id_user);
 
@@ -169,7 +169,7 @@ class CancelOrderController extends Controller
                     }                    
                     
                 }                                
-            }  
+            }  */
 
 
             /////Email Reminder///////
@@ -239,7 +239,7 @@ class CancelOrderController extends Controller
                         }
                         
                     }if($time2_2 - $timenow_2 <=21600){
-                        if($value->reminder6_tahap2 == 0) && $value->status_tahap2 == 0{
+                        if($value->reminder6_tahap2 == 0 && $value->status_tahap2 == 0){
 
                             $value->reminder6_tahap2 = 1;
                             $value->save();
