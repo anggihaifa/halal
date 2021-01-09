@@ -210,12 +210,6 @@ class RegistrasiController extends Controller
                        
                      }elseif( $status == '5'){
                         $e->status_berkas = '1';
-<<<<<<< HEAD
-                          
-
-=======
-                       
->>>>>>> 667e3a20811b434a3c1938137b96cdb0a65428fc
                        
 
                      }elseif( $status == '6'){
@@ -226,25 +220,13 @@ class RegistrasiController extends Controller
 
                      }elseif( $status == '9'){
                         $p->dl_tahap1 = $dl;
-<<<<<<< HEAD
                         
-
-                       
 
                      }elseif($status == 'g'){
                         if($p->nominal_tahap2 == 0){                            
                             $status=15;
                             $e->status = $status;
-                            // $this->konfirmasiPembayaranTahap22($e->id,$e->no_registrasi,$e->id_user,15);
-=======
-                       
-                       
-
-                     }elseif( $status == 'g'){
-                        if($p->nominal_tahap2 == 0){
-                            //dd("masuk");
-                            $this->konfirmasiPembayaranTahap2($e->id);
->>>>>>> 667e3a20811b434a3c1938137b96cdb0a65428fc
+                            // $this->konfirmasiPembayaranTahap22($e->id,$e->no_registrasi,$e->id_user,15);                                                                
 
                         }else{
 
@@ -252,19 +234,11 @@ class RegistrasiController extends Controller
                             $p->dl_tahap2 = $dl;
                         }
                            
-<<<<<<< HEAD
-=======
-                     
-                       
-                        
-
->>>>>>> 667e3a20811b434a3c1938137b96cdb0a65428fc
                     }elseif( $status == '21'){
                        
 
                         $p->dl_tahap3 = $dl;
                         //$p->save();
-<<<<<<< HEAD
                     }                    
                                                                      
                     
@@ -284,12 +258,7 @@ class RegistrasiController extends Controller
                 // $e->save();
                 // $u->save();
                
-                //Session::flash('success', "data berhasil disimpan!");                                
-=======
-                        $p->save();
-                          
-                   
-                    }
+                //Session::flash('success', "data berhasil disimpan!");                                                       
                         
                 //dd($e);
                 
@@ -305,12 +274,12 @@ class RegistrasiController extends Controller
                 }
                
                 //Session::flash('success', "data berhasil disimpan!");
->>>>>>> 667e3a20811b434a3c1938137b96cdb0a65428fc
+
                    
                 try{
                     // dd($e->status);
 
-<<<<<<< HEAD
+
                     if($e->status=='g' && $p->nominal_tahap2=='0'){
                             // dd($e->status);   
                     }else if($e->status == 15){                        
@@ -320,16 +289,12 @@ class RegistrasiController extends Controller
                     }
                                         
                     // dd($e);
-                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
+                    // Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
                     //dd($e->status);
-=======
-                    DB::commit();
                     //SendEmailP::dispatch($e,$u,$p, $status);
                     
                     SendEmailP::dispatch($e,$u,$p, $status);
-
                      
->>>>>>> 667e3a20811b434a3c1938137b96cdb0a65428fc
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
 
                 }catch(\Exception $u){
@@ -344,17 +309,7 @@ class RegistrasiController extends Controller
                     
             }else{
                 //dd($status);
-<<<<<<< HEAD
-                if(is_null($p)==0){
-                    // dd($e->status);                    
-                    $p->save();
-                    $e->save();
-                    $u->save();
-                }else{                    
-                    $e->save();
-                    $u->save();
-                }        
-=======
+
                 if(is_null($p)== 0){
 
                      $e->save();
@@ -365,7 +320,7 @@ class RegistrasiController extends Controller
                     $e->save();
                     $u->save();
                 }
->>>>>>> 667e3a20811b434a3c1938137b96cdb0a65428fc
+
 
                 DB::commit();
                 Session::flash('success', 'Data dengan nomor registrasi '.$no_registrasi.' berhasil diupdate');
@@ -3379,17 +3334,11 @@ class RegistrasiController extends Controller
 
             $e->save();
             $p->save();
-<<<<<<< HEAD
-            
-            DB::commit();          
-            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$e->status));            
-=======
-
 
             DB::commit();  
             SendEmailP::dispatch($e,$u,$p, $e->status);
             //dd("masuk");
->>>>>>> 667e3a20811b434a3c1938137b96cdb0a65428fc
+
             $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 15);
 
         }
