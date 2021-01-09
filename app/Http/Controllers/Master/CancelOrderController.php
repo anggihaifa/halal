@@ -19,6 +19,7 @@ use App\Mail\CancelOrder;
 use App\Mail\ProgresStatus;
 use App\Mail\ReminderMail;
 use Carbon\Carbon;
+use App\Jobs\SendEmailC;
 
 class CancelOrderController extends Controller
 {
@@ -202,7 +203,9 @@ class CancelOrderController extends Controller
                             $value->save();
                            //dd($p);
                              DB::commit();
-                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r1_12'));
+                             //Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r1_12'));
+
+                             SendEmailC::dispatch($e,$u,$value,'r1_12');
                         
                         }
                        
@@ -213,7 +216,8 @@ class CancelOrderController extends Controller
                              $value->reminder6_tahap1 = 1;
                              $value->save();
                               DB::commit();
-                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r1_6'));
+                             //Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r1_6'));
+                             SendEmailC::dispatch($e,$u,$value,'r1_6');
                         \Log::info("sukses");
                         }
                     }
@@ -234,7 +238,8 @@ class CancelOrderController extends Controller
                             $value->reminder12_tahap2 = 1;
                             $value->save();
                              DB::commit();
-                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_12'));
+                             //Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_12'));
+                             SendEmailC::dispatch($e,$u,$value,'r2_12');
                         
                         }
                         
@@ -244,7 +249,8 @@ class CancelOrderController extends Controller
                             $value->reminder6_tahap2 = 1;
                             $value->save();
                              DB::commit();
-                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_6'));
+                             //Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r2_6'));
+                             SendEmailC::dispatch($e,$u,$value,'r2_6');
                        
                         }
                       
@@ -268,7 +274,8 @@ class CancelOrderController extends Controller
                             $value->reminder12_tahap3 = 1;
                             $value->save();
                              DB::commit();
-                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r3_12'));
+                             //Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r3_12'));
+                             SendEmailC::dispatch($e,$u,$value,'r3_12');
                         
                         }
                         
@@ -278,7 +285,8 @@ class CancelOrderController extends Controller
                             $value->reminder6_tahap3 = 1;
                             $value->save();
                              DB::commit();
-                             Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r3_6'));
+                            // Mail::to("$u->email")->send(new ReminderMail($e,$u,$value,'r3_6'));
+                             SendEmailC::dispatch($e,$u,$value,'r3_6');
                        
                         }
                         

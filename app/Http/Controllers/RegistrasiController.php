@@ -46,6 +46,9 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Services\FileUploadServices;
 use App\Mail\KonfirmasiPembayaran;
 use App\Mail\ProgresStatus;
+use App\Jobs\SendEmailP;
+use App\Jobs\SendEmailK;
+use App\Jobs\SendEmailC;
 use Illuminate\Support\Facades\Mail;
 use PDF;
 use Response;
@@ -207,8 +210,7 @@ class RegistrasiController extends Controller
                        
                      }elseif( $status == '5'){
                         $e->status_berkas = '1';
-                        $p->save();   
-
+                       
                        
 
                      }elseif( $status == '6'){
@@ -219,13 +221,12 @@ class RegistrasiController extends Controller
 
                      }elseif( $status == '9'){
                         $p->dl_tahap1 = $dl;
-                        $p->save();
-
+                       
                        
 
                      }elseif( $status == 'g'){
                         if($p->nominal_tahap2 == 0){
-
+                            //dd("masuk");
                             $this->konfirmasiPembayaranTahap2($e->id);
 
                         }else{
@@ -234,7 +235,7 @@ class RegistrasiController extends Controller
                             $p->dl_tahap2 = $dl;
                         }
                            
-                        $p->save();
+                     
                        
                         
 
@@ -246,27 +247,33 @@ class RegistrasiController extends Controller
                         $p->save();
                           
                    
-                    }elseif($status== '4'|| $status== '7' || $status== '8'){
-
-
-                    } else{
-
-                        $p->save();
                     }
                         
                 //dd($e);
                 
-                
-                $e->save();
-                $u->save();
+                if(is_null($p)== 0){
+
+                     $e->save();
+                     $u->save();
+                     $p->save();
+
+                }else{
+                    $e->save();
+                    $u->save();
+                }
+               
                 //Session::flash('success', "data berhasil disimpan!");
                    
                 try{
 
                     DB::commit();
-                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
+                    //SendEmailP::dispatch($e,$u,$p, $status);
+                    
+                    SendEmailP::dispatch($e,$u,$p, $status);
+
                      
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
+
                 }catch(\Exception $u){
 
                     Session::flash('error', $u->getMessage());
@@ -278,9 +285,16 @@ class RegistrasiController extends Controller
                     
             }else{
                 //dd($status);
-                $p->save();
-                $e->save();
-                $u->save();
+                if(is_null($p)== 0){
+
+                     $e->save();
+                     $u->save();
+                     $p->save();
+
+                }else{
+                    $e->save();
+                    $u->save();
+                }
 
                 DB::commit();
                 Session::flash('success', 'Data dengan nomor registrasi '.$no_registrasi.' berhasil diupdate');
@@ -1465,7 +1479,7 @@ class RegistrasiController extends Controller
                
                 $e->save();
                 $f->save();
-                Mail::to($u->email)->send(new ProgresStatus($u,$f,$p,$f->status));
+                SendEmailP::dispatch($u,$f,$p,$f->status);
 
 
                 $this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
@@ -1481,7 +1495,7 @@ class RegistrasiController extends Controller
                 $f->save();
 
                 DB::commit();
-                Mail::to($u->email)->send(new ProgresStatus($u,$f,$p,$f->status));
+                SendEmailP::dispatch($u,$f,$p,$f->status);
                 Session::flash('success', "Status berhasil diupdate");
                 
             }
@@ -2224,7 +2238,7 @@ class RegistrasiController extends Controller
                 }
                 $e->id_pembayaran = $model3->id;
                 $e->save();
-                 Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$model3, $e->status));
+                SendEmailP::dispatch($e,$u,$model3, $e->status);
            }else{
                 if($e->total_biaya >10000000 && $e->total_biaya <= 50000000){
                // dd($e->total_biaya);
@@ -2259,7 +2273,7 @@ class RegistrasiController extends Controller
                     $p->tanggal_tahap1 = $date;
                      $p->save();
                 }
-                 Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p, $e->status));
+                SendEmailP::dispatch($e,$u,$p, $e->status);
 
 
            }
@@ -2329,7 +2343,7 @@ class RegistrasiController extends Controller
             }
             $e->save();
             DB::commit();
-            Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+             SendEmailP::dispatch($e,$u,$p, $e->status);
             Session::flash('success', "Upload Bukti Dokumen Kontrak Berhasil");
 
             
@@ -2359,7 +2373,7 @@ class RegistrasiController extends Controller
             
             $e->save();
             DB::commit();
-            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+            //  SendEmailP::dispatch($e,$u,$p, $status);
             Session::flash('success', "Konfirmasi File Report dan Berita Acara Audit Berhasil");
             
         }catch (\Exception $e){
@@ -2390,7 +2404,7 @@ class RegistrasiController extends Controller
             
             $e->save();
             DB::commit();
-            // Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+            //  SendEmailP::dispatch($e,$u,$p, $status);
             Session::flash('success', "Konfirmasi File Berita Acara Berhasil");
             
         }catch (\Exception $e){
@@ -2438,7 +2452,7 @@ class RegistrasiController extends Controller
             DB::commit();
             // dd($data);
             if($e->status_berita_acara==1){
-                Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+                SendEmailP::dispatch($e,$u,$p, $e->status);
             }
             // Session::flash('success', "Upload Dokumen Report Berhasil");            
             
@@ -2483,7 +2497,7 @@ class RegistrasiController extends Controller
 
             if($e->status_report==1){  
 
-                Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+                SendEmailP::dispatch($e,$u,$p, $e->status);
                  $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 18);
             }            
             // dd($data);
@@ -2524,7 +2538,7 @@ class RegistrasiController extends Controller
             }
             $e->save();
             DB::commit();
-            Mail::to($u->email)->send(new ProgresStatus($e,$u,$p,$e->status));
+            SendEmailP::dispatch($e,$u,$p, $e->status);
             Session::flash('success', "Upload Hasil Tinjauan Komite Ke MUI Berhasil");
 
             
@@ -2694,7 +2708,7 @@ class RegistrasiController extends Controller
             
         
                 try{
-                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
+                    SendEmailP::dispatch($e,$u,$p, $status);
                     //Session::flash('success', "data berhasil disimpan!");
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
 
@@ -2919,7 +2933,7 @@ class RegistrasiController extends Controller
             $p->updated_at = $tanggal;
             $p->save();
 
-            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$e->status));
+            SendEmailP::dispatch($e,$u,$p, $e->status);
 
             $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 14);
             DB::commit();  
@@ -3112,7 +3126,7 @@ class RegistrasiController extends Controller
            
         
                 try{
-                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
+                    SendEmailP::dispatch($e,$u,$p, $status);
                     //Session::flash('success', "data berhasil disimpan!");
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
 
@@ -3290,8 +3304,8 @@ class RegistrasiController extends Controller
 
 
             DB::commit();  
-            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$e->status));
-           
+            SendEmailP::dispatch($e,$u,$p, $e->status);
+            //dd("masuk");
             $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 15);
 
         }
@@ -3406,7 +3420,7 @@ class RegistrasiController extends Controller
              
         
                 try{
-                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
+                    SendEmailP::dispatch($e,$u,$p, $status);
                     //Session::flash('success', "data berhasil disimpan!");
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
 
@@ -3590,7 +3604,7 @@ class RegistrasiController extends Controller
             }
 
             DB::commit(); 
-            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$e->status));
+            SendEmailP::dispatch($e,$u,$p, $e->status);
 
             $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 26);
              
@@ -3710,7 +3724,7 @@ class RegistrasiController extends Controller
              
         
                 try{
-                    Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
+                    SendEmailP::dispatch($e,$u,$p, $status);
                     //Session::flash('success', "data berhasil disimpan!");
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil diupdate dan dikirim emailnya!');
 
@@ -3775,7 +3789,7 @@ class RegistrasiController extends Controller
             }
             $e->save();
             DB::commit();
-            Mail::to($u->email)->send(new ProgresStatus($u,$e,$p,$e->status));
+             SendEmailP::dispatch($e,$u,$p, $e->status);
             Session::flash('success', "Upload Invoice Berhasil");
 
             
@@ -3876,7 +3890,7 @@ class RegistrasiController extends Controller
 
                 DB::commit();
 
-                Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $data['status']));
+               SendEmailP::dispatch($e,$u,$p, $data['status']);
                 //Session::flash('success', "data berhasil disimpan!");
                 Session::flash('success', 'data dengan no registrasi '.$e->no_registrasi.' berhasil di kirim emailnya!');
 
@@ -3990,7 +4004,7 @@ class RegistrasiController extends Controller
 
                 DB::commit();
 
-                Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $data['status']));
+               SendEmailP::dispatch($e,$u,$p, $data['status']);
                 //Session::flash('success', "data berhasil disimpan!");
                 Session::flash('success', 'data dengan no registrasi '.$e->no_registrasi.' berhasil di kirim emailnya!');
 

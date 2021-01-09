@@ -60,6 +60,8 @@ class ProgresStatus extends Mailable
 
         }elseif($this->status == 8){
 
+            //dd("masuk");
+
             $this->subject('Kontrak Akad Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Disetujui');
 
 

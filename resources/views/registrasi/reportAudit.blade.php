@@ -45,7 +45,7 @@
 							<label class="col-lg-4 col-form-label">File Report Audit</label>
 							<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/report/'.Auth::user()->id.'/'.$data->file_report) }}" download>{{$data->file_report}}</a>
+										<a href="{{url('') .Storage::url('public/buktireport/'.Auth::user()->id.'/'.$data->file_report) }}" download>{{$data->file_report}}</a>
 									</div>
 							</div>  							
 														

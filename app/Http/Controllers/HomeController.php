@@ -35,7 +35,7 @@ class HomeController extends Controller
                                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                                  //->join('users','registrasi.id_user','=','users.id')
-                                 ->join('users','registrasi.id','=','users.registrasi_id')
+                                 //->join('users','registrasi.id','=','users.registrasi_id')
                                  ->where('registrasi.kode_wilayah','=',$kodewilayah)
                                  ->where('registrasi.status_cancel','=',0)
                                  ->get();
