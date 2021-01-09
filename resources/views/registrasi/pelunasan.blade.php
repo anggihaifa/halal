@@ -62,7 +62,7 @@
 								<input type="text" class="form-control" value="Rp. {{ $dataP->nominal_tahap3}} " disabled/>
 							</div>
 							
-							@elseif($dataP->status_tahap3 == 1)	
+							@if($dataP->status_tahap3 == 1)	
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
 								<div id="sh" class="col-lg-8">

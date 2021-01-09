@@ -456,12 +456,16 @@
 		rupiah1.addEventListener('keyup', function(e){									
 			rupiah1.value = formatRupiah(this.value, 'Rp. ');			
 		});
-	}else if(document.getElementById("biaya_pengujian")){
+	}
+	
+	if(document.getElementById("biaya_pengujian")){
 		var rupiah2 = document.getElementById("biaya_pengujian");
 		rupiah2.addEventListener('keyup', function(e){									
 			rupiah2.value = formatRupiah(this.value, 'Rp. ');			
 		});
-	}else if(document.getElementById("biaya_fatwa")){
+	}
+	
+	if(document.getElementById("biaya_fatwa")){
 		var rupiah3 = document.getElementById("biaya_fatwa");
 		rupiah3.addEventListener('keyup', function(e){									
 			rupiah3.value = formatRupiah(this.value, 'Rp. ');			

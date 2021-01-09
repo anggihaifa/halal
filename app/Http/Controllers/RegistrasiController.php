@@ -179,12 +179,12 @@ class RegistrasiController extends Controller
         $model2 = new User();
         $model3 = new Pembayaran();
 
-        try{
+        try{            
             DB::beginTransaction();
             $e = $model->find($id);
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
-            $e->status = $status;
+            $e->status = $status;          
             $e->updated_status_by = $updater;
             
             
@@ -207,7 +207,7 @@ class RegistrasiController extends Controller
                        
                      }elseif( $status == '5'){
                         $e->status_berkas = '1';
-                        $p->save();   
+                          
 
                        
 
@@ -219,14 +219,15 @@ class RegistrasiController extends Controller
 
                      }elseif( $status == '9'){
                         $p->dl_tahap1 = $dl;
-                        $p->save();
+                        
 
                        
 
-                     }elseif( $status == 'g'){
-                        if($p->nominal_tahap2 == 0){
-
-                            $this->konfirmasiPembayaranTahap2($e->id);
+                     }elseif($status == 'g'){
+                        if($p->nominal_tahap2 == 0){                            
+                            $status=15;
+                            $e->status = $status;
+                            // $this->konfirmasiPembayaranTahap22($e->id,$e->no_registrasi,$e->id_user,15);
 
                         }else{
 
@@ -234,42 +235,51 @@ class RegistrasiController extends Controller
                             $p->dl_tahap2 = $dl;
                         }
                            
-                        $p->save();
-                       
-                        
-
                     }elseif( $status == '21'){
                        
 
                         $p->dl_tahap3 = $dl;
                         //$p->save();
-                        $p->save();
-                          
-                   
-                    }elseif($status== '4'|| $status== '7' || $status== '8'){
-
-
-                    } else{
-
-                        $p->save();
-                    }
+                    }                    
+                                                                     
+                    
                         
                 //dd($e);
-                
-                
-                $e->save();
-                $u->save();
-                //Session::flash('success', "data berhasil disimpan!");
+                if(is_null($p)==0){
+                    // dd($e->status);                    
+                    $p->save();
+                    $e->save();
+                    $u->save();
+                }else{                    
+                    $e->save();
+                    $u->save();
+                }                
+
+                // $p->save();
+                // $e->save();
+                // $u->save();
+               
+                //Session::flash('success', "data berhasil disimpan!");                                
                    
                 try{
+                    // dd($e->status);
 
-                    DB::commit();
+                    if($e->status=='g' && $p->nominal_tahap2=='0'){
+                            // dd($e->status);   
+                    }else if($e->status == 15){                        
+                        DB::commit();
+                    }else{
+                        DB::commit();
+                    }
+                                        
+                    // dd($e);
                     Mail::to($u->email)->send(new ProgresStatus($e,$u,$p, $status));
-                     
+                    //dd($e->status);
                     Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
                 }catch(\Exception $u){
 
                     Session::flash('error', $u->getMessage());
+                    DB::rollback();
                     //Session::flash('success', "data berhasil disimpan!");
                     //$statusreg = $e->getMessage();
 
@@ -278,16 +288,22 @@ class RegistrasiController extends Controller
                     
             }else{
                 //dd($status);
-                $p->save();
-                $e->save();
-                $u->save();
+                if(is_null($p)==0){
+                    // dd($e->status);                    
+                    $p->save();
+                    $e->save();
+                    $u->save();
+                }else{                    
+                    $e->save();
+                    $u->save();
+                }        
 
                 DB::commit();
                 Session::flash('success', 'Data dengan nomor registrasi '.$no_registrasi.' berhasil diupdate');
             }
             
             
-        }catch (\Exception $e){
+        }catch (\Exception $e){            
             DB::rollBack();
 
             Session::flash('error', $e->getMessage());
@@ -3237,6 +3253,11 @@ class RegistrasiController extends Controller
         return view('registrasi.listPembayaranTahap2',compact('dataKelompok','dataJenis'));
     }
 
+    public function konfirmasiPembayaranTahap22($id,$noregis,$iduser,$status){
+        // Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$status));            
+        $this->updateStatusRegistrasi($id,$noregis,$iduser,$status);         
+    }
+
     
     public function konfirmasiPembayaranTahap2($id){
         //retrieve data
@@ -3248,11 +3269,13 @@ class RegistrasiController extends Controller
         $model = new Registrasi();
         $model2 = new User();
         $model3 = new Pembayaran();
+        
 
-         DB::beginTransaction();
+        DB::beginTransaction();
         $e = $model->find($id);
         $u = $model2->find($e->id_user);
         $p = $model3->find($e->id_pembayaran);
+        
         $e->status = 'l';
 
         $e->updated_status_by = $updater;
@@ -3287,11 +3310,9 @@ class RegistrasiController extends Controller
 
             $e->save();
             $p->save();
-
-
-            DB::commit();  
-            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$e->status));
-           
+            
+            DB::commit();          
+            Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$e->status));            
             $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 15);
 
         }
@@ -3597,7 +3618,7 @@ class RegistrasiController extends Controller
 
         }
 
-         Session::flash('success', "Pembayaran Tahap 2 berhasil dikonfirmasi!");
+         Session::flash('success', "Pembayaran Pelunasan berhasil dikonfirmasi!");
          $redirect = redirect()->route('listpelunasan');
          return $redirect;
     }
@@ -3738,7 +3759,22 @@ class RegistrasiController extends Controller
     }
 
 
-
+    public function uploadInvoice($id){
+        //dd($id);
+        $data = Registrasi::find($id);
+        $dataP = Pembayaran::find($data->id_pembayaran);
+        //get Data from FAQ Transfer
+        $getTransfer =   DB::table('faq')
+                    ->where('status','transfer')
+                    ->get();
+        $dataTransfer = json_decode($getTransfer,true);
+        //get Data from FAQ Tunai
+        $getTunai =   DB::table('faq')
+                    ->where('status','tunai')
+                    ->get();
+        $dataTunai = json_decode($getTunai,true);
+        return view('registrasi.uploadInvoice',compact('data','dataP','dataTransfer','dataTunai'));
+    }
 
    
 

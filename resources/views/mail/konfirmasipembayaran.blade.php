@@ -832,7 +832,7 @@
             
             <br/>
             
-               <p>Anda menerima email ini dikarenakan berkas kontrak akad telah diupload pada website LPH PT.SUCOIFNDO silahkan unduh file kontrak akad lalu tanda tangani setelah nya silahkan upload kembali file kontrak akad yang sudah anda tanda tangani. Order anda akan otomais cancel apabila tidak ditanda tangani dalam waktu 1 x 24 jam pada hari dan pukul <b> {{$tomorrow}} WIB/GMT+7  </b>
+               <p>Anda menerima email ini dikarenakan berkas kontrak akad telah diupload pada website LPH PT.SUCOIFNDO silahkan unduh file kontrak akad lalu tanda tangani setelah nya silahkan upload kembali file kontrak akad yang sudah anda tanda tangani. Order anda akan otomais cancel apabila tidak ditanda tangani dalam waktu 1 x 24 jam pada hari dan pukul <b> {{$registrasi['dl_akad']}} WIB/GMT+7  </b>
                </p>
 
                 
