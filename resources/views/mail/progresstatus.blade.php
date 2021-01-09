@@ -165,7 +165,7 @@
         <br/>
 
     @elseif($status== '8')
-
+   
 
         <h3 style="text-align: center">FILE KONTRAK AKAD TELAH TERKONFIRMASI</h3>
         
@@ -238,9 +238,9 @@
                     </tr>             
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal1}} </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
                      
                         
@@ -292,9 +292,9 @@
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal Kurang: </b> {{$pembayaran['mata_uang']}} {{$nominal_kurang1}} </tr>
                      
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
                         
                 </table>
@@ -368,9 +368,9 @@
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal1}} </tr>
                      
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
                         
                 </table>
@@ -628,9 +628,9 @@
                         </tr>             
                                   
                          <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
-                        <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                        <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                        <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                        <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                        <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                        <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                         <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$pembayaran['dl_tahap2']}}</tr>
                          
                             
@@ -675,9 +675,9 @@
                 </tr>             
                           
                  <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal_kurang2}} </tr>
-                  <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                  <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran TAHAP 2: </b>{{$pembayaran['dl_tahap2']}}</tr>
                 
                     
@@ -750,9 +750,9 @@
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
                      
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap2']}}</tr>
                         
                 </table>
@@ -940,9 +940,9 @@
                     </tr>             
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
-                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$pembayaran['dl_tahap3']}}</tr>
                      
                         
@@ -987,9 +987,9 @@
                 </tr>             
                           
                  <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal_kurang3}} </tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                 <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                  <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Pelunasan: </b>{{$pembayaran['dl_tahap3']}}</tr>
                 
                     
@@ -1064,9 +1064,9 @@
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
                      
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> : Bank Mandiri</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 127-000-1186699</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap3']}}</tr>
                         
                 </table>
