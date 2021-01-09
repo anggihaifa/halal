@@ -155,7 +155,7 @@
 								<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
 								
 									<div class="col-lg-8">
-										<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="1,500,000 " readonly />
+										<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="{{number_format(1500000,0,",",".")}} " readonly />
 									</div>
 							@elseif($data->skala_usaha == 'kecil')
 							<label class="col-lg-4 col-form-label">Mata Uang</label>
@@ -254,7 +254,7 @@
 
 								<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>								
 									<div class="col-lg-8">
-										<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="3,000,000 " readonly />
+										<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="3.000.000 " readonly />
 									</div>							
 							@else
 								<label class="col-lg-12 col-form-label">Biaya Sertifikasi</label>
@@ -397,10 +397,9 @@
 								</div>
 								<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 								<div class="col-lg-8">
-									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/msword" required   onchange="getValue('file')/>
+									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/msword" required   onchange="getValue('file')"/>
 								</div>
-							@elseif($data->status_akad == 0)	
-								<!--Auto Download-->
+							@elseif($data->status_akad == 0)									
 								<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 								<div class="col-lg-8">
 									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/msword" onchange="getValue('file')" required />
@@ -452,20 +451,22 @@
 	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
 
     <script type="text/javascript">		
+	if(document.getElementById("biaya_pemeriksaan")){
 		var rupiah1 = document.getElementById("biaya_pemeriksaan");
 		rupiah1.addEventListener('keyup', function(e){									
 			rupiah1.value = formatRupiah(this.value, 'Rp. ');			
 		});
-
+	}else if(document.getElementById("biaya_pengujian")){
 		var rupiah2 = document.getElementById("biaya_pengujian");
 		rupiah2.addEventListener('keyup', function(e){									
 			rupiah2.value = formatRupiah(this.value, 'Rp. ');			
 		});
-
+	}else if(document.getElementById("biaya_fatwa")){
 		var rupiah3 = document.getElementById("biaya_fatwa");
 		rupiah3.addEventListener('keyup', function(e){									
 			rupiah3.value = formatRupiah(this.value, 'Rp. ');			
 		});
+	}
  
 		/* Fungsi formatRupiah */
 		function formatRupiah(angka, prefix){			
