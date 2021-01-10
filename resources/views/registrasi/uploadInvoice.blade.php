@@ -70,6 +70,7 @@
 									@if($dataP->status_tahap3 == 1)
 										<button type="submit" class="btn btn-sm btn-success m-r-5" >Upload Invoice</button>
 									@elseif($dataP->status_tahap3 == 2)
+										<button type="submit" class="btn btn-sm btn-success m-r-5" >Upload Invoice</button>
 										<button type="submit" class="btn btn-sm btn-yellow m-r-5" disabled>Invoice Sudah Berhasil diupload</button>
 									
 									@endif								
