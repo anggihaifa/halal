@@ -54,7 +54,7 @@ return [
      
                 [   
                     'url' => 'listberitaacara',       
-                    'title' => 'Report dan Berita Acara'                    
+                    'title' => 'Pelaporan Audit dan Berita Acara'                    
                 ],
                  [
                     'url' => 'listpelunasan',
@@ -172,7 +172,7 @@ return [
                 ], 
                 [   
                     'url' => 'listberitaacara',       
-                    'title' => 'Report dan Berita Acara'                    
+                    'title' => 'Pelaporan Audit dan Berita Acara'                    
                 ],
                  [
                     'url' => 'listpelunasan',

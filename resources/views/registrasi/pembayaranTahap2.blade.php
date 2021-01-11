@@ -73,7 +73,7 @@
 								<label class="col-lg-4 col-form-label">Bukti Konfirmasi Pembayaran Sertifikasi</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/pembayaran/'.$dataP->bt_tahap2) }}" download>{{$dataP->bt_tahap2}}</a>
+											<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bt_tahap2) }}" download>{{$dataP->bt_tahap2}}</a>
 									</div>
 								</div>
 							@else
@@ -114,7 +114,7 @@
 										@if($dataP->status_tahap2 == 2)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Pembayaran Sudah Dikonfirmasi</button>
 										@else
-											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
+											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah bukti transfer pembayaran tahap 2 ?????')">Konfirmasi</button>
 
 											@if($dataP->status_tahap2 == 1)
 												

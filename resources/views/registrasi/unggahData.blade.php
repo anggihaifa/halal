@@ -114,14 +114,15 @@
 				<div class="card-body ">
 					<div class="tab-content p-0 m-0">
 						<div class="tab-pane fade active show" id="card-tab-1">
+
 							@php
 
 								$regId = Auth::user()->registrasi_id;
 								$fieldSudah = '<td class="text-nowrap valign-middle text-center"><i class="ion-ios-cloud-done" style="color:#2fca2f"></i></td>';
 								$fieldBelum = '<td class="text-nowrap valign-middle text-center"><i class="ion-ios-remove-circle-outline" style="color:#ababab"></i></td>';
-								$buttonUnduhDisabled = '<td class="text-nowrap valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a></td>';
+								$buttonUnduhDisabled = ' <td class="text-nowrap valign-middle text-center"> <button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>';
 
-								$buttonUnduh = '<td class="text-nowrap valign-middle text-center"><a href="#" class="btn btn-primary btn-xs">unduh</a></td>';
+								$buttonUnduh = '<button type="submit" style="height:70%" class="btn btn-xm btn-primary">Unggah</button> <td class="text-nowrap valign-middle text-center"><a href="#" class="btn btn-primary btn-xs">unduh</a></td>';
 								
 
 							@endphp
@@ -142,6 +143,9 @@
 								<span style="margin-right: 10px;"><i class="ion-ios-paper" style="color:#e46464"></i> Revisi</span>
 								<span style="margin-right: 5px; "><i class="ion-ios-cloud-done" style="color:#2fca2f"></i> Sudah diunggah</span>
 								<span style="margin-right: 5px; "><i class="ion-ios-remove-circle-outline" style="color:#ababab"></i> Belum diunggah</span>
+								<h6></h6>
+								<h5 style="color:#ff6961">NOTE: Ukuran Maksimal File 2MB</h5>
+								
 								
 							</div>
 							<form action="{{route('storedokumenhas')}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
@@ -173,11 +177,12 @@
 											<td class=" valign-middle"/>
 											
 											{!! $buttonUnduhDisabled !!}
+
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">2</td>
-											<td class=" valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
-											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_2" name="has_2" onchange="getValue('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
+											<td class=" valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJPH/SJH B)</td>
+											<td class="text-nowrap valign-middle text-center"><input type="file" id="has_2" name="has_2" onchange="getValueSJPH('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"/>
 											{!! $buttonUnduhDisabled !!}
@@ -277,7 +282,7 @@
 														<td class=" mydiv  valign-middle">
 															{{$value['keterangan_has_1']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -289,9 +294,9 @@
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">2</td>
-													<td class=" valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
+													<td class=" valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJPH/SJH B)</td>
 													<td class="valign-middle text-center">
-														<input style="width:180px" type="file" id="has_2" name="has_2" onchange="getValue('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+														<input style="width:180px" type="file" id="has_2" name="has_2" onchange="getValueSJPH('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
 													@component('components.forstatusdokumen',['value'=>$value['status_has_2']])@endcomponent
 													@if($value['has_2'] !== null)
@@ -299,7 +304,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_2']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class=" mydiv valign-middle">
@@ -320,7 +325,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_3']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class=" mydiv valign-middle">
@@ -341,7 +346,7 @@
 														<td class=" mydiv valign-middle">
 															{{$value['keterangan_has_4']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -362,7 +367,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_5']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -382,7 +387,7 @@
 														<td class=" mydiv valign-middle">
 															{{$value['keterangan_has_6']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -403,7 +408,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_7']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -423,7 +428,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_8']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -444,7 +449,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_9']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -465,7 +470,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_10']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -486,7 +491,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_11']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -507,7 +512,7 @@
 														<td class="mydiv valign-middle">
 															{{$value['keterangan_has_12']}}
 														</td>
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="mydiv valign-middle">
@@ -523,12 +528,12 @@
 								</table>
 								<div class="col-md-12 offset-md-5">
 									@if($dataHas == null)
-										<button type="submit" class="btn btn-sm btn-primary m-r-5">Unggah</button>
+										<button type="submit" class="btn btn-sm btn-primary m-r-5" hidden>Unggah</button>
 										<button type="button"  class="btn btn-sm btn-default" disabled=>Reset</button>
 									@else
-										<button type="submit" class="btn btn-sm btn-success m-r-5">Unggah</button>
+										<button type="submit" class="btn btn-sm btn-success m-r-5" hidden>Unggah</button>
 										@foreach($dataHas as $has => $value)
-											<a href="{{url('delete_dokumen_has')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default" onclick= "return confirm('Apakah anda yakin untuk menghapus semua data dokumen HAS??')">Reset</button></a>
+											<a href="{{url('delete_dokumen_has')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default" onclick= "return confirm('Apakah anda yakin untuk menghapus semua data dokumen SJPH atau SJH??')">Reset</button></a>
 										@endforeach
 									@endif
 								</div>
@@ -673,10 +678,10 @@
 								</table>
 								<div class="col-md-12 offset-md-5">
 									@if($dataMatriksProduk == null)
-										<button type="submit" class="btn btn-sm btn-primary m-r-5">Unggah</button>
+										<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah data matriks ?????')">Unggah</button>
 										<button type="button"  class="btn btn-sm btn-default" disabled>Reset</button>
 									@else
-										<button type="submit" class="btn btn-sm btn-success m-r-5">Unggah</button>
+										<button type="submit" class="btn btn-sm btn-success m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah data matriks produk ?????')">Unggah</button>
 										@foreach($dataMatriksProduk as $matriks => $value)
 											<a href="{{url('delete_matriks_produk')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default" onclick= "return confirm('Apakah anda yakin untuk menghapus semua data dokumen Matriks Produk??')">Reset</button></a>
 										@endforeach
@@ -941,10 +946,10 @@
 								</table>
 								<div class="col-md-12 offset-md-5">
 									@if($dataKuisionerHas == null)
-										<button type="submit" class="btn btn-sm btn-primary m-r-5">Submit</button>
+										<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah data kuisioner ?????')">Submit</button>
 										<button type="button"  class="btn btn-sm btn-default" disabled>Reset</button>
 									@else
-										<button type="submit" class="btn btn-sm btn-success m-r-5">Submit</button>
+										<button type="submit" class="btn btn-sm btn-success m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah data kuisioner ?????')">Submit</button>
 										@foreach($dataKuisionerHas as $kuis => $value)
 											<a href="{{url('delete_kuisioner_has')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default" onclick= "return confirm('Apakah anda yakin untuk reset jawaban kuisioner has??')">Reset</button></a>
 										@endforeach
@@ -1307,22 +1312,31 @@
             var values = x.value;
             var ext = values.split('.').pop();
             if(getSize > maxSize){
-                    alert("File terlalu besar, ukuran file maksimal 3MB");
+                    alert("File terlalu besar, ukuran file maksimal 2MB");
                     x.value = "";
                     return false;
             }
 
-            // if(ext=="pdf" || ext=="docx" || ext=="doc"){
-            //     if(getSize > maxSize){
-            //         alert("File terlalu besar :( , ukuran file maksimal 5MB :)");
-            //         x.value = "";
-            //         return false;
-            //     }
-            // }else{
-            //     alert(ext);
-            //     alert("file tidak termasuk");
-            //     x.value = "";
-            // }
+           
+        }
+        function getValueSJPH(y){
+        	const x  = document.getElementById(y);
+
+        	// var length = x.files[0];
+        	// console.log(length);
+
+            var getSize = x.files[0].size;
+            //var maxSize = 5120*1024;
+            var maxSize = 5120*1024;
+            var values = x.value;
+            var ext = values.split('.').pop();
+            if(getSize > maxSize){
+                    alert("File terlalu besar, ukuran file maksimal 5MB");
+                    x.value = "";
+                    return false;
+            }
+
+           
         }
 	</script>
 @endpush

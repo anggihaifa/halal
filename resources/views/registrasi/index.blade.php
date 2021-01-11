@@ -31,6 +31,7 @@
         <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body table-responsive" style="min-height: 230px">
+            <h5 style="color: #ff6961;">NOTE: Silahkan Aktifkan Registrasi Anda Untuk Melanjutkan Ke Tahapan Berikutnya</h5>
             <table id="table" class="table table-striped table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%">
                 <thead>
                 <tr>
@@ -42,7 +43,7 @@
                     <th class="text-nowrap valign-middle text-center">Aktif/Non Aktif</th>
                     <th class="text-nowrap valign-middle text-center">Progress</th>
                     <th class="text-nowrap valign-middle text-center">Aksi</th>
-                    <th class="text-nowrap valign-middle text-center">hide1</th>
+                  
                 </tr>
                 </thead>
             </table>
@@ -122,7 +123,7 @@
                                             <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
 
                                             
-                                            <div class="dropdown-divider"></div>`+akad+pembayaran+pembayaran2+pelunasan+reportA+
+                                            <div class="dropdown-divider"></div>`+akad+pembayaran+pembayaran2+reportA+pelunasan+
                                         `</div>
                                     </div>`
                                       
@@ -131,18 +132,9 @@
                         
                     }
                 },
-                {"data":"total_biaya"},
                 
             ],
-            "columnDefs": [
-                {
-                    "targets": [ 8 ],
-                    "visible": false,
-                    "searchable": false,
-
-
-                }
-            ],   
+           
 
             processing:true,
             serverSide:true,

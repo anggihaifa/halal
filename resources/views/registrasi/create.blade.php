@@ -96,12 +96,12 @@
                                 </div>
                             </div>                            
 
-                            <label id="lsjph0" class="col-lg-4 col-form-label">No. Sertifikat SJPH</label>
+                            <label id="lsjph0" class="col-lg-4 col-form-label">No. Sertifikat SJH/ SJPH</label>
                             <div id="dsjph0" class="col-lg-8">
                                 <input type="text" name="no_sertifikat" class="form-control" placeholder="No. Sertifikat SJPH"  />
                             </div>
 
-                            <label id="lsjph" class="col-lg-4 col-form-label">SJPH Berlaku s/d</label>
+                            <label id="lsjph" class="col-lg-4 col-form-label">SJH/ SJPH Berlaku s/d</label>
                             <div id="dsjph" class="col-lg-8">
                                 <div class="input-group date">
                                     <input id="tgl_sjph" name="tgl_sjph" type="text" class="form-control" placeholder="SJPH Berlaku s/d"  data-date-start-date="Date.default" />
@@ -237,7 +237,7 @@
 
                             <label class="col-lg-4 col-form-label">NPWP/KTP</label>
                             <div class="col-lg-8">
-                                <div style="margin-bottom:10px;">
+                                <!-- <div style="margin-bottom:10px;">
                                     <div class="radio radio-css radio-inline">
                                         <input type="radio" name="tipe" id="tipe1" value="ktp" checked />
                                         <label for="tipe1">KTP</label>
@@ -246,9 +246,14 @@
                                         <input type="radio" name="tipe" id="tipe2" value="npwp" />
                                         <label for="tipe2">NPWP</label>
                                     </div>
-                                </div>
+                                </div> -->
+                                
                                 <input id="no_tipe" name="no_tipe" type="text" class="form-control ktp" placeholder="KTP"/>
+                                
+                                <br>
+                                
                                 <input id="no_tipe2" name="no_tipe2" type="text" class="form-control npwp" placeholder="NPWP"/>
+                                
                             </div>
 
                             @component('components.inputtext',['name'=> 'jenis_izin','label' => 'Jenis Izin Usaha','required'=>true,'placeholder'=>'MD/ML/PIRT/TR/TI/DKL/SD/SI/CD/CL/CA//ITUP/ISUP/NKV/HC/CFS'])@endcomponent
@@ -499,7 +504,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><div><input class="form-control" id="dph2" name="ktp_dph[]" type="text" label="No KTP" placeholder="No KTP"></div></div>
+                                            <label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><div><input class="form-control ktp" id="dph2" name="ktp_dph[]" type="text" label="No KTP" placeholder="No KTP"></div></div>
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
@@ -514,7 +519,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">No Kontrak</label><div class="col-lg-8"><div><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" label="No Kontrak" placeholder="No Kontrak"></div></div>
+                                            <label class="col-4 col-form-label">No Kontak</label><div class="col-lg-8"><div><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" label="No Kontrak" placeholder="No Kontak"></div></div>
                                         </div>
                                     </div>
                                 
@@ -555,7 +560,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><div><input class="form-control" id="dph2" name="ktp_sdm[]" type="text" label="No KTP" placeholder="No KTP"></div></div>
+                                            <label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><div><input class="form-control ktp" id="dph2" name="ktp_sdm[]" type="text" label="No KTP" placeholder="No KTP"></div></div>
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
@@ -570,7 +575,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">No Kontrak</label><div class="col-lg-8"><div><input class="form-control" id="dph5" name="no_kontrak_sdm[]" type="text" label="No Kontrak" placeholder="No Kontrak"></div></div>
+                                            <label class="col-4 col-form-label">No Kontak</label><div class="col-lg-8"><div><input class="form-control" id="dph5" name="no_kontrak_sdm[]" type="text" label="No Kontrak" placeholder="No Kontak"></div></div>
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
@@ -1423,7 +1428,7 @@
         function addpenyelia(){
             jumlah+=1;
             // var penyelia = '<div> <label class="col-4 col-form-label">Nama</label><div class="col-lg-4"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-4"><div><input class="form-control" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-4"><div><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-4"><div><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div></div><label class="col-4 col-form-label">No Kontrak</label><div class="col-lg-4"><div><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontrak"></div></div><div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div><hr></div>';
-            var penyelia = '<div> <div class="wrapper row"><div class="wrapper row"><label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><input class="form-control" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-8"><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-8"><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div><label class="col-4 col-form-label">No Kontrak</label><div class="col-lg-8"><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontrak"></div></div> <div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div></div>';            
+            var penyelia = '<div> <div class="wrapper row"><div class="wrapper row"><label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><input class="form-control ktp" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-8"><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-8"><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div><label class="col-4 col-form-label">No Kontak</label><div class="col-lg-8"><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontak"></div></div> <div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div></div>';            
             $('.penyelia').append(penyelia);            
         }
 
@@ -1627,7 +1632,7 @@
 
         function addsdm(){
             jmlsdm+=1;            
-            var sdm = '<div><div id="wrappersdm" class="wrapper row"> <div class="wrapper row"> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-lg-4 col-form-label">Jenis Data SDM</label> <div class="col-lg-8"> <select name="jenis_sdm[]" class="form-control"><option value="penyelia halal" selected>Penyelia Halal</option><option value="juru sembelih halal">Juru Sembelih Halal</option><option value="dokter hewan">Dokter Hewan</option><option value="lainnya">Lainnya</option></select> </div></div> </div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">Nama</label> <div class="col-lg-8"><input class="form-control" id="dph1" name="nama_sdm[]" type="text" label="Nama" placeholder="Nama"> </div></div></div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">No KTP</label> <div class="col-lg-8"><input class="form-control" id="dph2" name="ktp_sdm[]" type="text" label="No KTP" placeholder="No KTP"></div></div> </div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">No Sertifikat</label> <div class="col-lg-8"><input class="form-control" id="dph3" name="sertif_sdm[]" type="text" label="No Sertifikasi" placeholder="No Sertifikasi" ></div></div> </div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">No dan Tanggal SK</label> <div class="col-lg-8"><input class="form-control" id="dph4" name="no_tglsk_sdm[]" type="text" label="No dan Tanggal SK" placeholder="No dan Tanggal SK"></div></div> </div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">No Kontrak</label> <div class="col-lg-8"><input class="form-control" id="dph5" name="no_kontrak_sdm[]" type="text" label="No Kontrak" placeholder="No Kontrak"></div></div> </div></div> <div class="col-lg-12"><a id="hapus_penyelia_sdm" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div><hr></div>  </div>';
+            var sdm = '<div><div id="wrappersdm" class="wrapper row"> <div class="wrapper row"> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-lg-4 col-form-label">Jenis Data SDM</label> <div class="col-lg-8"> <select name="jenis_sdm[]" class="form-control"><option value="penyelia halal" selected>Penyelia Halal</option><option value="juru sembelih halal">Juru Sembelih Halal</option><option value="dokter hewan">Dokter Hewan</option><option value="lainnya">Lainnya</option></select> </div></div> </div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">Nama</label> <div class="col-lg-8"><input class="form-control" id="dph1" name="nama_sdm[]" type="text" label="Nama" placeholder="Nama"> </div></div></div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">No KTP</label> <div class="col-lg-8"><input class="form-control ktp" id="dph2" name="ktp_sdm[]" type="text" label="No KTP" placeholder="No KTP"></div></div> </div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">No Sertifikat</label> <div class="col-lg-8"><input class="form-control" id="dph3" name="sertif_sdm[]" type="text" label="No Sertifikasi" placeholder="No Sertifikasi" ></div></div> </div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">No dan Tanggal SK</label> <div class="col-lg-8"><input class="form-control" id="dph4" name="no_tglsk_sdm[]" type="text" label="No dan Tanggal SK" placeholder="No dan Tanggal SK"></div></div> </div> <div class="wrapper col-lg-12"> <div class="row"> <label class="col-4 col-form-label">No Kontak</label> <div class="col-lg-8"><input class="form-control" id="dph5" name="no_kontrak_sdm[]" type="text" label="No Kontrak" placeholder="No Kontak"></div></div> </div></div> <div class="col-lg-12"><a id="hapus_penyelia_sdm" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div><hr></div>  </div>';
             
             $('.detail_sdm').append(sdm);            
         }
@@ -1727,8 +1732,7 @@
         $('#no_tipe').attr('placeholder','No. KTP');
         $('#no_tipe2').attr('placeholder','No. NPWP');      
 
-        document.getElementById("no_tipe").style.display="block";
-        document.getElementById("no_tipe2").style.display="none";
+        document.getElementById("no_tipe").style.display="block";        
 
         for (var i = 0; i < tipe.length; i++) {
             tipe[i].addEventListener('change', function() {

@@ -38,6 +38,6 @@ class CancelOrder extends Mailable
     public function build()
     {
 
-        return $this->view('mail.cancelorder');
+        return $this->view('mail.reminder');
     }
 }

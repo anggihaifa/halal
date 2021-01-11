@@ -39,7 +39,7 @@
 							<input name="username" type="text" class="form-control" placeholder="username" required />
 						</div>
                     </div>
-                    <label class="control-label">Name<span class="text-danger"> *</span></label>
+                    <label class="control-label">Nama Lengkap<span class="text-danger"> *</span></label>
 					<div class="row m-b-15">
 						<div class="col-md-12">
 							<input name="name" type="text" class="form-control" placeholder="username" required />
@@ -79,7 +79,7 @@
 							<input name="negara" type="text" class="form-control" placeholder="negara" required />
 						</div>
                     </div>
-                    <label class="control-label">Kota<span class="text-danger"> *</span></label>
+                    <label class="control-label">Kota/ Kabupaten<span class="text-danger"> *</span></label>
 					<div class="row m-b-15">
 						<div class="col-md-12">
 							<input name="kota" type="text" class="form-control" placeholder="kota" required />

@@ -129,17 +129,7 @@ class ProgresStatus extends Mailable
            
             $this->subject('Registrasi Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Proses Sidang Fatwa'); 
 
-           $this->attach(public_path('storage/buktireport/'.$this->registrasi['id_user'].'/'.$this->registrasi['file_report']),[
-                    'as' => $this->pembayaran['file_report'],
-                    'mime' => 'application/pdf',
-
-                ]);
-
-            $this->attach(public_path('storage/beritaacara/'.$this->registrasi['id_user'].'/'.$this->registrasi['file_berita_acara']),[
-                'as' => $this->pembayaran['file_berita_acara'],
-                'mime' => 'application/pdf',
-
-            ]);
+           
             
             //$this->email('')//email MUI
 

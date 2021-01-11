@@ -213,7 +213,7 @@
 
                             var status23 = (full.status == 23 ) ? dButton('Nominal Pelunasan Lebih'):`<a href="{{url('lebih')}}/`+full.id+`/3" class="dropdown-item">Nominal Pelunasan Lebih</a>`;
 
-                            var status24 = (full.status == 24) ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/24" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">pelunasan Gagal</a>`;
+                            var status24 = (full.status == 24) ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/24" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data??')">Pelunasan Gagal</a>`;
                            
                             var konfirm = (full.status ==  25) ? dButton('Konfirmasi dan Upload Invoice'):`<a href="{{url('upload_invoice')}}/`+full.id+`" class="dropdown-item" >Konfirmasi dan Upload Invoice</a>`;
 

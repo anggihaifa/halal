@@ -137,7 +137,7 @@
 							</div>
 							<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 							<div class="col-lg-8">
-								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/msword" onchange="getValue('file')"required />
+								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')"required />
 							</div>
 							
 							@elseif($data->status_akad==2 || $data->status_akad==3 )
@@ -146,7 +146,7 @@
 							<label class="col-lg-4 col-form-label">Kontrak Akad</label>
 							<div id="sh" class="col-lg-8">
 								<div class="form-control" readonly>
-									<a href="{{url('') .Storage::url('public/bukti_akad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
+									<a href="{{url('') .Storage::url('public/buktiakad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
 								</div>
 							</div>
 							@endif
@@ -159,7 +159,7 @@
 							
 							@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
 							@if($data->status_akad == 1 || $data->status_akad == 2)
-								<button  type = "sumbit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
+								<button  type = "sumbit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah berkas kontrak akad ?????')">Konfirmasi</button>
 								@if($data->status_akad == 1)
 									<button   class="btn btn-sm btn-warning m-r-5" disabled="">Menunggu File Upload User</button>
 								@else

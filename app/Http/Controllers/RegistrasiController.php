@@ -1331,10 +1331,13 @@ class RegistrasiController extends Controller
         $data = $request->except('_token','_method');
 
         $model = new DokumenHas;
+        $model2 = new Registrasi;
 
         $status = "HAS";
         $id_user = Auth::user()->id;
         $id_registrasi  = Auth::user()->registrasi_id;
+
+        $r = $model2->find($id_registrasi);
 
         $getRegistrasi = DB::table('registrasi')->where('id','=',Auth::user()->registrasi_id)->get();
 
@@ -1344,6 +1347,7 @@ class RegistrasiController extends Controller
 
 
         if($data["status"] == "0"){
+            //dd("masuk");
                 try{
                     DB::beginTransaction();
 
@@ -1366,6 +1370,9 @@ class RegistrasiController extends Controller
                     }else{
                         $model->status_has = 0;
                     }
+
+                    $r->status_berkas = 1;
+                    $r->save();
 
                     $model->save();
                     DB::commit();
@@ -1395,6 +1402,7 @@ class RegistrasiController extends Controller
                 }
 
         }elseif($data["status"] == "1"){
+
             // echo "<pre>";
             // print_r($data);
             // echo "</pre>";
@@ -1443,6 +1451,9 @@ class RegistrasiController extends Controller
                     }else{
                         $e->status_has = 1;
                     }
+                    $r->status_berkas = 1;
+                    //dd($r);
+                    $r->save();
                     $e->save();
 
                     DB::commit();
@@ -1499,22 +1510,22 @@ class RegistrasiController extends Controller
             $e->check_by = Auth::user()->id;
             if($data['status_has_1']==1 && $data['status_has_2']==1 && $data['status_has_3']==1 && $data['status_has_4']==1 && $data['status_has_5']==1 && $data['status_has_6']==1 && $data['status_has_7']==1 && $data['status_has_8']==1 && $data['status_has_9']==1 && $data['status_has_10']==1 && $data['status_has_11']==1 && $data['status_has_12']==1){
 
-                $e->status_berkas = 1;
-                $f->status_berkas = 1;
+                $e->status_berkas = 3;
+                $f->status_berkas = 3;
                 $f->status = 5;
                
                 $e->save();
                 $f->save();
                 SendEmailP::dispatch($u,$f,$p,$f->status);
-
+                DB::commit();
 
                 $this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
-                DB::commit();
+               
                 
 
             }else{
-                 $e->status_berkas = 0;
-                 $f->status_berkas = 0;
+                $e->status_berkas = 2;
+                $f->status_berkas = 2;
                  $f->status = 4;
 
                 $e->save();
@@ -2400,6 +2411,7 @@ class RegistrasiController extends Controller
             $e->save();
             DB::commit();
             //  SendEmailP::dispatch($e,$u,$p, $status);
+            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 18);
             Session::flash('success', "Konfirmasi File Report dan Berita Acara Audit Berhasil");
             
         }catch (\Exception $e){
@@ -2424,12 +2436,15 @@ class RegistrasiController extends Controller
             $u = $model2->find($e->id_user);            
             
             $e->status_berita_acara = 2;
+            $e->status_report = 2;
 
 
-            $e->status = 17;
+            //$e->status = 17;
             
             $e->save();
+
             DB::commit();
+            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 18);
             //  SendEmailP::dispatch($e,$u,$p, $status);
             Session::flash('success', "Konfirmasi File Berita Acara Berhasil");
             
@@ -2479,6 +2494,7 @@ class RegistrasiController extends Controller
             // dd($data);
             if($e->status_berita_acara==1){
                 SendEmailP::dispatch($e,$u,$p, $e->status);
+
             }
             // Session::flash('success', "Upload Dokumen Report Berhasil");            
             
@@ -2524,7 +2540,7 @@ class RegistrasiController extends Controller
             if($e->status_report==1){  
 
                 SendEmailP::dispatch($e,$u,$p, $e->status);
-                 $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 18);
+                
             }            
             // dd($data);
             Session::flash('success', "Upload Dokumen Berita Acara Berhasil");
@@ -2929,9 +2945,9 @@ class RegistrasiController extends Controller
             
             if($p->nominal_total <10000000 ){
                 $p->status_tahap1 = '2';
-                $p->status_tahap2 = '1';
+                $p->status_tahap2 = '2';
                 $p->bb_tahap2 = $p->bb_tahap1;
-                $p->status_tahap3 = '1';
+                $p->status_tahap3 = '2';
                 $p->bb_tahap3 = $p->bb_tahap1;
 
                 $p->reminder12_tahap2 = 1;
@@ -2943,7 +2959,7 @@ class RegistrasiController extends Controller
             }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
 
                 $p->status_tahap1 = '2';     
-                $p->status_tahap2 = '1';
+                $p->status_tahap2 = '2';
                 $p->bb_tahap2 = $p->bb_tahap1;
 
                 $p->reminder12_tahap2 = 1;
@@ -3065,7 +3081,7 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=',16);
                 })
-                ->orWhere(function($query) use ($kodewilayah){
+                /*->orWhere(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=',17);
@@ -3084,7 +3100,7 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=',20);
-                });
+                })*/;
 
 
         //filter condition

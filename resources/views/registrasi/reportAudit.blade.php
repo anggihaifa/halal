@@ -14,7 +14,7 @@
 	</ol>
 	<!-- end breadcrumb -->
 	<!-- begin page-header -->
-	<h1 class="page-header">Report Audit<small></small></h1>
+	<h1 class="page-header">Pelaporan Audit Tahap 2<small></small></h1>
 	<!-- end page-header -->
 	<!-- begin row -->
 	<div class="row">
@@ -24,7 +24,7 @@
             <div class="panel panel-inverse" data-sortable-id="form-plugins-7">
 				<!-- begin panel-heading -->
 				<div class="panel-heading">
-					<h4 class="panel-title">Report Audit</h4>
+					<h4 class="panel-title">Pelaporan Audit Tahap 2</h4>
 					<div class="panel-heading-btn">
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					</div>
@@ -42,7 +42,7 @@
 								<input type="text" class="form-control" name='no_registrasi' value="{{$data->no_registrasi}}" readonly/>
 							</div>
 														
-							<label class="col-lg-4 col-form-label">File Report Audit</label>
+							<label class="col-lg-4 col-form-label">File Pelaporan Audit Tahap 2</label>
 							<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
 										<a href="{{url('') .Storage::url('public/buktireport/'.Auth::user()->id.'/'.$data->file_report) }}" download>{{$data->file_report}}</a>
@@ -60,9 +60,9 @@
 								<div class="col-md-12 offset-md-5">
                                         @component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
 										@if($data->status_report == 0 and $data->status_berita_acara == 0)											
-											<button  class="btn btn-sm btn-warning m-r-5" disabled>Menunggu File Report Audit Dari Admin</button>
+											<button  class="btn btn-sm btn-warning m-r-5" disabled>Menunggu File Pelaporan Audit Tahap 2 Dari Admin</button>
 										@elseif($data->status_report == 1 and $data->status_berita_acara == 1)
-											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
+											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengkonfirmasi berita acara dan laporan audit?????')">Konfirmasi</button>
 										@elseif($data->status_report == 2 and $data->status_berita_acara == 2)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Report Audit Sudah Dikonfirmasi</button>										
 										@endif								

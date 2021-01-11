@@ -55,7 +55,7 @@
 										@if($data->status_berita_acara == 0)											
 											<button  class="btn btn-sm btn-warning m-r-5" disabled>Menunggu File Report Audit Dari Admin</button>
 										@elseif($data->status_berita_acara == 1)
-											<button type="submit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
+											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah berita acara ?????')">Konfirmasi</button>
 										@elseif($data->status_berita_acara == 2)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Report Audit Sudah Dikonfirmasi</button>										
 										@endif								

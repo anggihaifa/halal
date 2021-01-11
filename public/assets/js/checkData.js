@@ -11,6 +11,14 @@ function checkStatusPembayaran(data){
                 :'<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Bayar</a>';
             
 }
+function checkStatusBerkas(data){
+    return  (data==0)? '<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Upload</a>'
+        :(data==1)? '<a href="#" class="btn btn-yellow btn-xs  valign-middle">Menunggu Verifikasi Admin</a>'
+            :(data==2)? '<a href="#" class="btn btn-warning btn-xs valign-middle">Perbaikan</a>'
+                :(data==3)? '<a href="#" class="btn btn-success btn-xs valign-middle">Berkas Terkonfirmasi</a>'
+                    :'<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Upload</a>';
+            
+}
 function checkStatusAkad(data){
     return  (data==0)? '<a href="#" class="btn btn-grey btn-xs valign-middle">Belum Akad</a>'
         :(data==1)? '<a href="#" class="btn btn-warning btn-xs valign-middle">Menunggu Pelanggan Megupload Ulang Kontrak</a>'
@@ -48,13 +56,13 @@ function checkProgress(data){
                                                                             :(data==17)? 'Konfirmasi Berita Acara'
                                                                                 :(data==18)? 'Tinjauan Hasil Audit'
                                                                                     :(data==19)? 'Rekomendasi Hasil Pemeriksaan'
-                                                                                         :(data==20)? 'Hasil Dikirim ke MUI'
+                                                                                         :(data==20)? 'Proses Sidang Fatwa'
                                                                                              :(data==21)? 'Pelunasan'
                                                                                                 :(data==22)? 'Nominal Pelunasan Kurang'
                                                                                                     :(data==23)? 'Nominal Pelunasan Lebih'
                                                                                                         :(data==24)? 'Pelunasan Gagal'
                                                                                                             :(data==25)? 'Pelunasan Terkonfirmasi'
-                                                                                                                :(data==26)? 'Proses Sertifikasi'
+                                                                                                                :(data==26)? 'Proses Penerbitan Sertifikat'
                                                                                                                     :(data==27)? 'Keputusan Halal/ Haram'
                                                                                                                         :(data==28)? 'Sertifikat Halal'
                                                                                                                             :(data.trim()=='a')? 'Cancel Order Unggah Data'

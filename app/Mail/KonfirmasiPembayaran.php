@@ -7,31 +7,29 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class KonfirmasiPembayaran extends Mailable
+class ProgresStatus extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+   
     public $registrasi;
+    public $user;
     public $pembayaran;
     public $status;
-   
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($registrasi,$user, $pembayaran, $status)
-    {
-        //
-
+    public function __construct($registrasi, $user, $pembayaran, $status)
+    {        
        
         $this->registrasi = $registrasi;
         $this->user = $user;
         $this->pembayaran = $pembayaran;
         $this->status = $status;
-       // dd( $this);
+         //dd( $this);
     }
 
     /**
@@ -41,6 +39,7 @@ class KonfirmasiPembayaran extends Mailable
      */
     public function build()
     {
+        //dd( $this);
         if($this->status == 2){
             $this->subject('Melengkapi Berkas - No registrasi '.$this->registrasi['no_registrasi']);
         }elseif($this->status == 4){
@@ -60,7 +59,9 @@ class KonfirmasiPembayaran extends Mailable
             $this->subject('Kontrak Akad Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Ditolak');
 
         }elseif($this->status == 8){
-           // dd("masuk");
+
+            //dd("masuk");
+
             $this->subject('Kontrak Akad Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Disetujui');
 
 
@@ -73,6 +74,7 @@ class KonfirmasiPembayaran extends Mailable
             $this->subject('Pembayaran Tahap 1 Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Ditolak Nominal Kurang');
 
         }elseif($this->status == 11){
+            //dd("masuk");
 
             $this->subject('Pembayaran Tahap 1 Dengan No registrasi'.$this->registrasi['no_registrasi'].' -Disetujui Nominal Lebih');
 
@@ -96,10 +98,11 @@ class KonfirmasiPembayaran extends Mailable
 
         }elseif($this->status == 15){
 
-             $this->subject('Registrasi Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Proses Audit Tahap 2');      
+             $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Proses Audit Tahap 2');      
 
         }elseif($this->status == 16){
             //
+            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Pelaporan Audit dan Berita Acara');      
             if($this->registrasi['status_report']== 1 && $this->registrasi['status_berita_acara']== 1){
 
                  $this->attach(public_path('storage/buktireport/'.$this->registrasi['id_user'].'/'.$this->registrasi['file_report']),[
@@ -126,17 +129,7 @@ class KonfirmasiPembayaran extends Mailable
            
             $this->subject('Registrasi Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Proses Sidang Fatwa'); 
 
-           $this->attach(public_path('storage/buktireport/'.$this->registrasi['id_user'].'/'.$this->registrasi['file_report']),[
-                    'as' => $this->pembayaran['file_report'],
-                    'mime' => 'application/pdf',
-
-                ]);
-
-            $this->attach(public_path('storage/beritaacara/'.$this->registrasi['id_user'].'/'.$this->registrasi['file_berita_acara']),[
-                'as' => $this->pembayaran['file_berita_acara'],
-                'mime' => 'application/pdf',
-
-            ]);
+           
             
             //$this->email('')//email MUI
 
@@ -235,7 +228,10 @@ class KonfirmasiPembayaran extends Mailable
 
         }
 
+        return $this->view('mail.progresstatus');
 
-        return $this->view('mail.konfirmasipembayaran');
+        //alert("disini");
     }
+
+    
 }
