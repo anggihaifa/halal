@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Mail;
 class SendEmailC implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public $timeout = 1200;
     public $user;
     public $registrasi;
     public $pembayaran;

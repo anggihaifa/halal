@@ -148,7 +148,6 @@
                 <thead>
                 <tr>
                     <th class="text-nowrap valign-middle text-center">No</th>
-                    <th class="text-nowrap valign-middle text-center">Id User</th>
                     <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                     <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                     <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
@@ -203,7 +202,6 @@
                         return meta.row + 1;
                     }
                 },
-                {"data":"id_user"},
                 {"data":"no_registrasi"},
                 {"data":"nama_perusahaan"},
                 {"data":"kelompok"},
@@ -266,13 +264,12 @@
                     }
                 }
             ],
-            "columnDefs": [
-                {
-                    "targets": [ 1 ],
-                    "visible": false,
-                    "searchable": false
-                }
-            ],   
+           'columnDefs': [
+            {
+                  "targets": [1,2,3,4,5,6,7,8],
+                  "className": "text-center",
+                 
+            }],
             processing:true,
             serverSide:true,
             order:[[0,'asc']],

@@ -91,14 +91,28 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        $xdata = DB::table('registrasi')
+        if($kodewilayah == '00'){
+            $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')
-                 
-                 ->where('registrasi.kode_wilayah','=',$kodewilayah)
+                
                  ->where('registrasi.status_cancel','=',0)
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
+        }else{
+
+            $xdata = DB::table('registrasi')
+                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('users','registrasi.id_user','=','users.id')
+                 
+                ->where('registrasi.kode_wilayah','=',$kodewilayah)
+                ->where('registrasi.status_cancel','=',0)
+                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
+
+
+        }
+       
 
 
         //filter condition
@@ -614,7 +628,7 @@ class RegistrasiController extends Controller
             $model->kepemilikan = $data['kepemilikan'];
             $model->nama_kepemilikan = $data['nama_kepemilikan'];
             $model->skala_usaha = $data['skala_usaha'];
-            $model->tipe = $data['tipe'];
+           // $model->tipe = $data['tipe'];
             $model->no_tipe = $data['no_tipe'];
             $model->no_tipe2 = $data['no_tipe2'];
             $model->jenis_izin = $data['jenis_izin'];
@@ -2196,14 +2210,14 @@ class RegistrasiController extends Controller
         //dd($id);
         $data = Registrasi::find($id);
         
-        return view('registrasi.uploadreportadmin',compact('data'));
+        return view('registrasi.uploadReportAdmin',compact('data'));
     }
 
     public function uploadBeritaAcaraAdmin($id){
         //dd($id);
         $data = Registrasi::find($id);
         
-        return view('registrasi.uploadberitaacaraadmin',compact('data'));
+        return view('registrasi.uploadBeritaAcaraAdmin',compact('data'));
     }
 
     public function kirimKeMUI($id){
@@ -2665,37 +2679,73 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
-                 ->join('users','registrasi.id_user','=','users.id')
-                 
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',5);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',6);
-                }) 
-                 ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',7);
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','c');
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','f');
-                });
+
+        if($kodewilayah == '00'){
+             $xdata = DB::table('registrasi')
+                     ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                     ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                     ->join('users','registrasi.id_user','=','users.id')
+                     
+                     ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                    ->where(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                       
+                        $query->where('registrasi.status','=',5);
+                    })
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                       
+                        $query->where('registrasi.status','=',6);
+                    }) 
+                     ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                       
+                        $query->where('registrasi.status','=',7);
+                    }) 
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        
+                        $query->where('registrasi.status','=','c');
+                    })
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        
+                        $query->where('registrasi.status','=','f');
+                    });
+        }else{
+
+            $xdata = DB::table('registrasi')
+                     ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                     ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                     ->join('users','registrasi.id_user','=','users.id')
+                     
+                     ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                    ->where(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                        $query->where('registrasi.status','=',5);
+                    })
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                        $query->where('registrasi.status','=',6);
+                    }) 
+                     ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                        $query->where('registrasi.status','=',7);
+                    }) 
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                        $query->where('registrasi.status','=','c');
+                    })
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                        $query->where('registrasi.status','=','f');
+                    });
+        }
                           
 
         //filter condition
@@ -2791,7 +2841,21 @@ class RegistrasiController extends Controller
                     ->where('status','tunai')
                     ->get();
         $dataTunai = json_decode($getTunai,true);
-        return view('registrasi.pembayaran',compact('data','dataP','dataTransfer','dataTunai'));
+        if($dataP){
+            return view('registrasi.pembayaran',compact('data','dataP','dataTransfer','dataTunai'));
+        
+        }else{
+             Session::flash('error', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
+            $redirect = redirect()->route('registrasiHalal.index');
+            return $redirect;
+        }
+         
+            
+
+           
+       
+           
+        
     }
 
     //report
@@ -2799,14 +2863,37 @@ class RegistrasiController extends Controller
             //dd($id);
             $data = Registrasi::find($id);
             //get Data from FAQ Transfer            
-            return view('registrasi.reportAudit',compact('data'));
+           
+
+            if($data['status_report']==0  || $data['status_berita_acara']==0 ){
+                Session::flash('error', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
+                $redirect = redirect()->route('registrasiHalal.index');
+                return $redirect;
+            
+            }else{
+                
+                 return view('registrasi.reportAudit',compact('data'));
+            }
+
+
     }
 
     public function reportBeritaAcara($id){        
         //dd($id);
         $data = Registrasi::find($id);
         //get Data from FAQ Transfer            
-        return view('registrasi.reportBeritaAcara',compact('data'));
+      
+         if($data['status_report']==0  || $data['status_berita_acara']==0 ){
+            Session::flash('warning', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
+            $redirect = redirect()->route('registrasiHalal.index');
+            return $redirect;
+            
+        }else{
+            
+            return view('registrasi.reportBeritaAcara',compact('data'));
+
+        }
+
     }    
 
     public function konfirmasiPembayaranUser(Request $request, $id){
@@ -2993,7 +3080,48 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        $xdata = DB::table('registrasi')
+        if($kodewilayah == '00'){
+             $xdata = DB::table('registrasi')
+                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
+                 ->where(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    
+                    $query->where('registrasi.status','=',8);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=',9);
+                }) 
+
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    
+                    $query->where('registrasi.status','=',10);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=',11);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                  
+                    $query->where('registrasi.status','=',12);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=','d');
+                });          
+
+        }else{
+            $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
@@ -3031,6 +3159,8 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=','d');
                 });          
+        }
+        
                            
 
         //filter condition
@@ -3065,8 +3195,24 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;        
         //start                                
-
-        $xdata = DB::table('registrasi')
+        if($kodewilayah == '00'){
+            $xdata = DB::table('registrasi')
+                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('users','registrasi.id_user','=','users.id')                
+                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                ->where(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=',15);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=',16);
+                });
+        }else{
+             $xdata = DB::table('registrasi')
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')                
@@ -3080,27 +3226,9 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=',16);
-                })
-                /*->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',17);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',18);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',19);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',20);
-                })*/;
+                });
+        }
+       
 
 
         //filter condition
@@ -3216,7 +3344,16 @@ class RegistrasiController extends Controller
                     ->where('status','tunai')
                     ->get();
         $dataTunai = json_decode($getTunai,true);
-        return view('registrasi.pembayaranTahap2',compact('data','dataP','dataTransfer','dataTunai'));
+       
+
+        if($dataP){
+           return view('registrasi.pembayaranTahap2',compact('data','dataP','dataTransfer','dataTunai'));
+        
+        }else{
+             Session::flash('error', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
+            $redirect = redirect()->route('registrasiHalal.index');
+            return $redirect;
+        }
     }
 
     public function konfirmasiPembayaranUserTahap2(Request $request, $id){
@@ -3370,7 +3507,46 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        $xdata = DB::table('registrasi')
+        if($kodewilayah == '00'){
+            $xdata = DB::table('registrasi')
+                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
+                ->where(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    
+                    $query->where('registrasi.status','=',14);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=','g');
+                }) 
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    
+                    $query->where('registrasi.status','=','h');
+                }) 
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    
+                    $query->where('registrasi.status','=','i');
+                }) 
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=','j');
+                }) 
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                    
+                    $query->where('registrasi.status','=','k');
+                }) ;
+        }else{
+            $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
@@ -3407,6 +3583,8 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=','k');
                 }) ;
+        }
+        
                            
 
         //filter condition
@@ -3517,7 +3695,16 @@ class RegistrasiController extends Controller
                     ->where('status','tunai')
                     ->get();
         $dataTunai = json_decode($getTunai,true);
-        return view('registrasi.pelunasan',compact('data','dataP','dataTransfer','dataTunai'));
+       
+
+        if($dataP){
+           return view('registrasi.pelunasan',compact('data','dataP','dataTransfer','dataTunai'));
+        
+        }else{
+             Session::flash('error', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
+            $redirect = redirect()->route('registrasiHalal.index');
+            return $redirect;
+        }
     }
 
     public function konfirmasiPelunasanUser(Request $request, $id){
@@ -3647,7 +3834,7 @@ class RegistrasiController extends Controller
                 $file = $request->file("file");
                 $file = $data["file"];
                 $filename = "INV-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/INV/".$e->id_user."/" , $filename);
+                $file->storeAs("public/INV/" , $filename);
                 $e->inv_pembayaran = $filename;
                 $e->save();
             }
@@ -3671,7 +3858,46 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        $xdata = DB::table('registrasi')
+        if($kodewilayah == '00'){
+            $xdata = DB::table('registrasi')
+                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
+                 ->where(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=',20);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=',21);
+                }) 
+                ->orWhere(function($query) use ($kodewilayah){
+                   $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=',22);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=',23);
+                }) 
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                 
+                    $query->where('registrasi.status','=',24);
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.status_cancel','=',0);
+                   
+                    $query->where('registrasi.status','=','e');
+                });
+        }else{
+            $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
@@ -3708,6 +3934,8 @@ class RegistrasiController extends Controller
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                     $query->where('registrasi.status','=','e');
                 });
+        }
+        
                
 
                            
@@ -3902,6 +4130,8 @@ class RegistrasiController extends Controller
         $model2 = new User();
         $model3 = new Pembayaran();
 
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date("Y-m-d H:i:s");
 
         try{
             DB::beginTransaction();
@@ -3923,6 +4153,51 @@ class RegistrasiController extends Controller
                 $p->lebih_tahap1 = (int)$lebihTotal;                
                 $p->updated_by = $updater;
 
+               
+
+                        //create PDF File
+                       
+                        $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+                        $fileName = $e->no_registrasi.'_BT_TAHAP1.pdf';
+                        $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+                            
+                        // save
+                         Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+                            
+                        
+                        if($p->nominal_total <10000000 ){
+                            $p->status_tahap1 = '2';
+                            $p->status_tahap2 = '2';
+                            $p->bb_tahap2 = $p->bb_tahap1;
+                            $p->status_tahap3 = '2';
+                            $p->bb_tahap3 = $p->bb_tahap1;
+
+                            $p->reminder12_tahap2 = 1;
+                            $p->reminder12_tahap3 = 1;
+
+                            $p->reminder6_tahap2 = 1;
+                            $p->reminder6_tahap3 = 1;
+
+                        }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
+
+                            $p->status_tahap1 = '2';     
+                            $p->status_tahap2 = '2';
+                            $p->bb_tahap2 = $p->bb_tahap1;
+
+                            $p->reminder12_tahap2 = 1;
+                            $p->reminder6_tahap2 = 1;
+                        
+                        }else{
+                             $p->status_tahap1 = '2';
+                        }
+
+                        $p->bt_tahap1 = $fileName;
+                        $p->tanggal_tahap1 = $tanggal;
+                        //dd($p->tanggal_tahap1 );
+                        $p->updated_at = $tanggal;
+                        $p->save();
+                        
+                
 
 
             }elseif($data['status'] =='i'){
@@ -3934,6 +4209,20 @@ class RegistrasiController extends Controller
                 // $p->lebih_tahap2 = $data['lebih_tahap2'];
                 $p->updated_by = $updater;
 
+                $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+                $fileName = $e->no_registrasi.'_BT_TAHAP2.pdf';
+                $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+                    
+                // save
+                 Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+                    
+
+                $p->bt_tahap2 = $fileName;
+                $p->tanggal_tahap2 = $tanggal;
+                //dd($p->tanggal_tahap1 );
+                $p->updated_at = $tanggal;
+                $p->save();
+
                 
             }elseif($data['status'] =='23'){
                 $p->status_tahap3 = '2';
@@ -3943,6 +4232,22 @@ class RegistrasiController extends Controller
                 $p->lebih_tahap3 = (int)$lebihTotal3;
                 // $p->lebih_tahap3 = $data['lebih_tahap3'];
                 $p->updated_by = $updater;
+
+                 $p->updated_by = $updater;
+
+                $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+                $fileName = $e->no_registrasi.'_BT_TAHAP3.pdf';
+                $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+                    
+                // save
+                 Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+                    
+
+                $p->bt_tahap3 = $fileName;
+                $p->tanggal_tahap3 = $tanggal;
+                //dd($p->tanggal_tahap1 );
+                $p->updated_at = $tanggal;
+                $p->save();
                 
                 
             }

@@ -99,6 +99,10 @@ return [
                 ],
             ],
         ],
+         [    'icon' => 'ion-ios-person',
+            'title' => 'Guideline',
+            'url' => 'guideline.index'
+        ],
     ],
     'menu2' => [
         [
@@ -181,6 +185,7 @@ return [
                
             ],
         ],
+
         [
             'icon' => 'ion-ios-cube',
             'title' => 'Master',
@@ -200,6 +205,10 @@ return [
                     'title' => 'F.A.Q'
                 ]
             ],
+        ],
+        [    'icon' => 'ion-ios-person',
+            'title' => 'Guideline',
+            'url' => 'guideline.index'
         ],
     ],
     'preregistrasi' => [

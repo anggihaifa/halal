@@ -5,29 +5,33 @@ function checkStatus(data){
 }
 
 function checkStatusPembayaran(data){
-    return  (data==0)? '<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Bayar</a>'
-        :(data==1)? '<a href="#" class="btn btn-warning btn-xs  valign-middle">Menunggu Konfirmasi</a>'
-            :(data==2)? '<a href="#" class="btn btn-success btn-xs valign-middle">Sudah Dikonfirmasi</a>'
-                :'<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Bayar</a>';
+
+     return  (data==0)? '<a class="ion-ios-create" title="Belum Bayar" style="zoom:2.0;"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="zoom:2.0;color:#5d8aa8  ;" title="Menunggu Konfirmasi Admin"></a>'
+            :(data==2)? '<a  class="ion-ios-checkmark-circle " style="zoom:2.0; align-center; color: #32cd32;"title="Pembayaran Terkonfirmasi"></a>'
+                :'<a  class="ion-ios-clipboard " style="zoom:2.0;" title="Belum Bayar"></a>';
             
 }
+
 function checkStatusBerkas(data){
-    return  (data==0)? '<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Upload</a>'
-        :(data==1)? '<a href="#" class="btn btn-yellow btn-xs  valign-middle">Menunggu Verifikasi Admin</a>'
-            :(data==2)? '<a href="#" class="btn btn-warning btn-xs valign-middle">Perbaikan</a>'
-                :(data==3)? '<a href="#" class="btn btn-success btn-xs valign-middle">Berkas Terkonfirmasi</a>'
-                    :'<a href="#" class="btn btn-grey btn-xs  valign-middle">Belum Upload</a>';
+    return  (data==0)? '<a class="ion-ios-create" title="Belum Upload" style="zoom:2.0;"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="zoom:2.0;color:#5d8aa8  ;" title="Menunggu Konfirmasi Admin"></a>'
+            :(data==2)? '<a  class="ion-ios-close-circle " style="align-center; zoom:2.0; color:#e32636; " title="Perbaikan"></a>'
+                :(data==3)? '<a  class="ion-ios-checkmark-circle " style="zoom:2.0; align-center; color: #32cd32;"title="Berkas Terkonfirmasi"></a>'
+                    :'<a  class="ion-ios-clipboard " style="zoom:2.0;" title="Belum Upload"></a>';
             
 }
+
 function checkStatusAkad(data){
-    return  (data==0)? '<a href="#" class="btn btn-grey btn-xs valign-middle">Belum Akad</a>'
-        :(data==1)? '<a href="#" class="btn btn-warning btn-xs valign-middle">Menunggu Pelanggan Megupload Ulang Kontrak</a>'
-            :(data==2)? '<a href="#" class="btn btn-green btn-xs  valign-middle">Pelanggan Sudah Upload Ulang dan Menunggu Konfirmasi Admin</a>'
-                :(data==3)? '<a href="#" class="btn btn-success btn-xs  valign-middle">Admin Sudah Mengkonfirmasi File Kontrak</a>'
-                
-                    :'<a href="#" class="btn btn-grey btn-xs text-nowrap valign-middle">Belum Akad</a>';
+
+     return  (data==0)? '<a class="ion-ios-create" title="Belum Akad" style="zoom:2.0;"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="zoom:2.0;color:yellow ;" title="Menunggu Pelanggan Megupload Ulang Kontrak"></a>'
+            :(data==2)? '<a  class="ion-ios-clipboard " style="align-center; zoom:2.0; color:#5d8aa8; " title="Pelanggan Sudah Upload Ulang dan Menunggu Konfirmasi Admin"></a>'
+                :(data==3)? '<a  class="ion-ios-checkmark-circle  " style="zoom:2.0; align-center; color: #32cd32;"title="Admin Sudah Mengkonfirmasi File Kontrak"></a>'
+                    :'<a  class="ion-ios-clipboard " style="zoom:2.0;" title="Belum Akad"></a>';
             
 }
+
 function checkStatusFaq(data){
     return  (data=='nonaktif')? 'Non Aktif'
         :(data=='aktif')? 'Aktif'
@@ -36,6 +40,48 @@ function checkStatusFaq(data){
                     :'-';
             
 }
+                                   
+function checkWilayah(data){
+    return  (data=='00')? 'Pusat'
+                :(data=='11')? 'Aceh'
+                    :(data=='12')? 'Sumatra Utara'
+                        :(data=='13')? 'Sumatra Barat'
+                            :(data=='14')? 'Riau'
+                                :(data=='15')? 'Jambi'
+                                    :(data=='16')? 'Sumatera Selatan'
+                                         :(data=='17')? 'Bengkulu'
+                                            :(data=='18')? 'Lampung'
+                                                :(data=='19')? 'Bangka Belitung'
+                                                     :(data=='21')? 'Kepulauan Riau'
+                                                        :(data=='31')? 'DKI Jakarta'
+                                                            :(data=='32')? 'Jawa Barat'
+                                                                :(data=='33')? 'Jawa Tengah'
+                                                                    :(data=='34')? 'DI Yogyakarta'
+                                                                        :(data=='35')? 'Jawa Timur'
+                                                                            :(data=='36')? 'Banten'
+                                                                                :(data=='51')? 'Bali'
+                                                                                    :(data=='52')? 'NTB'
+                                                                                         :(data=='53')? 'NTT'
+                                                                                             :(data=='61')? 'Kalimantan Barat'
+                                                                                                :(data=='62')? 'Kalimantan Tengah'
+                                                                                                    :(data=='63')? 'Kalimantan Selatan'
+                                                                                                        :(data=='64')? 'Kalimantan Timur'
+                                                                                                            :(data=='65')? 'Kalimantan Utara'
+                                                                                                                :(data=='71')? 'Sulawesi Utara'
+                                                                                                                    :(data=='72')? 'Sulawesi Tengah'
+                                                                                                                        :(data=='73')? 'Sulawesi Selatan'
+                                                                                                                            :(data=='74')? 'Sulawesi Tenggara'
+                                                                                                                                :(data=='75')? 'Gorontalo'
+                                                                                                                                     :(data=='76')? 'Sulawesi Barat'
+                                                                                                                                         :(data=='81')? 'Maluku'
+                                                                                                                                            :(data=='82')? 'Maluku Utara'
+                                                                                                                                                :(data=='91')? 'Papua'
+                                                                                                                                                    :(data=='92')? 'Papua Barat'
+                                                                                                                                                       :'-';
+                                                                                                                        
+
+}
+
 function checkProgress(data){
     return  (data==1)? 'Pengajuan Baru'
                 :(data==2)? 'Melengkapi Berkas'

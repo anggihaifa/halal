@@ -228,14 +228,12 @@
                     }
                 }
             ],
-            /*"columnDefs": [
-                {
-                    "targets": [ 7 ],
-                    "visible": false,
-                    "searchable": false,
-
-                }
-            ],   */
+           'columnDefs': [
+            {
+                  "targets": [1,2,3,4,5,6,7,8,9,10],
+                  "className": "text-center",
+                 
+            }],
 
             processing:true,
             serverSide:true,
