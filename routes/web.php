@@ -38,6 +38,10 @@ Route::get('data_registrasi_pelanggan','RegistrasiController@dataRegistrasiPelan
 Route::get('list_registrasi_pelanggan_aktif','RegistrasiController@listRegistrasiPelangganAktif')->name('listregistrasipelangganaktif');
 Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistrasiPelangganAktif')->name('dataregistrasipelangganaktif');
 
+//penjadwalan
+Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin');
+Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
+
 
 
 Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran');

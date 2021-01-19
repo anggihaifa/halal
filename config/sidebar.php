@@ -51,6 +51,7 @@ return [
                     'url' => 'listpembayarantahap2',
                     'title' => 'List Pembayaran Tahap 2'
                 ],
+
      
                 [   
                     'url' => 'listberitaacara',       
@@ -62,6 +63,11 @@ return [
                 ],
                
             ],
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanadmin'
         ],
         [
             'icon' => 'ion-ios-cube',
@@ -184,6 +190,11 @@ return [
                 ],
                
             ],
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanadmin'
         ],
 
         [

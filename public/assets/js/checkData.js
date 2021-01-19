@@ -22,6 +22,15 @@ function checkStatusBerkas(data){
             
 }
 
+function checkPenjadwalan(data){
+    return  (data==0)? '<a class="ion-ios-create" title="Belum Dijadwalkan" style="zoom:2.0;"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="zoom:2.0;color:#5d8aa8  ;" title="Menunggu Konfirmasi reviewer"></a>'
+            :(data==2)? '<a  class="ion-ios-close-circle " style="align-center; zoom:2.0; color:#e32636; " title="Perbaikan"></a>'
+                :(data==3)? '<a  class="ion-ios-checkmark-circle " style="zoom:2.0; align-center; color: #32cd32;"title="perjadwalan Terkonfirmasi"></a>'
+                    :'<a  class="ion-ios-clipboard " style="zoom:2.0;" title="Belum Dijadwalkan"></a>';
+            
+}
+
 function checkStatusAkad(data){
 
      return  (data==0)? '<a class="ion-ios-create" title="Belum Akad" style="zoom:2.0;"></a>'
