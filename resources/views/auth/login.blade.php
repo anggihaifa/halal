@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="login-buttons">
-                        <button type="submit" class="btn btn-success btn-block btn-lg btn-login">Sign in</button>
+                        <button type="submit" class="btn btn-success btn-block btn-lg btn-login">Login</button>
                     </div>
                 </form>
                     <p class="text-center text-grey-darker mb-5" style="color: #d6dee2!important;margin-top: 10px;margin-bottom: -5px !important;">
@@ -68,6 +68,19 @@
                             </h5>
                         </a>
                     </div>
+
+                     <div style="margin-top:15px;" class="animated pulse infinite" >
+                        <a  href="{{asset('/assets/doc/manual/MANUAL GUIDELINE HALAL LPH SUCOFINDO.pdf')}}"  class="btn btn-inverse btn-block btn-lg forFaq"  download>
+                            <h5 style="margin-bottom: 0px;">
+                               
+                                <span style="color: #89d0d4">Download Manual Guide</span>
+                                
+                            </h5> 
+                        </a>
+                    </div>
+
+                        
+                    
                     @if(isset($notes))
                         <div class="login-info-red"><span>{{$notes}}</span></div>
                     @endif

@@ -51,6 +51,7 @@ Route::get('update_status_pembayaran_tahap2/{id}/{no_registrasi}/{id_user}/{stat
 Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad');
 Route::get('update_status_pelunasan/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPelunasan');
 //
+Route::get('update_status_akad_review/{id}/{no_registrasi}/{id_user}/{status}/{catatan}','ReviewerController@updateStatusAkad');
 //
 
 Route::get('update_status_registrasi/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusRegistrasi');
@@ -109,6 +110,12 @@ Route::put('upload_file_invoice/{id}','RegistrasiController@uploadFileInvoice')-
 
 
 //Akad
+//reviewer dan approver
+Route::get('list_akad_reviewer','ReviewerController@listAkadReviewer')->name('listakadreviewer');
+Route::get('data_akad_reviewer','ReviewerController@dataAkadReviewer')->name('dataakadreviewer');
+Route::get('list_penjadwalan_reviewer','ReviewerController@listPenjadwalanReviewer')->name('listpenjadwalanreviewer');
+Route::get('list_pelunasan_reviewer','ReviewerController@listPelunasanReviewer')->name('listpelunasanreviewer');
+
 //admin
 Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listakadadmin');
 Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin');

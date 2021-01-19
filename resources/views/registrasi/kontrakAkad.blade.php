@@ -57,76 +57,19 @@
                               
                             </div>
 							
-							@if($data->skala_usaha == 'mikro')
-							<label class="col-lg-4 col-form-label">Mata Uang</label>
-							<div class="col-lg-8">
-								<input id="mata_uang" name="mata_uang"  type="text" class="form-control"readonly  value={{$data->mata_uang}} >
-	                        </div>           
 							
-
-							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
-							
-							<div class="col-lg-8">
-								<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="1,500,000" readonly />
-							</div>
-							@elseif($data->skala_usaha == 'kecil')
-							<label class="col-lg-4 col-form-label">Mata Uang</label>
-							<div class="col-lg-8">
-								<input id="mata_uang" name="mata_uang" type="text" class="form-control "  readonly  value={{$data->mata_uang}}>
-	                        </div>  
-
-							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
-							
-							<div class="col-lg-8">
-								<input id="total_biaya" name="total_biaya" type="text" class="form-control" value="3,000,000 " readonly />
-							</div>
-							
-							@else
 							<label class="col-lg-12 col-form-label">Biaya Sertifikasi</label>
 							
 							<label class="col-lg-4 col-form-label">Mata Uang</label>
 							<div class="col-lg-8">
 								<input id="mata_uang" name="mata_uang" type="text" class="form-control "  readonly value={{$data->mata_uang}}>
 	                        </div>  
-							
-
-<!-- 
-							
-							@if ($data->status_akad == 0 || $data->status_akad == 1)
-							<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
-							<div class="col-lg-8">
-								<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " />
-							@else
-							<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
-							<div class="col-lg-8">
-								<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " />
-							@endif 
-
-								
-							</div>
-								
-							<label class="col-lg-4 col-form-label">Biaya Pengujian</label>
-							<div class="col-lg-8">
-							@if ($data->status_akad == 0 || $data->status_akad == 1 )
-								<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" />
-							@else
-								<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" disabled="" />
-							@endif
-							</div>
-							<label class="col-lg-4 col-form-label">Biaya Sidang Fatwa</label>
-							<div class="col-lg-8">
-								@if ($data->status_akad == 0 || $data->status_akad == 1 )
-									<input id="biaya_fatwa" onchange="jml()" name="biaya_fatwa" type="text" class="form-control number-separator" />
-								@else
-									<input id="biaya_fatwa" onchange="jml()" name="biaya_fatwa" type="text" class="form-control number-separator" disabled="" />
-								@endif
-							</div> -->
+																				
 							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
 							<div class="col-lg-8">
 								<input id="total_biaya" name="total_biaya" type="text" class="form-control " readonly value={{$data->total_biaya}}  />
 							</div>
 
-							@endif
 							@if($data->status_akad == 1)
 								<!--Auto Download-->
 							<label class="col-lg-4 col-form-label">Kontrak Akad</label>
@@ -137,7 +80,7 @@
 							</div>
 							<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 							<div class="col-lg-8">
-								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/msword" onchange="getValue('file')"required />
+								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')"required />
 							</div>
 							
 							@elseif($data->status_akad==2 || $data->status_akad==3 )
@@ -146,7 +89,7 @@
 							<label class="col-lg-4 col-form-label">Kontrak Akad</label>
 							<div id="sh" class="col-lg-8">
 								<div class="form-control" readonly>
-									<a href="{{url('') .Storage::url('public/bukti_akad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
+									<a href="{{url('') .Storage::url('public/buktiakad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
 								</div>
 							</div>
 							@endif
@@ -159,7 +102,7 @@
 							
 							@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
 							@if($data->status_akad == 1 || $data->status_akad == 2)
-								<button  type = "sumbit" class="btn btn-sm btn-primary m-r-5">Konfirmasi</button>
+								<button  type = "sumbit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah berkas kontrak akad ?????')">Konfirmasi</button>
 								@if($data->status_akad == 1)
 									<button   class="btn btn-sm btn-warning m-r-5" disabled="">Menunggu File Upload User</button>
 								@else

@@ -115,13 +115,13 @@
                                                     <option value="17">Konfirmasi Berita Acara</option>
                                                     <option value="18">Tinjauan Hasil Audit</option>
                                                     <option value="19">Rekomendasi Hasil Pemeriksaan</option>
-                                                    <option value="20">Kirim Hasil ke MUI</option>
+                                                    <option value="20">Proses Sidang Fatwa</option>
                                                     <option value="21">Pelunasan</option>
                                                     <option value="22">Nominal Pelunasan Kurang</option>
                                                     <option value="23">Nominal Pelunasan Lebih</option>
                                                     <option value="24">Pelunasan Gagal</option>
                                                     <option value="25">Pelunasan Terkonfirmasi</option>
-                                                    <option value="26">Proses Sertifikasi</option>
+                                                    <option value="26">Proses Penerbitan Sertifikat</option>
                                                     <option value="27">Keputusan Halal/ Haram</option>
                                                     <option value="28">Sertifikat Halal</option>
                                                     <option value="g">Pembayaran Tahap2</option>
@@ -148,7 +148,6 @@
                 <thead>
                 <tr>
                     <th class="text-nowrap valign-middle text-center">No</th>
-                    <th class="text-nowrap valign-middle text-center">Id User</th>
                     <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                     <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                     <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
@@ -203,7 +202,6 @@
                         return meta.row + 1;
                     }
                 },
-                {"data":"id_user"},
                 {"data":"no_registrasi"},
                 {"data":"nama_perusahaan"},
                 {"data":"kelompok"},
@@ -221,7 +219,7 @@
                     "orderable":false,
                     "render":function (data,type,full,meta) {                                     
 
-                                var upload = `<a href="{{url('upload_report_admin')}}/`+full.id+`"  class="dropdown-item" >Upload Report</a> `;
+                                var upload = `<a href="{{url('upload_report_admin')}}/`+full.id+`"  class="dropdown-item" >Upload Pelaporan Audit Tahap 2</a> `;
                                 var upload2 = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
                                 var mui = `<a href="{{url('kirim_ke_mui')}}/`+full.id+`"  class="dropdown-item" >Kirim ke MUI</a>` ;
 
@@ -266,13 +264,12 @@
                     }
                 }
             ],
-            "columnDefs": [
-                {
-                    "targets": [ 1 ],
-                    "visible": false,
-                    "searchable": false
-                }
-            ],   
+           'columnDefs': [
+            {
+                  "targets": [1,2,3,4,5,6,7,8],
+                  "className": "text-center",
+                 
+            }],
             processing:true,
             serverSide:true,
             order:[[0,'asc']],

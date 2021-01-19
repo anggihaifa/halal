@@ -36,6 +36,8 @@ class UserController extends Controller
                 ->select('users.*','usergroup.usergroup as role')
                 ->where('usergroup_id','=','1')
                 ->orWhere('usergroup_id','=','3')
+                ->orWhere('usergroup_id','=','6')
+                ->orWhere('usergroup_id','=','7')
                 ->orderBy('users.id','desc');
                 //->get();
         return Datatables::of($xdata)->make();

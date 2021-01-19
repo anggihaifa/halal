@@ -149,16 +149,7 @@
 				<td>:</td>
 				<td><b>{{$registrasiData['status_registrasi']}}</b></td>
 			</tr>
-			<tr>
-				<td>Status Halal Sebelumnya dan masa berlaku</td>
-				<td>:</td>
-				<td><b>{{$registrasiData['status_halal']}}, {{$registrasiData['sh_berlaku']}}</b></td>
-			</tr>
-			<tr>
-				<td>Status SJPH, No. Sertifikat, dan masa berlaku</td>
-				<td>:</td>
-				<td><b>{{$registrasiData['status_sjph']}}, {{$registrasiData['no_sertifikat']}}, {{$registrasiData['tgl_sjph']}}</b></td>
-			</tr>
+		
 			<tr>
 				<td>Jenis Produk</td>
 				<td>:</td>
@@ -170,7 +161,7 @@
 				<td><b>{{$registrasiData['skala_usaha']}}</b></td>
 			</tr>
 
-		@if($registrasiData['status']=='13')
+	@if($registrasiData['status']=='13')
 			<tr>
 				<td>Nominal Pembayaran Tahap 1</td>
 				<td>:</td>
@@ -178,7 +169,16 @@
 				<td><b>{{$pembayaranData['mata_uang']}} {{$nominal1}}</b></td>
 			
 			</tr>
-		@elseif($registrasiData['status']=='l')
+
+			</table>
+	</div>
+
+	<div>
+		<p>Bukti pembayaran ini harap disimpan baik-baik sebagai bukti pembayaran yang sah.</p>
+		<br>
+		<p>{{$userData['kota']}}, {{$pembayaranData['tanggal_tahap1']}}</p>
+	</div>
+	@elseif($registrasiData['status']=='l')
 			<tr>
 				<td>Nominal Pembayaran Tahap 2</td>
 				<td>:</td>
@@ -186,7 +186,15 @@
 				<td><b>{{$pembayaranData['mata_uang']}} {{$nominal2}}</b></td>
 			
 			</tr>
-		@elseif($registrasiData['status']=='25')
+			</table>
+	</div>
+
+	<div>
+		<p>Bukti pembayaran ini harap disimpan baik-baik sebagai bukti pembayaran yang sah.</p>
+		<br>
+		<p>{{$userData['kota']}}, {{$pembayaranData['tanggal_tahap2']}}</p>
+	</div>
+	@elseif($registrasiData['status']=='25')
 			<tr>
 				<td>Nominal Pembayaran Pelunasan</td>
 				<td>:</td>
@@ -194,17 +202,18 @@
 			<td><b>{{$pembayaranData['mata_uang']}} {{$nominal3}}</b></td>
 			
 			</tr>
-
-		@endif	
-			
-		</table>
+			</table>
 	</div>
 
 	<div>
 		<p>Bukti pembayaran ini harap disimpan baik-baik sebagai bukti pembayaran yang sah.</p>
 		<br>
-		<p>{{$userData['kota']}}, {{$registrasiData['tanggal_konfirmasi_pembayaran']}}</p>
+		<p>{{$userData['kota']}}, {{$pembayaranData['tanggal_tahap3']}}</p>
 	</div>
+
+		@endif	
+			
+		
 </body>
 </html>
 

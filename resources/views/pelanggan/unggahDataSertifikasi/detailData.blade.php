@@ -175,7 +175,7 @@
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">2</td>
-											<td class="valign-middle" style="word-wrap:break-word">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
+											<td class="valign-middle" style="word-wrap:break-word">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJPH/ SJH B)</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
@@ -276,7 +276,7 @@
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">2</td>
-													<td class="valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJH B)</td>
+													<td class="valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJPH/ SJH B)</td>
 													@if($value['has_2'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else

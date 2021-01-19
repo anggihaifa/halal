@@ -127,7 +127,7 @@
         
         <br/>
         
-        <p>Anda menerima email ini dikarenakan berkas registrasi anda telah disetujui oleh kami <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan lanjutkan pada tahapan selanjutnya yaitu Akad pada menu registrasi halal. silahkan tunggu admin memasukkan kontrak akad lalu tanda tangani akad yang sudah disetuji dan upload kembali </p>
+        <p>Anda menerima email ini dikarenakan berkas registrasi anda telah disetujui oleh kami <b>LPH </b>PT.SUCOFINDO. Silahkan lanjutkan pada tahapan berikutnya yaitu Akad pada menu registrasi halal. silahkan tunggu admin mengunggah kontrak akad, kemudian unggah kembali kontrak akad yang sudah anda tanda tangani.</p>
 
         
         <p>
@@ -157,7 +157,7 @@
         
         <br/>
         
-        <p>Anda menerima email ini dikarenakan proses akad gagal dikarnakan file yang diupload oleh anda tidak benar/ rusak. Silahkan upload kembali file kontrak akad sertifikasi yang sudah anda tanda tangani. Batas waktu pengunggahan kontrak akad adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_akad']}} WIB/GMT+7 </p>
+        <p>Anda menerima email ini dikarenakan proses akad gagal dikarnakan file yang anda unggah tidak benar/ rusak. Silahkan upload kembali file kontrak akad yang sudah anda tanda tangani. Batas waktu pengunggahan kontrak akad adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_akad']}} WIB/GMT+7 </p>
 
         
         <p>
@@ -171,7 +171,7 @@
         
         <br/>
         
-        <p>Anda menerima email ini dikarenakan proses akad sudah selesai dan selanjutnya silahkan melanjutkan pada tahapan selanjutnya yaitu pembayaran tahap 1. </p>
+        <p>Anda menerima email ini dikarenakan proses akad sudah selesai, selanjutnya silahkan melanjutkan pada tahapan berikutnya yaitu pembayaran tahap 1. </p>
 
         
         <p>
@@ -248,13 +248,13 @@
             </div>
 
 
-                 <p>Anda menerima email ini dikarenakan berkas kontrak akad anda telah disetujui oleh kami <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan lanjutkan pada tahapan selanjutnya yaitu Pembayaran pada menu registrasi halal. silahkan upload bukti transfer sesuai dengan nominal yang tertera </p>
+                 <p>Anda menerima email ini dikarenakan berkas kontrak akad anda telah disetujui oleh kami <b>LPH </b>PT.SUCOFINDO. Silahkan melanjutkan pada tahapan berikutnya yaitu Pembayaran. Silahkan upload bukti transfer sesuai dengan nominal yang tertera </p>
 
-                 <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
+                 <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara login di akun Anda,kemudian masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
 
                  <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
@@ -279,7 +279,7 @@
                         
                 </table>
             </div>
-            <p>Silahkan melakukan pembayaran ulang sesuai nominal agar tidak terjadi pembatalan.</p>
+            <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
 
              <div>
                 <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
@@ -304,7 +304,7 @@
 
             <h3><b>PERHTIAN</b></h3>
 
-            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
             </p>
 
             <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
@@ -323,7 +323,7 @@
                     <tr>
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN BERHASIL NOMINAL LEBIH  </th>
                     </tr>             
-                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 1 x 24 jam kami akan proses pengembalian dana yang lebih. 
+                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 5 x 24 jam kami akan proses pengembalian dana yang lebih. 
                     </tr>
                     <tr style="text-align: center; vertical-align: middle;"> Nominal Lebih : {{$pembayaran['mata_uang']}} {{$nominal_lebih1}}</tr>
                   
@@ -332,7 +332,7 @@
                 </table>
             </div>
 
-            <p><b>Notes :</b> Proses sertifikasi akan segera diproses. Silahkan tunggu 1 x 24 jam untuk pengembalian dana.</p>
+            <p><b>Notes :</b> Proses sertifikasi akan segera diproses. Silahkan tunggu 5 x 24 jam untuk pengembalian dana.</p>
             
 
     @elseif($status== '12')
@@ -355,7 +355,7 @@
                         
                 </table>
             </div>
-            <p>Silahkan melakukan pembayaran ulang sesuai nominal agar tidak terjadi pembatalan.</p>
+            <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
 
              <div>
                 <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
@@ -380,7 +380,7 @@
 
             <h3><b>PERHTIAN</b></h3>
 
-            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
             </p>
 
             <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
@@ -410,7 +410,7 @@
                 <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap1']) }}">Unduh Bukti Pembayaran Tahap 1</a></button>
             </p> -->
 
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 1 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 1. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 1 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 1. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p> 
 
     @elseif($status== '14')
@@ -507,39 +507,28 @@
                 
             @endif
 
-             <p>Anda dapat meninjau order dan mengunduh bukti laporan audit tahap 2 dan berita acara tahap 2 anda di menu pelaporan pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu report audit dan report berita acara. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>Anda dapat meninjau order dan mengunduh bukti laporan audit tahap 2 dan berita acara tahap 2 anda di menu pelaporan pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu report audit dan report berita acara. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p>     
     @elseif($status== '20')
-            <h3 style="text-align: center">KEPADA MUI:</h3>                
-            <br/>
+            <h3 style="text-align: center">SIDANG FATWA: DALAM PROSES</h3>
             
-            <div>
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th>ORDER {{$registrasi['no_registrasi']}} - LAPORAN AUDIT TAHAP 2 BERHASIL DIUPLOAD </th>
-                    </tr>             
-                              
-                                      
-                     <tr style="text-align: center; vertical-align: middle;">Laporan audit tahap 2 dan berita acara audit tahap 2 dengan nomor referensi {{$registrasi['no_registrasi']}} sudah diupload. Silahkan cek Pada Menu Pelaporan dan Unduh File Laporan Audit dan Berita Acara Tahap 2, lalu Klik Konfirmasi.</tr>
-                   
-                  
-                     
-                        
-                </table>
-            </div>
-            <!-- <p>
+                <br/>
                 
-                @if($registrasi['status_report']== '1')
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.$user['id'].'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Laporan Audit Tahap 2</a></button>
-                @endif
 
-                @if($registrasi['status_berita_acara']== '1')
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.$user['id'].'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
-                @endif
-            </p> -->
+                <div>
+                    <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
+                       
+                        <tr>
+                            <th  >ORDER {{$registrasi['no_registrasi']}} - PROSES SIDANG FATWA </th>
+                           
+                        </tr>             
+                         
+                            
+                    </table>
+                </div>
+           
 
-             <p>Anda dapat meninjau order dan mengunduh bukti laporan audit tahap 2 dan berita acara tahap 2 anda di menu pelaporan pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu report audit dan report berita acara. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran). untuk informasi lebih lanjut.
              </p>
 
 
@@ -566,7 +555,7 @@
                 <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap2']) }}">Unduh Bukti Pembayaran Tahap 2</a></button>
             </p> -->
 
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p>          
 
 
@@ -644,7 +633,7 @@
 
                      <h3><b>PERHTIAN</b></h3>
 
-                     <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                     <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                     </p>
 
                      <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
@@ -664,7 +653,7 @@
                 </tr>          
             </table>
         </div>
-        <p>Silahkan melakukan pembayaran ulang sesuai nominal agar tidak terjadi pembatalan.</p>
+        <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
 
          <div>
             <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
@@ -706,7 +695,7 @@
                     <tr>
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 BERHASIL - NOMINAL LEBIH  </th>
                     </tr>             
-                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 1 x 24 jam kami akan proses pengembalian dana yang lebih. 
+                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 5 x 24 jam kami akan proses pengembalian dana yang lebih. 
                     </tr>
                     <tr style="text-align: center; vertical-align: middle;"> Nominal Lebih : {{$pembayaran['mata_uang']}} {{$nominal_lebih2}}
                     </tr>
@@ -716,7 +705,7 @@
                 </table>
             </div>
 
-            <p><b>Notes :</b> Proses sertifikasi akan segera dilanjutkan. Silahkan tunggu 1 x 24 jam untuk pengembalian dana.</p>
+            <p><b>Notes :</b> Proses sertifikasi akan segera dilanjutkan. Silahkan tunggu 5 x 24 jam untuk pengembalian dana.</p>
     @elseif($status== 'j')
 
              <h3 style="text-align: center">PEMBAYARAN TAHAP 2 GAGAL</h3>
@@ -737,7 +726,7 @@
                         
                 </table>
             </div>
-             <p>Silahkan melakukan pembayaran ulang sesuai nominal agar tidak terjadi pembatalan.</p>
+             <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
 
              <div>
                 <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
@@ -791,7 +780,7 @@
                 <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap2']) }}">Unduh Bukti Pembayaran Tahap 2</a></button>
             </p> -->
 
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p>          
 
 
@@ -821,7 +810,7 @@
                 <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap2']) }}">Unduh Bukti Pembayaran Tahap 2</a></button>
             </p> -->
 
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p> 
         @endif         
    
@@ -832,7 +821,7 @@
             
             <br/>
             
-               <p>Anda menerima email ini dikarenakan berkas kontrak akad telah diupload pada website LPH PT.SUCOIFNDO silahkan unduh file kontrak akad lalu tanda tangani setelah nya silahkan upload kembali file kontrak akad yang sudah anda tanda tangani. Order anda akan otomais cancel apabila tidak ditanda tangani dalam waktu 1 x 24 jam pada hari dan pukul <b> {{$registrasi['dl_akad']}} WIB/GMT+7  </b>
+               <p>Anda menerima email ini dikarenakan berkas kontrak akad telah diupload pada website LPH PT.SUCOIFNDO silahkan unduh file kontrak akad lalu tanda tangani setelah nya silahkan upload kembali file kontrak akad yang sudah anda tanda tangani. Order anda tidak akan dapat dilanjutkan ke tahap selanjutnya  apabila tidak ditanda tangani dalam waktu 1 x 24 jam pada hari dan pukul <b> {{$registrasi['dl_akad']}} WIB/GMT+7  </b>
                </p>
 
                 
@@ -879,7 +868,7 @@
                 </p>
             @endif
  -->
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal, dengan cara tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p>       
 
 
@@ -976,7 +965,7 @@
                 </tr>          
             </table>
         </div>
-        <p>Silahkan melakukan pembayaran ulang sesuai nominal agar tidak terjadi pembatalan.</p>
+        <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
 
          <div>
             <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
@@ -1019,7 +1008,7 @@
                     <tr>
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASAN BERHASIL - NOMINAL LEBIH  </th>
                     </tr>             
-                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 1 x 24 jam kami akan proses pengembalian dana yang lebih. 
+                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 5 x 24 jam kami akan proses pengembalian dana yang lebih. 
                     </tr>
                     <tr style="text-align: center; vertical-align: middle;"> Nominal Lebih : {{$pembayaran['mata_uang']}} {{$nominal_lebih3}}
                     </tr>
@@ -1029,7 +1018,7 @@
                 </table>
             </div>
 
-            <p><b>Notes :</b> Proses sertifikasi akan segera dilanjutkan. Silahkan tunggu 1 x 24 jam untuk pengembalian dana.</p>
+            <p><b>Notes :</b> Proses sertifikasi akan segera dilanjutkan. Silahkan tunggu 5 x 24 jam untuk pengembalian dana.</p>
 
      @elseif($status== '24')
 
@@ -1051,7 +1040,7 @@
                         
                 </table>
             </div>
-             <p>Silahkan melakukan pembayaran ulang sesuai nominal agar tidak terjadi pembatalan.</p>
+             <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
 
              <div>
                 <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
@@ -1111,7 +1100,7 @@
                 </p>
             @endif -->
 
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p>       
 
         @else 
@@ -1144,7 +1133,7 @@
                 </p>
             @endif -->
 
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.
+             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p> 
         @endif
     @elseif($status == '26')   
@@ -1161,13 +1150,13 @@
                         <th  >ORDER {{$registrasi['no_registrasi']}} - TELAH SELESAI </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><h5>Anda Menerima email ini karna proses sertifikasi sudah selesai silahkann menunggu hasil sertifikat halal/haram dari bPJPH.</h5></tr>
+                     <tr style="text-align: center; vertical-align: middle;"><h5>Anda Menerima email ini karena proses sertifikasi sudah selesai silahkan menunggu hasil sertifikat halal/haram dari BPJPH.</h5></tr>
                      
                 </table>
             </div>
             
 
-             <p>Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami.</p>      
+             <p>Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).</p>      
     @else
 
        

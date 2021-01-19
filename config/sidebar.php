@@ -54,7 +54,7 @@ return [
      
                 [   
                     'url' => 'listberitaacara',       
-                    'title' => 'Report dan Berita Acara'                    
+                    'title' => 'Pelaporan Audit dan Berita Acara'                    
                 ],
                  [
                     'url' => 'listpelunasan',
@@ -98,6 +98,10 @@ return [
                     'title' => 'Grup Pengguna'
                 ],
             ],
+        ],
+         [    'icon' => 'ion-ios-person',
+            'title' => 'Guideline',
+            'url' => 'guideline.index'
         ],
     ],
     'menu2' => [
@@ -172,7 +176,7 @@ return [
                 ], 
                 [   
                     'url' => 'listberitaacara',       
-                    'title' => 'Report dan Berita Acara'                    
+                    'title' => 'Pelaporan Audit dan Berita Acara'                    
                 ],
                  [
                     'url' => 'listpelunasan',
@@ -181,6 +185,7 @@ return [
                
             ],
         ],
+
         [
             'icon' => 'ion-ios-cube',
             'title' => 'Master',
@@ -200,6 +205,10 @@ return [
                     'title' => 'F.A.Q'
                 ]
             ],
+        ],
+        [    'icon' => 'ion-ios-person',
+            'title' => 'Guideline',
+            'url' => 'guideline.index'
         ],
     ],
     'preregistrasi' => [
@@ -267,6 +276,38 @@ return [
             'title' => 'Guideline',
             'url' => 'guideline.index'
         ],
+    ],
+    'menu5' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],        
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Registrasi',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                /*[
+                    'url' => 'listregistrasipelanggan',
+                    'title' => 'List Registrasi Halal '
+                ],*/                 
+                [
+                    'url' => 'listakadreviewer',
+                    'title' => 'List Kontrak Akad'
+                ],                
+                [   
+                    'url' => 'listpenjadwalanreviewer',       
+                    'title' => 'List Penjadwalan'                    
+                ],
+                 [
+                    'url' => 'listpelunasanreviewer',
+                    'title' => 'List Pelunasan'
+                ],
+               
+            ],
+        ],                             
     ],
 ];
 

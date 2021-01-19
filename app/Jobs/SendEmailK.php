@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Mail;
 
 class SendEmailK implements ShouldQueue
 {
+    
+    public $timeout = 1200;
     public $user;
     public $registrasi;
     public $pembayaran;

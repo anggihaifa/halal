@@ -34,7 +34,7 @@
         </div>
 
         <!-- begin col-3 -->
-		<div class="col-xl-3 col-md-6 ">
+		<div class="col-xl-3 col-md-6 " >
 			<div class="widget widget-stats bg-blue animated zoomIn delay-2s">
 				<div class="stats-icon"><i class="fa fa-desktop text-white"></i></div>
 				<div class="stats-info">

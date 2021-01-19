@@ -129,7 +129,7 @@
 
                  <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran tidak akan dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>           
@@ -179,7 +179,7 @@
 
                  <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda tidak akan dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>  
@@ -231,7 +231,7 @@
 
                  <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda tidak akan dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>  
@@ -282,7 +282,7 @@
 
                  <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda tidak akan dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>  
@@ -335,7 +335,7 @@
 
                  <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Pendaftaran anda tidak akan dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>  
@@ -387,7 +387,7 @@
 
                  <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Pendaftaran anda akan dibatalkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Pendaftaran anda tidak akan dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>  

@@ -26,7 +26,6 @@
 
         <div class="widget widget-stats bg-inverse animated zoomIn delay-5s">				
 				<div class="stats-info text-center">
-					{{-- <h4>Guideline Belum Tersedia</h4>					 --}}                    
                     @if($user->usergroup_id == 1)
                     <img src="{{asset('/assets/img/guideline/guideline2.jpg')}}" style="width: 100%;" alt="" />
                     @else

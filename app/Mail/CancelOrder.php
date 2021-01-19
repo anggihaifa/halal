@@ -37,7 +37,7 @@ class CancelOrder extends Mailable
      */
     public function build()
     {
-
-        return $this->view('mail.cancelorder');
+        $this->subject('Reminder Pembayaran - No registrasi '.$this->registrasi['no_registrasi']);
+        return $this->view('mail.reminder');
     }
 }

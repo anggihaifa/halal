@@ -60,6 +60,47 @@
                                     <option value="1" {{ $data->status == "1" ? 'selected' : ''}}>Active</option>
                                 </select>
                             </div>
+                            <label class="col-lg-4 col-form-label">Wilayah</label>
+                            <div class="col-lg-8">
+                                <select name="kode_wilayah" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                    <option value="--" selected="">---Pilih Wilayah---</option>
+                                    <option value="00">Pusat</option>
+                                    <option value="11">Aceh</option>
+                                    <option value="12">Sumatera Utara</option>
+                                    <option value="13">Sumatera Barat</option>
+                                    <option value="14">Riau</option>
+                                    <option value="15">Jambi</option>
+                                    <option value="16">Sumatera Selatan</option>
+                                    <option value="17">Bengkulu</option>
+                                    <option value="18">Lampung</option>
+                                    <option value="19">Bangka Belitung</option>
+                                    <option value="21">Kep.Riau</option>
+                                    <option value="31">DKI Jakarta</option>
+                                    <option value="32">Jawa Barat</option>
+                                    <option value="33">Jawa Tengah</option>
+                                    <option value="34">DI Yogyakarta</option>
+                                    <option value="35">Jawa Timur</option>
+                                    <option value="36">Banten</option>
+                                    <option value="51">Bali</option>
+                                    <option value="52">NTB</option>
+                                    <option value="53">NTT</option>
+                                    <option value="61">Kalimantan Barat</option>
+                                    <option value="62">Kalimantan Tengah</option>
+                                    <option value="63">Kalimantan Selatan</option>
+                                    <option value="64">Kalimantan Timur</option>
+                                    <option value="65">Kalimantan Utara</option>
+                                    <option value="71">Sulawesi Utara</option>
+                                    <option value="72">Sulawesi Tengah</option>
+                                    <option value="73">Sulawesi Selatan</option>
+                                    <option value="74">Sulawesi Tenggara</option>
+                                    <option value="75">Gorontalo</option>
+                                    <option value="76">Sulawesi Barat</option>
+                                    <option value="81">Maluku</option>
+                                    <option value="82">Maluku Utara</option>
+                                    <option value="91">Papua</option>
+                                    <option value="92">Papua Barat</option>
+                                </select>
+                            </div>
                             <div class="col-md-12 offset-md-5">
                                 @component('components.buttonback',['href' => route("user.index")])@endcomponent
                                 @component('components.buttonsubmit')@endcomponent
