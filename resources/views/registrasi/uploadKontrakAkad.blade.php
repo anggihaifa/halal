@@ -160,7 +160,7 @@
 									@if ($data->status_akad == 0 || $data->status_akad == 1)
 										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator"/>
 									@else
-										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator " disabled="" />
+										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="{{number_format($dataAkad[0]->biaya_pemeriksaan,0,",",".")}}" onchange="jml()" class="form-control number-separator " disabled="" />
 									@endif 
 
 									
@@ -171,15 +171,15 @@
 									@if ($data->status_akad == 0 || $data->status_akad == 1 )
 										<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" />
 									@else
-										<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" disabled="" />
+										<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" value="{{number_format($dataAkad[0]->biaya_pengujian,0,",",".")}}" class="form-control number-separator" disabled="" />
 									@endif
 								</div>
 								<label class="col-lg-4 col-form-label">Biaya Sidang Fatwa</label>
 								<div class="col-lg-8">
 									@if ($data->status_akad == 0 || $data->status_akad == 1 )
-										<input id="biaya_fatwa" onchange="jml()" name="biaya_fatwa" type="text" class="form-control number-separator" />
+										<input id="biaya_fatwa" onchange="jml()" name="biaya_sidang_fatwa" type="text" class="form-control number-separator" />
 									@else
-										<input id="biaya_fatwa" onchange="jml()" name="biaya_fatwa" type="text" class="form-control number-separator" disabled="" />
+										<input id="biaya_fatwa" onchange="jml()" name="biaya_sidang_fatwa" type="text" value="{{number_format($dataAkad[0]->biaya_sidang_fatwa,0,",",".")}}" class="form-control number-separator" disabled="" />
 									@endif
 								</div>
 								<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>

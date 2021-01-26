@@ -42,6 +42,16 @@ Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistras
 Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin');
 Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
 
+Route::post('detail_auditor', 'PenjadwalanController@detail')->name('detail_auditor.detail');
+Route::post('dropdown1', 'PenjadwalanController@dataAuditor1')->name('dropdown1.dataauditor');
+Route::post('dropdown2', 'PenjadwalanController@dataAuditor2')->name('dropdown2.dataauditor');
+Route::post('auditor_dropdown', 'PenjadwalanController@dataRapatAuditor')->name('auditor_dropdown.datarapatauditor');
+Route::post('komite_dropdown', 'PenjadwalanController@dataKomite')->name('komite_dropdown.datakomite');
+Route::put('audit1', 'PenjadwalanController@audit1')->name('audit1');
+Route::put('audit2', 'PenjadwalanController@audit2')->name('audit2');
+Route::put('rapat', 'PenjadwalanController@rapat')->name('rapat');
+Route::put('tinjauan', 'PenjadwalanController@tinjauan')->name('tinjauan');
+
 
 
 Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran');
@@ -55,6 +65,7 @@ Route::get('update_status_pembayaran_tahap2/{id}/{no_registrasi}/{id_user}/{stat
 Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad');
 Route::get('update_status_pelunasan/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPelunasan');
 //
+Route::get('update_status_akad_review/{id}/{no_registrasi}/{id_user}/{status}/{catatan}','ReviewerController@updateStatusAkad');
 //
 
 Route::get('update_status_registrasi/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusRegistrasi');
@@ -113,6 +124,12 @@ Route::put('upload_file_invoice/{id}','RegistrasiController@uploadFileInvoice')-
 
 
 //Akad
+//reviewer dan approver
+Route::get('list_akad_reviewer','ReviewerController@listAkadReviewer')->name('listakadreviewer');
+Route::get('data_akad_reviewer','ReviewerController@dataAkadReviewer')->name('dataakadreviewer');
+Route::get('list_penjadwalan_reviewer','ReviewerController@listPenjadwalanReviewer')->name('listpenjadwalanreviewer');
+Route::get('list_pelunasan_reviewer','ReviewerController@listPelunasanReviewer')->name('listpelunasanreviewer');
+
 //admin
 Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listakadadmin');
 Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin');

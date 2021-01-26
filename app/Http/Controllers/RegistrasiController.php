@@ -19,6 +19,7 @@ use App\DetailKU;
 use App\Models\Registrasi;
 use App\Models\Pembayaran;
 use App\Models\Penjadwalan;
+use App\Models\Akad;
 use App\Models\Negara;
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
@@ -36,7 +37,6 @@ use App\Models\UnggahData\unggahDataSertifikasi;
 use App\Models\UnggahData\KantorPusat;
 use App\Models\UnggahData\MenuRestoran;
 use App\Models\UnggahData\Jagal;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -2180,6 +2180,9 @@ class RegistrasiController extends Controller
         //dd($id);
         $data = Registrasi::find($id);
         //get Data from FAQ Transfer
+        $dataAkad = DB::table('akad')->select('*')->where('id_registrasi',$id)->get();        
+        // dd($dataAkad);
+
         $getTransfer =   DB::table('faq')
                     ->where('status','transfer')
                     ->get();
@@ -2189,7 +2192,7 @@ class RegistrasiController extends Controller
                     ->where('status','tunai')
                     ->get();
         $dataTunai = json_decode($getTunai,true);
-        return view('registrasi.uploadKontrakAkad',compact('data','dataTransfer','dataTunai'));
+        return view('registrasi.uploadKontrakAkad',compact('data','dataTransfer','dataTunai','dataAkad'));
     }
     public function uploadAkadUser($id){
         //dd($id);
@@ -2253,7 +2256,7 @@ class RegistrasiController extends Controller
            
 
              $e->total_biaya = ((int)str_replace(',', '', $e->total_biaya));
-           if($p == null){
+            if($p == null){
                 if($e->total_biaya >10000000 && $e->total_biaya <= 50000000){
                // dd($e->total_biaya);
 
@@ -2361,20 +2364,38 @@ class RegistrasiController extends Controller
         $model = new Registrasi();
         $model2 = new User();
         $model3 = new Pembayaran();
+        $model4 = new Akad();
 
         try{
             DB::beginTransaction();
             $e = $model->find($id);
             $u = $model2->find($e->id_user);
-            $p = $model3->find($e->id_pembayaran);
+            $p = $model3->find($e->id_pembayaran);            
 
             date_default_timezone_set('Asia/Jakarta');
             $date = date("Y-m-d h:i:sa");
 
-            $e->tanggal_akad = $date;
-            $e->status_akad = 1;
+            $e->tanggal_akad = $date;            
             $e->mata_uang = $data['mata_uang'];            
-            $e->status='c';
+            $e->status_akad = 4;
+            $e->status='m';
+
+            $model4->id_registrasi = $id;            
+            $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
+            $bp2 = str_replace('.', '', $bp1);            
+            $model4->biaya_pemeriksaan = $bp2;
+
+            $bpe1 = str_replace('Rp', '', $data['biaya_pengujian']);
+            $bpe2 = str_replace('.', '', $bpe1);
+            $model4->biaya_pengujian = $bpe2;
+
+            $bsf1 = str_replace('Rp', '', $data['biaya_sidang_fatwa']);
+            $bsf2 = str_replace('.', '', $bsf1);
+            $model4->biaya_sidang_fatwa = $bsf2;
+
+            // $e->status_akad = 1;
+            // $e->status='c';
+
             // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
             $z = str_replace('Rp', '', $data['total_biaya']);
             $a = str_replace('.', '',$z);
@@ -2383,6 +2404,7 @@ class RegistrasiController extends Controller
             // $a = $data['total_biaya'].split('.').join("");
 			// $total = $a.split('Rp').join("");
             $e->total_biaya = $a;
+            $model4->total_biaya_sertifikasi = $a;
             // $e->total_biaya = $data['total_biaya'];
             // dd($data['total_biaya']);
             // dd($e->total_biaya);            
@@ -2392,7 +2414,9 @@ class RegistrasiController extends Controller
                 $filename = "AKAD-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                 $file->storeAs("public/buktiakad/".$e->id_user."/", $filename);
                 $e->file_akad = $filename;
+                $model4->berkas_akad = $filename;
             }
+            $model4->save();
             $e->save();
             DB::commit();
              SendEmailP::dispatch($e,$u,$p, $e->status);
@@ -2712,6 +2736,16 @@ class RegistrasiController extends Controller
                         $query->where('registrasi.status_cancel','=',0);
                         
                         $query->where('registrasi.status','=','f');
+                    })
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        
+                        $query->where('registrasi.status','=','m');
+                    })
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        
+                        $query->where('registrasi.status','=','n');
                     });
         }else{
 
@@ -2745,6 +2779,16 @@ class RegistrasiController extends Controller
                         $query->where('registrasi.status_cancel','=',0);
                         $query->where('registrasi.kode_wilayah','=',$kodewilayah);
                         $query->where('registrasi.status','=','f');
+                    })
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        
+                        $query->where('registrasi.status','=','m');
+                    })
+                    ->orWhere(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        
+                        $query->where('registrasi.status','=','n');
                     });
         }
                           

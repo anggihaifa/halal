@@ -11,7 +11,7 @@
 		<ul class="nav">
 			<li class="nav-profile">
 				<a href="javascript:;" data-toggle="nav-profile">
-					@if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 )
+					@if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6)
 						<div class="cover with-shadow adminbg"></div>
 					@else
 						<div class="cover with-shadow userbg"></div>
@@ -108,7 +108,7 @@
 					return $subMenu;
 				}
 
-				if(Auth::user()->usergroup_id == 2){
+				if(Auth::user()->usergroup_id == 2){					
 					if(Auth::user()->registrasi_id == null){
 						$configSidebar = config('sidebar.preregistrasi');
 					}else{
@@ -124,8 +124,10 @@
 						}
 						
 					}
-				}elseif(Auth::user()->usergroup_id == 3){
+				}elseif(Auth::user()->usergroup_id == 3){					
 				    $configSidebar = config('sidebar.menu3');
+				}elseif(Auth::user()->usergroup_id == 6){					
+					$configSidebar = config('sidebar.menu5');
 				}else{
 					$configSidebar = config('sidebar.menu');
 				}

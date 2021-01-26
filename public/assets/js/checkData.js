@@ -132,6 +132,10 @@ function checkProgress(data){
                                                                                                                                                                 :(data.trim()=='j')? 'Pembayaran Tahap2 Gagal'
                                                                                                                                                                     :(data.trim()=='k')? 'Menunggu Konfirmasi Pembayaran Tahap2'
                                                                                                                                                                          :(data.trim()=='l')? 'Pembayaran Tahap2 Terkonfirmasi'
+                                                                                                                                                                            :(data.trim()=='m')? 'Menunggu Persetujuan Reviewer'
+                                                                                                                                                                                :(data.trim()=='n')? 'Menunggu Persetujuan Approver'
+                                                                                                                                                                                    :(data.trim()=='o')? 'Reviewer Menolak Akad'
+                                                                                                                                                                                        :(data.trim()=='p')? 'Approver Menolak Akad'
                                                                                                                                                                             :'-';
                                                                                      
 

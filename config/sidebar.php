@@ -288,5 +288,37 @@ return [
             'url' => 'guideline.index'
         ],
     ],
+    'menu5' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],        
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Registrasi',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                /*[
+                    'url' => 'listregistrasipelanggan',
+                    'title' => 'List Registrasi Halal '
+                ],*/                 
+                [
+                    'url' => 'listakadreviewer',
+                    'title' => 'List Kontrak Akad'
+                ],                
+                [   
+                    'url' => 'listpenjadwalanreviewer',       
+                    'title' => 'List Penjadwalan'                    
+                ],
+                 [
+                    'url' => 'listpelunasanreviewer',
+                    'title' => 'List Pelunasan'
+                ],
+               
+            ],
+        ],                             
+    ],
 ];
 
