@@ -589,6 +589,7 @@ class ComposerStaticInit376389b5eebaaf631a33f74a22744baf
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\Laporan' => __DIR__ . '/../..' . '/app/Http/Controllers/Laporan.php',
         'App\\Http\\Controllers\\ManajemenDataController' => __DIR__ . '/../..' . '/app/Http/Controllers/ManajemenDataController.php',
+        'App\\Http\\Controllers\\Master\\BeritaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Master/BeritaController.php',
         'App\\Http\\Controllers\\Master\\BumnController' => __DIR__ . '/../..' . '/app/Http/Controllers/Master/BumnController.php',
         'App\\Http\\Controllers\\Master\\CancelOrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Master/CancelOrderController.php',
         'App\\Http\\Controllers\\Master\\FaqController' => __DIR__ . '/../..' . '/app/Http/Controllers/Master/FaqController.php',

@@ -24,6 +24,7 @@ return array(
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\Laporan' => $baseDir . '/app/Http/Controllers/Laporan.php',
     'App\\Http\\Controllers\\ManajemenDataController' => $baseDir . '/app/Http/Controllers/ManajemenDataController.php',
+    'App\\Http\\Controllers\\Master\\BeritaController' => $baseDir . '/app/Http/Controllers/Master/BeritaController.php',
     'App\\Http\\Controllers\\Master\\BumnController' => $baseDir . '/app/Http/Controllers/Master/BumnController.php',
     'App\\Http\\Controllers\\Master\\CancelOrderController' => $baseDir . '/app/Http/Controllers/Master/CancelOrderController.php',
     'App\\Http\\Controllers\\Master\\FaqController' => $baseDir . '/app/Http/Controllers/Master/FaqController.php',

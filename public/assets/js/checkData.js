@@ -127,6 +127,9 @@ function checkProgress(data){
                                                                                                                                                                                 :(data.trim()=='n')? 'Menunggu Persetujuan Approver'
                                                                                                                                                                                     :(data.trim()=='o')? 'Reviewer Menolak Akad'
                                                                                                                                                                                         :(data.trim()=='p')? 'Approver Menolak Akad'
+                                                                                                                                                                                            :(data.trim()=='q')? 'Reviewer Mengkonfirmasi Akad'
+                                                                                                                                                                                                :(data.trim()=='r')? 'Approver Mengkonfirmasi Akad'
+                                                                                                                                                                                                    :(data.trim()=='s')? 'User Tidak Menyetujui Berkas Akad'
                                                                                                                                                                             :'-';
                                                                                      
 

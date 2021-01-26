@@ -692,3 +692,18 @@ body{
         color: #74b4ab;
         font-weight: bold;
     }
+    .nav-halal{
+        color: white !important;
+    }
+    .bg-halal{
+        background: #3a6366;
+    }
+    .explore-halal ul{
+        margin-top: 20px;
+    }
+    .explore-halal ul li{
+        margin-bottom: 10px;
+    }
+    .explore-halal ul li a{
+        color: white;
+    }

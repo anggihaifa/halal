@@ -209,8 +209,8 @@
                                
                                 var upload = `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
 
-                                 var status8 = `<a href="{{url('update_status_akad')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7"   class="dropdown-item"> Akad Gagal</a> `;
-                                 var konfirm = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
+                                var status8 = `<a href="{{url('update_status_akad')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7"   class="dropdown-item"> Akad Gagal</a> `;
+                                var konfirm = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`/`+full.status_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
 
                                 return `<div class="btn-group m-r-5 show">
                                         <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
