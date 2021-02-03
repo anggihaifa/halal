@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\Cast\Object_;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Berita;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -85,21 +86,12 @@ class HomeController extends Controller
             return view('homeUser',compact('dataDetailUser','totalRegistrasiUser','dataCurrent'));
         }
         //return view('home');
-    }
-
-    public function landingPage(){
-        $berita = Berita::all();
-        // dd($berita);
-
-        return view('landingPage', compact('berita'));
-
-        // return redirect()->route('home.index');
-    }
+    }        
 
     public function home(){
         //return view('home');
 
         return redirect()->route('home.index');
-    }
+    }    
 
 }

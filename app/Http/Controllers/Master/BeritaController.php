@@ -44,9 +44,20 @@ class BeritaController extends Controller
     }
 
     public function detailBerita($id){		
-        $berita = Berita::find($id);        
+        $berita = Berita::find($id);     
 
 		return view('master.berita.detail',compact('berita'));
+    }
+
+    public function cariBerita(Request $request){
+        $data = $request->except('_token','_method');
+        $berita = Db::table('berita')
+                    ->where('judul_berita','like',"%".$data['katakunci']."%")
+                    ->where('status_approve','=',1)
+                    ->get();       
+        // dd($berita);        
+
+		return view('landingpage',compact('berita'));
     }
 
     public function detailBeritaUser($id){

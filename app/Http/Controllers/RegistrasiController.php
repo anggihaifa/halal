@@ -378,10 +378,10 @@ class RegistrasiController extends Controller
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                 ->join('users','registrasi.id_user','=','users.id')
                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
-                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.*')
+                ->select('registrasi.*','registrasi.status as statusnya','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.*')
                 ->where('registrasi.id','=',$id)
                 ->get();
-            $data = json_decode($data,true);
+            $data = json_decode($data,true);            
 
             foreach ($data as $key => $value) {
                 $id_reg = $value['id_jenis_registrasi'];
