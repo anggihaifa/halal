@@ -95,11 +95,11 @@
                                             </div>
                                             <div class="radio radio-css radio-inline">
                                                 <input type="radio" name="status_registrasi" id="statusRegistrasi2"  value="perpanjangan" />
-                                                <label for="statusRegistrasi2">*Perpanjangan</label>
+                                                <label for="statusRegistrasi2">*Pembaruan</label>
                                             </div>
                                             <div class="radio radio-css radio-inline">
                                                 <input type="radio" name="status_registrasi" id="statusRegistrasi3"  value="pengembangan" />
-                                                <label for="statusRegistrasi3">*Pengembangan</label>
+                                                <label for="statusRegistrasi3">*Perubahan</label>                                                
                                             </div>
                                         </div>
                                     </div>
@@ -108,24 +108,27 @@
                                 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Perusahaan','required'=>true,'placeholder'=>'Nama Perusahaan'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Perusahaan *','required'=>true,'placeholder'=>'Nama Perusahaan'])@endcomponent
                                 </div>
                                 </div>
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'no_surat','id' => 'no_surat','label' => 'No. Surat Permohonan Sertifikasi','required'=>true,'placeholder'=>'xx-x-xxxx-xxxx'])@endcomponent                            
+                                    @component('components.inputtext',['name'=> 'no_surat','id' => 'no_surat','label' => 'No. Surat Permohonan Sertifikasi Dari BPJPH *','required'=>true,'placeholder'=>'xx-x-xxxx-xxxx'])@endcomponent                            
                                 </div>
                                 </div>
 
-                                <div class="wrapper col-lg-12">
+                                <div class="wrapper col-lg-12" id="lsh">
                                 <div class="row">
-                                    <label id="lsh" class="col-lg-4 col-form-label">*Status Halal Sebelumnya</label>
+                                    <label class="col-lg-4 col-form-label">*Status Halal Sebelumnya</label>
                                     <div id="sh" class="col-lg-8">
                                         <input type="text" name="status_halal" class="form-control" placeholder="Status Halal Sebelumnuya"  />
                                     </div>
-                                
-                                    <label id="lshb" class="col-lg-4 col-form-label">*SH Berlaku s/d</label>
+                                </div>
+                                </div>
+                                <div class="wrapper col-lg-12" id="lshb">
+                                <div class="row">
+                                    <label class="col-lg-4 col-form-label">*SH Berlaku s/d</label>
                                     <div id="shb" class="col-lg-8">                                
                                         <div class="input-group date">
                                             <input type="text" id="sh_berlaku" name="sh_berlaku" class="form-control" placeholder="SH Berlaku s/d" value="" data-date-start-date="Date.default" />
@@ -135,7 +138,7 @@
                                 </div>
                                 </div>
 
-                                <div class="wrapper col-lg-12">
+                                <div class="wrapper col-lg-12" id="nosjh">
                                 <div class="row">
                                     <label id="lsjph0" class="col-lg-4 col-form-label">No. Sertifikat SJH/ SJPH</label>
                                     <div id="dsjph0" class="col-lg-8">
@@ -144,7 +147,7 @@
                                 </div>
                                 </div>
 
-                                <div class="wrapper col-lg-12">
+                                <div class="wrapper col-lg-12" id="nosjh2">
                                 <div class="row">
                                     <label id="lsjph" class="col-lg-4 col-form-label">SJH/ SJPH Berlaku s/d</label>
                                     <div id="dsjph" class="col-lg-8">
@@ -327,29 +330,29 @@
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'jenis_izin','label' => 'Jenis Izin Usaha','required'=>true,'placeholder'=>'MD/ML/PIRT/TR/TI/DKL/SD/SI/CD/CL/CA//ITUP/ISUP/NKV/HC/CFS'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'jenis_izin','label' => 'Jenis Izin Usaha *','required'=>true,'placeholder'=>'MD/ML/PIRT/TR/TI/DKL/SD/SI/CD/CL/CA//ITUP/ISUP/NKV/HC/CFS'])@endcomponent
                                 </div>
                                 </div>
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['id'=>'jumlah_karyawan','name'=> 'jumlah_karyawan','label' => 'Jumlah Karyawan','type' => 'number','max' => '10','required'=>true,'placeholder'=>'Jumlah Karyawan'])@endcomponent
+                                    @component('components.inputtext',['id'=>'jumlah_karyawan','name'=> 'jumlah_karyawan','label' => 'Jumlah Karyawan *','type' => 'number','max' => '10','required'=>true,'placeholder'=>'Jumlah Karyawan'])@endcomponent
                                 </div>
                                 </div>
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'kapasitas_produksi','label' => 'Kapasitas Produksi','required'=>true,'placeholder'=>'Contoh: 1000 Ton / Tahun'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'kapasitas_produksi','label' => 'Kapasitas Produksi *','required'=>true,'placeholder'=>'Contoh: 1000 Ton / Tahun'])@endcomponent
                                 </div>
                                 </div>
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    <label for="kelompok" class="col-lg-4 col-form-label">Kelompok Produk</label>
+                                    <label for="kelompok" class="col-lg-4 col-form-label">Jenis Produk</label>
 
                                     <div class="col-lg-8">
                                         <select id="id_kelompok_produk" name="id_kelompok_produk" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
-                                            <option value="">--Pilih Kelompok Produk--</option>
+                                            <option value="">--Pilih Jenis Produk--</option>
                                                 @if(isset($kelompokProduk))
                                                     @foreach($kelompokProduk as $index => $value)
                                                         <option value="{{$value['id']}}"> - {{$value['kelompok_produk']}}</i></option>
@@ -362,7 +365,7 @@
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'nib','label' => 'Nomor Induk Berusaha (NIB)','required'=>true,'placeholder'=>'Nomor Induk Berusaha (NIB)'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'nib','label' => 'Nomor Induk Berusaha (NIB) *','required'=>true,'placeholder'=>'Nomor Induk Berusaha (NIB)'])@endcomponent
                                 </div>
                                 </div>
 
@@ -404,7 +407,7 @@
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtextarea',['name'=> 'alamat_kantor','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat Kantor','id'=>'alamatKantor','value'=>''])@endcomponent                            
+                                    @component('components.inputtextarea',['name'=> 'alamat_kantor','label' => 'Alamat *','required'=>true,'placeholder'=>'Alamat Kantor','id'=>'alamatKantor','value'=>''])@endcomponent                            
                                 </div>
                                 </div>
                                 
@@ -456,13 +459,13 @@
                                 @component('components.inputtext',['name'=> 'kota_kantor','label' => 'Kota','required'=>false,'placeholder'=>'Kota/Kab','id'=>'kotaKantor','class'=>'kotaKantor'])@endcomponent
                                 </div></div>
                                 <div class="wrapper col-lg-12"><div class="row">
-                                @component('components.inputtext',['name'=> 'telepon_kantor','label' => 'Telepon','required'=>true,'placeholder'=>'Telepon','id'=>'teleponKantor'])@endcomponent
+                                @component('components.inputtext',['name'=> 'telepon_kantor','label' => 'Telepon *','required'=>true,'placeholder'=>'Telepon','id'=>'teleponKantor'])@endcomponent
                                 </div></div>
                                 <div class="wrapper col-lg-12"><div class="row">
-                                @component('components.inputtext',['name'=> 'kodepos_kantor','label' => 'Kode Pos','required'=>true,'placeholder'=>'Kode Pos','id'=>'kodeposKantor'])@endcomponent
+                                @component('components.inputtext',['name'=> 'kodepos_kantor','label' => 'Kode Pos *','required'=>true,'placeholder'=>'Kode Pos','id'=>'kodeposKantor'])@endcomponent
                                 </div></div>
                                 <div class="wrapper col-lg-12"><div class="row">
-                                @component('components.inputemail',['name'=> 'email_kantor','label' => 'Email','required'=>true,'placeholder'=>'Email','id'=>'emailKantor'])@endcomponent                            
+                                @component('components.inputemail',['name'=> 'email_kantor','label' => 'Email *','required'=>true,'placeholder'=>'Email','id'=>'emailKantor'])@endcomponent                            
                                 </div></div>                            
                                 </div>
                                 <div class="text-center">
@@ -485,7 +488,7 @@
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtextarea',['name'=> 'alamat_pabrik','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat Pabrik','id'=>'alamatPabrik'])@endcomponent
+                                    @component('components.inputtextarea',['name'=> 'alamat_pabrik','label' => 'Alamat *','required'=>true,'placeholder'=>'Alamat Pabrik','id'=>'alamatPabrik'])@endcomponent
                                 </div>
                                 </div>
 
@@ -538,13 +541,13 @@
                                 @component('components.inputtext',['name'=> 'kota_pabrik','label' => 'Kota','required'=>false,'placeholder'=>'Kota/Kab','id'=>'kotaPabrik','class'=>'kotaPabrik'])@endcomponent
                                 </div></div>
                                 <div class="wrapper col-lg-12"><div class="row">
-                                @component('components.inputtext',['name'=> 'telepon_pabrik','label' => 'Telepon','required'=>true,'placeholder'=>'Telepon','id'=>'teleponPabrik'])@endcomponent
+                                @component('components.inputtext',['name'=> 'telepon_pabrik','label' => 'Telepon *','required'=>true,'placeholder'=>'Telepon','id'=>'teleponPabrik'])@endcomponent
                                 </div></div>
                                 <div class="wrapper col-lg-12"><div class="row">
-                                @component('components.inputtext',['name'=> 'kodepos_pabrik','label' => 'Kode Pos','required'=>true,'placeholder'=>'Kode Pos','id'=>'kodeposPabrik'])@endcomponent
+                                @component('components.inputtext',['name'=> 'kodepos_pabrik','label' => 'Kode Pos *','required'=>true,'placeholder'=>'Kode Pos','id'=>'kodeposPabrik'])@endcomponent
                                 </div></div>
                                 <div class="wrapper col-lg-12"><div class="row">
-                                @component('components.inputemail',['name'=> 'email_pabrik','label' => 'Email','required'=>true,'placeholder'=>'Email','id'=>'emailPabrik'])@endcomponent
+                                @component('components.inputemail',['name'=> 'email_pabrik','label' => 'Email *','required'=>true,'placeholder'=>'Email','id'=>'emailPabrik'])@endcomponent
                                 </div></div>
 
                                 <!--status pabrik-->
@@ -602,27 +605,27 @@
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'nama_pemilik','label' => 'Nama','required'=>true,'placeholder'=>'Nama'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'nama_pemilik','label' => 'Nama *','required'=>true,'placeholder'=>'Nama'])@endcomponent
                                 </div>
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'jabatan_pemilik','label' => 'Jabatan','required'=>true,'placeholder'=>'Jabatan'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'jabatan_pemilik','label' => 'Jabatan *','required'=>true,'placeholder'=>'Jabatan'])@endcomponent
                                 </div>
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'telepon_pemilik','label' => 'Telepon','required'=>true,'placeholder'=>'Telepon'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'telepon_pemilik','label' => 'Telepon *','required'=>true,'placeholder'=>'Telepon'])@endcomponent
                                 </div>
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'fax_pemilik','label' => 'Fax','required'=>true,'placeholder'=>'Fax'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'fax_pemilik','label' => 'Fax *','required'=>true,'placeholder'=>'Fax'])@endcomponent
                                 </div>
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputemail',['name'=> 'email_pemilik','label' => 'Email','required'=>true,'placeholder'=>'Email'])@endcomponent
+                                    @component('components.inputemail',['name'=> 'email_pemilik','label' => 'Email *','required'=>true,'placeholder'=>'Email'])@endcomponent
                                 </div>
                                 </div>
                             </div>
@@ -644,27 +647,27 @@
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'nama_pj','label' => 'Nama','required'=>true,'placeholder'=>'Nama'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'nama_pj','label' => 'Nama *','required'=>true,'placeholder'=>'Nama'])@endcomponent
                                 </div>
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'jabatan_pj','label' => 'Jabatan','required'=>true,'placeholder'=>'Jabatan'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'jabatan_pj','label' => 'Jabatan *','required'=>true,'placeholder'=>'Jabatan'])@endcomponent
                                 </div>
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'telepon_pj','label' => 'Telepon','required'=>true,'placeholder'=>'Telepon'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'telepon_pj','label' => 'Telepon *','required'=>true,'placeholder'=>'Telepon'])@endcomponent
                                 </div>
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'fax_pj','label' => 'Fax','required'=>true,'placeholder'=>'Fax'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'fax_pj','label' => 'Fax *','required'=>true,'placeholder'=>'Fax'])@endcomponent
                                 </div>
                                 </div>
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputemail',['name'=> 'email_pj','label' => 'Email','required'=>true,'placeholder'=>'Email'])@endcomponent
+                                    @component('components.inputemail',['name'=> 'email_pj','label' => 'Email *','required'=>true,'placeholder'=>'Email'])@endcomponent
                                 </div>
                                 </div>
 
@@ -1908,8 +1911,12 @@
         var kepemilikan_lainnya = document.getElementById('k_lainnya');
         var s_pabrik = document.getElementById('sp');   
         var s_jenisusaha = document.getElementById('ju');
+        var no_sjh = document.getElementById('nosjh');
+        var no_sjh2 = document.getElementById('nosjh2');
 
         lsh.style.display = 'none';
+        nosjh.style.display = 'none';
+        nosjh2.style.display = 'none';
         sh.style.display = 'none';
         lshb.style.display = 'none';
         shb.style.display = 'none';
@@ -1965,12 +1972,16 @@
                     lsh.style.display = 'none';
                     sh.style.display = 'none';
                     lshb.style.display = 'none';
-                    shb.style.display = 'none';
+                    shb.style.display = 'none';                    
+                    no_sjh.style.display = 'none';
+                    no_sjh2.style.display = 'none';
                 }else{
                     lsh.style.display = 'block';
                     sh.style.display = 'block';
                     lshb.style.display = 'block';
                     shb.style.display = 'block';
+                    no_sjh.style.display = 'block';
+                    no_sjh2.style.display = 'block';
                 }
             });
         }

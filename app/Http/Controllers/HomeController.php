@@ -56,7 +56,19 @@ class HomeController extends Controller
                             ->join('registrasi','registrasi.id','=','users.registrasi_id')
                             ->join('jenis_registrasi','jenis_registrasi.id','=','registrasi.id_jenis_registrasi')
                             ->where('users.id',Auth::user()->id)
-                            ->get();                                                                                  
+                            ->get();    
+        $statistikregistrasi = DB::table('registrasi')                            
+                            ->select(DB::raw('count(MONTH(created_at)) as jumlah'),DB::raw('MONTH(created_at) as bulan'),DB::raw('YEAR(created_at) as tahun'))
+                            ->groupBy(DB::raw('MONTH(created_at)'))
+                            ->orderBy(DB::raw('YEAR(created_at)'),'ASC')
+                            ->get();
+        $statistikpelanggan = DB::table('users')
+                            ->select(DB::raw('count(MONTH(created_at)) as jumlah'),DB::raw('MONTH(created_at) as bulan'),DB::raw('YEAR(created_at) as tahun'))
+                            ->where('usergroup_id','=','2')
+                            ->groupBy(DB::raw('MONTH(created_at)'))
+                            ->orderBy(DB::raw('YEAR(created_at)'),'ASC')
+                            ->get();
+        // dd($statistikregistrasi);
 
         $dataRegistrasi = count($checkRegistrasi);
         $dataUser    = count($checkUserActive);
@@ -77,8 +89,8 @@ class HomeController extends Controller
         // print_r(count($checkUserActive));
         // echo "</pre>"; 
 
-        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7){            
-            return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan'));
+        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7){                        
+            return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan'));
         }else{
             // echo "<pre>";
             // print_r($dataCurrent);

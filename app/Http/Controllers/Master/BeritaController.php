@@ -62,7 +62,9 @@ class BeritaController extends Controller
 
     public function detailBeritaUser($id){
         $berita = Berita::find($id);
-        $berita_all = Berita::all();
+        $berita_all = Db::table('berita')        
+        ->where('status_approve','=',1)
+        ->get();       
 
 		return view('master.berita.detailUser',compact('berita','berita_all'));
     }

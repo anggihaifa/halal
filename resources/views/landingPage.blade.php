@@ -15,15 +15,27 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-            <div class="carousel-inner">
+            <div class="carousel-inner container-fluid" style="width: 95%">
                 <div class="carousel-item active">
-                <img class="d-block w-100" src="assets/img/berita_utama/berita_utama1.jpg" alt="First slide" style="min-height:400px; background: #b9b9b9">
+                    <img class="d-block w-100" src="assets/img/berita_utama/berita_utama1.jpg" alt="First slide" style="min-height:400px; background: #b9b9b9">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Pertemuan Auditor</h5>
+                        <p>Pertemuan auditor semua cabang Sucofindo</p>
+                    </div>
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src="assets/img/berita_utama/berita_utama2.jpg" alt="Second slide" style="min-height:400px; background: #b9b9b9">
+                    <img class="d-block w-100" src="assets/img/berita_utama/berita_utama2.jpg" alt="Second slide" style="min-height:400px; background: #b9b9b9">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Pertemuan Auditor</h5>
+                        <p>Pertemuan auditor semua cabang Sucofindo</p>
+                    </div>
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src="assets/img/berita_utama/berita_utama1.jpg" alt="Third slide" style="min-height:400px; background: #b9b9b9">
+                    <img class="d-block w-100" src="assets/img/berita_utama/berita_utama1.jpg" alt="Third slide" style="min-height:400px; background: #b9b9b9">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Pertemuan Auditor</h5>
+                        <p>Pertemuan auditor semua cabang Sucofindo</p>
+                    </div>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -80,8 +92,8 @@
         @endif        
     
 
-    <div class="container-fluid col-lg-12">       
-        <div class="row col-lg-12 ml-5">
+    <div class="container-fluid col-lg-11">
+        <div class="row col-lg-12">
             <span class="col-lg-12 col-form-label"><h3>Berita</h3></span>
             <div class="col-lg-12">
                 <div class="col-lg-4 mt-3 mb-3">
@@ -102,10 +114,9 @@
                     </div>
                 @else      
                     @foreach ($berita as $item)
-                        <div class="row col-lg-2 border mr-3 mb-3 p-10 ml-2" style="min-height: 100px;">
+                        <div class="row col-lg-12 border mr-3 mb-3 p-10 ml-2" style="min-height: 100px;">
                             <p class="col-sm-12">{{$item->created_at}}</p>
                             <a href="{{url('detail_berita_user')}}/{{$item->id}}" class="text-dark"><h6 class="col-sm-12">{{$item->judul_berita}}</h6></a>
-                            {{-- <a class="col-sm-12 btn btn-outline-primary float-right">Detail</a> --}}
                         </div>
                     @endforeach         
                 @endif   
