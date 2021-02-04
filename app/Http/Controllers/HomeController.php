@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\Cast\Object_;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\Berita;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -75,15 +76,24 @@ class HomeController extends Controller
         // print_r(count($checkUserActive));
         // echo "</pre>"; 
 
-        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 ){
+        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7){            
             return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan'));
         }else{
             // echo "<pre>";
             // print_r($dataCurrent);
-            // echo "</pre>";
+            // echo "</pre>";            
             return view('homeUser',compact('dataDetailUser','totalRegistrasiUser','dataCurrent'));
         }
         //return view('home');
+    }
+
+    public function landingPage(){
+        $berita = Berita::all();
+        // dd($berita);
+
+        return view('landingPage', compact('berita'));
+
+        // return redirect()->route('home.index');
     }
 
     public function home(){

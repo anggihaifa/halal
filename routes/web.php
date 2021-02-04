@@ -1,10 +1,11 @@
 <?php
 
-Route::get('','HomeController@home')->name('home.index');
+Route::get('','HomeController@landingPage')->name('home.index');
 Route::get('home','HomeController@index')->name('home.index');
+Route::get('landing_page','HomeController@landingPage')->name('home.landingpage');
+// Route::get('home','HomeController@landingPage')->name('home.landingpage');
 
 Route::get('report','ReportController@index')->name('report.index');
-
 
 //user management
 Route::get('login','Auth\LoginController@login')->name("login");
@@ -44,6 +45,8 @@ Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin'
 
 Route::post('detail_auditor', 'PenjadwalanController@detail')->name('detail_auditor.detail');
 Route::post('dropdown1', 'PenjadwalanController@dataAuditor1')->name('dropdown1.dataauditor');
+Route::post('jenis_akomodasi', 'PenjadwalanController@jenisAkomodasi')->name('jenis_akomodasi.data');
+Route::post('opsi_akomodasi', 'PenjadwalanController@opsiAkomodasi')->name('opsi_akomodasi.data');
 Route::post('dropdown2', 'PenjadwalanController@dataAuditor2')->name('dropdown2.dataauditor');
 Route::post('auditor_dropdown', 'PenjadwalanController@dataRapatAuditor')->name('auditor_dropdown.datarapatauditor');
 Route::post('komite_dropdown', 'PenjadwalanController@dataKomite')->name('komite_dropdown.datakomite');
@@ -65,7 +68,11 @@ Route::get('update_status_pembayaran_tahap2/{id}/{no_registrasi}/{id_user}/{stat
 Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad');
 Route::get('update_status_pelunasan/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPelunasan');
 //
-Route::get('update_status_akad_review/{id}/{no_registrasi}/{id_user}/{status}/{catatan}','ReviewerController@updateStatusAkad');
+Route::get('update_status_akad_review/{id}/{id_user}/{status}/{id_akad}/{catatan}','ReviewerController@updateStatusAkad');
+Route::get('konfirmasi_akad_reviewer/{id}/{id_akad}','ReviewerController@konfirmasiAkadReviewer');
+
+Route::get('update_status_akad_approve/{id}/{id_user}/{status}/{id_akad}/{catatan}','ReviewerController@updateStatusAkad2');
+Route::get('konfirmasi_akad_approver/{id}/{id_akad}','ReviewerController@konfirmasiAkadReviewer2');
 //
 
 Route::get('update_status_registrasi/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusRegistrasi');
@@ -130,12 +137,15 @@ Route::get('data_akad_reviewer','ReviewerController@dataAkadReviewer')->name('da
 Route::get('list_penjadwalan_reviewer','ReviewerController@listPenjadwalanReviewer')->name('listpenjadwalanreviewer');
 Route::get('list_pelunasan_reviewer','ReviewerController@listPelunasanReviewer')->name('listpelunasanreviewer');
 
+Route::get('list_akad_approver','ReviewerController@listAkadApprover')->name('listakadapprover');
+Route::get('data_akad_approver','ReviewerController@dataAkadApprover')->name('dataakadapprover');
+
 //admin
 Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listakadadmin');
 Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin');
 Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin');
 Route::put('upload_file_akad_admin/{id}','RegistrasiController@uploadFileAkadAdmin')->name('registrasi.uploadfileakadadmin');
-Route::get('konfirmasi_akad_admin/{id}','RegistrasiController@konfirmasiAkadAdmin');
+Route::get('konfirmasi_akad_admin/{id}/{status}','RegistrasiController@konfirmasiAkadAdmin');
 
 Route::put('acc_audit_admin/{id}','RegistrasiController@accAuditAdmin')->name('registrasi.accauditadmin');
 Route::put('acc_berita_acara_admin/{id}','RegistrasiController@accBeritaAcaraAdmin')->name('registrasi.accberitaacaraadmin');
@@ -277,14 +287,42 @@ Route::prefix('master')->group(function (){
     Route::resource('kelompok_produk','Master\KelompokProdukController');
     Route::get('kelompok_produk_datatable','Master\KelompokProdukController@datatable')->name('master.kelompokproduk.datatable');
 
+    
+
     Route::resource('faq','Master\FaqController');
     Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
 
+    Route::resource('akomodasi','\App\Http\Controllers\Master\AkomodasiController');
+    Route::get('akomodasi_datatable','Master\AkomodasiController@datatable')->name('master.akomodasi.datatable');
+
+    Route::get('akomodasi/delete/{id}/{jenis_akomodasi}', [
+    'as' => 'destroy', 
+    'uses' => 'Master\AkomodasiController@destroy'
+    ]);
+
+    Route::get('akomodasi/update/{id}', [
+    'as' => 'update', 
+    'uses' => 'Master\AkomodasiController@update'
+    ]);
+
+     Route::get('akomodasi/edit/{id}/{jenis_akomodasi}', [
+    'as' => 'edit', 
+    'uses' => 'Master\AkomodasiController@edit'
+    ]);
+
     Route::resource('guideline','Master\GuidelineController');
-    // Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
+
+    Route::resource('berita','Master\BeritaController');
+    Route::resource('editberita','Master\EditBeritaController');
+    Route::get('data_berita','Master\BeritaController@dataBerita')->name('master.databerita');
+    Route::post('upload_image','Master\BeritaController@uploadImage')->name('master.uploadimage');    
+        
+    // Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin');
 });
 Route::get('faq_detail/{id}','Master\FaqController@faqDetail')->name('master.faq.detail');
-
+Route::get('detail_berita/{id}','Master\BeritaController@detailBerita')->name('master.berita.detailberita');
+Route::get('detail_berita_user/{id}','Master\BeritaController@detailBeritaUser')->name('master.berita.detailberitauser');
+Route::get('acc_berita/{id}','Master\BeritaController@accBerita')->name('master.berita.accberita');
 
 //user management
 Route::prefix('system')->group(function(){

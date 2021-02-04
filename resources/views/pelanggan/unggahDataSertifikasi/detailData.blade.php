@@ -120,8 +120,8 @@
 								$regId = Auth::user()->registrasi_id;
 								$fieldSudah = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:#2fca2f"></i></td>';
 								$fieldBelum = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:grey"></i></td>';
-								$buttonUnduhDisabled = '<td class="text-nowrap valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a></td>';
-								$buttonUnduh = '<td class="text-nowrap valign-middle text-center"><a href="#" class="btn btn-primary btn-xs">unduh</a></td>';
+								$buttonUnduhDisabled = '<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a></td>';
+								$buttonUnduh = '<td class="valign-middle text-center"><a href="#" class="btn btn-primary btn-xs">unduh</a></td>';
 						
 							@endphp
 							@if($dataHas !== null)

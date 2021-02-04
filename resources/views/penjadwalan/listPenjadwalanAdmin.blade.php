@@ -287,12 +287,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Saran Pelaksana 1 : </label>
-                                <input type="text" class="form-control"
-                                id="saran1" name="saran1" readonly />
-                            </div>
-
-                            <div class="form-group">
+                                <label>Saran Pelaksana 1 :  </label> <a id="saran1"><b></b></a><br>
                                 <label>Pelaksana 1</label>
                                 <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
@@ -300,21 +295,54 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Saran Pelaksana 2 : </label>
-                                <input type="text" class="form-control"
-                                id="saran2" name="saran2" readonly />
-                            </div>
-
-                            <div class="form-group">
+                                 <label>Saran Pelaksana 2 :  </label> <a id="saran2"><b></b></a><br>
                                 <label>Pelaksana 2</label>
                                 <select id="pelaksana2_audit2" name="pelaksana2_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
+
+                            <div class="form-group">
+
+                                <label >Akomodasi</label> 
+                                <select id="jenis_akomodasi" name="jenis_akomodasi" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                    <option value="">==Pilih Jenis Akomodasi==</option>                                                                        
+                                </select>
+       
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>Pilih</label>
+                                </select>
+                                <select id="opsi_akomodasi" name="opsi_akomodasi" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                    <option value="">==Pilih Opsi Akomodasi==</option>                                                                        
+                                </select>
+                            </div>
+
+                           <!--  <div class="form-group">
+                                <a class="btn btn-default" style="float:right;" onclick="tambahAkomodasi(this)">Tambah</a>
+                            </div> -->
+
+                            <div id="tAkomodasi" name="tAkomodasi" class="form-group" style="visibility:hidden;display:none;">
+                                 <table id="tableAkomodasi" name="tableAkomodasi" class="table table-bordered" >
+                                    <thead>
+                                        <tr>   
+                                            <th>Jenis Akomodasi</th>
+                                            <th>Opsi Akomodasi</th>     
+                                            <th>Aksi</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+  
+                                    </tbody>
+                                </table>
+                           
+                            </div>
                            
                         </div>
                         <div class="modal-footer">
-                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan penjadwalan?')">Submit</button>
+                           <button type="submit" class="btn btn-info m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan penjadwalan?')">Submit</button>
                         </div>
                     </form>
                 </div>  
@@ -538,6 +566,8 @@
 
         $('#modalPenjadwalan2').on('show.bs.modal', function(e) {
 
+
+
             var $this = $(e.relatedTarget);
             
             var data_id = $this.data('id');
@@ -546,31 +576,52 @@
             var modal = $('#modalPenjadwalan2');
 
            //alert($this.data('pelaksana1'));
+           var z = document.getElementById("idregis2"); 
+
+           var x = document.getElementById("saran1"); 
+           var y = document.getElementById("saran2"); 
           
             if(modal.find('#idregis2').val()){
 
             }else{
-                modal.find('#idregis2').val(data_id);
-                  
-                modal.find('#formpenjadwalan2').attr('action', function (i,old) {
-                   return old + '/' + data_id;
-                }); 
 
+                z.value = data_id;
+                x.innerHTML = '<b>'+data_saran1+'</b>' ;
+                y.innerHTML = '<b>'+data_saran2+'</b>' ;
+                $.ajax({
 
+                    url: '{{ route('jenis_akomodasi.data') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                       /* mulai: $('#mulai_audit1').val(),
+                        selesai: $('#selesai_audit1').val(),
+                        selected_pelaksana1: $('#pelaksana1_audit1').val(),
+                        id_regis: $('#idregis1').val()*/
+                    },
+                    success: function (response) {
+                    
+                        $('#jenis_akomodasi').empty();  
+                        $('#jenis_akomodasi').append(new Option('==Pilih Jenis Akomodasi==',''))                       
+                        $.each(response, function (jenis_akomodasi, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                            $('#jenis_akomodasi').append(new Option(jenis_akomodasi,id))
+                        })
 
-                modal.find('#saran1').val(data_saran1);
-                  
-                modal.find('#formpenjadwalan2').attr('action', function (i,old) {
-                   return old + '/' + data_saran1;  
-                }); 
+                        $('#jenis_akomodasi').selectpicker('destroy');
+                        $('#jenis_akomodasi').selectpicker();
+                                     
+                        
+                    }
+                })
 
-                modal.find('#saran2').val(data_saran2);
-                  
-                modal.find('#formpenjadwalan2').attr('action', function (i,old) {
-                   return old + '/' + data_saran2;      
-                });  
+              
+                
             }
            
+
+           
+
 
         });
 
@@ -608,11 +659,14 @@
             var data_id = $this.data('id');
             var modal = $('#modalPenjadwalan4');
            
+
           
             if(modal.find('#idregis4').val()){
 
+               // console.log(data_id);
+
             }else{
-                modal.find('#idregi4s').val(data_id);
+                modal.find('#idregis4').val(data_id);
                   
                 modal.find('#formpenjadwalan4').attr('action', function (i,old) {
                    return old + '/' + data_id;
@@ -655,7 +709,58 @@
 
         }
 
+        var i =0;
 
+        function deleteAkomodasi(d){
+            d.closest('tr').remove();
+
+        }
+
+        function tambahAkomodasi (d) {
+            
+            
+            //var value = 0;
+            var jenis_a = 'jenis_a['+i+']';
+            var opsi_a = 'opsi_a['+i+']';
+
+            var table = document.getElementById("tableAkomodasi").getElementsByTagName('tbody')[0];;
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            //var i =0;
+
+            var jenis = document.getElementById("jenis_akomodasi");
+            var jenisText = jenis.options[jenis.selectedIndex].text;
+
+            var opsi = document.getElementById("opsi_akomodasi");
+            var opsiText = opsi.options[opsi.selectedIndex].text;
+
+            cell1.innerHTML = '<input type="text"  class="form-control" name='+jenis_a+' value="'+jenisText+'">';
+
+            cell2.innerHTML = '<input type="text" class="form-control"  name='+opsi_a+' value="'+opsiText+'">';
+
+            cell3.innerHTML = '<input type="button" class="btn btn-danger btn-sm" id="hapus" style="color:white;" value="X" onClick="deleteAkomodasi(this)">';
+
+            i++;
+
+            //cell3.innerHTML = opsiText;
+
+            console.log(i);
+
+            var x = document.getElementById("tAkomodasi");
+
+            if(x.style.visibility == "hidden"){
+
+                 x.style.visibility = "visible";
+                 x.style.display = "block";
+            }
+           
+
+           
+
+            
+        }
          
         function format ( d ) {
             // `d` is the original data object for the row
@@ -962,7 +1067,53 @@
                          $('#pelaksana2_audit2').selectpicker('refresh');
                     }
                 })
+
+                
             });
+
+            $('#jenis_akomodasi').on('change', function () {
+
+                  $.ajax({
+
+                    url: '{{ route('opsi_akomodasi.data') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                        jenis: $('#jenis_akomodasi').val(),
+                      
+                    },
+                    success: function (response) {
+                        
+                        $('#opsi_akomodasi').selectpicker('destroy');
+                        $('#opsi_akomodasi').selectpicker();
+
+                        $('#opsi_akomodasi').empty();  
+                        $('#opsi_akomodasi').append(new Option('==Pilih Opsi Akomodasi==',''))                       
+                        $.each(response, function (opsi_akomodasi, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                            $('#opsi_akomodasi').append(new Option(opsi_akomodasi,id))
+                        })
+
+                        $('#opsi_akomodasi').selectpicker('refresh');    
+                       // $('#pelaksana1_rapat').selectpicker('refresh');              
+
+                        
+                                     
+                        
+                    }
+                })
+                
+
+
+            });
+
+            $('#opsi_akomodasi').on('change', function () {
+
+                 tambahAkomodasi(this);
+
+
+           });
+
 
             $('#mulai_rapat').on('change', function () {
                 $.ajax({

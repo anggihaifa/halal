@@ -128,6 +128,8 @@
 				    $configSidebar = config('sidebar.menu3');
 				}elseif(Auth::user()->usergroup_id == 6){					
 					$configSidebar = config('sidebar.menu5');
+				}elseif(Auth::user()->usergroup_id == 7){
+					$configSidebar = config('sidebar.menu6');
 				}else{
 					$configSidebar = config('sidebar.menu');
 				}

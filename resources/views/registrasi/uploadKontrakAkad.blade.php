@@ -44,8 +44,7 @@
 							
 							<label class="col-lg-4 col-form-label">Tanggal Akad</label>
 							<div class="col-lg-8">
-								@if($data->status_akad ==0 )
-
+								@if($data->status_akad == 0 || $data->status_akad ==9)
 									<input id="tgl_akad" name="tgl_akad" type="text" class="form-control"/>
 								@else
 									<input id="tgl_akad" name="tgl_akad" type="text" class="form-control" value={{ $data->status_akad}} readonly />
@@ -62,7 +61,7 @@
 								
 								<label class="col-lg-4 col-form-label">Mata Uang</label>
 								
-								@if($data->status_akad == 0 || $data->status_akad == 1  )
+								@if($data->status_akad == 0 || $data->status_akad == 1  || $data->status_akad == 5 || $data->status_akad ==9)
 								<div class="col-lg-8">
 									<select id="mata_uang" name="mata_uang" class="form-control selectpicker forSearch" data-size="10" data-live-search="true" data-style="btn-white" value={{$data->mata_uang}} >
 	                                    <option value="" selected="selected">--Pilih Mata Uang--</option>
@@ -157,10 +156,14 @@
 
 								<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
 								<div class="col-lg-8">
-									@if ($data->status_akad == 0 || $data->status_akad == 1)
+									@if ($data->status_akad == 0 || $data->status_akad == 1 || $data->status_akad == 5 || $data->status_akad ==9)
 										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator"/>
 									@else
+										@if (count($dataAkad) > 0)
 										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="{{number_format($dataAkad[0]->biaya_pemeriksaan,0,",",".")}}" onchange="jml()" class="form-control number-separator " disabled="" />
+										@else
+										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" onchange="jml()" class="form-control number-separator " disabled="" />
+										@endif
 									@endif 
 
 									
@@ -168,18 +171,26 @@
 								
 								<label class="col-lg-4 col-form-label">Biaya Pengujian</label>
 								<div class="col-lg-8">
-									@if ($data->status_akad == 0 || $data->status_akad == 1 )
+									@if ($data->status_akad == 0 || $data->status_akad == 1 || $data->status_akad == 5 || $data->status_akad ==9)
 										<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" />
 									@else
+										@if (count($dataAkad) > 0)
 										<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" value="{{number_format($dataAkad[0]->biaya_pengujian,0,",",".")}}" class="form-control number-separator" disabled="" />
+										@else
+										<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" disabled="" />
+										@endif
 									@endif
 								</div>
 								<label class="col-lg-4 col-form-label">Biaya Sidang Fatwa</label>
 								<div class="col-lg-8">
-									@if ($data->status_akad == 0 || $data->status_akad == 1 )
+									@if ($data->status_akad == 0 || $data->status_akad == 1 || $data->status_akad == 5 || $data->status_akad ==9)
 										<input id="biaya_fatwa" onchange="jml()" name="biaya_sidang_fatwa" type="text" class="form-control number-separator" />
 									@else
+										@if (count($dataAkad) > 0)
 										<input id="biaya_fatwa" onchange="jml()" name="biaya_sidang_fatwa" type="text" value="{{number_format($dataAkad[0]->biaya_sidang_fatwa,0,",",".")}}" class="form-control number-separator" disabled="" />
+										@else
+										<input id="biaya_fatwa" onchange="jml()" name="biaya_sidang_fatwa" type="text" value="" class="form-control number-separator" disabled="" />
+										@endif
 									@endif
 								</div>
 								<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
@@ -189,7 +200,7 @@
 								</div>
 
 							
-							@if($data->status_akad == 1)
+							@if($data->status_akad == 1 || $data->status_akad == 5)
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Kontrak Akad</label>
 								<div id="sh" class="col-lg-8">
@@ -201,7 +212,7 @@
 								<div class="col-lg-8">
 									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required   onchange="getValue('file')"/>
 								</div>
-							@elseif($data->status_akad == 0)									
+							@elseif($data->status_akad == 0 || $data->status_akad ==9)
 								<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 								<div class="col-lg-8">
 									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')" required />
@@ -218,6 +229,43 @@
 								</div>
 							@endif
 
+							@if ($data->status_akad == 5)
+								<label class="col-lg-4 col-form-label">Catatan Reviewer</label>
+								<div id="sh" class="col-lg-8">
+									<div class="form-control" readonly>
+										@if (count($dataAkad) > 0)
+										<p>{{$dataAkad[0]->catatan_reviewer}}</p>
+										@else
+										<p></p>
+										@endif
+									</div>
+								</div>			
+
+								<label class="col-lg-4 col-form-label">Catatan Approver</label>
+								<div id="sh" class="col-lg-8">
+									<div class="form-control" readonly>
+										@if (count($dataAkad) > 0)
+										<p>{{$dataAkad[0]->catatan_approver}}</p>
+										@else
+										<p></p>
+										@endif
+									</div>
+								</div>
+							@endif
+
+							@if ($data->status_akad ==9)
+							<label class="col-lg-4 col-form-label">Catatan Pengguna</label>
+								<div id="sh" class="col-lg-8">
+									<div class="form-control" readonly>
+										@if (count($dataAkad) > 0)
+										<p>{{$dataAkad[0]->catatan_user}}</p>
+										@else
+										<p></p>
+										@endif
+									</div>
+								</div>
+							@endif
+
 							
 								
 							
@@ -225,14 +273,14 @@
 									
 								
 										@component('components.buttonback',['href' => route("listakadadmin")])@endcomponent	
-										@if($data->status_akad == 1)
+										@if($data->status_akad == 1 || $data->status_akad == 5)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah berkas kontrak akad???')">Konfirmasi</button>
 											<button  class="btn btn-sm btn-warning m-r-5" disabled>Akad Sedang Diproses</button>
 										@elseif($data->status_akad == 2)
 											<button type="submit" class="btn btn-sm btn-green m-r-5" disabled>Akad Sedang Diproses</button>
 										@elseif($data->status_akad == 3)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad Sudah Dikonfirmasi</button>
-										@elseif($data->status_akad == 0)
+										@elseif($data->status_akad == 0 || $data->status_akad ==9)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi</button>
 										@endif								
 									

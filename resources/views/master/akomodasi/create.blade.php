@@ -1,6 +1,6 @@
 @extends('layouts.default', ['boxedLayout' => true], ['sidebarLight' => true], ['sidebarWide' => true])
 
-@section('title', 'Tambah Data Master Jenis Registrasi')
+@section('title', 'Tambah Data Master Akomodasi')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -11,12 +11,12 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="#">Master</a></li>
-        <li class="breadcrumb-item"><a href="#">Jenis Registrasi</a></li>
-        <li class="breadcrumb-item active">Tambah Data Master Jenis Registrasi</li>
+        <li class="breadcrumb-item"><a href="#">Akomodasi</a></li>
+        <li class="breadcrumb-item active">Tambah Data Master Akomodasi</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Tambah Dagta Master Jenis Registrasi<small></small></h1>
+    <h1 class="page-header">Tambah Dagta Master Akomodasi<small></small></h1>
     <!-- end page-header -->
     <!-- begin row -->
     <div class="row">
@@ -26,7 +26,7 @@
             <div class="panel panel-inverse" data-sortable-id="form-plugins-7">
                 <!-- begin panel-heading -->
                 <div class="panel-heading">
-                    <h4 class="panel-title">Tambah Data Master Jenis Registrasi</h4>
+                    <h4 class="panel-title">Tambah Data Master Akomodasi</h4>
                     <div class="panel-heading-btn">
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     </div>
@@ -34,12 +34,16 @@
                 <!-- end panel-heading -->
                 <!-- begin panel-body -->
                 <div class="panel-body panel-form">
-                    <form action="{{route('jenis_registrasi.store')}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
+                    <form action="{{route('akomodasi.store')}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
                         <div class="form-group row">
                             @csrf
-                            @component('components.inputtext',['name'=> 'jenis_registrasi','label' => 'Jenis Registrasi'])@endcomponent
+
+                            @component('components.inputselect',['name'=>'jenis_akomodasi','label'=>'Jenis Akomodasi','options'=>$jenis_akomodasi,'labelKey'=>'jenis_akomodasi','required'=>true])@endcomponent
+
+
+                            @component('components.inputtext',['name'=> 'detail_akomodasi','label' => 'Detail Akomodasi'])@endcomponent
                             <div class="col-md-12 offset-md-5">
-                                @component('components.buttonback',['href' => route("jenis_registrasi.index")])@endcomponent
+                                @component('components.buttonback',['href' => route("akomodasi.index")])@endcomponent
                                 @component('components.buttonsubmit')@endcomponent
                             </div>
                         </div>

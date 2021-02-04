@@ -44,7 +44,7 @@
 							
 							<label class="col-lg-4 col-form-label">Tanggal Akad</label>
 							<div class="col-lg-8">
-							@if($data->status_akad ==0 )
+							@if($data->status_akad == 0 )
 
 								<input id="tgl_akad" name="tgl_akad" type="text" class="form-control"/>
 							@else
@@ -80,7 +80,12 @@
 							</div>
 							<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 							<div class="col-lg-8">
-								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')"required />
+								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')"/>
+							</div>
+
+							<label class="col-lg-4 col-form-label">Catatan (Diisi jika kontrak akad tidak sesuai menurut anda)</label>
+							<div class="col-lg-8">
+								<input id="catatan_user" name="catatan_user" type="text" class="form-control" placeholder="Catatan"/>
 							</div>
 							
 							@elseif($data->status_akad==2 || $data->status_akad==3 )
@@ -104,7 +109,8 @@
 							@if($data->status_akad == 1 || $data->status_akad == 2)
 								<button  type = "sumbit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah berkas kontrak akad ?????')">Konfirmasi</button>
 								@if($data->status_akad == 1)
-									<button   class="btn btn-sm btn-warning m-r-5" disabled="">Menunggu File Upload User</button>
+									<button type="submit" name="tidaksetuju" value="Tidak Setuju" class="btn btn-sm btn-warning m-r-5">Tidak Setuju</button>
+									<button class="btn btn-sm btn-warning m-r-5" disabled="">Menunggu File Upload User</button>									
 								@else
 									<button type="submit" class="btn btn-sm btn-green m-r-5" disabled>Akad Sedang Diproses</button>
 								@endif

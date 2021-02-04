@@ -29,7 +29,7 @@ use App\Models\UnggahData\Fasilitas;
 use App\Models\UnggahData\Produk;
 use App\Models\UnggahData\DokumenHas;
 use App\Models\UnggahData\DokumenMaterial;
-use App\Models\UnggahData\material;
+use App\Models\UnggahData\Material;
 use App\Models\UnggahData\DokumenMatriksProduk;
 use App\Models\UnggahData\KuisionerHas;
 use App\Models\UnggahData\unggahDataSertifikasi;
@@ -397,7 +397,7 @@ class PenjadwalanController extends Controller
 
                        $dataAuditor2 = DB::table('users')
                         ->where('usergroup_id','8')  
-                        ->where('id',$data['selected_pelaksana1'])
+                        ->where('id','!=',$data['selected_pelaksana1'])
                         ->pluck('id', 'name');   
                          
                 }else{
@@ -649,10 +649,47 @@ class PenjadwalanController extends Controller
 
 
 
+    public function jenisAkomodasi(Request $request)
+    {
+        $dataJenisAkomodasi =  DB::table('jenis_akomodasi')
+                           
+                             ->pluck('id', 'jenis_akomodasi');   
+
+        return response()->json( $dataJenisAkomodasi);
+    }
+
+    public function opsiAkomodasi(Request $request)
+    {
+        
+        $data = $request->except('_token','_method');
+
+        if($data['jenis'] == 1){
+            $dataOpsiAkomodasi = DB::table('detail_transportasi_darat')    
+                                ->pluck('id', 'transportasi_darat as opsi_akomodasi');   
+
+        }elseif($data['jenis'] == 2){
+            $dataOpsiAkomodasi = DB::table('detail_transportasi_laut')    
+                                ->pluck('id', 'transportasi_laut as opsi_akomodasi');  
+
+        }elseif($data['jenis'] == 3){
+             $dataOpsiAkomodasi = DB::table('detail_transportasi_udara')    
+                                ->pluck('id', 'transportasi_udara as opsi_akomodasi');   
+
+        }elseif($data['jenis'] == 4){
+            $dataOpsiAkomodasi= DB::table('detail_penginapan')    
+                                ->pluck('id', 'penginapan as opsi_akomodasi');   
+        }
+       
+
+        return response()->json( $dataOpsiAkomodasi);
+    }
+
+
     public function dataAuditor2(Request $request)
     {
 
         $data = $request->except('_token','_method');
+
 
         //Log::info('ini data: '.$data['selected_pelaksana1']);
         //$data['mulai'] = strtotime( $data['mulai'] ); 
@@ -980,7 +1017,7 @@ class PenjadwalanController extends Controller
 
                        $dataAuditor2 = DB::table('users')
                         ->where('usergroup_id','8')  
-                        ->where('id',$data['selected_pelaksana1'])
+                        ->where('id','!=',$data['selected_pelaksana1'])
                         ->pluck('id', 'name');   
                          
                 }else{
@@ -1712,7 +1749,7 @@ class PenjadwalanController extends Controller
 
                             $dataAuditor2 = DB::table('users')
                             ->where('usergroup_id','8')  
-                            ->where('id',$data['selected_pelaksana1'])
+                            ->where('id','!=',$data['selected_pelaksana1'])
                             ->where('id','!=',$key4['pelaksana1_audit1'])
                             ->where('id','!=',$key4['pelaksana2_audit1'])
                             ->where('id','!=',$key4['pelaksana1_audit2'])
@@ -2096,8 +2133,8 @@ class PenjadwalanController extends Controller
                         ->where('id','!=',$key4['pelaksana2_audit1'])
                         ->where('id','!=',$key4['pelaksana1_audit2'])
                         ->where('id','!=',$key4['pelaksana2_audit2'])
-                        ->where('id',$data['selected_pelaksana1'])
-                        ->where('id',$data['selected_pelaksana2'])
+                        ->where('id','!=',$data['selected_pelaksana1'])
+                        ->where('id','!=',$data['selected_pelaksana2'])
                         ->pluck('id', 'name');  
                     } 
                          
@@ -2474,6 +2511,9 @@ class PenjadwalanController extends Controller
     public function dataKomite(Request $request)
     {
 
+
+         $data = $request->except('_token','_method');
+
         if($data['mulai'] && $data['selesai']){
             $data = $request->except('_token','_method');
           
@@ -2668,7 +2708,10 @@ class PenjadwalanController extends Controller
     {
 
         $data = $request->except('_token','_method');
-        //dd($data);
+                   
+        $full_opsi = join("#",$data['opsi_a']);
+       
+
 
 
         DB::beginTransaction();
@@ -2682,6 +2725,8 @@ class PenjadwalanController extends Controller
         $j->mulai_audit2 = $data['mulai_audit2'];
         $j->status_audit2 = 1;
         $j->selesai_audit2 = $data['selesai_audit2'];
+
+        $j->akomodasi_audit2 = $full_opsi;
 
         $j->pelaksana1_audit2 = $data['pelaksana1_audit2'];
         $j->pelaksana2_audit2 = $data['pelaksana2_audit2'];

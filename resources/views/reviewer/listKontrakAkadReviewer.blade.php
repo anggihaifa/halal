@@ -194,7 +194,7 @@
 
                             return `-`
                             }else{
-                                return `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`" class="btn btn-indigo btn-xs">&nbsp;&nbsp;Detail&nbsp;&nbsp;</a>`    
+                                return `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`" class="btn btn-indigo btn-xs">&nbsp;&nbsp;Detail&nbsp;&nbsp;</a>`
                             }
                         
                         
@@ -204,10 +204,13 @@
                     "data":null,
                     "searchable":false,
                     "orderable":false,
-                    "render":function (data,type,full,meta) {
+                    "render":function (data,type,full,meta) {                                
                                 if(dataArray[meta.row] != null){
                                     return `<form><input type="text" id="catatan_akad`+meta.row+`" onchange="catatan_reviewer(`+meta.row+`)" name="catatan" value="`+dataArray[meta.row]+`" class="form-control"></form>`
                                 }else{
+                                    // if(full.catatan!=null){
+                                    //     return `<form><input type="text" id="catatan_akad`+meta.row+`" onchange="catatan_reviewer(`+meta.row+`)" name="catatan" value="`+full.catatan+`" class="form-control"></form>`
+                                    // }
                                     return `<form><input type="text" id="catatan_akad`+meta.row+`" onchange="catatan_reviewer(`+meta.row+`)" name="catatan" class="form-control"></form>`
                                 }                                
                                       
@@ -223,11 +226,11 @@
                                 
                                 // alert(document.getElementById("catatan_akad").value);                                
                                 if(dataArray[meta.row] != null){
-                                    var status8 = `<a href="{{url('update_status_akad_review')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/o/`+dataArray[meta.row]+`"   class="dropdown-item"> Akad Gagal</a> `;
+                                    var status8 = `<a href="{{url('update_status_akad_review')}}/`+full.id+`/`+full.id_user+`/o/`+full.id_akad+`/`+dataArray[meta.row]+`"   class="dropdown-item"> Akad Gagal</a> `;
                                 }else{                                    
-                                    var status8 = `<a href="{{url('update_status_akad_review')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/o/-"   class="dropdown-item"> Akad Gagal</a> `;
+                                    var status8 = `<a href="{{url('update_status_akad_review')}}/`+full.id+`/`+full.id_user+`/o/`+full.id_akad+`/-"   class="dropdown-item"> Akad Gagal</a> `;
                                 }
-                                var konfirm = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
+                                var konfirm = `<a href="{{url('konfirmasi_akad_reviewer')}}/`+full.id+`/`+full.id_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
 
                                 return `<div class="btn-group m-r-5 show">
                                         <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>

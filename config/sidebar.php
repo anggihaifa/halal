@@ -86,7 +86,11 @@ return [
                 [
                     'url' => 'faq.index',
                     'title' => 'F.A.Q'
-                ]                
+                ],
+                 [
+                    'url' => 'akomodasi.index',
+                    'title' => 'Akomodasi'
+                ]                    
             ],
         ],        
         [
@@ -108,6 +112,10 @@ return [
          [    'icon' => 'ion-ios-person',
             'title' => 'Guideline',
             'url' => 'guideline.index'
+        ],
+        [    'icon' => 'ion-md-information-circle-outline',
+            'title' => 'Berita',
+            'url' => 'berita.index'
         ],
     ],
     'menu2' => [
@@ -214,7 +222,11 @@ return [
                 [
                     'url' => 'faq.index',
                     'title' => 'F.A.Q'
-                ]
+                ],
+                [
+                    'url' => 'akomodasi.index',
+                    'title' => 'Akomodasi'
+                ]  
             ],
         ],
         [    'icon' => 'ion-ios-person',
@@ -312,12 +324,44 @@ return [
                     'url' => 'listpenjadwalanreviewer',       
                     'title' => 'List Penjadwalan'                    
                 ],
-                 [
-                    'url' => 'listpelunasanreviewer',
-                    'title' => 'List Pelunasan'
-                ],
+                //  [
+                //     'url' => 'listpelunasanreviewer',
+                //     'title' => 'List Pelunasan'
+                // ],
                
             ],
+        ],
+        [    'icon' => 'ion-md-information-circle-outline',
+            'title' => 'Berita',
+            'url' => 'berita.index'
+        ],
+    ],
+    'menu6' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],        
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Registrasi',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                /*[
+                    'url' => 'listregistrasipelanggan',
+                    'title' => 'List Registrasi Halal '
+                ],*/                 
+                [
+                    'url' => 'listakadapprover',
+                    'title' => 'List Kontrak Akad'
+                ]                
+               
+            ],
+        ],
+        [    'icon' => 'ion-md-information-circle-outline',
+            'title' => 'Berita',
+            'url' => 'berita.index'
         ],                             
     ],
 ];
