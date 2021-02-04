@@ -61,7 +61,7 @@ class BeritaController extends Controller
     }
 
     public function detailBeritaUser($id){
-        $berita = Berita::find($id);        
+        $berita = Berita::find($id);
         $berita_all = Berita::all();
 
 		return view('master.berita.detailUser',compact('berita','berita_all'));

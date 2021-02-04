@@ -14,7 +14,7 @@
             <div class="wrapper col-lg-12">
                     <div class="row">
                         <div class="col-lg-12">
-                            @component('components.buttonback',['href' => route('home.landingpage')])@endcomponent
+                            @component('components.buttonback',['href' => route('landingpage.index')])@endcomponent
                         </div>
                     </div>
             </div>                            

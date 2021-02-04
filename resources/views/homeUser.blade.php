@@ -155,6 +155,8 @@
 							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>
 						@elseif ($value['status'] == 'b' || $value['status'] == 'd' || $value['status'] == 'g' || $value['status'] == 'h' || $value['status'] == 'i' || $value['status'] == 'j' || $value['status'] == 'k' || $value['status'] == 'l' || $value['status'] == 'm' || $value['status'] == 'n' || $value['status'] == 'o' || $value['status'] == 'p' || $value['status'] == 'q' || $value['status'] == 'r' || $value['status'] == 's')
 							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>
+						@elseif ($value['status'] == 'e')
+							<li id="account" class="active"><strong>Pengajuan Baru</strong></li>
 						@else
 							<li id="account"><strong>Pengajuan Baru</strong></li>
 						@endif
@@ -171,6 +173,8 @@
 							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>						
 						@elseif ($value['status'] == 'b' || $value['status'] == 'd' || $value['status'] == 'g' || $value['status'] == 'h' || $value['status'] == 'i' || $value['status'] == 'j' || $value['status'] == 'k' || $value['status'] == 'l' || $value['status'] == 'm' || $value['status'] == 'n' || $value['status'] == 'o' || $value['status'] == 'p' || $value['status'] == 'q' || $value['status'] == 'r' || $value['status'] == 's')
 							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>
+						@elseif ($value['status'] == 'e')
+							<li id="personal" class="active"><strong>Verifikasi Data</strong></li>
 						@else
 							<li id="personal"><strong>Verifikasi Data</strong></li>
 						@endif
@@ -201,6 +205,8 @@
 							<li id="payment" class="warning"><strong>Approver Mengkonfirmasi Akad</strong></li>
 						@elseif ($value['status'] == 's')
 							<li id="payment" class="warning"><strong>User Tidak Menyutujui Berkas Akad</strong></li>
+						@elseif ($value['status'] == 'e')
+							<li id="payment" class="active"><strong>Akad</strong></li>
 						@elseif ($value['status'] > 8)
 							<li id="payment" class="active"><strong>Akad</strong></li>
 						@else
@@ -233,6 +239,8 @@
 							<li id="confirm" class="active"><strong>Menunggu Konfirmasi Pembayaran Tahap 2</strong></li>
 						@elseif ($value['status'] == 'l')
 							<li id="confirm" class="active"><strong>Pembayaran Tahap 2 Terkonfirmasi</strong></li>
+						@elseif ($value['status'] == 'e')
+							<li id="confirm" class="active"><strong>Pembayaran</strong></li>
 						@elseif ($value['status'] > 13)
 							<li id="confirm" class="active"><strong>Pembayaran Tahap 2</strong></li>
 						@else
@@ -243,6 +251,8 @@
 							<li id="confirm" class="active"><strong>Proses Audit Tahap 1</strong></li>
 						@elseif ($value['status'] > 14)
 							<li id="confirm" class="active"><strong>Proses Audit Tahap 1</strong></li>
+						@elseif ($value['status'] == 'e')
+							<li id="confirm" class="active"><strong>Proses Audit Tahap 1</strong></li>
 						@else
 							<li id="confirm"><strong>Proses Audit Tahap 1</strong></li>
 						@endif
@@ -250,6 +260,8 @@
 						@if ($value['status'] == 15)
 							<li id="confirm" class="active"><strong>Proses Audit Tahap 2</strong></li>
 						@elseif ($value['status'] > 15)
+							<li id="confirm" class="active"><strong>Proses Audit Tahap 2</strong></li>
+						@elseif ($value['status'] == 'e')
 							<li id="confirm" class="active"><strong>Proses Audit Tahap 2</strong></li>
 						@else
 							<li id="confirm"><strong>Proses Audit Tahap 2</strong></li>
@@ -261,6 +273,8 @@
 							<li id="confirm" class="active"><strong>Konfirmasi Berita Acara</strong></li>
 						@elseif ($value['status'] > 17)
 							<li id="confirm" class="active"><strong>Pelaporan Audit Tahap 2</strong></li>
+						@elseif ($value['status'] == 'e')
+							<li id="confirm" class="active"><strong>Pelaporan Audit Tahap 2</strong></li>
 						@else
 							<li id="confirm"><strong>Pelaporan Audit Tahap 2</strong></li>
 						@endif
@@ -271,11 +285,15 @@
 							<li id="confirm" class="active"><strong>Rekomendasi Hasil Pemeriksaan</strong></li>
 						@elseif ($value['status'] > 19)
 							<li id="confirm" class="active"><strong>Tinjauan Hasil Audit</strong></li>
+						@elseif ($value['status'] == 'e')
+							<li id="confirm" class="active"><strong>Tinjauan Hasil Audit</strong></li>
 						@else
 							<li id="confirm"><strong>Tinjauan Hasil Audit</strong></li>
 						@endif
 
 						@if ($value['status'] == 20)
+							<li id="confirm" class="active"><strong>Hasil Dikirimkan Ke MUI</strong></li>
+						@elseif ($value['status'] == 'e')
 							<li id="confirm" class="active"><strong>Hasil Dikirimkan Ke MUI</strong></li>
 						@elseif ($value['status'] > 20)
 							<li id="confirm" class="active"><strong>Hasil Dikirimkan Ke MUI</strong></li>
@@ -293,6 +311,8 @@
 							<li id="confirm" class="failed"><strong>Pelunasan Gagal</strong></li>
 						@elseif ($value['status'] == 25)
 							<li id="confirm" class="active"><strong>Pelunasan Terkonfirmasi</strong></li>
+						@elseif ($value['status'] == 'e')
+							<li id="confirm" class="active"><strong>Menunggu Konfirmasi Pelunasan</strong></li>
 						@elseif ($value['status'] > 25)
 							<li id="confirm" class="active"><strong>Pelunasan</strong></li>
 						@else
