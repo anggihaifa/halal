@@ -257,7 +257,7 @@ var myLineChart = new Chart(ctx2, {
     // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September","Oktober", "November", "Desember"],		
 	labels: bulan2,
     datasets: [{
-      label: "Registrasi Halal",
+      label: "Pelanggan",
       lineTension: 0.5,
       backgroundColor: "rgba(2,117,216,0.2)",
       borderColor: "rgba(2,117,216,1)",

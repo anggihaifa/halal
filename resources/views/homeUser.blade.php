@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="col-xl-12 col-md-12 ">
-			<div class="widget widget-stats bg-primary animated zoomIn delay-2s">
+			<div class="widget widget-stats bg-personal animated zoomIn delay-2s">
 				<div class="stats-icon"><i class="ion-md-desktop text-white"></i></div>
 				<div class="stats-info" style="font-size: 15px;">
 					@foreach($dataDetailUser as $key => $value)
@@ -92,7 +92,7 @@
 				<div class="stats-icon"><i class="ion-ios-document text-white"></i></div>
 				<div class="stats-info">
 					<h4>TOTAL REGISTRASI</h4>
-					<p>{{$totalRegistrasiUser}}</p>	
+					<a href="{{route('registrasiHalal.index')}}" class="text-white"><p>{{$totalRegistrasiUser}}</p></a>
 				</div>
 
 				<div class="stats-link">
@@ -119,7 +119,7 @@
 				<div class="stats-info">
 					<h4>REGISTRASI AKTIF</h4>
 					@foreach($dataCurrent as $key => $value)
-							<div><span>{{$value['no_registrasi']}}</span></div>
+							<div><a class="text-white" href="{{url('detail_registrasi')}}/{{$value['id']}}"><span>{{$value['no_registrasi']}}</span></a></div>
 							<div><span>{{$value['jenis_registrasi']}}</span></div>
 							{{-- @php $id_prog = $value['progress'] @endphp --}}
 							<!--

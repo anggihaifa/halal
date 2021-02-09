@@ -9,12 +9,12 @@
 		@if (!$sidebarSearch)
 		<!-- begin sidebar user -->
 		<ul class="nav">
-			<li class="nav-profile">
+			<li class="nav-profile" style="background: #218c74">
 				<a href="javascript:;" data-toggle="nav-profile">
 					@if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6)
-						<div class="cover with-shadow adminbg"></div>
+						{{-- <div class="cover with-shadow adminbg"></div> --}}
 					@else
-						<div class="cover with-shadow userbg"></div>
+						{{-- <div class="cover with-shadow userbg"></div> --}}
 					@endif
 					{{--<div class="cover with-shadow sci"></div>--}}
 					<div class="image">
