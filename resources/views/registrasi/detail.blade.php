@@ -81,7 +81,7 @@
 										</tr>
 										<tr>																						
 											<td><p><b>Kapasitas Produksi : </b>{{$value['kapasitas_produksi']}}</p></td>
-											<td colspan="3"><p><b>Kelompok Produk : </b>{{$value['kelompok']}}</p></td>											
+											<td colspan="3"><p><b>Jenis Produk : </b>{{$value['kelompok']}}</p></td>											
 										</tr>
 										<tr>
 											<td><p><b>Sertifikat Perusahaan : </b>{{$value['sertifikat_perusahaan']}}</p></td>

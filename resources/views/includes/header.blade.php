@@ -16,7 +16,9 @@
 			<span class="icon-bar"></span>
 		</button>
 		@endif
-		<a href="" class="navbar-brand" style="font-family:textmeone; color:black;"><img src="{{asset('/assets/img/logo/white-sci.png')}}" alt="" /> <b>LPH</b> SUCOFINDO</a>
+
+		<a href="" class="navbar-brand text-dark" style="font-family:textmeone"><img src="{{asset('/assets/img/logo/sci-color.png')}}" alt="" /> <b>LPH</b> SUCOFINDO</a>
+
 		@if ($headerMegaMenu)
 			<button type="button" class="navbar-toggle pt-0 pb-0 mr-0" data-toggle="collapse" data-target="#top-navbar">
 				<span class="fa-stack fa-lg text-inverse">
@@ -78,7 +80,7 @@
 				@else
 					<img src="{{asset('/assets/img/user/user-0.png')}}" alt="" />
 				@endif
-				<span class="d-none d-md-inline">{{ucwords(strtolower(Auth::user()->name))}}</span> <b class="caret"></b>
+				<span class="d-none d-md-inline text-dark">{{ucwords(strtolower(Auth::user()->name))}}</span> <b class="caret"></b>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right">
 				<a href="{{route('system.user.editprofile',Auth::user()->id)}}" class="dropdown-item">Edit Profile</a>

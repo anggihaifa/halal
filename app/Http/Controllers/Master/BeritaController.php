@@ -51,18 +51,28 @@ class BeritaController extends Controller
 
     public function cariBerita(Request $request){
         $data = $request->except('_token','_method');
+
+        $produk = Db::table('registrasi')                    
+                    ->get();
+        
+        $cek = Db::table('registrasi')
+                    ->where('nama_perusahaan','like',"%9999999999%")
+                    ->get();
+
         $berita = Db::table('berita')
                     ->where('judul_berita','like',"%".$data['katakunci']."%")
                     ->where('status_approve','=',1)
                     ->get();       
         // dd($berita);        
 
-		return view('landingpage',compact('berita'));
+		return view('landingpage',compact('produk','cek','berita'));
     }
 
     public function detailBeritaUser($id){
-        $berita = Berita::find($id);        
-        $berita_all = Berita::all();
+        $berita = Berita::find($id);
+        $berita_all = Db::table('berita')        
+        ->where('status_approve','=',1)
+        ->get();       
 
 		return view('master.berita.detailUser',compact('berita','berita_all'));
     }

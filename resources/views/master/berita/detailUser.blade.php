@@ -14,7 +14,7 @@
             <div class="wrapper col-lg-12">
                     <div class="row">
                         <div class="col-lg-12">
-                            @component('components.buttonback',['href' => route('home.landingpage')])@endcomponent
+                            @component('components.buttonback',['href' => route('landingpage.index')])@endcomponent
                         </div>
                     </div>
             </div>                            
@@ -31,7 +31,7 @@
             <div class="panel-body panel-form col-lg-4">
                 <div class="container-fluid col-lg-12">        
                     <div class="ml-5">
-                        <span class="col-lg-12 col-form-label"><h3>Berita</h3></span>
+                        <span class="col-lg-12 col-form-label"><h3>Berita Lainnya</h3></span>
                         @foreach ($berita_all as $item)
                             @if ($item->id == $berita->id)
                             @else
