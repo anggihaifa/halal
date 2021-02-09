@@ -170,22 +170,23 @@
      <!-- end panel -->
 
      <!--modal-->
-    <div id="modalPenjadwalan1" class="modal fade" role="dialog">
+      <!--modal-->
+    <div id="modalReject" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <form action="{{route('audit1')}}" method="post" name="registerForm">
+            <form action="{{route('reject_audit')}}" method="post" name="registerForm">
                 @csrf
                 @method('PUT')
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                        <h4 class="modal-title">Penjadwalan Audit Tahap 1</h4>
+                        <h4 class="modal-title">Reject Penjadwalan Audit Tahap 1</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                     </div>
 
-                    <form id="formpenjadwalan1">
+                    <form id="formreject1">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>ID Registrasi</label>
@@ -195,7 +196,7 @@
                            
                            
                             <div class="form-group">
-                              <label>Tanggal Mulai</label>
+                              <label>Catatan</label>
                              
                                 <input id="mulai_audit1"  name="mulai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
                                 <span class="add-on">
@@ -240,6 +241,8 @@
     </div>
 
     <!--- Modal Audit 2 -->
+
+
 
     
     

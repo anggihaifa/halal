@@ -150,7 +150,7 @@
 								<form action="#" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 									@csrf
 							@endif
-								<table id="hasTable" class="table table-striped table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%">
+								<table id="hasTable" class="table table-striped table-bordered table-td-valign-middle table-sm table-responsive" cellspacing="0" style="width:100%">
 									<thead>
 										<tr>
 											<th width="1%" class="text-nowrap valign-middle text-center">No</th>
@@ -168,54 +168,54 @@
 										<input type="text" name="status" value="0" readonly hidden>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">1</td>
-											<td class="valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
+											<td class="valign-middle">Manual Sistem Jaminan Produk Halal (SJPH)</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">2</td>
-											<td class="valign-middle" style="word-wrap:break-word">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJPH/ SJH B)</td>
+											<td class="valign-middle" style="word-wrap:break-word">Matriks Bahan</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
 										</tr>
-																			<tr class="odd">
+										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">3</td>
-											<td class="text-nowrap valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/Perpanjangan)</td>
+											<td class="text-nowrap valign-middle">Data Produk Yang Dihasilkan Sendiri</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">4</td>
-											<td class=" valign-middle">Flow process chart of halal certified products</td>
+											<td class=" valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">5</td>
-											<td class="valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
+											<td class="valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">6</td>
-											<td class=" valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
+											<td class=" valign-middle">Sertifikat Halal Sebelumnya</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">7</td>
-											<td class=" valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
+											<td class=" valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">8</td>
-											<td class="valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
+											<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang </td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
@@ -223,7 +223,7 @@
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">9</td>
-											<td class="valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
+											<td class="valign-middle">Diagram Alir Proses Untuk Produk Yang Disertifikasi</td>
 											
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
@@ -244,17 +244,48 @@
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">12</td>
-											<td class="valign-middle">Denah/ Tata letak ruang produksi</td>
+											<td class="valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
 											{!! $buttonUnduhDisabled !!}
 											<td class=" valign-middle"/>
 										</tr>
+										<tr class="even">
+											<td class="text-nowrap valign-middle text-center">13</td>
+											<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)</td>
+											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
+										</tr>
+										<tr class="even">
+											<td class="text-nowrap valign-middle text-center">14</td>
+											<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
+											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
+										</tr>
+										<tr class="even">
+											<td class="text-nowrap valign-middle text-center">15</td>
+											<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
+											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
+										</tr>
+										<tr class="even">
+											<td class="text-nowrap valign-middle text-center">16</td>
+											<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
+											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
+										</tr>
+										<tr class="even">
+											<td class="text-nowrap valign-middle text-center">17</td>
+											<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
+											{!! $buttonUnduhDisabled !!}
+											<td class=" valign-middle"/>
+										</tr>
+										
 									@else
 											@foreach($dataHas as $has => $value)
 												<input type="text" name="status" value="1" readonly hidden>
 												<input type="text" name="id" value="{{$value['id']}}" readonly hidden>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">1</td>
-													<td class="valign-middle">Sertifikat Halal Sebelumnya (Registrasi Perpanjangan/Pengembangan)</td>
+													<td class="valign-middle">Manual Sistem Jaminan Produk Halal (SJPH)</td>
 													@if($value['has_1'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -276,7 +307,7 @@
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">2</td>
-													<td class="valign-middle">Manual SJPH (untuk Registrasi Baru/Perpanjangan dan Pendaftaran Pengembangan dengan Status SJPH/ SJH B)</td>
+													<td class="valign-middle">Matriks Bahan </td>
 													@if($value['has_2'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -295,7 +326,7 @@
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">3</td>
-													<td class="text-nowrap valign-middle">Status SJPH atau Sertifikat SJH (untuk Registrasi Pengembangan/Perpanjangan)</td>
+													<td class="text-nowrap valign-middle">Data Produk Yang Dihasilkan Sendiri</td>
 													@if($value['has_3'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -315,7 +346,7 @@
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">4</td>
-													<td class="valign-middle">Flow process chart of halal certified products</td>
+													<td class="valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 													@if($value['has_4'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -332,7 +363,7 @@
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">5</td>
-													<td class="valign-middle">Pernyataan fasilitas bebas dari babi dan turunannya (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
 													@if($value['has_5'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -348,7 +379,7 @@
 													<td ><input type="text" class="form-control"  name="keterangan_has_5" value='{{$value['keterangan_has_5']}}'  ></input></td>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">6</td>
-													<td class="valign-middle">Daftar alamat seluruh fasilitas produksi (termasuk gerai, dapur, gudang dan kantor pusat)</td>
+													<td class="valign-middle">Sertifikat Halal Sebelumnya</td>
 													@if($value['has_6'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -365,7 +396,7 @@
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">7</td>
-													<td class="valign-middle">Bukti diseminasi/sosialisasi kebijakan halal (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 													@if($value['has_7'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -381,7 +412,7 @@
 													<td ><input type="text" class="form-control" name="keterangan_has_7" value='{{$value['keterangan_has_7']}}' ></input></td>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">8</td>
-													<td class="valign-middle">Bukti pelaksanaan pelatihan internal SJPH (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
 													@if($value['has_8'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -398,7 +429,7 @@
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">9</td>
-													<td class="valign-middle">Bukti pelaksanaan Audit Internal (untuk registrasi baru atau fasilitas baru)</td>
+													<td class="valign-middle">Diagram Alir Proses Untuk Produk Yang disertifikasi</td>
 													@if($value['has_9'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -449,7 +480,7 @@
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">12</td>
-													<td class="valign-middle">Denah/ Tata letak ruang produksi</td>
+													<td class="valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
 													@if($value['has_12'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
@@ -464,6 +495,97 @@
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_12" value='{{$value['keterangan_has_12']}}' ></input></td>
 												</tr>
+
+												<tr class="even">
+													<td class="text-nowrap valign-middle text-center">13</td>
+													<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)</td>
+													@if($value['has_13'] !== null)
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													@else
+														{!! $buttonUnduhDisabled !!}
+													@endif
+													<td>
+														<select id="status_has_13" name="status_has_13" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+															<option value="" {{$value["status_has_13"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+															<option value="1" {{$value["status_has_13"] == 1 ? 'selected' : ''}}>Approve</option>
+						                                    <option value="2" {{$value["status_has_13"] == 2 ? 'selected' : ''}}>Reject</option>
+														</select>
+													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_13" value='{{$value['keterangan_has_13']}}' ></input></td>
+												</tr>
+
+												<tr class="even">
+													<td class="text-nowrap valign-middle text-center">14</td>
+													<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
+													@if($value['has_14'] !== null)
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													@else
+														{!! $buttonUnduhDisabled !!}
+													@endif
+													<td>
+														<select id="status_has_14" name="status_has_14" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+															<option value="" {{$value["status_has_14"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+															<option value="1" {{$value["status_has_14"] == 1 ? 'selected' : ''}}>Approve</option>
+						                                    <option value="2" {{$value["status_has_14"] == 2 ? 'selected' : ''}}>Reject</option>
+														</select>
+													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_14" value='{{$value['keterangan_has_14']}}' ></input></td>
+												</tr>
+
+												<tr class="even">
+													<td class="text-nowrap valign-middle text-center">15</td>
+													<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
+													@if($value['has_15'] !== null)
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													@else
+														{!! $buttonUnduhDisabled !!}
+													@endif
+													<td>
+														<select id="status_has_15" name="status_has_15" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+															<option value="" {{$value["status_has_15"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+															<option value="1" {{$value["status_has_15"] == 1 ? 'selected' : ''}}>Approve</option>
+						                                    <option value="2" {{$value["status_has_15"] == 2 ? 'selected' : ''}}>Reject</option>
+														</select>
+													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_15" value='{{$value['keterangan_has_15']}}' ></input></td>
+												</tr>
+
+												<tr class="even">
+													<td class="text-nowrap valign-middle text-center">16</td>
+													<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
+													@if($value['has_16'] !== null)
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													@else
+														{!! $buttonUnduhDisabled !!}
+													@endif
+													<td>
+														<select id="status_has_16" name="status_has_16" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+															<option value="" {{$value["status_has_16"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+															<option value="1" {{$value["status_has_16"] == 1 ? 'selected' : ''}}>Approve</option>
+						                                    <option value="2" {{$value["status_has_16"] == 2 ? 'selected' : ''}}>Reject</option>
+														</select>
+													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_16" value='{{$value['keterangan_has_16']}}' ></input></td>
+												</tr>
+
+												<tr class="even">
+													<td class="text-nowrap valign-middle text-center">17</td>
+													<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
+													@if($value['has_17'] !== null)
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_17']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													@else
+														{!! $buttonUnduhDisabled !!}
+													@endif
+													<td>
+														<select id="status_has_17" name="status_has_17" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+															<option value="" {{$value["status_has_17"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+															<option value="1" {{$value["status_has_17"] == 1 ? 'selected' : ''}}>Approve</option>
+						                                    <option value="2" {{$value["status_has_17"] == 2 ? 'selected' : ''}}>Reject</option>
+														</select>
+													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_17" value='{{$value['keterangan_has_17']}}' ></input></td>
+												</tr>
+
 											@endforeach()
 										@endif
 									</tbody>

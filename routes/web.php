@@ -1,8 +1,9 @@
 <?php
 
-Route::get('','HomeController@landingPage')->name('home.index');
+Route::get('','LandingPageController@index')->name('landingpage.index');
 Route::get('home','HomeController@index')->name('home.index');
-Route::get('landing_page','HomeController@landingPage')->name('home.landingpage');
+Route::get('main','LandingPageController@index')->name('landingpage.index');
+Route::get('cari_produk','LandingPageController@cariProduk')->name('landingpage.cariproduk');
 // Route::get('home','HomeController@landingPage')->name('home.landingpage');
 
 Route::get('report','ReportController@index')->name('report.index');
@@ -292,6 +293,7 @@ Route::prefix('master')->group(function (){
     Route::resource('faq','Master\FaqController');
     Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
 
+
     Route::resource('akomodasi','\App\Http\Controllers\Master\AkomodasiController');
     Route::get('akomodasi_datatable','Master\AkomodasiController@datatable')->name('master.akomodasi.datatable');
 
@@ -305,17 +307,19 @@ Route::prefix('master')->group(function (){
     'uses' => 'Master\AkomodasiController@update'
     ]);
 
-     Route::get('akomodasi/edit/{id}/{jenis_akomodasi}', [
+    Route::get('akomodasi/edit/{id}/{jenis_akomodasi}', [
     'as' => 'edit', 
     'uses' => 'Master\AkomodasiController@edit'
     ]);
+
+    Route::get('faq_user','Master\FaqController@user')->name('faquser');
 
     Route::resource('guideline','Master\GuidelineController');
 
     Route::resource('berita','Master\BeritaController');
     Route::resource('editberita','Master\EditBeritaController');
     Route::get('data_berita','Master\BeritaController@dataBerita')->name('master.databerita');
-    Route::post('upload_image','Master\BeritaController@uploadImage')->name('master.uploadimage');    
+    Route::post('upload_image','Master\BeritaController@uploadImage')->name('master.uploadimage');
         
     // Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin');
 });
@@ -323,6 +327,10 @@ Route::get('faq_detail/{id}','Master\FaqController@faqDetail')->name('master.faq
 Route::get('detail_berita/{id}','Master\BeritaController@detailBerita')->name('master.berita.detailberita');
 Route::get('detail_berita_user/{id}','Master\BeritaController@detailBeritaUser')->name('master.berita.detailberitauser');
 Route::get('acc_berita/{id}','Master\BeritaController@accBerita')->name('master.berita.accberita');
+Route::get('cari_berita','Master\BeritaController@cariBerita')->name('master.berita.cariberita');
+
+Route::get('informasi_panduan','InformasiController@panduan')->name('informasipanduan');
+Route::get('informasi_alur','InformasiController@alur')->name('informasialur');
 
 //user management
 Route::prefix('system')->group(function(){

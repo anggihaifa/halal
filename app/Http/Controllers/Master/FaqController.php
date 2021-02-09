@@ -37,6 +37,18 @@ class FaqController extends Controller
 
 	public function create(){
 		return view('master.faq.create');
+    }
+    
+    public function user(){        
+        $getFaq =   DB::table('faq')
+                    ->where('status','aktif')
+                    ->orderBy('step','asc') 
+                    ->get();
+        $dataFaq = json_decode($getFaq,true);
+        // dd($dataFaq);
+
+        return view('master.faq.create_user',compact('dataFaq'));
+        // return view('master.faq.create_user');
 	}
 
 	public function store(Request $request){

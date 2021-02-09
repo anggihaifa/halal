@@ -25,9 +25,9 @@
         <!-- end news-feed -->
         <!-- begin right-content -->
         <div class="right-content right-content-custom">
-            <!-- begin login-header -->
+            <!-- begin login-header -->            
             <div class="login-header">
-                <div class="brand" style="font-family:textmeone">
+                <div class="brand" style="font-family:textmeone">                
                     <img src="{{asset('/assets/img/logo/white-sci.png')}}" alt="" /> <b>LPH</b><span>SUCOFINDO</span>
                 </div>
             </div>
@@ -81,7 +81,15 @@
                         </a>
                     </div>
 
-                        
+                    <div style="margin-top:15px;" >
+                        <a  href="{{route('landingpage.index')}}"  class="btn btn-inverse btn-block btn-lg forFaq">
+                            <h5 style="margin-bottom: 0px;">
+                               
+                                <span style="color: #89d0d4">Halaman Utama</span>
+                                
+                            </h5> 
+                        </a>
+                    </div>                                            
                     
                     @if(isset($notes))
                         <div class="login-info-red"><span>{{$notes}}</span></div>

@@ -210,7 +210,7 @@ select.list-dt:focus {
 
 #progressbar li.active:before,
 #progressbar li.active:after {
-    background: #348fe2
+    background: #348fe2;
 }
 
 #progressbar li.failed:before,

@@ -153,7 +153,7 @@
 							<li id="personal" class="active"><strong>Pengajuan Baru</strong></li>
 						@elseif ($value['status'] == 'c' || $value['status'] == 'f')
 							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>
-						@elseif ($value['status'] == 'b' || $value['status'] == 'd' || $value['status'] == 'g' || $value['status'] == 'h' || $value['status'] == 'i' || $value['status'] == 'j' || $value['status'] == 'k' || $value['status'] == 'l')
+						@elseif ($value['status'] == 'b' || $value['status'] == 'd' || $value['status'] == 'g' || $value['status'] == 'h' || $value['status'] == 'i' || $value['status'] == 'j' || $value['status'] == 'k' || $value['status'] == 'l' || $value['status'] == 'm' || $value['status'] == 'n' || $value['status'] == 'o' || $value['status'] == 'p' || $value['status'] == 'q' || $value['status'] == 'r' || $value['status'] == 's')
 							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>
 						@else
 							<li id="account"><strong>Pengajuan Baru</strong></li>
@@ -169,7 +169,7 @@
 							<li id="personal" class="active"><strong>Verifikasi Data</strong></li>
 						@elseif ($value['status'] == 'c' || $value['status'] == 'f')
 							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>						
-						@elseif ($value['status'] == 'b' || $value['status'] == 'd' || $value['status'] == 'g' || $value['status'] == 'h' || $value['status'] == 'i' || $value['status'] == 'j' || $value['status'] == 'k' || $value['status'] == 'l')
+						@elseif ($value['status'] == 'b' || $value['status'] == 'd' || $value['status'] == 'g' || $value['status'] == 'h' || $value['status'] == 'i' || $value['status'] == 'j' || $value['status'] == 'k' || $value['status'] == 'l' || $value['status'] == 'm' || $value['status'] == 'n' || $value['status'] == 'o' || $value['status'] == 'p' || $value['status'] == 'q' || $value['status'] == 'r' || $value['status'] == 's')
 							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>
 						@else
 							<li id="personal"><strong>Verifikasi Data</strong></li>
@@ -187,6 +187,20 @@
 							<li id="payment" class="active"><strong>Menunggu Konfirmasi Akad</strong></li>
 						@elseif ($value['status'] == 'b' || $value['status'] == 'd' || $value['status'] == 'g' || $value['status'] == 'h' || $value['status'] == 'i' || $value['status'] == 'j' || $value['status'] == 'k' || $value['status'] == 'l')
 							<li id="payment" class="active"><strong>Menunggu Konfirmasi Akad</strong></li>
+						@elseif ($value['status'] == 'm')
+							<li id="payment" class="active"><strong>Menunggu Persetujuan Reviewer</strong></li>
+						@elseif ($value['status'] == 'n')
+							<li id="payment" class="active"><strong>Menunggu Persetujuan Approver</strong></li>
+						@elseif ($value['status'] == 'o')
+							<li id="payment" class="warning"><strong>Reviewer Menolak Akad</strong></li>
+						@elseif ($value['status'] == 'p')
+							<li id="payment" class="warning"><strong>Approver Menolak Akad</strong></li>
+						@elseif ($value['status'] == 'q')
+							<li id="payment" class="warning"><strong>Reviewer Mengkonfirmasi Akad</strong></li>
+						@elseif ($value['status'] == 'r')
+							<li id="payment" class="warning"><strong>Approver Mengkonfirmasi Akad</strong></li>
+						@elseif ($value['status'] == 's')
+							<li id="payment" class="warning"><strong>User Tidak Menyutujui Berkas Akad</strong></li>
 						@elseif ($value['status'] > 8)
 							<li id="payment" class="active"><strong>Akad</strong></li>
 						@else
@@ -314,7 +328,7 @@
 	function getNotif (data) {return notifProgress(data);}
 	data=document.getElementById("stat_val").textContent;
 	/*
-	document.getElementById("status").innerText = getProgress(data);
+	document.getElementById("status").innerText = getProgresss(data);
 	*/
 	document.getElementById("notif_user").innerHTML = "<h6><b>"+getNotif(data)+"</h6></b>";
 </script>

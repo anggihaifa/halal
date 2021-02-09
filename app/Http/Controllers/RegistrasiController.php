@@ -378,10 +378,10 @@ class RegistrasiController extends Controller
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                 ->join('users','registrasi.id_user','=','users.id')
                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
-                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.*')
+                ->select('registrasi.*','registrasi.status as statusnya','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.*')
                 ->where('registrasi.id','=',$id)
                 ->get();
-            $data = json_decode($data,true);
+            $data = json_decode($data,true);            
 
             foreach ($data as $key => $value) {
                 $id_reg = $value['id_jenis_registrasi'];
@@ -1343,7 +1343,11 @@ class RegistrasiController extends Controller
     //tab dokumen has
 
     public function storeDokumenHas(Request $request){
-        $data = $request->except('_token','_method');
+
+        $data_real = $request->except('_token','_method');
+        $data = $request->except('_token','_method','has_selected');
+
+        //dd($data);
 
         $model = new DokumenHas;
         $model2 = new Registrasi;
@@ -1362,7 +1366,7 @@ class RegistrasiController extends Controller
 
 
         if($data["status"] == "0"){
-            //dd("masuk");
+           
                 try{
                     DB::beginTransaction();
 
@@ -1371,7 +1375,7 @@ class RegistrasiController extends Controller
                     $model->id_registrasi = $id_registrasi;
 
                     foreach ($data as $key => $value) {
-                        if($key){
+                        if($key == $data_real['has_selected']){
 
                             $model->$key =  FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
                             FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
@@ -1379,13 +1383,11 @@ class RegistrasiController extends Controller
                         }
 
                     }
-                    //print_r(count($data)) ;
-                    if(count($data)==10){
-                        $model->status_has = 1;
-                    }else{
-                        $model->status_has = 0;
-                    }
 
+                     //dd($key);
+                    //print_r(count($data)) ;
+                    
+                    $model->status_has = 0;
                     $r->status_berkas = 1;
                     $r->save();
 
@@ -1431,7 +1433,7 @@ class RegistrasiController extends Controller
                     unset($data["status"]);
 
                     foreach ($data as $key => $value) {
-                        if($key){
+                        if($key == $data_real['has_selected']){
 
                             $e->$key =  FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
                             FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);

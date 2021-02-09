@@ -320,10 +320,7 @@ return [
                     'url' => 'listakadreviewer',
                     'title' => 'List Kontrak Akad'
                 ],                
-                [   
-                    'url' => 'listpenjadwalanreviewer',       
-                    'title' => 'List Penjadwalan'                    
-                ],
+               
                 //  [
                 //     'url' => 'listpelunasanreviewer',
                 //     'title' => 'List Pelunasan'
