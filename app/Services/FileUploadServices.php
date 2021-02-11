@@ -20,6 +20,16 @@ class FileUploadServices{
 		
 	}
 
+	public static function getFileNameHPAS($x,$id_user,$id_registrasi,$status,$key,$no_registrasi){
+
+		$originalName = $x->getClientOriginalName();
+		$originalExtension = $x->getClientOriginalExtension();
+		$filename = strtoupper("HPAS_").$no_registrasi.".".$originalExtension;
+
+		return $filename;
+		
+	}
+
 	public static function getFileNameMaster($x,$status,$key){
 
 		$originalName = $x->getClientOriginalName();
@@ -35,6 +45,17 @@ class FileUploadServices{
 		$originalName = $x->getClientOriginalName();
 		$originalExtension = $x->getClientOriginalExtension();
 		$filename = strtoupper($key).$no_registrasi.".".$originalExtension;
+
+		$store = $x->storeAs("public/uploadDokumen/".$id_user."/".$id_registrasi."/".$status."/", $filename);
+
+		return $store;
+	}
+
+	public static function getUploadFileHPAS($x, $id_user, $id_registrasi,$status,$key,$no_registrasi){
+		
+		$originalName = $x->getClientOriginalName();
+		$originalExtension = $x->getClientOriginalExtension();
+		$filename = strtoupper("HPAS_").$no_registrasi.".".$originalExtension;
 
 		$store = $x->storeAs("public/uploadDokumen/".$id_user."/".$id_registrasi."/".$status."/", $filename);
 

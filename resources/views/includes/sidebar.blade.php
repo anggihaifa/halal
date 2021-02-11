@@ -115,13 +115,9 @@
 						$regId = Auth::user()->registrasi_id;
 						$getStatusPembayaran = \App\Models\Registrasi::where('id','=',$regId)->first();
 						
-						$statusBayar = $getStatusPembayaran->status_pembayaran;
-
-						if($statusBayar == 2){
-							$configSidebar = config('sidebar.menu2');
-						}else{
-							$configSidebar = config('sidebar.menu4');
-						}
+						
+						$configSidebar = config('sidebar.menu2');
+						
 						
 					}
 				}elseif(Auth::user()->usergroup_id == 3){					
@@ -130,7 +126,10 @@
 					$configSidebar = config('sidebar.menu5');
 				}elseif(Auth::user()->usergroup_id == 7){
 					$configSidebar = config('sidebar.menu6');
-				}else{
+				}elseif(Auth::user()->usergroup_id == 10){
+					$configSidebar = config('sidebar.menu10');
+				}
+				else{
 					$configSidebar = config('sidebar.menu');
 				}
 

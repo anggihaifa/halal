@@ -1352,7 +1352,7 @@ class RegistrasiController extends Controller
         $model = new DokumenHas;
         $model2 = new Registrasi;
 
-        $status = "HAS";
+        $status = "HPAS";
         $id_user = Auth::user()->id;
         $id_registrasi  = Auth::user()->registrasi_id;
 
@@ -1377,8 +1377,9 @@ class RegistrasiController extends Controller
                     foreach ($data as $key => $value) {
                         if($key == $data_real['has_selected']){
 
-                            $model->$key =  FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-                            FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
+                            //dd($value);
+                            $model->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
+                            FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
 
                         }
 
@@ -1435,8 +1436,8 @@ class RegistrasiController extends Controller
                     foreach ($data as $key => $value) {
                         if($key == $data_real['has_selected']){
 
-                            $e->$key =  FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-                            FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
+                            $e->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
+                            FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
                         }
 
                     }
