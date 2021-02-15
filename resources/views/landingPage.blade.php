@@ -108,7 +108,7 @@
                 <div class="input-group rounded">
                     <form action="{{route('master.berita.cariberita')}}" method="get" name="searchForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
                         <div class="input-group">
-                            <input type="search" class="form-control rounded" style="height: 40px;text-size:15px;" name="katakunci" placeholder="Kata Kunci Berita" aria-label="Search" aria-describedby="search-addon" required/>
+                            <input type="search" class="form-control text-center rounded" style="height: 50px;text-size:15px;" name="katakunci" placeholder="Kata Kunci Berita" aria-label="Search" aria-describedby="search-addon" required/>
                             &nbsp;&nbsp;<button type="submit" class="btn btn-outline-primary">Cari Berita</button>
                         </div>
                     </form>
@@ -122,9 +122,10 @@
                     </div>
                 @else      
                     @foreach ($berita as $item)
-                        <div class="row col-lg-12 border mr-3 mb-3 p-10 ml-2">
-                            <p class="col-sm-12">{{$item->created_at}}</p>
-                            <a href="{{url('detail_berita_user')}}/{{$item->id}}" class="text-dark"><h6 class="col-sm-12 text-primary">{{$item->judul_berita}}</h6></a>
+                        <div class="row col-lg-3 border mr-3 mb-3 p-20 ml-2" style="min-height: 150px;">
+                            <span class="col-sm-12"><b>{{$item->created_at}} </b>
+                            <br><span style="font-size: 10px;">Oleh : {{$item->nama_penulis}} </span>
+                            <br><br><a href="{{url('detail_berita_user')}}/{{$item->id}}" class="text-dark"><h6 class="text-primary">{{$item->judul_berita}}</h6></a></span>                            
                         </div>
                     @endforeach         
                 @endif   

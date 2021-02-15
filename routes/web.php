@@ -40,9 +40,17 @@ Route::get('data_registrasi_pelanggan','RegistrasiController@dataRegistrasiPelan
 Route::get('list_registrasi_pelanggan_aktif','RegistrasiController@listRegistrasiPelangganAktif')->name('listregistrasipelangganaktif');
 Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistrasiPelangganAktif')->name('dataregistrasipelangganaktif');
 
+//phpword
+Route::post('download_data','PHPWordController@download')->name('downloaddata');
+Route::post('download_auditplan','PHPWordController@downloadAuditPlan')->name('downloadauditplan');
+Route::post('download_auditplan_fix','PHPWordController@downloadAuditPlanFix')->name('downloadauditplanfix');
+
 //penjadwalan
 Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin');
+Route::get('list_penjadwalan_auditor','PenjadwalanController@listpenjadwalanAuditor')->name('listpenjadwalanauditor');
 Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
+Route::get('data_penjadwalan_auditor','PenjadwalanController@dataPenjadwalanAuditor')->name('datapenjadwalanauditor');
+Route::get('audit_plan/{id}','PenjadwalanController@auditPlan')->name('auditplan');
 
 Route::post('detail_auditor', 'PenjadwalanController@detail')->name('detail_auditor.detail');
 Route::post('dropdown1', 'PenjadwalanController@dataAuditor1')->name('dropdown1.dataauditor');

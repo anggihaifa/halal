@@ -659,6 +659,7 @@ class PenjadwalanController extends Controller
                                         foreach ( $dataAuditor2_TidakLuang as $key2) {
                                             foreach ( $dataAuditor3_TidakLuang as $key3) {
 
+
                                                 $aud =  explode("_",$key['pelaksana1_audit1']);
                                                 $key['pelaksana1_audit1'] =$aud[0];
                                                 $aud2 =  explode("_",$key['pelaksana2_audit1']);
@@ -674,6 +675,7 @@ class PenjadwalanController extends Controller
                                                 $aud7 =  explode("_",$key3['pelaksana3_rapat']);
                                                 $key3['pelaksana3_rapat'] =$aud7[0];
                                               
+
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3,$kodewilayah){
@@ -5248,6 +5250,22 @@ class PenjadwalanController extends Controller
     
         return view('penjadwalan.listPenjadwalanAdmin');
     }
+
+    public function listpenjadwalanAuditor(){
+        $dataKelompok = KelompokProduk::all();
+        $dataJenis = JenisRegistrasi::all();
+       
+
+         $dataAuditor = DB::table('users')
+                ->where('usergroup_id','8')
+                ->get();
+
+        $dataAuditor = json_decode($dataAuditor, true);
+        //$dataKomite = json_decode($dataKomite, true);
+       // dd($dataAuditor); 
+        
+        return view('penjadwalan.listPenjadwalanAuditor',compact('dataKelompok','dataJenis','dataAuditor'));
+    }
     public function dataPenjadwalanAdmin(Request $request){
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
@@ -5308,6 +5326,93 @@ class PenjadwalanController extends Controller
         return Datatables::of($xdata)->make();
     }
 
+    public function dataPenjadwalanAuditor(Request $request){
+        $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
+        //start
+        if($kodewilayah == '00'){
+            $xdata = DB::table('registrasi')
+                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
+                 ->where('registrasi.status_cancel','=',0)                 
+                 ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','penjadwalan.mulai_audit2 as audit2');
+        }else{
+
+            $xdata = DB::table('registrasi')
+                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('users','registrasi.id_user','=','users.id')
+                ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
+                 
+                ->where('registrasi.kode_wilayah','=',$kodewilayah)
+                ->where('registrasi.status_cancel','=',0)                
+                ->select('registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','penjadwalan.mulai_audit2 as audit2');
+
+
+        }
+        
+       
+
+
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['perusahaan'])){
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+        }
+        if(isset($gdata['kelompok_produk'])){
+            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+        }
+        if(isset($gdata['tgl_registrasi'])){
+            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+        }
+        if(isset($gdata['jenis_registrasi'])){
+            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        }
+        if(isset($gdata['status_registrasi'])){
+            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
+        }
+        if(isset($gdata['status'])){
+            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+        }
+
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
+    }
+
+    public function auditPlan($id){        
+        $dataRegistrasi = DB::table('registrasi')
+                ->join('registrasi_alamatkantor','registrasi.id','=','registrasi_alamatkantor.id_registrasi')                
+                ->select('registrasi.*','registrasi_alamatkantor.alamat as alamat')
+                ->where('registrasi.id',$id)
+                ->get();        
+        // $dataRegistrasi = Registrasi::find($id);
+        $dataRegistrasi_ = json_decode($dataRegistrasi, true);
+
+        foreach ($dataRegistrasi_ as $key => $value) {
+            $id_penjadwalan = $value['id_penjadwalan'];
+        }
+        
+        $dataPenjadwalan = DB::table('penjadwalan')
+                ->where('id',$id_penjadwalan)
+                ->get();               
+        // $dataPenjadwalan = Penjadwalan::find($id_penjadwalan);
+        $dataPenjadwalan_ = json_decode($dataPenjadwalan, true);
+                
+        return view('penjadwalan.auditPlan',compact('dataRegistrasi','dataPenjadwalan'));
+    }
+
+
+
     
 
 }
+
+
+    

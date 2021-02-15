@@ -252,22 +252,15 @@ var myLineChart = new Chart(ctx, {
 });
 
 var myLineChart = new Chart(ctx2, {
-  type: 'line',
+  type: 'bar',
   data: {
     // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September","Oktober", "November", "Desember"],		
 	labels: bulan2,
     datasets: [{
       label: "Pelanggan",
       lineTension: 0.5,
-      backgroundColor: "rgba(2,117,216,0.2)",
-      borderColor: "rgba(2,117,216,1)",
-      pointRadius: 5,
-      pointBackgroundColor: "rgba(2,117,216,1)",
-      pointBorderColor: "rgba(255,255,255,0.8)",
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(2,117,216,1)",
-      pointHitRadius: 50,
-      pointBorderWidth: 2,
+      backgroundColor: "rgba(2,117,216,1)",
+      borderColor: "rgba(2,117,216,1)",      
     //   data: [5, 7, 4, 10, 15, 12, 7, 4, 10, 15, 20, 13],      
 	  data: jml2,
     }],
@@ -292,7 +285,7 @@ var myLineChart = new Chart(ctx2, {
           maxTicksLimit: 10
         },
         gridLines: {
-          color: "rgba(0, 0, 0, .125)",
+          display: true
         }
       }],
     },

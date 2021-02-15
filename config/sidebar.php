@@ -411,5 +411,17 @@ return [
             'url' => 'berita.index'
         ],                             
     ],
+    'menu7' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],        
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanauditor'
+        ],                                     
+    ],
 ];
 

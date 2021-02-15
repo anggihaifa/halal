@@ -43,7 +43,7 @@
                     <form action="{{route('registrasiHalal.store')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data" id="msform">
 
                         <ul id="progressbar">
-                            <li class="active text-center" id="umum"><strong>Data Umum</strong></li>                            
+                            <li class="active text-center" id="umum"><strong>Data Umum</strong></li>
                             <li id="kantor" class="text-center"><strong>Alamat Kantor</strong></li>
                             <li id="pabrik" class="text-center"><strong>Alamat Pabrik</strong></li>
                             <li id="pemilik" class="text-center"><strong>Pemilik Perusahaan</strong></li>
@@ -1219,7 +1219,7 @@
                             </div>                                                                                             
                             <div class="text-center">                                                                
                                 <input type="button" name="previous" class="previous action-button-previous" value="Kembali" />
-                                <button type="submit" class="action-button">Kirim</button>                                                                                                
+                                <button type="submit" class="action-button">Kirim</button>
                             </div>
                             </fieldset>
 
