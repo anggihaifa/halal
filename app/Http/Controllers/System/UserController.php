@@ -38,6 +38,8 @@ class UserController extends Controller
                 ->orWhere('usergroup_id','=','3')
                 ->orWhere('usergroup_id','=','6')
                 ->orWhere('usergroup_id','=','7')
+                 ->orWhere('usergroup_id','=','8')
+                ->orWhere('usergroup_id','=','9')
                 ->orderBy('users.id','desc');
                 //->get();
         return Datatables::of($xdata)->make();

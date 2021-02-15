@@ -40,6 +40,30 @@ Route::get('data_registrasi_pelanggan','RegistrasiController@dataRegistrasiPelan
 Route::get('list_registrasi_pelanggan_aktif','RegistrasiController@listRegistrasiPelangganAktif')->name('listregistrasipelangganaktif');
 Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistrasiPelangganAktif')->name('dataregistrasipelangganaktif');
 
+//phpword
+Route::post('download_data','PHPWordController@download')->name('downloaddata');
+Route::post('download_auditplan','PHPWordController@downloadAuditPlan')->name('downloadauditplan');
+Route::post('download_auditplan_fix','PHPWordController@downloadAuditPlanFix')->name('downloadauditplanfix');
+
+//penjadwalan
+Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin');
+Route::get('list_penjadwalan_auditor','PenjadwalanController@listpenjadwalanAuditor')->name('listpenjadwalanauditor');
+Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
+Route::get('data_penjadwalan_auditor','PenjadwalanController@dataPenjadwalanAuditor')->name('datapenjadwalanauditor');
+Route::get('audit_plan/{id}','PenjadwalanController@auditPlan')->name('auditplan');
+
+Route::post('detail_auditor', 'PenjadwalanController@detail')->name('detail_auditor.detail');
+Route::post('dropdown1', 'PenjadwalanController@dataAuditor1')->name('dropdown1.dataauditor');
+Route::post('jenis_akomodasi', 'PenjadwalanController@jenisAkomodasi')->name('jenis_akomodasi.data');
+Route::post('opsi_akomodasi', 'PenjadwalanController@opsiAkomodasi')->name('opsi_akomodasi.data');
+Route::post('dropdown2', 'PenjadwalanController@dataAuditor2')->name('dropdown2.dataauditor');
+Route::post('auditor_dropdown', 'PenjadwalanController@dataRapatAuditor')->name('auditor_dropdown.datarapatauditor');
+Route::post('komite_dropdown', 'PenjadwalanController@dataKomite')->name('komite_dropdown.datakomite');
+Route::put('audit1', 'PenjadwalanController@audit1')->name('audit1');
+Route::put('audit2', 'PenjadwalanController@audit2')->name('audit2');
+Route::put('rapat', 'PenjadwalanController@rapat')->name('rapat');
+Route::put('tinjauan', 'PenjadwalanController@tinjauan')->name('tinjauan');
+
 
 
 Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran');
@@ -272,8 +296,29 @@ Route::prefix('master')->group(function (){
     Route::resource('kelompok_produk','Master\KelompokProdukController');
     Route::get('kelompok_produk_datatable','Master\KelompokProdukController@datatable')->name('master.kelompokproduk.datatable');
 
+    
+
     Route::resource('faq','Master\FaqController');
     Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
+
+
+    Route::resource('akomodasi','\App\Http\Controllers\Master\AkomodasiController');
+    Route::get('akomodasi_datatable','Master\AkomodasiController@datatable')->name('master.akomodasi.datatable');
+
+    Route::get('akomodasi/delete/{id}/{jenis_akomodasi}', [
+    'as' => 'destroy', 
+    'uses' => 'Master\AkomodasiController@destroy'
+    ]);
+
+    Route::get('akomodasi/update/{id}', [
+    'as' => 'update', 
+    'uses' => 'Master\AkomodasiController@update'
+    ]);
+
+    Route::get('akomodasi/edit/{id}/{jenis_akomodasi}', [
+    'as' => 'edit', 
+    'uses' => 'Master\AkomodasiController@edit'
+    ]);
 
     Route::get('faq_user','Master\FaqController@user')->name('faquser');
 

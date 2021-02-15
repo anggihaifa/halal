@@ -51,6 +51,7 @@ return [
                     'url' => 'listpembayarantahap2',
                     'title' => 'List Pembayaran Tahap 2'
                 ],
+
      
                 [   
                     'url' => 'listberitaacara',       
@@ -62,6 +63,11 @@ return [
                 ],
                
             ],
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanadmin'
         ],
         [
             'icon' => 'ion-ios-cube',
@@ -80,7 +86,11 @@ return [
                 [
                     'url' => 'faq.index',
                     'title' => 'F.A.Q'
-                ]                
+                ],
+                 [
+                    'url' => 'akomodasi.index',
+                    'title' => 'Akomodasi'
+                ]                    
             ],
         ],        
         [
@@ -189,6 +199,11 @@ return [
                
             ],
         ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanadmin'
+        ],
 
         [
             'icon' => 'ion-ios-cube',
@@ -207,7 +222,11 @@ return [
                 [
                     'url' => 'faq.index',
                     'title' => 'F.A.Q'
-                ]
+                ],
+                [
+                    'url' => 'akomodasi.index',
+                    'title' => 'Akomodasi'
+                ]  
             ],
         ],
         [    'icon' => 'ion-ios-person',
@@ -301,10 +320,7 @@ return [
                     'url' => 'listakadreviewer',
                     'title' => 'List Kontrak Akad'
                 ],                
-                [   
-                    'url' => 'listpenjadwalanreviewer',       
-                    'title' => 'List Penjadwalan'                    
-                ],
+               
                 //  [
                 //     'url' => 'listpelunasanreviewer',
                 //     'title' => 'List Pelunasan'
@@ -344,6 +360,18 @@ return [
             'title' => 'Berita',
             'url' => 'berita.index'
         ],                             
+    ],
+    'menu7' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],        
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanauditor'
+        ],                                     
     ],
 ];
 

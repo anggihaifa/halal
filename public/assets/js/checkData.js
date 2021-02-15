@@ -6,19 +6,28 @@ function checkStatus(data){
 
 function checkStatusPembayaran(data){
 
-     return  (data==0)? '<a class="ion-ios-create" title="Belum Bayar" style="zoom:2.0;"></a>'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="zoom:2.0;color:#5d8aa8  ;" title="Menunggu Konfirmasi Admin"></a>'
-            :(data==2)? '<a  class="ion-ios-checkmark-circle " style="zoom:2.0; align-center; color: #32cd32;"title="Pembayaran Terkonfirmasi"></a>'
-                :'<a  class="ion-ios-clipboard " style="zoom:2.0;" title="Belum Bayar"></a>';
+     return  (data==0)? '<a class=" btn ion-ios-create" title="Belum Bayar" style="zoom:2.0;"></a>'
+        :(data==1)? '<a  class="btn ion-ios-clipboard " style="zoom:2.0;color:#5d8aa8  ;" title="Menunggu Konfirmasi Admin"></a>'
+            :(data==2)? '<a  class="btn ion-ios-checkmark-circle " style="zoom:2.0; align-center; color: #32cd32;"title="Pembayaran Terkonfirmasi"></a>'
+                :'<a  class="btn ion-ios-clipboard " style="zoom:2.0;" title="Belum Bayar"></a>';
             
 }
 
 function checkStatusBerkas(data){
     return  (data==0)? '<a class="ion-ios-create" title="Belum Upload" style="zoom:2.0;"></a>'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="zoom:2.0;color:#5d8aa8  ;" title="Menunggu Konfirmasi Admin"></a>'
-            :(data==2)? '<a  class="ion-ios-close-circle " style="align-center; zoom:2.0; color:#e32636; " title="Perbaikan"></a>'
-                :(data==3)? '<a  class="ion-ios-checkmark-circle " style="zoom:2.0; align-center; color: #32cd32;"title="Berkas Terkonfirmasi"></a>'
-                    :'<a  class="ion-ios-clipboard " style="zoom:2.0;" title="Belum Upload"></a>';
+        :(data==1)? '<a  class="btn-sm ion-ios-clipboard " style="zoom:2.0;color:#5d8aa8  ;" title="Menunggu Konfirmasi Admin"></a>'
+            :(data==2)? '<a  class="btn ion-ios-close-circle " style="align-center; zoom:2.0; color:#e32636; " title="Perbaikan"></a>'
+                :(data==3)? '<a  class="btn ion-ios-checkmark-circle " style="zoom:2.0; align-center; color: #32cd32;"title="Berkas Terkonfirmasi"></a>'
+                    :'<a  class="btn ion-ios-clipboard " style="zoom:2.0;" title="Belum Upload"></a>';
+            
+}
+
+function checkPenjadwalan(data){
+    return  (data==0)? '<a class="btn-sm ion-ios-create" title="Belum Dijadwalkan" style="zoom:1.3; color:white; background-color:black"></a>'
+        :(data==1)? '<a   class="btn-sm ion-ios-clipboard " style="zoom:1.2;color:white; background-color:#5d8aa8;" title="Menunggu Konfirmasi Reviewer"></a>'
+            :(data==2)? '<a  class="btn-sm ion-ios-close-circle " style="align-center; zoom:1.2;color:white; background-color:#e32636" title="Perbaikan"></a>'
+                :(data==3)? '<a  class="btn-sm ion-ios-checkmark-circle " style="zoom:1.2; align-center;color:white; background-color:#32cd32"title="perjadwalan Terkonfirmasi"></a>'
+                    :'<a  class="btn-sm ion-ios-clipboard " style="zoom:1.3; color:white; background-color:black" title="Belum Dijadwalkan"></a>';
             
 }
 

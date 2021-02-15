@@ -61,14 +61,14 @@
                 <thead>
                 <tr>
                     <th class="text-nowrap valign-middle text-center">No</th>
-                    <th class="text-nowrap valign-middle text-center">Email</th>
-                    <th class="text-nowrap valign-middle text-center">Username</th>
-                    <th class="text-nowrap valign-middle text-center">Nama</th>
-                    <th class="text-nowrap valign-middle text-center">Perusahaan</th>
-                    <th class="text-nowrap valign-middle text-center">Negara</th>
-                    <th class="text-nowrap valign-middle text-center">Kota</th>
-                    <th class="text-nowrap valign-middle text-center">Alamat</th>
-                    <th class="text-nowrap valign-middle text-center">Status</th>
+                    <th class=" valign-middle text-center">Email</th>
+                    <th class=" valign-middle text-center">Username</th>
+                    <th class="valign-middle text-center">Nama</th>
+                    <th class="valign-middle text-center">Perusahaan</th>
+                    <th class="valign-middle text-center">Negara</th>
+                    <th class="valign-middle text-center">Kota</th>
+                    <th class=" valign-middle text-center">Alamat</th>
+                    <th class="valign-middle text-center">Status</th>
                     {{--<th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;</th>--}}
                 </tr>
                 </thead>
@@ -80,6 +80,13 @@
 @endsection
 @push('scripts')
     <script src="{{asset('/assets/js/checkData.js')}}"></script>
+    <style type="text/css">
+        
+        table.dataTable tbody td {
+            word-break: break-word;
+            vertical-align: top;
+        }
+    </style>
     <script>
         console.log("SHOW");
         var xTable = $('#table').DataTable({

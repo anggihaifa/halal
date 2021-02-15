@@ -16,7 +16,9 @@
 			<span class="icon-bar"></span>
 		</button>
 		@endif
+
 		<a href="" class="navbar-brand text-dark" style="font-family:textmeone"><img src="{{asset('/assets/img/logo/sci-color.png')}}" alt="" /> <b>LPH</b> SUCOFINDO</a>
+
 		@if ($headerMegaMenu)
 			<button type="button" class="navbar-toggle pt-0 pb-0 mr-0" data-toggle="collapse" data-target="#top-navbar">
 				<span class="fa-stack fa-lg text-inverse">
@@ -72,7 +74,7 @@
 		</li>
 		@endisset
 		<li class="dropdown navbar-user">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			<a href="#" class="dropdown-toggle" style="color:black;" data-toggle="dropdown">
 				@if(Auth::user()->usergroup_id == 1 )
 					<img src="{{asset('/assets/img/user/user-x.png')}}" alt="" />
 				@else

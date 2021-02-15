@@ -130,6 +130,8 @@
 					$configSidebar = config('sidebar.menu5');
 				}elseif(Auth::user()->usergroup_id == 7){
 					$configSidebar = config('sidebar.menu6');
+				}elseif(Auth::user()->usergroup_id == 8){
+					$configSidebar = config('sidebar.menu7');
 				}else{
 					$configSidebar = config('sidebar.menu');
 				}
@@ -180,7 +182,7 @@
 				}
 			@endphp
 			<!-- begin sidebar minify button -->
-			<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+			<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify" ><i class="fa fa-angle-double-left"></i></a></li>
 			<!-- end sidebar minify button -->
 		</ul>
 		<!-- end sidebar nav -->

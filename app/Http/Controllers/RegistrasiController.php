@@ -18,6 +18,7 @@ use App\RegistrasiJumlahProduksi;
 use App\DetailKU;
 use App\Models\Registrasi;
 use App\Models\Pembayaran;
+use App\Models\Penjadwalan;
 use App\Models\Akad;
 use App\Models\Negara;
 use App\Models\Provinsi;
@@ -29,14 +30,13 @@ use App\Models\UnggahData\Fasilitas;
 use App\Models\UnggahData\Produk;
 use App\Models\UnggahData\DokumenHas;
 use App\Models\UnggahData\DokumenMaterial;
-use App\Models\UnggahData\material;
+use App\Models\UnggahData\Material;
 use App\Models\UnggahData\DokumenMatriksProduk;
 use App\Models\UnggahData\KuisionerHas;
 use App\Models\UnggahData\unggahDataSertifikasi;
 use App\Models\UnggahData\KantorPusat;
 use App\Models\UnggahData\MenuRestoran;
 use App\Models\UnggahData\Jagal;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -1343,7 +1343,11 @@ class RegistrasiController extends Controller
     //tab dokumen has
 
     public function storeDokumenHas(Request $request){
-        $data = $request->except('_token','_method');
+
+        $data_real = $request->except('_token','_method');
+        $data = $request->except('_token','_method','has_selected');
+
+        //dd($data);
 
         $model = new DokumenHas;
         $model2 = new Registrasi;
@@ -1362,7 +1366,7 @@ class RegistrasiController extends Controller
 
 
         if($data["status"] == "0"){
-            //dd("masuk");
+           
                 try{
                     DB::beginTransaction();
 
@@ -1371,7 +1375,7 @@ class RegistrasiController extends Controller
                     $model->id_registrasi = $id_registrasi;
 
                     foreach ($data as $key => $value) {
-                        if($key){
+                        if($key == $data_real['has_selected']){
 
                             $model->$key =  FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
                             FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
@@ -1379,13 +1383,11 @@ class RegistrasiController extends Controller
                         }
 
                     }
-                    //print_r(count($data)) ;
-                    if(count($data)==10){
-                        $model->status_has = 1;
-                    }else{
-                        $model->status_has = 0;
-                    }
 
+                     //dd($key);
+                    //print_r(count($data)) ;
+                    
+                    $model->status_has = 0;
                     $r->status_berkas = 1;
                     $r->save();
 
@@ -1431,7 +1433,7 @@ class RegistrasiController extends Controller
                     unset($data["status"]);
 
                     foreach ($data as $key => $value) {
-                        if($key){
+                        if($key == $data_real['has_selected']){
 
                             $e->$key =  FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
                             FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
@@ -2263,7 +2265,9 @@ class RegistrasiController extends Controller
             
             $e->updated_status_by = $updater;
             $e->save();
+
             $e->total_biaya = ((int)str_replace(',', '', $e->total_biaya));
+
             if($p == null){
                 if($e->total_biaya >10000000 && $e->total_biaya <= 50000000){
                // dd($e->total_biaya);
@@ -3124,72 +3128,81 @@ class RegistrasiController extends Controller
         $model = new Registrasi();
         $model2 = new User();
         $model3 = new Pembayaran();
+        $model4 = new Penjadwalan();
 
          DB::beginTransaction();
         $e = $model->find($id);
         $u = $model2->find($e->id_user);
         $p = $model3->find($e->id_pembayaran);
+        //$j = $model4->find($e->id_penjadwalan);
+        
+
+        $model4->updated_by = $updater;
+        $model4->status_audit1 = '0';
+        $model4->progres_penjadwalan = 'audit1';
+        $model4->id_registrasi = $e->id;
+        $model4->save();
+
         $e->status = '13';
         $e->updated_status_by = $updater;
+        $e->id_penjadwalan = $model4->id;
+        
         $e->save();
+        
 
         date_default_timezone_set('Asia/Jakarta');
         $tanggal = date("Y-m-d H:i:s");
 
+        
 
-        foreach ($getUserId as $key) {
-            $userId = $key->id_user;
 
-            //create PDF File
-            $getUser = User::find($userId);
-            $getRegistrasi= Registrasi::find($id);
-            $getPembayaran= Pembayaran::find($getRegistrasi->id_pembayaran);
-            $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi,'pembayaranData'=>$getPembayaran];
-            $fileName = $key->no_registrasi.'_BT_TAHAP1.pdf';
-            $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
-                
-            // save
-             Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
-                
+   
+        $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+        $fileName = $e->no_registrasi.'_BT_TAHAP1.pdf';
+        $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
             
-            if($p->nominal_total <10000000 ){
-                $p->status_tahap1 = '2';
-                $p->status_tahap2 = '2';
-                $p->bb_tahap2 = $p->bb_tahap1;
-                $p->status_tahap3 = '2';
-                $p->bb_tahap3 = $p->bb_tahap1;
-
-                $p->reminder12_tahap2 = 1;
-                $p->reminder12_tahap3 = 1;
-
-                $p->reminder6_tahap2 = 1;
-                $p->reminder6_tahap3 = 1;
-
-            }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
-
-                $p->status_tahap1 = '2';     
-                $p->status_tahap2 = '2';
-                $p->bb_tahap2 = $p->bb_tahap1;
-
-                $p->reminder12_tahap2 = 1;
-                $p->reminder6_tahap2 = 1;
+        // save
+         Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
             
-            }else{
-                 $p->status_tahap1 = '2';
-            }
+        
+        if($p->nominal_total <10000000 ){
+            $p->status_tahap1 = '2';
+            $p->status_tahap2 = '2';
+            $p->bb_tahap2 = $p->bb_tahap1;
+            $p->status_tahap3 = '2';
+            $p->bb_tahap3 = $p->bb_tahap1;
 
-            $p->bt_tahap1 = $fileName;
-            $p->tanggal_tahap1 = $tanggal;
-            //dd($p->tanggal_tahap1 );
-            $p->updated_at = $tanggal;
-            $p->save();
+            $p->reminder12_tahap2 = 1;
+            $p->reminder12_tahap3 = 1;
 
-            SendEmailP::dispatch($e,$u,$p, $e->status);
+            $p->reminder6_tahap2 = 1;
+            $p->reminder6_tahap3 = 1;
 
-            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 14);
-            DB::commit();  
+        }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
 
+            $p->status_tahap1 = '2';     
+            $p->status_tahap2 = '2';
+            $p->bb_tahap2 = $p->bb_tahap1;
+
+            $p->reminder12_tahap2 = 1;
+            $p->reminder6_tahap2 = 1;
+        
+        }else{
+             $p->status_tahap1 = '2';
         }
+
+        $p->bt_tahap1 = $fileName;
+        $p->tanggal_tahap1 = $tanggal;
+        //dd($p->tanggal_tahap1 );
+        $p->updated_at = $tanggal;
+        $p->save();
+
+        SendEmailP::dispatch($e,$u,$p, $e->status);
+
+        $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 14);
+        DB::commit();  
+
+        
 
          Session::flash('success', "Pembayaran berhasil dikonfirmasi dan email telah dikirim!");
          $redirect = redirect()->route('listpembayaranregistrasi');
@@ -4252,6 +4265,7 @@ class RegistrasiController extends Controller
         $model = new Registrasi();
         $model2 = new User();
         $model3 = new Pembayaran();
+        $model4 = new Penjadwalan();
 
         date_default_timezone_set('Asia/Jakarta');
         $tanggal = date("Y-m-d H:i:s");
@@ -4276,49 +4290,53 @@ class RegistrasiController extends Controller
                 $p->lebih_tahap1 = (int)$lebihTotal;                
                 $p->updated_by = $updater;
 
-               
+                $model4->updated_by = $updater;
+                $model4->status_audit1 = '0';
+                $model4->progres_penjadwalan = 'audit1';
+                $model4->id_registrasi = $e->id;
+                $model4->save();
 
                         //create PDF File
                        
-                        $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
-                        $fileName = $e->no_registrasi.'_BT_TAHAP1.pdf';
-                        $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
-                            
-                        // save
-                         Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
-                            
-                        
-                        if($p->nominal_total <10000000 ){
-                            $p->status_tahap1 = '2';
-                            $p->status_tahap2 = '2';
-                            $p->bb_tahap2 = $p->bb_tahap1;
-                            $p->status_tahap3 = '2';
-                            $p->bb_tahap3 = $p->bb_tahap1;
+                $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+                $fileName = $e->no_registrasi.'_BT_TAHAP1.pdf';
+                $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+                    
+                // save
+                 Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+                    
+                
+                if($p->nominal_total <10000000 ){
+                    $p->status_tahap1 = '2';
+                    $p->status_tahap2 = '2';
+                    $p->bb_tahap2 = $p->bb_tahap1;
+                    $p->status_tahap3 = '2';
+                    $p->bb_tahap3 = $p->bb_tahap1;
 
-                            $p->reminder12_tahap2 = 1;
-                            $p->reminder12_tahap3 = 1;
+                    $p->reminder12_tahap2 = 1;
+                    $p->reminder12_tahap3 = 1;
 
-                            $p->reminder6_tahap2 = 1;
-                            $p->reminder6_tahap3 = 1;
+                    $p->reminder6_tahap2 = 1;
+                    $p->reminder6_tahap3 = 1;
 
-                        }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
+                }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
 
-                            $p->status_tahap1 = '2';     
-                            $p->status_tahap2 = '2';
-                            $p->bb_tahap2 = $p->bb_tahap1;
+                    $p->status_tahap1 = '2';     
+                    $p->status_tahap2 = '2';
+                    $p->bb_tahap2 = $p->bb_tahap1;
 
-                            $p->reminder12_tahap2 = 1;
-                            $p->reminder6_tahap2 = 1;
-                        
-                        }else{
-                             $p->status_tahap1 = '2';
-                        }
+                    $p->reminder12_tahap2 = 1;
+                    $p->reminder6_tahap2 = 1;
+                
+                }else{
+                     $p->status_tahap1 = '2';
+                }
 
-                        $p->bt_tahap1 = $fileName;
-                        $p->tanggal_tahap1 = $tanggal;
-                        //dd($p->tanggal_tahap1 );
-                        $p->updated_at = $tanggal;
-                        $p->save();
+                $p->bt_tahap1 = $fileName;
+                $p->tanggal_tahap1 = $tanggal;
+                //dd($p->tanggal_tahap1 );
+                $p->updated_at = $tanggal;
+                $p->save();
                         
                 
 
