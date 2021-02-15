@@ -327,7 +327,7 @@
 														<td class="   valign-middle">
 															{{$value['keterangan_has_1']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" class="btn btn-xs btn-primary" id="btn_has1" onclick="setHas('has_1')">Unggah</button> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" class="btn btn-xs btn-primary" id="btn_has1" onclick="setHas('has_1')">Unggah</button> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -350,7 +350,7 @@
 															{{$value['keterangan_has_2']}}
 														</td>
 														<td class="  valign-middle text-center">
-															<button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has2" onclick="setHas('has_2')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a>
+															<button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has2" onclick="setHas('has_2')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a>
 														</td>
 													@else
 														{!! $fieldBelum !!}
@@ -372,7 +372,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_3']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has3" onclick="setHas('has_3')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has3" onclick="setHas('has_3')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="   valign-middle">
@@ -393,7 +393,7 @@
 														<td class="   valign-middle">
 															{{$value['keterangan_has_4']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has4" onclick="setHas('has_4')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has4" onclick="setHas('has_4')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -414,7 +414,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_5']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has5" onclick="setHas('has_5')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has5" onclick="setHas('has_5')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -434,7 +434,7 @@
 														<td class="   valign-middle">
 															{{$value['keterangan_has_6']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has6" onclick="setHas('has_6')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has6" onclick="setHas('has_6')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -455,7 +455,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_7']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has7" onclick="setHas('has_7')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has7" onclick="setHas('has_7')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -475,7 +475,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_8']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has8" onclick="setHas('has_8')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has8" onclick="setHas('has_8')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -496,7 +496,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_9']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has9" onclick="setHas('has_9')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has9" onclick="setHas('has_9')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -517,7 +517,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_10']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has10" onclick="setHas('has_10')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has10" onclick="setHas('has_10')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -538,7 +538,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_11']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has11" onclick="setHas('has_11')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has11" onclick="setHas('has_11')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -559,7 +559,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_12']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has12" onclick="setHas('has_12')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has12" onclick="setHas('has_12')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -582,7 +582,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_13']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has13" onclick="setHas('has_13')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has13" onclick="setHas('has_13')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -605,7 +605,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_14']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has14" onclick="setHas('has_14')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has14" onclick="setHas('has_14')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -628,7 +628,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_15']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has15" onclick="setHas('has_15')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has15" onclick="setHas('has_15')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -651,7 +651,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_16']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has16" onclick="setHas('has_16')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has16" onclick="setHas('has_16')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
@@ -674,7 +674,7 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_17']}}
 														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has17" onclick="setHas('has_17')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_17']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has17" onclick="setHas('has_17')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_17']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">

@@ -287,7 +287,7 @@
 													<td class="text-nowrap valign-middle text-center">1</td>
 													<td class="valign-middle">Manual Sistem Jaminan Produk Halal (SJPH)</td>
 													@if($value['has_1'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -309,7 +309,7 @@
 													<td class="text-nowrap valign-middle text-center">2</td>
 													<td class="valign-middle">Matriks Bahan </td>
 													@if($value['has_2'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -328,7 +328,7 @@
 													<td class="text-nowrap valign-middle text-center">3</td>
 													<td class="text-nowrap valign-middle">Data Produk Yang Dihasilkan Sendiri</td>
 													@if($value['has_3'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -348,7 +348,7 @@
 													<td class="text-nowrap valign-middle text-center">4</td>
 													<td class="valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 													@if($value['has_4'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -365,7 +365,7 @@
 													<td class="text-nowrap valign-middle text-center">5</td>
 													<td class="valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
 													@if($value['has_5'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -381,7 +381,7 @@
 													<td class="text-nowrap valign-middle text-center">6</td>
 													<td class="valign-middle">Sertifikat Halal Sebelumnya</td>
 													@if($value['has_6'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -398,7 +398,7 @@
 													<td class="text-nowrap valign-middle text-center">7</td>
 													<td class="valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 													@if($value['has_7'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -414,7 +414,7 @@
 													<td class="text-nowrap valign-middle text-center">8</td>
 													<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
 													@if($value['has_8'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -431,7 +431,7 @@
 													<td class="text-nowrap valign-middle text-center">9</td>
 													<td class="valign-middle">Diagram Alir Proses Untuk Produk Yang disertifikasi</td>
 													@if($value['has_9'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -448,7 +448,7 @@
 													<td class="text-nowrap valign-middle text-center">10</td>
 													<td class=" valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
 													@if($value['has_10'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -465,7 +465,7 @@
 													<td class="text-nowrap valign-middle text-center">11</td>
 													<td class="valign-middle">Bukti registrasi dari BPJPH</td>
 													@if($value['has_11'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -482,7 +482,7 @@
 													<td class="text-nowrap valign-middle text-center">12</td>
 													<td class="valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
 													@if($value['has_12'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -500,7 +500,7 @@
 													<td class="text-nowrap valign-middle text-center">13</td>
 													<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)</td>
 													@if($value['has_13'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -518,7 +518,7 @@
 													<td class="text-nowrap valign-middle text-center">14</td>
 													<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 													@if($value['has_14'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -536,7 +536,7 @@
 													<td class="text-nowrap valign-middle text-center">15</td>
 													<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 													@if($value['has_15'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -554,7 +554,7 @@
 													<td class="text-nowrap valign-middle text-center">16</td>
 													<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
 													@if($value['has_16'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
@@ -572,7 +572,7 @@
 													<td class="text-nowrap valign-middle text-center">17</td>
 													<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
 													@if($value['has_17'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HAS/'.$value['has_17']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_17']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif

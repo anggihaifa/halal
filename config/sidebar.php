@@ -109,7 +109,12 @@ return [
                 ],
             ],
         ],
-         [    'icon' => 'ion-ios-person',
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.index'
+        ],
+        [    'icon' => 'ion-ios-person',
             'title' => 'Guideline',
             'url' => 'guideline.index'
         ],
@@ -229,6 +234,11 @@ return [
                 ]  
             ],
         ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ], 
         [    'icon' => 'ion-ios-person',
             'title' => 'Guideline',
             'url' => 'guideline.index'
@@ -264,7 +274,7 @@ return [
         ],
     ],
     'menu4' => [
-         [
+        [
             'icon' => 'ion-ios-home',
             'title' => 'Home',
             'url' => 'home.index'
@@ -328,6 +338,11 @@ return [
                
             ],
         ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ], 
         [    'icon' => 'ion-md-information-circle-outline',
             'title' => 'Berita',
             'url' => 'berita.index'
@@ -352,10 +367,30 @@ return [
                 [
                     'url' => 'listakadapprover',
                     'title' => 'List Kontrak Akad'
-                ]                
-               
+                ]   
             ],
         ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],  
+        [    'icon' => 'ion-md-information-circle-outline',
+            'title' => 'Berita',
+            'url' => 'berita.index'
+        ],                             
+    ],
+    'menu10' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],    
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.index'
+        ],        
         [    'icon' => 'ion-md-information-circle-outline',
             'title' => 'Berita',
             'url' => 'berita.index'

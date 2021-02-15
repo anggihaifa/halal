@@ -155,7 +155,12 @@
                         </div>
                         <div class="wrapper col-lg-12">
                             <div class="row">
-                                @component('components.inputtext',['name'=> 'Nama kegiatan','label' => 'Nama Kegiatan','required'=>true,'placeholder'=>'Nama Kegiatan'])@endcomponent
+                                @component('components.inputtextarea',['name'=> 'Detail kegiatan','label' => 'Detail Kegiatan','required'=>true,'placeholder'=>'Detail Kegiatan'])@endcomponent
+                            </div>
+                        </div>
+                        <div class="wrapper col-lg-12">
+                            <div class="row">
+                                @component('components.inputtext',['name'=> 'Personil','label' => 'Detail Kegiatan','required'=>true,'placeholder'=>'Detail Kegiatan'])@endcomponent
                             </div>
                         </div>
                     </div>

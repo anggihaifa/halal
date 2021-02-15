@@ -286,7 +286,10 @@ Route::get('pembayaranAkad','RegistrasiController@pembayaranAkad')->name('regist
 Route::get('penjadualanAudit','RegistrasiController@penjadualanAudit')->name('registrasi.penjadualanAudit');
 Route::get('dokumenTravel','RegistrasiController@dokumenTravel')->name('registrasi.dokumenTravel');
 
-
+Route::resource('dokumen','DokumenController');
+Route::get('dokumen_user','DokumenController@indexUser')->name('dokumen.indexuser');
+Route::get('dokumen_view/{id}','DokumenController@dokumenView')->name('dokumen.view');
+Route::get('dokumen_datatable','DokumenController@datatable')->name('dokumen.datatable');
 //master
 Route::prefix('master')->group(function (){
 
@@ -302,13 +305,17 @@ Route::prefix('master')->group(function (){
     Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
 
 
-    Route::resource('akomodasi','\App\Http\Controllers\Master\AkomodasiController');
+    Route::resource('akomodasi','Master\AkomodasiController');
     Route::get('akomodasi_datatable','Master\AkomodasiController@datatable')->name('master.akomodasi.datatable');
+
+   
 
     Route::get('akomodasi/delete/{id}/{jenis_akomodasi}', [
     'as' => 'destroy', 
     'uses' => 'Master\AkomodasiController@destroy'
     ]);
+
+  
 
     Route::get('akomodasi/update/{id}', [
     'as' => 'update', 
@@ -320,6 +327,7 @@ Route::prefix('master')->group(function (){
     'uses' => 'Master\AkomodasiController@edit'
     ]);
 
+ 
     Route::get('faq_user','Master\FaqController@user')->name('faquser');
 
     Route::resource('guideline','Master\GuidelineController');
