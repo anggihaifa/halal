@@ -146,6 +146,8 @@
 								<span style="margin-right: 5px; "><i class="ion-ios-remove-circle-outline" style="color:#ababab"></i> Belum diunggah</span>
 								<h6></h6>
 								<h5 style="color:#ff6961">NOTE: Ukuran Maksimal File 2MB. Silahkan Upload File Satu Persatu</h5>
+
+								
 								
 								
 							</div>

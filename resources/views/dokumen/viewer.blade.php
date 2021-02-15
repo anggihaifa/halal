@@ -36,8 +36,8 @@
                 <div id="pdf" class="panel-body panel-form embed-responsive embed-responsive-1by1" style="position: relative; z-index: 1;">
                     
 
-                    <object type="application/pdf" data="{{url('') .Storage::url('public/dokumenHalal/'.$data->nama_file) }}#toolbar=0&navpanes=0" class ="embed-responsive-item">
-                        <p>Pdf File Cannot Displayed</p>
+                    <object type="application/pdf,application/word" data="{{url('') .Storage::url('public/dokumenHalal/'.$data->nama_file) }}#toolbar=0&navpanes=0" class ="embed-responsive-item">
+                        <p>Pdf/DOCX  File Tidak Dapat Ditampilkan Silahkan Gunakan FItur Unduh</p>
                     </object>
                       
 

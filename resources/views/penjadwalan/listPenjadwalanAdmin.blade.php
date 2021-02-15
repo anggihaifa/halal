@@ -304,6 +304,17 @@
 
                             <div class="form-group">
 
+                                <label >Kategori Audit</label> 
+                                <select id="ktg_audit2" name="ktg_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                    <option value="">==Pilih Kategori Audit==</option>
+                                    <option value="Onsite">Onsite Audit</option>
+                                    <option value="Remote">Remote Audit</option>                                                                        
+                                </select>
+       
+                            </div>
+
+                            <div class="form-group">
+
                                 <label >Akomodasi</label> 
                                 <select id="jenis_akomodasi" name="jenis_akomodasi" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Jenis Akomodasi==</option>                                                                        
@@ -763,81 +774,155 @@
         }
          
         function format ( d ) {
-            // `d` is the original data object for the row
+
+
+            if(d.mulai_audit1  == null){
+
+                d.mulai_audit1 ="-";
+            }
+            if(d.selesai_audit1  == null){
+
+                d.selesai_audit1 ="-";
+            }
+            if(d.mulai_audit2  == null){
+
+                d.mulai_audit2 ="-";
+            }
+            if(d.selesai_audit2  == null){
+
+                d.selesai_audit2 ="-";
+            }
+            if(d.mulai_rapat  == null){
+
+                d.mulai_rapat ="-";
+            }
+            if(d.selesai_rapat  == null){
+
+                d.selesai_rapat ="-";
+            }
+            if(d.mulai_tinjauan  == null){
+
+                d.mulai_tinjauan ="-";
+            }
+            if(d.selesai_tinjauan  == null){
+
+                d.selesai_tinjauan ="-";
+            }
+            
+        
             if(d.pelaksana1_audit1 != null){
-                $str1 =  d.pelaksana1_audit1.split("_");
-                d.pelaksana1_audit1 = $str1[1];
+                if (d.pelaksana1_audit1.indexOf('_') > -1)
+                {
+                    $str1 =  d.pelaksana1_audit1.split("_");
+                    d.pelaksana1_audit1 = $str1[1];
+                }
+               
             }else{
-                d.pelaksana1_audit1 ="";
+                d.pelaksana1_audit1 ="-";
             }
 
 
              if(d.pelaksana2_audit1 != null){
-                $str2 =  d.pelaksana2_audit1.split("_");
-                d.pelaksana2_audit1 = $str2[1];
-            
+
+                if (d.pelaksana2_audit1.indexOf('_') > -1){
+                    $str2 =  d.pelaksana2_audit1.split("_");
+                    d.pelaksana2_audit1 = $str2[1];
+                }
+                           
             }else{
-                d.pelaksana2_audit1 ="";
+                d.pelaksana2_audit1 ="-";
             }
 
 
             if(d.pelaksana1_audit2 != null){
-                $str3 = d.pelaksana1_audit2.split("_");
-                d.pelaksana1_audit2 = $str3[1];
+                
+                if (d.pelaksana1_audit2.indexOf('_') > -1){
+                    $str3 = d.pelaksana1_audit2.split("_");
+                    d.pelaksana1_audit2 = $str3[1];
+                }
+                
+               
             }
             else{
-                d.pelaksana1_audit2 ="";
+               
+                d.pelaksana1_audit2 ="-";
             }
 
 
             if(d.pelaksana2_audit2 != null){
-                $str4 =  d.pelaksana2_audit2.split("_");
-                d.pelaksana2_audit2 = $str4[1];
+                if (d.pelaksana2_audit2.indexOf('_') > -1){
+                    $str4 =  d.pelaksana2_audit2.split("_");
+                    d.pelaksana2_audit2 = $str4[1];
+                }
+                
             }else{
-                d.pelaksana2_audit2 ="";
+                d.pelaksana2_audit2 ="-";
             }
 
             if(d.pelaksana1_rapat != null){
-                $str5 =  d.pelaksana1_rapat.split("_");
-                d.pelaksana1_rapat = $str5[1];
+                if (d.pelaksana1_rapat.indexOf('_') > -1){
+                    $str5 =  d.pelaksana1_rapat.split("_");
+                    d.pelaksana1_rapat = $str5[1];
+                }
+                
             }else{
-                d.pelaksana1_rapat ="";
+                d.pelaksana1_rapat ="-";
             }
 
             if(d.pelaksana2_rapat != null){
-                $str6 =  d.pelaksana2_rapat.split("_");
-                d.pelaksana2_rapat = $str6[1];
+                if (d.pelaksana2_rapat.indexOf('_') > -1){
+                    $str6 =  d.pelaksana2_rapat.split("_");
+                    d.pelaksana2_rapat = $str6[1];
+                }
+                
             }else{
-                d.pelaksana2_rapat ="";
+                d.pelaksana2_rapat ="-";
             }
 
             if(d.pelaksana3_rapat != null){
-                $str7 =  d.pelaksana3_rapat.split("_");
-                d.pelaksana3_rapat = $str7[1];
+                if (d.pelaksana3_rapat.indexOf('_') > -1){
+                    $str7 =  d.pelaksana3_rapat.split("_");
+                    d.pelaksana3_rapat = $str7[1];
+                }
+                
             }else{
-                d.pelaksana3_rapat ="";
+                d.pelaksana3_rapat ="-";
             }
 
+            console.log(d.pelaksana1_tinjauan);
             if(d.pelaksana1_tinjauan != null){
-                $str8 =  d.pelaksana1_tinjauan.split("_");
-                d.pelaksana1_tinjauan = $str8[1];
+                if (d.pelaksana1_tinjauan.indexOf('_') > -1){
+                    $str8 =  d.pelaksana1_tinjauan.split("_");
+                    d.pelaksana1_tinjauan = $str8[1];
+                }
+               
             }else{
-                d.pelaksana1_tinjauan ="";
+                d.pelaksana1_tinjauan ="-";
             }
 
             if(d.pelaksana12_tinjauan != null){
-                $str9 =  d.pelaksana2_tinjauan.split("_");
-                d.pelaksana2_tinjauan = $str9[1];
+                if (d.pelaksana2_tinjauan.indexOf('_') > -1){
+                    $str9 =  d.pelaksana2_tinjauan.split("_");
+                    d.pelaksana2_tinjauan = $str9[1];
+                }
+                
             }else{
-                d.pelaksana2_tinjauan ="";
+                d.pelaksana2_tinjauan ="-";
             }
 
             if(d.pelaksana3_tinjauan != null){
-                $str10 = d.pelaksana3_tinjauan.split("_");
-                d.pelaksana3_tinjauan = $str10[1];
+                if (d.pelaksana3_tinjauan.indexOf('_') > -1){
+                    $str10 = d.pelaksana3_tinjauan.split("_");
+                    d.pelaksana3_tinjauan = $str10[1];
+                }
+               
             }else{
-                d.pelaksana3_tinjauan ="";
+                d.pelaksana3_tinjauan ="-";
             }
+
+            
+            
+
 
         
 
@@ -847,6 +932,7 @@
                     '<th class="valign-middle text-center">Jenis</th>'+
                     '<th class="valign-middle text-center">Mulai Audit</th>'+
                     '<th class="valign-middle text-center">Selesai Audit</th>'+
+                    '<th class="valign-middle text-center">Kategori</th>'+
                     '<th class="valign-middle text-center">Auditor/Komite</th>'+
                     '<th class="valign-middle text-center">Auditor/Komite</th>'+
                     '<th class="valign-middle text-center">Auditor/Komite</th>'+
@@ -857,24 +943,27 @@
                     '<td class="valign-middle text-center">Audit Tahap 1</td>'+
                     '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
                     '<td class="valign-middle text-center">'+d.selesai_audit1+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
                     '<td class="valign-middle text-center">'+d.pelaksana2_audit1+'</td>'+
-                    '<td class="valign-middle text-center"></td>'+    
+                    '<td class="valign-middle text-center">-</td>'+    
                 '</tr>'+
                 '<tr>'+
                     '<td class="valign-middle text-center">2</td>'+
                     '<td class="valign-middle text-center">Audit Tahap 2</td>'+
                     '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
                     '<td class="valign-middle text-center">'+d.selesai_audit2+'</td>'+
+                    '<td class="valign-middle text-center">'+d.ktg_audit2+'</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
                     '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
-                    '<td class="valign-middle text-center"></td>'+    
+                    '<td class="valign-middle text-center">-</td>'+    
                 '</tr>'+
                 '<tr>'+
                     '<td class="valign-middle text-center">3</td>'+
                     '<td class="valign-middle text-center">Rapat Auditor</td>'+
                     '<td class="valign-middle text-center">'+d.mulai_rapat+'</td>'+
                     '<td class="valign-middle text-center">'+d.selesai_rapat+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_rapat+'</td>'+    
                     '<td class="valign-middle text-center" >'+d.pelaksana2_rapat+'</td>'+ 
                     '<td class="valign-middle text-center" >'+d.pelaksana3_rapat+'</td>'+    
@@ -884,6 +973,7 @@
                     '<td class="valign-middle text-center">Tinjauan Komite</td>'+
                     '<td class="valign-middle text-center">'+d.mulai_tinjauan+'</td>'+
                     '<td class="valign-middle text-center">'+d.selesai_tinjauan+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
                     '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
                     '<td class="valign-middle text-center" >'+d.pelaksana3_tinjauan+'</td>'+    

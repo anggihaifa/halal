@@ -147,6 +147,11 @@ return [
             ],
         ],
         [
+            'icon' => 'ion-md-book',
+            'title' => 'Unduh Form',
+            'url' => 'dokumen.indexpelanggan'
+        ],
+        [
             'icon' => 'ion-ios-home',
             'title' => 'F.A.Q',
             'url' => 'faq.index'
@@ -262,6 +267,11 @@ return [
                 ]
             ],
         ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Unduh Form',
+            'url' => 'dokumen.indexpelanggan'
+        ],
          [
             'icon' => 'ion-ios-help-circle',
             'title' => 'F.A.Q',
@@ -298,6 +308,11 @@ return [
                     'title' => 'Pembayaran Sertifikasi Halal'
                 ],*/
             ],
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Unduh Form',
+            'url' => 'dokumen.indexpelanggan'
         ],
         [
             'icon' => 'ion-ios-help-circle',

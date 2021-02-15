@@ -42,10 +42,27 @@
                             <input type="text" class="form-control col-lg-8" id="id" name="id" value="{{$data->id}}" hidden required>
 
                             <label class="col-lg-4 col-form-label">Nama File</label>
-                            <input  style="margin-right: 15px;" type="text" class="form-control col-lg-7" id="nama_file" name="nama_file" value="{{$data->nama_file}}" required>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="nama_file" name="nama_file" value="{{$data->nama_file}}" required>
+                            </div>
+                            <label class="col-lg-4 col-form-label">File</label>
+                            <div class="col-lg-8">
+                                <a href="{{url('') .Storage::url('public/dokumenHalal/'.$data->nama_file_extension) }}" style="font-size: 15px" download>{{$data->nama_file_extension}}</a>
+                            </div>
+                            <label class="col-lg-4 col-form-label">Upload File Baru</label>
+                            <div class="col-lg-8">
+                                
+                                <input style="padding-top: 15px;padding-left: 0px" type="file" class="form-control-input" name="file" id="file" required/>  
+                            </div>
 
-                            <label class="col-lg-4 col-form-label">Upload File</label>
-                            <input style="padding-top: 15px;padding-left: 0px" type="file" class="form-control-input col-lg-8" name="file" id="file" accept="application/pdf" required/>
+                            <label class="col-lg-4 col-form-label">Kategori Role</label>
+                            <div class="col-lg-8">
+                                <select id="role" name="role" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required="">
+                                    <option value="">==Pilih Kategori Role==</option>
+                                    <option value="pelanggan">Pelanggan</option>
+                                    <option value="user">Karyawan PT SUCOFINDO</option>                                                               
+                                </select>
+                            </div>
 
 
                            

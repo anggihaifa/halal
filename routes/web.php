@@ -280,8 +280,11 @@ Route::get('dokumenTravel','RegistrasiController@dokumenTravel')->name('registra
 
 Route::resource('dokumen','DokumenController');
 Route::get('dokumen_user','DokumenController@indexUser')->name('dokumen.indexuser');
+Route::get('dokumen_pelanggan','DokumenController@indexpelanggan')->name('dokumen.indexpelanggan');
 Route::get('dokumen_view/{id}','DokumenController@dokumenView')->name('dokumen.view');
 Route::get('dokumen_datatable','DokumenController@datatable')->name('dokumen.datatable');
+Route::get('dokumen_datatable_pelanggan','DokumenController@datatablePelanggan')->name('dokumen.datatable_pelanggan');
+Route::get('dokumen_datatable_user','DokumenController@datatableUser')->name('dokumen.datatable_user');
 //master
 Route::prefix('master')->group(function (){
 
