@@ -1677,7 +1677,7 @@
         function addpenyelia(){
             jumlah+=1;
             // var penyelia = '<div> <label class="col-4 col-form-label">Nama</label><div class="col-lg-4"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-4"><div><input class="form-control" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-4"><div><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-4"><div><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div></div><label class="col-4 col-form-label">No Kontrak</label><div class="col-lg-4"><div><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontrak"></div></div><div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div><hr></div>';
-            var penyelia = '<div> <div class="wrapper row"><div class="wrapper row"><label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><input class="form-control ktp" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-8"><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-8"><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div><label class="col-4 col-form-label">No Kontak</label><div class="col-lg-8"><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontak"></div></div> <div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div></div>';            
+            var penyelia = '<div> <div class="wrapper row"><div class="wrapper row"><label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><input class="form-control ktp" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-8"><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-8"><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div><label class="col-4 col-form-label">No Kontak</label><div class="col-lg-8"><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontak"></div></div> <div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div></div>';
             $('.penyelia').append(penyelia);            
         }
 
@@ -1776,7 +1776,7 @@
         detaildatalokasilain.style.display = 'none';
         var nolainnya=1;
 
-        $('#tam_detail_datalokasi').on('click', function(){                                                
+        $('#tam_detail_datalokasi').on('click', function(){
             lokasilainnya = $('#nama_lokasi_lainnya').val();
             alamatlainnya = $('#alamat_lainnya').val();
             kotalainnya = $('#kota_lainnya').val();
@@ -1791,7 +1791,7 @@
             adddatalokasilain();       
         });
 
-        function adddatalokasilain(){            
+        function adddatalokasilain(){           
             // var data_lain = '<div>  
             // <div class="wrapper row"><div class="wrapper row">
             // <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Lokasi</label><div class="col-lg-8"><input class="form-control" id="nama_lokasi_lainnya" name="nama_lokasi_lainnya[]" type="text" label="Nama Lokasi:" placeholder="Nama Lokasi:"></div></div></div>            
@@ -1808,7 +1808,7 @@
             jumlahsertiflainnya+=1;            
         }
 
-        $(document).on('click','#hapus_datalain', function(){                        
+        $(document).on('click','#hapus_datalain', function(){
             $(this).parent().parent().parent().remove();
             jumlahsertiflainnya-=1;
             nolainnya-=1;

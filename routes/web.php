@@ -43,6 +43,7 @@ Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistras
 //phpword
 Route::post('download_data','PHPWordController@download')->name('downloaddata');
 Route::post('download_auditplan','PHPWordController@downloadAuditPlan')->name('downloadauditplan');
+Route::post('upload_auditplan','PHPWordController@uploadAuditPlan')->name('uploadauditplan');
 Route::post('download_auditplan_fix','PHPWordController@downloadAuditPlanFix')->name('downloadauditplanfix');
 
 //penjadwalan
@@ -51,6 +52,7 @@ Route::get('list_penjadwalan_auditor','PenjadwalanController@listpenjadwalanAudi
 Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
 Route::get('data_penjadwalan_auditor','PenjadwalanController@dataPenjadwalanAuditor')->name('datapenjadwalanauditor');
 Route::get('audit_plan/{id}','PenjadwalanController@auditPlan')->name('auditplan');
+Route::get('laporan_audit/{id}','PenjadwalanController@laporanAudit')->name('laporanaudit');
 
 Route::post('detail_auditor', 'PenjadwalanController@detail')->name('detail_auditor.detail');
 Route::post('dropdown1', 'PenjadwalanController@dataAuditor1')->name('dropdown1.dataauditor');

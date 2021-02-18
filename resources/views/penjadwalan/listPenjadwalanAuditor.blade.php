@@ -1441,7 +1441,7 @@
                             
                             // var audit_plan = `<a class="dropdown-item" href=""  data-toggle='modal' data-id=`+full.id_registrasi+` data-target='#modalPenjadwalan1'>Perencanaan Audit (Audit Plan)</a>`;
                             var audit_plan = `<a class="dropdown-item" href="{{url('audit_plan')}}/`+full.id_registrasi+`">Perencanaan Audit (Audit Plan)</a>`;
-                            var form_report = `<a class="dropdown-item"  href="">Form Laporan</a>`;
+                            var form_report = `<a class="dropdown-item"  href="{{url('laporan_audit')}}/`+full.id+`">Form Laporan</a>`;
 
                             //var audit1 ="<button type='button' class='dropdown-item' data-toggle='modal' data-id=\"" + full[0] + "\" data-target='#modalPenjadwalan'>Audit Tahap 1</button>";
                             if(full.audit2!=null){
@@ -1449,7 +1449,7 @@
                                         <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
                                         <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
                                         <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">                                        
-                                            <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>                                        
+                                            <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
                                             <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
                                             <div class="dropdown-divider"></div>
 

@@ -647,7 +647,7 @@ class PenjadwalanController extends Controller
         }
     }
 
-    public function auditPlan($id){        
+    public function auditPlan($id){
         $dataRegistrasi = DB::table('registrasi')
                 ->join('registrasi_alamatkantor','registrasi.id','=','registrasi_alamatkantor.id_registrasi')                
                 ->select('registrasi.*','registrasi_alamatkantor.alamat as alamat')
@@ -667,6 +667,16 @@ class PenjadwalanController extends Controller
         $dataPenjadwalan_ = json_decode($dataPenjadwalan, true);
                 
         return view('penjadwalan.auditPlan',compact('dataRegistrasi','dataPenjadwalan'));
+    }
+
+    public function laporanAudit($id){
+        $dataPenjadwalan = DB::table('penjadwalan')
+                ->where('id',$id)
+                ->get();               
+        // $dataPenjadwalan = Penjadwalan::find($id_penjadwalan);
+        $dataPenjadwalan_ = json_decode($dataPenjadwalan, true);
+                
+        return view('penjadwalan.laporanAudit',compact('dataPenjadwalan'));
     }
 
 
