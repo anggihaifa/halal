@@ -593,7 +593,8 @@ class RegistrasiController extends Controller
             $expd = explode('-',$nosurat);            
 
             $no_order = date('YmdHis').".".Auth::user()->id . "." .$data['id_jenis_registrasi'];
-            dd($no_order);
+            // dd($no_order);
+            dd($data);
             // //Create PDF
             // $nama = Auth::user()->name;
             // $perusahaan = Auth::user()->perusahaan;
