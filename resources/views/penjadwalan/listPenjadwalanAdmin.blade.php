@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Registrasi Halal')
+@section('title', 'Penjadwalan Admin')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -15,18 +15,18 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Registrasi Halal</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Registrasi Aktif</a></li>
+        <li class="breadcrumb-item"><a href="#">Penjadwalan Admin</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Penjadwalan Admin</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Registrasi Halal  <small></small></h1>
+    <h1 class="page-header">List Penjadwalan Admin  <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Registrasi Halal</h4>
+            <h4 class="panel-title">List Penjadwalan Admin</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -155,6 +155,7 @@
                         <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                         <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                         <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
+                         <th class="text-nowrap valign-middle text-center">Wilayah</th>
                         <th class="valign-middle text-center">Status Tahap 1</th>
                         <th class="valign-middle text-center">Status Tahap 2</th>
                         <th class="valign-middle text-center">Status Rapat</th>
@@ -197,7 +198,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_audit1"  name="mulai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input id="mulai_audit1"  name="mulai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -207,7 +208,7 @@
                             <div class="form-group">
                               <label>Tanggal Selesai</label>
                               
-                                <input  id="selesai_audit1" name="selesai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input  id="selesai_audit1" name="selesai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -217,7 +218,7 @@
 
                             <div class="form-group">
                                 <label>Pelaksana 1</label>
-                                <select id="pelaksana1_audit1" name="pelaksana1_audit1" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="pelaksana1_audit1" name="pelaksana1_audit1" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -268,7 +269,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_audit2"  name="mulai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input id="mulai_audit2"  name="mulai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -278,7 +279,7 @@
                             <div class="form-group">
                               <label>Tanggal Selesai</label>
                               
-                                <input  id="selesai_audit2" name="selesai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input  id="selesai_audit2" name="selesai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -289,7 +290,7 @@
                             <div class="form-group">
                                 <label>Saran Pelaksana 1 :  </label> <a id="saran1"><b></b></a><br>
                                 <label>Pelaksana 1</label>
-                                <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -305,7 +306,7 @@
                             <div class="form-group">
 
                                 <label >Kategori Audit</label> 
-                                <select id="ktg_audit2" name="ktg_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="ktg_audit2" name="ktg_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                     <option value="">==Pilih Kategori Audit==</option>
                                     <option value="Onsite">Onsite Audit</option>
                                     <option value="Remote">Remote Audit</option>                                                                        
@@ -388,7 +389,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_rapat"  name="mulai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input id="mulai_rapat"  name="mulai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -398,7 +399,7 @@
                             <div class="form-group">
                               <label>Tanggal Selesai</label>
                               
-                                <input  id="selesai_rapat" name="selesai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input  id="selesai_rapat" name="selesai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -408,7 +409,7 @@
 
                             <div class="form-group">
                                 <label>Pelaksana 1</label>
-                                <select id="pelaksana1_rapat" name="pelaksana1_rapat" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="pelaksana1_rapat" name="pelaksana1_rapat" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -465,7 +466,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_tinjauan"  name="mulai_tinjauan" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input id="mulai_tinjauan"  name="mulai_tinjauan" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -476,7 +477,7 @@
                               <label>Tanggal Selesai</label>
                               
                                 <input  id="selesai_tinjauan" name="selesai_tinjauan" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
-                                <span class="add-on">
+                                <span class="add-on"required>
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
                                 </span>
@@ -486,7 +487,7 @@
 
                             <div class="form-group">
                                 <label>Pelaksana 1</label>
-                                <select id="pelaksana1_tinjauan" name="pelaksana1_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="pelaksana1_tinjauan" name="pelaksana1_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -1489,6 +1490,13 @@
                     {"data":"no_registrasi"},
                     {"data":"nama_perusahaan"},
                     {"data":"kelompok"},
+                    {
+                        
+                        "data":null,
+                        "render":function (data,type,full,meta) {
+                            return checkWilayah(full.kode_wilayah)
+                        }
+                    },
                 
                     {
                         

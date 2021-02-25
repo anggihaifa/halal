@@ -43,6 +43,7 @@ class DokumenController extends Controller
 
         return view('dokumen.viewer', compact('data'));
     }
+    
 
     public function datatable(){
         $data= DB::table('dokumen_halal')

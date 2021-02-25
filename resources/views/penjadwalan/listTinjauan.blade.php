@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Registrasi Halal')
+@section('title', 'Tinjauan Hasil Audit')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -15,18 +15,18 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Registrasi Halal</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Registrasi Aktif</a></li>
+        <li class="breadcrumb-item"><a href="#">Tinjauan Hasil Audit</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Tinjauan Hasil Audit</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Registrasi Halal  <small></small></h1>
+    <h1 class="page-header">List Tinjauan Hasil Audit  <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Registrasi Halal</h4>
+            <h4 class="panel-title">List Tinjauan Hasil Audit</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -112,7 +112,7 @@
                                                     <option value="11">Nominal Pembayaran Lebih</option>
                                                     <option value="12">Pembayaran Gagal</option>
                                                     <option value="13">Pembayaran Terkonfirmasi</option>
-                                                    <option value="14">Proses Audit Tahap 1</option>
+                                                    <option value="14">Proses Tinjauan Hasil Audit</option>
                                                     <option value="15">Proses Audit Tahap 2</option>
                                                     <option value="16">Pelaporan Audit Tahap 2</option>
                                                     <option value="17">Konfirmasi Berita Acara</option>
@@ -151,14 +151,15 @@
                 <thead class="thead-light">
                     <tr>
                         <th class="text-nowrap valign-middle text-center">No</th>      
-                        <th class="text-nowrap valign-middle text-center">Detail</th>                  
                         <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                         <th class="text-nowrap valign-middle text-center">Perusahaan</th>
-                        <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
-                        <th class="valign-middle text-center">Status Tahap 1</th>
-                        <th class="valign-middle text-center">Status Tahap 2</th>
-                        <th class="valign-middle text-center">Status Rapat</th>
-                        <th class="valign-middle text-center">Status Tinjauan</th>
+                        <th class="text-nowrap valign-middle text-center">Jenis Produk</th>
+                        <th class="text-nowrap valign-middle text-center">Tanggal Mulai</th>
+                        <th class="text-nowrap valign-middle text-center">Tanggal Selesai</th>
+                        <th class="text-nowrap valign-middle text-center">Komite 1</th>
+                        <th class="text-nowrap valign-middle text-center">Komite 2</th>
+                        <th class="text-nowrap valign-middle text-center">Komite 3</th>
+                        <th class="valign-middle text-center">Status</th>
                         <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                 </thead>
@@ -180,190 +181,11 @@
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+
     
-    <style type="text/css">
-        td.details-control {
-            text-align:center;
-            color:forestgreen;
-            cursor: pointer;
-        }
-        tr.shown td.details-control {
-            text-align:center; 
-            color:red;
-        }
-    </style>
-
-
     <script>
 
 
-        
-
-
-        function checkNamaAuditor(d,dom) {
-            //var detailNama;
-            $('#loading-image').show();
-            $.ajax({
-
-                   
-                url: '{{ route('detail_auditor.detail') }}',
-                method: 'POST',
-                data: {
-                     _token: "{{ csrf_token() }}",
-                    id: d,
-                  
-                },
-                 success: function (response) {
-                    
-                        //alert(response);
-                        if(response == ""){
-                            document.getElementById(dom).innerHTML = "";
-                        }else{
-                            document.getElementById(dom).innerHTML = response[0];
-                        }
-                        
-                       
-                        //response = parseJSON(response);
-                        //console.log(response[0]);
-                },
-               
-               
-            });   
-
-        }
-
-       
-         
-        function format ( d ) {
-            // `d` is the original data object for the row
-            if(d.pelaksana1_audit1 != null){
-                $str1 =  d.pelaksana1_audit1.split("_");
-                d.pelaksana1_audit1 = $str1[1];
-            }else{
-                d.pelaksana1_audit1 ="";
-            }
-
-
-             if(d.pelaksana2_audit1 != null){
-                $str2 =  d.pelaksana2_audit1.split("_");
-                d.pelaksana2_audit1 = $str2[1];
-            
-            }else{
-                d.pelaksana2_audit1 ="";
-            }
-
-
-            if(d.pelaksana1_audit2 != null){
-                $str3 = d.pelaksana1_audit2.split("_");
-                d.pelaksana1_audit2 = $str3[1];
-            }
-            else{
-                d.pelaksana1_audit2 ="";
-            }
-
-
-            if(d.pelaksana2_audit2 != null){
-                $str4 =  d.pelaksana2_audit2.split("_");
-                d.pelaksana2_audit2 = $str4[1];
-            }else{
-                d.pelaksana2_audit2 ="";
-            }
-
-            if(d.pelaksana1_rapat != null){
-                $str5 =  d.pelaksana1_rapat.split("_");
-                d.pelaksana1_rapat = $str5[1];
-            }else{
-                d.pelaksana1_rapat ="";
-            }
-
-            if(d.pelaksana2_rapat != null){
-                $str6 =  d.pelaksana2_rapat.split("_");
-                d.pelaksana2_rapat = $str6[1];
-            }else{
-                d.pelaksana2_rapat ="";
-            }
-
-            if(d.pelaksana3_rapat != null){
-                $str7 =  d.pelaksana3_rapat.split("_");
-                d.pelaksana3_rapat = $str7[1];
-            }else{
-                d.pelaksana3_rapat ="";
-            }
-
-            if(d.pelaksana1_tinjauan != null){
-                $str8 =  d.pelaksana1_tinjauan.split("_");
-                d.pelaksana1_tinjauan = $str8[1];
-            }else{
-                d.pelaksana1_tinjauan ="";
-            }
-
-            if(d.pelaksana12_tinjauan != null){
-                $str9 =  d.pelaksana2_tinjauan.split("_");
-                d.pelaksana2_tinjauan = $str9[1];
-            }else{
-                d.pelaksana2_tinjauan ="";
-            }
-
-            if(d.pelaksana3_tinjauan != null){
-                $str10 = d.pelaksana3_tinjauan.split("_");
-                d.pelaksana3_tinjauan = $str10[1];
-            }else{
-                d.pelaksana3_tinjauan ="";
-            }
-
-        
-
-            return '<table  class="table" cellspacing="0" style="width:100% padding-left:50px;">'+
-                '<thead style="background-color:#dff3e3;">'+
-                    '<th class="valign-middle text-center">No</th>'+
-                    '<th class="valign-middle text-center">Jenis</th>'+
-                    '<th class="valign-middle text-center">Mulai Audit</th>'+
-                    '<th class="valign-middle text-center">Selesai Audit</th>'+
-                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                    
-                '</thead>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">1</td>'+
-                    '<td class="valign-middle text-center">Audit Tahap 1</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
-                    '<td class="valign-middle text-center">'+d.selesai_audit1+'</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
-                    '<td class="valign-middle text-center">'+d.pelaksana2_audit1+'</td>'+
-                    '<td class="valign-middle text-center"></td>'+    
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">2</td>'+
-                    '<td class="valign-middle text-center">Audit Tahap 2</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
-                    '<td class="valign-middle text-center">'+d.selesai_audit2+'</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
-                    '<td class="valign-middle text-center"></td>'+    
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">3</td>'+
-                    '<td class="valign-middle text-center">Rapat Auditor</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_rapat+'</td>'+
-                    '<td class="valign-middle text-center">'+d.selesai_rapat+'</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_rapat+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_rapat+'</td>'+ 
-                    '<td class="valign-middle text-center" >'+d.pelaksana3_rapat+'</td>'+    
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">4</td>'+
-                    '<td class="valign-middle text-center">Tinjauan Komite</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_tinjauan+'</td>'+
-                    '<td class="valign-middle text-center">'+d.selesai_tinjauan+'</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
-                    '<td class="valign-middle text-center" >'+d.pelaksana3_tinjauan+'</td>'+    
-                '</tr>'+
-                    
-               
-            '</table>';
-        }
 
         $('#tgl_registrasi').datepicker({
             format: "yyyy-mm-dd",
@@ -377,7 +199,7 @@
 
             var xTable = $('#table').DataTable({
                 ajax:{
-                    url:"{{route('datapenjadwalanauditor')}}",
+                    url:"{{route('datatinjauan')}}",
                     data:function(d){
                         d.no_registrasi = $('input[name=no_registrasi]').val();
                         d.perusahaan = $('input[name=perusahaan]').val();
@@ -402,45 +224,51 @@
                             return meta.row + 1;
                         }
                     },
-                    {
-                        "className": 'details-control',
-                         "orderable": false,
-                         "data": null,
-                         "render": function () {
-                             return '<i class="fa fa-plus-square" aria-hidden="true"></i>';
-                         },
-                         width:"15px"
-                    },
-                  
-
+ 
                     {"data":"no_registrasi"},
                     {"data":"nama_perusahaan"},
                     {"data":"kelompok"},
+                    {"data":"mulai_tinjauan"},
+                    {"data":"selesai_tinjauan"},
+                    {
+                        
+                        "data":null,
+                        "searchable":false,
+                        "render":function (data,type,full,meta) {
+                            var str = full.pelaksana1_tinjauan.split("_");
+                            return str[1]
+                        }
+                    },
+                    {
+                        
+                        "data":null,
+                        "searchable":false,
+                        "render":function (data,type,full,meta) {
+                            if(full.pelaksana2_tinjauan){
+                                var str = full.pelaksana2_tinjauan.split("_");
+                                return str[1]
+                            }else{
+                                return ''
+                            }
+                            
+                        }
+                    },
+                    {
+                        
+                        "data":null,
+                        "searchable":false,
+                        "render":function (data,type,full,meta) {
+                            if(full.pelaksana3_tinjauan){
+                                var str = full.pelaksana3_tinjauan.split("_");
+                                return str[1]
+                            }else{
+                                return ''
+                            }
+                            
+                        }
+                    },
+                    
                 
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            return checkPenjadwalan(full.status_audit1)
-                        }
-                    },
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            return checkPenjadwalan(full.status_audit2)
-                        }
-                    },
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            return checkPenjadwalan(full.status_rapat)
-                        }
-                    },
                     {
                         
                         "data":null,
@@ -449,6 +277,7 @@
                             return checkPenjadwalan(full.status_tinjauan)
                         }
                     },
+                   
                     {
                         "data":null,
                         "searchable":false,
@@ -457,48 +286,29 @@
 
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                    
-                            
                           
-                            
-                            // var audit_plan = `<a class="dropdown-item" href=""  data-toggle='modal' data-id=`+full.id_registrasi+` data-target='#modalPenjadwalan1'>Perencanaan Audit (Audit Plan)</a>`;
                             var audit_plan = `<a class="dropdown-item" href="{{url('audit_plan')}}/`+full.id_registrasi+`">Perencanaan Audit (Audit Plan)</a>`;
                             var form_report = `<a class="dropdown-item"  href="">Form Laporan</a>`;
 
-                            //var audit1 ="<button type='button' class='dropdown-item' data-toggle='modal' data-id=\"" + full[0] + "\" data-target='#modalPenjadwalan'>Audit Tahap 1</button>";
-                            if(full.audit2!=null){
-                                return `<div class="btn-group m-r-5 show">
-                                        <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
-                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">                                        
-                                            <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>                                        
-                                            <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
-                                            <div class="dropdown-divider"></div>
+                            return `<div class="btn-group m-r-5 show">
+                                    <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">                                        
+                                        <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>                                        
+                                        <a href="{{url('detail_unggah_data_sertifikasi_auditor')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
+                                        <div class="dropdown-divider"></div>
 
-                                            <div class="dropdown-button-title">Update Progress</div>`+
-                                            audit_plan+form_report+
-                                        `</div>
-                                    </div>`
-                            }else{
-                                return `<div class="btn-group m-r-5 show">
-                                        <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
-                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">                                        
-                                            <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
-                                            <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
-                                            <div class="dropdown-divider"></div>
-
-                                            <div class="dropdown-button-title">Update Progress</div>`+
-                                            form_report+
-                                        `</div>
-                                    </div>`
-                            }
+                                        <div class="dropdown-button-title"></div>`+
+                                       form_report+
+                                    `</div>
+                                </div>`
+                           
                         }
                     }
                 ],
                 'columnDefs': [
                 {
-                      "targets": [1,2,3,4,5,6,7,8,9],
+                      "targets": [0,1,2,3,4,5,6,7,8,9,10],
                       "className": "text-center",
                      
                 }],
@@ -506,32 +316,10 @@
                 processing:true,
                 serverSide:true,
                 order:[[0,'asc']],
-                "searching": false,
 
             });
 
-            $('#table tbody').on('click', 'td.details-control', function () {
-                 var tr = $(this).closest('tr');
-                 var tdi = tr.find("i.fa");
-                 var row = xTable.row(tr);
-
-                 //console.log(row.data());
-
-                 if (row.child.isShown()) {
-                     // This row is already open - close it
-                     row.child.hide();
-                     tr.removeClass('shown');
-                     tdi.first().removeClass('fa-minus-square');
-                     tdi.first().addClass('fa-plus-square');
-                 }
-                 else {
-                     // Open this row
-                     row.child(format(row.data())).show();
-                     tr.addClass('shown');
-                     tdi.first().removeClass('fa-plus-square');
-                     tdi.first().addClass('fa-minus-square');
-                 }
-             });
+           
         
     
         });

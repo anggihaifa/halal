@@ -1079,6 +1079,39 @@ class RegistrasiController extends Controller
 
     }
 
+    public function detailUnggahDataSertifikasiAuditor($id_registrasi){
+        //dd("masuk");
+        //get data registrasi
+        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+
+        //check data dokumen has
+        $checkHas =  DB::table('dokumen_has')
+                     ->where('id_registrasi',$id_registrasi)
+                     ->get();
+
+        if(isset($checkHas[0])){ $dataHas = json_decode($checkHas,true);}
+        else{ $dataHas = null;}
+
+        //check data dokumen matriks produk
+        $checkMatriks = DB::table('dokumen_matriks_produk')
+                         ->where('id_registrasi',$id_registrasi)
+                         ->get();
+
+        if(isset($checkMatriks[0])){$dataMatriksProduk = json_decode($checkMatriks,true);}
+        else{$dataMatriksProduk = null;}
+
+        //check data kuisioner has
+        $checkKuisionerHas = DB::table('kuisioner_has')
+                         ->where('id_registrasi',$id_registrasi)
+                         ->get();
+
+        if(isset($checkKuisionerHas[0])){$dataKuisionerHas = json_decode($checkKuisionerHas,true);}
+        else{$dataKuisionerHas = null;}
+
+        return view('pelanggan.unggahDataSertifikasi.detailDataAuditor', compact('dataRegistrasi','dataHas','dataMatriksProduk','dataKuisionerHas'));
+
+    }
+
     public function dataFasilitas($id_registrasi){
         $xdata = DB::table('fasilitas')
                  ->where('id_registrasi','=',$id_registrasi)

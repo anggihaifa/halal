@@ -82,5 +82,12 @@
     <p>Terima kasih,</p>
     <br>
     <p>Admin LPH SUCOFINDO</p>
+
+     <footer style="text-align:center;">
+        <div style="background-color:#00acac; color:white; height: 50px;">
+            <a><b>Call Center:  021-7983666 ext 1324</b></a><br>
+            <a><b>WhatsApp: 0812-8957-7157</b></a>
+        </div>
+    </footer>
 </body>
 </html>

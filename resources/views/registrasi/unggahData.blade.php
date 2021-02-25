@@ -164,7 +164,8 @@
 											<th width="1%" class="  valign-middle text-center">Status</th>
 											@endif
 											<th width="1%" class="  valign-middle text-center">Keterangan</th>
-											<th width="30%" class="  valign-middle text-center">Catatan</th>
+											<th width="30%" class="  valign-middle text-center">Temuan</th>
+											<th width="30%" class="  valign-middle text-center">Review Tambahan/ Perbaikan  Dokumen</th>
 
 											<th width="1%" class="  valign-middle text-center">Aksi</th>
 											
@@ -180,6 +181,7 @@
 											<td class="valign-middle text-center"><input type="file" id="has_1" name="has_1" onchange="getValue('has_1')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"></td>
+											<td class=" valign-middle"></td>
 											
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_1')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 
@@ -190,15 +192,17 @@
 											<td class="  valign-middle text-center"><input type="file" id="has_2" name="has_2" onchange="getValueSJPH('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"></td>
+											<td class=" valign-middle"></td>
 
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has2" class="btn btn-xs btn-primary" onclick="setHas('has_2')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 
 										</tr>
 										<tr class="odd">
 											<td class="  valign-middle text-center">3</td>
-											<td class=" valign-middle">Data Produk Yang Dihasilkan Sendiri</td>
+											<td class=" valign-middle">Data Produk Yang Dihasilkan</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_3" name="has_3" onchange="getValue('has_3')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has3" class="btn btn-xs btn-primary" onclick="setHas('has_3')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
@@ -208,6 +212,7 @@
 											<td class="  valign-middle text-center"><input type="file" id="has_4" name="has_4" onchange="getValue('has_4')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"></td>
+											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has4" class="btn btn-xs btn-primary" onclick="setHas('has_4')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="odd">
@@ -216,12 +221,14 @@
 											<td class="  valign-middle text-center"><input type="file" id="has_5" name="has_5" onchange="getValue('has_5')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"></td>
+											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has5" class="btn btn-xs btn-primary" onclick="setHas('has_5')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										<tr class="even">
 											<td class="  valign-middle text-center">6</td>
-											<td class=" valign-middle">Sertifikat Halal Sebelumnya</td>
+											<td class=" valign-middle">Sertifikat Halal Sebelumnya (Jika Ada)</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_6" name="has_6" onchange="getValue('has_6')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has6" class="btn btn-xs btn-primary" onclick="setHas('has_6')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
@@ -231,12 +238,14 @@
 											<td class="  valign-middle text-center"><input type="file" id="has_7" name="has_7" onchange="getValue('has_7')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"></td>
+											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has7" class="btn btn-xs btn-primary" onclick="setHas('has_7')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										<tr class="even">
 											<td class="  valign-middle text-center">8</td>
 											<td class=" valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_8" name="has_8" onchange="getValue('has_8')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has8" class="btn btn-xs btn-primary" onclick="setHas('has_8')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
@@ -246,72 +255,74 @@
 											<td class="  valign-middle text-center"><input type="file" id="has_9" name="has_9" onchange="getValue('has_9')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"></td>
+											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has9" class="btn btn-xs btn-primary" onclick="setHas('has_9')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">10</td>
-											<td class=" valign-middle">Izin Usaha (Untuk Registrasi Baru Atau Untuk Fasilitas Baru)</td>
+											<td class=" valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya.</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_10" name="has_10" onchange="getValue('has_10')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has10" class="btn btn-xs btn-primary" onclick="setHas('has_10')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="odd">
 											<td class="  valign-middle text-center">11</td>
-											<td class=" valign-middle">Bukti Registrasi Dari BPJPH</td>
+											<td class=" valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)*Dilampirkan Aspek Legal Perusahaan
+											</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_11" name="has_11" onchange="getValue('has_11')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has11" class="btn btn-xs btn-primary" onclick="setHas('has_11')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">12</td>
-											<td class="valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
+											<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_12" name="has_12" onchange="getValue('has_12')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has12" class="btn btn-xs btn-primary" onclick="setHas('has_12')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">13</td>
-											<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D</td>
+											<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_13" name="has_13" onchange="getValue('has_13')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has13" class="btn btn-xs btn-primary" onclick="setHas('has_13')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">14</td>
-											<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
+											<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_14" name="has_14" onchange="getValue('has_14')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has14" class="btn btn-xs btn-primary" onclick="setHas('has_14')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">15</td>
-											<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
+											<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_15" name="has_15" onchange="getValue('has_15')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
+											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has15" class="btn btn-xs btn-primary" onclick="setHas('has_15')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">16</td>
-											<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
+											<td class="valign-middle">BBukti Registrasi Dari BPJPH</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_16" name="has_16" onchange="getValue('has_16')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"></td>
+											<td class=" valign-middle"></td>
 											<td class="valign-middle text-center"> <button type="submit" id="btn_has16" class="btn btn-xs btn-primary" onclick="setHas('has_16')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
-										<tr class="even">
-											<td class="  valign-middle text-center">17</td>
-											<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
-											<td class="  valign-middle text-center"><input type="file" id="has_17" name="has_17" onchange="getValue('has_17')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
-											{!! $fieldBelum !!}
-											<td class=" valign-middle"></td>
-											<td class="valign-middle text-center"> <button type="submit" id="btn_has17" class="btn btn-xs btn-primary" onclick="setHas('has_17')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-										</tr>
+										
 									@else
 											@foreach($dataHas as $has => $value)
 												<input type="text" name="status" value="1" readonly hidden>
@@ -329,11 +340,17 @@
 														<td class="   valign-middle">
 															{{$value['keterangan_has_1']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_1']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" class="btn btn-xs btn-primary" id="btn_has1" onclick="setHas('has_1')">Unggah</button> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_1']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_1']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_1')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -351,6 +368,9 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_2']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_2']}}
+														</td>
 														<td class="  valign-middle text-center">
 															<button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has2" onclick="setHas('has_2')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a>
 														</td>
@@ -359,12 +379,15 @@
 														<td class="   valign-middle">
 															{{$value['keterangan_has_2']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_2']}}
+														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has2" class="btn btn-xs btn-primary" onclick="setHas('has_2')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
 												</tr>
 												<tr class="odd">
 													<td id="no_has3" class="  valign-middle text-center">3</td>
-													<td class="valign-middle">Data Produk Yang Dihasilkan Sendiri</td>
+													<td class="valign-middle">Data Produk Yang Dihasilkan</td>
 													<td class="valign-middle text-center">
 														<input style="width:180px" type="file" id="has_3" name="has_3" onchange="getValue('has_3')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
@@ -374,11 +397,17 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_3']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_3']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has3" onclick="setHas('has_3')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="   valign-middle">
 															{{$value['keterangan_has_3']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_3']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has3" class="btn btn-xs btn-primary" onclick="setHas('has_3')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -395,11 +424,17 @@
 														<td class="   valign-middle">
 															{{$value['keterangan_has_4']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_4']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has4" onclick="setHas('has_4')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_4']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_4']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has4" class="btn btn-xs btn-primary" onclick="setHas('has_4')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -416,11 +451,17 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_5']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_5']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has5" onclick="setHas('has_5')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_5']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_5']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has5" class="btn btn-xs btn-primary" onclick="setHas('has_5')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -436,11 +477,17 @@
 														<td class="   valign-middle">
 															{{$value['keterangan_has_6']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_6']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has6" onclick="setHas('has_6')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_6']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_6']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has6" class="btn btn-xs btn-primary" onclick="setHas('has_6')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -457,11 +504,17 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_7']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_7']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has7" onclick="setHas('has_7')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_7']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_7']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has7" class="btn btn-xs btn-primary" onclick="setHas('has_7')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -477,11 +530,17 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_8']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_8']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has8" onclick="setHas('has_8')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_8']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_8']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has8" class="btn btn-xs btn-primary" onclick="setHas('has_8')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -498,18 +557,24 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_9']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_9']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has9" onclick="setHas('has_9')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_9']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_9']}}
+														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has9" class="btn btn-xs btn-primary" onclick="setHas('has_9')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
 												</tr>
 												<tr class="even">
 													<td id="no_has10" class="  valign-middle text-center">10</td>
-													<td class=" valign-middle">Izin usaha (untuk registrasi baru atau untuk fasilitas baru)</td>
+													<td class=" valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya.</td>
 													<td class=" valign-middle text-center">
 														<input style="width:180px" type="file" id="has_10" name="has_10" onchange="getValue('has_10')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
@@ -519,18 +584,25 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_10']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_10']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has10" onclick="setHas('has_10')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_10']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_10']}}
+														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has10" class="btn btn-xs btn-primary" onclick="setHas('has_10')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
 												</tr>
 												<tr class="odd">
 													<td id="no_has11" class="  valign-middle text-center">11</td>
-													<td class=" valign-middle">Bukti registrasi dari BPJPH</td>
+													<td class=" valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)*Dilampirkan Aspek Legal Perusahaan
+													</td>
 													<td class="valign-middle text-center">
 														<input style="width:180px" type="file" id="has_11" name="has_11" onchange="getValue('has_11')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
@@ -540,18 +612,24 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_11']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_11']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has11" onclick="setHas('has_11')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_11']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_11']}}
+														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has11" class="btn btn-xs btn-primary" onclick="setHas('has_11')" >Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
 												</tr>
 												<tr class="even">
 													<td id="no_has12" class="  valign-middle text-center">12</td>
-													<td class=" valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
+													<td class=" valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 													<td class=" valign-middle text-center">
 														<input style="width:180px" type="file" id="has_12" name="has_12" onchange="getValue('has_12')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
@@ -561,11 +639,17 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_12']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_12']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has12" onclick="setHas('has_12')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_12']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_12']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has12" class="btn btn-xs btn-primary" onclick="setHas('has_12')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -574,7 +658,7 @@
 
 												<tr class="even">
 													<td id="no_has13" class="  valign-middle text-center">13</td>
-													<td class=" valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)</td>
+													<td class=" valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 													<td class=" valign-middle text-center">
 														<input style="width:180px" type="file" id="has_13" name="has_13" onchange="getValue('has_13')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
@@ -584,11 +668,17 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_13']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_13']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has13" onclick="setHas('has_13')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_13']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_13']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has13" class="btn btn-xs btn-primary" onclick="setHas('has_13')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -597,7 +687,7 @@
 
 												<tr class="even">
 													<td id="no_has14" class="  valign-middle text-center">14</td>
-													<td class=" valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
+													<td class=" valign-middle">Bukti Pelaksanaan Audit Internal</td>
 													<td class=" valign-middle text-center">
 														<input style="width:180px" type="file" id="has_14" name="has_14" onchange="getValue('has_14')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
@@ -607,11 +697,17 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_14']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_14']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has14" onclick="setHas('has_14')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_14']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_14']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has14" class="btn btn-xs btn-primary" onclick="setHas('has_14')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -620,7 +716,7 @@
 
 												<tr class="even">
 													<td id="no_has15" class="  valign-middle text-center">15</td>
-													<td class=" valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
+													<td class=" valign-middle">Informasi Denah Lokasi Produksi</td>
 													<td class=" valign-middle text-center">
 														<input style="width:180px" type="file" id="has_15" name="has_15" onchange="getValue('has_15')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
@@ -630,11 +726,17 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_15']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_15']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has15" onclick="setHas('has_15')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_15']}}
+														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_15']}}
 														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has15" class="btn btn-xs btn-primary" onclick="setHas('has_15')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
@@ -643,7 +745,7 @@
 
 												<tr class="even">
 													<td id="no_has16" class="  valign-middle text-center">16</td>
-													<td class=" valign-middle">Bukti Pelaksanaan Audit Internal</td>
+													<td class=" valign-middle">Bukti Registrasi Dari BPJPH</td>
 													<td class=" valign-middle text-center">
 														<input style="width:180px" type="file" id="has_16" name="has_16" onchange="getValue('has_16')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 													</td>
@@ -653,39 +755,24 @@
 														<td class="  valign-middle">
 															{{$value['keterangan_has_16']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_16']}}
+														</td>
 														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has16" onclick="setHas('has_16')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
 													@else
 														{!! $fieldBelum !!}
 														<td class="  valign-middle">
 															{{$value['keterangan_has_16']}}
 														</td>
+														<td class="   valign-middle">
+															{{$value['review_perbaikan_16']}}
+														</td>
 														<td class="valign-middle text-center"> <button type="submit" id="btn_has16" class="btn btn-xs btn-primary" onclick="setHas('has_16')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 													@endif
 												
 												</tr>
 
-												<tr class="even">
-													<td id="no_has17" class="  valign-middle text-center">17</td>
-													<td class=" valign-middle">Informasi Denah Lokasi Produksi</td>
-													<td class=" valign-middle text-center">
-														<input style="width:180px" type="file" id="has_17" name="has_17" onchange="getValue('has_17')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_17']])@endcomponent
-													@if($value['has_17'] !== null)
-														{!! $fieldSudah !!}
-														<td class="  valign-middle">
-															{{$value['keterangan_has_17']}}
-														</td>
-														<td class="  valign-middle text-center"><button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has17" onclick="setHas('has_17')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_17']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-														{!! $fieldBelum !!}
-														<td class="  valign-middle">
-															{{$value['keterangan_has_17']}}
-														</td>
-														<td class="valign-middle text-center"> <button type="submit" id="btn_has17" class="btn btn-xs btn-primary" onclick="setHas('has_17')">Unggah</button><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
 												
-												</tr>
 											@endforeach()
 										@endif
 									</tbody>

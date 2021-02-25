@@ -20,6 +20,7 @@ class SendEmailAuditor implements ShouldQueue
     
     public $timeout = 1200;
     public $user;
+    public $registrasi;
     public $penjadwalan;
     public $status;
     /**
@@ -27,11 +28,12 @@ class SendEmailAuditor implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($user,$penjadwalan, $status)
+    public function __construct($user,$registrasi,$penjadwalan, $status)
     {
         //
         
         $this->user = $user;
+        $this->registrasi = $registrasi;
         $this->penjadwalan = $penjadwalan;
         $this->status = $status;
     }
@@ -44,7 +46,7 @@ class SendEmailAuditor implements ShouldQueue
     public function handle()
     {
         //
-        $email = new EmailAuditor($this->user,$this->penjadwalan, $this->status);
+        $email = new EmailAuditor($this->user,$this->registrasi,$this->penjadwalan, $this->status);
         Mail::to($this->user['email'])->send($email);
     }
 }

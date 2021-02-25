@@ -47,9 +47,17 @@ Route::post('download_auditplan_fix','PHPWordController@downloadAuditPlanFix')->
 
 //penjadwalan
 Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin');
-Route::get('list_penjadwalan_auditor','PenjadwalanController@listpenjadwalanAuditor')->name('listpenjadwalanauditor');
+Route::get('list_audit1','PenjadwalanController@listAudit1')->name('listaudit1');
+Route::get('list_audit2','PenjadwalanController@listAudit2')->name('listaudit2');
+Route::get('list_rapat','PenjadwalanController@listRapat')->name('listrapat');
+Route::get('list_tinjauan','PenjadwalanController@listTinjauan')->name('listtinjauan');
+
 Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
-Route::get('data_penjadwalan_auditor','PenjadwalanController@dataPenjadwalanAuditor')->name('datapenjadwalanauditor');
+Route::get('data_audit1','PenjadwalanController@dataAudit1')->name('dataaudit1');
+Route::get('data_audit2','PenjadwalanController@dataAudit2')->name('dataaudit2');
+Route::get('data_rapat','PenjadwalanController@dataRapat')->name('datarapat');
+Route::get('data_tinjauan','PenjadwalanController@dataTinjauan')->name('datatinjauan');
+
 Route::get('audit_plan/{id}','PenjadwalanController@auditPlan')->name('auditplan');
 
 Route::post('detail_auditor', 'PenjadwalanController@detail')->name('detail_auditor.detail');
@@ -64,7 +72,12 @@ Route::put('audit2', 'PenjadwalanController@audit2')->name('audit2');
 Route::put('rapat', 'PenjadwalanController@rapat')->name('rapat');
 Route::put('tinjauan', 'PenjadwalanController@tinjauan')->name('tinjauan');
 
+Route::get('penjadwalan_viewer/{id_regis}/{hpas}','PenjadwalanController@dokumenView')->name('penjadwalan.viewer');
 
+Route::get('penjadwalan_viewer_doc/{id_user}/{id_regis}/{hpas}','PenjadwalanController@view')->name('penjadwalan.view');
+
+
+////////////////End OF Penjadwalan
 
 Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran');
 
@@ -193,6 +206,8 @@ Route::get('unggahDataSertifikasi','RegistrasiController@unggahDataSertifikasi')
 Route::get('list_unggah_data_sertifikasi','RegistrasiController@listUnggahDataSertifikasi')->name('listunggahdatasertifikasi');
 Route::get('get_data_registrasi','RegistrasiController@getDataRegistrasi')->name('getdataregistrasi');
 Route::get('detail_unggah_data_sertifikasi/{id_registrasi}','RegistrasiController@detailUnggahDataSertifikasi')->name('detailunggahdatasertifikasi');
+
+Route::get('detail_unggah_data_sertifikasi_auditor/{id_registrasi}','RegistrasiController@detailUnggahDataSertifikasiAuditor')->name('detailunggahdatasertifikasiauditor');
 
 Route::get('data_fasilitas/{id_registrasi}','RegistrasiController@dataFasilitas');
 Route::get('data_produk/{id_registrasi}','RegistrasiController@dataProduk');

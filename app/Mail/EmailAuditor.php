@@ -13,6 +13,7 @@ class EmailAuditor extends Mailable
 
    
     public $user;
+    public $registrasi;
     public $penjadwalan;
     public $status;
 
@@ -21,10 +22,11 @@ class EmailAuditor extends Mailable
      *
      * @return void
      */
-    public function __construct($user, $penjadwalan, $status)
+    public function __construct($user,$registrasi, $penjadwalan, $status)
     {        
         
         $this->user = $user;
+        $this->registrasi = $registrasi;
         $this->penjadwalan = $penjadwalan;
         $this->status = $status;
          //dd( $this);

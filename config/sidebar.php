@@ -416,12 +416,53 @@ return [
             'icon' => 'ion-ios-stats',
             'title' => 'Dashboard',
             'url' => 'home.index'
-        ],        
+        ],
+         [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Jadwal Audit',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                         
+                [
+                    'url' => 'listaudit1',
+                    'title' => 'Audit Tahap 1'
+                ],
+                [
+                    'url' => 'listaudit2',
+                    'title' => 'Audit Tahap 2'
+                ],
+                [
+                    'url' => 'listrapat',
+                    'title' => 'Rapat Auditor'
+                ],    
+            ],
+
+        ], 
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],         
+                                      
+    ],
+    'menu8' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],
         [
             'icon' => 'ion-ios-calendar',
-            'title' => 'Penjadwalan',
-            'url' => 'listpenjadwalanauditor'
-        ],                                     
+            'title' => 'Jadwal Tinajaun Audit',
+            'url' => 'listtinjauan'
+        ],
+         [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],  
+                                      
     ],
 ];
 
