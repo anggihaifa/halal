@@ -1441,7 +1441,7 @@
                             
                             // var audit_plan = `<a class="dropdown-item" href=""  data-toggle='modal' data-id=`+full.id_registrasi+` data-target='#modalPenjadwalan1'>Perencanaan Audit (Audit Plan)</a>`;
                             var audit_plan = `<a class="dropdown-item" href="{{url('audit_plan')}}/`+full.id_registrasi+`">Perencanaan Audit (Audit Plan)</a>`;
-                            var form_report = `<a class="dropdown-item"  href="{{url('laporan_audit')}}/`+full.id+`">Form Laporan</a>`;
+                            var form_report = `<a class="dropdown-item"  href="{{url('laporan_audit')}}/`+full.id_registrasi+`">Form Laporan</a>`;
 
                             //var audit1 ="<button type='button' class='dropdown-item' data-toggle='modal' data-id=\"" + full[0] + "\" data-target='#modalPenjadwalan'>Audit Tahap 1</button>";
                             if(full.audit2!=null){

@@ -105,15 +105,15 @@ class PHPWordController extends Controller
         
         $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
                 
-        $phpWord = $objReader->load("storage/docx/download/".$fileName);                        
+        $phpWord = $objReader->load("storage/docx/download/".$fileName);
         
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
         $fileName2 = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_AuditPlan_'.$data['nama_perusahaan'].'.html';
         $objWriter->save('storage/docx/download/'.$fileName2);
-        return response()->download('storage/docx/download/'.$fileName);        
+        return response()->download('storage/docx/download/'.$fileName);
 
         $dompdf = new Dompdf();
-        $html = file_get_contents("AP.html"); 
+        $html = file_get_contents('storage/docx/download/'.$fileName); 
         $dompdf->loadHtml($html);
         
         $dompdf->setPaper('A4', 'landscape');
@@ -124,12 +124,47 @@ class PHPWordController extends Controller
         
     }
 
+    public function downloadLaporanAuditSJPH(Request $request){
+        $data = $request->except('_token','_method');
+        // dd("disini");
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();                
+        
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-07 Format Laporan SJPH.docx');
+
+        $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
+        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);
+
+        $fileName = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_LaporanSJPH_'.$data['nama_perusahaan'].'.docx';
+        $templateProcessor->saveAs("storage/laporan/download/".$fileName);        
+        
+        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+                                
+        return response()->download('storage/laporan/download/'.$fileName);        
+    }
+
+    public function downloadLaporanAuditBahan(Request $request){
+        $data = $request->except('_token','_method');
+        // dd("disini");
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();                
+        
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-06 Format Laporan Bahan.docx');
+
+        $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
+        $templateProcessor->setValue('no_registrasi', $data['no_registrasi']);
+        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);
+
+        $fileName = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_LaporanBahan_'.$data['nama_perusahaan'].'.docx';
+        $templateProcessor->saveAs("storage/laporan/download/".$fileName);        
+        
+        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+                                
+        return response()->download('storage/laporan/download/'.$fileName);
+    }
+
     public function downloadAuditPlanFix(Request $request){
         // dd("didieu");
 
-        $data = $request->except('_token','_method');
-
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();        
+        $data = $request->except('_token','_method');        
 
         $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
         
@@ -246,5 +281,105 @@ class PHPWordController extends Controller
 
         return response()->download('storage/docx/upload/'.$fileName);        
         
+    }
+
+    public function downloadLaporanAuditSJPHFix(Request $request){
+        $data = $request->except('_token','_method');        
+
+        // dd($data);
+        $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
+        
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-07 Format Laporan SJPH Complete.docx');
+
+        $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);        
+        $templateProcessor->setValue('no_organisasi', $data['no_organisasi']);                
+        $templateProcessor->setValue('nama_auditor', $data['nama_auditor']);            
+        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);
+        
+        $jml=1;
+        $arrData=array();
+        
+        $temp=0;
+        $temp2=0;
+        for ($i=0; $i < sizeof($data['kriteria']); $i++) { 
+            $no = $jml;
+            $kriteria = $data['kriteria'][$i];                        
+            $temuan = $data['temuan'][$i];
+
+            $arrData[] = array('no' => $no, 'kriteria' => $kriteria, 'temuan' => $temuan);
+            $jml++;            
+        }            
+
+        $values = $arrData;
+        $templateProcessor->cloneRowAndSetValues('no', $values);
+        
+        $fileName = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_LaporanSJPH_'.$data['nama_perusahaan'].'.docx';
+        $templateProcessor->saveAs('storage/laporan/upload/'.$fileName);
+        // $templateProcessor->saveAs("AuditPlan.docx");
+        
+        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                        
+        
+        // DB::beginTransaction();
+        // $model = new Registrasi;
+        // $model2 = new Penjadwalan;
+
+        
+        // $f = $model2->find($data['id_penjadwalan']);
+        // $f->berkas_audit_plan = $fileName;
+        // $f->save();
+        // DB::Commit();
+
+        return response()->download('storage/laporan/upload/'.$fileName);
+    }
+
+    public function downloadLaporanAuditBahanFix(Request $request){
+        $data = $request->except('_token','_method');        
+
+        // dd($data);
+        $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
+        
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-06 Format Laporan Bahan Complete.docx');
+
+        $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
+        $templateProcessor->setValue('no_registrasi', $data['no_registrasi']);
+        $templateProcessor->setValue('nama_auditor', $data['nama_auditor']);            
+        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);
+        
+        $jml=1;
+        $arrData=array();
+        
+        $temp=0;
+        $temp2=0;
+        for ($i=0; $i < sizeof($data['bahan']); $i++) { 
+            $no = $jml;
+            $bahan = $data['bahan'][$i];                        
+            $temuan = $data['temuan'][$i];
+            $kategori_bahan = $data['kategori_bahan'][$i];
+            $catatan = $data['catatan'][$i];
+
+            $arrData[] = array('no' => $no, 'bahan' => $bahan, 'temuan' => $temuan, 'kategori_bahan' => $kategori_bahan, 'catatan' => $catatan);
+            $jml++;            
+        }            
+
+        $values = $arrData;
+        $templateProcessor->cloneRowAndSetValues('no', $values);
+        
+        $fileName = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_LaporanBahan_'.$data['nama_perusahaan'].'.docx';
+        $templateProcessor->saveAs('storage/laporan/upload/'.$fileName);
+        // $templateProcessor->saveAs("AuditPlan.docx");
+        
+        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                        
+        
+        // DB::beginTransaction();
+        // $model = new Registrasi;
+        // $model2 = new Penjadwalan;
+
+        
+        // $f = $model2->find($data['id_penjadwalan']);
+        // $f->berkas_audit_plan = $fileName;
+        // $f->save();
+        // DB::Commit();
+
+        return response()->download('storage/laporan/upload/'.$fileName);
     }
 }

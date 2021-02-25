@@ -8,6 +8,9 @@ body{
     /* background: #218c74!important; */
     backdrop-filter: blur(10px);
 }
+.caption-slide{    
+    background: #000;
+}
 .right-content-custom .brand{
     color: #eaeaea !important;
 }
@@ -623,7 +626,33 @@ body{
             border: none;
         }
     
-    }    
+    }
+
+    .navbar-nav li{
+        width: 150px;
+        text-align: center;
+    }
+
+    .nav-link:hover{
+        color: #b6c2c9!important;
+    }
+
+    .carousel-caption{
+        left:0;
+        padding:50px;        
+        bottom:0;
+        background:#2d2d2d82 !important;
+    }
+
+    .box-berita:hover{
+        box-shadow: 4px 5px 7px -3px rgba(0,0,0,0.5) !important;
+        background: #f0ecec;
+    }
+
+    .box-pelatihan:hover{
+        box-shadow: 4px 5px 7px -3px rgba(0,0,0,0.3) !important;
+        background: #f5f5f5;
+    }
 
 
     /*update 17062020*/

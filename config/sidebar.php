@@ -122,6 +122,10 @@ return [
             'title' => 'Berita',
             'url' => 'berita.index'
         ],
+        [    'icon' => 'ion-ios-clipboard',
+            'title' => 'Pelatihan',
+            'url' => 'pelatihan.index'
+        ],
     ],
     'menu2' => [
         [
@@ -346,6 +350,10 @@ return [
         [    'icon' => 'ion-md-information-circle-outline',
             'title' => 'Berita',
             'url' => 'berita.index'
+        ],
+        [    'icon' => 'ion-ios-clipboard',
+            'title' => 'Pelatihan',
+            'url' => 'pelatihan.index'
         ],
     ],
     'menu6' => [

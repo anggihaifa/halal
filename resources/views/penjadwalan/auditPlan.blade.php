@@ -109,7 +109,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">   
-                                    <div class="row col-lg-12">
+                                    <div class="col-md-12 offset-md-5 mb-5">
+                                        <button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
                                         <button type="submit" class="btn btn-sm btn-info">Unggah</button>
                                     </div>
                                 </div>
@@ -270,7 +271,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">   
-                                    <div class="row col-lg-12">
+                                    <div class="row col-lg-12">                                        
                                         <button type="submit" class="btn btn-sm btn-primary offset-md-5">Kirim</button>
                                     </div>
                                 </div>

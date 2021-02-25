@@ -45,6 +45,10 @@ Route::post('download_data','PHPWordController@download')->name('downloaddata');
 Route::post('download_auditplan','PHPWordController@downloadAuditPlan')->name('downloadauditplan');
 Route::post('upload_auditplan','PHPWordController@uploadAuditPlan')->name('uploadauditplan');
 Route::post('download_auditplan_fix','PHPWordController@downloadAuditPlanFix')->name('downloadauditplanfix');
+Route::post('download_laporan_audit_sjph','PHPWordController@downloadLaporanAuditSJPH')->name('downloadlaporanauditsjph');
+Route::post('download_laporan_audit_bahan','PHPWordController@downloadLaporanAuditBahan')->name('downloadlaporanauditbahan');
+Route::post('download_laporan_audit_sjph_fix','PHPWordController@downloadLaporanAuditSJPHFix')->name('downloadlaporanauditsjphfix');
+Route::post('download_laporan_audit_bahan_fix','PHPWordController@downloadLaporanAuditBahanFix')->name('downloadlaporanauditbahanfix');
 
 //penjadwalan
 Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin');
@@ -338,13 +342,21 @@ Route::prefix('master')->group(function (){
     Route::resource('editberita','Master\EditBeritaController');
     Route::get('data_berita','Master\BeritaController@dataBerita')->name('master.databerita');
     Route::post('upload_image','Master\BeritaController@uploadImage')->name('master.uploadimage');
+
+    Route::resource('pelatihan','Master\PelatihanController');
+    Route::resource('editpelatihan','Master\EditPelatihanController');
+    Route::post('upload_image_pelatihan','Master\PelatihanController@uploadImagePelatihan')->name('master.uploadimagepelatihan');
+    Route::get('data_pelatihan','Master\PelatihanController@dataPelatihan')->name('master.datapelatihan');
         
     // Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin');
 });
 Route::get('faq_detail/{id}','Master\FaqController@faqDetail')->name('master.faq.detail');
 Route::get('detail_berita/{id}','Master\BeritaController@detailBerita')->name('master.berita.detailberita');
+Route::get('detail_pelatihan/{id}','Master\PelatihanController@detailPelatihan')->name('master.pelatihan.detailpelatihan');
 Route::get('detail_berita_user/{id}','Master\BeritaController@detailBeritaUser')->name('master.berita.detailberitauser');
+Route::get('detail_pelatihan_user/{id}','Master\PelatihanController@detailPelatihanUser')->name('master.pelatihan.detailpelatihanuser');
 Route::get('acc_berita/{id}','Master\BeritaController@accBerita')->name('master.berita.accberita');
+Route::get('acc_pelatihan/{id}','Master\PelatihanController@accPelatihan')->name('master.pelatihan.accpelatihan');
 Route::get('cari_berita','Master\BeritaController@cariBerita')->name('master.berita.cariberita');
 
 Route::get('informasi_panduan','InformasiController@panduan')->name('informasipanduan');
@@ -373,5 +385,8 @@ Route::prefix('system')->group(function(){
 
     Route::get('dependent_dropdown', 'DependentDropdownController@index')->name('dependent_dropdown.index');
     Route::post('dependent_dropdown', 'DependentDropdownController@store')->name('dependent_dropdown.store');
+
+    Route::get('dependent_dropdown_rincian', 'DependentDropdownRincianController@index')->name('dependent_dropdown_rincian.index');
+    Route::post('dependent_dropdown_rincian', 'DependentDropdownRincianController@store')->name('dependent_dropdown_rincian.store');
 
 });

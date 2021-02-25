@@ -26,6 +26,7 @@ use App\Models\Kabupaten;
 use App\Models\System\User;
 use App\Models\Master\JenisRegistrasi;
 use App\Models\Master\KelompokProduk;
+use App\Models\Master\DetailKelompokProduk;
 use App\Models\UnggahData\Fasilitas;
 use App\Models\UnggahData\Produk;
 use App\Models\UnggahData\DokumenHas;
@@ -542,6 +543,7 @@ class RegistrasiController extends Controller
     public function create(){
         $jenisRegistrasi = JenisRegistrasi::all();
         $kelompokProduk = KelompokProduk::all();
+        $detailkelompokProduk = DetailKelompokProduk::all();
 
         $dataNegara = Negara::all();
         $dataProvinsi = Provinsi::all();
@@ -556,7 +558,7 @@ class RegistrasiController extends Controller
                     ->where('status','tunai')
                     ->get();
         $dataTunai = json_decode($getTunai,true);
-        return view('registrasi.create', compact('jenisRegistrasi','kelompokProduk','dataTransfer','dataTunai','dataNegara','dataProvinsi','dataKebupaten'));
+        return view('registrasi.create', compact('jenisRegistrasi','kelompokProduk','dataTransfer','dataTunai','dataNegara','dataProvinsi','dataKebupaten','detailkelompokProduk'));
     }
 
     //function random generate
@@ -575,13 +577,11 @@ class RegistrasiController extends Controller
     }
 
    public function store(Request $request){
-        $data = $request->except('_token','_method');
+        $data = $request->except('_token','_method');        
 
         $model = new Registrasi();
 
-        try{
-
-            //get random token from function random generate
+        try{            
             $length = 8;
             $token = "";
             $codeAlphabet= "0123456789";
@@ -589,7 +589,11 @@ class RegistrasiController extends Controller
                 $token .= $codeAlphabet[$this->crypto_Rand_secure(0,strlen($codeAlphabet))];
             }
             $randomid =$token;
+            $nosurat = $data['no_surat'];
+            $expd = explode('-',$nosurat);            
 
+            $no_order = date('YmdHis').".".Auth::user()->id . "." .$data['id_jenis_registrasi'];
+            dd($no_order);
             // //Create PDF
             // $nama = Auth::user()->name;
             // $perusahaan = Auth::user()->perusahaan;
@@ -605,13 +609,10 @@ class RegistrasiController extends Controller
             // $model->no_registrasi = $randomid;
             //$model->inv_registrasi = $fileName;
 
-            $model->id_user = Auth::user()->id;          
-            $model->nama_perusahaan = $data['nama_perusahaan'];
+            $model->id_user = Auth::user()->id;        
+            $model->nama_perusahaan = $data['nama_perusahaan'];                    
 
-            $nosurat = $data['no_surat'];
-            $expd = explode('-',$nosurat);
-
-            $kodewilayah = $expd[0];                        
+            $kodewilayah = $expd[0];                      
 
             $model->kode_wilayah = $kodewilayah;
             $model->no_surat = $data['no_surat'];
@@ -636,6 +637,7 @@ class RegistrasiController extends Controller
             $model->jumlah_karyawan = $data['jumlah_karyawan'];
             $model->kapasitas_produksi = $data['kapasitas_produksi'];
             $model->id_kelompok_produk = $data['id_kelompok_produk'];
+            $model->id_rincian_kelompok_produk = implode(',',$data['id_rincian_kelompok_produk']);
 
             $model->progress = 1;
 

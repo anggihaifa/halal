@@ -1,4 +1,4 @@
-<div class="container-fluid col-lg-12">
+<div class="containercol-lg-12">
     <!-- Footer -->
     <footer class="text-lg-start mt-5 bg-halal text-white">
     <!-- Grid container -->

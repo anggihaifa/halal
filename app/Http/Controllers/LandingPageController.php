@@ -20,7 +20,11 @@ class LandingPageController extends Controller
         // $berita = Berita::all();
         $berita = Db::table('berita')
                     ->where('status_approve','=',1)
-                    ->get();     
+                    ->get();
+
+        $pelatihan = Db::table('pelatihan')
+                    ->where('status_approve','=',1)
+                    ->get();
                     
         $produk = Db::table('registrasi')                    
                     ->get();
@@ -31,7 +35,7 @@ class LandingPageController extends Controller
                     // dd($produk);
 
 
-        return view('landingPage', compact('berita','produk','cek'));
+        return view('landingPage', compact('berita','produk','cek','pelatihan'));
 
         // return redirect()->route('home.index');
     }
@@ -50,8 +54,12 @@ class LandingPageController extends Controller
             $berita = Db::table('berita')                    
                     ->where('status_approve','=',1)
                     ->get();
+
+            $pelatihan = Db::table('pelatihan')
+                    ->where('status_approve','=',1)
+                    ->get();
             // Session::flash('success', 'Data berhasil ditemukan!');
-            return view('landingpage',compact('produk','berita'));
+            return view('landingpage',compact('produk','berita','pelatihan'));
         }else{
             $produk = Db::table('registrasi')                    
                     ->get();
