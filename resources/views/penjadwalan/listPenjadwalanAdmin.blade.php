@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Registrasi Halal')
+@section('title', 'Penjadwalan Admin')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -15,18 +15,18 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Registrasi Halal</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Registrasi Aktif</a></li>
+        <li class="breadcrumb-item"><a href="#">Penjadwalan Admin</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Penjadwalan Admin</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Registrasi Halal  <small></small></h1>
+    <h1 class="page-header">List Penjadwalan Admin  <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Registrasi Halal</h4>
+            <h4 class="panel-title">List Penjadwalan Admin</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -155,6 +155,7 @@
                         <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                         <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                         <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
+                         <th class="text-nowrap valign-middle text-center">Wilayah</th>
                         <th class="valign-middle text-center">Status Tahap 1</th>
                         <th class="valign-middle text-center">Status Tahap 2</th>
                         <th class="valign-middle text-center">Status Rapat</th>
@@ -197,7 +198,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_audit1"  name="mulai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input id="mulai_audit1"  name="mulai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -207,7 +208,7 @@
                             <div class="form-group">
                               <label>Tanggal Selesai</label>
                               
-                                <input  id="selesai_audit1" name="selesai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input  id="selesai_audit1" name="selesai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -217,7 +218,7 @@
 
                             <div class="form-group">
                                 <label>Pelaksana 1</label>
-                                <select id="pelaksana1_audit1" name="pelaksana1_audit1" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="pelaksana1_audit1" name="pelaksana1_audit1" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -268,7 +269,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_audit2"  name="mulai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input id="mulai_audit2"  name="mulai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -278,7 +279,7 @@
                             <div class="form-group">
                               <label>Tanggal Selesai</label>
                               
-                                <input  id="selesai_audit2" name="selesai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input  id="selesai_audit2" name="selesai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -289,7 +290,7 @@
                             <div class="form-group">
                                 <label>Saran Pelaksana 1 :  </label> <a id="saran1"><b></b></a><br>
                                 <label>Pelaksana 1</label>
-                                <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -300,6 +301,17 @@
                                 <select id="pelaksana2_audit2" name="pelaksana2_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label >Kategori Audit</label> 
+                                <select id="ktg_audit2" name="ktg_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
+                                    <option value="">==Pilih Kategori Audit==</option>
+                                    <option value="Onsite">Onsite Audit</option>
+                                    <option value="Remote">Remote Audit</option>                                                                        
+                                </select>
+       
                             </div>
 
                             <div class="form-group">
@@ -377,7 +389,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_rapat"  name="mulai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input id="mulai_rapat"  name="mulai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -387,7 +399,7 @@
                             <div class="form-group">
                               <label>Tanggal Selesai</label>
                               
-                                <input  id="selesai_rapat" name="selesai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input  id="selesai_rapat" name="selesai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -397,7 +409,7 @@
 
                             <div class="form-group">
                                 <label>Pelaksana 1</label>
-                                <select id="pelaksana1_rapat" name="pelaksana1_rapat" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="pelaksana1_rapat" name="pelaksana1_rapat" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -454,7 +466,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_tinjauan"  name="mulai_tinjauan" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
+                                <input id="mulai_tinjauan"  name="mulai_tinjauan" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -465,7 +477,7 @@
                               <label>Tanggal Selesai</label>
                               
                                 <input  id="selesai_tinjauan" name="selesai_tinjauan" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
-                                <span class="add-on">
+                                <span class="add-on"required>
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
                                 </span>
@@ -475,7 +487,7 @@
 
                             <div class="form-group">
                                 <label>Pelaksana 1</label>
-                                <select id="pelaksana1_tinjauan" name="pelaksana1_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="pelaksana1_tinjauan" name="pelaksana1_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -763,81 +775,155 @@
         }
          
         function format ( d ) {
-            // `d` is the original data object for the row
+
+
+            if(d.mulai_audit1  == null){
+
+                d.mulai_audit1 ="-";
+            }
+            if(d.selesai_audit1  == null){
+
+                d.selesai_audit1 ="-";
+            }
+            if(d.mulai_audit2  == null){
+
+                d.mulai_audit2 ="-";
+            }
+            if(d.selesai_audit2  == null){
+
+                d.selesai_audit2 ="-";
+            }
+            if(d.mulai_rapat  == null){
+
+                d.mulai_rapat ="-";
+            }
+            if(d.selesai_rapat  == null){
+
+                d.selesai_rapat ="-";
+            }
+            if(d.mulai_tinjauan  == null){
+
+                d.mulai_tinjauan ="-";
+            }
+            if(d.selesai_tinjauan  == null){
+
+                d.selesai_tinjauan ="-";
+            }
+            
+        
             if(d.pelaksana1_audit1 != null){
-                $str1 =  d.pelaksana1_audit1.split("_");
-                d.pelaksana1_audit1 = $str1[1];
+                if (d.pelaksana1_audit1.indexOf('_') > -1)
+                {
+                    $str1 =  d.pelaksana1_audit1.split("_");
+                    d.pelaksana1_audit1 = $str1[1];
+                }
+               
             }else{
-                d.pelaksana1_audit1 ="";
+                d.pelaksana1_audit1 ="-";
             }
 
 
              if(d.pelaksana2_audit1 != null){
-                $str2 =  d.pelaksana2_audit1.split("_");
-                d.pelaksana2_audit1 = $str2[1];
-            
+
+                if (d.pelaksana2_audit1.indexOf('_') > -1){
+                    $str2 =  d.pelaksana2_audit1.split("_");
+                    d.pelaksana2_audit1 = $str2[1];
+                }
+                           
             }else{
-                d.pelaksana2_audit1 ="";
+                d.pelaksana2_audit1 ="-";
             }
 
 
             if(d.pelaksana1_audit2 != null){
-                $str3 = d.pelaksana1_audit2.split("_");
-                d.pelaksana1_audit2 = $str3[1];
+                
+                if (d.pelaksana1_audit2.indexOf('_') > -1){
+                    $str3 = d.pelaksana1_audit2.split("_");
+                    d.pelaksana1_audit2 = $str3[1];
+                }
+                
+               
             }
             else{
-                d.pelaksana1_audit2 ="";
+               
+                d.pelaksana1_audit2 ="-";
             }
 
 
             if(d.pelaksana2_audit2 != null){
-                $str4 =  d.pelaksana2_audit2.split("_");
-                d.pelaksana2_audit2 = $str4[1];
+                if (d.pelaksana2_audit2.indexOf('_') > -1){
+                    $str4 =  d.pelaksana2_audit2.split("_");
+                    d.pelaksana2_audit2 = $str4[1];
+                }
+                
             }else{
-                d.pelaksana2_audit2 ="";
+                d.pelaksana2_audit2 ="-";
             }
 
             if(d.pelaksana1_rapat != null){
-                $str5 =  d.pelaksana1_rapat.split("_");
-                d.pelaksana1_rapat = $str5[1];
+                if (d.pelaksana1_rapat.indexOf('_') > -1){
+                    $str5 =  d.pelaksana1_rapat.split("_");
+                    d.pelaksana1_rapat = $str5[1];
+                }
+                
             }else{
-                d.pelaksana1_rapat ="";
+                d.pelaksana1_rapat ="-";
             }
 
             if(d.pelaksana2_rapat != null){
-                $str6 =  d.pelaksana2_rapat.split("_");
-                d.pelaksana2_rapat = $str6[1];
+                if (d.pelaksana2_rapat.indexOf('_') > -1){
+                    $str6 =  d.pelaksana2_rapat.split("_");
+                    d.pelaksana2_rapat = $str6[1];
+                }
+                
             }else{
-                d.pelaksana2_rapat ="";
+                d.pelaksana2_rapat ="-";
             }
 
             if(d.pelaksana3_rapat != null){
-                $str7 =  d.pelaksana3_rapat.split("_");
-                d.pelaksana3_rapat = $str7[1];
+                if (d.pelaksana3_rapat.indexOf('_') > -1){
+                    $str7 =  d.pelaksana3_rapat.split("_");
+                    d.pelaksana3_rapat = $str7[1];
+                }
+                
             }else{
-                d.pelaksana3_rapat ="";
+                d.pelaksana3_rapat ="-";
             }
 
+            console.log(d.pelaksana1_tinjauan);
             if(d.pelaksana1_tinjauan != null){
-                $str8 =  d.pelaksana1_tinjauan.split("_");
-                d.pelaksana1_tinjauan = $str8[1];
+                if (d.pelaksana1_tinjauan.indexOf('_') > -1){
+                    $str8 =  d.pelaksana1_tinjauan.split("_");
+                    d.pelaksana1_tinjauan = $str8[1];
+                }
+               
             }else{
-                d.pelaksana1_tinjauan ="";
+                d.pelaksana1_tinjauan ="-";
             }
 
             if(d.pelaksana12_tinjauan != null){
-                $str9 =  d.pelaksana2_tinjauan.split("_");
-                d.pelaksana2_tinjauan = $str9[1];
+                if (d.pelaksana2_tinjauan.indexOf('_') > -1){
+                    $str9 =  d.pelaksana2_tinjauan.split("_");
+                    d.pelaksana2_tinjauan = $str9[1];
+                }
+                
             }else{
-                d.pelaksana2_tinjauan ="";
+                d.pelaksana2_tinjauan ="-";
             }
 
             if(d.pelaksana3_tinjauan != null){
-                $str10 = d.pelaksana3_tinjauan.split("_");
-                d.pelaksana3_tinjauan = $str10[1];
+                if (d.pelaksana3_tinjauan.indexOf('_') > -1){
+                    $str10 = d.pelaksana3_tinjauan.split("_");
+                    d.pelaksana3_tinjauan = $str10[1];
+                }
+               
             }else{
-                d.pelaksana3_tinjauan ="";
+                d.pelaksana3_tinjauan ="-";
             }
+
+            
+            
+
 
         
 
@@ -847,6 +933,7 @@
                     '<th class="valign-middle text-center">Jenis</th>'+
                     '<th class="valign-middle text-center">Mulai Audit</th>'+
                     '<th class="valign-middle text-center">Selesai Audit</th>'+
+                    '<th class="valign-middle text-center">Kategori</th>'+
                     '<th class="valign-middle text-center">Auditor/Komite</th>'+
                     '<th class="valign-middle text-center">Auditor/Komite</th>'+
                     '<th class="valign-middle text-center">Auditor/Komite</th>'+
@@ -857,24 +944,27 @@
                     '<td class="valign-middle text-center">Audit Tahap 1</td>'+
                     '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
                     '<td class="valign-middle text-center">'+d.selesai_audit1+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
                     '<td class="valign-middle text-center">'+d.pelaksana2_audit1+'</td>'+
-                    '<td class="valign-middle text-center"></td>'+    
+                    '<td class="valign-middle text-center">-</td>'+    
                 '</tr>'+
                 '<tr>'+
                     '<td class="valign-middle text-center">2</td>'+
                     '<td class="valign-middle text-center">Audit Tahap 2</td>'+
                     '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
                     '<td class="valign-middle text-center">'+d.selesai_audit2+'</td>'+
+                    '<td class="valign-middle text-center">'+d.ktg_audit2+'</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
                     '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
-                    '<td class="valign-middle text-center"></td>'+    
+                    '<td class="valign-middle text-center">-</td>'+    
                 '</tr>'+
                 '<tr>'+
                     '<td class="valign-middle text-center">3</td>'+
                     '<td class="valign-middle text-center">Rapat Auditor</td>'+
                     '<td class="valign-middle text-center">'+d.mulai_rapat+'</td>'+
                     '<td class="valign-middle text-center">'+d.selesai_rapat+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_rapat+'</td>'+    
                     '<td class="valign-middle text-center" >'+d.pelaksana2_rapat+'</td>'+ 
                     '<td class="valign-middle text-center" >'+d.pelaksana3_rapat+'</td>'+    
@@ -884,6 +974,7 @@
                     '<td class="valign-middle text-center">Tinjauan Komite</td>'+
                     '<td class="valign-middle text-center">'+d.mulai_tinjauan+'</td>'+
                     '<td class="valign-middle text-center">'+d.selesai_tinjauan+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
                     '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
                     '<td class="valign-middle text-center" >'+d.pelaksana3_tinjauan+'</td>'+    
@@ -1399,6 +1490,13 @@
                     {"data":"no_registrasi"},
                     {"data":"nama_perusahaan"},
                     {"data":"kelompok"},
+                    {
+                        
+                        "data":null,
+                        "render":function (data,type,full,meta) {
+                            return checkWilayah(full.kode_wilayah)
+                        }
+                    },
                 
                     {
                         

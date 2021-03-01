@@ -23,6 +23,10 @@ class DokumenController extends Controller
     {
         return view('dokumen.indexUser');
     }
+    public function indexPelanggan()
+    {
+        return view('dokumen.indexPelanggan');
+    }
 
     public function dokumenView($id)
     {
@@ -39,6 +43,7 @@ class DokumenController extends Controller
 
         return view('dokumen.viewer', compact('data'));
     }
+    
 
     public function datatable(){
         $data= DB::table('dokumen_halal')
@@ -48,6 +53,27 @@ class DokumenController extends Controller
        //Log::info('ini data'. $data);
         return DataTables::of($data)->make();
     }
+
+    public function datatableUser(){
+        $data= DB::table('dokumen_halal')
+                    ->where('role','user')
+                    ->select('dokumen_halal.*')
+                    ->get();
+                
+       //Log::info('ini data'. $data);
+        return DataTables::of($data)->make();
+    }
+
+    public function datatablePelanggan(){
+        $data= DB::table('dokumen_halal')
+                    ->where('role','pelanggan')
+                    ->select('dokumen_halal.*')
+                    ->get();
+                
+       //Log::info('ini data'. $data);
+        return DataTables::of($data)->make();
+    }
+
 
 
    
@@ -81,6 +107,7 @@ class DokumenController extends Controller
                 $filename = $data['nama_file'].".".$file->getClientOriginalExtension();
                 $file->storeAs("public/dokumenHalal/", $filename);
                 $model->nama_file = $filename;
+                $model->role = $data['role'];
             }  
 
            
@@ -111,7 +138,9 @@ class DokumenController extends Controller
         //dd("masuk");
         $data = DokumenHalal::find($id);
 
-      
+        $data->nama_file_extension = $data->nama_file;
+        $str = explode(".",$data->nama_file);
+        $data->nama_file = $str[0];
         return view('dokumen.edit',compact('data'));
     }
 

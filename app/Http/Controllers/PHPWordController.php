@@ -145,7 +145,7 @@ class PHPWordController extends Controller
     public function downloadLaporanAuditBahan(Request $request){
         $data = $request->except('_token','_method');
         // dd("disini");
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();                
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
         
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-06 Format Laporan Bahan.docx');
 

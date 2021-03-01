@@ -151,7 +151,7 @@
                                         </div>                            
                                     @endforeach                                
                                 </div>
-                                <div class="panel-body panel-form">                         
+                                <div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
                                             @component('components.inputtext',['name'=> 'no_organisasi','label' => 'No Organisasi','required'=>true,'placeholder'=>'No Organisasi'])@endcomponent

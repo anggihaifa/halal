@@ -39,10 +39,23 @@
 
                             
                             <label class="col-lg-4 col-form-label">Nama File</label>
-                            <input type="text" class="form-control col-lg-8" id="nama_file" name="nama_file" placeholder="Masukan Nama File">
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="nama_file" name="nama_file" placeholder="Masukan Nama File" required>
+                            </div>
 
-                            <label class="col-lg-4 col-form-label">Upload File</label>
-                            <input type="file" class="form-control-input col-lg-8" name="file" id="file" oninvalid="this.setCustomValidity('File file masih kosong')" oninput="setCustomValidity('')" accept="application/pdf"/>
+                            <label for="file" class="col-lg-4 col-form-label">Upload File</label>
+                            <div class="col-lg-8">
+                                <input type="file" class="form-control-input" name="file" id="file" required />
+                            </div>
+
+                            <label class="col-lg-4 col-form-label">Kategori Role</label>
+                            <div class="col-lg-8">
+                                <select id="role" name="role" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required="">
+                                    <option value="">==Pilih Kategori Role==</option>
+                                    <option value="pelanggan">Pelanggan</option>
+                                    <option value="user">Karyawan PT SUCOFINDO</option>                                                               
+                                </select>
+                            </div>
 
                             <div class="col-md-12 offset-md-5">
                                 @component('components.buttonback',['href' => route("dokumen.index")])@endcomponent
