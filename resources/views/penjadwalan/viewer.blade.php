@@ -30,16 +30,18 @@
                 </div>
                 <!-- end panel-heading -->
                 <!-- begin panel-body -->
-                <div id ="cover" class="panel-body panel-form" style="position:absolute; z-index: 2; opacity: 0.3; background-color: red;">
+                <div id ="cover" class="panel-body panel-form" style="position:absolute; z-index: 2; opacity: 0; background-color: red;">
                 </div>
 
                 <div id="pdf" class="panel-body panel-form embed-responsive embed-responsive-1by1" style="position: relative; z-index: 1;">
                     
-                    <!-- <iframe src="{{route('penjadwalan.view',[$datkey->id_user, $datkey->id_registrasi, $datkey->$hpas])}}#toolbar=0&navpanes=0" class="doc-iframe"></iframe> -->
+                 
 
-                    <object type="application/pdf" data="{{url('') .Storage::url('public/uploadDokumen/'.$datkey->id_user.'/'.$datkey->id_registrasi.'/HPAS/'.$datkey->$hpas) }}#toolbar=0&navpanes=0" class ="embed-responsive-item">
+                    <object type="application/pdf;base64" data="{{url('') .Storage::url('public/uploadDokumen/'.$datkey->id_user.'/'.$datkey->id_registrasi.'/HPAS/'.$datkey->$hpas) }}#toolbar=0&navpanes=0" class ="embed-responsive-item">
                         <p>Pdf/DOCX  File Tidak Dapat Ditampilkan Silahkan Gunakan FItur Unduh</p>
                     </object>
+
+
 
                 </div>
 

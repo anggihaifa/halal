@@ -124,8 +124,17 @@
 								$buttonUnduh = '<td class="valign-middle text-center"><a href="#"><i class="fa fa-eye"></i></a></td>';
 						
 							@endphp
-							
-							<h5>Dokumen Lengkap</h5>
+							@if($dataHas !== null)
+								@foreach($dataHas as $has => $value)
+									@if($value['status_has'] == 1)
+										<h5>Dokumen Lengkap</h5>
+									@else
+										<h5>Dokumen Belum Lengkap</h5>
+									@endif 
+								@endforeach
+							@else
+								<h5>Dokumen Belum Lengkap</h5>	
+							@endif
 									
 							
 							@foreach($dataHas as $has => $value)
@@ -428,9 +437,9 @@
 
 											<tr class="even">
 												<td class="text-nowrap valign-middle text-center">11</td>
-												<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)</td>
+												<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)<br><b>*dilampirkan aspek legal perusahaan</b></td>
 												@if($value['has_11'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_11')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
@@ -457,7 +466,7 @@
 												<td class="text-nowrap valign-middle text-center">12</td>
 												<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 												@if($value['has_12'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_12')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
@@ -484,7 +493,7 @@
 												<td class="text-nowrap valign-middle text-center">13</td>
 												<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 												@if($value['has_13'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_13')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
@@ -511,7 +520,7 @@
 												<td class="text-nowrap valign-middle text-center">14</td>
 												<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
 												@if($value['has_14'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_14')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
@@ -538,7 +547,7 @@
 												<td class="text-nowrap valign-middle text-center">15</td>
 												<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
 												@if($value['has_15'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_15')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
@@ -564,7 +573,7 @@
 												<td class="text-nowrap valign-middle text-center">16</td>
 												<td class="valign-middle">Bukti registrasi dari BPJPH</td>
 												@if($value['has_16'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_16')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
@@ -598,16 +607,16 @@
 										<label><b>Organisasi/ Pelaku usaha harus menyerahkan tambahan/ perbaikan dokumen kepada LPH dengan tembusan kepada BPJPH dalam jangka waktu paling lama 5 (lima) hari kerja sejak permintaan tambahan dokumen diterima. Apabila melebihi dari 5 hari kerja maka permohonan sertifikat halal tidak dapat diproses lebih lanjut.</b></label>
 									</div>
 									<div class="radio radio-css ">
-                                        <input type="radio" name="status_memenuhi" id="memenuhi" value="memenuhi" checked />
+                                        <input type="radio" name="status" id="memenuhi" value="memenuhi" checked/>
                                         <label for="memenuhi"><b>Audit Tahap II dapat dilaksanakan</b></label>
                                     </div>
                                     <div class="radio radio-css " >
-                                        <input  type="radio" name="status_memenuhi" id="tidak_memenuhi" value="tidak memenuhi"  />
-                                        <b><label id="dl_label" for="tidak_memenuhi">Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan tanggal</label></b>
+                                       <input type="radio" name="status" id="tidak_memenuhi" value="tidak_memenuhi" />
+                                        <label id="dl_label" for="tidak_memenuhi"></label>
                                     </div>
 								</div>
 								<div class=" offset-md-5">
-					                @component('components.buttonback',['href' => route("listregistrasipelangganaktif")])@endcomponent
+					               <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
 					                @if($dataHas !== null)
 										<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;">Submit</button>
 									@endif
@@ -1006,7 +1015,7 @@
 		$(document).ready(function () {
 
 
-			$('#dl_label').text("Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan tanggal "+dlDate); 
+			$('#dl_label').html("<b>Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan tanggal "+dlDate+"</b>"); 
 
 		});
 
@@ -1031,8 +1040,8 @@
 
 
 			if(h1 == '2' || h2 == '2'|| h3 == '2'|| h4== '2'|| h5 == '2'|| h6 == '2'|| h7 == '2'|| h8 == '2'|| h9 == '2'|| h10 == '2'|| h11 == '2'|| h12 == '2'|| h13 == '2'|| h14 == '2'|| h15 == '2'|| h16 == '2'){
-		  		
-		  		$("#tidak_memenuhi").prop('checked',true);
+
+		  		$("#tidak_memenuhi").prop('checked', true);
 		  	}else{
 		  		
 		  		$("#memenuhi").prop('checked', true);

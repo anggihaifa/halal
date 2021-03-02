@@ -780,11 +780,14 @@
 								<div class="col-md-12 offset-md-5">
 									@if($dataHas == null)
 										<button type="submit" class="btn btn-sm btn-primary m-r-5" hidden>Unggah</button>
-										<button type="button"  class="btn btn-sm btn-default" disabled=>Reset</button>
+										<a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
+										<button type="button"  class="btn btn-sm btn-default btn-warning" disabled=>Reset</button>
 									@else
 										<button type="submit" class="btn btn-sm btn-success m-r-5" hidden>Unggah</button>
 										@foreach($dataHas as $has => $value)
-											<a href="{{url('delete_dokumen_has')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default" onclick= "return confirm('Apakah anda yakin untuk menghapus semua data dokumen SJPH atau SJH??')">Reset</button></a>
+											<a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
+											
+											<a href="{{url('delete_dokumen_has')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default btn-warning" onclick= "return confirm('Apakah anda yakin untuk menghapus semua data dokumen SJPH atau SJH??')">Reset</button></a>
 										@endforeach
 									@endif
 								</div>

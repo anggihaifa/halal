@@ -1484,24 +1484,37 @@ class RegistrasiController extends Controller
                         has_1 IS NULL
                         OR has_2 IS NULL
                         OR has_3 IS NULL
-                        OR has_4 IS NULL
                         OR has_5 IS NULL
-                        OR has_6 IS NULL
-                        OR has_7 IS NULL
                         OR has_8 IS NULL
                         OR has_9 IS NULL
                         OR has_10 IS NULL
                         OR has_11 IS NULL
-                        OR has_12 IS NULL)
+                        OR has_12 IS NULL
+                        OR has_13 IS NULL
+                        OR has_14 IS NULL
+                        OR has_15 IS NULL
+                        OR has_16 IS NULL)
                         ";
 
+                   // dd($checkHasLengkap);
                     $dataLengkap = DB::select($checkHasLengkap);
 
                     if(isset($dataLengkap[0])){
+                         //dd($dataLengkap[0]);
                         $e->status_has = 0;
                     }else{
+                        //dd("masuk");
                         $e->status_has = 1;
+                        //masukan fungsi untuk pindah ke tahapan akad..
+                        $this->updateStatusRegistrasi($r->id, $r->no_registrasi, $r->id_user, 6);
+                        //update status table registrasi dan update tanggal updated at nya
+
                     }
+
+                    $mytime = Carbon::now();
+                    $now=  $mytime->toDateTimeString();
+
+                    $r->updated_at= $now;
                     $r->status_berkas = 1;
                     //dd($r);
                     $r->save();

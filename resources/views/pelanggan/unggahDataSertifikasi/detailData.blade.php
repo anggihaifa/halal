@@ -120,7 +120,7 @@
 								$regId = Auth::user()->registrasi_id;
 								$fieldSudah = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:#2fca2f"></i></td>';
 								$fieldBelum = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:grey"></i></td>';
-								$buttonUnduhDisabled = '<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a></td>';
+								$buttonUnduhDisabled = '<td class="valign-middle text-center"><a href="#" ><i class="fa fa-eye" style="color:grey;"></i></a></td>';
 								$buttonUnduh = '<td class="valign-middle text-center"><a href="#" class="btn btn-primary btn-xs">unduh</a></td>';
 						
 							@endphp
@@ -156,12 +156,7 @@
 											<th width="1%" class="text-nowrap valign-middle text-center">No</th>
 											<th width="50%" class="text-nowrap valign-middle text-center">Nama Dokumen</th>
 											<th width="1%" class="text-nowrap valign-middle text-center">File</th>
-											@if($dataHas !== null)
-											<th class="text-nowrap valign-middle text-center" style="width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;</th>
-											@endif
-											<th width="20%" class="valign-middle text-center">Temuan</th>
-											<th width="1%" class="valign-middle text-center">Tanggal Penyerahan Tambahan/ Perbaikan  Dokumen</th>
-											<th width="30%" class="valign-middle text-center">Review Tambahan/ Perbaikan  Dokumen</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -173,62 +168,54 @@
 											<td class="valign-middle">Manual Sistem Jaminan Produk Halal (SJPH)</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">2</td>
 											<td class="valign-middle" style="word-wrap:break-word">Matriks Bahan</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">3</td>
 											<td class="text-nowrap valign-middle">Data Produk Yang Dihasilkan</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">4</td>
 											<td class=" valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">5</td>
 											<td class="valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">6</td>
 											<td class=" valign-middle">Sertifikat Halal Sebelumnya</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">7</td>
 											<td class=" valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">8</td>
 											<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang </td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 
 										</tr>
 										<tr class="odd">
@@ -236,59 +223,51 @@
 											<td class="valign-middle">Diagram Alir Proses Untuk Produk Yang Disertifikasi</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">10</td>
 											<td class="valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">11</td>
 											<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)*Dilampirkan Aspek Legal Perusahaan</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">12</td>
 											<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">13</td>
 											<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">14</td>
 											<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">15</td>
 											<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">16</td>
 											<td class="valign-middle">Bukti Registrasi Dari BPJPH</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											
 										</tr>
 										
 										
@@ -304,28 +283,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_1" name="status_has_1" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_1"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_1"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_1"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_1"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td >
-														<input class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value='{{$value['keterangan_has_1']}}'>
-														</input>
-														
-
-													</td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_1" type="text" name="review_perbaikan_1" value='{{$value['review_perbaikan_1']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">2</td>
@@ -335,25 +293,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_2" name="status_has_2" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_2"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_2"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_2"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_2"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td >
-														<input type="text" class="form-control" name="keterangan_has_2" value='{{$value["keterangan_has_2"]}}' ></input>
-													</td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_2" type="text" name="review_perbaikan_2" value='{{$value['review_perbaikan_2']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">3</td>
@@ -363,26 +303,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_3" name="status_has_3" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_3"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_3"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_3"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_3"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td >
-														<input type="text" class="form-control" name="keterangan_has_3" value='{{$value['keterangan_has_3']}}' >
-														</input>
-													</td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_3" type="text" name="review_perbaikan_3" value='{{$value['review_perbaikan_1']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">4</td>
@@ -392,23 +313,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_4" name="status_has_4" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_4"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_4"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_4"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_5"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_4" value='{{$value['keterangan_has_4']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_4" type="text" name="review_perbaikan_4" value='{{$value['review_perbaikan_4']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">5</td>
@@ -418,23 +323,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_5" name="status_has_5" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_5"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_5"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_5"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_5"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control"  name="keterangan_has_5" value='{{$value['keterangan_has_5']}}'  ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_5" type="text" name="review_perbaikan_5" value='{{$value['review_perbaikan_5']}}'>
-														</input>
-														
-
-													</td>
+													
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">6</td>
 													<td class="valign-middle">Sertifikat Halal Sebelumnya</td>
@@ -443,23 +332,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_6" name="status_has_6" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_6"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_6"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_6"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_6"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control"  name="keterangan_has_6" value='{{$value['keterangan_has_6']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_6" type="text" name="review_perbaikan_6" value='{{$value['review_perbaikan_6']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">7</td>
@@ -469,23 +342,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_7" name="status_has_7" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_7"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_7"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_7"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_7"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_7" value='{{$value['keterangan_has_7']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_7" type="text" name="review_perbaikan_7" value='{{$value['review_perbaikan_7']}}'>
-														</input>
-														
-
-													</td>
+													
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">8</td>
 													<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
@@ -494,23 +351,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_8" name="status_has_8" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_8"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_8"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_8"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_8"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_8" value='{{$value['keterangan_has_8']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_8" type="text" name="review_perbaikan_8" value='{{$value['review_perbaikan_8']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">9</td>
@@ -520,23 +361,7 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_9" name="status_has_9" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_9"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_9"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_9"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_9"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_9" value='{{$value['keterangan_has_9']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_9" type="text" name="review_perbaikan_9" value='{{$value['review_perbaikan_9']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">10</td>
@@ -546,185 +371,74 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_10" name="status_has_10" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_10"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_10"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_10"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_10"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_10" value='{{$value['keterangan_has_10']}}' ></input></td>
-
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_10" type="text" name="review_perbaikan_10" value='{{$value['review_perbaikan_10']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">11</td>
 													<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)</td>
 													@if($value['has_11'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														
+
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_11')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_11" name="status_has_11" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_11"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_11"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_11"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_11"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_11" value='{{$value['keterangan_has_11']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_11" type="text" name="review_perbaikan_11" value='{{$value['review_perbaikan_11']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">12</td>
 													<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 													@if($value['has_12'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_12')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_12" name="status_has_12" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_12"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_12"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_12"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_12"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_12" value='{{$value['keterangan_has_12']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_12" type="text" name="review_perbaikan_12" value='{{$value['review_perbaikan_12']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">13</td>
 													<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 													@if($value['has_13'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_13')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_13" name="status_has_13" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_13"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_13"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_13"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_13"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_13" value='{{$value['keterangan_has_13']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_13" type="text" name="review_perbaikan_13" value='{{$value['review_perbaikan_13']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">14</td>
 													<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
 													@if($value['has_14'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_14')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_14" name="status_has_14" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_14"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_14"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_14"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_14"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_14" value='{{$value['keterangan_has_14']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_14" type="text" name="review_perbaikan_14" value='{{$value['review_perbaikan_14']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">15</td>
 													<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
 													@if($value['has_15'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_15')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_15" name="status_has_15" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_15"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_15"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_15"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_15"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_15" value='{{$value['keterangan_has_15']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_15" type="text" name="review_perbaikan_15" value='{{$value['review_perbaikan_15']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">16</td>
 													<td class="valign-middle">Bukti registrasi dari BPJPH</td>
 													@if($value['has_16'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_16')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
-													<td>
-														<select id="status_has_16" name="status_has_16" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-															<option value="" {{$value["status_has_16"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-															<option value="1" {{$value["status_has_16"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_16"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_16"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
-														</select>
-													</td>
-													<td ><input type="text" class="form-control" name="keterangan_has_16" value='{{$value['keterangan_has_16']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_16" type="text" name="review_perbaikan_16" value='{{$value['review_perbaikan_16']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
 
 											@endforeach
@@ -732,10 +446,9 @@
 									</tbody>
 								</table>
 								<div class=" offset-md-5">
-					                @component('components.buttonback',['href' => route("listregistrasipelangganaktif")])@endcomponent
-					                @if($dataHas !== null)
-										<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;">Submit</button>
-									@endif
+
+					               <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
+					               	
 									
 					            </div>
 								
