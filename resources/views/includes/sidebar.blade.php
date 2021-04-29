@@ -132,14 +132,17 @@
 				}elseif(Auth::user()->usergroup_id == 7){
 					$configSidebar = config('sidebar.menu7fix');
 				}elseif(Auth::user()->usergroup_id == 8){
-					$configSidebar = config('sidebar.menu7');
-
+					$configSidebar = config('sidebar.menu8fix');
+				}elseif(Auth::user()->usergroup_id == 9){
+					$configSidebar = config('sidebar.menu9fix');
 				}elseif(Auth::user()->usergroup_id == 10){
-					$configSidebar = config('sidebar.menu10');
-					
+					$configSidebar = config('sidebar.menu10fix');					
 				}elseif(Auth::user()->usergroup_id == 11){
-					$configSidebar = config('sidebar.menu10');
-					
+					$configSidebar = config('sidebar.menu11fix');					
+				}elseif(Auth::user()->usergroup_id == 12){
+					$configSidebar = config('sidebar.menu12fix');
+				}elseif(Auth::user()->usergroup_id == 13){
+					$configSidebar = config('sidebar.menu13fix');
 				}else{
 					$configSidebar = config('sidebar.menu');
 				}

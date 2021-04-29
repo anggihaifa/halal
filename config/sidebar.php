@@ -121,7 +121,6 @@ return [
                 ],        
             ],
         ],        
-
     ],
     'menu2' => [ //user
         [
@@ -155,6 +154,11 @@ return [
         [    'icon' => 'ion-ios-person',
             'title' => 'Guideline',
             'url' => 'guideline.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
         ],
     ],
     'menu3' => [
@@ -295,6 +299,11 @@ return [
             'title' => 'Guideline',
             'url' => 'guideline.index'
         ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],
     ],
     'menu4' => [
         [
@@ -328,6 +337,11 @@ return [
             'icon' => 'ion-ios-person',
             'title' => 'Guideline',
             'url' => 'guideline.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
         ],
     ],
     'menu4fix' => [
@@ -364,6 +378,11 @@ return [
         [    'icon' => 'ion-ios-clipboard',
             'title' => 'Pelatihan',
             'url' => 'pelatihan.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
         ],
     ],
     'menu5' => [
@@ -424,6 +443,11 @@ return [
         [    'icon' => 'ion-md-information-circle-outline',
             'title' => 'Berita',
             'url' => 'berita.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
         ],                             
     ],
     'menu6fix' => [
@@ -537,6 +561,10 @@ return [
                     'title' => 'List Registrasi Aktif'
                 ],
                 [
+                    'url' => 'listpembayaranregistrasi',
+                    'title' => 'Penawaran Harga'
+                ],
+                [
                     'url' => 'listakadadmin',
                     'title' => 'List Kontrak Akad'
                 ],
@@ -558,7 +586,11 @@ return [
                 ],
                
             ],
-        ], 
+        ],
+        [    'icon' => 'ion-md-information-circle-outline',
+            'title' => 'Berita',
+            'url' => 'berita.index'
+        ],
         [
             'icon' => 'ion-md-book',
             'title' => 'Reporsitory Dokumen Halal',
@@ -584,6 +616,111 @@ return [
         ],  
                                       
     ],
+    'menu8fix' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Registrasi',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [                
+                 [
+                    'url' => 'listregistrasipelangganaktif',
+                    'title' => 'List Registrasi Aktif'
+                ],                
+                [
+                    'url' => 'listakadadmin',
+                    'title' => 'List Kontrak Akad'
+                ],
+                [
+                    'url' => 'listpembayaranregistrasi',
+                    'title' => 'List Pembayaran Tahap 1'
+                ],
+                [
+                    'url' => 'listpembayarantahap2',
+                    'title' => 'List Pembayaran Tahap 2'
+                ],
+                [   
+                    'url' => 'listberitaacara',       
+                    'title' => 'Berita Acara'                    
+                ],
+                 [
+                    'url' => 'listpelunasan',
+                    'title' => 'List Pelunasan'
+                ],
+               
+            ],
+        ],
+        [    'icon' => 'ion-ios-clipboard',
+            'title' => 'Pelatihan',
+            'url' => 'pelatihan.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],  
+                                      
+    ],
+    'menu9fix' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],
+        [
+            'icon' => 'ion-ios-people',
+            'title' => 'Pelanggan',
+            'url' => 'user.listpelanggan'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Registrasi',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [                
+                 [
+                    'url' => 'listregistrasipelangganaktif',
+                    'title' => 'List Registrasi Aktif'
+                ],                
+                [
+                    'url' => 'listakadadmin',
+                    'title' => 'List Kontrak Akad'
+                ],
+                [
+                    'url' => 'listpembayaranregistrasi',
+                    'title' => 'List Pembayaran Tahap 1'
+                ],
+                [
+                    'url' => 'listpembayarantahap2',
+                    'title' => 'List Pembayaran Tahap 2'
+                ],
+                [   
+                    'url' => 'listberitaacara',       
+                    'title' => 'Berita Acara'                    
+                ],
+                 [
+                    'url' => 'listpelunasan',
+                    'title' => 'List Pelunasan'
+                ],
+               
+            ],
+        ],
+        [    'icon' => 'ion-ios-clipboard',
+            'title' => 'Pelatihan',
+            'url' => 'pelatihan.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],  
+                                      
+    ],
     'menu10' => [
         [
             'icon' => 'ion-ios-stats',
@@ -602,6 +739,176 @@ return [
         [    'icon' => 'ion-md-information-circle-outline',
             'title' => 'Berita',
             'url' => 'berita.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],
+    ],
+    'menu10fix' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Jadwal Audit',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                         
+                [
+                    'url' => 'listaudit1',
+                    'title' => 'Audit Tahap 1'
+                ],
+                [
+                    'url' => 'listaudit2',
+                    'title' => 'Audit Tahap 2'
+                ],
+                [
+                    'url' => 'listrapat',
+                    'title' => 'Rapat Auditor'
+                ],    
+            ],
+
+        ], 
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],
+    ],
+    'menu11fix' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Jadwal Audit',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                         
+                [
+                    'url' => 'listaudit1',
+                    'title' => 'Audit Tahap 1'
+                ],
+                [
+                    'url' => 'listaudit2',
+                    'title' => 'Audit Tahap 2'
+                ],
+                [
+                    'url' => 'listrapat',
+                    'title' => 'Rapat Auditor'
+                ],    
+            ],
+
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Worksheet',
+            'url' => 'listpenjadwalanadmin'
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanadmin'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],        
+    ],
+    'menu12fix' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Jadwal Audit',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                         
+                [
+                    'url' => 'listaudit1',
+                    'title' => 'Audit Tahap 1'
+                ],
+                [
+                    'url' => 'listaudit2',
+                    'title' => 'Audit Tahap 2'
+                ],
+                [
+                    'url' => 'listrapat',
+                    'title' => 'Rapat Auditor'
+                ],    
+            ],
+
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Technical Review',
+            'url' => 'listpenjadwalanadmin'
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Review Laporan Audit',
+            'url' => 'listpenjadwalanadmin'
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanadmin'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],       
+    ],
+    'menu13fix' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],        
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Review Laporan Audit',
+            'url' => 'listpenjadwalanadmin'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
+        ],
+    ],
+    'menu14fix' => [
+        [
+            'icon' => 'ion-ios-stats',
+            'title' => 'Dashboard',
+            'url' => 'home.index'
+        ],        
+        [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Review Laporan Audit',
+            'url' => 'listpenjadwalanadmin'
+        ],     
+        [    'icon' => 'ion-ios-clipboard',
+            'title' => 'Pelatihan',
+            'url' => 'pelatihan.index'
+        ],
+        [
+            'icon' => 'ion-md-book',
+            'title' => 'Reporsitory Dokumen Halal',
+            'url' => 'dokumen.indexuser'
         ],
     ],
 ];
