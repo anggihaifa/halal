@@ -484,7 +484,7 @@ return [
         [
             'icon' => 'ion-ios-stats',
             'title' => 'Dashboard',
-            'url' => 'home.index'
+            'url' => 'home.index' 
         ],
         [
             'icon' => 'ion-ios-calendar',
