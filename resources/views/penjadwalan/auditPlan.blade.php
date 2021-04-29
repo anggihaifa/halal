@@ -55,6 +55,8 @@
                                     @foreach($dataRegistrasi as $index => $value)
                                         @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
                                         @component('components.inputtext',['name'=> 'jenis_audit','label' => 'Jenis Audit','required'=>true,'placeholder'=>'Jenis Audit','readonly'=>true,'value'=>$value->status_registrasi])@endcomponent
+                                        @component('components.inputtext',['name'=> 'skema_audit','label' => 'Skema Audit','required'=>true,'placeholder'=>'Skema Audit','readonly'=>true,'value'=>"sjph"])@endcomponent
+                                        @component('components.inputtext',['name'=> 'tipe_audit','label' => 'Tipe Audit','required'=>true,'placeholder'=>'Tipe Audit','readonly'=>true,'value'=>"tahap2"])@endcomponent
                                         @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
                                         @component('components.inputtext',['name'=> 'alamat_perusahaan','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$value->alamat])@endcomponent
                                         @foreach($dataPenjadwalan as $index => $value2)
@@ -157,6 +159,61 @@
                                             @component('components.inputtext',['name'=> 'no_organisasi','label' => 'No Organisasi','required'=>true,'placeholder'=>'No Organisasi'])@endcomponent
                                         </div>
                                     </div>
+                                    <div class="wrapper col-lg-12">                               
+                                        <div class="row">
+                                            <label class="col-lg-4 col-form-label">Skema Audit</label>
+                                            <div id="shb" class="col-lg-8">
+                                                <div class="input-group date">           
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="skema_audit" value="sjph" id="sjph"/>                                                                                                        
+                                                        <label for="sjph">SJPH</label>
+                                                    </div>
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="skema_audit" value="smh" id="smh"/>
+                                                        <label for="smh">SMH</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                                                                    
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-4 col-form-label">Jenis Audit</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">           
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="jenis_audit" value="baru" id="baru"/>
+                                                        <label for="baru">Baru</label>
+                                                    </div>
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="jenis_audit" value="perpanjangan" id="perpanjangan"/>
+                                                        <label for="perpanjangan">Perpanjangan</label>
+                                                    </div>
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="jenis_audit" value="perubahan" id="perubahan"/>
+                                                        <label for="perubahan">Perubahan</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-4 col-form-label">Tipe Audit</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">           
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="tipe_audit" value="tahap1" id="tahap1"/>
+                                                        <label for="tahap1">Tahap II</label>
+                                                    </div>
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="tipe_audit" value="tahap2" id="tahap2"/>
+                                                        <label for="tahap2">Tahap I</label>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
                                             @component('components.inputtext',['name'=> 'no_audit','label' => 'No Audit','required'=>true,'placeholder'=>'No Audit'])@endcomponent

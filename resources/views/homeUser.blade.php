@@ -140,11 +140,11 @@
 		</div>
 
 		<div class="col-md-12 mx-0 step widget widget-stats bg-light animated zoomIn delay-5s">			
-            <form id="msform">
-			<h4 style="color: #348fe2; margin-bottom: 30px;">PROGRESS</h4>
+            <form id="msform">			
                 <!-- progressbar -->
                 <ul id="progressbar">
 					@foreach($dataCurrent as $key => $value)	
+						<h4 style="color: #348fe2; margin-bottom: 30px;">PROGRESS</h4>
 						@if ($value['status'] == 1)
 							<li id="account" class="active"><strong>Pengajuan Baru</strong></li>
 						@elseif ($value['status'] == 2)

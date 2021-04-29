@@ -109,16 +109,14 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        if({{Auth::user()->usergroup_id}} == 6){
+                        if({{Auth::user()->usergroup_id}} == 11){
                             if(full.status_approve == 0){
                                 return `<div class="btn-group m-r-5 show">
                                     <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
                                     <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
 
-                                        <a href="{{url('acc_pelatihan')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-check-circle"></i> Acc</a>
-
-                                        <a href="{{url('master/pelatihan')}}/`+full.id+`/edit" class="dropdown-item" ><i class="fa fa-edit"></i> Edit</a>
+                                        <a href="{{url('acc_pelatihan')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-check-circle"></i> Acc</a>                                        
 
                                         <form class="forDelete dropdown-item" action="{{url('master/pelatihan')}}/${full.id}" method="post" style="padding:0px;">
                                             @csrf
@@ -133,9 +131,7 @@
                                     <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
 
-                                        <a href="{{url('acc_pelatihan')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-check-circle"></i> Cabut Acc</a>
-
-                                        <a href="{{url('master/pelatihan')}}/`+full.id+`/edit" class="dropdown-item" ><i class="fa fa-edit"></i> Edit</a>
+                                        <a href="{{url('acc_pelatihan')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-check-circle"></i> Cabut Acc</a>                                        
 
                                         <form class="forDelete dropdown-item" action="{{url('master/pelatihan')}}/${full.id}" method="post" style="padding:0px;">
                                             @csrf
@@ -145,7 +141,7 @@
                                     </div>
                                 </div>`
                             }                  
-                        }else{
+                        }else if({{Auth::user()->usergroup_id}} == 10){
                             return `<div class="btn-group m-r-5 show">
                                 <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
                                 <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
@@ -160,7 +156,11 @@
                                         </form>       
                                 </div>
                             </div>`    
-                        }                        
+                        }else if({{Auth::user()->usergroup_id}} == 1){
+                            return `<div class="btn-group m-r-5 show">
+                            <a href="#" class="btn btn-secondary btn-xs">Pilih Aksi</a>                                
+                            </div>`    
+                        }
                     }
                 }
             ],

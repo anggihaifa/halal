@@ -46,28 +46,14 @@
 								$buttonUnduh = '<td class="valign-middle text-center"><a href="#"><i class="fa fa-eye"></i></a></td>';
 						
 							@endphp
-							@if($dataHas !== null)
-								@foreach($dataHas as $has => $value)
-									@if($value['status_has'] == 1)
-										<h5>Dokumen Lengkap</h5>
-									@else
-										<h5>Dokumen Belum Lengkap</h5>
-									@endif 
-								@endforeach
-							@else
-								<h5>Dokumen Belum Lengkap</h5>	
-							@endif
-									
-							@if($dataHas !== null)
-								@foreach($dataHas as $has => $value)
-									<form action="{{route('updatestatushas',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
-										@csrf
-										@method('PUT')
-								@endforeach()	
-							@else
-								<form action="#" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
-									@csrf
-							@endif
+							
+							<h5>Dokumen Lengkap</h5>
+																
+							@foreach($dataHas as $has => $value)
+								<form action="{{route('updatestatushas',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+							@endforeach
+								@csrf
+								@method('PUT')
 
 								<div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
@@ -82,12 +68,12 @@
                                     </div>
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'ruang_lingkup','label' => 'Ruang Lingkup','required'=>true,'placeholder'=>'Ruang Lingkup'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'ruang_lingkup','label' => 'Ruang Lingkup','required'=>true,'placeholder'=>'Ruang Lingkup','value'=>$dataRegis['jenis_usaha'],'readonly'=>true])@endcomponent
                                         </div>
                                     </div>
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Kelompok/Jenis Produk','required'=>true,'placeholder'=>'Kelompok/Jenis Produk','readonly'=>true,'value'=>$dataRegis['jenis_produk']])@endcomponent
+                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Kelompok/Jenis Produk','required'=>true,'placeholder'=>'Kelompok/Jenis Produk','readonly'=>true,'value'=>$dataJenisProduk['kelompok_produk']])@endcomponent
                                         </div>
                                     </div>
 									<div class="wrapper col-lg-12">
@@ -835,9 +821,7 @@
 										<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;">Submit</button>
 									@endif
 									
-					            </div>
-								
-									
+					            </div>		
 								
 							</form>	
 						</div>

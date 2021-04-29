@@ -597,7 +597,7 @@ class RegistrasiController extends Controller
 
             $no_order = date('YmdHis').".".Auth::user()->id . "." .$data['id_jenis_registrasi'];
             // dd($no_order);
-            dd($data);
+            // dd($data);
             // //Create PDF
             // $nama = Auth::user()->name;
             // $perusahaan = Auth::user()->perusahaan;
@@ -637,6 +637,7 @@ class RegistrasiController extends Controller
            // $model->tipe = $data['tipe'];
             $model->no_tipe = $data['no_tipe'];
             $model->no_tipe2 = $data['no_tipe2'];
+            $model->sni = $data['sni'];
             $model->jenis_izin = $data['jenis_izin'];
             $model->jumlah_karyawan = $data['jumlah_karyawan'];
             $model->kapasitas_produksi = $data['kapasitas_produksi'];
@@ -655,6 +656,8 @@ class RegistrasiController extends Controller
             $model->nib = $data['nib'];
             $model->jenis_surat = $data['jenis_surat'];
             $model->nomor_surat = $data['nomor_surat'];
+            $model->penerbit_sertifikat_perusahaan = $data['penerbit_sertifikat_perusahaan'];
+            $model->no_sertifikat_perusahaan = $data['no_sertifikat_perusahaan'];
 
             $model->status = 1 ;            
             $model->save();
@@ -1092,7 +1095,15 @@ class RegistrasiController extends Controller
         $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
 
         $model2 = new Registrasi();
+        $model3 = new KelompokProduk();
+        
         $dataRegis = $model2->find($id_registrasi);        
+
+        $dataRegis = json_decode($dataRegis,true);        
+
+        $dataJenisProduk = $model3->find($dataRegis['id_kelompok_produk']);
+
+        // dd($dataJenisProduk);
 
         //check data dokumen has
         $checkHas =  DB::table('dokumen_has')
@@ -1118,7 +1129,7 @@ class RegistrasiController extends Controller
         if(isset($checkKuisionerHas[0])){$dataKuisionerHas = json_decode($checkKuisionerHas,true);}
         else{$dataKuisionerHas = null;}
 
-        return view('pelanggan.unggahDataSertifikasi.detailDataAuditor', compact('dataRegistrasi','dataHas','dataMatriksProduk','dataKuisionerHas','dataRegis'));
+        return view('pelanggan.unggahDataSertifikasi.detailDataAuditor', compact('dataRegistrasi','dataHas','dataMatriksProduk','dataKuisionerHas','dataRegis','dataJenisProduk'));
 
     }
 
@@ -2815,9 +2826,35 @@ class RegistrasiController extends Controller
 
     public function uploadBeritaAcaraAdmin($id){
         //dd($id);
-        $data = Registrasi::find($id);
+        $data = Registrasi::find($id);        
+
+        $dataAlamatKantor = DB::table('registrasi_alamatkantor')
+                    ->where('id_registrasi',$id)
+                    ->get();
+
+        $dataPemilik = DB::table('registrasi_pemilik_perusahaan')
+                    ->where('id_registrasi',$id)
+                    ->get();
+
+        $dataNamaProduk = DB::table('registrasi_data_produk')
+                    ->join('detail_data_produk','registrasi_data_produk.id','=','detail_data_produk.id_registrasi_data_produk')
+                    ->select('detail_data_produk.merk as merk')
+                    ->where('registrasi_data_produk.id_registrasi','=',$id)
+                    ->get();
+        // dd($dataNamaProduk);
+
+        $data = json_decode($data);        
+
+        $dataKelProduk = DB::table('kelompok_produk')                    
+                    ->where('id','=',$data->id_kelompok_produk)
+                    ->get();
         
-        return view('registrasi.uploadBeritaAcaraAdmin',compact('data'));
+        // dd($dataPemilik);
+
+        $dataAlamatKantor = json_decode($dataAlamatKantor);        
+        // dd($dataAlamatKantor);
+        
+        return view('registrasi.uploadBeritaAcaraAdmin',compact('data','dataAlamatKantor','dataNamaProduk','dataKelProduk','dataPemilik'));
     }
 
     public function kirimKeMUI($id){

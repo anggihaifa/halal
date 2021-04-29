@@ -9,6 +9,13 @@ body{
     /* background: #218c74!important; */
     backdrop-filter: blur(10px);
 }
+.page-with-wide-sidebar .sidebar, .page-with-wide-sidebar .sidebar-bg{
+    /* width: 200px !important; */
+    width: 17%;
+}
+.page-with-wide-sidebar .content{
+    margin-left: 220px;
+}
 .caption-slide{    
     background: #000;
 }

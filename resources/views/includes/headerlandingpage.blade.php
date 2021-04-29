@@ -1,12 +1,12 @@
 <div class="containercol-lg-12">
-        <nav class="navbar navbar-light bg-halal d-flex justify-content-center">
+        <nav class="navbar navbar-light bg-halal d-flex justify-content-center" style="background: #218c74">
             <a class="navbar-brand text-white" href="{{route('landingpage.index')}}">
-                <img src="{{asset('/assets/img/logo/white-sci.png')}}" alt="">
+                <img src="{{asset('/assets/img/logo/white-sci2.png')}}" alt="">
                 <span style="font-size: 22px"><b>LPH</b>SUCOFINDO</span>
             </a>
         </nav>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-halal">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background: #218c74">
         {{-- <a class="navbar-brand" href="#">Navbar</a> --}}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link nav-halal" href="#"><h5>Pelanggan Kami</h5></a>
+                <a class="nav-link nav-halal" href="{{route('pelanggankami')}}"><h5>Pelanggan Kami</h5></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link nav-halal" href="{{route('faquser')}}"><h5>FAQ</h5></a>

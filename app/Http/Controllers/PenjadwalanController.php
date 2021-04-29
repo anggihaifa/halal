@@ -5347,16 +5347,16 @@ class PenjadwalanController extends Controller
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
              ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')            
             ->where(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status_cancel','=',0);  
                 $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
   
             })    
             ->orWhere(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status_cancel','=',0);  
                 $query->where('penjadwalan.pelaksana2_audit1','LIKE','%'.$id_user.'%');
   
             })               
-             ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+            ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
         //filter condition
@@ -5571,8 +5571,9 @@ class PenjadwalanController extends Controller
 
     public function laporanAudit($id){
         $dataRegistrasi = DB::table('registrasi')
-                ->join('registrasi_alamatkantor','registrasi.id','=','registrasi_alamatkantor.id_registrasi')                
-                ->select('registrasi.*','registrasi_alamatkantor.alamat as alamat')
+                ->join('registrasi_alamatkantor','registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+                ->join('registrasi_pemilik_perusahaan','registrasi.id','=','registrasi_pemilik_perusahaan.id_registrasi')
+                ->select('registrasi.*','registrasi_alamatkantor.alamat as alamat', 'registrasi_pemilik_perusahaan.nama_pemilik as nama_pemilik')
                 ->where('registrasi.id',$id)
                 ->get();        
         // $dataRegistrasi = Registrasi::find($id);

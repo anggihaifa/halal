@@ -64,7 +64,7 @@
                                 </div>
                                 </div>
 
-                                <label class="col-lg-4 col-form-label">Tanggal Registrasi</label>
+                                <label class="col-lg-4 col-form-label">Tanggal Pendaftaran</label>
                                 <div class="col-lg-8">
                                     <input type="text" id="tgl_registrasi" name="tgl_registrasi" class="form-control " readonly/>
                                 </div>
@@ -84,9 +84,23 @@
                                 </div>
                                 </div>
 
+                                <div class="wrapper col-lg-12" id="wrapperip" style="display: none">
+                                    <div class="row">
+                                        <label class="col-lg-4 col-form-label">Industri Pengolahan</label>
+                                        <div class="col-lg-8">
+                                            <select id="id_jenis_reg"  name="id_jenis_registrasi" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                <option value="makanan">Makanan</option>
+                                                <option value="makanan">Minuman</option>
+                                                <option value="makanan">Obat</option>
+                                                <option value="makanan">Kosmetik</option>                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    <label class="col-lg-4 col-form-label">Status Registrasi</label>
+                                    <label class="col-lg-4 col-form-label">Jenis Pendaftaran</label>
                                     <div class="col-lg-8">
                                         <div style="margin-bottom:7px;">
                                             <div class="radio radio-css radio-inline">
@@ -114,7 +128,7 @@
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'no_surat','id' => 'no_surat','label' => 'No. Surat Permohonan Sertifikasi Dari BPJPH *','required'=>true,'placeholder'=>'xx-x-xxxx-xxxx'])@endcomponent                            
+                                    @component('components.inputtext',['name'=> 'no_surat','id' => 'no_surat','label' => 'No. Surat Permohonan Sertifikasi (BPJPH) *','required'=>true,'placeholder'=>'xx-x-xxxx-xxxx'])@endcomponent                            
                                 </div>
                                 </div>
 
@@ -157,27 +171,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-
-                                <div class="wrapper col-lg-12">
-                                <div class="row">
-                                    <label class="col-lg-4 col-form-label">Jenis Produk</label>
-                                    <div class="col-lg-8">
-                                        <div class="radio radio-css radio-inline">
-                                            <input type="radio" name="jenis_produk" id="jenisProduk1" value="Retail" checked />
-                                            <label for="jenisProduk1">Retail</label>
-                                        </div>
-                                        <div class="radio radio-css radio-inline">
-                                            <input type="radio" name="jenis_produk" id="jenisProduk2" value="Non Retail" />
-                                            <label for="jenisProduk2">Non Retail</label>
-                                        </div>
-                                        <div class="radio radio-css radio-inline">
-                                            <input type="radio" name="jenis_produk" id="jenisProduk3" value="Retail & Non Retail" />
-                                            <label for="jenisProduk3">Retail & Non Retail</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
+                                </div>                                
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
@@ -275,8 +269,7 @@
                                         <div class="radio radio-css radio-inline">
                                             <input type="radio" name="skala_usaha" id="skalaUsaha4" value="besar" />
                                             <label for="skalaUsaha4">Besar</label>
-                                        </div>
-                                        <small class="f-s-12 text-grey-darker m-t-5">Jika nilai "Skala Usaha" adalah "Usaha Kecil" maka Registrasi bisa menggunakan NPWP atau KTP</small>
+                                        </div>                                        
                                     </div>
                                 </div>
                                 </div>
@@ -305,7 +298,8 @@
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    <label class="col-lg-4 col-form-label">NPWP/KTP</label>
+                                    {{-- <label class="col-lg-4 col-form-label">NPWP/KTP</label> --}}
+                                    <label class="col-lg-4 col-form-label">NPWP</label>
                                     <div class="col-lg-8">
                                         <!-- <div style="margin-bottom:10px;">
                                             <div class="radio radio-css radio-inline">
@@ -318,9 +312,9 @@
                                             </div>
                                         </div> -->
                                         
-                                        <input id="no_tipe" name="no_tipe" type="text" class="form-control ktp" placeholder="KTP"/>
+                                        {{-- <input id="no_tipe" name="no_tipe" type="text" class="form-control ktp" placeholder="KTP"/> --}}
                                         
-                                        <br>
+                                        {{-- <br> --}}
                                         
                                         <input id="no_tipe2" name="no_tipe2" type="text" class="form-control npwp" placeholder="NPWP"/>
                                         
@@ -344,36 +338,7 @@
                                 <div class="row">
                                     @component('components.inputtext',['name'=> 'kapasitas_produksi','label' => 'Kapasitas Produksi *','required'=>true,'placeholder'=>'Contoh: 1000 Ton / Tahun'])@endcomponent
                                 </div>
-                                </div>
-
-                                <div class="wrapper col-lg-12">
-                                    <div class="row">
-                                        <label for="kelompok" class="col-lg-4 col-form-label">Jenis Produk</label>
-
-                                        <div class="col-lg-8">
-                                            <select id="id_kelompok_produk" name="id_kelompok_produk" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
-                                                <option value="">--Pilih Jenis Produk--</option>
-                                                    @if(isset($kelompokProduk))
-                                                        @foreach($kelompokProduk as $index => $value)
-                                                            <option value="{{$value['id']}}"> - {{$value['kelompok_produk']}}</i></option>
-                                                            @endforeach
-                                                    @endif
-                                            </select>                                
-                                        </div>   
-                                    </div>
-                                </div>
-
-                                <div class="wrapper col-lg-12">
-                                    <div class="row">
-                                        <label for="kelompok" class="col-lg-4 col-form-label">Rincian Jenis Produk</label>
-
-                                        <div class="col-lg-8">
-                                            <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
-                                                <option value="">--Pilih Jenis Produk--</option>                                                    
-                                            </select>                                
-                                        </div>   
-                                    </div>
-                                </div>
+                                </div>                                
                                 {{-- <div class="wrapper col-lg-12" id="label-kot">
                                     <div class="row">
                                         <label class="col-lg-4 col-form-label">Kota/Kabupaten</label>
@@ -577,7 +542,7 @@
                                 <div class="row">
                                     <label class="col-lg-4 col-form-label" id="textstatuspabrik">Status Pabrik</label>
                                     <div class="col-lg-8">
-                                        <div style="margin-bottom:10px;">                                
+                                        <div style="margin-bottom:10px;">                    
                                             <div class="radio radio-css radio-inline">
                                                 <input type="radio" name="status_pabrik" id="statusPabrik1" value="milik sendiri" checked />
                                                 <label for="statusPabrik1">Milik Sendiri</label>
@@ -704,7 +669,19 @@
                                         <input type="radio" name="sertifikat_perusahaan" id="sertifperusahaan2" value="lainnya" />
                                         <label for="sertifperusahaan2">Lainnya</label>
                                     </div>                                                                                          
-                                </div>                                
+                                </div>
+                                
+                                <div class="wrapper col-lg-12">
+                                    <div class="row">
+                                        @component('components.inputtext',['name'=> 'penerbit_sertifikat_perusahaan','label' => 'Penerbit Sertifikat','required'=>true,'placeholder'=>'Penerbit Sertifikat'])@endcomponent
+                                    </div>
+                                </div>
+
+                                <div class="wrapper col-lg-12">
+                                    <div class="row">
+                                        @component('components.inputtext',['name'=> 'no_sertifikat_perusahaan','label' => 'No Sertifikat','required'=>true,'placeholder'=>'No Sertifikat'])@endcomponent
+                                    </div>
+                                </div>
 
                                 <label class="col-4 col-form-label" id="nkv1">Nomor Kontrol Veteriner</label><div class="col-lg-8" id="nkv2"><div><input class="form-control" id="nkv3" name="nkv" type="text" placeholder="Nomor Kontrol Veteriner (NKV)"></div></div>
                             </div>
@@ -855,6 +832,35 @@
 
                                             <div class="wrapper col-lg-12">
                                                 <div class="row">
+                                                    <label for="kelompok" class="col-lg-4 col-form-label">Jenis Produk</label>
+            
+                                                    <div class="col-lg-8">
+                                                        <select id="id_kelompok_produk" name="id_kelompok_produk" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
+                                                            <option value="">--Pilih Jenis Produk--</option>
+                                                                @if(isset($kelompokProduk))
+                                                                    @foreach($kelompokProduk as $index => $value)
+                                                                        <option value="{{$value['id']}}"> - {{$value['kelompok_produk']}}</i></option>
+                                                                        @endforeach
+                                                                @endif
+                                                        </select>                                
+                                                    </div>   
+                                                </div>
+                                            </div>
+            
+                                            <div class="wrapper col-lg-12">
+                                                <div class="row">
+                                                    <label for="kelompok" class="col-lg-4 col-form-label">Rincian Jenis Produk</label>
+            
+                                                    <div class="col-lg-8">
+                                                        <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
+                                                            <option value="">--Pilih Jenis Produk--</option>
+                                                        </select>
+                                                    </div>   
+                                                </div>
+                                            </div>
+
+                                            <div class="wrapper col-lg-12">
+                                                <div class="row">
                                             
                                                 <label class="col-lg-4 col-form-label">Area Pemasaran</label>
                                                 <div class="col-lg-8">
@@ -876,6 +882,26 @@
 
                                             <div class="wrapper col-lg-12">
                                                 <div class="row">
+                                                    <label class="col-lg-4 col-form-label">Sistem Pemasaran</label>
+                                                    <div class="col-lg-8">
+                                                        <div class="radio radio-css radio-inline">
+                                                            <input type="radio" name="jenis_produk" id="jenisProduk1" value="Retail" checked />
+                                                            <label for="jenisProduk1">Retail</label>
+                                                        </div>
+                                                        <div class="radio radio-css radio-inline">
+                                                            <input type="radio" name="jenis_produk" id="jenisProduk2" value="Non Retail" />
+                                                            <label for="jenisProduk2">Non Retail</label>
+                                                        </div>
+                                                        <div class="radio radio-css radio-inline">
+                                                            <input type="radio" name="jenis_produk" id="jenisProduk3" value="Retail & Non Retail" />
+                                                            <label for="jenisProduk3">Retail & Non Retail</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="wrapper col-lg-12">
+                                                <div class="row">
                                                     <label class="col-4 col-form-label">Izin Edar</label><div class="col-lg-8"><div><input class="form-control" id="izinedar" name="izin_edar" type="text" label="Izin Edar" placeholder="Izin Edar"></div></div>
                                                 </div>
                                             </div>
@@ -883,6 +909,12 @@
                                             <div class="wrapper col-lg-12">
                                                 <div class="row">
                                                     <label class="col-4 col-form-label">Produk lain yang diproduksi/dilayani oleh organisasi diluar ruang lingkup sertifikasi yang diajukan, (jika ada):</label><div class="col-lg-8"><div><input class="form-control" id="produklain" name="produk_lain" type="text" label="Produk Lain" placeholder="Produk Lain"></div></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="wrapper col-lg-12" id="wrappersni">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">SNI</label><div class="col-lg-8"><div><input class="form-control" id="izinedar" name="sni" type="text" label="SNI" placeholder="SNI"></div></div>
                                                 </div>
                                             </div>
 
@@ -1335,7 +1367,7 @@
                     success: function (response) {                                                
                         $('#id_rincian_kelompok_produk').empty();                               
                         $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
-                            $("#id_rincian_kelompok_produk").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi))
+                            $("#id_rincian_kelompok_produk").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, rincian_kelompok_produk))
                         })
                         $('#id_rincian_kelompok_produk').selectpicker('refresh');
                     }                   
@@ -1485,6 +1517,14 @@
                 document.getElementById("wrapperdataproduk").style.display = 'block';
                 document.getElementById("wrapperdatakelompokusaha").style.display = 'none';
                 document.getElementById("wrapperdatajasa").style.display = 'none';
+
+                if(selectedValue == 1){
+                    document.getElementById("wrapperip").style.display = 'block';
+                    document.getElementById("wrappersni").style.display = 'none';
+                }else if(selectedValue == 5){
+                    document.getElementById("wrapperip").style.display = 'none';
+                    document.getElementById("wrappersni").style.display = 'block';
+                }
                 
                 document.getElementById("wrapperaspeklegal").style.display = 'block';
                 document.getElementById("nkv1").style.display = 'none';
@@ -1497,6 +1537,8 @@
             }else if(selectedValue == 2){
                 document.getElementById("textalamatpabrik").innerHTML = '<h4>Alamat Lokasi Produksi</h4>';
                 document.getElementById("textstatuspabrik").innerHTML = 'Status Lokasi Produksi';
+                document.getElementById("wrapperip").style.display = 'none';
+                document.getElementById("wrappersni").style.display = 'none';
                 
                 document.getElementById("wrapperdataproduk").style.display = 'none';
                 document.getElementById("wrapperdatakelompokusaha").style.display = 'block';
@@ -1511,6 +1553,8 @@
                 document.getElementById("wrapperjumlahproduksi").style.display = 'none';
             }else if(selectedValue == 4){
                 document.getElementById("textalamatpabrik").innerHTML = '<h4>Alamat Pabrik</h4>';
+                document.getElementById("wrapperip").style.display = 'none';
+                document.getElementById("wrappersni").style.display = 'none';
 
                 document.getElementById("wrapperdataproduk").style.display = 'none';
                 document.getElementById("wrapperdatakelompokusaha").style.display = 'none';
@@ -1525,9 +1569,11 @@
                 document.getElementById("wrapperjumlahproduksi").style.display = 'none';
             }else if(selectedValue == 3){
                 document.getElementById("textalamatpabrik").innerHTML = '<h4>Alamat RPH/U Lainnya</h4>';
+                document.getElementById("wrapperip").style.display = 'none';
                 document.getElementById("textjenisbadanusaha").innerHTML = 'Status Unit Usaha';
                 document.getElementById("textalamatkantor").innerHTML = '<h4>Alamat Utama</h4>';
                 document.getElementById("textstatuspabrik").innerHTML = 'Status RPH/U';
+                document.getElementById("wrappersni").style.display = 'none';
 
                 
                 document.getElementById("wrapperdataproduk").style.display = 'none';
@@ -1619,6 +1665,12 @@
             if(selectedValue == 1 || selectedValue == 5){
                 document.getElementById("textalamatpabrik").innerHTML = '<h4>Alamat Pabrik</h4>';
 
+                if(selectedValue == 1){
+                    document.getElementById("wrapperip").style.display = 'block';
+                }else if(selectedValue == 5){
+                    document.getElementById("wrapperip").style.display = 'none';
+                }
+
                 document.getElementById("wrapperdataproduk").style.display = 'block';
                 document.getElementById("wrapperdatakelompokusaha").style.display = 'none';
                 document.getElementById("wrapperdatajasa").style.display = 'none';                
@@ -1633,6 +1685,7 @@
             }else if(selectedValue == 2){
                 document.getElementById("textalamatpabrik").innerHTML = '<h4>Alamat Lokasi Produksi</h4>';
                 document.getElementById("textstatuspabrik").innerHTML = 'Status Lokasi Produksi';
+                document.getElementById("wrapperip").style.display = 'none';
                 
                 document.getElementById("wrapperdataproduk").style.display = 'none';
                 document.getElementById("wrapperdatakelompokusaha").style.display = 'block';
@@ -1648,6 +1701,7 @@
             }else if(selectedValue == 4){
                 document.getElementById("textalamatpabrik").innerHTML = '<h4>Alamat Pabrik</h4>';
                 document.getElementById("textalamatkantor").innerHTML = '<h4>Alamat Kantor</h4>';
+                document.getElementById("wrapperip").style.display = 'none';
 
                 document.getElementById("wrapperdataproduk").style.display = 'none';
                 document.getElementById("wrapperdatakelompokusaha").style.display = 'none';
@@ -1664,6 +1718,7 @@
                 document.getElementById("textalamatpabrik").innerHTML = '<h4>Alamat RPH/U Lainnya</h4>';
                 document.getElementById("textjenisbadanusaha").innerHTML = 'Status Unit Usaha';
                 document.getElementById("textalamatkantor").innerHTML = '<h4>Alamat Utama</h4>';
+                document.getElementById("wrapperip").style.display = 'none';
 
                 document.getElementById("wrapperdataproduk").style.display = 'none';
                 document.getElementById("wrapperdatakelompokusaha").style.display = 'none';
@@ -2022,18 +2077,20 @@
             });
         }
 
-        $('#no_tipe').attr('placeholder','No. KTP');
+        // $('#no_tipe').attr('placeholder','No. KTP');
+        // var ktp = document.getElementById('no_tipe');
+        // ktp.style.display = 'none';
         $('#no_tipe2').attr('placeholder','No. NPWP');      
 
-        document.getElementById("no_tipe").style.display="block";        
+        // document.getElementById("no_tipe").style.display="block";        
 
         for (var i = 0; i < tipe.length; i++) {
             tipe[i].addEventListener('change', function() {
                 if (this.value == 'ktp') {                    
-                    document.getElementById("no_tipe").style.display="block";
+                    // document.getElementById("no_tipe").style.display="block";
                     document.getElementById("no_tipe2").style.display="none";                                       
                 }else{                    
-                    document.getElementById("no_tipe").style.display="none";
+                    // document.getElementById("no_tipe").style.display="none";
                     document.getElementById("no_tipe2").style.display="block";        
                 }
             });
