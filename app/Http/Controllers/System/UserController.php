@@ -4,6 +4,7 @@ namespace App\Http\Controllers\System;
 
 use App\Models\Master\Bumn;
 use App\Models\System\User;
+use App\Models\System\DetailUser;
 use App\Http\Controllers\Controller;
 use App\Models\System\UserGroup;
 use Illuminate\Http\Request;
@@ -188,19 +189,97 @@ class UserController extends Controller
 
     //update
     public function editProfile($id){
+
+        $model = new DetailUser();
+        $model2 = new User();
+
+        $id_real = Auth::user()->id;
         $data = User::find($id);
-        return view('system.user.editprofile',compact('data'));
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
+
+        $response = curl_exec($curl);   
+        curl_close($curl);
+
+        $response = json_decode($response);
+        $cabang = $response->data;
+       
+
+        //dd($id_real == $data['id']);
+        if($data['id'] ==$id_real){
+
+            if(empty($data->detail_id)==0){
+                //dd("isset");
+                $data2 = DetailUser::find($data->detail_id);
+            }else{
+                try{
+                    //dd("masuk");
+                    DB::beginTransaction();
+                    $model->id_user = $id;
+                    $model->save();
+    
+                    $e = DetailUser::where('id_user', '=', $id)->first();
+                    $f = $model2->find($id);
+                    $f->detail_id = $e->id;
+                    $f->save();
+                    DB::commit();
+                    
+                    $data2 = $e;
+                }catch (\Exception $e){
+                   // dd("try");
+                    DB::rollBack();
+                    Session::flash('error', $e->getMessage());
+                }
+                   
+                $data2 = DetailUser::where('id_user', '=', $id)->first();   
+               
+            }
+
+            //dd($data2);
+            
+            return view('system.user.editprofile',compact('data','data2','cabang'));
+        }else{
+            return redirect('login');
+        }
+       
+       
     }
+
     public function updateProfile(Request $request){
-        $data = $request->except('_token','_method');
+        $data = $request->except('_token','_method','telp','noreg_bpjph','no_sertifikat_diklat','no_ujikom','masaberlaku_ujikom','pendidikan','pelatihan','dokumen_pendukung','jenis_kelamin','status_karyawan','foto');
+        $data2 = $request->except('_token','_method','username','name','email','perusahaan','negara','kota','alamat','kode_wilayah');
         $id = Auth::user()->id;
 
         $model = new User();
+        $model2 = new DetailUser();
         try{
             DB::beginTransaction();
             $a = $model->find($id);
+            $e = $model2->find($a->detail_id);
             $a->fill($data);
+            $e->fill($data2);
+
+            if($request->has("foto")){
+                $file = $request->file("foto");
+                $file = $data2["foto"];
+                $filename = "Foto-".$id.".".$file->getClientOriginalExtension();
+                $file->storeAs("public/detailUser/".$id."/", $filename);
+                $e->foto = $filename;
+                //dd("asup");
+            }     
             $a->save();
+            $e->save();
             DB::commit();
             
             Session::flash('success', "data berhasil diupdate!");

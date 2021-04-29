@@ -43,7 +43,7 @@ class BeritaController extends Controller
 		return view('master.berita.create',compact('user'));
     }
 
-    public function detailBerita($id){		
+    public function detailBerita($id){
         $berita = Berita::find($id);     
 
 		return view('master.berita.detail',compact('berita'));
@@ -62,10 +62,14 @@ class BeritaController extends Controller
         $berita = Db::table('berita')
                     ->where('judul_berita','like',"%".$data['katakunci']."%")
                     ->where('status_approve','=',1)
-                    ->get();       
+                    ->get();
+                    
+        $pelatihan = Db::table('pelatihan')
+                    ->where('status_approve','=',1)
+                    ->get();
         // dd($berita);        
 
-		return view('landingpage',compact('produk','cek','berita'));
+		return view('landingpage',compact('produk','cek','berita','pelatihan'));
     }
 
     public function detailBeritaUser($id){
@@ -125,13 +129,13 @@ class BeritaController extends Controller
     //         'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     //    ]);
        if ($files = $request->file('file')) {
-           $destinationPath = public_path().'/assets/img/'; // upload path
+           $destinationPath = public_path().'/assets/img/berita/'; // upload path
         //    $path= public_path(). '/assets/img'.$image_name;
            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
            $files->move($destinationPath, $profileImage);
         //    return response()->json($files->move($destinationPath, $profileImage));
             // return response()->json(["path" => $destinationPath.$profileImage]);
-            return response()->json(request()->getHttpHost()."/assets/img/" . $profileImage);   
+            return response()->json(request()->getHttpHost()."/assets/img/berita/" . $profileImage);   
         }        
  
         // return Redirect::to("image")

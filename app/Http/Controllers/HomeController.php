@@ -89,7 +89,7 @@ class HomeController extends Controller
         // print_r(count($checkUserActive));
         // echo "</pre>"; 
 
-        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7){                        
+        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7 || Auth::user()->usergroup_id == 8){
             return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan'));
         }else{
             // echo "<pre>";

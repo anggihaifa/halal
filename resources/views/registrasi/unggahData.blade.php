@@ -31,86 +31,7 @@
 		<!-- begin panel-body -->
 		<div class="panel-body ">
 
-			<!-- begin card -->
-			<div class="card border-0">
-				<div class="card-header tab-overflow p-t-0 p-b-0">
-					<ul class="nav nav-tabs card-header-tabs">
-						<li class="nav-item prev-button"><a href="#" data-click="prev-tab" class="nav-link text-primary"><i class="fa fa-arrow-left"></i></a></li>
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-1">
-								<img src="{{asset('/assets/img/halal/has.png')}}" width="40%" alt=""  /> 
-							</a>
-							
-							<a class="nav-link active" data-toggle="tab" href="#card-tab-1">Dokumen</a>
-						</li>
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-7">
-								<img src="{{asset('/assets/img/halal/kantor.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-7">Kantor Pusat</a>
-						</li>
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-8">
-								<img src="{{asset('/assets/img/halal/menu.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-8">Menu Restoran</a>
-						</li>
-						@endif
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-2">
-								<img src="{{asset('/assets/img/halal/fasilitas-1.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-2">Fasilitas</a>
-						</li>
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 3 || $dataRegistrasi[0]['id_jenis_registrasi'] == 4 )
-						<li class="nav-item text-center">
-							@if($dataRegistrasi[0]['id_jenis_registrasi'] == 4)
-							<a data-toggle="tab" href="#card-tab-3">
-								<img src="{{asset('/assets/img/halal/servis.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-3">Servis</a>
-							@else
-							<a data-toggle="tab" href="#card-tab-3">
-								<img src="{{asset('/assets/img/halal/produk-1.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-3">Produk</a>
-							@endif
-						</li>
-						@endif
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-4">
-								<img src="{{asset('/assets/img/halal/material-1.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-4">Material</a>
-						</li>
-						@endif
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-5">
-								<img src="{{asset('/assets/img/halal/matriks.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-5">Matriks Produk</a>
-						</li>
-						@endif
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 3 )
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-9">
-								<img src="{{asset('/assets/img/halal/penyembelih.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-9">Jagal</a>
-						</li>
-						@endif
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-6">
-								<img src="{{asset('/assets/img/halal/kuesioner.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-6">Kuesioner SJPH</a>
-						</li>
-						<li class="nav-item next-button"><a href="#" data-click="next-tab" class="nav-link text-primary"><i class="fa fa-arrow-right"></i></a></li>
-					</ul>
-				</div>
+			
 				<div class="card-body table-responsive-lg ">
 					<div class="tab-content p-0 m-0">
 						<div class="tab-pane fade active show" id="card-tab-1">
@@ -1565,7 +1486,7 @@
         	var x = document.getElementById("has_selected");
         	x.value = d;
 
-        	console.log(x.value);
+        	//console.log(x.value);
 
         }
         function getValueSJPH(y){

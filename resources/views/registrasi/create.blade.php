@@ -8,7 +8,7 @@
     <link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css')}}" rel="stylesheet" />
     <link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css')}}" rel="stylesheet" />
     <link href="{{asset('/assets/css/customize.css')}}" rel="stylesheet" />
-    {{-- <link href="{{asset('/assets/css/multistep.css')}}" rel="stylesheet" /> --}}
+    {{-- <link href="{{asset('/assets/css/multistep.css')}}" rel="stylesheet" /> --}}    
     <link rel="stylesheet" >            
 @endpush
 
@@ -95,11 +95,11 @@
                                             </div>
                                             <div class="radio radio-css radio-inline">
                                                 <input type="radio" name="status_registrasi" id="statusRegistrasi2"  value="perpanjangan" />
-                                                <label for="statusRegistrasi2">*Pembaruan</label>
+                                                <label for="statusRegistrasi2">Perpanjangan</label>
                                             </div>
                                             <div class="radio radio-css radio-inline">
                                                 <input type="radio" name="status_registrasi" id="statusRegistrasi3"  value="pengembangan" />
-                                                <label for="statusRegistrasi3">*Perubahan</label>                                                
+                                                <label for="statusRegistrasi3">Perubahan</label>                                                
                                             </div>
                                         </div>
                                     </div>
@@ -347,21 +347,43 @@
                                 </div>
 
                                 <div class="wrapper col-lg-12">
-                                <div class="row">
-                                    <label for="kelompok" class="col-lg-4 col-form-label">Jenis Produk</label>
+                                    <div class="row">
+                                        <label for="kelompok" class="col-lg-4 col-form-label">Jenis Produk</label>
 
-                                    <div class="col-lg-8">
-                                        <select id="id_kelompok_produk" name="id_kelompok_produk" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
-                                            <option value="">--Pilih Jenis Produk--</option>
-                                                @if(isset($kelompokProduk))
-                                                    @foreach($kelompokProduk as $index => $value)
-                                                        <option value="{{$value['id']}}"> - {{$value['kelompok_produk']}}</i></option>
-                                                        @endforeach
-                                                @endif
-                                        </select>                                
+                                        <div class="col-lg-8">
+                                            <select id="id_kelompok_produk" name="id_kelompok_produk" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
+                                                <option value="">--Pilih Jenis Produk--</option>
+                                                    @if(isset($kelompokProduk))
+                                                        @foreach($kelompokProduk as $index => $value)
+                                                            <option value="{{$value['id']}}"> - {{$value['kelompok_produk']}}</i></option>
+                                                            @endforeach
+                                                    @endif
+                                            </select>                                
+                                        </div>   
+                                    </div>
+                                </div>
+
+                                <div class="wrapper col-lg-12">
+                                    <div class="row">
+                                        <label for="kelompok" class="col-lg-4 col-form-label">Rincian Jenis Produk</label>
+
+                                        <div class="col-lg-8">
+                                            <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
+                                                <option value="">--Pilih Jenis Produk--</option>                                                    
+                                            </select>                                
+                                        </div>   
+                                    </div>
+                                </div>
+                                {{-- <div class="wrapper col-lg-12" id="label-kot">
+                                    <div class="row">
+                                        <label class="col-lg-4 col-form-label">Kota/Kabupaten</label>
+                                        <div class="col-lg-8">
+                                            <select id="kotkantor" name="kota_kantor_domestik" class="selectpicker form-control" data-size="100" data-live-search="true" data-style="btn-white">
+                                                <option value="">==Pilih Kota/Kabupaten==</option>                                                                        
+                                            </select>
+                                        </div> 
                                     </div>   
-                                </div>
-                                </div>
+                                </div>   --}}
 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
@@ -445,7 +467,7 @@
                                         <label class="col-lg-4 col-form-label">Kota/Kabupaten</label>
                                         <div class="col-lg-8">
                                             <select id="kotkantor" name="kota_kantor_domestik" class="selectpicker form-control" data-size="100" data-live-search="true" data-style="btn-white">
-                                                <option value="">==Pilih Kota/Kabupaten==</option>                                                                        
+                                                <option value="">==Pilih Kota/Kabupaten==</option>
                                             </select>
                                         </div> 
                                     </div>   
@@ -1247,7 +1269,7 @@
     <script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/js/demo/form-plugins.demo.js')}}"></script>
-    <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>    
     <script>
         var date = new Date();
         var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -1256,7 +1278,7 @@
         var y = date.getFullYear();
         if(d < 10 ){ d = '0'+ d;}
         if(month < 10){ month = '0'+ month; }
-        var todayFormat = y+"-"+month+"-"+d ;
+        var todayFormat = y+"-"+month+"-"+d ;        
 
         $('#tgl_registrasi').val(todayFormat);
         $('#sh_berlaku').datepicker({
@@ -1287,7 +1309,7 @@
                         $('#kotkantor').selectpicker('refresh');
                     }                   
                 })
-            });
+            });            
 
             $('#prov_pabrik').on('change', function () {
                 $.ajax({
@@ -1302,6 +1324,21 @@
                         })
                         $('#kotpabrik').selectpicker('refresh');
                     }
+                })
+            });
+
+            $('#id_kelompok_produk').on('change', function () {                                        
+                $.ajax({                    
+                    url: '{{ route('dependent_dropdown_rincian.store') }}',
+                    method: 'POST',
+                    data: {id: $(this).val()},
+                    success: function (response) {                                                
+                        $('#id_rincian_kelompok_produk').empty();                               
+                        $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
+                            $("#id_rincian_kelompok_produk").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi))
+                        })
+                        $('#id_rincian_kelompok_produk').selectpicker('refresh');
+                    }                   
                 })
             });
         }); 
@@ -1328,8 +1365,7 @@
                         data: {id: $id = document.getElementById("prov_kantor").value},
                         success: function (response) {
                             $('#kotkantor').empty();                               
-                            $.each(response, function (nama_kabupaten, id) {                                                                    
-                                // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                            $.each(response, function (nama_kabupaten, id) {                                                                                                    
                                 $("#kotkantor").append(new Option(nama_kabupaten, id))
                             })
                             $('#kotkantor').selectpicker('refresh');
@@ -1349,7 +1385,7 @@
                             document.getElementById("kotpabrik").value = document.getElementById("kotkantor").value;
                             $('#kotpabrik').selectpicker('refresh');                            
                         }                        
-                    });
+                    });                                            
 
         function autofill(){
             if(document.getElementById("autofill_alamat").checked){                                              
@@ -1677,7 +1713,7 @@
         function addpenyelia(){
             jumlah+=1;
             // var penyelia = '<div> <label class="col-4 col-form-label">Nama</label><div class="col-lg-4"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-4"><div><input class="form-control" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-4"><div><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-4"><div><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div></div><label class="col-4 col-form-label">No Kontrak</label><div class="col-lg-4"><div><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontrak"></div></div><div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div><hr></div>';
-            var penyelia = '<div> <div class="wrapper row"><div class="wrapper row"><label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><input class="form-control ktp" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-8"><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-8"><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div><label class="col-4 col-form-label">No Kontak</label><div class="col-lg-8"><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontak"></div></div> <div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div></div>';            
+            var penyelia = '<div> <div class="wrapper row"><div class="wrapper row"><label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><input class="form-control" id="dph1" name="nama_dph[]" type="text" placeholder="Nama"></div><label class="col-4 col-form-label">No KTP</label><div class="col-lg-8"><input class="form-control ktp" id="dph2" name="ktp_dph[]" type="text" placeholder="No KTP"></div><label class="col-4 col-form-label">No Sertifikat</label><div class="col-lg-8"><input class="form-control" id="dph3" name="sertif_dph[]" type="text"  placeholder="No Sertifikasi" ></div><label class="col-4 col-form-label">No dan Tanggal SK</label><div class="col-lg-8"><input class="form-control" id="dph4" name="no_tglsk_dph[]" type="text" placeholder="No dan Tanggal SK" ></div><label class="col-4 col-form-label">No Kontak</label><div class="col-lg-8"><input class="form-control" id="dph5" name="no_kontrak_dph[]" type="text" placeholder="No Kontak"></div></div> <div class="col-lg-12"><div><a id="hapus_penyelia" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus</a></div></div></div>';
             $('.penyelia').append(penyelia);            
         }
 
@@ -1776,7 +1812,7 @@
         detaildatalokasilain.style.display = 'none';
         var nolainnya=1;
 
-        $('#tam_detail_datalokasi').on('click', function(){                                                
+        $('#tam_detail_datalokasi').on('click', function(){
             lokasilainnya = $('#nama_lokasi_lainnya').val();
             alamatlainnya = $('#alamat_lainnya').val();
             kotalainnya = $('#kota_lainnya').val();
@@ -1791,7 +1827,7 @@
             adddatalokasilain();       
         });
 
-        function adddatalokasilain(){            
+        function adddatalokasilain(){           
             // var data_lain = '<div>  
             // <div class="wrapper row"><div class="wrapper row">
             // <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Lokasi</label><div class="col-lg-8"><input class="form-control" id="nama_lokasi_lainnya" name="nama_lokasi_lainnya[]" type="text" label="Nama Lokasi:" placeholder="Nama Lokasi:"></div></div></div>            
@@ -1808,7 +1844,7 @@
             jumlahsertiflainnya+=1;            
         }
 
-        $(document).on('click','#hapus_datalain', function(){                        
+        $(document).on('click','#hapus_datalain', function(){
             $(this).parent().parent().parent().remove();
             jumlahsertiflainnya-=1;
             nolainnya-=1;

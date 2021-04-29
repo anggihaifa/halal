@@ -830,11 +830,11 @@
 							</div>
 							<div class="col-md-12 offset-md-5 mb-5">
 								@if(Auth::user()->usergroup_id == 1 ||  Auth::user()->usergroup_id == 3)
-									<button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>									
+								<a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
 									<button type="submit" class="btn bnt-sm btn-primary">Download Data</button>
 									{{-- <a href="{{route('exportdata')}}" class="btn bnt-sm btn-primary">Download Data</a> --}}
 								@else
-									@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
+								<a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
 									<button type="submit" class="btn bnt-sm btn-primary">Download Data</button>
 								@endif	
 							</div>

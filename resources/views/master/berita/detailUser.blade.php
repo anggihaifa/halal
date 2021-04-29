@@ -25,7 +25,7 @@
                         <label class="col-12 col-form-label"><p>@php echo $berita->created_at @endphp</p></label>
                     </div>                        
                     <div class="col-lg-12" class="center">
-                        <label class="col-12 col-form-label">@php echo $berita->isi_berita @endphp</label>
+                        <label class="col-12 col-form-label"><p>@php echo $berita->isi_berita @endphp</p></label>
                     </div>
             </div>
             <div class="panel-body panel-form col-lg-4">

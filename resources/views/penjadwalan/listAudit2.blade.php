@@ -289,7 +289,7 @@
 
                           
                             var audit_plan = `<a class="dropdown-item" href="{{url('audit_plan')}}/`+full.id_registrasi+`">Perencanaan Audit (Audit Plan)</a>`;
-                            var form_report = `<a class="dropdown-item"  href="">Form Laporan</a>`;
+                            var form_report = `<a class="dropdown-item"  href="{{url('laporan_audit')}}/`+full.id_registrasi+`">Form Laporan</a>`;
 
                             return `<div class="btn-group m-r-5 show">
                                     <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>

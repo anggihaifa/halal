@@ -37,4 +37,10 @@ class User extends Model
             'usergroup_id'
         );
     }
+
+    public function hasRole($role){
+
+        return User::where('role', $role)->get();
+    }
+    
 }

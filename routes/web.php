@@ -28,78 +28,90 @@ Route::get('logout','Auth\LoginController@logout')->name("logout");
 
 
 //registrasi
-Route::resource('registrasiHalal','RegistrasiController');
-Route::get('registrasiHalal_datatable','RegistrasiController@registrasiDatatable')->name('registrasi.datatable');
-Route::get('detail_registrasi/{id}','RegistrasiController@detailRegistrasi');
-Route::get('activate_registrasi/{token}','RegistrasiController@activeRegistrasi');
+Route::resource('registrasiHalal','RegistrasiController')->middleware('role:1,2,3');
+Route::get('registrasiHalal_datatable','RegistrasiController@registrasiDatatable')->name('registrasi.datatable')->middleware('role:1,2,3');
+Route::get('detail_registrasi/{id}','RegistrasiController@detailRegistrasi')->middleware('role:1,2,3');
+Route::get('activate_registrasi/{token}','RegistrasiController@activeRegistrasi')->middleware('role:1,2,3');
 
 //list registrasi pelanggan
-Route::get('list_registrasi_pelanggan','RegistrasiController@listRegistrasiPelanggan')->name('listregistrasipelanggan');
-Route::get('data_registrasi_pelanggan','RegistrasiController@dataRegistrasiPelanggan')->name('dataregistrasipelanggan');
+Route::get('list_registrasi_pelanggan','RegistrasiController@listRegistrasiPelanggan')->name('listregistrasipelanggan')->middleware('role:1,3');
+Route::get('data_registrasi_pelanggan','RegistrasiController@dataRegistrasiPelanggan')->name('dataregistrasipelanggan')->middleware('role:1,3');
 //list registrasi pelanggan aktif
-Route::get('list_registrasi_pelanggan_aktif','RegistrasiController@listRegistrasiPelangganAktif')->name('listregistrasipelangganaktif');
-Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistrasiPelangganAktif')->name('dataregistrasipelangganaktif');
+Route::get('list_registrasi_pelanggan_aktif','RegistrasiController@listRegistrasiPelangganAktif')->name('listregistrasipelangganaktif')->middleware('role:1,3');
+Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistrasiPelangganAktif')->name('dataregistrasipelangganaktif')->middleware('role:1,3');
 
 //phpword
-Route::post('download_data','PHPWordController@download')->name('downloaddata');
-Route::post('download_auditplan','PHPWordController@downloadAuditPlan')->name('downloadauditplan');
-Route::post('download_auditplan_fix','PHPWordController@downloadAuditPlanFix')->name('downloadauditplanfix');
+Route::post('download_data','PHPWordController@download')->name('downloaddata')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('download_auditplan','PHPWordController@downloadAuditPlan')->name('downloadauditplan')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('upload_auditplan','PHPWordController@uploadAuditPlan')->name('uploadauditplan')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('download_auditplan_fix','PHPWordController@downloadAuditPlanFix')->name('downloadauditplanfix')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('download_laporan_audit_sjph','PHPWordController@downloadLaporanAuditSJPH')->name('downloadlaporanauditsjph')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('download_laporan_audit_bahan','PHPWordController@downloadLaporanAuditBahan')->name('downloadlaporanauditbahan')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('download_laporan_audit_sjph_fix','PHPWordController@downloadLaporanAuditSJPHFix')->name('downloadlaporanauditsjphfix')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('download_laporan_audit_bahan_fix','PHPWordController@downloadLaporanAuditBahanFix')->name('downloadlaporanauditbahanfix')->middleware('role:1,3,6,9,10,11,12,13');
 
 //penjadwalan
-Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin');
-Route::get('list_audit1','PenjadwalanController@listAudit1')->name('listaudit1');
-Route::get('list_audit2','PenjadwalanController@listAudit2')->name('listaudit2');
-Route::get('list_rapat','PenjadwalanController@listRapat')->name('listrapat');
-Route::get('list_tinjauan','PenjadwalanController@listTinjauan')->name('listtinjauan');
+Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin')->middleware('role:1,3');
+Route::get('list_audit1','PenjadwalanController@listAudit1')->name('listaudit1')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('list_audit2','PenjadwalanController@listAudit2')->name('listaudit2')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('list_rapat','PenjadwalanController@listRapat')->name('listrapat')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('list_tinjauan','PenjadwalanController@listTinjauan')->name('listtinjauan')->middleware('role:1,3,6,9,10,11,12,13');
 
-Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
-Route::get('data_audit1','PenjadwalanController@dataAudit1')->name('dataaudit1');
-Route::get('data_audit2','PenjadwalanController@dataAudit2')->name('dataaudit2');
-Route::get('data_rapat','PenjadwalanController@dataRapat')->name('datarapat');
-Route::get('data_tinjauan','PenjadwalanController@dataTinjauan')->name('datatinjauan');
+Route::get('list_log','PenjadwalanController@listLog')->name('listlog')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('data_log','PenjadwalanController@dataLog')->name('datalog')->middleware('role:1,3,6,9,10,11,12,13');
 
-Route::get('audit_plan/{id}','PenjadwalanController@auditPlan')->name('auditplan');
+Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin')->middleware('role:1,3,9,11,6');
+Route::get('data_audit1','PenjadwalanController@dataAudit1')->name('dataaudit1')->middleware('role:1,3,6,9,11');
+Route::get('data_audit2','PenjadwalanController@dataAudit2')->name('dataaudit2')->middleware('role:1,3,6,9,11');
+Route::get('data_rapat','PenjadwalanController@dataRapat')->name('datarapat')->middleware('role:1,3,6,9,11');
+Route::get('data_tinjauan','PenjadwalanController@dataTinjauan')->name('datatinjauan')->middleware('role:1,3,6,9,11');
 
-Route::post('detail_auditor', 'PenjadwalanController@detail')->name('detail_auditor.detail');
-Route::post('dropdown1', 'PenjadwalanController@dataAuditor1')->name('dropdown1.dataauditor');
-Route::post('jenis_akomodasi', 'PenjadwalanController@jenisAkomodasi')->name('jenis_akomodasi.data');
-Route::post('opsi_akomodasi', 'PenjadwalanController@opsiAkomodasi')->name('opsi_akomodasi.data');
-Route::post('dropdown2', 'PenjadwalanController@dataAuditor2')->name('dropdown2.dataauditor');
-Route::post('auditor_dropdown', 'PenjadwalanController@dataRapatAuditor')->name('auditor_dropdown.datarapatauditor');
-Route::post('komite_dropdown', 'PenjadwalanController@dataKomite')->name('komite_dropdown.datakomite');
-Route::put('audit1', 'PenjadwalanController@audit1')->name('audit1');
-Route::put('audit2', 'PenjadwalanController@audit2')->name('audit2');
-Route::put('rapat', 'PenjadwalanController@rapat')->name('rapat');
-Route::put('tinjauan', 'PenjadwalanController@tinjauan')->name('tinjauan');
+Route::get('audit_plan/{id}','PenjadwalanController@auditPlan')->name('auditplan')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('laporan_audit/{id}','PenjadwalanController@laporanAudit')->name('laporanaudit')->middleware('role:1,3,6,9,10,11,12,13');
 
-Route::get('penjadwalan_viewer/{id_regis}/{hpas}','PenjadwalanController@dokumenView')->name('penjadwalan.viewer');
+Route::post('detail_auditor', 'PenjadwalanController@detail')->name('detail_auditor.detail')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('dropdown1', 'PenjadwalanController@dataAuditor1')->name('dropdown1.dataauditor')->middleware('role:1,3,6,9,11');
+Route::post('jenis_akomodasi', 'PenjadwalanController@jenisAkomodasi')->name('jenis_akomodasi.data')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('opsi_akomodasi', 'PenjadwalanController@opsiAkomodasi')->name('opsi_akomodasi.data')->middleware('role:1,3,6,9,10,11,12,13');
+Route::post('dropdown2', 'PenjadwalanController@dataAuditor2')->name('dropdown2.dataauditor')->middleware('role:1,3,6,9,11');
+Route::post('auditor_dropdown', 'PenjadwalanController@dataRapatAuditor')->name('auditor_dropdown.datarapatauditor')->middleware('role:1,3,6,9,11');
+Route::post('komite_dropdown', 'PenjadwalanController@dataKomite')->name('komite_dropdown.datakomite')->middleware('role:1,3,6,9,11');
+Route::put('audit1', 'PenjadwalanController@audit1')->name('audit1')->middleware('role:1,3,6,9,11');
+Route::put('audit2', 'PenjadwalanController@audit2')->name('audit2')->middleware('role:1,3,6,9,11');
+Route::put('rapat', 'PenjadwalanController@rapat')->name('rapat')->middleware('role:1,3,6,9,11');
+Route::put('tinjauan', 'PenjadwalanController@tinjauan')->name('tinjauan')->middleware('role:1,3,6,9,11');
 
-Route::get('penjadwalan_viewer_doc/{id_user}/{id_regis}/{hpas}','PenjadwalanController@view')->name('penjadwalan.view');
+Route::get('penjadwalan_viewer/{id_regis}/{hpas}','PenjadwalanController@dokumenView')->name('penjadwalan.viewer')->middleware('role:1,3,6,9,10,11,12,13');
+
+Route::get('penjadwalan_viewer_doc/{id_user}/{id_regis}/{hpas}','PenjadwalanController@view')->name('penjadwalan.view')->middleware('role:1,3,6,9,10,11,12,13');
 
 
 ////////////////End OF Penjadwalan
 
-Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran');
+Route::get('update_status_pembayaran/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaran')->middleware('role:1,3,5,7,9');
 
-Route::put('update_status_lebih/{id}','RegistrasiController@updateStatusLebih')->name('registrasi.uploadlebih');
+Route::put('update_status_lebih/{id}','RegistrasiController@updateStatusLebih')->name('registrasi.uploadlebih')->middleware('role:1,3,5,7,9');
 
-Route::put('update_status_kurang/{id}','RegistrasiController@updateStatusKurang')->name('registrasi.uploadkurang');
+Route::put('update_status_kurang/{id}','RegistrasiController@updateStatusKurang')->name('registrasi.uploadkurang')->middleware('role:1,3,5,7,9');
 
-Route::get('update_status_pembayaran_tahap2/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaranTahap2');
+Route::get('update_status_pembayaran_tahap2/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaranTahap2')->middleware('role:1,3,5,7,9');
 
-Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad');
-Route::get('update_status_pelunasan/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPelunasan');
+Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad')->middleware('role:1,3,5,7,9');
+Route::get('update_status_pelunasan/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPelunasan')->middleware('role:1,3,5,7,9');
 //
-Route::get('update_status_akad_review/{id}/{id_user}/{status}/{id_akad}/{catatan}','ReviewerController@updateStatusAkad');
-Route::get('konfirmasi_akad_reviewer/{id}/{id_akad}','ReviewerController@konfirmasiAkadReviewer');
+Route::get('update_status_akad_review/{id}/{id_user}/{status}/{id_akad}/{catatan}','ReviewerController@updateStatusAkad')->middleware('role:1,3,5,7,9');
 
-Route::get('update_status_akad_approve/{id}/{id_user}/{status}/{id_akad}/{catatan}','ReviewerController@updateStatusAkad2');
-Route::get('konfirmasi_akad_approver/{id}/{id_akad}','ReviewerController@konfirmasiAkadReviewer2');
+Route::put('update_cabang','RegistrasiController@updateCabang')->name('registrasi.updatecabang')->middleware('role:1,3');
+
+Route::get('konfirmasi_akad_reviewer/{id}/{id_akad}','ReviewerController@konfirmasiAkadReviewer')->middleware('role:1,3');
+
+Route::get('update_status_akad_approve/{id}/{id_user}/{status}/{id_akad}/{catatan}','ReviewerController@updateStatusAkad2')->middleware('role:1,3,9');
+Route::get('konfirmasi_akad_approver/{id}/{id_akad}','ReviewerController@konfirmasiAkadReviewer2')->middleware('role:1,3,5,7,9');
 //
 
-Route::get('update_status_registrasi/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusRegistrasi');
+Route::get('update_status_registrasi/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusRegistrasi')->middleware('role:1,3');
 
-Route::get('data_registrasi_pelanggan_bayar','RegistrasiController@dataRegistrasiPelangganBayar')->name('dataregistrasipelangganbayar');
+//Route::get('data_registrasi_pelanggan_bayar','RegistrasiController@dataRegistrasiPelangganBayar')->name('dataregistrasipelangganbayar');
 
 
 //view email design
@@ -107,86 +119,86 @@ Route::get('view_email','RegistrasiController@viewEmail')->name('view.email');
 
 
 //list konfirmasi pembayaran
-Route::get('list_pembayaran_registrasi','RegistrasiController@listPembayaranRegistrasi')->name('listpembayaranregistrasi');
-Route::get('data_pembayaran_registrasi','RegistrasiController@dataPembayaranRegistrasi')->name('datapembayaranregistrasi');
-Route::get('konfirmasi_pembayaran_registrasi/{id}','RegistrasiController@konfirmasiPembayaranRegistrasi');
+Route::get('list_pembayaran_registrasi','RegistrasiController@listPembayaranRegistrasi')->name('listpembayaranregistrasi')->middleware('role:1,3,5,7,9');
+Route::get('data_pembayaran_registrasi','RegistrasiController@dataPembayaranRegistrasi')->name('datapembayaranregistrasi')->middleware('role:1,3,5,7,9');
+Route::get('konfirmasi_pembayaran_registrasi/{id}','RegistrasiController@konfirmasiPembayaranRegistrasi')->middleware('role:1,3');
 
 //pembayaran registrasi
-Route::get('pembayaran_registrasi/{id}','RegistrasiController@pembayaranRegistrasi')->name('registrasi.pembayaranRegistrasi');
-Route::put('konfirmasi_pembayaran/{id}','RegistrasiController@konfirmasiPembayaranUser')->name('registrasi.konfirmasipembayaran');
+Route::get('pembayaran_registrasi/{id}','RegistrasiController@pembayaranRegistrasi')->name('registrasi.pembayaranRegistrasi')->middleware('role:1,2,3,5,7,9');
+Route::put('konfirmasi_pembayaran/{id}','RegistrasiController@konfirmasiPembayaranUser')->name('registrasi.konfirmasipembayaran')->middleware('role:1,2,3,5,7,9');
 Route::get('download','RegistrasiController@download');
 
 
 //pembayaran tahap 2
-Route::get('list_pembayaran_tahap2','RegistrasiController@listPembayaranTahap2')->name('listpembayarantahap2');
-Route::get('data_pembayaran_Tahap2','RegistrasiController@dataPembayaranTahap2')->name('datapembayarantahap2');
-Route::get('konfirmasi_pembayaran_tahap2/{id}','RegistrasiController@konfirmasiPembayaranTahap2');
+Route::get('list_pembayaran_tahap2','RegistrasiController@listPembayaranTahap2')->name('listpembayarantahap2')->middleware('role:1,3,5,7,9');
+Route::get('data_pembayaran_Tahap2','RegistrasiController@dataPembayaranTahap2')->name('datapembayarantahap2')->middleware('role:1,3,5,7,9');
+Route::get('konfirmasi_pembayaran_tahap2/{id}','RegistrasiController@konfirmasiPembayaranTahap2')->middleware('role:1,3,5,7,9');
 
 
 //pembayaran tahap 2
-Route::get('pembayaran_tahap2/{id}','RegistrasiController@pembayaranTahap2')->name('registrasi.pembayarantahap2');
-Route::put('konfirmasi_pembayaran_user_tahap2/{id}','RegistrasiController@konfirmasiPembayaranUserTahap2')->name('registrasi.konfirmasipembayaranusertahap2');
+Route::get('pembayaran_tahap2/{id}','RegistrasiController@pembayaranTahap2')->name('registrasi.pembayarantahap2')->middleware('role:1,2,3,5,7,9');
+Route::put('konfirmasi_pembayaran_user_tahap2/{id}','RegistrasiController@konfirmasiPembayaranUserTahap2')->name('registrasi.konfirmasipembayaranusertahap2')->middleware('role:1,2,3,5,7,9');
 
 //report
-Route::get('report_audit/{id}','RegistrasiController@reportAudit')->name('registrasi.reportaudit');
-Route::get('report_berita_acara/{id}','RegistrasiController@reportBeritaAcara')->name('registrasi.reportberitaacara');
+//Route::get('report_audit/{id}','RegistrasiController@reportAudit')->name('registrasi.reportaudit');
+//Route::get('report_berita_acara/{id}','RegistrasiController@reportBeritaAcara')->name('registrasi.reportberitaacara');
 // Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser');
 
 //list konfirmasi pelunasan
-Route::get('list_pelunasan','RegistrasiController@listPelunasan')->name('listpelunasan');
-Route::get('data_pelunasan','RegistrasiController@dataPelunasan')->name('datapelunasan');
-Route::put('konfirmasi_pelunasan_admin/{id}','RegistrasiController@konfirmasiPelunasanInvoiceAdmin')->name('registrasi.konfirmasiinvoice');;
+Route::get('list_pelunasan','RegistrasiController@listPelunasan')->name('listpelunasan')->middleware('role:1,3,5,7,9');
+Route::get('data_pelunasan','RegistrasiController@dataPelunasan')->name('datapelunasan')->middleware('role:1,3,5,7,9');
+Route::put('konfirmasi_pelunasan_admin/{id}','RegistrasiController@konfirmasiPelunasanInvoiceAdmin')->name('registrasi.konfirmasiinvoice')->middleware('role:1,3,5,7,9');
 
 //pelunasan
-Route::get('pelunasan/{id}','RegistrasiController@pelunasan')->name('registrasi.pelunasan');
-Route::put('konfirmasi_pelunasan_user/{id}','RegistrasiController@konfirmasiPelunasanUser')->name('registrasi.konfirmasipelunasanuser');
+Route::get('pelunasan/{id}','RegistrasiController@pelunasan')->name('registrasi.pelunasan')->middleware('role:1,2,3,5,7,9');
+Route::put('konfirmasi_pelunasan_user/{id}','RegistrasiController@konfirmasiPelunasanUser')->name('registrasi.konfirmasipelunasanuser')->middleware('role:1,2,3,5,7,9');
 
-Route::get('upload_invoice/{id}','RegistrasiController@uploadInvoice')->name('registrasi.uploadinvoice');
+Route::get('upload_invoice/{id}','RegistrasiController@uploadInvoice')->name('registrasi.uploadinvoice')->middleware('role:1,3,5,7,9');
 
-Route::get('lebih/{id}/{tahap}','RegistrasiController@lebih')->name('registrasi.lebih');
-Route::get('kurang/{id}/{tahap}','RegistrasiController@kurang')->name('registrasi.kurang');
+//Route::get('lebih/{id}/{tahap}','RegistrasiController@lebih')->name('registrasi.lebih')->middleware('role:1,3,5,7,9');
+//Route::get('kurang/{id}/{tahap}','RegistrasiController@kurang')->name('registrasi.kurang')->middleware('role:1,3,5,7,9');
 
 
-Route::put('upload_file_invoice/{id}','RegistrasiController@uploadFileInvoice')->name('registrasi.uploadfileinvoice');
+Route::put('upload_file_invoice/{id}','RegistrasiController@uploadFileInvoice')->name('registrasi.uploadfileinvoice')->middleware('role:1,3,5,7,9');
 //Route::get('download','RegistrasiController@download');
 //Route::get('unduh_bukti_bayar/{id}','RegistrasiController@unduhBuktiBayar');
 
 
 //Akad
 //reviewer dan approver
-Route::get('list_akad_reviewer','ReviewerController@listAkadReviewer')->name('listakadreviewer');
-Route::get('data_akad_reviewer','ReviewerController@dataAkadReviewer')->name('dataakadreviewer');
-Route::get('list_penjadwalan_reviewer','ReviewerController@listPenjadwalanReviewer')->name('listpenjadwalanreviewer');
-Route::get('list_pelunasan_reviewer','ReviewerController@listPelunasanReviewer')->name('listpelunasanreviewer');
+Route::get('list_akad_reviewer','ReviewerController@listAkadReviewer')->name('listakadreviewer')->middleware('role:1,3,5,7,9');
+Route::get('data_akad_reviewer','ReviewerController@dataAkadReviewer')->name('dataakadreviewer')->middleware('role:1,3,5,7,9');
+Route::get('list_penjadwalan_reviewer','ReviewerController@listPenjadwalanReviewer')->name('listpenjadwalanreviewer')->middleware('role:1,3,6,9');
+Route::get('list_pelunasan_reviewer','ReviewerController@listPelunasanReviewer')->name('listpelunasanreviewer')->middleware('role:1,3,5,7,9');
 
-Route::get('list_akad_approver','ReviewerController@listAkadApprover')->name('listakadapprover');
-Route::get('data_akad_approver','ReviewerController@dataAkadApprover')->name('dataakadapprover');
+Route::get('list_akad_approver','ReviewerController@listAkadApprover')->name('listakadapprover')->middleware('role:1,3,9');
+Route::get('data_akad_approver','ReviewerController@dataAkadApprover')->name('dataakadapprover')->middleware('role:1,3,9');
 
 //admin
-Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listakadadmin');
-Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin');
-Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin');
-Route::put('upload_file_akad_admin/{id}','RegistrasiController@uploadFileAkadAdmin')->name('registrasi.uploadfileakadadmin');
-Route::get('konfirmasi_akad_admin/{id}/{status}','RegistrasiController@konfirmasiAkadAdmin');
+Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listakadadmin')->middleware('role:1,3,5,7,9');
+Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin')->middleware('role:1,3,5,7,9');
+Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin')->middleware('role:1,3,5,7,9');
+Route::put('upload_file_akad_admin/{id}','RegistrasiController@uploadFileAkadAdmin')->name('registrasi.uploadfileakadadmin')->middleware('role:1,3,5,7,9');
+Route::get('konfirmasi_akad_admin/{id}/{status}','RegistrasiController@konfirmasiAkadAdmin')->middleware('role:1,3,5,7,9');
 
-Route::put('acc_audit_admin/{id}','RegistrasiController@accAuditAdmin')->name('registrasi.accauditadmin');
-Route::put('acc_berita_acara_admin/{id}','RegistrasiController@accBeritaAcaraAdmin')->name('registrasi.accberitaacaraadmin');
+//Route::put('acc_audit_admin/{id}','RegistrasiController@accAuditAdmin')->name('registrasi.accauditadmin');
+//Route::put('acc_berita_acara_admin/{id}','RegistrasiController@accBeritaAcaraAdmin')->name('registrasi.accberitaacaraadmin');
 
-Route::get('upload_report_admin/{id}','RegistrasiController@uploadReportAdmin')->name('registrasi.uploadreportadmin');
-Route::put('upload_file_report_admin/{id}','RegistrasiController@uploadFileReportAdmin')->name('registrasi.uploadfilereportadmin');
-Route::get('upload_berita_acara_admin/{id}','RegistrasiController@uploadBeritaAcaraAdmin')->name('registrasi.uploadberitaacaraadmin');
-Route::put('upload_file_berita_acara_admin/{id}','RegistrasiController@uploadFileBeritaAcaraAdmin')->name('registrasi.uploadfileberitaacaraadmin');
-Route::get('kirim_ke_mui/{id}','RegistrasiController@kirimKeMUI')->name('registrasi.kirimkemui');
-Route::put('upload_file_mui/{id}','RegistrasiController@uploadFileMUI')->name('registrasi.uploadfilemui');
+Route::get('upload_report_admin/{id}','RegistrasiController@uploadReportAdmin')->name('registrasi.uploadreportadmin')->middleware('role:1,3');
+Route::put('upload_file_report_admin/{id}','RegistrasiController@uploadFileReportAdmin')->name('registrasi.uploadfilereportadmin')->middleware('role:1,3');
+Route::get('upload_berita_acara_admin/{id}','RegistrasiController@uploadBeritaAcaraAdmin')->name('registrasi.uploadberitaacaraadmin')->middleware('role:1,3');
+Route::put('upload_file_berita_acara_admin/{id}','RegistrasiController@uploadFileBeritaAcaraAdmin')->name('registrasi.uploadfileberitaacaraadmin')->middleware('role:1,3');
+//Route::get('kirim_ke_mui/{id}','RegistrasiController@kirimKeMUI')->name('registrasi.kirimkemui');
+//Route::put('upload_file_mui/{id}','RegistrasiController@uploadFileMUI')->name('registrasi.uploadfilemui');
 
-Route::get('list_berita_acara','RegistrasiController@listBeritaAcara')->name('listberitaacara');
-Route::get('data_berita_acara_admin','RegistrasiController@dataBeritaAcaraAdmin')->name('databeritaacaraadmin');
+Route::get('list_berita_acara','RegistrasiController@listBeritaAcara')->name('listberitaacara')->middleware('role:1,3');
+Route::get('data_berita_acara_admin','RegistrasiController@dataBeritaAcaraAdmin')->name('databeritaacaraadmin')->middleware('role:1,3');
 // Route::get('list_berita_acara2','RegistrasiController@listBeritaAcara2')->name('listberitaacara2');
 // Route::get('data_berita_acara_admin2','RegistrasiController@dataBeritaAcaraAdmin2')->name('databeritaacaraadmin2');
 
 //user
-Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser');
-Route::put('upload_file_akad_user/{id}','RegistrasiController@uploadFileAkadUser')->name('registrasi.uploadfileakaduser');
+Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser')->middleware('role:1,2,3,5,7,9');
+Route::put('upload_file_akad_user/{id}','RegistrasiController@uploadFileAkadUser')->name('registrasi.uploadfileakaduser')->middleware('role:1,2,3,5,7,9');
 
 
 //akad registrasi
@@ -202,12 +214,12 @@ Route::get('download','RegistrasiController@download');
 
 
 //unggah data sertifikasi - uds
-Route::get('unggahDataSertifikasi','RegistrasiController@unggahDataSertifikasi')->name('registrasi.unggahDataSertifikasi');
-Route::get('list_unggah_data_sertifikasi','RegistrasiController@listUnggahDataSertifikasi')->name('listunggahdatasertifikasi');
-Route::get('get_data_registrasi','RegistrasiController@getDataRegistrasi')->name('getdataregistrasi');
-Route::get('detail_unggah_data_sertifikasi/{id_registrasi}','RegistrasiController@detailUnggahDataSertifikasi')->name('detailunggahdatasertifikasi');
+Route::get('unggahDataSertifikasi','RegistrasiController@unggahDataSertifikasi')->name('registrasi.unggahDataSertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
+//Route::get('list_unggah_data_sertifikasi','RegistrasiController@listUnggahDataSertifikasi')->name('listunggahdatasertifikasi');
+Route::get('get_data_registrasi','RegistrasiController@getDataRegistrasi')->name('getdataregistrasi')->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::get('detail_unggah_data_sertifikasi/{id_registrasi}','RegistrasiController@detailUnggahDataSertifikasi')->name('detailunggahdatasertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
 
-Route::get('detail_unggah_data_sertifikasi_auditor/{id_registrasi}','RegistrasiController@detailUnggahDataSertifikasiAuditor')->name('detailunggahdatasertifikasiauditor');
+Route::get('detail_unggah_data_sertifikasi_auditor/{id_registrasi}','RegistrasiController@detailUnggahDataSertifikasiAuditor')->name('detailunggahdatasertifikasiauditor')->middleware('role:1,2,3,6,9,10,11,12,13');
 
 Route::get('data_fasilitas/{id_registrasi}','RegistrasiController@dataFasilitas');
 Route::get('data_produk/{id_registrasi}','RegistrasiController@dataProduk');
@@ -266,12 +278,13 @@ Route::post('store_produk','RegistrasiController@storeProduk')->name("storeprodu
 Route::get('edit_produk/{id}','RegistrasiController@editProduk')->name('editproduk');
 Route::put('update_produk/{id}','RegistrasiController@updateProduk')->name('updateproduk');
 //dokumen has
-Route::post('store_dokumen_has','RegistrasiController@storeDokumenHas')->name("storedokumenhas");
-Route::get('delete_dokumen_has/{id}','RegistrasiController@deleteDokumenHas')->name('deletedokumenhas');
-Route::get('detail_dokumen_has_pelanggan/{id}','RegistrasiController@detailDokumenHasPelanggan')->name('detaildokumenhas.pelanggan');
-//Route::get('update_status_has/{registrasi}/{id}/{name}/{status}','RegistrasiController@updateStatusHas');
-Route::put('update_status_has/{id}','RegistrasiController@updateStatusHas')->name('updatestatushas');
+Route::post('store_dokumen_has','RegistrasiController@storeDokumenHas')->name("storedokumenhas")->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::get('delete_dokumen_has/{id}','RegistrasiController@deleteDokumenHas')->name('deletedokumenhas')->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::get('detail_dokumen_has_pelanggan/{id}','RegistrasiController@detailDokumenHasPelanggan')->name('detaildokumenhas.pelanggan')->middleware('role:1,2,3,6,9,10,11,12,13');
 
+Route::put('update_status_has/{id}','RegistrasiController@updateStatusHas')->name('updatestatushas')->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::put('update_status_verifikasi/{id}','RegistrasiController@updateStatusVerifikasi')->name('updatestatusverifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::put('store_dokumen_has_admin/{id}','RegistrasiController@storeDokumenHasAdmin')->name("storedokumenhasadmin")->middleware('role:1,2,3,6,9,10,11,12,13');
 
 
 //material
@@ -296,71 +309,82 @@ Route::post('store_kuisioner_has','RegistrasiController@storeKuisionerHas')->nam
 Route::get('delete_kuisioner_has/{id}','RegistrasiController@deleteKuisionerHas')->name('deletekuisionerhas');
 Route::get('detail_kuisioner_pelanggan/{id}','RegistrasiController@detailKuisionerHasPelanggan')->name('detailkuisionerhas.pelanggan');
 
-Route::get('detailRegistrasi','RegistrasiController@detailRegistrasi')->name('registrasi.detailRegistrasi');
-Route::get('pembayaranAkad','RegistrasiController@pembayaranAkad')->name('registrasi.pembayaranAkad');
-Route::get('penjadualanAudit','RegistrasiController@penjadualanAudit')->name('registrasi.penjadualanAudit');
-Route::get('dokumenTravel','RegistrasiController@dokumenTravel')->name('registrasi.dokumenTravel');
+//Route::get('detailRegistrasi','RegistrasiController@detailRegistrasi')->name('registrasi.detailRegistrasi');
+//Route::get('pembayaranAkad','RegistrasiController@pembayaranAkad')->name('registrasi.pembayaranAkad');
+//Route::get('penjadualanAudit','RegistrasiController@penjadualanAudit')->name('registrasi.penjadualanAudit');
+//Route::get('dokumenTravel','RegistrasiController@dokumenTravel')->name('registrasi.dokumenTravel');
 
-Route::resource('dokumen','DokumenController');
-Route::get('dokumen_user','DokumenController@indexUser')->name('dokumen.indexuser');
-Route::get('dokumen_pelanggan','DokumenController@indexpelanggan')->name('dokumen.indexpelanggan');
+Route::resource('dokumen','DokumenController')->middleware('role:1,2,3,6,9,10,11,12,13');;
+Route::get('dokumen_user','DokumenController@indexUser')->name('dokumen.indexuser')->middleware('role:1,2,3');
+Route::get('dokumen_pelanggan','DokumenController@indexpelanggan')->name('dokumen.indexpelanggan')->middleware('role:1,2,3');
 Route::get('dokumen_view/{id}','DokumenController@dokumenView')->name('dokumen.view');
 Route::get('dokumen_datatable','DokumenController@datatable')->name('dokumen.datatable');
-Route::get('dokumen_datatable_pelanggan','DokumenController@datatablePelanggan')->name('dokumen.datatable_pelanggan');
-Route::get('dokumen_datatable_user','DokumenController@datatableUser')->name('dokumen.datatable_user');
+Route::get('dokumen_datatable_pelanggan','DokumenController@datatablePelanggan')->name('dokumen.datatable_pelanggan')->middleware('role:1,2,3');
+Route::get('dokumen_datatable_user','DokumenController@datatableUser')->name('dokumen.datatable_user')->middleware('role:1,3,4,5,6,7,8,9,10,11,12,13');
 //master
 Route::prefix('master')->group(function (){
 
-    Route::resource('jenis_registrasi','Master\JenisRegistrasiController');
-    Route::get('jenis_registrasi_datatable','Master\JenisRegistrasiController@datatable')->name('master.jenisregistrasi.datatable');
+    Route::resource('detailpelaksana','Master\PelaksanaController')->middleware('role:1,3,6,9,10,11,12,13');
+    Route::get('detailpelaksana_datatable','Master\PelaksanaController@datatable')->name('master.detailpelaksana.datatable')->middleware('role:1,3,6,9,10,11,12,13');
+
+    Route::resource('jenis_registrasi','Master\JenisRegistrasiController')->middleware('role:1,3,6,9,10,11,12,13');
+    Route::get('jenis_registrasi_datatable','Master\JenisRegistrasiController@datatable')->name('master.jenisregistrasi.datatable')->middleware('role:1,3,6,9');
     
-    Route::resource('kelompok_produk','Master\KelompokProdukController');
-    Route::get('kelompok_produk_datatable','Master\KelompokProdukController@datatable')->name('master.kelompokproduk.datatable');
+    Route::resource('kelompok_produk','Master\KelompokProdukController')->middleware('role:1,3,6,9');
+    Route::get('kelompok_produk_datatable','Master\KelompokProdukController@datatable')->name('master.kelompokproduk.datatable')->middleware('role:1,3,6,9');
 
     
 
-    Route::resource('faq','Master\FaqController');
-    Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
+    Route::resource('faq','Master\FaqController')->middleware('role:1,3,6,9');
+    Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable')->middleware('role:1,3,6,9');
 
 
-    Route::resource('akomodasi','Master\AkomodasiController');
-    Route::get('akomodasi_datatable','Master\AkomodasiController@datatable')->name('master.akomodasi.datatable');
+    Route::resource('akomodasi','Master\AkomodasiController')->middleware('role:1,3,6,9');
+    Route::get('akomodasi_datatable','Master\AkomodasiController@datatable')->name('master.akomodasi.datatable')->middleware('role:1,3,6,9');
 
    
 
     Route::get('akomodasi/delete/{id}/{jenis_akomodasi}', [
     'as' => 'destroy', 
     'uses' => 'Master\AkomodasiController@destroy'
-    ]);
+    ])->middleware('role:1,3,6,9');
 
   
 
     Route::get('akomodasi/update/{id}', [
     'as' => 'update', 
     'uses' => 'Master\AkomodasiController@update'
-    ]);
+    ])->middleware('role:1,3,6,9');
 
     Route::get('akomodasi/edit/{id}/{jenis_akomodasi}', [
     'as' => 'edit', 
     'uses' => 'Master\AkomodasiController@edit'
-    ]);
+    ])->middleware('role:1,3,6,9');
 
  
     Route::get('faq_user','Master\FaqController@user')->name('faquser');
 
     Route::resource('guideline','Master\GuidelineController');
 
-    Route::resource('berita','Master\BeritaController');
-    Route::resource('editberita','Master\EditBeritaController');
-    Route::get('data_berita','Master\BeritaController@dataBerita')->name('master.databerita');
-    Route::post('upload_image','Master\BeritaController@uploadImage')->name('master.uploadimage');
+    Route::resource('berita','Master\BeritaController')->middleware('role:1,3,4,7,9');
+    Route::resource('editberita','Master\EditBeritaController')->middleware('role:1,3,4,7,9');
+    Route::get('data_berita','Master\BeritaController@dataBerita')->name('master.databerita')->middleware('role:1,3,4,7,9');
+    Route::post('upload_image','Master\BeritaController@uploadImage')->name('master.uploadimage')->middleware('role:1,3,4,7,9');
+
+    Route::resource('pelatihan','Master\PelatihanController')->middleware('role:1,3,14,8,9');
+    Route::resource('editpelatihan','Master\EditPelatihanController')->middleware('role:1,3,14,8,9');
+    Route::post('upload_image_pelatihan','Master\PelatihanController@uploadImagePelatihan')->name('master.uploadimagepelatihan')->middleware('role:1,3,14,8,9');
+    Route::get('data_pelatihan','Master\PelatihanController@dataPelatihan')->name('master.datapelatihan')->middleware('role:1,3,14,8,9');
         
     // Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin');
 });
 Route::get('faq_detail/{id}','Master\FaqController@faqDetail')->name('master.faq.detail');
 Route::get('detail_berita/{id}','Master\BeritaController@detailBerita')->name('master.berita.detailberita');
+Route::get('detail_pelatihan/{id}','Master\PelatihanController@detailPelatihan')->name('master.pelatihan.detailpelatihan');
 Route::get('detail_berita_user/{id}','Master\BeritaController@detailBeritaUser')->name('master.berita.detailberitauser');
+Route::get('detail_pelatihan_user/{id}','Master\PelatihanController@detailPelatihanUser')->name('master.pelatihan.detailpelatihanuser');
 Route::get('acc_berita/{id}','Master\BeritaController@accBerita')->name('master.berita.accberita');
+Route::get('acc_pelatihan/{id}','Master\PelatihanController@accPelatihan')->name('master.pelatihan.accpelatihan');
 Route::get('cari_berita','Master\BeritaController@cariBerita')->name('master.berita.cariberita');
 
 Route::get('informasi_panduan','InformasiController@panduan')->name('informasipanduan');
@@ -370,11 +394,14 @@ Route::get('informasi_alur','InformasiController@alur')->name('informasialur');
 Route::prefix('system')->group(function(){
 
     Route::resource('user','System\UserController');
-    Route::get('user_datatable','System\UserController@datatable')->name('system.user.datatable');
-    Route::get('list_pelanggan','System\UserController@listPelanggan')->name('user.listpelanggan');
-    Route::get('pelanggan_datatable','System\UserController@dataPelanggan')->name('system.pelanggan.datatable');
+    Route::get('user_datatable','System\UserController@datatable')->name('system.user.datatable')->middleware('role:1,3,9');
+    Route::get('list_pelanggan','System\UserController@listPelanggan')->name('user.listpelanggan')->middleware('role:1,3,9');
+    Route::get('pelanggan_datatable','System\UserController@dataPelanggan')->name('system.pelanggan.datatable')->middleware('role:1,3,9');
+
 
     Route::get('edit_profile/{id}','System\UserController@editProfile')->name('system.user.editprofile');
+
+    //Route::get('edit_profile/{id}','System\UserController@editProfile')->name('system.user.editprofile');
     Route::post('update_profile','System\UserController@updateProfile')->name('system.user.updateprofile');
 
     Route::get('change_password/{id}','System\UserController@change_Password')->name('system.user.change_password');
@@ -389,5 +416,8 @@ Route::prefix('system')->group(function(){
 
     Route::get('dependent_dropdown', 'DependentDropdownController@index')->name('dependent_dropdown.index');
     Route::post('dependent_dropdown', 'DependentDropdownController@store')->name('dependent_dropdown.store');
+
+    Route::get('dependent_dropdown_rincian', 'DependentDropdownRincianController@index')->name('dependent_dropdown_rincian.index');
+    Route::post('dependent_dropdown_rincian', 'DependentDropdownRincianController@store')->name('dependent_dropdown_rincian.store');
 
 });
