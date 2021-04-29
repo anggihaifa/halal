@@ -51,11 +51,11 @@ class PelatihanController extends Controller
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        if($user->usergroup_id == '6'){
+        if($user->usergroup_id == '11' || $user->usergroup_id == '1'){
             $xdata = DB::table('pelatihan');
-        }else{            
+        }else if($user->usergroup_id == '10'){
             $xdata = DB::table('pelatihan')
-            ->where('id_user','=',Auth::user()->id);            
+            ->where('id_user','=',Auth::user()->id);
         }
 
         return Datatables::of($xdata)->make();
@@ -127,7 +127,7 @@ class PelatihanController extends Controller
 
   public function edit($id){		
       $pelatihan = Pelatihan::find($id);
-      $user = User::find($pelatihan->id_user);
+      $user = User::find($pelatihan->id_user);      
 
       return view('master.pelatihan.edit',compact('pelatihan','user'));
   }

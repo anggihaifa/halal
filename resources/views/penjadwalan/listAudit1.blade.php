@@ -279,12 +279,12 @@
                                     <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
                                     <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">                                        
-                                        <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>                                        
-                                        <a href="{{url('detail_unggah_data_sertifikasi_auditor')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
+                                        <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
+                                        <a href="{{url('detail_unggah_data_sertifikasi_auditor')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="fa fa-edit"></i> Form Laporan</a>
                                         <div class="dropdown-divider"></div>
 
-                                        <div class="dropdown-button-title"></div>`+
-                                       form_report+
+                                        <div class="dropdown-button-title"></div>`
+                                        +form_report+
                                     `</div>
                                 </div>`
                            

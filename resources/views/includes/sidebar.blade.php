@@ -10,7 +10,8 @@
 		<!-- begin sidebar user -->
 		<ul class="nav">
 			<li class="nav-profile" style="background: #218c74">
-				<a href="javascript:;" data-toggle="nav-profile">
+				<a href="javascript:;">
+				{{-- <a href="javascript:;" data-toggle="nav-profile"> --}}
 					@if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6)
 						{{-- <div class="cover with-shadow adminbg"></div> --}}
 					@else
@@ -108,7 +109,9 @@
 					return $subMenu;
 				}
 
-				if(Auth::user()->usergroup_id == 2){					
+				if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3){
+					$configSidebar = config('sidebar.menu');
+				}elseif(Auth::user()->usergroup_id == 2){
 					if(Auth::user()->registrasi_id == null){
 						$configSidebar = config('sidebar.preregistrasi');
 					}else{
@@ -120,16 +123,21 @@
 						
 						
 					}
-				}elseif(Auth::user()->usergroup_id == 3){					
-				    $configSidebar = config('sidebar.menu3');
-				}elseif(Auth::user()->usergroup_id == 6){					
+				}elseif(Auth::user()->usergroup_id == 4){
+					$configSidebar = config('sidebar.menu4fix');
+				}elseif(Auth::user()->usergroup_id == 5){
 					$configSidebar = config('sidebar.menu5');
+				}elseif(Auth::user()->usergroup_id == 6){					
+					$configSidebar = config('sidebar.menu6fix');
 				}elseif(Auth::user()->usergroup_id == 7){
-					$configSidebar = config('sidebar.menu6');
+					$configSidebar = config('sidebar.menu7fix');
 				}elseif(Auth::user()->usergroup_id == 8){
 					$configSidebar = config('sidebar.menu7');
 
 				}elseif(Auth::user()->usergroup_id == 10){
+					$configSidebar = config('sidebar.menu10');
+					
+				}elseif(Auth::user()->usergroup_id == 11){
 					$configSidebar = config('sidebar.menu10');
 					
 				}else{

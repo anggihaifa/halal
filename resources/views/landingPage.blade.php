@@ -17,7 +17,7 @@
             </ol>
             <div class="carousel-inner h-100 bg-light">
                 <div class="carousel-item active" style="height:450px">
-                    <img class="d-block w-100" src="assets/img/berita_utama/berita_utama1.jpg" alt="First slide" style="min-height:400px; background: #b9b9b9">                    
+                    <img class="d-block w-100" src="assets/img/berita_utama/berita_utama1.jpg" alt="First slide" style="min-height:400px; background: #b9b9b9">
                     <div class="carousel-caption d-none d-md-block w-100">
                         <h2 class="text-white">Pertemuan Auditor</h2>
                         <p style="font-size: 15px;">Pertemuan auditor semua cabang Sucofindo</p>
@@ -99,7 +99,7 @@
         @endif        
     
 
-    <div class="containercol-lg-12 bg-halal">
+    <div class="containercol-lg-12 bg-halal" style="background: #218c74">
         <div class="col-lg-12 rounded mt-2 mb-4">
             <div class="row col-lg-12">
                 <span class="col-lg-12 mt-3 col-form-label text-center text-white"><h2>Berita</h2></span>

@@ -83,18 +83,38 @@ class HomeController extends Controller
             $dataCurrent = null;    
         }
 
+        $id_user = Auth::user()->id;
+        $cekAudit = DB::table('registrasi')
+             ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+             ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+             ->join('users','registrasi.id_user','=','users.id')
+             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+  
+            })    
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('penjadwalan.pelaksana2_audit1','LIKE','%'.$id_user.'%');
+  
+            })               
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*')
+             ->get();
+
+        $dataAudit = count($cekAudit);
+        // dd($dataAudit);
 
         // echo "<pre>";
         // print_r(count($checkRegistrasi));
         // print_r(count($checkUserActive));
         // echo "</pre>"; 
 
-        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7 || Auth::user()->usergroup_id == 8){
+        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 4 || Auth::user()->usergroup_id == 5 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7 || Auth::user()->usergroup_id == 8 || Auth::user()->usergroup_id == 9 || Auth::user()->usergroup_id == 13 || Auth::user()->usergroup_id == 14){
             return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan'));
-        }else{
-            // echo "<pre>";
-            // print_r($dataCurrent);
-            // echo "</pre>";            
+        }else if(Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12){
+            return view('homeAuditor',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan','dataAudit'));
+        }else if(Auth::user()->usergroup_id == 2){
             return view('homeUser',compact('dataDetailUser','totalRegistrasiUser','dataCurrent'));
         }
         //return view('home');

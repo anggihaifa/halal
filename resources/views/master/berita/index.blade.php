@@ -109,7 +109,7 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        if({{Auth::user()->usergroup_id}} == 6){
+                        if({{Auth::user()->usergroup_id}} == 7){
                             if(full.status_approve == 0){
                                 return `<div class="btn-group m-r-5 show">
                                     <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>

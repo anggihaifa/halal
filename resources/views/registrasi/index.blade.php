@@ -37,7 +37,7 @@
                 <tr>
                     <th class="text-nowrap valign-middle text-center">No</th>
                     <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
-                    <th class="text-nowrap valign-middle text-center">Tanggal</th>
+                    <th class="text-nowrap valign-middle text-center">Tanggal Pendaftaran</th>
                     <th class="text-nowrap valign-middle text-center">Jenis </th>
                     <th class="text-nowrap valign-middle text-center">Status</th>
                     <th class="text-nowrap valign-middle text-center">Aktif/Non Aktif</th>

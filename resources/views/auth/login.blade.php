@@ -28,7 +28,7 @@
             <!-- begin login-header -->            
             <div class="login-header">
                 <div class="brand" style="font-family:textmeone">                
-                    <img src="{{asset('/assets/img/logo/white-sci.png')}}" alt="" /> <b>LPH</b><span>SUCOFINDO</span>
+                    <img src="{{asset('/assets/img/logo/white-sci2.png')}}" alt="" /> <b>LPH</b><span>SUCOFINDO</span>
                 </div>
             </div>
             <!-- end login-header -->

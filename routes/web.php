@@ -49,6 +49,13 @@ Route::post('download_laporan_audit_sjph','PHPWordController@downloadLaporanAudi
 Route::post('download_laporan_audit_bahan','PHPWordController@downloadLaporanAuditBahan')->name('downloadlaporanauditbahan');
 Route::post('download_laporan_audit_sjph_fix','PHPWordController@downloadLaporanAuditSJPHFix')->name('downloadlaporanauditsjphfix');
 Route::post('download_laporan_audit_bahan_fix','PHPWordController@downloadLaporanAuditBahanFix')->name('downloadlaporanauditbahanfix');
+Route::post('download_laporan_audit_2','PHPWordController@downloadLaporanAudit2')->name('downloadlaporanaudit2');
+Route::post('download_laporan_audit_tahap2_fix','PHPWordController@downloadLaporanAuditTahap2Fix')->name('downloadlaporanaudittahap2fix');
+Route::post('download_laporan_audit_tahap2_fix2','PHPWordController@downloadLaporanAuditTahap2Fix2')->name('downloadlaporanaudittahap2fix2');
+Route::post('download_laporan_audit_fasilitas_produksi','PHPWordController@downloadLaporanAuditFasilitasProduk')->name('downloadlaporanauditfasilitasproduksi');
+Route::post('download_laporan_audit_fasilitas_produksi_fix','PHPWordController@downloadLaporanAuditFasilitasProdukFix')->name('downloadlaporanauditfasilitasproduksifix');
+Route::post('download_laporan_produk','PHPWordController@downloadLaporanProduk')->name('downloadlaporanproduk');
+Route::post('download_laporan_produk_fix','PHPWordController@downloadLaporanProdukFix')->name('downloadlaporanprodukfix');
 
 //penjadwalan
 Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin');
@@ -353,6 +360,7 @@ Route::prefix('master')->group(function (){
 
  
     Route::get('faq_user','Master\FaqController@user')->name('faquser');
+    Route::get('pelanggan_kami','Master\PelangganController@user')->name('pelanggankami');
 
     Route::resource('guideline','Master\GuidelineController');
 

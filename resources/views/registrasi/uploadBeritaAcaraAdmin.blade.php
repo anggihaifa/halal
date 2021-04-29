@@ -42,7 +42,7 @@
 								<input type="text" class="form-control" name='no_registrasi' value="{{$data->no_registrasi}}" readonly/>
 							</div>
 																					
-                            @if($data->file_berita_acara == null)
+                            {{-- @if($data->file_berita_acara == null)
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Upload Berita Acara</label>
 								<div class="col-lg-8">
@@ -63,7 +63,109 @@
 										<a href="{{url('') .Storage::url('public/beritaacara/'.$data->id_user.'/'.$data->file_berita_acara) }}" download>{{$data->file_berita_acara}}</a>
 									</div>
 								</div>
-							@endif
+							@endif --}}
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									<label class="col-lg-4 col-form-label"><b>Waktu</b></label>
+									<div id="shb" class="col-lg-8">
+										<div class="input-group date">
+											<input type="text" id="tgl_berita_acara" name="tgl_berita_acara" class="form-control" placeholder="Waktu Berita Acara" value="" data-date-start-date="Date.default" />
+											<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@component('components.inputtext',['name'=> 'nama_pelaku_usaha','label' => 'Nama Pelaku Usaha','required'=>true,'placeholder'=>'Nama Pelaku Usaha','readonly'=>true,'value'=>$data->nama_perusahaan])@endcomponent
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@component('components.inputtext',['name'=> 'nomor_registrasi_bpjph','label' => 'No Registrasi BPJPH','required'=>true,'placeholder'=>'No Registrasi BPJPH','readonly'=>true,'value'=>$data->no_surat])@endcomponent
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@if($dataAlamatKantor[0]->kota != null)
+										@component('components.inputtext',['name'=> 'alamat','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$dataAlamatKantor[0]->alamat.', '.$dataAlamatKantor[0]->kota.', '.$dataAlamatKantor[0]->provinsi.', '.$dataAlamatKantor[0]->negara])@endcomponent
+									@else
+										@component('components.inputtext',['name'=> 'alamat','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$dataAlamatKantor[0]->alamat.', '.$dataAlamatKantor[0]->kota_domestik.', '.$dataAlamatKantor[0]->provinsi_domestik.', '.$dataAlamatKantor[0]->negara])@endcomponent
+									@endif									
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@component('components.inputtext',['name'=> 'izin_usaha','label' => 'Izin Usaha','required'=>true,'placeholder'=>'Izin Usaha','readonly'=>true,'value'=>$data->jenis_izin])@endcomponent
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@component('components.inputtext',['name'=> 'kategori_produk','label' => 'Kategori Produk','required'=>true,'placeholder'=>'Kategori Produk','readonly'=>true,'value'=>'Makanan'])@endcomponent
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">									
+
+									@php
+									$arr_nama=[];
+
+									foreach ($dataNamaProduk as $key) {
+										$arr_nama[] = $key->merk;
+									}									
+									$nama_produk = implode(', ',$arr_nama);
+									@endphp
+
+									@component('components.inputtext',['name'=> 'nama_produk','label' => 'Nama Produk','required'=>true,'placeholder'=>'Nama Produk','readonly'=>true,'value'=>$nama_produk])@endcomponent
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@foreach ($dataKelProduk as $item)
+										@component('components.inputtext',['name'=> 'jenis_produk','label' => 'Jenis Produk','required'=>true,'placeholder'=>'Jenis Produk','readonly'=>true,'value'=>$item->kelompok_produk])@endcomponent
+									@endforeach									
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@component('components.inputtext',['name'=> 'status_sertifikasi','label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','readonly'=>true,'value'=>$data->status_registrasi])@endcomponent
+								</div>
+							</div>
+
+							@foreach ($dataPemilik as $item)
+							<div class="wrapper col-lg-12">
+								<div class="row">									
+										@component('components.inputtext',['name'=> 'pemilik_perusahaan','label' => 'Nama Pemilik Perusahaan','required'=>true,'placeholder'=>'Nama Pemilik Perusahaan','readonly'=>true,'value'=>$item->nama_pemilik])@endcomponent
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@component('components.inputtext',['name'=> 'jabatan_pemilik','label' => 'Jabatan Pemilik','required'=>true,'placeholder'=>'Jabatan Pemilik','readonly'=>true,'value'=>$item->jabatan_pemilik])@endcomponent
+								</div>
+							</div>
+							@endforeach							
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@component('components.inputtext',['name'=> 'nama_petugas1','label' => 'Nama Petugas 1','required'=>true,'placeholder'=>'Nama Petugas 1'])@endcomponent
+								</div>
+							</div>
+
+							<div class="wrapper col-lg-12">
+								<div class="row">
+									@component('components.inputtext',['name'=> 'nama_petugas2','label' => 'Nama Petugas 2','required'=>true,'placeholder'=>'Nama Petugas 2'])@endcomponent
+								</div>
+							</div>
 								
 							
 								<div class="col-md-12 offset-md-5">
@@ -93,7 +195,15 @@
 
 @push('scripts')
 	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
+	<script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{asset('/assets/js/demo/form-plugins.demo.js')}}"></script>    
+    <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
     <script type="text/javascript">
+		$('#tgl_berita_acara').datepicker({
+			format: "yyyy-mm-dd",
+			todayHighlight: true,
+		});
     	//var date = new Date();
         // var today = new Date();
     	// $('#tgl_akad').datepicker({

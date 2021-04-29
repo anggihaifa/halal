@@ -126,8 +126,7 @@
 							@endphp
 							
 							<h5>Dokumen Lengkap</h5>
-									
-							
+																
 							@foreach($dataHas as $has => $value)
 								<form action="{{route('updatestatushas',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 							@endforeach
@@ -147,12 +146,12 @@
                                     </div>
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'ruang_lingkup','label' => 'Ruang Lingkup','required'=>true,'placeholder'=>'Ruang Lingkup'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'ruang_lingkup','label' => 'Ruang Lingkup','required'=>true,'placeholder'=>'Ruang Lingkup','value'=>$dataRegis['jenis_usaha'],'readonly'=>true])@endcomponent
                                         </div>
                                     </div>
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Kelompok/Jenis Produk','required'=>true,'placeholder'=>'Kelompok/Jenis Produk','readonly'=>true,'value'=>$dataRegis['jenis_produk']])@endcomponent
+                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Kelompok/Jenis Produk','required'=>true,'placeholder'=>'Kelompok/Jenis Produk','readonly'=>true,'value'=>$dataJenisProduk['kelompok_produk']])@endcomponent
                                         </div>
                                     </div>
 									<div class="wrapper col-lg-12">

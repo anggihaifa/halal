@@ -1,6 +1,6 @@
 <div class="containercol-lg-12">
     <!-- Footer -->
-    <footer class="text-lg-start mt-5 bg-halal text-white">
+    <footer class="text-lg-start mt-5 bg-halal text-white" style="background: #218c74">
     <!-- Grid container -->
     <div class="container p-20">
         <!--Grid row-->

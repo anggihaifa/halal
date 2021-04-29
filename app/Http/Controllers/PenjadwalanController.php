@@ -5342,7 +5342,7 @@ class PenjadwalanController extends Controller
              ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
              ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
-             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
+             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
                 $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
@@ -5583,8 +5583,9 @@ class PenjadwalanController extends Controller
 
     public function laporanAudit($id){
         $dataRegistrasi = DB::table('registrasi')
-                ->join('registrasi_alamatkantor','registrasi.id','=','registrasi_alamatkantor.id_registrasi')                
-                ->select('registrasi.*','registrasi_alamatkantor.alamat as alamat')
+                ->join('registrasi_alamatkantor','registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+                ->join('registrasi_pemilik_perusahaan','registrasi.id','=','registrasi_pemilik_perusahaan.id_registrasi')
+                ->select('registrasi.*','registrasi_alamatkantor.alamat as alamat', 'registrasi_pemilik_perusahaan.nama_pemilik as nama_pemilik')
                 ->where('registrasi.id',$id)
                 ->get();        
         // $dataRegistrasi = Registrasi::find($id);
