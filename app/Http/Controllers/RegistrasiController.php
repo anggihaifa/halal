@@ -87,8 +87,38 @@ class RegistrasiController extends Controller
     public function listRegistrasiPelangganAktif(){
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
-        return view('registrasi.listRegistrasiAktif',compact('dataKelompok','dataJenis'));
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
+
+        $response = curl_exec($curl);   
+        curl_close($curl);
+
+        $response = json_decode($response);
+        $cabang = $response->data;
+
+
+        $kw = DB::table('registrasi')
+                
+                 ->where('registrasi.status_cancel','=',0)
+                 ->select('registrasi.kode_wilayah')
+                 ->orderBy('registrasi.updated_at','desc')
+                 ->get();
+
+        //dd($cabang);
+
+        return view('registrasi.listRegistrasiAktif',compact('dataKelompok','dataJenis','cabang','kw'));
     }
+
     public function dataRegistrasiPelangganAktif(Request $request){
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
@@ -98,52 +128,44 @@ class RegistrasiController extends Controller
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')
+                 /*->leftJoin('pembayaran','registrasi.id','=', 'pembayaran.id_registrasi')*/
+                 ->leftJoin('akad','registrasi.id', '=', 'akad.id_registrasi')
+                 ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
+                 ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
+                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
+                
                 
                  ->where('registrasi.status_cancel','=',0)
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'penjadwalan.status_audit1 as status_audit1', 'penjadwalan.status_audit2 as status_audit2', 'penjadwalan.status_rapat as status_rapat', 'penjadwalan.status_tinjauan as status_tinjauan', 'akad.berkas_akad as berkas_akad', 'akad.total_biaya_sertifikasi as total_biaya_sertifikasi', 'registrasi_alamatkantor.alamat as alamat_kantor');
         }else{
 
             $xdata = DB::table('registrasi')
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')
-                 
+                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')      
+                ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
+                 ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
+                 ->leftJoin('akad','registrasi.id', '=', 'akad.id_registrasi')
+
                 ->where('registrasi.kode_wilayah','=',$kodewilayah)
                 ->where('registrasi.status_cancel','=',0)
-                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
+                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3', 'penjadwalan.status_audit1 as status_audit1', 'penjadwalan.status_audit2 as status_audit2', 'penjadwalan.status_rapat as status_rapat', 'penjadwalan.status_tinjauan as status_tinjauan', 'akad.berkas_akad as berkas_akad', 'akad.total_biaya_sertifikasi as total_biaya_sertifikasi', 'registrasi_alamatkantor.alamat as alamat_kantor');
 
 
         }
-       
 
-
-        //filter condition
         if(isset($gdata['no_registrasi'])){
             $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
         }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
-        }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+        if(isset($gdata['mulai'])){
+            $xdata = $xdata->where('mulai_audit1','LIKE','%'.$gdata['mulai'].'%');
+            $xdata = $xdata->where('mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
         }
 
-        //end
         $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
-
+                 ->orderBy('registrasi.updated_at','desc');
+       
         return Datatables::of($xdata)->make();
     }
 
@@ -157,33 +179,7 @@ class RegistrasiController extends Controller
                  //
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
 
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
-        }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
-
-        //end
+        
         $xdata = $xdata
                  ->orderBy('registrasi.id','desc');
 
@@ -191,6 +187,8 @@ class RegistrasiController extends Controller
     }
    
     public function updateStatusRegistrasi($id,$no_registrasi,$id_user,$status){
+        
+    
         
         $updater = Auth::user()->name;
 
@@ -361,12 +359,17 @@ class RegistrasiController extends Controller
                  ->orderBy('id','desc');*/
         //for detail data
         $xdata = DB::table('registrasi')
+
+                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
                  ->leftJoin('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->leftJoin('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok')
+                ->leftJoin('users','registrasi.id','=','users.registrasi_id')
+               
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok', 'users.registrasi_id as registrasi_id','registrasi_alamatkantor.alamat as alamat_kantor')
                  ->where('id_user','=',Auth::user()->id)
-                 ->orderBy('registrasi.id','desc')
                  ->where('registrasi.status_cancel','=',0)
+                 ->orderBy('registrasi_id','desc')
+                 
                  ->get();
 
         //alert(Datatables::of($xdata));
@@ -1062,6 +1065,7 @@ class RegistrasiController extends Controller
                      ->where('id_registrasi',$id_registrasi)
                      ->get();
 
+       // dd($checkHas);
         if(isset($checkHas[0])){ $dataHas = json_decode($checkHas,true);}
         else{ $dataHas = null;}
 
@@ -1489,37 +1493,84 @@ class RegistrasiController extends Controller
                         if($key == $data_real['has_selected']){
 
                             if($key == 'has_1'){
-                                $e->tgl_penyerahan_1 = $currentDateTime;
+                                if($e->keterangan_has_1 != null){
+                                    $e->tgl_penyerahan_1 = $currentDateTime;
+                                }
+                                
                             }else if($key == 'has_2'){
-                                $e->tgl_penyerahan_2 = $currentDateTime;
+                                if($e->keterangan_has_2 != null){
+                                    $e->tgl_penyerahan_2 = $currentDateTime;
+                                }
+                               
                             }else if($key == 'has_3'){
-                                $e->tgl_penyerahan_3 = $currentDateTime;
+                                if($e->keterangan_has_3 != null){
+                                    $e->tgl_penyerahan_3 = $currentDateTime;
+                                }
+                                
                             }else if($key == 'has_4'){
-                                $e->tgl_penyerahan_4 = $currentDateTime;
+                                if($e->keterangan_has_4 != null){
+                                    $e->tgl_penyerahan_4 = $currentDateTime;
+                                }
+                              
                             }else if($key == 'has_5'){
-                                $e->tgl_penyerahan_5 = $currentDateTime;
+                                if($e->keterangan_has_5 != null){
+                                    $e->tgl_penyerahan_5 = $currentDateTime;
+                                }
+                                
                             }else if($key == 'has_6'){
-                                $e->tgl_penyerahan_6 = $currentDateTime;
+                                if($e->keterangan_has_6 != null){
+                                    $e->tgl_penyerahan_6 = $currentDateTime;
+                                }
+                                
                             }else if($key == 'has_7'){
-                                $e->tgl_penyerahan_7 = $currentDateTime;
+                                if($e->keterangan_has_7 != null){
+                                     $e->tgl_penyerahan_7 = $currentDateTime;
+                                }
                             }else if($key == 'has_8'){
-                                $e->tgl_penyerahan_8 = $currentDateTime;
+                                if($e->keterangan_has_8 != null){
+                                    $e->tgl_penyerahan_8 = $currentDateTime;
+                                }
+                               
                             }else if($key == 'has_9'){
-                                $e->tgl_penyerahan_9 = $currentDateTime;
+                                if($e->keterangan_has_9 != null){
+                                    $e->tgl_penyerahan_9 = $currentDateTime;
+                                }
+                               
                             }else if($key == 'has_10'){
-                                $e->tgl_penyerahan_10 = $currentDateTime;
+                                if($e->keterangan_has_10 != null){
+                                    $e->tgl_penyerahan_10 = $currentDateTime;
+                                }
+                               
                             }else if($key == 'has_11'){
-                                $e->tgl_penyerahan_11 = $currentDateTime;
+                                if($e->keterangan_has_11 != null){
+                                    $e->tgl_penyerahan_11 = $currentDateTime;
+                                }
+                                
                             }else if($key == 'has_12'){
-                                $e->tgl_penyerahan_12 = $currentDateTime;
+                                if($e->keterangan_has_12 != null){
+                                    $e->tgl_penyerahan_12 = $currentDateTime;
+                                }
+                                
                             }else if($key == 'has_13'){
-                                $e->tgl_penyerahan_13 = $currentDateTime;
+                                if($e->keterangan_has_13 != null){
+                                    $e->tgl_penyerahan_13 = $currentDateTime;
+                                }
+                               
                             }else if($key == 'has_14'){
-                                $e->tgl_penyerahan_14 = $currentDateTime;
+                                if($e->keterangan_has_14 != null){
+                                    $e->tgl_penyerahan_14 = $currentDateTime;
+                                }
+                               
                             }else if($key == 'has_15'){
-                                $e->tgl_penyerahan_15 = $currentDateTime;
+                                if($e->keterangan_has_15 != null){
+                                    $e->tgl_penyerahan_15 = $currentDateTime;
+                                }
+                               
                             }else if($key == 'has_16'){
-                                $e->tgl_penyerahan_16 = $currentDateTime;
+                                if($e->keterangan_has_16 != null){
+                                    $e->tgl_penyerahan_16 = $currentDateTime;
+                                }
+                              
                             }
                                                                   
                             $e->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
@@ -1537,24 +1588,37 @@ class RegistrasiController extends Controller
                         has_1 IS NULL
                         OR has_2 IS NULL
                         OR has_3 IS NULL
-                        OR has_4 IS NULL
                         OR has_5 IS NULL
-                        OR has_6 IS NULL
-                        OR has_7 IS NULL
                         OR has_8 IS NULL
                         OR has_9 IS NULL
                         OR has_10 IS NULL
                         OR has_11 IS NULL
-                        OR has_12 IS NULL)
+                        OR has_12 IS NULL
+                        OR has_13 IS NULL
+                        OR has_14 IS NULL
+                        OR has_15 IS NULL
+                        OR has_16 IS NULL)
                         ";
 
+                   // dd($checkHasLengkap);
                     $dataLengkap = DB::select($checkHasLengkap);
 
                     if(isset($dataLengkap[0])){
+                         //dd($dataLengkap[0]);
                         $e->status_has = 0;
                     }else{
+                        //dd("masuk");
                         $e->status_has = 1;
+                        //masukan fungsi untuk pindah ke tahapan akad..
+                        $this->updateStatusRegistrasi($r->id, $r->no_registrasi, $r->id_user, 6);
+                        //update status table registrasi dan update tanggal updated at nya
+
                     }
+
+                    $mytime = Carbon::now();
+                    $now=  $mytime->toDateTimeString();
+
+                    $r->updated_at= $now;
                     $r->status_berkas = 1;
                     //dd($r);
                     $r->save();
@@ -1588,11 +1652,351 @@ class RegistrasiController extends Controller
         }
     }
 
-   
+    public function storeDokumenHasAdmin(Request $request, $id){
 
-    public function updateStatusHas(Request $request, $id){
+        $data_real = $request->except('_token','_method');
+        $data = $request->except('_token','_method','has_selected');
+
+        //dd($data);
+
+        $model = new DokumenHas;
+        $model2 = new Registrasi;
+
+        $status = "HPAS";
+        $dh = $model->find($id);
+        $id_user = $dh->user_id;
+        $r = $model2->find($dh->registrasi_id);
+
+
+        if($data["status"] == "0"){
+           
+                try{
+                    DB::beginTransaction();
+
+                    unset($data["status"]);
+                    $model->id_user = $id_user;
+                    $model->id_registrasi = $id_registrasi;
+
+                    foreach ($data as $key => $value) {
+                        if($key == $data_real['has_selected']){
+                            
+                            $model->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
+                            FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
+
+                        }
+
+                    }
+
+                     //dd($key);
+                    //print_r(count($data)) ;
+                    
+                    $model->status_has = 0;
+                    $r->status_berkas = 1;
+                    $r->save();
+
+                    $model->save();
+                    DB::commit();
+
+                    //update unggah data sertifikasi
+                    $checkDataHas = DB::table('dokumen_has')
+                         ->where('id_user','=',$id_user)
+                         ->where('id_registrasi',$id_registrasi)
+                         ->get();
+
+                    $id_has = $checkDataHas[0]->id;
+
+                    DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_has' => $id_has]);
+
+                    Session::flash('success', "data berhasil disimpan!");
+                    $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
+                    return $redirect;
+
+                }catch (\Exception $e){
+                    DB::rollBack();
+
+                    //$this->debugs($e->getMessage());
+
+                    Session::flash('error', $e->getMessage());
+                    $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
+                    return $redirectPass;
+                }
+
+        }elseif($data["status"] == "1"){
+
+            // echo "<pre>";
+            // print_r($data);
+            // echo "</pre>";
+            try{
+                    DB::beginTransaction();
+
+                    $id = $data["id"];
+                    $e = $model->find($id);
+
+                    unset($data["id"]);
+                    unset($data["status"]);
+
+                    $no=1;
+                    foreach ($data as $key => $value) {
+                        $currentDateTime = Carbon::now();                                                
+
+                        if($key == $data_real['has_selected']){
+
+                            if($key == 'has_1'){
+                                if($e->keterangan_has_1 != null){
+                                    $e->tgl_penyerahan_1 = $currentDateTime;
+                                }
+                                
+                            }else if($key == 'has_2'){
+                                if($e->keterangan_has_2 != null){
+                                    $e->tgl_penyerahan_2 = $currentDateTime;
+                                }
+                               
+                            }else if($key == 'has_3'){
+                                if($e->keterangan_has_3 != null){
+                                    $e->tgl_penyerahan_3 = $currentDateTime;
+                                }
+                                
+                            }else if($key == 'has_4'){
+                                if($e->keterangan_has_4 != null){
+                                    $e->tgl_penyerahan_4 = $currentDateTime;
+                                }
+                              
+                            }else if($key == 'has_5'){
+                                if($e->keterangan_has_5 != null){
+                                    $e->tgl_penyerahan_5 = $currentDateTime;
+                                }
+                                
+                            }else if($key == 'has_6'){
+                                if($e->keterangan_has_6 != null){
+                                    $e->tgl_penyerahan_6 = $currentDateTime;
+                                }
+                                
+                            }else if($key == 'has_7'){
+                                if($e->keterangan_has_7 != null){
+                                     $e->tgl_penyerahan_7 = $currentDateTime;
+                                }
+                            }else if($key == 'has_8'){
+                                if($e->keterangan_has_8 != null){
+                                    $e->tgl_penyerahan_8 = $currentDateTime;
+                                }
+                               
+                            }else if($key == 'has_9'){
+                                if($e->keterangan_has_9 != null){
+                                    $e->tgl_penyerahan_9 = $currentDateTime;
+                                }
+                               
+                            }else if($key == 'has_10'){
+                                if($e->keterangan_has_10 != null){
+                                    $e->tgl_penyerahan_10 = $currentDateTime;
+                                }
+                               
+                            }else if($key == 'has_11'){
+                                if($e->keterangan_has_11 != null){
+                                    $e->tgl_penyerahan_11 = $currentDateTime;
+                                }
+                                
+                            }else if($key == 'has_12'){
+                                if($e->keterangan_has_12 != null){
+                                    $e->tgl_penyerahan_12 = $currentDateTime;
+                                }
+                                
+                            }else if($key == 'has_13'){
+                                if($e->keterangan_has_13 != null){
+                                    $e->tgl_penyerahan_13 = $currentDateTime;
+                                }
+                               
+                            }else if($key == 'has_14'){
+                                if($e->keterangan_has_14 != null){
+                                    $e->tgl_penyerahan_14 = $currentDateTime;
+                                }
+                               
+                            }else if($key == 'has_15'){
+                                if($e->keterangan_has_15 != null){
+                                    $e->tgl_penyerahan_15 = $currentDateTime;
+                                }
+                               
+                            }else if($key == 'has_16'){
+                                if($e->keterangan_has_16 != null){
+                                    $e->tgl_penyerahan_16 = $currentDateTime;
+                                }
+                              
+                            }
+                                                                  
+                            $e->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
+                            FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);                            
+                        }
+                        $no++;
+                    }
+
+                    $e->save();
+
+                    $checkHasLengkap = "SELECT *
+                       FROM dokumen_has
+                       WHERE id_registrasi = ".$id_registrasi."
+                       AND(
+                        has_1 IS NULL
+                        OR has_2 IS NULL
+                        OR has_3 IS NULL
+                        OR has_5 IS NULL
+                        OR has_8 IS NULL
+                        OR has_9 IS NULL
+                        OR has_10 IS NULL
+                        OR has_11 IS NULL
+                        OR has_12 IS NULL
+                        OR has_13 IS NULL
+                        OR has_14 IS NULL
+                        OR has_15 IS NULL
+                        OR has_16 IS NULL)
+                        ";
+
+                   // dd($checkHasLengkap);
+                    $dataLengkap = DB::select($checkHasLengkap);
+
+                    if(isset($dataLengkap[0])){
+                         //dd($dataLengkap[0]);
+                        $e->status_has = 0;
+                    }else{
+                        //dd("masuk");
+                        $e->status_has = 1;
+                        //masukan fungsi untuk pindah ke tahapan akad..
+                        $this->updateStatusRegistrasi($r->id, $r->no_registrasi, $r->id_user, 6);
+                        //update status table registrasi dan update tanggal updated at nya
+
+                    }
+
+                    $mytime = Carbon::now();
+                    $now=  $mytime->toDateTimeString();
+
+                    $r->updated_at= $now;
+                    $r->status_berkas = 1;
+                    //dd($r);
+                    $r->save();
+                    $e->save();
+
+                    DB::commit();
+
+
+                    Session::flash('success', "data berhasil diupdate!");
+                    $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
+                    return $redirect;
+
+            }catch (\Exception $e){
+                    DB::rollBack();
+
+                    //$this->debugs($e->getMessage());
+
+                    Session::flash('error', $e->getMessage());
+                    $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
+                    return $redirectPass;
+            }
+            $checkDataHas = DB::table('dokumen_has')
+                         ->where('id_user','=',$id_user)
+                         ->where('id_registrasi',$id_registrasi)
+                         ->get();
+            $id_has = $checkDataHas[0]->id;
+
+            DB::table('unggah_data_sertifikasi')
+                    ->where('id_registrasi', $id_registrasi)
+                    ->update(['id_has' => $id_has]);
+        }
+    }
+
+    
+
+    public function updateStatusVerifikasi(Request $request, $id){
+        dd($id);
         $data = $request->except('_token','_method','status');
+        $currentDateTime = Carbon::now();
+        $model = new DokumenHas();
+        $model2 = new Registrasi();
+        $model3 = new User();
+        $model4 = new Penjadwalan();
+        $id_user = Auth::user()->id;
 
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);            
+            $f = $model2->find($e->id_registrasi);
+            $u = $model3->find($f->id_user);
+           
+
+            $e->fill($data);
+            $e->check_by = Auth::user()->id;
+            if($data['status_has_1']=='null' || $data['status_has_2']=='null' || $data['status_has_3']=='null' || $data['status_has_4']=='null' || $data['status_has_5']=='null' || $data['status_has_6']=='null' || $data['status_has_7']=='null' || $data['status_has_8']=='null' || $data['status_has_9']=='null' || $data['status_has_10']=='null' || $data['status_has_11']=='null' || $data['status_has_12']=='null'|| $data['status_has_13']=='null' || $data['status_has_14']=='null'|| $data['status_has_15']=='null' || $data['status_has_16']=='null'){
+
+                $e->status_berkas = 2;
+                $e->updated_at =  $currentDateTime;
+                $f->updated_at =  $currentDateTime;
+                $f->status_berkas = 2;
+                $e->save();
+                $f->save();
+                DB::commit();
+                Session::flash('success', "Status berhasil diupdate");
+
+
+            }else{
+
+                if($data['status_has_1']=='2' || $data['status_has_2']=='2' || $data['status_has_3']=='2' || $data['status_has_4']=='2' || $data['status_has_5']=='2' || $data['status_has_6']=='2' || $data['status_has_7']=='2' || $data['status_has_8']=='2' || $data['status_has_9']=='2' || $data['status_has_10']=='2' || $data['status_has_11']=='2' || $data['status_has_12']=='2'|| $data['status_has_13']=='2' || $data['status_has_14']=='2'|| $data['status_has_15']=='2' || $data['status_has_16']=='2'){
+
+
+                    $e->status_berkas = 2;
+                    $f->status_berkas = 2;
+                    $e->updated_at =  $currentDateTime;
+                    $f->updated_at =  $currentDateTime;
+                    $f->status = 4;
+                    $e->save();
+                    $f->save();
+                    DB::commit();
+                    SendEmailP::dispatch($u,$f,$p,$f->status);
+                    Session::flash('success', "Status berhasil diupdate");
+
+                }else{
+                   
+
+                     //apabila tidak ada yang perlu revisi
+
+                    $e->status_berkas = 3;
+                    $f->status_berkas = 3;
+                    $e->updated_at =  $currentDateTime;
+                    $f->updated_at =  $currentDateTime;
+                    $e->
+                    $f->status = 5;
+                   
+                    $e->save();
+                    $f->save();
+                    SendEmailP::dispatch($u,$f,$p,$f->status);
+                    DB::commit();
+
+                    $this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
+                    
+                    $model4->updated_by = $updater;
+                    $model4->status_audit1 = '0';
+                    $model4->progres_penjadwalan = 'audit1';
+                    $model4->id_registrasi = $e->id;
+                    $model4->save();
+                    
+                }
+
+               
+            }
+            
+           
+        }catch (\Exception $e){
+            DB::rollBack();
+            Session::flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+    public function updateStatusHas(Request $request, $id){
+        
+        $data = $request->except('_token','_method','status');
+        
+        $currentDateTime = Carbon::now();
         $model = new DokumenHas();
         $model2 = new Registrasi();
         $model3 = new User();
@@ -1611,120 +2015,148 @@ class RegistrasiController extends Controller
             $p = $model4->find($f->id_pembayaran);
 
             $e->fill($data);
+            
             $e->check_by = Auth::user()->id;
-            if($data['status_has_1']==1 && $data['status_has_2']==1 && $data['status_has_3']==1 && $data['status_has_4']==1 && $data['status_has_5']==1 && $data['status_has_6']==1 && $data['status_has_7']==1 && $data['status_has_8']==1 && $data['status_has_9']==1 && $data['status_has_10']==1 && $data['status_has_11']==1 && $data['status_has_12']==1){
-
-                $e->status_berkas = 3;
-                $f->status_berkas = 3;
-                $f->status = 5;
+            if($data['status_has_1']=='null' || $data['status_has_2']=='null' || $data['status_has_3']=='null' || $data['status_has_4']=='null' || $data['status_has_5']=='null' || $data['status_has_6']=='null' || $data['status_has_7']=='null' || $data['status_has_8']=='null' || $data['status_has_9']=='null' || $data['status_has_10']=='null' || $data['status_has_11']=='null' || $data['status_has_12']=='null'|| $data['status_has_13']=='null' || $data['status_has_14']=='null'|| $data['status_has_15']=='null' || $data['status_has_16']=='null'){
                
+                $e->status_berkas = 2;
+                $e->updated_at =  $currentDateTime;
+                $f->updated_at =  $currentDateTime;
+                $f->status_berkas = 2;
                 $e->save();
                 $f->save();
-                SendEmailP::dispatch($u,$f,$p,$f->status);
                 DB::commit();
+                Session::flash('success', "Status berhasil diupdate");
 
-                $this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
+              
+            }else{
                 
-                $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        
-                $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-04 Laporan Audit Tahap I.docx');
+                if($data['status_has_1']=='2' || $data['status_has_2']=='2' || $data['status_has_3']=='2' || $data['status_has_4']=='2' || $data['status_has_5']=='2' || $data['status_has_6']=='2' || $data['status_has_7']=='2' || $data['status_has_8']=='2' || $data['status_has_9']=='2' || $data['status_has_10']=='2' || $data['status_has_11']=='2' || $data['status_has_12']=='2'|| $data['status_has_13']=='2' || $data['status_has_14']=='2'|| $data['status_has_15']=='2' || $data['status_has_16']=='2'){
 
-                $templateProcessor->setValue('nama_organisasi', $data['nama_organisasi']);
-                $templateProcessor->setValue('nomor_registrasi', $data['nomor_registrasi_bpjph']);
-                $templateProcessor->setValue('ruang_lingkup', $data['ruang_lingkup']);
-                $templateProcessor->setValue('jenis_produk', $data['jenis_produk']);
-                $templateProcessor->setValue('status_registrasi', $data['status_sertifikasi']);
+                    
+                    $e->status_berkas = 2;
+                    $f->status_berkas = 2;
+                    $e->updated_at =  $currentDateTime;
+                    $f->updated_at =  $currentDateTime;
+                    $f->status = 4;
+                    $e->save();
+                    $f->save();
+                    DB::commit();
+                    SendEmailP::dispatch($u,$f,$p,$f->status);
+                    Session::flash('success', "Status berhasil diupdate");
 
-                $templateProcessor->setValue('tgl_penyerahan1', $data['tgl_penyerahan_1']);
-                $templateProcessor->setValue('tgl_penyerahan2', $data['tgl_penyerahan_2']);
-                $templateProcessor->setValue('tgl_penyerahan3', $data['tgl_penyerahan_3']);
-                $templateProcessor->setValue('tgl_penyerahan4', $data['tgl_penyerahan_4']);
-                $templateProcessor->setValue('tgl_penyerahan5', $data['tgl_penyerahan_5']);                
-                $templateProcessor->setValue('tgl_penyerahan6', $data['tgl_penyerahan_6']);
-                $templateProcessor->setValue('tgl_penyerahan7', $data['tgl_penyerahan_7']);
-                $templateProcessor->setValue('tgl_penyerahan8', $data['tgl_penyerahan_8']);
-                $templateProcessor->setValue('tgl_penyerahan9', $data['tgl_penyerahan_9']);
-                $templateProcessor->setValue('tgl_penyerahan10', $data['tgl_penyerahan_10']);
-                $templateProcessor->setValue('tgl_penyerahan11', $data['tgl_penyerahan_11']);
-                $templateProcessor->setValue('tgl_penyerahan12', $data['tgl_penyerahan_12']);
-                $templateProcessor->setValue('tgl_penyerahan13', $data['tgl_penyerahan_13']);
-                $templateProcessor->setValue('tgl_penyerahan14', $data['tgl_penyerahan_14']);
-                $templateProcessor->setValue('tgl_penyerahan15', $data['tgl_penyerahan_15']);
-                $templateProcessor->setValue('tgl_penyerahan16', $data['tgl_penyerahan_16']);
-
-                $templateProcessor->setValue('temuan1', $data['keterangan_has_1']);
-                $templateProcessor->setValue('temuan2', $data['keterangan_has_2']);
-                $templateProcessor->setValue('temuan3', $data['keterangan_has_3']);
-                $templateProcessor->setValue('temuan4', $data['keterangan_has_4']);
-                $templateProcessor->setValue('temuan5', $data['keterangan_has_5']);
-                $templateProcessor->setValue('temuan6', $data['keterangan_has_6']);
-                $templateProcessor->setValue('temuan7', $data['keterangan_has_7']);
-                $templateProcessor->setValue('temuan8', $data['keterangan_has_8']);
-                $templateProcessor->setValue('temuan9', $data['keterangan_has_9']);
-                $templateProcessor->setValue('temuan10', $data['keterangan_has_10']);
-                $templateProcessor->setValue('temuan11', $data['keterangan_has_11']);
-                $templateProcessor->setValue('temuan12', $data['keterangan_has_12']);
-                $templateProcessor->setValue('temuan13', $data['keterangan_has_13']);
-                $templateProcessor->setValue('temuan14', $data['keterangan_has_14']);
-                $templateProcessor->setValue('temuan15', $data['keterangan_has_15']);
-                $templateProcessor->setValue('temuan16', $data['keterangan_has_16']);
-
-                $templateProcessor->setValue('review_perbaikan1', $data['review_perbaikan_1']);
-                $templateProcessor->setValue('review_perbaikan2', $data['review_perbaikan_2']);
-                $templateProcessor->setValue('review_perbaikan3', $data['review_perbaikan_3']);
-                $templateProcessor->setValue('review_perbaikan4', $data['review_perbaikan_4']);
-                $templateProcessor->setValue('review_perbaikan5', $data['review_perbaikan_5']);
-                $templateProcessor->setValue('review_perbaikan6', $data['review_perbaikan_6']);
-                $templateProcessor->setValue('review_perbaikan7', $data['review_perbaikan_7']);
-                $templateProcessor->setValue('review_perbaikan8', $data['review_perbaikan_8']);
-                $templateProcessor->setValue('review_perbaikan9', $data['review_perbaikan_9']);
-                $templateProcessor->setValue('review_perbaikan10', $data['review_perbaikan_10']);
-                $templateProcessor->setValue('review_perbaikan11', $data['review_perbaikan_11']);
-                $templateProcessor->setValue('review_perbaikan12', $data['review_perbaikan_12']);
-                $templateProcessor->setValue('review_perbaikan13', $data['review_perbaikan_13']);
-                $templateProcessor->setValue('review_perbaikan14', $data['review_perbaikan_14']);
-                $templateProcessor->setValue('review_perbaikan15', $data['review_perbaikan_15']);
-                $templateProcessor->setValue('review_perbaikan16', $data['review_perbaikan_16']);
-
-                if($data['status_memenuhi'] == 'memenuhi'){
-                    $templateProcessor->setValue('pilihan1', '');
-                    $templateProcessor->setValue('pilihan2', 'x');
                 }else{
-                    $templateProcessor->setValue('pilihan1', 'x');
-                    $templateProcessor->setValue('pilihan2', '');
+                   
+
+                     //apabila tidak ada yang perlu revisi
+
+                    $e->status_berkas = 3;
+                    $f->status_berkas = 3;
+                    $e->updated_at =  $currentDateTime;
+                    
+                    $f->updated_at =  $currentDateTime;
+                    
+                    $f->status = 5;
+                    
+                    $e->save();
+                    $f->save();
+                    SendEmailP::dispatch($u,$f,$p,$f->status);
+                    DB::commit();
+
+                    $this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
+                    
+                    
+                    
                 }
 
-                $currentDateTime = Carbon::now();                
+                    $phpWord = new \PhpOffice\PhpWord\PhpWord();
+            
+                    $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-04 Laporan Audit Tahap I.docx');
 
-                $newDateTime = Carbon::now()->addDays(5);
-                $templateProcessor->setValue('deadline', $newDateTime);
-                                
-                // dd($newDateTime);
+                    $templateProcessor->setValue('nama_organisasi', $data['nama_organisasi']);
+                    $templateProcessor->setValue('nomor_registrasi', $data['nomor_registrasi_bpjph']);
+                    $templateProcessor->setValue('ruang_lingkup', $data['ruang_lingkup']);
+                    $templateProcessor->setValue('jenis_produk', $data['jenis_produk']);
+                    $templateProcessor->setValue('status_registrasi', $data['status_sertifikasi']);
 
-                $fileName = $e->id_registrasi.'_'.$e->id_penjadwalan.'_Laporan Audit 1_'.$e->nama_perusahaan.'.docx';
-                $templateProcessor->saveAs("storage/laporan/download/".$fileName);
-                
-                $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
-                                        
-                return response()->download('storage/laporan/download/'.$fileName);
-                
+                    $templateProcessor->setValue('tgl_penyerahan1', $data['tgl_penyerahan_1']);
+                    $templateProcessor->setValue('tgl_penyerahan2', $data['tgl_penyerahan_2']);
+                    $templateProcessor->setValue('tgl_penyerahan3', $data['tgl_penyerahan_3']);
+                    $templateProcessor->setValue('tgl_penyerahan4', $data['tgl_penyerahan_4']);
+                    $templateProcessor->setValue('tgl_penyerahan5', $data['tgl_penyerahan_5']);                
+                    $templateProcessor->setValue('tgl_penyerahan6', $data['tgl_penyerahan_6']);
+                    $templateProcessor->setValue('tgl_penyerahan7', $data['tgl_penyerahan_7']);
+                    $templateProcessor->setValue('tgl_penyerahan8', $data['tgl_penyerahan_8']);
+                    $templateProcessor->setValue('tgl_penyerahan9', $data['tgl_penyerahan_9']);
+                    $templateProcessor->setValue('tgl_penyerahan10', $data['tgl_penyerahan_10']);
+                    $templateProcessor->setValue('tgl_penyerahan11', $data['tgl_penyerahan_11']);
+                    $templateProcessor->setValue('tgl_penyerahan12', $data['tgl_penyerahan_12']);
+                    $templateProcessor->setValue('tgl_penyerahan13', $data['tgl_penyerahan_13']);
+                    $templateProcessor->setValue('tgl_penyerahan14', $data['tgl_penyerahan_14']);
+                    $templateProcessor->setValue('tgl_penyerahan15', $data['tgl_penyerahan_15']);
+                    $templateProcessor->setValue('tgl_penyerahan16', $data['tgl_penyerahan_16']);
 
-            }else{
-                $e->status_berkas = 2;
-                $f->status_berkas = 2;
-                 $f->status = 4;
+                    $templateProcessor->setValue('temuan1', $data['keterangan_has_1']);
+                    $templateProcessor->setValue('temuan2', $data['keterangan_has_2']);
+                    $templateProcessor->setValue('temuan3', $data['keterangan_has_3']);
+                    $templateProcessor->setValue('temuan4', $data['keterangan_has_4']);
+                    $templateProcessor->setValue('temuan5', $data['keterangan_has_5']);
+                    $templateProcessor->setValue('temuan6', $data['keterangan_has_6']);
+                    $templateProcessor->setValue('temuan7', $data['keterangan_has_7']);
+                    $templateProcessor->setValue('temuan8', $data['keterangan_has_8']);
+                    $templateProcessor->setValue('temuan9', $data['keterangan_has_9']);
+                    $templateProcessor->setValue('temuan10', $data['keterangan_has_10']);
+                    $templateProcessor->setValue('temuan11', $data['keterangan_has_11']);
+                    $templateProcessor->setValue('temuan12', $data['keterangan_has_12']);
+                    $templateProcessor->setValue('temuan13', $data['keterangan_has_13']);
+                    $templateProcessor->setValue('temuan14', $data['keterangan_has_14']);
+                    $templateProcessor->setValue('temuan15', $data['keterangan_has_15']);
+                    $templateProcessor->setValue('temuan16', $data['keterangan_has_16']);
 
-                $e->save();
-                $f->save();
+                    $templateProcessor->setValue('review_perbaikan1', $data['review_perbaikan_1']);
+                    $templateProcessor->setValue('review_perbaikan2', $data['review_perbaikan_2']);
+                    $templateProcessor->setValue('review_perbaikan3', $data['review_perbaikan_3']);
+                    $templateProcessor->setValue('review_perbaikan4', $data['review_perbaikan_4']);
+                    $templateProcessor->setValue('review_perbaikan5', $data['review_perbaikan_5']);
+                    $templateProcessor->setValue('review_perbaikan6', $data['review_perbaikan_6']);
+                    $templateProcessor->setValue('review_perbaikan7', $data['review_perbaikan_7']);
+                    $templateProcessor->setValue('review_perbaikan8', $data['review_perbaikan_8']);
+                    $templateProcessor->setValue('review_perbaikan9', $data['review_perbaikan_9']);
+                    $templateProcessor->setValue('review_perbaikan10', $data['review_perbaikan_10']);
+                    $templateProcessor->setValue('review_perbaikan11', $data['review_perbaikan_11']);
+                    $templateProcessor->setValue('review_perbaikan12', $data['review_perbaikan_12']);
+                    $templateProcessor->setValue('review_perbaikan13', $data['review_perbaikan_13']);
+                    $templateProcessor->setValue('review_perbaikan14', $data['review_perbaikan_14']);
+                    $templateProcessor->setValue('review_perbaikan15', $data['review_perbaikan_15']);
+                    $templateProcessor->setValue('review_perbaikan16', $data['review_perbaikan_16']);
 
-                DB::commit();
-                SendEmailP::dispatch($u,$f,$p,$f->status);
-                Session::flash('success', "Status berhasil diupdate");
-                
+                    if($data['status_memenuhi'] == 'memenuhi'){
+                        $templateProcessor->setValue('pilihan1', '');
+                        $templateProcessor->setValue('pilihan2', 'x');
+                    }else{
+                        $templateProcessor->setValue('pilihan1', 'x');
+                        $templateProcessor->setValue('pilihan2', '');
+                    }
+
+                    $currentDateTime = Carbon::now();                
+
+                    $newDateTime = Carbon::now()->addDays(5);
+                    $templateProcessor->setValue('deadline', $newDateTime);
+                    //$e->dl_berkas = $newDateTime;
+                    $f->dl_berkas = $newDateTime;
+
+                    $e->save();
+                    $f->save();            
+                    // dd($newDateTime);
+
+                    $fileName = $e->id_registrasi.'_'.$e->id_penjadwalan.'_Laporan Audit 1_'.$e->nama_perusahaan.'.docx';
+                    $templateProcessor->saveAs("storage/laporan/download/".$fileName);
+                    
+                    $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+                                            
+                    return response()->download('storage/laporan/download/'.$fileName);
+
             }
-
-            //$e->save();
-            //$f->save();
             
            
         }catch (\Exception $e){
@@ -2348,7 +2780,7 @@ class RegistrasiController extends Controller
 
     ////////////////////////AKAD////////////////////////////////////////
     public function uploadAkadAdmin($id){
-        //dd($id);
+        dd($id);
         $data = Registrasi::find($id);
         //get Data from FAQ Transfer        
         // dd($dataAkad);
@@ -3332,11 +3764,7 @@ class RegistrasiController extends Controller
         //$j = $model4->find($e->id_penjadwalan);
         
 
-        $model4->updated_by = $updater;
-        $model4->status_audit1 = '0';
-        $model4->progres_penjadwalan = 'audit1';
-        $model4->id_registrasi = $e->id;
-        $model4->save();
+       
 
         $e->status = '13';
         $e->updated_status_by = $updater;
@@ -4702,26 +5130,18 @@ class RegistrasiController extends Controller
                 
             }
             
-           $e->save();
-           $p->save();
+            $e->save();
+            $p->save();
         
-            try{
+          
+            DB::commit();
 
-                DB::commit();
-
-               SendEmailP::dispatch($e,$u,$p, $data['status']);
-                //Session::flash('success', "data berhasil disimpan!");
-                Session::flash('success', 'data dengan no registrasi '.$e->no_registrasi.' berhasil di kirim emailnya!');
+            SendEmailP::dispatch($e,$u,$p, $data['status']);
+            //Session::flash('success', "data berhasil disimpan!");
+            Session::flash('success', 'data dengan no registrasi '.$e->no_registrasi.' berhasil di kirim emailnya!');
 
 
-            }catch(\Exception $u){
-
-                Session::flash('error', $u->getMessage());
-                //Session::flash('success', "data berhasil disimpan!");
-                //$statusreg = $e->getMessage();
-
-            }
-            
+           
         }catch (\Exception $e){
             DB::rollBack();
 
@@ -4749,8 +5169,34 @@ class RegistrasiController extends Controller
     }
 /////////////////////END of Pembayaran tahap 3////////////////////////////////
 
+    public function updateCabang(Request $request){
 
-   
+        $gdata = $request->except('_token','_method');
+        //dd($gdata);
+        $user = Auth::user()->id;
+
+        $model = new Registrasi();
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($gdata['id']);
+
+            $e->kode_wilayah = $gdata['kode_wilayah'];
+            $e->updated_status_by = $user;
+            $e->save();
+
+            DB::commit();
+
+        }catch(\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+
+        $redirect = redirect()->route('listregistrasipelangganaktif');
+        return $redirect;
+    }
+
     
 
 }

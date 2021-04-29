@@ -33,94 +33,16 @@
 		<!-- begin panel-body -->
 		<div class="panel-body ">
 
-			<!-- begin card -->
-			<div class="card border-0">
-				<div class="card-header tab-overflow p-t-0 p-b-0">
-					<ul class="nav nav-tabs card-header-tabs">
-						<li class="nav-item prev-button"><a href="#" data-click="prev-tab" class="nav-link text-primary"><i class="fa fa-arrow-left"></i></a></li>
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-1">
-								<img src="{{asset('/assets/img/halal/has.png')}}" width="40%" alt=""  /> 
-							</a>
-							
-							<a class="nav-link active" data-toggle="tab" href="#card-tab-1">Dokumen</a>
-						</li>
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-7">
-								<img src="{{asset('/assets/img/halal/kantor.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-7">Kantor Pusat</a>
-						</li>
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-8">
-								<img src="{{asset('/assets/img/halal/menu.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-8">Menu Restoran</a>
-						</li>
-						@endif
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-2">
-								<img src="{{asset('/assets/img/halal/fasilitas-1.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-2">Fasilitas</a>
-						</li>
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 3 || $dataRegistrasi[0]['id_jenis_registrasi'] == 4 )
-						<li class="nav-item text-center">
-							@if($dataRegistrasi[0]['id_jenis_registrasi'] == 4)
-							<a data-toggle="tab" href="#card-tab-3">
-								<img src="{{asset('/assets/img/halal/servis.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-3">Servis</a>
-							@else
-							<a data-toggle="tab" href="#card-tab-3">
-								<img src="{{asset('/assets/img/halal/produk-1.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-3">Produk</a>
-							@endif
-						</li>
-						@endif
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-4">
-								<img src="{{asset('/assets/img/halal/material-1.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-4">Material</a>
-						</li>
-						@endif
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 1 || $dataRegistrasi[0]['id_jenis_registrasi'] == 2 )
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-5">
-								<img src="{{asset('/assets/img/halal/matriks.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-5">Matriks Produk</a>
-						</li>
-						@endif
-						@if($dataRegistrasi[0]['id_jenis_registrasi'] == 3 )
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-9">
-								<img src="{{asset('/assets/img/halal/penyembelih.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-9">Jagal</a>
-						</li>
-						@endif
-						<li class="nav-item text-center">
-							<a data-toggle="tab" href="#card-tab-6">
-								<img src="{{asset('/assets/img/halal/kuesioner.png')}}" width="40%" alt="" /> 
-							</a>
-							<a class="nav-link" data-toggle="tab" href="#card-tab-6">Kuesioner SJPH</a>
-						</li>
-						<li class="nav-item next-button"><a href="#" data-click="next-tab" class="nav-link text-primary"><i class="fa fa-arrow-right"></i></a></li>
-					</ul>
-				</div>
-				<div class="card-body table-responsive">
-					<div class="tab-content p-0 m-0">
-						<div class="tab-pane fade active show" id="card-tab-1">
+		
+			<div class="table-responsive">
+				<div class="tab-content p-0 m-0">
+
+					<div class="tab-pane fade active show" id="card-tab-1">
 							@php
 								$regId = Auth::user()->registrasi_id;
 								$fieldSudah = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:#2fca2f"></i></td>';
 								$fieldBelum = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:grey"></i></td>';
-								$buttonUnduhDisabled = '<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a></td>';
+								$buttonUnduhDisabled = '<td class="valign-middle text-center"><a href="#" ><i class="fa fa-eye" style="color:grey;"></i></a></td>';
 								$buttonUnduh = '<td class="valign-middle text-center"><a href="#" class="btn btn-primary btn-xs">unduh</a></td>';
 						
 							@endphp
@@ -140,95 +62,153 @@
 								<span style="margin-right: 5px;"><i class="ion-ios-paper" style="color:#2fca2f"></i> Sesuai</span>
 								<span style="margin-right: 10px;"><i class="ion-ios-paper" style="color:#e46464"></i> Revisi</span>
 							</div>
+
 							@if($dataHas !== null)
 								@foreach($dataHas as $has => $value)
-									<form action="{{route('updatestatushas',["id" => $value['id']])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
-										@csrf
-										@method('PUT')
+								<form action="{{route('updatestatusverifikasi',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+									@csrf
+									@method('PUT')
 								@endforeach()	
 							@else
-								<form action="#" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+							<form action="#" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 									@csrf
 							@endif
-								<table id="hasTable" class="table table-striped table-bordered table-td-valign-middle table-sm table-responsive" cellspacing="0" style="width:100%">
+
+								<input type="text" id="has_selected" name="has_selected" hidden value="tes">
+								
+								<table id="hasTable" class="table  table-bordered table-td-valign-middle table-sm table-responsive" cellspacing="0" style="width:100%">
 									<thead>
 										<tr>
 											<th width="1%" class="text-nowrap valign-middle text-center">No</th>
 											<th width="50%" class="text-nowrap valign-middle text-center">Nama Dokumen</th>
 											<th width="1%" class="text-nowrap valign-middle text-center">File</th>
-											@if($dataHas !== null)
-											<th class="text-nowrap valign-middle text-center" style="width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;</th>
-											@endif
-											<th width="20%" class="valign-middle text-center">Temuan</th>
-											<th width="1%" class="valign-middle text-center">Tanggal Penyerahan Tambahan/ Perbaikan  Dokumen</th>
-											<th width="30%" class="valign-middle text-center">Review Tambahan/ Perbaikan  Dokumen</th>
+											<th width="1%" class="text-nowrap valign-middle text-center">Aksi</th>
+											<th width="20%" class="text-nowrap valign-middle text-center">Catatan</th>
+											<th width="1%" class="text-nowrap valign-middle text-center">Unggah File</th>
+											
 										</tr>
 									</thead>
 									<tbody>
 										
 									@if($dataHas == null)
-										<input type="text" name="status" value="0" readonly hidden>
+										
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">1</td>
 											<td class="valign-middle">Manual Sistem Jaminan Produk Halal (SJPH)</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												
+												<form action="{{route('storedokumenhasadmin',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+													@csrf
+													@method('PUT')
+													<input type="text" id="has_selected" name="has_selected" hidden value="tes">
+													
+													<input type="file" id="has_1" name="has_1">
+													<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_1')" >Unggah
+												</form>
+												</button>
+												
+											</td>
+
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">2</td>
 											<td class="valign-middle" style="word-wrap:break-word">Matriks Bahan</td>
-											
+
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_2" name="has_2">
+												<button type="submit" id="btn_has2" class="btn btn-xs btn-primary" onclick="setHas('has_2')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">3</td>
 											<td class="text-nowrap valign-middle">Data Produk Yang Dihasilkan</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_3" name="has_3">
+												<button type="submit" id="btn_has3" class="btn btn-xs btn-primary" onclick="setHas('has_3')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">4</td>
 											<td class=" valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_4" name="has_4">
+												<button type="submit" id="btn_has4" class="btn btn-xs btn-primary" onclick="setHas('has_4')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">5</td>
 											<td class="valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_5" name="has_5">
+												<button type="submit" id="btn_has5" class="btn btn-xs btn-primary" onclick="setHas('has_5')" >Unggah
+												</button>
+											</td>
+											
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">6</td>
 											<td class=" valign-middle">Sertifikat Halal Sebelumnya</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_6" name="has_6">
+												<button type="submit" id="btn_has6" class="btn btn-xs btn-primary" onclick="setHas('has_6')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">7</td>
 											<td class=" valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_7" name="has_7">
+												<button type="submit" id="btn_has7" class="btn btn-xs btn-primary" onclick="setHas('has_7')" >Unggah
+												</button>
+											</td>
+											
 										<tr class="even">
-											<td class="text-nowrap valign-middle text-center">8</td>
+											<td class="valign-middle text-center">8</td>
 											<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang </td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_8" name="has_8">
+												<button type="submit" id="btn_has8" class="btn btn-xs btn-primary" onclick="setHas('has_8')" >Unggah
+												</button>
+											</td>
+											
 
 										</tr>
 										<tr class="odd">
@@ -236,61 +216,135 @@
 											<td class="valign-middle">Diagram Alir Proses Untuk Produk Yang Disertifikasi</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_9" name="has_9">
+												<button type="submit" id="btn_has9" class="btn btn-xs btn-primary" onclick="setHas('has_9')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">10</td>
 											<td class="valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_10" name="has_10">
+												<button type="submit" id="btn_has10" class="btn btn-xs btn-primary" onclick="setHas('has_10')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="odd">
 											<td class="text-nowrap valign-middle text-center">11</td>
-											<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)*Dilampirkan Aspek Legal Perusahaan</td>
+											<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D <b>)*Dilampirkan Aspek Legal Perusahaan (NIB dan NPWP></b></td>
 											
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_11" name="has_11">
+												<button type="submit" id="btn_has11" class="btn btn-xs btn-primary" onclick="setHas('has_11')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">12</td>
 											<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_12" name="has_12">
+												<button type="submit" id="btn_has12" class="btn btn-xs btn-primary" onclick="setHas('has_12')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">13</td>
-											<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
+											<td class="valign-middle">Bukti Sertifikat Penyelia Halal</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_13" name="has_13">
+												<button type="submit" id="btn_has13" class="btn btn-xs btn-primary" onclick="setHas('has_13')" >Unggah
+												</button>
+											</td>
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">14</td>
-											<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
+											<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_14" name="has_14">
+												<button type="submit" id="btn_has14" class="btn btn-xs btn-primary" onclick="setHas('has_14')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">15</td>
-											<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
+											<td class="valign-middle">Bukti Pelaksaan Audit Internal</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_15" name="has_15">
+												<button type="submit" id="btn_has15" class="btn btn-xs btn-primary" onclick="setHas('has_15')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">16</td>
+											<td class="valign-middle">Bukti Pelaksanaan Kaji Ulang Manajemen</td>
+											{!! $buttonUnduhDisabled !!}
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_16" name="has_16">
+												<button type="submit" id="btn_has16" class="btn btn-xs btn-primary" onclick="setHas('has_16')" >Unggah
+												</button>
+											</td>
+											
+										</tr>
+										<tr class="even">
+											<td class="text-nowrap valign-middle text-center">17</td>
+											<td class="valign-middle">Informasi Layout Lokasi Produksi</td>
+											{!! $buttonUnduhDisabled !!}
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_17" name="has_17">
+												<button type="submit" id="btn_has15" class="btn btn-xs btn-primary" onclick="setHas('has_15')" >Unggah
+												</button>
+											</td>
+											
+										</tr>
+										<tr class="even">
+											<td class="text-nowrap valign-middle text-center">18</td>
 											<td class="valign-middle">Bukti Registrasi Dari BPJPH</td>
 											{!! $buttonUnduhDisabled !!}
-											<td class=" valign-middle"/>
-											<td class=" valign-middle"/>
+											<td></td>
+											<td></td>
+											<td class="valign-middle text-center">
+												<input type="file" id="has_18" name="has_18">
+												<button type="submit" id="btn_has16" class="btn btn-xs btn-primary" onclick="setHas('has_16')" >Unggah
+												</button>
+											</td>
+											
 										</tr>
-										
+									
+									
 										
 									@else
 											@foreach($dataHas as $has => $value)
@@ -304,56 +358,50 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_1" name="status_has_1" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_1"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_1"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_1"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_1"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_1"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_1"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
-													<td >
-														<input class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value='{{$value['keterangan_has_1']}}'>
-														</input>
+													<td ><input type="text" class="form-control" name="keterangan_has_1" value='{{$value['keterangan_has_1']}}' ></input></td>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_1" name="has_1">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_1')" >Unggah
+														</button>
 														
-
 													</td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_1" type="text" name="review_perbaikan_1" value='{{$value['review_perbaikan_1']}}'>
-														</input>
-														
-
-													</td>
+													
 												</tr>
+												
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">2</td>
-													<td class="valign-middle">Matriks Bahan </td>
+													<td class="valign-middle">Matriks Bahan vs Produk </td>
 													@if($value['has_2'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_2')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_2" name="status_has_2" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_2"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_2"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_2"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_2"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_2"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_2"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
-													<td >
-														<input type="text" class="form-control" name="keterangan_has_2" value='{{$value["keterangan_has_2"]}}' ></input>
-													</td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_2" type="text" name="review_perbaikan_2" value='{{$value['review_perbaikan_2']}}'>
-														</input>
+													<td ><input type="text" class="form-control" name="keterangan_has_2" value='{{$value['keterangan_has_2']}}' ></input></td>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_2" name="has_2">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_2')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">3</td>
@@ -363,26 +411,23 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_3" name="status_has_3" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_3"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_3"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_3"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_3"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_3"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_3"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
-													<td >
-														<input type="text" class="form-control" name="keterangan_has_3" value='{{$value['keterangan_has_3']}}' >
-														</input>
-													</td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_3" type="text" name="review_perbaikan_3" value='{{$value['review_perbaikan_1']}}'>
-														</input>
+													<td ><input type="text" class="form-control" name="keterangan_has_3" value='{{$value['keterangan_has_3']}}' ></input></td>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_3" name="has_3">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_3')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">4</td>
@@ -392,23 +437,23 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+													
 													<td>
 														<select id="status_has_4" name="status_has_4" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_4"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_4"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_4"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_5"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_4"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_4"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_4" value='{{$value['keterangan_has_4']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_4" type="text" name="review_perbaikan_4" value='{{$value['review_perbaikan_4']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_4" name="has_4">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_4')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">5</td>
@@ -418,26 +463,27 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_5" name="status_has_5" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_5"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_5"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_5"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_5"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_5"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_5"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control"  name="keterangan_has_5" value='{{$value['keterangan_has_5']}}'  ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_5" type="text" name="review_perbaikan_5" value='{{$value['review_perbaikan_5']}}'>
-														</input>
+													<td ><input type="text" class="form-control" name="keterangan_has_5" value='{{$value['keterangan_has_5']}}' ></input></td>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_5" name="has_5">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_5')" >Unggah
+														</button>
 														
-
 													</td>
+												</tr>
+													
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">6</td>
-													<td class="valign-middle">Sertifikat Halal Sebelumnya</td>
+													<td class="valign-middle">Sertifikat Halal Sebelumnya (Jika Ada)</td>
 													@if($value['has_6'] !== null)
 														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_6')}}"><i class="fa fa-eye"></i></a></td>
 													@else
@@ -447,19 +493,18 @@
 														<select id="status_has_6" name="status_has_6" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_6"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_6"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_6"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_6"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_6"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_6"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
-													<td ><input type="text" class="form-control"  name="keterangan_has_6" value='{{$value['keterangan_has_6']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_6" type="text" name="review_perbaikan_6" value='{{$value['review_perbaikan_6']}}'>
-														</input>
+													<td ><input type="text" class="form-control" name="keterangan_has_6" value='{{$value['keterangan_has_6']}}' ></input></td>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_6" name="has_6">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_6')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">7</td>
@@ -473,19 +518,19 @@
 														<select id="status_has_7" name="status_has_7" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_7"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_7"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_7"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_7"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_7"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_7"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_7" value='{{$value['keterangan_has_7']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_7" type="text" name="review_perbaikan_7" value='{{$value['review_perbaikan_7']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_7" name="has_7">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_7')" >Unggah
+														</button>
 														
-
 													</td>
+												
+												</tr>	
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">8</td>
 													<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
@@ -494,23 +539,24 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+													
+											
 													<td>
 														<select id="status_has_8" name="status_has_8" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_8"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_8"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_8"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_8"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_8"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_8"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_8" value='{{$value['keterangan_has_8']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_8" type="text" name="review_perbaikan_8" value='{{$value['review_perbaikan_8']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_8" name="has_8">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_8')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">9</td>
@@ -520,23 +566,23 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_9" name="status_has_9" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_9"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_9"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_9"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_9"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_9"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_9"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_9" value='{{$value['keterangan_has_9']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_9" type="text" name="review_perbaikan_9" value='{{$value['review_perbaikan_9']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_9" name="has_9">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_9')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">10</td>
@@ -546,563 +592,259 @@
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_10" name="status_has_10" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_10"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_10"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_10"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_10"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_10"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_10"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_10" value='{{$value['keterangan_has_10']}}' ></input></td>
-
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_10" type="text" name="review_perbaikan_10" value='{{$value['review_perbaikan_10']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_10" name="has_10">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_10')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">11</td>
-													<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)</td>
+													<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D) <b>*) dilampirkan aspek legal perusahaan (NIB dan NPWP)</b></td>
 													@if($value['has_11'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														
+
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_11')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_11" name="status_has_11" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_11"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_11"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_11"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_11"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_11"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_11"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_11" value='{{$value['keterangan_has_11']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_11" type="text" name="review_perbaikan_11" value='{{$value['review_perbaikan_11']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_11" name="has_11">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_11')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">12</td>
 													<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 													@if($value['has_12'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_12')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_12" name="status_has_12" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_12"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_12"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_12"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_12"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_12"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_12"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_12" value='{{$value['keterangan_has_12']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_12" type="text" name="review_perbaikan_12" value='{{$value['review_perbaikan_12']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_12" name="has_12">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_12')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">13</td>
-													<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
+													<td class="valign-middle">Bukti Sertifikat Pelatihan Penyelia Halal</td>
 													@if($value['has_13'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_13')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_13" name="status_has_13" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_13"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_13"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_13"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_13"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_13"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_13"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_13" value='{{$value['keterangan_has_13']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_13" type="text" name="review_perbaikan_13" value='{{$value['review_perbaikan_13']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_13" name="has_13">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_13')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">14</td>
-													<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
+													<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 													@if($value['has_14'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_14')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_14" name="status_has_14" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_14"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_14"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_14"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_14"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_14"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_14"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_14" value='{{$value['keterangan_has_14']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_14" type="text" name="review_perbaikan_14" value='{{$value['review_perbaikan_14']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_14" name="has_14">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_14')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 
 												<tr class="even">
 													<td class="text-nowrap valign-middle text-center">15</td>
-													<td class="valign-middle">Informasi Denah Lokasi Produksi</td>
+													<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
 													@if($value['has_15'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_15')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_15" name="status_has_15" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_15"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_15"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_15"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_15"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_15"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_15"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_15" value='{{$value['keterangan_has_15']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_15" type="text" name="review_perbaikan_15" value='{{$value['review_perbaikan_15']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_15" name="has_15">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_15')" >Unggah
+														</button>
 														
-
 													</td>
+													
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">16</td>
-													<td class="valign-middle">Bukti registrasi dari BPJPH</td>
+													<td class="valign-middle">Bukti Pelaksanaan Kaji Ulang Manajemen</td>
 													@if($value['has_16'] !== null)
-														<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_16')}}"><i class="fa fa-eye"></i></a></td>
 													@else
 														{!! $buttonUnduhDisabled !!}
 													@endif
+
 													<td>
 														<select id="status_has_16" name="status_has_16" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
 															<option value="" {{$value["status_has_16"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 															<option value="1" {{$value["status_has_16"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-						                                    <option value="2" {{$value["status_has_16"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    	<option value="3" {{$value["status_has_16"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+															<option value="2" {{$value["status_has_16"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_16"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_16" value='{{$value['keterangan_has_16']}}' ></input></td>
-													<td></td>
-
-													<td >
-														<input class="form-control" id="review_perbaikan_16" type="text" name="review_perbaikan_16" value='{{$value['review_perbaikan_16']}}'>
-														</input>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_16" name="has_16">
+														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_16')" >Unggah
+														</button>
 														
-
 													</td>
+													
+												</tr>
+												<tr class="even">
+													<td class="text-nowrap valign-middle text-center">17</td>
+													<td class="valign-middle">Informasi Layout Lokasi Produksi</td>
+													@if($value['has_17'] !== null)
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_17')}}"><i class="fa fa-eye"></i></a></td>
+													@else
+													{!! $buttonUnduhDisabled !!}
+													@endif
+													<td>
+														<select id="status_has_17" name="status_has_17" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+															<option value="" {{$value["status_has_17"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+															<option value="1" {{$value["status_has_17"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+															<option value="2" {{$value["status_has_17"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_17"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														</select>
+													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_17" value='{{$value['keterangan_has_17']}}' ></input></td>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_17" name="has_17">
+														<button type="submit" id="btn_has17" class="btn btn-xs btn-primary" onclick="setHas('has_17')" >Unggah
+														</button>
+														
+													</td>
+												</tr>
+
+												<tr class="odd">
+													<td class="text-nowrap valign-middle text-center">18</td>
+													<td class="valign-middle">Bukti Registrasi dari BPJPH</td>
+													@if($value['has_18'] !== null)
+														<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_18')}}"><i class="fa fa-eye"></i></a></td>
+													@else
+													{!! $buttonUnduhDisabled !!}
+													@endif
+													<td>
+														<select id="status_has_18" name="status_has_18" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+															<option value="" {{$value["status_has_18"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+															<option value="1" {{$value["status_has_18"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+															<option value="2" {{$value["status_has_18"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+															<option value="3" {{$value["status_has_18"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														</select>
+													</td>
+													<td ><input type="text" class="form-control" name="keterangan_has_18" value='{{$value['keterangan_has_18']}}' ></input></td>
+													<td class="valign-middle text-center">
+														<input type="file" id="has_18" name="has_18">
+														<button type="submit" id="btn_has18" class="btn btn-xs btn-primary" onclick="setHas('has_18')" >Unggah
+														</button>
+														
+													</td>
+													
 												</tr>
 
 											@endforeach
 										@endif
 									</tbody>
 								</table>
+								
 								<div class=" offset-md-5">
-					                @component('components.buttonback',['href' => route("listregistrasipelangganaktif")])@endcomponent
+					               <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
 					                @if($dataHas !== null)
-										<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;">Submit</button>
+										<button type="submit" class="btn btn-md btn-success " style="">Submit</button>
 									@endif
 									
 					            </div>
 								
+								
+								
 									
 								
 							</form>	
 						</div>
-						<div class="tab-pane fade" id="card-tab-7">
-							<table id="kantorPusatTable" class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-				                <thead>
-				                    <tr>
-				                        <th class="text-nowrap valign-middle text-center">No</th>
-				                        <th class="text-nowrap valign-middle text-center">Kantor Pusat</th>
-				                        <th class="text-nowrap valign-middle text-center">Alamat</th>
-				                        <th class="text-nowrap valign-middle text-center">Kota</th>
-				                        <th class="text-nowrap valign-middle text-center">Negara</th>
-				                        <th class="text-nowrap valign-middle text-center">Telepon</th>
-				                        <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;</th>
-				                    </tr>
-				                </thead>
-				            </table>
-						</div>
-						<div class="tab-pane fade" id="card-tab-8">
-							<table id="menuRestoranTable" class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-				                <thead>
-				                    <tr>
-				                        <th class="text-nowrap valign-middle text-center">No</th>
-				                        <th class="text-nowrap valign-middle text-center">Menu Restoran</th>
-				                    </tr>
-				                </thead>
-				            </table>
-						</div>
-						<div class="tab-pane fade" id="card-tab-2">
-							<table id="fasilitasTable" class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-				                <thead>
-				                    <tr>
-				                        <th class="text-nowrap valign-middle text-center">No</th>
-				                        <th class="text-nowrap valign-middle text-center">Nama Fasilitas</th>
-				                        <th class="text-nowrap valign-middle text-center">Alamat</th>
-				                        <th class="text-nowrap valign-middle text-center">Kota</th>
-				                        <th class="text-nowrap valign-middle text-center">Negara</th>
-				                        <th class="text-nowrap valign-middle text-center">Telepon</th>
-				                        <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;</th>
-				                    </tr>
-				                </thead>
-				            </table>
-						</div>
-						<div class="tab-pane fade" id="card-tab-3">
-							<table id="produkTable" class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-				                <thead>
-				                    <tr>
-				                        <th class="text-nowrap valign-middle text-center">No</th>
-				                        <th class="text-nowrap valign-middle text-center">Nama Fasilitas</th>
-				                        <th class="text-nowrap valign-middle text-center">Nama Produk</th>
-				                        <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
-				                    </tr>
-				                </thead>
-				            </table>
-						</div>
-						<div class="tab-pane fade" id="card-tab-4">
-							<table id="materialTable" class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-				                <thead>
-				                    <tr>
-				                        <th class="text-nowrap valign-middle text-center">No</th>
-				                        <th class="text-nowrap valign-middle text-center">Tipe Material</th>
-				                        <th class="text-nowrap valign-middle text-center">Nama Material</th>
-				                        <th class="text-nowrap valign-middle text-center">File</th>
-				                        <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;</th>
-				                    </tr>
-				                </thead>
-				            </table>
-						</div>
-						<div class="tab-pane fade" id="card-tab-5">
-							@if($dataMatriksProduk !== null)
-								@foreach($dataMatriksProduk as $matriks => $value)
-									@if($value['status_matriks_produk'] == 1)
-										<h5 style="float: left;">Dokumen Lengkap</h5>
-									@else
-										<h5 style="float: left;">Dokumen Belum Lengkap</h5>
-									@endif 
-								@endforeach
-							@else
-								<h5 style="float: left;">Dokumen Belum Lengkap</h5>	
-							@endif
-							<form action="{{route('storematriksproduk')}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
-								@csrf
-								<table  class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-									<thead>
-										<tr>
-											<th width="1%" class="text-nowrap valign-middle text-center">No</th>
-											<th width="10%" class="text-nowrap valign-middle text-center">No Registrasi</th>
-											<th width="10%" class="text-nowrap valign-middle text-center">Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										@if($dataMatriksProduk == null)
-										<input type="text" name="status" value="0" readonly hidden>
-										<tr class="odd">
-											<td class="text-nowrap valign-middle text-center">1</td>
-											<td class="text-nowrap valign-middle text-center">{{$dataRegistrasi[0]['no_registrasi']}}</td>
-											{!! $buttonUnduhDisabled !!}
-										</tr>
-										@else
-											@foreach($dataMatriksProduk as $matriks => $value)
-												<input type="text" name="status" value="1" readonly hidden>
-												<input type="text" name="id" value="{{$value['id']}}" readonly hidden>
-												<tr class="odd">
-													<td class="text-nowrap valign-middle text-center">1</td>
-													<td class="text-nowrap valign-middle text-center">{{$dataRegistrasi[0]['no_registrasi']}}</td>
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/MATRIKSPRODUK/'.$value['matriks_produk']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-												</tr>
-											@endforeach
-										@endif	
-									</tbody>
-								</table>
-							</form>
-						</div>
-						<div class="tab-pane fade" id="card-tab-9">
-							<table id="jagalTable" class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-				                <thead>
-				                    <tr>
-				                        <th class="text-nowrap valign-middle text-center">No</th>
-				                        <th class="text-nowrap valign-middle text-center">Nama</th>
-				                        <th class="text-nowrap valign-middle text-center">ID Penerbit Kartu</th>
-				                        <th class="text-nowrap valign-middle text-center">ID Kartu</th>
-				                        <th class="text-nowrap valign-middle text-center">Masa Berlaku</th>
-				                        <th class="text-nowrap valign-middle text-center">Komentar</th>
-				                        <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;</th>
-				                    </tr>
-				                </thead>
-				            </table>
-						</div>
-						<div class="tab-pane fade" id="card-tab-6">
-							@if($dataKuisionerHas !== null)
-								@foreach($dataKuisionerHas as $kuis => $value)
-									@if($value['status_kuis'] == 1)
-										<h5>Kuisioner Sudah Terisi</h5>
-									@else
-										<h5>Kuisioiner Belum Diisi</h5>
-									@endif 
-								@endforeach
-							@else
-								<h5>Kuisioiner Belum Diisi</h5>	
-							@endif
-							<form action="{{route('storekuisionerhas')}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
-								@csrf
-								<table  class="table table-striped table-bordered table-td-valign-middle " cellspacing="0" style="width:100%">
-									<thead>
-										<tr>
-											<th width="1%" class="text-nowrap valign-middle text-center">No</th>
-											<th width="10%" class="text-nowrap valign-middle text-center">Kuesioner</th>
-											<th width="1%" class="text-nowrap valign-middle text-center">Jawaban</th>
-										</tr>
-									</thead>
-									@if($dataKuisionerHas == null)
-                                        <input type="text" name="status" value="0" readonly hidden>
-                                        <tbody>
-                                            <tr class="odd">
-                                                <td class="text-nowrap valign-middle text-center">1</td>
-                                                <td class="valign-middle text-left">
-                                                    Apakah perusahaan pemohon sertifikasi adalah distributor (bukan produsen/manufacturer)?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_1" id="kuis11" value="1" disabled/>
-                                                        <label for="kuis11">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_1" id="kuis12" value="0" disabled/>
-                                                        <label for="kuis12">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="text-nowrap valign-middle text-center">2</td>
-                                                <td class="valign-middle text-left">
-                                                    Jika jawaban pada poin 1 Ya, apakah perusahaan pemohon merupakan satu grup dengan produsen/manufacturer?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_2" id="kuis21" value="1" disabled/>
-                                                        <label for="kuis21">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_2" id="kuis22" value="0" disabled/>
-                                                        <label for="kuis22">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="text-nowrap valign-middle text-center">3</td>
-                                                <td class=" valign-middle text-left">
-                                                    Apakah perusahaan pemohon melakukan proses pelabelan ulang (relabeling) atau pengemasan ulang (repacking)?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_3" id="kuis31" value="1" disabled/>
-                                                        <label for="kuis31">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_3" id="kuis32" value="0" disabled/>
-                                                        <label for="kuis32">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="text-nowrap valign-middle text-center">4</td>
-                                                <td class=" valign-middle text-left">
-                                                    Selain menghasilkan produk yang disertifikasi, apakah pabrik juga menghasilkan produk yang tidak disertifikasi?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_4" id="kuis41" value="1" disabled/>
-                                                        <label for="kuis41">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_4" id="kuis42" value="0" disabled/>
-                                                        <label for="kuis42">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="text-nowrap valign-middle text-center">5</td>
-                                                <td class=" valign-middle text-left">
-                                                    Jika jawaban pada poin 4 Ya, apakah ada penggunaan fasilitas produksi dan peralatan pembantu yang sama untuk produk yang disertifikasi dan produk yang tidak disertifikasi?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_5" id="kuis51" value="1" disabled/>
-                                                        <label for="kuis51">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_5" id="kuis52" value="0" disabled/>
-                                                        <label for="kuis52">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="text-nowrap valign-middle text-center">6</td>
-                                                <td class="text-nowrap valign-middle text-left">
-                                                    Jika jawaban pada poin 5 Ya, apakah ada penggunaan bahan dari babi atau turunannya?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_6" id="kuis61" value="1" disabled/>
-                                                        <label for="kuis61">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_6" id="kuis62" value="0" disabled/>
-                                                        <label for="kuis62">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    @else
-                                        @foreach($dataKuisionerHas as $kuis => $value)
-                                            <input type="text" name="status" value="1" readonly hidden>
-                                            <input type="text" name="id" value="{{$value['id']}}" readonly hidden>
-                                            <tbody>
-                                            <tr class="odd">
-                                                <td class="text-nowrap valign-middle text-center">1</td>
-                                                <td class=" valign-middle text-left">
-                                                    Apakah perusahaan pemohon sertifikasi adalah distributor (bukan produsen/manufacturer)?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_1" id="kuis11" value="1" {{$value['kuis_1'] == 1 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis11">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_1" id="kuis12" value="0" {{$value['kuis_1'] == 0 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis12">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="text-nowrap valign-middle text-center">2</td>
-                                                <td class=" valign-middle text-left">
-                                                    Jika jawaban pada poin 1 Ya, apakah perusahaan pemohon merupakan satu grup dengan produsen/manufacturer?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_2" id="kuis21" value="1" {{$value['kuis_2'] == 1 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis21">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_2" id="kuis22" value="0" {{$value['kuis_2'] == 0 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis22">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="text-nowrap valign-middle text-center">3</td>
-                                                <td class=" valign-middle text-left">
-                                                    Apakah perusahaan pemohon melakukan proses pelabelan ulang (relabeling) atau pengemasan ulang (repacking)?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_3" id="kuis31" value="1" {{$value['kuis_3'] == 1 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis31">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_3" id="kuis32" value="0" {{$value['kuis_3'] == 0 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis32">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="text-nowrap valign-middle text-center">4</td>
-                                                <td class=" valign-middle text-left">
-                                                    Selain menghasilkan produk yang disertifikasi, apakah pabrik juga menghasilkan produk yang tidak disertifikasi?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_4" id="kuis41" value="1" {{$value['kuis_4'] == 1 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis41">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_4" id="kuis42" value="0" {{$value['kuis_4'] == 0 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis42">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="text-nowrap valign-middle text-center">5</td>
-                                                <td class=" valign-middle text-left">
-                                                    Jika jawaban pada poin 4 Ya, apakah ada penggunaan fasilitas produksi dan peralatan pembantu yang sama untuk produk yang disertifikasi dan produk yang tidak disertifikasi?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_5" id="kuis51" value="1" {{$value['kuis_5'] == 1 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis51">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_5" id="kuis52" value="0" {{$value['kuis_5'] == 0 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis52">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="text-nowrap valign-middle text-center">6</td>
-                                                <td class="text-center valign-middle text-left">
-                                                    Jika jawaban pada poin 5 Ya, apakah ada penggunaan bahan dari babi atau turunannya?
-                                                </td>
-                                                <td class="text-nowrap valign-middle text-center">
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_6" id="kuis61" value="1" {{$value['kuis_6'] == 1 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis61">Ya</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">
-                                                        <input type="radio" name="kuis_6" id="kuis62" value="0" {{$value['kuis_6'] == 0 ? 'checked' : ''}} disabled/>
-                                                        <label for="kuis62">Tidak</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        @endforeach
-                                    @endif  
-								</table>
-							</form>	
-						</div>
-					</div>
-				</div>
+				</div>		
 			</div>
-
-			
-			<!-- end card -->
 		</div>
 		<!-- end panel-body -->
 	</div>
@@ -1116,245 +858,18 @@
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
 	<script src="{{asset('/assets/js/demo/table-manage-default.demo.js')}}"></script>
 	<script type="text/javascript">
-		$('#fasilitasTable').DataTable({
-            columns:[
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    "data":"fasilitas"
-                },
-                {
-                    "data":"alamat"
-                },
-                {
-                    "data":"kota"
-                },
-                {
-                    "data":"negara"
-                },
-                {
-                    "data":"telepon"
-                },
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return `<a href="{{url('fasilitas_detail')}}/`+full.id_registrasi+`/`+full.id+`" class="btn btn-lime btn-xs" >&nbsp;&nbsp;Detail&nbsp;&nbsp;</a>`
-                    }
-                }
-            ],
-            processing:true,
-            serverSide:true,
-            ajax:'{{url('data_fasilitas')}}'+'/'+'<?php echo $dataRegistrasi[0]['id'] ;?>',
-            "paging":   false,
-	        "ordering": false,
-	        "info":     false,
-	        "searching": false,
-            order:[[0,'asc']]
-        });
+		
 
-        $('#produkTable').DataTable({
-            columns:[
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    "data":"fasilitas"
-                },
-                {
-                    "data":"nama_produk"
-                },
-                {
-                    "data":"kelompok"
-                }
-            ],
-            processing:true,
-            serverSide:true,
-            ajax:'{{url('data_produk')}}'+'/'+'<?php echo $dataRegistrasi[0]['id'] ;?>',
-            "paging":   false,
-	        "ordering": false,
-	        "info":     false,
-	        "searching": false,
-            order:[[0,'asc']]
-        });
+        
 
-        $('#hasTable').DataTable({
-        	"paging":   false,
-	        "ordering": false,
-	        "info":     false,
-	        "searching":false
-        });
+		function setHas(d){
 
-        $('#materialTable').DataTable({
-            columns:[
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    "data":"tipe_material"
-                },
-                {
-                    "data":"nama_material"
-                },
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                    	if(full.file_material == null){
-                    		return `<a href="" class="btn btn-lime btn-xs" disabled>&nbsp;&nbsp;Unduh File&nbsp;&nbsp;</a>`
-                    	}else{
-                    		return `<a href="{{ url('').Storage::url('public/uploadDokumen/`+full.id_user+`/`+full.id_registrasi+`/MATERIAL/`+full.file_material+`') }}" class="btn btn-lime btn-xs" download>&nbsp;&nbsp;Unduh File&nbsp;&nbsp;</a>`
-                    	}
-                    }
-                },
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return `<a href="{{url('material_detail')}}/`+full.id_registrasi+`/`+full.id+`" class="btn btn-green btn-xs" >&nbsp;&nbsp;Detail&nbsp;&nbsp;</a>`
-                    }
-                }
-            ],
-            processing:true,
-            serverSide:true,
-            ajax:'{{url('data_material')}}'+'/'+'<?php echo $dataRegistrasi[0]['id'] ;?>',
-            "paging":   false,
-	        "ordering": false,
-	        "info":     false,
-	        "searching": false,
-            order:[[0,'asc']]
-        });
+			var x = document.getElementById("has_selected");
+			x.value = d;
 
-        $('#kantorPusatTable').DataTable({
-            columns:[
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    "data":"kantor_pusat"
-                },
-                {
-                    "data":"alamat"
-                },
-                {
-                    "data":"kota"
-                },
-                {
-                    "data":"negara"
-                },
-                {
-                    "data":"phone"
-                },
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return `<a href="{{url('kantor_pusat_detail')}}/`+full.id_registrasi+`/`+full.id+`" class="btn btn-lime btn-xs" >&nbsp;&nbsp;Detail&nbsp;&nbsp;</a>`
-                    }
-                }
-            ],
-            processing:true,
-            serverSide:true,
-            ajax:'{{url('data_kantor_pusat')}}'+'/'+'<?php echo $dataRegistrasi[0]['id'] ;?>',
-            "paging":   false,
-	        "ordering": false,
-	        "info":     false,
-	        "searching": false,
-            order:[[0,'asc']]
-        });
+			//console.log(x.value);
 
-        $('#menuRestoranTable').DataTable({
-            columns:[
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    "data":"menu"
-                },
-            ],
-            processing:true,
-            serverSide:true,
-            ajax:'{{url('data_menu_restoran')}}'+'/'+'<?php echo $dataRegistrasi[0]['id'] ;?>',
-            "paging":   false,
-	        "ordering": false,
-	        "info":     false,
-	        "searching": false,
-            order:[[0,'asc']]
-        });
-
-        $('#jagalTable').DataTable({
-            columns:[
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    "data":"nama_jagal"
-                },
-                {
-                    "data":"id_penerbit_kartu"
-                },
-                {
-                    "data":"id_kartu"
-                },
-                {
-                    "data":"tanggal_expired"
-                },
-                {
-                    "data":"deskripsi"
-                },
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return `<a href="{{url('jagal_detail')}}/`+full.id_registrasi+`/`+full.id+`" class="btn btn-lime btn-xs" >&nbsp;&nbsp;Detail&nbsp;&nbsp;</a>`
-                    }
-                }
-            ],
-            processing:true,
-            serverSide:true,
-            ajax:'{{url('data_jagal')}}'+'/'+'<?php echo $dataRegistrasi[0]['id'] ;?>',
-            "paging":   false,
-	        "ordering": false,
-	        "info":     false,
-	        "searching": false,
-            order:[[0,'asc']]
-        });
+		}
 
 	</script>
 @endpush

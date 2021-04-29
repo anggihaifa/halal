@@ -30,119 +30,184 @@
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
-        <div class="panel-body table-responsive" style="min-height: 230px">
+        <div class="panel-body" style="min-height: 230px">
             <h5 style="color: #ff6961;">NOTE: Silahkan Aktifkan Registrasi Anda Untuk Melanjutkan Ke Tahapan Berikutnya</h5>
-            <table id="table" class="table table-striped table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%">
-                <thead>
-                <tr>
-                    <th class="text-nowrap valign-middle text-center">No</th>
-                    <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
-                    <th class="text-nowrap valign-middle text-center">Tanggal Pendaftaran</th>
-                    <th class="text-nowrap valign-middle text-center">Jenis </th>
-                    <th class="text-nowrap valign-middle text-center">Status</th>
-                    <th class="text-nowrap valign-middle text-center">Aktif/Non Aktif</th>
-                    <th class="text-nowrap valign-middle text-center">Progress</th>
-                    <th class="text-nowrap valign-middle text-center">Aksi</th>
-                  
-                </tr>
+           <table id="table" class="table" cellspacing="0" style="width:100%">
+                <thead style="display: none;">
+                    <tr>
+                        <th ></th>                         
+                    </tr>
                 </thead>
             </table>
         </div>
         <!-- end panel-body -->
     </div>
-    <!-- end panel -->
+
+    
+    
 @endsection
 @push('scripts')
+
+
     <script src="{{asset('/assets/js/checkData.js')}}"></script>
+    <script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+
+    
     <script>
-        $('#table').DataTable({
-            columns:[
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {"data":"no_registrasi"},
-                {"data":"tgl_registrasi"},
-                {"data":"jenis"},
-                {"data":"status_registrasi"},
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                        // if(full.status_pembayaran == 2 ){
-                        //     if(full.id == `{{Auth::user()->registrasi_id}}` ){
-                        //         return `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-yellow btn-xs" >Non Aktifkan</a>`
-                        //     }else{
-                        //         return `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-green btn-xs" >Aktifkan</a>`
-                        //     }
-                        // }else{
-                        //     return `-`
-                        // }
-                        
-                        if(full.id == `{{Auth::user()->registrasi_id}}` ){
-                            return `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-yellow btn-xs" >Non Aktifkan</a>`
-                        }else{
-                            return `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-green btn-xs" >Aktifkan</a>`
-                        }
-                        
-                    }
-                },
-                {
-                    "data":"status",
-                    "render":function (data) {return checkProgress(data);}
-                },
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-                         
-                                
-                                   
-                                
-                                var akad = `<a href="{{url('upload_kontrak_akad_user')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
-
-                                var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayaran</a> `;
-                                var pembayaran2 = `<a href="{{url('pembayaran_tahap2')}}/`+full.id+`"  class="dropdown-item"> Pembayaran Tahap 2</a> `;
-                                var pelunasan = `<a href="{{url('pelunasan')}}/`+full.id+`"  class="dropdown-item" >Pelunasan</a>` ;
-                                var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit dan Berita Acara</a>` ;
-                                // var reportB = `<a href="{{url('report_berita_acara')}}/`+full.id+`"  class="dropdown-item" >Report Berita Acara</a>` ;
 
 
-                                   
-                                return `<div class="btn-group m-r-5 show">
-                                        <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
-                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
 
-                                            <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
-
-                                            
-                                            <div class="dropdown-divider"></div>`+akad+pembayaran+pembayaran2+reportA+pelunasan+
-                                        `</div>
-                                    </div>`
-                                      
-                                
-                            
-                        
-                    }
-                },
-                
-            ],
-           
-
-            processing:true,
-            serverSide:true,
-            ajax:"{{route('registrasi.datatable')}}",
-            order:[[0,'asc']]
+       
+        $('#btncalendar').datepicker({
+            format: "yyyy-mm-dd",
+            todayHighlight: true,
         });
+        
+        function formatRupiah(d) {
+            return Number(d).toLocaleString('id', {
+              maximumFractionDigits: 2,
+              style: 'currency',
+              currency: 'IDR'
+            });
+        }
+      
+        $(document).ready(function () {
+
+            var aktif_reg =  {!! json_encode(Auth::user()->registrasi_id) !!};
+
+            var xTable = $('#table').DataTable({
+               
+                columns:[
+                   
+                   {                       
+                        "render":function (data,type,full,meta) {
+
+                            var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+
+                           
+                            var akad = `<a href="{{url('upload_kontrak_akad_user')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
+
+                            var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayaran</a> `;
+                            var pembayaran2 = `<a href="{{url('pembayaran_tahap2')}}/`+full.id+`"  class="dropdown-item"> Pembayaran Tahap 2</a> `;
+                            var pelunasan = `<a href="{{url('pelunasan')}}/`+full.id+`"  class="dropdown-item" >Pelunasan</a>` ;
+                            var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit dan Berita Acara</a>`;
+                            var uploadBerkas = `<a href="{{url('unggahDataSertifikasi')}}"  class="dropdown-item" >Berkas Sertifikasi</a>`;
+
+                            if(full.id == aktif_reg ){
+                                var aktif =`<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-yellow btn-xs" >Non Aktifkan</a>`;
+                                var uploadBerkas = `<a href="{{url('unggahDataSertifikasi')}}"  class="dropdown-item" ><i class="fa fa-edit"></i>Berkas Sertifikasi</a>`;
+                                var div_aktif = `<div class="col-lg-12 row border-left rounded-lg border-primary" style="background-color:#fafbfc" >`;
+                            }else{
+                                var aktif = `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-green btn-xs" >Aktifkan</a>`;
+                                var uploadBerkas = `<a href="#"  class="dropdown-item" >Aktifkan Untuk edit berkas</a>`;
+                                 var div_aktif = `<div class="col-lg-12 row border-left rounded-lg border-primary" >`;
+                            }
+                            
+                            return ``+div_aktif+`
+                                       
+                                          
+                                       
+                                        <div class="col-lg-5 row" >
+                                             <div class="col-lg-4 " >
+                                                <i class="fa fa-building text-primary" style="font-size:900%"></i> 
+                                                    
+                                            </div>
+                                            <div class="col-lg-8 ">
+                                                <h4 class="text-grey" style=>`+full.nama_perusahaan+`</h4>
+                                                <a  href="{{url('detail_registrasi')}}/`+full.id+`"  style="color: white; " class="label label-success">NOMOR ID: `+full.no_registrasi+`</a><br> 
+                                                <i class="fa fa-info text-primary" ></i> 
+                                                `+full.tgl_registrasi+`<br>
+                                                <i class="fa fa-info text-primary" ></i> 
+                                                `+full.kelompok+`<br>
+                                                <i class="fa fa-info text-primary" ></i>
+                                                `+full.jenis+`<br>
+                                                <i class="fa fa-info text-primary" ></i> Aktivasi: 
+                                                `+aktif+`<br>
+                                             </div>     
+                                            
+                                           
+                                        </div>
+                                      
+
+                                        <div class="col-lg-7 row " >
+
+                                            <table class="table table-sm"> 
+                                                <tr>
+                                                     <td class="text-center">Cabang Pelaksana</td>
+                                                    <td class="text-center" style="max-width:20%; min-width:20%;">Progres</td>
+                                                    <td class="text-center">Status</td>
+                                                    <td class="text-center">Status Berkas</td>
+                                                    <td class="text-center">Aksi</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td class="text-center" style="width:20%;">
+                                                        `+checkWilayah(full.kode_wilayah)+`
+                                                    </td>
+                                                    <td class="text-center" style="width:20%;">
+                                                        `+checkProgress(full.status)+`
+                                                    </td>
+                                                    <td class="text-center" style="width:20%;">
+                                                        `+full.status_registrasi+`
+                                                    </td>
+                                                    <td class="text-center" style="width:20%;">
+                                                        `+checkStatusBerkas(full.status_berkas)+`
+                                                    </td>
+
+                                              
+
+                                                    <td class="text-center">
+                                                        <div class="btn-group m-r-5 show">
+                                                            <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+                                                                `+uploadBerkas+`
+                                                                <div class="dropdown-divider"></div>
+                                                                <div class="dropdown-button-title">Update Progress</div>`+akad+pembayaran+pembayaran2+reportA+pelunasan+`
+                                                               
+                                                            </div> 
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                                    
+                                        </div>
+                                    </div>`  
+                        }
+                    }
+                ],
+
+              
+               
+               //tambahkan bkti bayar 1,2,3, bkti kontrak akad, berita acara,
+                
+                
+               
+                
+                bSortable: false,
+                ordering: false,
+                processing:true,
+                serverSide:true,
+                ajax:"{{route('registrasi.datatable')}}",
+                order:[[0,'asc']]
+
+            });
+
+
+
+        });
+
+  
+        
+        
+      
+
         $(".fordelete").on("submit",function () {
             return confirm("Apakah anda yakin?");
         });
     </script>
+    <script src="{{asset('/assets/js/filterData.js')}}"></script>
 @endpush

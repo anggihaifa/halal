@@ -696,13 +696,7 @@
         "support": {
             "issues": "https://github.com/filp/whoops/issues",
             "source": "https://github.com/filp/whoops/tree/2.9.2"
-        },
-        "funding": [
-            {
-                "url": "https://github.com/denis-sokolov",
-                "type": "github"
-            }
-        ]
+        }
     },
     {
         "name": "fzaninotto/faker",
@@ -949,12 +943,6 @@
         "keywords": [
             "escaper",
             "laminas"
-        ],
-        "funding": [
-            {
-                "url": "https://funding.communitybridge.org/projects/laminas-project",
-                "type": "community_bridge"
-            }
         ]
     },
     {
@@ -1438,17 +1426,7 @@
         "support": {
             "issues": "https://github.com/thephpleague/mime-type-detection/issues",
             "source": "https://github.com/thephpleague/mime-type-detection/tree/1.7.0"
-        },
-        "funding": [
-            {
-                "url": "https://github.com/frankdejonge",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/league/flysystem",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "maatwebsite/excel",
@@ -2080,16 +2058,6 @@
             "date",
             "datetime",
             "time"
-        ],
-        "funding": [
-            {
-                "url": "https://opencollective.com/Carbon",
-                "type": "open_collective"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/nesbot/carbon",
-                "type": "tidelift"
-            }
         ]
     },
     {
@@ -2364,6 +2332,185 @@
             "issues": "https://github.com/ivanlanin/pclzip/issues",
             "source": "https://github.com/ivanlanin/pclzip/tree/master"
         }
+    },
+    {
+        "name": "pear/http_request2",
+        "version": "v2.4.2",
+        "version_normalized": "2.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/HTTP_Request2.git",
+            "reference": "84da432fbbf615593bd8aa25408aca3478b77502"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/HTTP_Request2/zipball/84da432fbbf615593bd8aa25408aca3478b77502",
+            "reference": "84da432fbbf615593bd8aa25408aca3478b77502",
+            "shasum": ""
+        },
+        "require": {
+            "pear/net_url2": "^2.2.0",
+            "pear/pear_exception": "^1.0.0",
+            "php": ">=5.6.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^3.7|^4.8|^5.7"
+        },
+        "suggest": {
+            "ext-curl": "Allows using cURL as a request backend.",
+            "ext-fileinfo": "Adds support for looking up mime-types using finfo.",
+            "ext-openssl": "Allows handling SSL requests when not using cURL.",
+            "ext-zlib": "Allows handling gzip compressed responses."
+        },
+        "time": "2020-09-24T22:07:33+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "HTTP_Request2": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Alexey Borzov",
+                "email": "avb@php.net"
+            }
+        ],
+        "description": "Provides an easy way to perform HTTP requests.",
+        "homepage": "https://pear.php.net/package/HTTP_Request2",
+        "keywords": [
+            "PEAR",
+            "curl",
+            "http",
+            "request"
+        ]
+    },
+    {
+        "name": "pear/net_url2",
+        "version": "v2.2.2",
+        "version_normalized": "2.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Net_URL2.git",
+            "reference": "07fd055820dbf466ee3990abe96d0e40a8791f9d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Net_URL2/zipball/07fd055820dbf466ee3990abe96d0e40a8791f9d",
+            "reference": "07fd055820dbf466ee3990abe96d0e40a8791f9d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.1.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": ">=3.3.0"
+        },
+        "time": "2017-08-25T06:16:11+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "Net/URL2.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "David Coallier",
+                "email": "davidc@php.net"
+            },
+            {
+                "name": "Tom Klingenberg",
+                "email": "tkli@php.net"
+            },
+            {
+                "name": "Christian Schmidt",
+                "email": "chmidt@php.net"
+            }
+        ],
+        "description": "Class for parsing and handling URL. Provides parsing of URLs into their constituent parts (scheme, host, path etc.), URL generation, and resolving of relative URLs.",
+        "homepage": "https://github.com/pear/Net_URL2",
+        "keywords": [
+            "PEAR",
+            "net",
+            "networking",
+            "rfc3986",
+            "uri",
+            "url"
+        ]
+    },
+    {
+        "name": "pear/pear_exception",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/PEAR_Exception.git",
+            "reference": "dbb42a5a0e45f3adcf99babfb2a1ba77b8ac36a7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/PEAR_Exception/zipball/dbb42a5a0e45f3adcf99babfb2a1ba77b8ac36a7",
+            "reference": "dbb42a5a0e45f3adcf99babfb2a1ba77b8ac36a7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=4.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*"
+        },
+        "time": "2019-12-10T10:24:42+00:00",
+        "type": "class",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "PEAR/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "."
+        ],
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Helgi Thormar",
+                "email": "dufuz@php.net"
+            },
+            {
+                "name": "Greg Beaver",
+                "email": "cellog@php.net"
+            }
+        ],
+        "description": "The PEAR Exception base class.",
+        "homepage": "https://github.com/pear/PEAR_Exception",
+        "keywords": [
+            "exception"
+        ]
     },
     {
         "name": "phar-io/manifest",
@@ -4693,21 +4840,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/console/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/css-selector",
@@ -4760,21 +4893,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/css-selector/tree/v5.2.3"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/debug",
@@ -4831,21 +4950,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/debug/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/deprecation-contracts",
@@ -4954,21 +5059,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/error-handler/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/event-dispatcher",
@@ -5039,21 +5130,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/event-dispatcher/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/event-dispatcher-contracts",
@@ -5166,21 +5243,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/finder/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/http-client-contracts",
@@ -5300,21 +5363,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/http-foundation/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/http-kernel",
@@ -5406,21 +5455,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/http-kernel/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/mime",
@@ -5490,21 +5525,7 @@
         ],
         "support": {
             "source": "https://github.com/symfony/mime/tree/v5.2.3"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/polyfill-ctype",
@@ -6081,21 +6102,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/process/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/routing",
@@ -6171,21 +6178,7 @@
         ],
         "support": {
             "source": "https://github.com/symfony/routing/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/service-contracts",
@@ -6325,21 +6318,7 @@
         "homepage": "https://symfony.com",
         "support": {
             "source": "https://github.com/symfony/translation/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "symfony/translation-contracts",
@@ -6479,21 +6458,7 @@
         ],
         "support": {
             "source": "https://github.com/symfony/var-dumper/tree/v4.4.19"
-        },
-        "funding": [
-            {
-                "url": "https://symfony.com/sponsor",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/fabpot",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "theseer/tokenizer",
@@ -6719,17 +6684,7 @@
         "support": {
             "issues": "https://github.com/vlucas/phpdotenv/issues",
             "source": "https://github.com/vlucas/phpdotenv/tree/v3.6.8"
-        },
-        "funding": [
-            {
-                "url": "https://github.com/GrahamCampbell",
-                "type": "github"
-            },
-            {
-                "url": "https://tidelift.com/funding/github/packagist/vlucas/phpdotenv",
-                "type": "tidelift"
-            }
-        ]
+        }
     },
     {
         "name": "webmozart/assert",

@@ -12,12 +12,23 @@
 
 @endpush
 
+
+
+
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="#">Penjadwalan Admin</a></li>
         <li class="breadcrumb-item active"><a href="#">List Penjadwalan Admin</a></li>
     </ol>
+
+
+    
+   
+
+    
+
+
     <!-- end breadcrumb -->
     <!-- begin page-header -->
     <h1 class="page-header">List Penjadwalan Admin  <small></small></h1>
@@ -227,6 +238,24 @@
                                 <label>Pelaksana 2</label>
                                 <select id="pelaksana2_audit1" name="pelaksana2_audit1" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Skema audit</label>
+                                <select id="skema_audit" name="skema_audit" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                    <option value="">==Pilih Skema Audit==</option>
+                                    <option value="">Jaminan Produk Halal</option>
+                                    <option value="">SMH SNI 99001:2016</option>                                                                        
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Pelaksana Pekerjaan</label>
+                                <select id="skema_audit" name="skema_audit" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                    <option value="">==Pilih Pelaksana==</option>
+                                    <option value="">Kantor Pusat</option>
+                                    <option value="">Kantor Cabang</option>                                                                        
                                 </select>
                             </div>
                            
@@ -1015,7 +1044,7 @@
                         $("#pelaksana1_audit1").append(new Option('==Pilih Auditor==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
                         })
                          $('#pelaksana1_audit1').selectpicker('refresh');
                          //$('#pelaksana2_audit1').empty();                         
@@ -1041,7 +1070,7 @@
                         $("#pelaksana1_audit1").append(new Option('==Pilih Auditor==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
                         })
                          $('#pelaksana1_audit1').selectpicker('refresh');
                          //$('#pelaksana2_audit1').empty();                         
@@ -1070,7 +1099,7 @@
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana2_audit1").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana2_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
                         })
                         $('#pelaksana2_audit1').selectpicker('refresh');
                     }
@@ -1096,7 +1125,7 @@
                         $("#pelaksana1_audit2").append(new Option('==Pilih Auditor==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
                         })
                          $('#pelaksana1_audit2').selectpicker('refresh');
                          //$('#pelaksana2_audit1').empty();                         
@@ -1124,7 +1153,7 @@
                         $("#pelaksana1_audit2").append(new Option('==Pilih Auditor==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
                         })
                          $('#pelaksana1_audit2').selectpicker('refresh');
                          //$('#pelaksana2_audit1').empty();                         
@@ -1153,7 +1182,7 @@
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana2_audit2").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana2_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
                         })
                          $('#pelaksana2_audit2').selectpicker('refresh');
                     }
@@ -1226,7 +1255,7 @@
                         $("#pelaksana1_rapat").append(new Option('==Pilih Auditor==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
                         })
                      
 
@@ -1257,7 +1286,7 @@
                         $("#pelaksana1_rapat").append(new Option('==Pilih Auditor==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
                         })
                        
 
@@ -1289,7 +1318,7 @@
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana2_rapat").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana2_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
                         })
                         $('#pelaksana2_rapat').selectpicker('refresh'); 
                     }
@@ -1317,7 +1346,7 @@
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana3_rapat").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana3_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
                         })
                         $('#pelaksana3_rapat').selectpicker('refresh'); 
                     }
@@ -1345,7 +1374,7 @@
                         $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_tinjauan").append(new Option(nid +"_"+ name,id +"_"+ name))
+                            $("#pelaksana1_tinjauan").append(new Option(nid +"_"+ name,id +"_"+ name+"_tinjauan"))
                         })
 
                        
@@ -1375,7 +1404,7 @@
                         $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana1_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
                         })
 
                        
@@ -1407,7 +1436,7 @@
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana2_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana2_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
                         })
 
                         $('#pelaksana2_tinjauan').selectpicker('refresh'); 
@@ -1436,7 +1465,7 @@
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana3_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name))
+                            $("#pelaksana3_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
                         })
 
                         $('#pelaksana3_tinjauan').selectpicker('refresh'); 
@@ -1554,9 +1583,9 @@
                                     <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
 
-                                        <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
+                                        <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
 
-                                        <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
+                                        <a href="{{url('detail_unggah_data_sertifikasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
                                         <div class="dropdown-divider"></div>
 
                                         <div class="dropdown-button-title">Update Progress</div>`+

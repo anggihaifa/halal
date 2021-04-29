@@ -8,6 +8,7 @@
         <option value="">--Pilih {{$label}}--</option>
         @if(isset($options))
             @foreach($options as $index => $value)
+              
                 <option value="{{$value[$key ?? 'id']}}" {{ isset($disabledOption) && $disabledOption == $value[$key ?? 'id'] ? 'disabled' : '' }}>{{$value[isset($labelKey) ? $labelKey : 'name']}}</option>
             @endforeach
         @endif
