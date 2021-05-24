@@ -123,7 +123,7 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        if($kodewilayah == '00'){
+        if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
@@ -1904,30 +1904,31 @@ class RegistrasiController extends Controller
     
 
     public function updateStatusVerifikasi(Request $request, $id){
-        dd($id);
-        $data = $request->except('_token','_method','status');
+        
+        $data = $request->except('_token','_method','status','has_selected');
         $currentDateTime = Carbon::now();
         $model = new DokumenHas();
         $model2 = new Registrasi();
         $model3 = new User();
         $model4 = new Penjadwalan();
-        $id_user = Auth::user()->id;
 
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
 
+       
         try{
             DB::beginTransaction();
             $e = $model->find($id);            
             $f = $model2->find($e->id_registrasi);
-            $u = $model3->find($f->id_user);
-           
+            $u = $model3->find($e->id_user);
+
+            $id_user = $u->id;
+            //dd($id_user);
 
             $e->fill($data);
+            
             $e->check_by = Auth::user()->id;
-            if($data['status_has_1']=='null' || $data['status_has_2']=='null' || $data['status_has_3']=='null' || $data['status_has_4']=='null' || $data['status_has_5']=='null' || $data['status_has_6']=='null' || $data['status_has_7']=='null' || $data['status_has_8']=='null' || $data['status_has_9']=='null' || $data['status_has_10']=='null' || $data['status_has_11']=='null' || $data['status_has_12']=='null'|| $data['status_has_13']=='null' || $data['status_has_14']=='null'|| $data['status_has_15']=='null' || $data['status_has_16']=='null'){
+            if($data['status_has_1']==null || $data['status_has_2']==null || $data['status_has_3']==null || $data['status_has_4']==null || $data['status_has_5']==null || $data['status_has_6']==null || $data['status_has_7']==null || $data['status_has_8']==null || $data['status_has_9']==null || $data['status_has_10']==null || $data['status_has_11']==null || $data['status_has_12']==null|| $data['status_has_13']==null || $data['status_has_14']==null|| $data['status_has_15']==null || $data['status_has_16']==null|| $data['status_has_17']==null || $data['status_has_18']==null){
 
+                //dd($data);
                 $e->status_berkas = 2;
                 $e->updated_at =  $currentDateTime;
                 $f->updated_at =  $currentDateTime;
@@ -1940,8 +1941,9 @@ class RegistrasiController extends Controller
 
             }else{
 
-                if($data['status_has_1']=='2' || $data['status_has_2']=='2' || $data['status_has_3']=='2' || $data['status_has_4']=='2' || $data['status_has_5']=='2' || $data['status_has_6']=='2' || $data['status_has_7']=='2' || $data['status_has_8']=='2' || $data['status_has_9']=='2' || $data['status_has_10']=='2' || $data['status_has_11']=='2' || $data['status_has_12']=='2'|| $data['status_has_13']=='2' || $data['status_has_14']=='2'|| $data['status_has_15']=='2' || $data['status_has_16']=='2'){
-
+                
+                if($data['status_has_1']=='2' || $data['status_has_2']=='2' || $data['status_has_3']=='2' || $data['status_has_4']=='2' || $data['status_has_5']=='2' || $data['status_has_6']=='2' || $data['status_has_7']=='2' || $data['status_has_8']=='2' || $data['status_has_9']=='2' || $data['status_has_10']=='2' || $data['status_has_11']=='2' || $data['status_has_12']=='2'|| $data['status_has_13']=='2' || $data['status_has_14']=='2'|| $data['status_has_15']=='2' || $data['status_has_16']=='2'|| $data['status_has_17']=='2' || $data['status_has_18']=='2'){
+                   
 
                     $e->status_berkas = 2;
                     $f->status_berkas = 2;
@@ -1951,11 +1953,11 @@ class RegistrasiController extends Controller
                     $e->save();
                     $f->save();
                     DB::commit();
-                    SendEmailP::dispatch($u,$f,$p,$f->status);
+                    //SendEmailP::dispatch($u,$f,$p,$f->status);
                     Session::flash('success', "Status berhasil diupdate");
 
                 }else{
-                   
+                    //dd($data);
 
                      //apabila tidak ada yang perlu revisi
 
@@ -1963,17 +1965,17 @@ class RegistrasiController extends Controller
                     $f->status_berkas = 3;
                     $e->updated_at =  $currentDateTime;
                     $f->updated_at =  $currentDateTime;
-                    $e->
+                    
                     $f->status = 5;
                    
                     $e->save();
                     $f->save();
-                    SendEmailP::dispatch($u,$f,$p,$f->status);
+                    //SendEmailP::dispatch($u,$f,$p,$f->status);
                     DB::commit();
 
                     $this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
                     
-                    $model4->updated_by = $updater;
+                    $model4->updated_by = Auth::user()->id;
                     $model4->status_audit1 = '0';
                     $model4->progres_penjadwalan = 'audit1';
                     $model4->id_registrasi = $e->id;
@@ -3383,7 +3385,7 @@ class RegistrasiController extends Controller
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
 
-        if($kodewilayah == '00'){
+        if($kodewilayah == '119'){
              $xdata = DB::table('registrasi')
                      ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                      ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
@@ -3838,7 +3840,7 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        if($kodewilayah == '00'){
+        if($kodewilayah == '119'){
              $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
@@ -3953,7 +3955,7 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;        
         //start                                
-        if($kodewilayah == '00'){
+        if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
@@ -4265,7 +4267,7 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        if($kodewilayah == '00'){
+        if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
@@ -4616,7 +4618,7 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        if($kodewilayah == '00'){
+        if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')

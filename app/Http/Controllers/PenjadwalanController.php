@@ -5291,7 +5291,7 @@ class PenjadwalanController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        if($kodewilayah == '00'){
+        if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
