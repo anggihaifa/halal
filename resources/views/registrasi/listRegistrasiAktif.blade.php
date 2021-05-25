@@ -288,7 +288,7 @@
                                        
                                         <div class="col-lg-5 row" >
                                              <div class="col-lg-4 " >
-                                                <i class="fa fa-building text-primary" style="zoom:10.0; padding-top:20%"></i> 
+                                                <i class="fa fa-building text-primary" style="font-size:1000%; padding-top:20%"></i> 
                                                     
                                             </div>
                                             <div class="col-lg-8 ">

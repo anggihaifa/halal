@@ -29,43 +29,7 @@ return [
             'icon' => 'ion-md-book',
             'title' => 'Registrasi',
             'url' => 'listregistrasipelangganaktif',
-            /*'caret' => true,
-            'sub_menu' => [
-                [
-                    'url' => 'listregistrasipelanggan',
-                    'title' => 'List Registrasi Halal '
-                ],
-                [
-                    'url' => 'listregistrasipelangganaktif',
-                    'title' => 'List Registrasi Aktif'
-                ],
-               [
-                    'url' => 'listakadadmin',
-                    'title' => 'List Kontrak Akad'
-                ],
-                [
-                    'url' => 'listpembayaranregistrasi',
-                    'title' => 'List Pembayaran Tahap 1'
-                ],
-                [
-                    'url' => 'listpembayarantahap2',
-                    'title' => 'List Pembayaran Tahap 2'
-                ],
-                [   
-                    'url' => 'listberitaacara',       
-                    'title' => 'Berita Acara'                    
-                ],
-                 [
-                    'url' => 'listpelunasan',
-                    'title' => 'List Pelunasan'
-                ],
-               
-            ],*/
-        ],
-        [
-            'icon' => 'ion-ios-calendar',
-            'title' => 'Penjadwalan',
-            'url' => 'listpenjadwalanadmin'
+          
         ],
         [   'icon' => 'ion-md-information-circle-outline',
             'title' => 'Berita',
@@ -132,14 +96,6 @@ return [
             'icon' => 'ion-md-book',
             'title' => 'Registrasi',
             'url' => 'registrasiHalal.index',
-            /*'caret' => true,
-            'sub_menu' => [
-                [
-                    'url' => 'registrasiHalal.index',
-                    'title' => 'Registrasi Halal'
-                ],
-                
-            ],*/
         ],
         [
             'icon' => 'ion-md-book',
@@ -176,43 +132,7 @@ return [
             'icon' => 'ion-md-book',
             'title' => 'Registrasi',
             'url' => 'listregistrasipelangganaktif',
-            /*'caret' => true,
-            'sub_menu' => [
-                [
-                    'url' => 'listregistrasipelanggan',
-                    'title' => 'List Registrasi Halal'
-                ],
-                 [
-                    'url' => 'listregistrasipelangganaktif',
-                    'title' => 'List Registrasi Aktif'
-                ],
-                [
-                    'url' => 'listakadadmin',
-                    'title' => 'List Kontrak Akad'
-                ],
-                [
-                    'url' => 'listpembayaranregistrasi',
-                    'title' => 'List Pembayaran Tahap 1'
-                ],
-                [
-                    'url' => 'listpembayarantahap2',
-                    'title' => 'List Pembayaran Tahap 2'
-                ], 
-                [   
-                    'url' => 'listberitaacara',       
-                    'title' => 'Berita Acara'                    
-                ],
-                 [
-                    'url' => 'listpelunasan',
-                    'title' => 'List Pelunasan'
-                ],
-               
-            ],*/
-        ],
-        [
-            'icon' => 'ion-ios-calendar',
-            'title' => 'Penjadwalan',
-            'url' => 'listpenjadwalanadmin'
+            
         ],
         [    'icon' => 'ion-md-information-circle-outline',
             'title' => 'Berita',
@@ -508,7 +428,7 @@ return [
         [
             'icon' => 'ion-ios-stats',
             'title' => 'Dashboard',
-            'url' => 'home.index'
+            'url' => 'home.index' 
         ],
         [
             'icon' => 'ion-ios-calendar',
@@ -767,12 +687,13 @@ return [
                     'url' => 'listaudit2',
                     'title' => 'Audit Tahap 2'
                 ],
-                [
-                    'url' => 'listrapat',
-                    'title' => 'Rapat Auditor'
-                ],    
             ],
 
+        ], 
+        [
+            'icon' => 'ion-ios-cube',
+            'title' => 'Log',
+            'url' => 'listlog'
         ], 
         [
             'icon' => 'ion-md-book',
@@ -788,6 +709,11 @@ return [
         ],
         [
             'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanadmin'
+        ],
+        [
+            'icon' => 'ion-ios-calendar',
             'title' => 'Jadwal Audit',
             'url' => '#',
             'caret' => true,
@@ -800,24 +726,15 @@ return [
                 [
                     'url' => 'listaudit2',
                     'title' => 'Audit Tahap 2'
-                ],
-                [
-                    'url' => 'listrapat',
-                    'title' => 'Rapat Auditor'
-                ],    
+                ],  
             ],
 
         ],
         [
-            'icon' => 'ion-ios-calendar',
-            'title' => 'Worksheet',
-            'url' => 'listpenjadwalanadmin'
-        ],
-        [
-            'icon' => 'ion-ios-calendar',
-            'title' => 'Penjadwalan',
-            'url' => 'listpenjadwalanadmin'
-        ],
+            'icon' => 'ion-ios-cube',
+            'title' => 'Log',
+            'url' => 'listlog'
+        ], 
         [
             'icon' => 'ion-md-book',
             'title' => 'Reporsitory Dokumen Halal',
@@ -845,10 +762,6 @@ return [
                     'url' => 'listaudit2',
                     'title' => 'Audit Tahap 2'
                 ],
-                [
-                    'url' => 'listrapat',
-                    'title' => 'Rapat Auditor'
-                ],    
             ],
 
         ],
@@ -860,13 +773,13 @@ return [
         [
             'icon' => 'ion-ios-calendar',
             'title' => 'Review Laporan Audit',
-            'url' => 'listpenjadwalanadmin'
+            'url' => 'listrapat'
         ],
         [
-            'icon' => 'ion-ios-calendar',
-            'title' => 'Penjadwalan',
-            'url' => 'listpenjadwalanadmin'
-        ],
+            'icon' => 'ion-ios-cube',
+            'title' => 'Log',
+            'url' => 'listlog'
+        ], 
         [
             'icon' => 'ion-md-book',
             'title' => 'Reporsitory Dokumen Halal',
@@ -881,9 +794,14 @@ return [
         ],        
         [
             'icon' => 'ion-ios-calendar',
-            'title' => 'Review Laporan Audit',
+            'title' => 'Tinjauan Komite Sertifikasi',
             'url' => 'listpenjadwalanadmin'
         ],
+        [
+            'icon' => 'ion-ios-cube',
+            'title' => 'Log',
+            'url' => 'listlog'
+        ], 
         [
             'icon' => 'ion-md-book',
             'title' => 'Reporsitory Dokumen Halal',
@@ -896,11 +814,6 @@ return [
             'title' => 'Dashboard',
             'url' => 'home.index'
         ],        
-        [
-            'icon' => 'ion-ios-calendar',
-            'title' => 'Review Laporan Audit',
-            'url' => 'listpenjadwalanadmin'
-        ],     
         [    'icon' => 'ion-ios-clipboard',
             'title' => 'Pelatihan',
             'url' => 'pelatihan.index'

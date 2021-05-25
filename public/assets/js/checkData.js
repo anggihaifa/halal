@@ -7,39 +7,101 @@ function checkStatus(data){
 function checkStatusPembayaran(data){
 
      return  (data==0)? '<a class=" ion-ios-clipboard" title="Belum Bayar" style="font-size: 200%;"></a>'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:#5d8aa8  ;" title="Menunggu Konfirmasi Admin"></a>'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #32cd32;"title="Pembayaran Terkonfirmasi"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow  ;" title="Pelanggan Sudah Upload dan Menunggu Konfirmasi"></a>'
+        :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #e32636;;"title="Pembayaran Gagal"></a>'
+        :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #32cd32;"title="Pembayaran Terkonfirmasi"></a>'
         :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Bayar"></a>';
             
 }
 
+function checkStatusPenerbitanOrderConfirmation(data){
+
+    return  (data==0)? '<a class=" ion-ios-clipboard" title="Belum diupload" style="font-size: 200%;"></a>'
+       :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow  ;" title="Menunggu Pelanggan Upload Ulang OC"></a>'
+       :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow  ;" title="Menunggu Konfirmasi Admin"></a>'
+       :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #e32636;;"title="Penerbitan OC Gagal"></a>'
+       :(data==4)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #32cd32;"title="Penerbitan O Terkonfirmasi"></a>'
+       :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Bayar"></a>';
+           
+}
+
+function checkStatusPelunasan(data){
+
+    return  (data==0)? '<a class=" ion-ios-clipboard" title="Belum Bayar Pelunasan" style="font-size: 200%;"></a>'
+       :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow  ;" title="Pelanggan Sudah Upload dan Menunggu Konfirmasi"></a>'
+       :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #e32636;;"title="Pembayaran Gagal"></a>'
+       :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #32cd32;"title="Pembayaran Terkonfirmasi"></a>'
+       :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Bayar"></a>';
+           
+}
+
 function checkStatusBerkas(data){
     return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum Upload"></a>'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="color:#5d8aa8; font-size: 200%;" title="Menunggu Konfirmasi Admin"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="color:#yellow; font-size: 200%;" title="Menunggu Konfirmasi"></a>'
         :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan"></a>'
         :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Berkas Terkonfirmasi"></a>'
         :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum Upload"></a>';
             
 }
 
+function checkStatusBerkasAuditTahap1(data){
+    return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum Upload"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi Admin"></a>'
+        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan"></a>'
+        :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Audit Tahap 1 Selesai"></a>'
+        :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum Upload"></a>';
+            
+}
+
+function checkStatusBerkasAuditTahap2(data){
+    return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum Upload Audit Plan"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi Audit Plan Pelaku Usaha"></a>'
+        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Pelaku Usaha Menolak Audit Plan"></a>'
+        :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Audit Plan Terkonfirmasi"></a>'
+        :(data==4)? '<a  class="ion-ios-clipboard " style="color:yellow font-size: 200%;" title="Menunggu Konfirmasi Tehnical Reviewer"></a>'
+        :(data==5)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan Audit Tahap 2"></a>'
+        :(data==6)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi Komite Sertifikasi"></a>'
+        :(data==7)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi Approver Operasi (Juli Permana)"></a>'
+        :(data==8)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Laporan Audit Tahap 2 Terkonfirmasi"></a>'
+        :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum Upload"></a>';
+            
+}
+
+
+function checkStatusWaktuKebutuhanAudit(data){
+    return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum ditentukan"></a>'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi"></a>'
+        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan"></a>'
+        :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Formulir Perhitungan Waktu Audit Terkonfirmasi"></a>'
+        :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum ditentukan"></a>';
+            
+}
+
+
+
 function checkPenjadwalan(data){
-    return  (data==0)? '<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Dijadwalkan-1"></a>'
-        :(data==1)? '<a   class="ion-ios-clipboard " style="font-size: 200%;color:blue;" title="Menunggu Konfirmasi Reviewer"></a>'
+    return  (data==0)? '<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Dijadwalkan"></a>'
+        :(data==1)? '<a   class="ion-ios-clipboard " style="font-size: 200%;color:yellow;" title="Menunggu Konfirmasi Reviewer"></a>'
         :(data==2)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#e32636;  title="Perbaikan"></a>'
-        :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center;color:#32cd32;"title="perjadwalan Terkonfirmasi"></a>'
+        :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center;color:#32cd32;"title="Perjadwalan Terkonfirmasi"></a>'
         :'<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Dijadwalkan-1"></a>';
             
 }
 
-function checkStatusAkad(data){
+// function checkStatusAkad(data){
 
-     return  (data==0)? '<a class="ion-ios-clipboard" title="Belum Akad" style="font-size: 200%;"></a>'
-            :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Pelanggan Megupload Ulang Kontrak"></a>'
-            :(data==2)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%; color:#5d8aa8; " title="Pelanggan Sudah Upload Ulang dan Menunggu Konfirmasi Admin"></a>'
-            :(data==3)? '<a  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color: #32cd32;"title="Admin Sudah Mengkonfirmasi File Kontrak"></a>'
-            :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Akad"></a>';
+//      return  (data==0)? '<a class="ion-ios-clipboard" title="Belum Akad" style="font-size: 200%;"></a>'
+//             :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Konfirmasi"></a>'
+//             :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:#e32636 ;" title="Perbaikan"></a>'
+//             :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:#32cd32 ;" title="Penawaran Terkonfirmasi"></a>'
+//             :(data==4)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Pelanggan Megupload Ulang Kontrak"></a>'
+//             :(data==5)? '<a  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color: #e32636;"title="Pelanggan Menolak Penawaran"></a>'
+//             :(data==6)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%; color:yellow; " title="Pelanggan Sudah Upload Ulang dan Menunggu Konfirmasi Sales"></a>'
+//             :(data==7)? '<a  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color: #e32636;"title="Penawaran Gagal"></a>'
+//             :(data==8)? '<a  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color:#32cd32 ;"title="Penawaran Terkonfirmasi"></a>'
+//             :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Akad"></a>';
             
-}
+// }
 
 function checkStatusBeritaAcara(data){
 
@@ -96,109 +158,153 @@ function checkWilayah(data){
                 
 }
 
+
 function checkProgress(data){
     return  (data==1)? 'Pengajuan Baru'
-            :(data==2)? 'Melengkapi Berkas'
-            :(data==3)? 'Verifikasi Data'
-            :(data==4)? 'Perbaiki Data Berkas'
-            :(data==5)? 'Konfirmasi Data Berkas'
-            :(data==6)? 'Akad'
-            :(data==7)? 'Akad Gagal'
-            :(data==8)? 'Akad Terkonfirmasi'
-            :(data==9)? 'Pembayaran'
-            :(data==10)? 'Nominal Pembayaran Kurang'
-            :(data==11)? 'Nominal Pembayaran Lebih'
-            :(data==12)? 'Pembayaran Gagal'
-            :(data==13)? 'Pembayaran Terkonfirmasi'
-            :(data==14)? 'Proses Audit Tahap 1'
-            :(data==15)? 'Proses Audit Tahap 2'
-            :(data==16)? 'Pelaporan Audit tahap 2'
-            :(data==17)? 'Konfirmasi Berita Acara'
-            :(data==18)? 'Rapat Auditor'
-            :(data==19)? 'Tinjauan Komite Sertifikasi'
-            :(data==20)? 'Proses Sidang Fatwa'
-            :(data==21)? 'Pelunasan'
-            :(data==22)? 'Nominal Pelunasan Kurang'
-            :(data==23)? 'Nominal Pelunasan Lebih'
-            :(data==24)? 'Pelunasan Gagal'
-            :(data==25)? 'Pelunasan Terkonfirmasi'
-            :(data==26)? 'Proses Penerbitan Sertifikat'
-            :(data==27)? 'Keputusan Halal/ Haram'
-            :(data==28)? 'Sertifikat Halal'
-            :(data.trim()=='a')? 'Cancel Order Unggah Data'
-            :(data.trim()=='b')? 'Cancel Order Pembayaran'
-            :(data.trim()=='c')? 'Menunggu User Upload Akad'
-            :(data.trim()=='f')? 'Menunggu Konfirmasi Akad'
-            :(data.trim()=='d')? 'Menunggu Konfirmasi Pembayaran'
-            :(data.trim()=='e')? 'Menunggu Konfirmasi Pelunasan'
-            :(data.trim()=='g')? 'Pembayaran Tahap 2'
-            :(data.trim()=='h')? 'Nominal Pembayaran Tahap2 Kurang'
-            :(data.trim()=='i')? 'Nominal Pembayaran Tahap2 Lebih'
-            :(data.trim()=='j')? 'Pembayaran Tahap2 Gagal'
-            :(data.trim()=='k')? 'Menunggu Konfirmasi Pembayaran Tahap2'
-            :(data.trim()=='l')? 'Pembayaran Tahap2 Terkonfirmasi'
-            :(data.trim()=='m')? 'Menunggu Persetujuan Reviewer'
-            :(data.trim()=='n')? 'Menunggu Persetujuan Approver'
-            :(data.trim()=='o')? 'Reviewer Menolak Akad'
-            :(data.trim()=='p')? 'Approver Menolak Akad'
-            :(data.trim()=='q')? 'Reviewer Mengkonfirmasi Akad'
-            :(data.trim()=='r')? 'Approver Mengkonfirmasi Akad'
-            :(data.trim()=='s')? 'User Tidak Menyetujui Berkas Akad'
+            //verifikasi data sertifikasi
+            :(data==2)? 'Verifikasi Berkas'
+            :(data.trim()=='2-0')? 'Belum Upload Berkas'
+            :(data.trim()=='2-1')? 'Menunggu Verifikasi Admin'
+            :(data.trim()=='2-2')? 'Perbaikan Berkas'
+            :(data.trim()=='2-3')? 'Berkas Terkonfirmasi'
+            //menentukan waktu audit
+            :(data==3)? 'Menentukan Kebutuhan Audit'
+            :(data.trim()=='3-0')? 'Belum ditentukan'
+            :(data.trim()=='3-1')? 'Menunggu Konfirmasi Reviewer'
+            :(data.trim()=='3-2')? 'Perbaikan Kebutuhan Audit'
+            :(data.trim()=='3-3')? 'Kebutuhan Waktu Audit Terkonfirmasi'
+            //penawaran harga dan akad
+            :(data==4)? 'Penawaran Harga dan Akad'
+            //pembayaran tahap 1
+            :(data==5)? 'Pembayaran'
+            :(data.trim()=='5-0')? 'Belum Bayar'
+            :(data.trim()=='5-1')? 'Menunggu Konfirmasi Sales'
+            :(data.trim()=='5-2')? 'Pembayaran Gagal'
+            :(data.trim()=='5-3')? 'Pembayaran Terkonfirmasi'
+            //penerbitan OC
+            :(data==6)? 'Penerbitan OC'
+            :(data.trim()=='6-0')? 'Belum Upload OC'
+            :(data.trim()=='6-1')? 'Menunggu Pelanggan Upload Ulang OC'
+            :(data.trim()=='6-2')? 'Menunggu Konfirmasi Admin'
+            :(data.trim()=='6-3')? 'Penerbitan OC Gagal'
+            :(data.trim()=='6-4')? 'Penerbitan OC Terkonfirmasi'
+            //Penjadwalan
+            :(data==7)? 'Penjadwalan'
+            :(data.trim()=='7-0')? 'Belum Dijadwalkan'
+            :(data.trim()=='7-1')? 'Menunggu Konfirmasi Reviewer'
+            :(data.trim()=='7-2')? 'Perbaikan Penjadwalan'
+            :(data.trim()=='7-3')? 'Penjadwalan Terkonfirmasi'
+            //Proses Audit Tahap 1
+            :(data==8)? 'Proses Audit Tahap 1'
+            :(data.trim()=='8-1')? 'Menunggu Verifikasi Admin'
+            :(data.trim()=='8-2')? 'Perbaikan Berkas'
+            :(data.trim()=='8-3')? 'Audit Tahap 1 Selesai'
+            //Pembayaran Tahap 2
+            :(data==9)? 'Pembayaran Tahap 2'
+            :(data.trim()=='9-0')? 'Belum Bayar'
+            :(data.trim()=='9-1')? 'Menunggu Konfirmasi Sales'
+            :(data.trim()=='9-2')? 'Pembayaran Gagal'
+            :(data.trim()=='9-3')? 'Pembayaran Terkonfirmasi'
+            //Proses Audit Tahap 2
+            :(data==10)? 'Proses Audit Tahap 2'
+            :(data.trim()=='10-0')? 'Belum Upload Audit Plan'
+            :(data.trim()=='10-1')? 'Menunggu Konfirmasi Pelaku Usaha'
+            :(data.trim()=='10-2')? 'Audit Plan Ditolak'
+            :(data.trim()=='10-3')? 'Audit Plan Terkonfirmasi'
+            :(data.trim()=='10-4')? 'Menunggu Konfirmasi Tehnical Review'
+            :(data.trim()=='10-5')? 'Perbaikan Laporan Audit Tahap 2'
+            :(data.trim()=='10-6')? 'Menunggu Konfirmasi Komite Sertifikasi'
+            :(data.trim()=='10-7')? 'Menunggu Konfirmasi Reviewer Operasi (Pak Juli)'
+            :(data.trim()=='10-8')? 'Laporan Audit Tahap 2 Terkonfirmasi'
+            //Berita Acara
+            :(data==11)? 'Berita Acara'
+            :(data.trim()=='12-0')? 'Belum Upload Berita Acara'
+            :(data.trim()=='12-1')? 'Menunggu Pelanggan Upload Ulang Berita Acara'
+            :(data.trim()=='12-2')? 'Berita Acara Terkonfirmasi'
+            //Pelunasan
+            :(data==12)? 'Pelunasan'
+            :(data.trim()=='9-0')? 'Belum Bayar'
+            :(data.trim()=='9-1')? 'Menunggu Konfirmasi Sales'
+            :(data.trim()=='9-2')? 'Pelunasan Gagal'
+            :(data.trim()=='9-3')? 'Pelunasan Terkonfirmasi'
+            //Proses Sidang Fatwa
+            :(data==13)? 'Proses Sidang Fatwa'
             :'-';
-
-
 }
 
 function notifProgress(data){
     console.log(data);
     return  (data==1)? 'Pengajuan Baru Berhasil Silahkan Lanjutkan Upload Berkas Pada Menu Unggah Data'
-            :(data==2)? 'Tolong Lengkapi Berkas Pada Menu Unggah Data Sertifikasi'
-            :(data==3)? 'Berkas Berhasil diunggah dan Sedang Dilakukan Verivikasi Data, Mohon Tunggu 1 Hari Kerja'
-            :(data==4)? 'Berkas Sertifikasi Perlu Diperbaiki, Silahkan Cek Menu Unggah Data Sertifikasi Pada Kolom Catatan'
-            :(data==5)? 'Berkas Sertifikasi Sudah Berhasil Terverivikasi Silahkan Melakukan Kontrak Akad'
-            :(data==6)? 'Silahkan Melakukan Kontrak Akad Pada Menu Akad dengan Cara Mengunduh Berkas Kontrak Lalu Mengupload Kembali Berkas Yang Sudah Disetujui (Tanda Tangan)'
-            :(data==7)? 'File Kontrak Yang Diupload Tidak Benar/ Rusak Tolong Upload Ulang File Kontrak Akad Yang Benar'
-            :(data==8)? 'Kontrak Akad Telah Diterima Silahkan Lanjutkan Pembayaran Pada Menu Pembayaran Dengan Cara Melakukan Upload Bukti Trasnfer Uang Muka Sesuai Kesepakatan Pada Kontrak Akad'
-            :(data==9)? 'Silahkan Upload Bukti Trasnfer Uang Muka Pada Menu Pembayaran Sesuai dengan Kontrak Akad'
-            :(data==10)? 'Nominal Pembayaran Uang Muka Pada Bukti Transfer Kurang Silahkan Upload Lagi Sejumlah Nominal Yang Kurang'
-            :(data==11)? 'Nominal Pembayaran Uang Muka Pada Bukti Transfer Lebih Kami Akan Mengembalikan Kelebihan Uang Dalam 1 Hari Kerja'
-            :(data==12)? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
-            :(data==13)? 'Nominal Pembayaran Uang Muka Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
-            :(data==14)? 'Proses Audit Tahhap 1 Sedang Berlangsung Harap Tunggu 1 Hari Kerja'
-            :(data==15)? 'Proses Audit Tahap 2 Sedang Dijadwalkan Harap Bersiap Untuk Kunjungan Lapangan'
-            :(data==16)? 'Laporan Audit Tahap 2 Dan Berita Acara Audit Tahap 2 Sudah Diupload Silahkan cek Pada Menu Pelaporan dan Unduh File Laporan Audit Tahap 2 Dan Berita Acara Lalu Klik Konfirmasi Berita Acara'
-            :(data==17)? 'Berita Acara Berhasil Dikonfirmasi '
-            :(data==18)? 'Tinjauan Hasil Audit Sedang Berlangsung Silahkan Tunggu 1 Hari Kerja'
-            :(data==19)? 'Rekomendasi Hasil Pemeriksaan Oleh Komite Ahli Sedang Berlangsung Silahkan Tunggu 1 Hari Kerja'
-            :(data==20)? 'Hasil Rekomendasi Tinjauan Komite Ahli Sudah Dikirmkan Ke EMAIL MUI untuk Proses FATWA yang akan Berlangsung Selama 3 Hari Kerja. Silahkan Lakukan Pelunasan Dengan Nominal Sesuai Kontrak Akad'
-            :(data==21)? 'Silahkan Upload Bukti Pelunasan Pada Menu Pelunasan'
-            :(data==22)? 'Nominal Pelunasan Pada Bukti Transfer Kurang Silahkan Upload Lagi Sejumlah Nominal Yang Kurang'
-            :(data==23)? 'Nominal Pelunasan Pada Bukti Transfer Lebih Kami Akan Mengembalikan Kelebihan Uang Dalam 1 Hari Kerja'
-            :(data==24)? 'Pelunasan Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
-            :(data==25)? 'Nominal Pelunasan Sesuai'
-            :(data==26)? 'Proses Sertifikasi Sudah Selesai Silahkan Tunggu Pemberitahuan dari BPJPH Untuk Informasi Selanjutnya'
-            :(data==27)? 'Keputusan Halal/ Haram'
-            :(data==28)? 'Sertifikat Halal'
-            :(data.trim()=='a')? 'Order dicancel dikarnakan dalam waktu 24 jam seteleah pendaftaran data berkas sertifikasi tidak dilengkapi'
-            :(data.trim()=='b')? 'Order dicancel dikarnakan dalam waktu 24 jam seteleah Akad. Anda tidak melakukan Pembayaran. Apabila menurut anda ini adalah kesalahan sillahkan mengontak custumore care kami di XXX-XXXXXX'
-            :(data.trim()=='c')? 'Kontrak Akad teah diunggah oleh admin LPH SUCOFINDO. Silahkan unduh kontrak akad lalu tanda tangani, selanjutnya silahkan upload ulang kontrak akad dalam waktu 1 x 24 jam'                                                                                                                                            
-            :(data.trim()=='f')? 'Kontrak Akad Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo'
-            :(data.trim()=='d')? 'Bukti Pembayaran Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
-            :(data.trim()=='e')? 'Bukti Pelunasan Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo '
-            :(data.trim()=='g')? 'Silahkan Upload Bukti Trasnfer Uang Muka Pada Menu Pembayaran Sesuai dengan Kontrak Akad'
-            :(data.trim()=='h')? 'Nominal Pembayaran Uang Muka Pada Bukti Transfer Kurang Silahkan Upload Lagi Sejumlah Nominal Yang Kurang'
-            :(data.trim()=='i')? 'Nominal Pembayaran Uang Muka Pada Bukti Transfer Lebih Kami Akan Mengembalikan Kelebihan Uang Dalam 1 Hari Kerja'
-            :(data.trim()=='j')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
-            :(data.trim()=='k')? 'Bukti Pelunasan Telah Diterima dan Menunggu Konfirmasi ADMIN Sucofindo'
-            :(data.trim()=='l')? 'Nominal Pembayaran Uang Muka Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
-            :(data.trim()=='m')? 'Reviewer Sedang Memproses dan Mengkonfirmasi Berkas Akad'
-            :(data.trim()=='n')? 'Approver Sedang Memproses dan Mengkonfirmasi Berkas Akad'
-            :(data.trim()=='o')? 'Terdapat Kesalahan Pada Berkas Akad'
-            :(data.trim()=='p')? 'Terdapat Kesalahan Pada Berkas Akad, berkas akan diproses kembali'
-            :(data.trim()=='q')? 'Berkas Akad Telah Selesai Diproses dan Dikonfirmasi Oleh Reviewer'
-            :(data.trim()=='r')? 'Berkas Akad Telah Selesai Diproses dan Dikonfirmasi Oleh Approver'
-            :(data.trim()=='s')? 'User Tidak Menyetujui Berkas Akad dan Admin Akan Memproses Kembali Berkas Akad'
-            :'-';
+            //verifikasi data sertifikasi
+            :(data==2)? 'Silahkan Lengkapi Berkas'
+            :(data.trim()=='2-0')? 'Silahkan Lengkapi Berkas'
+            :(data.trim()=='2-1')? 'Berkas Berhasil diunggah dan Sedang Dilakukan Verivikasi Data, Mohon Tunggu 1 Hari Kerja'
+            :(data.trim()=='2-2')? 'Berkas Sertifikasi Perlu Diperbaiki, Silahkan Cek Menu Unggah Data Sertifikasi Pada Kolom Catatan'
+            :(data.trim()=='2-3')? 'Berkas Sertifikasi Sudah Berhasil Terverifikasi'
+            //menentukan waktu audit
+            :(data==3)? 'Menentukan Kebutuhan Audit'
+            :(data.trim()=='3-0')? 'Menentukan Kebutuhan Waktu Audit'
+            :(data.trim()=='3-1')? 'Menunggu Konfirmasi Reviewer'
+            :(data.trim()=='3-2')? 'Perbaikan Kebutuhan Audit'
+            :(data.trim()=='3-3')? 'Kebutuhan Waktu Audit Terkonfirmasi'
+            //penawaran harga dan akad
+            :(data==4)? 'Penawaran Harga dan Akad'
+            //pembayaran tahap 1
+            :(data==5)? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
+            :(data.trim()=='5-0')? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
+            :(data.trim()=='5-1')? 'Silahkan Menunggu Berkas Bukti Transfer Dikonfirmasi oleh Sales Admin'
+            :(data.trim()=='5-2')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
+            :(data.trim()=='5-3')? 'Pembayaran  Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
+            //penerbitan OC
+            :(data==6)? 'Penerbitan OC'
+            :(data.trim()=='6-0')? 'Penerbitan OC'
+            :(data.trim()=='6-1')? 'Silahkan mengupload Order Confirmation yang Sudah Ditandatangani'
+            :(data.trim()=='6-2')? 'Silahkan Menunggu Admin Memverifikasi Order Confirmation'
+            :(data.trim()=='6-3')? 'Order Confirmation Tidak Sesuai, Gagal Diterbitkan. Silahkan Upload Ulang dan Pastikan Dokumen Sudah Ditandatangani'
+            :(data.trim()=='6-4')? 'Order COnfirmation Sudah Terkonfirmasi Silahkan Melanjutkan Ke Tahapan Selanjutnya Penjadwalan'
+            //Penjadwalan
+            :(data==7)? 'Penjadwalan'
+            :(data.trim()=='7-0')? 'Belum Dijadwalkan'
+            :(data.trim()=='7-1')? 'Silahkan Menunggu Reviewer Menyetujui Penjadwalan'
+            :(data.trim()=='7-2')? 'Perbaikan Penjadwalan'
+            :(data.trim()=='7-3')? 'Penjadwalan Terkonfirmasi Silahkan Melanjutkan ke Tahapan Selanjutnya : Proses Audit Tahap 1 Audit Tahap 1'
+            //Proses Audit Tahap 1
+            :(data==8)? 'Proses Audit Tahap 1: Silahkan Lengkapi Berkas'
+            :(data.trim()=='8-1')? 'Silahkan Menunggu Auditor Untuk Memeriksa Kesesuaian Berkas'
+            :(data.trim()=='8-2')? 'Berkas Tidak Sesuai, Silahkan Cek Kembali Catatan Ketidaksesuaian Pada Halaman Laporan Audit Tahap 1'
+            :(data.trim()=='8-3')? 'Audit Tahap 1 Selesai, Silahkan Melanjutkan ke Tahapan Selanjutnya Pembayaran Tahap 2. (Apabila Nominal diatas 50 Jt)'
+            //Pembayaran Tahap 2
+            :(data==9)? 'Silahkan Melakukan Pembayaran Tahap 2 Sesuai dengan Akad'
+            :(data.trim()=='9-0')? 'Silahkan Melakukan Pembayaran Tahap 2 Sesuai dengan Akad'
+            :(data.trim()=='9-1')? 'Silahkan  Menunggu Berkas Bukti Transfer Pembayaran Tahap 2 Dikonfirmasi oleh Sales Admin'
+            :(data.trim()=='9-2')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Pembayaran Tahap 2 Pastikan Foto Terlihat Jelas'
+            :(data.trim()=='9-3')? 'Pembayaran Tahap 2 Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
+            //Proses Audit Tahap 2
+            :(data==10)? 'Proses Audit Tahap 2 : Silahkan Kontak CS Kami Untuk Infromasi Lebih Lengkap Terkait Audit Lapangan'
+            :(data.trim()=='10-0')? 'Belum Upload Audit Plan'
+            :(data.trim()=='10-1')? 'Menunggu Konfirmasi Pelaku Usaha'
+            :(data.trim()=='10-2')? 'Audit Plan Ditolak'
+            :(data.trim()=='10-3')? 'Audit Plan Terkonfirmasi'
+            :(data.trim()=='10-4')? 'Menunggu Konfirmasi Tehnical Review'
+            :(data.trim()=='10-5')? 'Perbaikan Laporan Audit Tahap 2'
+            :(data.trim()=='10-6')? 'Menunggu Konfirmasi Komite Sertifikasi'
+            :(data.trim()=='10-7')? 'Menunggu Konfirmasi Reviewer Operasi (Pak Juli)'
+            :(data.trim()=='10-8')? 'Laporan Audit Tahap 2 Terkonfirmasi'
+            //Berita Acara
+            :(data==11)? 'Berita Acara'
+            :(data.trim()=='12-0')? 'Belum Upload Berita Acara'
+            :(data.trim()=='12-1')? 'Silahkan Upload Ulang Berita Acara Yang Sudah Ditandatangani'
+            :(data.trim()=='12-2')? 'Berita Acara Terkonfirmasi Silahkan Lanjutkan Tahapan Berikutnya : Pelunasan dan Penerbitan Invoice'
+            //Pelunasan
+            :(data==12)? 'Silahkan Melakukan Pelunasan Sesuai Dengan Akad'
+            :(data.trim()=='9-0')? 'Silahkan Upload Bukti Pelunasan'
+            :(data.trim()=='9-1')? 'Silahkan Menunggu Konfirmasi Sales'
+            :(data.trim()=='9-2')? 'Pelunasan Gagal Silahkan Upload Ulang Bukti Pelunasan'
+            :(data.trim()=='9-3')? 'Pelunasan Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaitu Penerbitan Invoice'
+            //Proses Sidang Fatwa
+            :(data==13)? 'Proses Sidang Fatwa'
+            :'-'; 
+           
 }
 /*
 function checkIcon(data){
