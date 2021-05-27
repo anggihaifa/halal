@@ -2782,7 +2782,7 @@ class RegistrasiController extends Controller
 
     ////////////////////////AKAD////////////////////////////////////////
     public function uploadAkadAdmin($id){
-        dd($id);
+        //dd($id);
         $data = Registrasi::find($id);
         //get Data from FAQ Transfer        
         // dd($dataAkad);
