@@ -144,22 +144,26 @@ select.list-dt:focus {
     color: lightgrey
 }
 
-#progressbar .active {
-    color: #348fe2
+#progressbar .notyet {
+    color: #2d353c
 }
 
-#progressbar .failed {
+#progressbar .confirming {
+    color: #32a932
+}
+
+#progressbar .fixing {
     color: #ff5b57;
 }
 
-#progressbar .warning {
+#progressbar .waiting {
     color: #ffd900;
 }
 
 #progressbar li {
     list-style-type: none;
-    font-size: 12px;
-    width: 9%;
+    font-size: 10px;
+    width: 7.5%;
     float: left;
     position: relative
 }
@@ -208,18 +212,23 @@ select.list-dt:focus {
     z-index: -1
 }
 
-#progressbar li.active:before,
-#progressbar li.active:after {
-    background: #348fe2;
+#progressbar li.notyet:before,
+#progressbar li.notyet:after {
+    background: #2d353c;
 }
 
-#progressbar li.failed:before,
-#progressbar li.failed:after {
+#progressbar li.confirming:before,
+#progressbar li.confirming:after {
+    background: #32a932;
+}
+
+#progressbar li.fixing:before,
+#progressbar li.fixing:after {
     background: #ff5b57;
 }
 
-#progressbar li.warning:before,
-#progressbar li.warning:after {
+#progressbar li.waiting:before,
+#progressbar li.waiting:after {
     background: #ffd900;
 }
 

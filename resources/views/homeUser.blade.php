@@ -139,29 +139,322 @@
 			@endif
 		</div>
 
-		<div class="col-md-12 mx-0 step widget widget-stats bg-light animated zoomIn delay-5s">			
+		<div class="col-md-12 mx-0 step widget widget-stats bg-light animated zoomIn delay-5s">
             <form id="msform">			
+				@php
+					$status_temp = $value['status'];
+					$status = 'a'.'_'.$status_temp;
+					// dd($status);
+				@endphp
                 <!-- progressbar -->
                 <ul id="progressbar">
 					@foreach($dataCurrent as $key => $value)	
-						<h4 style="color: #348fe2; margin-bottom: 30px;">PROGRESS</h4>
-						@if ($value['status'] == 1)
-							<li id="account" class="active"><strong>Pengajuan Baru</strong></li>
-						@elseif ($value['status'] == 2)
-							<li id="personal" class="active"><strong>Melengkapi Berkas</strong></li>
-						@elseif ($value['status'] > 2)
-							<li id="personal" class="active"><strong>Pengajuan Baru</strong></li>
-						@elseif ($value['status'] == 'c' || $value['status'] == 'f')
-							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>
-						@elseif ($value['status'] == 'b' || $value['status'] == 'd' || $value['status'] == 'g' || $value['status'] == 'h' || $value['status'] == 'i' || $value['status'] == 'j' || $value['status'] == 'k' || $value['status'] == 'l' || $value['status'] == 'm' || $value['status'] == 'n' || $value['status'] == 'o' || $value['status'] == 'p' || $value['status'] == 'q' || $value['status'] == 'r' || $value['status'] == 's')
-							<li id="payment" class="active"><strong>Verifikasi Data</strong></li>
-						@elseif ($value['status'] == 'e')
-							<li id="account" class="active"><strong>Pengajuan Baru</strong></li>
+						<h4 style="color: #32a932; margin-bottom: 30px;">PROGRESS</h4>
+						@if ($status == 'a_1')
+							<li id="account" class="confirming"><strong>Pengajuan Baru</strong></li>
 						@else
-							<li id="account"><strong>Pengajuan Baru</strong></li>
+							<li id="account" class="confirming"><strong>Pengajuan Baru</strong></li>
+						@endif
+
+						@php
+							// dd($value['status']);				
+						@endphp
+
+						@if ($status == 'a_2')
+							<li id="account" class="notyet"><strong>Verifikasi Berkas</strong></li>
+						@elseif ($status == 'a_2_0')
+							<li id="account" class="notyet"><strong>Belum Upload Berkas</strong></li>
+						@elseif ($status == 'a_2_1')
+							<li id="account" class="waiting"><strong>Menunggu Verifikasi Admin</strong></li>
+						@elseif ($status == 'a_2_2')
+							<li id="account" class="fixing"><strong>Perbaikan Berkas</strong></li>
+						@elseif ($status == 'a_2_3')
+							<li id="account" class="confirming"><strong>Berkas Terkonfirmasi</strong></li>
+						@elseif ($status == 'a_1')
+							<li id="account"><strong>Verifikasi Berkas</strong></li>						
+						@else
+							<li id="account" class="confirming"><strong>Berkas Terkonfirmasi</strong></li>
+						@endif
+
+						@if ($status == 'a_3')
+							<li id="personal" class="notyet"><strong>Menentukan Kebutuhan Waktu Audit</strong></li>
+						@elseif ($status == 'a_3_0')
+							<li id="personal" class="notyet"><strong>Belum Ditentukan</strong></li>
+						@elseif ($status == 'a_3_1')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Reviewer</strong></li>
+						@elseif ($status == 'a_3_2')
+							<li id="personal" class="fixing"><strong>Perbaikan Kebutuhan Audit</strong></li>
+						@elseif ($status == 'a_3_3')
+							<li id="personal" class="confirming"><strong>Kebutuhan Waktu Audit Terkonfirmasi</strong></li>
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Menentukan Kebutuhan Waktu Audit</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Kebutuhan Waktu Audit Terkonfirmasi</strong></li>
+						@endif
+
+						@if ($status == 'a_4')
+							<li id="personal" class="confirming"><strong>Penawaran Harga dan Akad</strong></li>
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Penawaran Harga dan Akad</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Penawaran Harga dan Akad</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Penawaran Harga dan Akad</strong></li>
+						@endif
+
+						@if ($status == 'a_5')
+							<li id="personal" class="notyet"><strong>Pembayaran</strong></li>
+						@elseif ($status == 'a_5_0')
+							<li id="personal" class="notyet"><strong>Belum Bayar</strong></li>
+						@elseif ($status == 'a_5_1')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Sales</strong></li>
+						@elseif ($status == 'a_5_2')
+							<li id="personal" class="fixing"><strong>Pembayaran Gagal</strong></li>
+						@elseif ($status == 'a_5_3')
+							<li id="personal" class="confirming"><strong>Pembayaran Terkonfirmasi</strong></li>
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Pembayaran</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Pembayaran</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Pembayaran</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Pembayaran Terkonfirmasi</strong></li>
+						@endif
+
+						@if ($status == 'a_6')
+							<li id="personal" class="notyet"><strong>Penerbitan OC</strong></li>
+						@elseif ($status == 'a_6_0')
+							<li id="personal" class="notyet"><strong>Belum Upload OC</strong></li>
+						@elseif ($status == 'a_6_1')
+							<li id="personal" class="waiting"><strong>Menunggu Pelanggan Upload Ulang OC</strong></li>
+						@elseif ($status == 'a_6_2')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Admin</strong></li>
+						@elseif ($status == 'a_6_3')
+							<li id="personal" class="fixing"><strong>Penerbitan OC Gagal</strong></li>
+						@elseif ($status == 'a_6_4')
+							<li id="personal" class="confirming"><strong>Penerbitan OC Terkonfirmasi</strong></li>
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Penerbitan OC</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Penerbitan OC</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Penerbitan OC</strong></li>
+						@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3')
+							<li id="account"><strong>Penerbitan OC</strong></li>						
+						@else
+							<li id="account" class="confirming"><strong>Penerbitan OC Terkonfirmasi</strong></li>
+						@endif
+
+						@if ($status == 'a_7')
+							<li id="personal" class="notyet"><strong>Penjadwalan</strong></li>
+						@elseif ($status == 'a_7_0')
+							<li id="personal" class="notyet"><strong>Belum Dijadwalkan</strong></li>
+						@elseif ($status == 'a_7_1')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Reviewer</strong></li>
+						@elseif ($status == 'a_7_2')
+							<li id="personal" class="fixing"><strong>Perbaikan Penjadwalan</strong></li>
+						@elseif ($status == 'a_7_3')
+							<li id="personal" class="confirming"><strong>Penjadwalan Terkonfirmasi</strong></li>						
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Penjadwalan</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Penjadwalan</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Penjadwalan</strong></li>
+						@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3')
+							<li id="account"><strong>Penjadwalan</strong></li>
+						@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
+							<li id="account"><strong>Penjadwalan</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Penjadwalan Terkonfirmasi</strong></li>
+						@endif
+
+						@if ($status == 'a_8')
+							<li id="personal" class="notyet"><strong>Proses Audit Tahap 1</strong></li>						
+						@elseif ($status == 'a_8_1')
+							<li id="personal" class="waiting"><strong>Menunggu Verifikasi Admin</strong></li>
+						@elseif ($status == 'a_8_2')
+							<li id="personal" class="fixing"><strong>Perbaikan Berkas</strong></li>
+						@elseif ($status == 'a_8_3')
+							<li id="personal" class="confirming"><strong>Audit Tahap 1 Selesai</strong></li>						
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Proses Audit Tahap 1</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Proses Audit Tahap 1</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Proses Audit Tahap 1</strong></li>
+						@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3')
+							<li id="account"><strong>Proses Audit Tahap 1</strong></li>
+						@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
+							<li id="account"><strong>Proses Audit Tahap 1</strong></li>
+						@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
+							<li id="account"><strong>Proses Audit Tahap 1</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Proses Audit Tahap 1</strong></li>
+						@endif
+
+						@if ($status == 'a_9')
+							<li id="personal" class="notyet"><strong>Pembayaran Tahap 2</strong></li>						
+						@elseif ($status == 'a_9_0')
+							<li id="personal" class="notyet"><strong>Belum Bayar</strong></li>
+						@elseif ($status == 'a_9_1')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Sales</strong></li>
+						@elseif ($status == 'a_9_2')
+							<li id="personal" class="fixing"><strong>Pembayaran Gagal</strong></li>
+						@elseif ($status == 'a_9_3')
+							<li id="personal" class="confirming"><strong>Pembayaran Terkonfirmasi</strong></li>
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Pembayaran Tahap 2</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Pembayaran Tahap 2</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Pembayaran Tahap 2</strong></li>
+						@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3')
+							<li id="account"><strong>Pembayaran Tahap 2</strong></li>
+						@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
+							<li id="account"><strong>Pembayaran Tahap 2</strong></li>
+						@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
+							<li id="account"><strong>Pembayaran Tahap 2</strong></li>
+						@elseif ($status == 'a_8' || $status == 'a_8_1' || $status == 'a_8_2' || $status == 'a_8_3')
+							<li id="account"><strong>Pembayaran Tahap 2</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Pembayaran Tahap 2</strong></li>
+						@endif
+
+						@if ($status == 'a_10')
+							<li id="personal" class="notyet"><strong>Proses Audit Tahap 2</strong></li>						
+						@elseif ($status == 'a_10_0')
+							<li id="personal" class="notyet"><strong>Belum Upload Audit Plan</strong></li>
+						@elseif ($status == 'a_10_1')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Pelaku Usaha</strong></li>
+						@elseif ($status == 'a_10_2')
+							<li id="personal" class="fixing"><strong>Audit Plan Ditolak</strong></li>
+						@elseif ($status == 'a_10_3')
+							<li id="personal" class="confirming"><strong>Audit Plan Terkonfirmasi</strong></li>
+						@elseif ($status == 'a_10_4')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Technical Reviewer</strong></li>
+						@elseif ($status == 'a_10_5')
+							<li id="personal" class="fixing"><strong>Perbaikan Laporan Audit Tahap 2</strong></li>
+						@elseif ($status == 'a_10_6')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Komite Sertifikasi</strong></li>
+						@elseif ($status == 'a_10_7')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Reviewer Operasi</strong></li>
+						@elseif ($status == 'a_10_8')
+							<li id="personal" class="confirming"><strong>Laporan Audit Tahap 2 Terkonfirmasi</strong></li>
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Proses Audit Tahap 2</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Proses Audit Tahap 2</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Proses Audit Tahap 2</strong></li>
+						@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3')
+							<li id="account"><strong>Proses Audit Tahap 2</strong></li>
+						@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
+							<li id="account"><strong>Proses Audit Tahap 2</strong></li>
+						@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
+							<li id="account"><strong>Proses Audit Tahap 2</strong></li>
+						@elseif ($status == 'a_8' || $status == 'a_8_1' || $status == 'a_8_2' || $status == 'a_8_3')
+							<li id="account"><strong>Proses Audit Tahap 2</strong></li>
+						@elseif ($status == 'a_9' || $status == 'a_9_0' || $status == 'a_9_1' || $status == 'a_9_2' || $status == 'a_9_3')
+							<li id="account"><strong>Proses Audit Tahap 2</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Proses Audit Tahap 2</strong></li>
+						@endif
+
+						@if ($status == 'a_11')
+							<li id="personal" class="notyet"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_11_0')
+							<li id="personal" class="waiting"><strong>Belum Upload Berita Acara</strong></li>
+						@elseif ($status == 'a_11_1')
+							<li id="personal" class="confirming"><strong>Menunggu Pelanggan Upload Ulang Berita Acara</strong></li>
+						@elseif ($status == 'a_11_2')
+							<li id="personal" class="fixing"><strong>Berita Acara Terkonfirmasi</strong></li>						
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_8' || $status == 'a_8_1' || $status == 'a_8_2' || $status == 'a_8_3')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_9' || $status == 'a_9_0' || $status == 'a_9_1' || $status == 'a_9_2' || $status == 'a_9_3')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@elseif ($status == 'a_10' || $status == 'a_10_0' || $status == 'a_10_1' || $status == 'a_10_2' || $status == 'a_10_3' || $status == 'a_10_4' || $status == 'a_10_5' || $status == 'a_10_6' || $status == 'a_10_7' || $status == 'a_10_8')
+							<li id="account"><strong>Berita Acara</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Berita Acara</strong></li>
+						@endif
+
+						@if ($status == 'a_12')
+							<li id="personal" class="notyet"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_12_0')
+							<li id="personal" class="notyet"><strong>Belum Bayar</strong></li>
+						@elseif ($status == 'a_12_1')
+							<li id="personal" class="waiting"><strong>Menunggu Konfirmasi Sales</strong></li>
+						@elseif ($status == 'a_12_2')
+							<li id="personal" class="fixing"><strong>Pelunasan Gagal</strong></li>
+						@elseif ($status == 'a_12_3')
+							<li id="personal" class="confirming"><strong>Pelunasan Terkonfirmasi</strong></li>
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_8' || $status == 'a_8_1' || $status == 'a_8_2' || $status == 'a_8_3')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_9' || $status == 'a_9_0' || $status == 'a_9_1' || $status == 'a_9_2' || $status == 'a_9_3')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_10' || $status == 'a_10_0' || $status == 'a_10_1' || $status == 'a_10_2' || $status == 'a_10_3' || $status == 'a_10_4' || $status == 'a_10_5' || $status == 'a_10_6' || $status == 'a_10_7' || $status == 'a_10_8')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@elseif ($status == 'a_11' || $status == 'a_11_0' || $status == 'a_11_1' || $status == 'a_11_2')
+							<li id="account"><strong>Pelunasan</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Pelunasan Terkonfirmasi</strong></li>
+						@endif
+
+						@if ($status == 'a_13')
+							<li id="personal" class="confirming"><strong>Proses Sidang Fatwa</strong></li>						
+						@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_8' || $status == 'a_8_1' || $status == 'a_8_2' || $status == 'a_8_3')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_9' || $status == 'a_9_0' || $status == 'a_9_1' || $status == 'a_9_2' || $status == 'a_9_3')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_10' || $status == 'a_10_0' || $status == 'a_10_1' || $status == 'a_10_2' || $status == 'a_10_3' || $status == 'a_10_4' || $status == 'a_10_5' || $status == 'a_10_6' || $status == 'a_10_7' || $status == 'a_10_8')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_11' || $status == 'a_11_0' || $status == 'a_11_1' || $status == 'a_11_2')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@elseif ($status == 'a_12' || $status == 'a_12_0' || $status == 'a_12_1' || $status == 'a_12_2' || $status == 'a_12_3')
+							<li id="account"><strong>Proses Sidang Fatwa</strong></li>
+						@else
+							<li id="account" class="confirming"><strong>Proses Sidang Fatwa</strong></li>
 						@endif
 						
-						@if ($value['status'] == 3)
+						{{-- @if ($value['status'] == 3)
 							<li id="personal" class="active"><strong>Verifikasi Data</strong></li>						
 						@elseif ($value['status'] == 4)
 							<li id="personal" class="warning"><strong>Perbaiki Data Berkas</strong></li>
@@ -330,7 +623,7 @@
 							<li id="confirm" class="active"><strong>Sertifikat Halal</strong></li>
 						@else
 							<li id="confirm"><strong>Sertifikat Halal</strong></li>
-						@endif
+						@endif --}}
 					@endforeach	                    
                                                             																														
 				</ul> <!-- fieldsets -->
