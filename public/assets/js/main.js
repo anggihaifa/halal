@@ -1,4 +1,4 @@
-new Cleave('#no_surat',{    
+new Cleave('#no_registrasi_bpjph',{    
     delimiter: '-',
     blocks: [2,1,4,4],    
     uppercase: true
