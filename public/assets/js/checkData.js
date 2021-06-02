@@ -37,7 +37,7 @@ function checkStatusPelunasan(data){
 
 function checkStatusBerkas(data){
     return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum Upload"></a><br>Pelaku Usaha'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="color:#yellow; font-size: 200%;" title="Menunggu Admin Mememverifikasi Berkas"></a> <br>Admin'
+        :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Admin Memverifikasi Berkas"></a> <br>Admin'
         :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan"></a><br>Pelaku Usaha'
         :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Berkas Terkonfirmasi"></a>'
         :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum Upload"></a><br>Pelaku Usaha';
@@ -185,20 +185,21 @@ function checkProgress(data){
             :(data==4)? 'Penawaran Harga dan Akad'
             :(data.trim()=='4_0')? 'Belum Upload Bukti Penawaran dan Akad'
             :(data.trim()=='4_1')? 'Sudah Upload Bukti Penawaran dan Akad'
-            //pembayaran tahap 1
-            :(data==5)? 'Pembayaran'
-
-            :(data.trim()=='5_0')? 'Belum Upload Bukti Bayar'
-            :(data.trim()=='5_1')? 'Menunggu Sales Officer Mengkonfirmasi Pembayaran'
-            :(data.trim()=='5_2')? 'Pembayaran Gagal'
-            :(data.trim()=='5_3')? 'Pembayaran Terkonfirmasi'
+           
             //penerbitan OC
-            :(data==6)? 'Penerbitan Order Confirmation'
-            :(data.trim()=='6_0')? 'Belum Upload OC'
-            :(data.trim()=='6_1')? 'Menunggu Pelaku Usaha Upload Ulang OC'
-            :(data.trim()=='6_2')? 'Menunggu Konfirmasi Admin'
-            :(data.trim()=='6_3')? 'Penerbitan OC Gagal'
-            :(data.trim()=='6_4')? 'Penerbitan OC Terkonfirmasi'
+            :(data==5)? 'Penerbitan Order Confirmation'
+            :(data.trim()=='5_0')? 'Belum Upload OC'
+            :(data.trim()=='5_1')? 'Menunggu Pelaku Usaha Upload Ulang OC'
+            :(data.trim()=='5_2')? 'Menunggu Konfirmasi Admin'
+            :(data.trim()=='5_3')? 'Penerbitan OC Gagal'
+            :(data.trim()=='5_4')? 'Penerbitan OC Terkonfirmasi'
+             //pembayaran tahap 1
+             :(data==5)? 'Pembayaran'
+
+             :(data.trim()=='6_0')? 'Belum Upload Bukti Bayar'
+             :(data.trim()=='6_1')? 'Menunggu Sales Officer Mengkonfirmasi Pembayaran'
+             :(data.trim()=='6_2')? 'Pembayaran Gagal'
+             :(data.trim()=='6_3')? 'Pembayaran Terkonfirmasi'
             //Penjadwalan
             :(data==7)? 'Penjadwalan'
             :(data.trim()=='7_0')? 'Belum Dijadwalkan'
@@ -262,18 +263,18 @@ function notifProgress(data){
             //penawaran harga dan akad
             :(data==4)? 'Penawaran Harga dan Akad'
             //pembayaran tahap 1
-            :(data==5)? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
-            :(data.trim()=='5_0')? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
-            :(data.trim()=='5_1')? 'Silahkan Menunggu Berkas Bukti Transfer Dikonfirmasi oleh Sales Admin'
-            :(data.trim()=='5_2')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
-            :(data.trim()=='5_3')? 'Pembayaran  Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
+            :(data==6)? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
+            :(data.trim()=='6_0')? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
+            :(data.trim()=='6_1')? 'Silahkan Menunggu Berkas Bukti Transfer Dikonfirmasi oleh Sales Admin'
+            :(data.trim()=='6_2')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
+            :(data.trim()=='6_3')? 'Pembayaran  Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
             //penerbitan OC
-            :(data==6)? 'Penerbitan OC'
-            :(data.trim()=='6_0')? 'Penerbitan OC'
-            :(data.trim()=='6_1')? 'Silahkan mengupload Order Confirmation yang Sudah Ditandatangani'
-            :(data.trim()=='6_2')? 'Silahkan Menunggu Admin Memverifikasi Order Confirmation'
-            :(data.trim()=='6_3')? 'Order Confirmation Tidak Sesuai, Gagal Diterbitkan. Silahkan Upload Ulang dan Pastikan Dokumen Sudah Ditandatangani'
-            :(data.trim()=='6_4')? 'Order COnfirmation Sudah Terkonfirmasi Silahkan Melanjutkan Ke Tahapan Selanjutnya Penjadwalan'
+            :(data==5)? 'Penerbitan OC'
+            :(data.trim()=='5_0')? 'Penerbitan OC'
+            :(data.trim()=='5_1')? 'Silahkan mengupload Order Confirmation yang Sudah Ditandatangani'
+            :(data.trim()=='5_2')? 'Silahkan Menunggu Admin Memverifikasi Order Confirmation'
+            :(data.trim()=='5_3')? 'Order Confirmation Tidak Sesuai, Gagal Diterbitkan. Silahkan Upload Ulang dan Pastikan Dokumen Sudah Ditandatangani'
+            :(data.trim()=='5_4')? 'Order COnfirmation Sudah Terkonfirmasi Silahkan Melanjutkan Ke Tahapan Selanjutnya Penjadwalan'
             //Penjadwalan
             :(data==7)? 'Penjadwalan'
             :(data.trim()=='7_0')? 'Belum Dijadwalkan'

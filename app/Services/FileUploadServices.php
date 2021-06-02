@@ -50,13 +50,17 @@ class FileUploadServices{
 		}elseif($key == 'has_12'){
 			$filename = strtoupper("HPAS_12_Bukti_Sosialisasi_Kebijakan_Halal_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_13'){
-			$filename = strtoupper("HPAS_13_Bukti_Pelatihan_Internal_").$no_registrasi.".".$originalExtension;
+			$filename = strtoupper("HPAS_13_Bukti_Sertifikat_Penyelia_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_14'){
-			$filename = strtoupper("HPAS_14_Bukti_Audit_Internal_").$no_registrasi.".".$originalExtension;
+			$filename = strtoupper("HPAS_14_Bukti_Pelatihan_Internal_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_15'){
-			$filename = strtoupper("HPAS_15_Informasi_Denah_Lokasi_Produksi_").$no_registrasi.".".$originalExtension;
+			$filename = strtoupper("HPAS_15_Bukti_Pelaksanaan_Audit_Internal_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_16'){
-			$filename = strtoupper("HPAS_16_Bukti_Registrasi_BPJPH_").$no_registrasi.".".$originalExtension;
+			$filename = strtoupper("HPAS_16_Bukti_Pelaksanaan_Kaji_Ulang_Manajemen_").$no_registrasi.".".$originalExtension;
+		}elseif($key == 'has_17'){
+			$filename = strtoupper("HPAS_17_Informasi_Denah_Lokasi_Produksi_").$no_registrasi.".".$originalExtension;
+		}elseif($key == 'has_18'){
+			$filename = strtoupper("HPAS_18_Bukti_Registrasi_BPJPH_").$no_registrasi.".".$originalExtension;
 		}
 		
 
@@ -118,14 +122,19 @@ class FileUploadServices{
 		}elseif($key == 'has_12'){
 			$filename = strtoupper("HPAS_12_Bukti_Sosialisasi_Kebijakan_Halal_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_13'){
-			$filename = strtoupper("HPAS_13_Bukti_Pelatihan_Internal_").$no_registrasi.".".$originalExtension;
+			$filename = strtoupper("HPAS_13_Bukti_Sertifikat_Penyelia_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_14'){
-			$filename = strtoupper("HPAS_14_Bukti_Audit_Internal_").$no_registrasi.".".$originalExtension;
+			$filename = strtoupper("HPAS_14_Bukti_Pelatihan_Internal_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_15'){
-			$filename = strtoupper("HPAS_15_Informasi_Denah_Lokasi_Produksi_").$no_registrasi.".".$originalExtension;
+			$filename = strtoupper("HPAS_15_Bukti_Pelaksanaan_Audit_Internal_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_16'){
-			$filename = strtoupper("HPAS_16_Bukti_Registrasi_BPJPH_").$no_registrasi.".".$originalExtension;
+			$filename = strtoupper("HPAS_16_Bukti_Pelaksanaan_Kaji_Ulang_Manajemen_").$no_registrasi.".".$originalExtension;
+		}elseif($key == 'has_17'){
+			$filename = strtoupper("HPAS_17_Informasi_Denah_Lokasi_Produksi_").$no_registrasi.".".$originalExtension;
+		}elseif($key == 'has_18'){
+			$filename = strtoupper("HPAS_18_Bukti_Registrasi_BPJPH_").$no_registrasi.".".$originalExtension;
 		}
+		
 		
 		$store = $x->storeAs("public/uploadDokumen/".$id_user."/".$id_registrasi."/".$status."/", $filename);
 
