@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registrasi extends Model
 {
+    // protected $table = 'registrasi_v2';
     protected $table = 'registrasi';
 
     protected $fillable = [

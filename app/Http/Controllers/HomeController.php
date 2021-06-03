@@ -35,7 +35,7 @@ class HomeController extends Controller
                             ->get();                    
         $checkRegistrasiActive =  DB::table('registrasi')
                                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                                  //->join('users','registrasi.id_user','=','users.id')
                                  //->join('users','registrasi.id','=','users.registrasi_id')
                                  ->where('registrasi.kode_wilayah','=',$kodewilayah)
@@ -86,7 +86,7 @@ class HomeController extends Controller
         $id_user = Auth::user()->id;
         $cekAudit = DB::table('registrasi')
              ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-             ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
             ->where(function($query) use ($id_user){

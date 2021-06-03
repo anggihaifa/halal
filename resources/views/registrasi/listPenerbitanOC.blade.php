@@ -13,17 +13,17 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="#">Registrasi Halal</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Penawaran dan Kontrak Akad Sertifikasi Halal</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Penerbitan Order Confirmation Sertifikasi Halal</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Penawaran dan Kontrak Akad Sertifikasi Halal  <small></small></h1>
+    <h1 class="page-header">List Penerbitan Order Confirmation Sertifikasi Halal  <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Penawaran dan Kontrak Akad Sertifikasi Halal</h4>
+            <h4 class="panel-title">List Penerbitan Order Confirmation Sertifikasi Halal</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -105,9 +105,8 @@
                     <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                     <th class="text-nowrap valign-middle text-center">Tanggal</th>
                     <th class="text-nowrap valign-middle text-center">status</th>
-                    <th class="text-nowrap valign-middle text-center">status</th>
-                    <th class="text-nowrap valign-middle text-center">Biaya</th>
-                    <th class="text-nowrap valign-middle text-center">File Kotrak</th>
+                    <th class="text-nowrap valign-middle text-center">status</th>                    
+                    <th class="text-nowrap valign-middle text-center">File OC</th>
                     <th class="text-nowrap valign-middle text-center">Aksi</th>
                 </tr>
                 </thead>
@@ -130,7 +129,7 @@
         var xTable = $('#table').DataTable({
 
             ajax:{
-                url:"{{route('dataakadadmin')}}",
+                url:"{{route('datapenerbitanoc')}}",
                 data:function(d){
                     d.no_registrasi = $('input[name=no_registrasi]').val();
                     d.name = $('input[name=name]').val();
@@ -167,32 +166,19 @@
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                        return checkStatusAkad(full.status_akad)
+                        return checkOC(full.status_oc)
                     }
-                },
-                {
-                    "data":"total_biaya",
-                    
-                    "searchable":false,
-                    "orderable":false,
-                    "render": function(data, type, row) {
-                        return Number(data).toLocaleString('id', {
-                          maximumFractionDigits: 2,
-                          style: 'currency',
-                          currency: 'IDR'
-                        });
-                    }
-                },
+                },                
                {
                     "data":null,
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                            if(full.status_akad == 0 || full.status_akad == null){
+                            if(full.status_oc == 0 || full.status_oc == null){
 
                             return `-`
                             }else{
-                                return `<a href="{{ url('').Storage::url('public/buktiakad/`+full.id_user+`/`+full.file_akad+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`
+                                return `<a href="{{ url('').Storage::url('public/buktioc/`+full.id_user+`/`+full.file_oc+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`    
                             }
                         
                         
@@ -207,10 +193,10 @@
 
                        
                                
-                                var upload = `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
+                                var upload = `<a href="{{url('upload_oc_admin')}}/`+full.id+`"  class="dropdown-item" >OC</a> `;
 
-                                var status8 = `<a href="{{url('update_status_akad')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7"   class="dropdown-item"> Akad Gagal</a> `;
-                                var konfirm = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`/`+full.status_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
+                                var status8 = `<a href="{{url('update_status_oc')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_3"   class="dropdown-item"> OC Gagal</a> `;
+                                var konfirm = `<a href="{{url('konfirmasi_oc_admin')}}/`+full.id+`/6_4"  class="dropdown-item" >Konfirmasi OC</a>` ;
 
                                 return `<div class="btn-group m-r-5 show">
                                         <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
@@ -220,8 +206,7 @@
                                             <a href="{{url('detail_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
 
                                             
-                                            <div class="dropdown-divider"></div>`+upload+
-                                            // status8+konfirm+
+                                            <div class="dropdown-divider"></div>`+upload+status8+konfirm+
                                         `</div>
                                     </div>`
                                       
@@ -231,7 +216,7 @@
             ],
            'columnDefs': [
             {
-                  "targets": [1,2,3,4,5,6,7,8,9,10],
+                  "targets": [1,2,3,4,5,6,7,8,9],
                   "className": "text-center",
                  
             }],

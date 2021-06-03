@@ -89,6 +89,7 @@
 
                            
                             var akad = `<a href="{{url('upload_kontrak_akad_user')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
+                            var oc = `<a href="{{url('upload_oc_user')}}/`+full.id+`"  class="dropdown-item" >Order Confirmation</a> `;                            
 
                             var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayaran</a> `;
                             var pembayaran2 = `<a href="{{url('pembayaran_tahap2')}}/`+full.id+`"  class="dropdown-item"> Pembayaran Tahap 2</a> `;
@@ -99,11 +100,11 @@
                             if(full.id == aktif_reg ){
                                 var aktif =`<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-yellow btn-xs" >Non Aktifkan</a>`;
                                 var uploadBerkas = `<a href="{{url('unggahDataSertifikasi')}}"  class="dropdown-item" ><i class="fa fa-edit"></i>Berkas Sertifikasi</a>`;
-                                var div_aktif = `<div class="col-lg-12 row border-left rounded-lg border-primary" style="background-color:#fafbfc" >`;
+                                var div_aktif = `<div class="col-lg-12 row border-left border-primary" style="background-color:#fafbfc" >`;
                             }else{
                                 var aktif = `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-green btn-xs" >Aktifkan</a>`;
                                 var uploadBerkas = `<a href="#"  class="dropdown-item" >Aktifkan Untuk edit berkas</a>`;
-                                 var div_aktif = `<div class="col-lg-12 row border-left rounded-lg border-primary" >`;
+                                 var div_aktif = `<div class="col-lg-12 row border-left border-primary" >`;
                             }
                             
                             return ``+div_aktif+`
@@ -111,9 +112,8 @@
                                           
                                        
                                         <div class="col-lg-5 row" >
-                                             <div class="col-lg-4 " >
-                                                <i class="fa fa-building text-primary" style="font-size:900%"></i> 
-                                                    
+                                             <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-building text-primary" style="font-size:600%"></i>
                                             </div>
                                             <div class="col-lg-8 ">
                                                 <h4 class="text-grey" style=>`+full.nama_perusahaan+`</h4>
@@ -166,7 +166,7 @@
                                                             <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
                                                                 `+uploadBerkas+`
                                                                 <div class="dropdown-divider"></div>
-                                                                <div class="dropdown-button-title">Update Progress</div>`+akad+pembayaran+pembayaran2+reportA+pelunasan+`
+                                                                <div class="dropdown-button-title">Update Progress</div>`+akad+oc+pembayaran+pembayaran2+reportA+pelunasan+`
                                                                
                                                             </div> 
                                                         </div>

@@ -69,8 +69,39 @@
                             <label class="col-lg-4 col-form-label">Wilayah</label>
                             <div class="col-lg-8">
                                 <select name="kode_wilayah" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
-                                    <option value="00" selected>Pusat</option>
-                                    <option value="11" selected>Aceh</option>
+                                    <option value="119" selected>Pusat</option>
+                                    <option value="115" selected>Cabang Balikpapan</option>
+                                    <option value="125" selected>Cabang Bandar Lampung</option>
+                                    <option value="107" selected>Cabang Bandung</option>
+                                    <option value="117" selected>Cabang Banjarmasin</option>
+                                    <option value="123" selected>Cabang Batam</option>
+                                    <option value="104" selected>Cabang Batu Licin</option>
+                                    <option value="103" selected>Cabang Bekasi</option>
+                                    <option value="129" selected>Cabang Bengkulu</option>
+                                    <option value="121" selected>Cabang Bontang</option>
+                                    <option value="113" selected>Cabang Cilacap</option>
+                                    <option value="131" selected>Cabang Cilegon</option>
+                                    <option value="105" selected>Cabang Cirebon</option>
+                                    <option value="114" selected>Cabang Denpasar</option>
+                                    <option value="127" selected>Cabang Dumai</option>
+                                    <option value="130" selected>Cabang Jakarta</option>
+                                    <option value="128" selected>Cabang Jambi</option>
+                                    <option value="111" selected>Cabang Makasar</option>
+                                    <option value="116" selected>Cabang Manado</option>
+                                    <option value="101" selected>Cabang Medan</option>
+                                    <option value="126" selected>Cabang Padang</option>
+                                    <option value="124" selected>Cabang Palembang</option>
+                                    <option value="109" selected>Cabang Pekanbaru</option>
+                                    <option value="122" selected>Cabang Pontianak</option>
+                                    <option value="120" selected>Cabang Samarinda</option>
+                                    <option value="102" selected>Cabang Sangatta</option>
+                                    <option value="110" selected>Cabang Semarang</option>
+                                    <option value="108" selected>Cabang Surabaya</option>
+                                    <option value="106" selected>Cabang Tarakan</option>
+                                    <option value="112" selected>Cabang Timika</option>
+                                    <option value="118" selected>SBU Kantor Pusat</option>
+                                    <option value="132" selected>SBU Laboratorium Cibitung</option>
+                                    {{-- <option value="11" selected>Aceh</option>
                                     <option value="12" selected>Sumatera Utara</option>
                                     <option value="13" selected>Sumatera Barat</option>
                                     <option value="14" selected>Riau</option>
@@ -103,7 +134,7 @@
                                     <option value="81" selected>Maluku</option>
                                     <option value="82" selected>Maluku Utara</option>
                                     <option value="91" selected>Papua</option>
-                                    <option value="92" selected>Papua Barat</option>
+                                    <option value="92" selected>Papua Barat</option> --}}
                                 </select>
                             </div>
                             <div class="col-md-12 offset-md-5">
