@@ -126,7 +126,7 @@ class RegistrasiController extends Controller
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')
                  /*->leftJoin('pembayaran','registrasi.id','=', 'pembayaran.id_registrasi')*/
                  ->leftJoin('akad','registrasi.id', '=', 'akad.id_registrasi')
@@ -141,7 +141,7 @@ class RegistrasiController extends Controller
 
             $xdata = DB::table('registrasi')
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')
                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')      
                 ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
@@ -174,7 +174,7 @@ class RegistrasiController extends Controller
         //start
         $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')                                  
                  //
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
@@ -362,7 +362,7 @@ class RegistrasiController extends Controller
 
                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
                  ->leftJoin('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->leftJoin('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->leftJoin('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->leftJoin('users','registrasi.id','=','users.registrasi_id')
                
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok', 'users.registrasi_id as registrasi_id','registrasi_alamatkantor.alamat as alamat_kantor')
@@ -381,7 +381,7 @@ class RegistrasiController extends Controller
             $data = DB::table('registrasi')
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
                 ->join('users','registrasi.id_user','=','users.id')
-                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->select('registrasi.*','registrasi.status as statusnya','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.*')
                 ->where('registrasi.id','=',$id)
                 ->get();
@@ -641,7 +641,7 @@ class RegistrasiController extends Controller
             $model->jenis_izin = $data['jenis_izin'];
             $model->jumlah_karyawan = $data['jumlah_karyawan'];
             $model->kapasitas_produksi = $data['kapasitas_produksi'];
-            $model->id_kelompok_produk = $data['id_kelompok_produk'];
+            $model->jenis_produk = $data['jenis_produk'];
             $model->id_rincian_kelompok_produk = implode(',',$data['id_rincian_kelompok_produk']);
 
             $model->progress = 1;
@@ -995,7 +995,7 @@ class RegistrasiController extends Controller
 
         $data   = new Registrasi;
         $data   = $data->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok')
                  ->where('registrasi.id','=',$id_registrasi)
                  ->orderBy('registrasi.id','desc')->get();
@@ -1448,7 +1448,7 @@ class RegistrasiController extends Controller
 
         $data   = new Registrasi;
         $data   = $data->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok')
                  ->where('registrasi.id','=',$id_registrasi)
                  ->orderBy('registrasi.id','desc')->get();
@@ -1483,7 +1483,7 @@ class RegistrasiController extends Controller
 
         $dataRegis = json_decode($dataRegis,true);        
 
-        $dataJenisProduk = $model3->find($dataRegis['id_kelompok_produk']);
+        $dataJenisProduk = $model3->find($dataRegis['jenis_produk']);
 
         // dd($dataJenisProduk);
 
@@ -1745,7 +1745,7 @@ class RegistrasiController extends Controller
         $data = json_decode($data);        
 
         $dataKelProduk = DB::table('kelompok_produk')                    
-                    ->where('id','=',$data->id_kelompok_produk)
+                    ->where('id','=',$data->jenis_produk)
                     ->get();
         
         // dd($dataPemilik);
@@ -2285,7 +2285,7 @@ class RegistrasiController extends Controller
         if($kodewilayah == '119'){
              $xdata = DB::table('registrasi')
                      ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                     ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                     ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
                      
                      ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
@@ -2343,7 +2343,7 @@ class RegistrasiController extends Controller
 
             $xdata = DB::table('registrasi')
                      ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                     ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                     ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
                      
                      ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
@@ -2740,7 +2740,7 @@ class RegistrasiController extends Controller
         if($kodewilayah == '119'){
              $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
@@ -2780,7 +2780,7 @@ class RegistrasiController extends Controller
         }else{
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
@@ -2855,7 +2855,7 @@ class RegistrasiController extends Controller
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')                
                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                 ->where(function($query) use ($kodewilayah){
@@ -2871,7 +2871,7 @@ class RegistrasiController extends Controller
         }else{
              $xdata = DB::table('registrasi')
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')                
                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                 ->where(function($query) use ($kodewilayah){
@@ -3167,7 +3167,7 @@ class RegistrasiController extends Controller
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
@@ -3205,7 +3205,7 @@ class RegistrasiController extends Controller
         }else{
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
@@ -3518,7 +3518,7 @@ class RegistrasiController extends Controller
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
@@ -3556,7 +3556,7 @@ class RegistrasiController extends Controller
         }else{
             $xdata = DB::table('registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  

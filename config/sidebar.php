@@ -415,8 +415,8 @@ return [
         ],
         [
             'icon' => 'ion-ios-calendar',
-            'title' => 'Penjadwalan',
-            'url' => 'listpenjadwalanadmin'
+            'title' => 'Penentuan Kebutuhan Waktu Audit',
+            'url' => 'listkebutuhanwaktuaudit'
         ],
         [
             'icon' => 'ion-md-book',
@@ -709,8 +709,8 @@ return [
         ],
         [
             'icon' => 'ion-ios-calendar',
-            'title' => 'Penjadwalan',
-            'url' => 'listpenjadwalanadmin'
+            'title' => 'Penentuan Kebutuhan Waktu Audit',
+            'url' => 'listkebutuhanwaktuaudit'
         ],
         [
             'icon' => 'ion-ios-calendar',

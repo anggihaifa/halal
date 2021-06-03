@@ -68,7 +68,7 @@ function checkStatusBerkasAuditTahap2(data){
 }
 
 
-function checkStatusWaktuKebutuhanAudit(data){
+function checkStatusKebutuhanAudit(data){
     return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum ditentukan"></a><br>Verifikator'
         :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi"></a><br>Reviewer Operasi'
         :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan"></a><br>Verifikator'

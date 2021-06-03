@@ -5247,24 +5247,78 @@ class PenjadwalanController extends Controller
         return $detailNama;
     }
 
+    public function storeKebutuhanWaktuAudit(Request $request)
+    {
 
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model3 = new User;
+
+        $e = $model->find($data['idregis1']);
+        $j = $model2->find($e->id_penjadwalan);
+        //dd($j);
+
+        $j->mulai_audit1 = $data['mulai_audit1'];
+        $j->status_audit1 = 1;
+        $j->selesai_audit1 = $data['selesai_audit1'];
+
+        $j->pelaksana1_audit1 = $data['pelaksana1_audit1'];
+        $j->pelaksana2_audit1 = $data['pelaksana2_audit1'];
+
+        $j->save();
+
+        
+
+        try{
+            DB::Commit();
+
+            if($data['pelaksana1_audit1']){
+                $str =  explode("_",$data['pelaksana1_audit1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'audit1');
+
+            }if($data['pelaksana2_audit1']){
+
+                $str2 =  explode("_",$data['pelaksana2_audit1']);
+                $u2 = $model3->find($str2[0]);
+                
+                SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
+            }
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('listpenjadwalanadmin');
+
+
+         return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('listpenjadwalanadmin');
+            return $redirectPass;
+        }
+  
+    }
 
     public function listPenjadwalanAdmin(){
 
-        /*require_once 'vendor/pear/http_request2/HTTP/Request2.php';
-        $request = new Request2();
-        $request->setUrl('https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja');
-        $request->setMethod(HTTP_Request2::METHOD_POST);
-        $request->setConfig(array(
-        'follow_redirects' => TRUE
-        ));
-
-        $response = $request->send();
-        $data =$response->getBody();
-        dd($data);*/
+        
        
     
         return view('penjadwalan.listPenjadwalanAdmin');
+    }
+
+    public function listKebutuhanWaktuAudit(){
+
+        return view('penjadwalan.listKebutuhanWaktuAudit');
     }
 
     public function listAudit1(){
@@ -5287,6 +5341,59 @@ class PenjadwalanController extends Controller
         return view('penjadwalan.listTinjauan');
     }
 
+    public function dataKebutuhanWaktuAudit(Request $request){
+        $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
+        //start
+        if($kodewilayah == '119'){
+            $xdata = DB::table('registrasi')
+                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')                 
+                 ->where('registrasi.status_cancel','=',0)
+                 ->orWhere('registrasi.status','=','3')
+                 ->orWhere('registrasi.status','=','3_1')
+                 ->orWhere('registrasi.status','=','3_2')
+                 ->orWhere('registrasi.status','=','3_3')
+                 ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','registrasi.no_registrasi_bpjph','registrasi.status_registrasi as status_registrasi','penjadwalan.*');
+        }else{
+
+            $xdata = DB::table('registrasi')
+                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                ->join('users','registrasi.id_user','=','users.id')
+                ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
+                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+                ->where('registrasi.kode_wilayah','=',$kodewilayah)
+                ->where('registrasi.status_cancel','=',0)
+                ->orWhere('registrasi.status','=','3')
+                ->orWhere('registrasi.status','=','3_1')
+                ->orWhere('registrasi.status','=','3_2')
+                ->orWhere('registrasi.status','=','3_3')
+                ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+
+
+        }
+
+       
+
+
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        
+
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
+    }
+
+
     public function dataPenjadwalanAdmin(Request $request){
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
@@ -5295,7 +5402,7 @@ class PenjadwalanController extends Controller
             $xdata = DB::table('registrasi')
                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
                  ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')
                  ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
                 
@@ -5305,7 +5412,7 @@ class PenjadwalanController extends Controller
 
             $xdata = DB::table('registrasi')
                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-                ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')
                 ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
@@ -5342,7 +5449,7 @@ class PenjadwalanController extends Controller
        
         $xdata = DB::table('registrasi')
              ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-             ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
              ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')            
@@ -5381,7 +5488,7 @@ class PenjadwalanController extends Controller
        
         $xdata = DB::table('registrasi')
              ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-             ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
             ->where(function($query) use ($id_user){
@@ -5434,7 +5541,7 @@ class PenjadwalanController extends Controller
        
         $xdata = DB::table('registrasi')
              ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-             ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
             ->where(function($query) use ($id_user){
@@ -5491,7 +5598,7 @@ class PenjadwalanController extends Controller
        
         $xdata = DB::table('registrasi')
              ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-             ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
             ->where(function($query) use ($id_user){
@@ -5648,7 +5755,7 @@ class PenjadwalanController extends Controller
        
         $dataAudit1 = DB::table('registrasi')
              ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-             ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
                       
@@ -5670,7 +5777,7 @@ class PenjadwalanController extends Controller
 
         $dataAudit2 = DB::table('registrasi')
              ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
-             ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
                       
