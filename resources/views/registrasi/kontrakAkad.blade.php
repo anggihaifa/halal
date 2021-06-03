@@ -10,11 +10,11 @@
     <!-- begin breadcrumb -->
 	<ol class="breadcrumb float-xl-right">
 		<li class="breadcrumb-item">Registrasi</li>
-		<li class="breadcrumb-item active">Kontrak Akad Sertifikasi Halal</li>
+		<li class="breadcrumb-item active">Penawaran dan Kontrak Akad Sertifikasi Halal</li>
 	</ol>
 	<!-- end breadcrumb -->
 	<!-- begin page-header -->
-	<h1 class="page-header">Kontrak Akad Sertifikasi Halal<small></small></h1>
+	<h1 class="page-header">Penawaran dan Kontrak Akad Sertifikasi Halal<small></small></h1>	
 	<!-- end page-header -->
 	<!-- begin row -->
 	<div class="row">
@@ -23,8 +23,16 @@
             <!-- begin panel -->
             <div class="panel panel-inverse" data-sortable-id="form-plugins-7">
 				<!-- begin panel-heading -->
+				@if ($data->status_akad == 0)		
+					<div class="panel-heading">
+						<h4 class="panel-title">Proses Belum Memasuki Tahap Ini</h4>
+						<div class="panel-heading-btn">
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+						</div>
+					</div>
+				@else
 				<div class="panel-heading">
-					<h4 class="panel-title">Kontrak Akad Sertifikasi Halal</h4>
+					<h4 class="panel-title">Penawaran dan Kontrak Akad Sertifikasi Halal</h4>
 					<div class="panel-heading-btn">
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					</div>
@@ -55,22 +63,21 @@
 							<div class="col-lg-8">
 								<input id="skala_usaha" class="form-control"  name="skala_usaha" value={{ $data->skala_usaha }} type="text" readonly/>
                               
-                            </div>
-							
-							
-							<label class="col-lg-12 col-form-label">Biaya Sertifikasi</label>
-							
-							<label class="col-lg-4 col-form-label">Mata Uang</label>
-							<div class="col-lg-8">
-								<input id="mata_uang" name="mata_uang" type="text" class="form-control "  readonly value={{$data->mata_uang}}>
-	                        </div>  
+                            </div>																					
 																				
 							<label class="col-lg-4 col-form-label">Total Biaya Sertifikasi</label>
 							<div class="col-lg-8">
 								<input id="total_biaya" name="total_biaya" type="text" class="form-control " readonly value={{$data->total_biaya}}  />
 							</div>
 
-							@if($data->status_akad == 1)
+							<label class="col-lg-4 col-form-label">Penawaran dan Kontrak Akad</label>
+							<div id="sh" class="col-lg-8">
+								<div class="form-control" readonly>
+									<a href="{{url('') .Storage::url('public/buktiakad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
+								</div>
+							</div>
+
+							{{-- @if($data->status == '6_1')
 								<!--Auto Download-->
 							<label class="col-lg-4 col-form-label">Kontrak Akad</label>
 							<div id="sh" class="col-lg-8">
@@ -78,7 +85,7 @@
 									<a href="{{url('') .Storage::url('public/buktiakad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
 								</div>
 							</div>
-							<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
+							<label class="col-lg-4 col-form-label">Upload Penawaran dan Kontrak Akad</label>
 							<div class="col-lg-8">
 								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')"/>
 							</div>
@@ -97,16 +104,13 @@
 									<a href="{{url('') .Storage::url('public/buktiakad/'.Auth::user()->id.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
 								</div>
 							</div>
-							@endif
+							@endif --}}
 
-							
-								
-							
 							<div class="col-md-12 offset-md-5">
 								
 							
 							@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
-							@if($data->status_akad == 1 || $data->status_akad == 2)
+							{{-- @if($data->status_akad == 1 || $data->status_akad == 2)
 								<button  type = "sumbit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah berkas kontrak akad ?????')">Konfirmasi</button>
 								@if($data->status_akad == 1)
 									<button type="submit" name="tidaksetuju" value="Tidak Setuju" class="btn btn-sm btn-warning m-r-5">Tidak Setuju</button>
@@ -120,19 +124,20 @@
 								<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad Sudah Dikonfirmasi</button>
 							@elseif($data->status_akad == 0)
 								<button class="btn btn-sm btn-yellow m-r-5" disabled="">Menunggu File Kontrak Diupload oleh Admin</button>
-							@endif								
+							@endif								 --}}
 								
 							</div>
 						</div>
 					</form>
 				</div>
 				<!-- end panel-body -->
+				@endif
 			</div>
 			<!-- end panel -->
 		</div>
 		<!-- end col-12 -->
 	</div>
-	<!-- end row -->
+	<!-- end row -->	
 @endsection
 
 @push('scripts')

@@ -19,7 +19,7 @@
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Registrasi Halal  <small></small></h1>
+    <h1 class="page-header">List Registrasi Halal<small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">

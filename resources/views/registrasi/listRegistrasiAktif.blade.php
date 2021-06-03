@@ -593,7 +593,7 @@
                                                             <td class="text-center align-middle">Status</td>
                                                             <td class="text-center align-middle">Tipe</td>
                                                             <td class="text-center align-middle">Status</td>
-                                                           
+                                                            <td class="text-center align-middle">Aksi</td>
                                                         </tr>
 
                                                        
@@ -611,6 +611,18 @@
                                                             <td class="text-center align-middle">
                                                                 `+checkPenjadwalan(full.status_audit2)+`
                                                             </td>
+                                                            <td class="text-center align-middle">
+                                                                <div class="btn-group m-r-5 show">
+                                                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
+                                                                        <b class="ion-ios-arrow-down"></b>
+                                                                    </a>
+                                                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                                                        
+                                                                    <div class="dropdown-button-title">Update Progress</div>`+status8+status10+`
+                                                                    </div>
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-center align-middle">
@@ -624,6 +636,18 @@
                                                             </td>
                                                             <td class="text-center align-middle">
                                                                 `+checkPenjadwalan(full.status_tinjauan)+`
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                                <div class="btn-group m-r-5 show">
+                                                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
+                                                                        <b class="ion-ios-arrow-down"></b>
+                                                                    </a>
+                                                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                                                        
+                                                                    <div class="dropdown-button-title">Update Progress</div>`+status12_2+konfirmBayar3+`
+                                                                    </div>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         </table>

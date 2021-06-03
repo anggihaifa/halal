@@ -10,7 +10,7 @@
     <!-- begin breadcrumb -->
 	<ol class="breadcrumb float-xl-right">
 		<li class="breadcrumb-item">Registrasi</li>
-		<li class="breadcrumb-item active">Kontrak Akad Sertifikasi Halal</li>
+		<li class="breadcrumb-item active">Penawaran dan Kontrak Akad Sertifikasi Halal</li>
 	</ol>
 	<!-- end breadcrumb -->
 	<!-- begin page-header -->
@@ -169,7 +169,7 @@
 									
 								</div>
 								
-								<label class="col-lg-4 col-form-label">Biaya Pengujian</label>
+								{{-- <label class="col-lg-4 col-form-label">Biaya Pengujian</label>
 								<div class="col-lg-8">
 									@if ($data->status_akad == 0 || $data->status_akad == 1 || $data->status_akad == 5 || $data->status_akad ==9)
 										<input id="biaya_pengujian" name="biaya_pengujian" onchange="jml()"  type="text" class="form-control number-separator" />
@@ -197,7 +197,7 @@
 								<div class="col-lg-8">
 									<input id="total_biaya" type="text" class="form-control " value='{{number_format($data->total_biaya,0,",",".")}}' readonly />
 									<input id="total_biaya2" name="total_biaya" type="text" class="form-control " value='{{number_format($data->total_biaya,0,",",".")}}' readonly hidden/>
-								</div>
+								</div> --}}
 
 							
 							@if($data->status_akad == 1 || $data->status_akad == 5)
@@ -229,7 +229,7 @@
 								</div>
 							@endif
 
-							@if ($data->status_akad == 5)
+							{{-- @if ($data->status_akad == 5)
 								<label class="col-lg-4 col-form-label">Catatan Reviewer</label>
 								<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
@@ -264,22 +264,16 @@
 										@endif
 									</div>
 								</div>
-							@endif
+							@endif --}}
 
 							
 								
 							
-								<div class="col-md-12 offset-md-5">
-									
+								<div class="col-md-12 offset-md-5">									
 								
-										@component('components.buttonback',['href' => route("listakadadmin")])@endcomponent	
-										@if($data->status_akad == 1 || $data->status_akad == 5)
-											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah berkas kontrak akad???')">Konfirmasi</button>
-											<button  class="btn btn-sm btn-warning m-r-5" disabled>Akad Sedang Diproses</button>
-										@elseif($data->status_akad == 2)
-											<button type="submit" class="btn btn-sm btn-green m-r-5" disabled>Akad Sedang Diproses</button>
-										@elseif($data->status_akad == 3)
-											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad Sudah Dikonfirmasi</button>
+										@component('components.buttonback',['href' => route("listakadadmin")])@endcomponent											
+										@if($data->status_akad == 1)
+											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad dan Penawaran Sudah Dikirim Kepada Pelaku Usaha</button>
 										@elseif($data->status_akad == 0 || $data->status_akad ==9)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi</button>
 										@endif								

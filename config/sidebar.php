@@ -278,12 +278,12 @@ return [
             'sub_menu' => [                
                 [
                     'url' => 'listpembayaranregistrasi',
-                    'title' => 'Penawaran Harga'
+                    'title' => 'Penawaran Harga dan Kontrak Akad'
                 ],
-                [
-                    'url' => 'listakadadmin',
-                    'title' => 'List Kontrak Akad'
-                ],               
+                // [
+                //     'url' => 'listakadadmin',
+                //     'title' => 'List Kontrak Akad'
+                // ],
             ],
         ],
         [
@@ -318,12 +318,12 @@ return [
             'caret' => true,
             'sub_menu' => [
                 [
-                    'url' => 'listpembayaranregistrasi',
-                    'title' => 'Penawaran Harga'
+                    'url' => 'listpenawaranharga',
+                    'title' => 'Penawaran Harga dan Kontrak Akad'
                 ],               
                 [
-                    'url' => 'listakadreviewer',
-                    'title' => 'List Kontrak Akad'
+                    'url' => 'listpenerbitanoc',
+                    'title' => 'Penerbitan OC'
                 ],               
             ],
         ],
@@ -482,7 +482,7 @@ return [
                 ],
                 [
                     'url' => 'listpembayaranregistrasi',
-                    'title' => 'Penawaran Harga'
+                    'title' => 'Penawaran Harga dan Kontrak Akad'
                 ],
                 [
                     'url' => 'listakadadmin',

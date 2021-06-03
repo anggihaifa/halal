@@ -194,6 +194,17 @@ Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmi
 Route::put('upload_file_akad_admin/{id}','RegistrasiController@uploadFileAkadAdmin')->name('registrasi.uploadfileakadadmin')->middleware('role:1,3,5,7,9');
 Route::get('konfirmasi_akad_admin/{id}/{status}','RegistrasiController@konfirmasiAkadAdmin')->middleware('role:1,3,5,7,9');
 
+//sales account officer
+Route::get('list_penawaran_harga_kontrak_akad','RegistrasiController@listPenawaranHarga')->name('listpenawaranharga')->middleware('role:1,3,4,5,6');
+Route::get('list_penerbitan_order_confirmation','RegistrasiController@listPenerbitanOC')->name('listpenerbitanoc')->middleware('role:1,3,5');
+Route::get('data_penerbitan_oc','RegistrasiController@dataPenerbitanOC')->name('datapenerbitanoc')->middleware('role:1,3,5');
+Route::get('upload_oc_admin/{id}','RegistrasiController@uploadOCAdmin')->name('registrasi.uploadocadmin')->middleware('role:1,3,5');
+Route::get('upload_oc_user/{id}','RegistrasiController@uploadOCUser')->name('registrasi.uploadocuser')->middleware('role:1,2,3,5');
+Route::put('upload_file_oc_admin/{id}','RegistrasiController@uploadFileOCAdmin')->name('registrasi.uploadfileocadmin')->middleware('role:1,3,5');
+Route::put('upload_file_oc_user/{id}','RegistrasiController@uploadFileOCUser')->name('registrasi.uploadfileocuser')->middleware('role:1,2,3,5');
+Route::get('update_status_oc/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusOC')->middleware('role:1,3,5,7,9');
+Route::get('konfirmasi_oc_admin/{id}/{status}','RegistrasiController@konfirmasiOCAdmin')->middleware('role:1,3,5');
+
 //Route::put('acc_audit_admin/{id}','RegistrasiController@accAuditAdmin')->name('registrasi.accauditadmin');
 //Route::put('acc_berita_acara_admin/{id}','RegistrasiController@accBeritaAcaraAdmin')->name('registrasi.accberitaacaraadmin');
 
