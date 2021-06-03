@@ -65,7 +65,7 @@
 
 							@if($dataHas !== null)
 								@foreach($dataHas as $has => $value)
-								<form action="{{route('updatestatusverifikasi',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+								<form action="{{route('updatestatusverifikasidokumen',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 									@csrf
 									@method('PUT')
 								@endforeach()	
@@ -84,8 +84,8 @@
 											<th width="1%" class="text-nowrap valign-middle text-center">File</th>
 											<th width="1%" class="text-nowrap valign-middle text-center">Aksi</th>
 											<th width="20%" class="text-nowrap valign-middle text-center">Catatan</th>
-											<th width="1%" class="text-nowrap valign-middle text-center">Unggah File</th>
-											
+											<!-- <th width="1%" class="text-nowrap valign-middle text-center">Unggah File</th>
+											 -->
 										</tr>
 									</thead>
 									<tbody>
@@ -99,7 +99,7 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												
 												<form action="{{route('storedokumenhasadmin',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 													@csrf
@@ -111,7 +111,7 @@
 												</form>
 												</button>
 												
-											</td>
+											</td> -->
 
 										</tr>
 										<tr class="even">
@@ -121,11 +121,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_2" name="has_2">
 												<button type="submit" id="btn_has2" class="btn btn-xs btn-primary" onclick="setHas('has_2')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="odd">
@@ -135,11 +135,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_3" name="has_3">
 												<button type="submit" id="btn_has3" class="btn btn-xs btn-primary" onclick="setHas('has_3')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="even">
@@ -149,11 +149,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_4" name="has_4">
 												<button type="submit" id="btn_has4" class="btn btn-xs btn-primary" onclick="setHas('has_4')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="odd">
@@ -163,11 +163,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_5" name="has_5">
 												<button type="submit" id="btn_has5" class="btn btn-xs btn-primary" onclick="setHas('has_5')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">6</td>
@@ -176,11 +176,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_6" name="has_6">
 												<button type="submit" id="btn_has6" class="btn btn-xs btn-primary" onclick="setHas('has_6')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="odd">
@@ -190,11 +190,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_7" name="has_7">
 												<button type="submit" id="btn_has7" class="btn btn-xs btn-primary" onclick="setHas('has_7')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										<tr class="even">
 											<td class="valign-middle text-center">8</td>
@@ -203,11 +203,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_8" name="has_8">
 												<button type="submit" id="btn_has8" class="btn btn-xs btn-primary" onclick="setHas('has_8')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 
 										</tr>
@@ -218,11 +218,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_9" name="has_9">
 												<button type="submit" id="btn_has9" class="btn btn-xs btn-primary" onclick="setHas('has_9')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="even">
@@ -232,11 +232,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_10" name="has_10">
 												<button type="submit" id="btn_has10" class="btn btn-xs btn-primary" onclick="setHas('has_10')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="odd">
@@ -246,11 +246,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_11" name="has_11">
 												<button type="submit" id="btn_has11" class="btn btn-xs btn-primary" onclick="setHas('has_11')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="even">
@@ -259,12 +259,12 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_12" name="has_12">
 												<button type="submit" id="btn_has12" class="btn btn-xs btn-primary" onclick="setHas('has_12')" >Unggah
 												</button>
 											</td>
-											
+											 -->
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">13</td>
@@ -272,11 +272,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_13" name="has_13">
 												<button type="submit" id="btn_has13" class="btn btn-xs btn-primary" onclick="setHas('has_13')" >Unggah
 												</button>
-											</td>
+											</td> -->
 										</tr>
 										<tr class="even">
 											<td class="text-nowrap valign-middle text-center">14</td>
@@ -284,11 +284,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_14" name="has_14">
 												<button type="submit" id="btn_has14" class="btn btn-xs btn-primary" onclick="setHas('has_14')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="even">
@@ -297,11 +297,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_15" name="has_15">
 												<button type="submit" id="btn_has15" class="btn btn-xs btn-primary" onclick="setHas('has_15')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="even">
@@ -310,11 +310,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_16" name="has_16">
 												<button type="submit" id="btn_has16" class="btn btn-xs btn-primary" onclick="setHas('has_16')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="even">
@@ -323,11 +323,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_17" name="has_17">
 												<button type="submit" id="btn_has15" class="btn btn-xs btn-primary" onclick="setHas('has_15')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 										<tr class="even">
@@ -336,11 +336,11 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<td class="valign-middle text-center">
+											<!-- <td class="valign-middle text-center">
 												<input type="file" id="has_18" name="has_18">
 												<button type="submit" id="btn_has16" class="btn btn-xs btn-primary" onclick="setHas('has_16')" >Unggah
 												</button>
-											</td>
+											</td> -->
 											
 										</tr>
 									
@@ -368,12 +368,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_1" value='{{$value['keterangan_has_1']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_1" name="has_1">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_1')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 												
@@ -395,12 +395,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_2" value='{{$value['keterangan_has_2']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_2" name="has_2">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_2')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 												<tr class="odd">
@@ -421,12 +421,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_3" value='{{$value['keterangan_has_3']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_3" name="has_3">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_3')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 												<tr class="even">
@@ -447,13 +447,13 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_4" value='{{$value['keterangan_has_4']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_4" name="has_4">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_4')" >Unggah
 														</button>
 														
 													</td>
-													
+													 -->
 												</tr>
 												<tr class="odd">
 													<td class="text-nowrap valign-middle text-center">5</td>
@@ -473,12 +473,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_5" value='{{$value['keterangan_has_5']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_5" name="has_5">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_5')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 												</tr>
 													
 												<tr class="even">
@@ -498,12 +498,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_6" value='{{$value['keterangan_has_6']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_6" name="has_6">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_6')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 												<tr class="odd">
@@ -523,12 +523,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_7" value='{{$value['keterangan_has_7']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_7" name="has_7">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_7')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 												
 												</tr>	
 												<tr class="even">
@@ -550,12 +550,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_8" value='{{$value['keterangan_has_8']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_8" name="has_8">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_8')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 												<tr class="odd">
@@ -576,12 +576,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_9" value='{{$value['keterangan_has_9']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_9" name="has_9">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_9')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 												<tr class="even">
@@ -602,12 +602,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_10" value='{{$value['keterangan_has_10']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_10" name="has_10">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_10')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 
@@ -631,12 +631,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_11" value='{{$value['keterangan_has_11']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_11" name="has_11">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_11')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 
@@ -658,12 +658,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_12" value='{{$value['keterangan_has_12']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_12" name="has_12">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_12')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 
@@ -685,12 +685,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_13" value='{{$value['keterangan_has_13']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_13" name="has_13">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_13')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 
@@ -712,12 +712,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_14" value='{{$value['keterangan_has_14']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_14" name="has_14">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_14')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 
@@ -739,12 +739,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_15" value='{{$value['keterangan_has_15']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_15" name="has_15">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_15')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 												<tr class="odd">
@@ -765,12 +765,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_16" value='{{$value['keterangan_has_16']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_16" name="has_16">
 														<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_16')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 												<tr class="even">
@@ -790,12 +790,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_17" value='{{$value['keterangan_has_17']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_17" name="has_17">
 														<button type="submit" id="btn_has17" class="btn btn-xs btn-primary" onclick="setHas('has_17')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 												</tr>
 
 												<tr class="odd">
@@ -815,12 +815,12 @@
 														</select>
 													</td>
 													<td ><input type="text" class="form-control" name="keterangan_has_18" value='{{$value['keterangan_has_18']}}' ></input></td>
-													<td class="valign-middle text-center">
+													<!-- <td class="valign-middle text-center">
 														<input type="file" id="has_18" name="has_18">
 														<button type="submit" id="btn_has18" class="btn btn-xs btn-primary" onclick="setHas('has_18')" >Unggah
 														</button>
 														
-													</td>
+													</td> -->
 													
 												</tr>
 

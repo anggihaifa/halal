@@ -1071,8 +1071,9 @@ class RegistrasiController extends Controller
     public function download($path){
          return Storage::download($path);
     }
-    //unggah data sertifikasi
-    public function unggahDataSertifikasi(){
+    //Unggah Dokumen Sertifikasi
+    //pelanggan
+    public function unggahDokumenSertifikasi(){
 
         $id_registrasi  = Auth::user()->registrasi_id;
         $id_user = Auth::user()->id;
@@ -1088,47 +1089,20 @@ class RegistrasiController extends Controller
 
         $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
 
-        //check data dokumen has
         $checkHas =  DB::table('dokumen_has')
-                     ->where('id_user','=',$id_user)
                      ->where('id_registrasi',$id_registrasi)
                      ->get();
 
+       // dd($checkHas);
         if(isset($checkHas[0])){ $dataHas = json_decode($checkHas,true);}
         else{ $dataHas = null;}
-
-        //check data dokumen material
-        $checkMaterial = DB::table('dokumen_material')
-                         ->where('id_user','=',$id_user)
-                         ->where('id_registrasi',$id_registrasi)
-                         ->get();
-
-        if(isset($checkMaterial[0])){$dataMaterial = json_decode($checkMaterial,true);}
-        else{$dataMaterial = null;}
-
-        //check data dokumen matriks produk
-        $checkMatriks = DB::table('dokumen_matriks_produk')
-                         ->where('id_user','=',$id_user)
-                         ->where('id_registrasi',$id_registrasi)
-                         ->get();
-
-        if(isset($checkMatriks[0])){$dataMatriksProduk = json_decode($checkMatriks,true);}
-        else{$dataMatriksProduk = null;}
-
-        //check data kuisioner has
-        $checkKuisionerHas = DB::table('kuisioner_has')
-                         ->where('id_user','=',$id_user)
-                         ->where('id_registrasi',$id_registrasi)
-                         ->get();
+        
 
         if(isset($checkKuisionerHas[0])){$dataKuisionerHas = json_decode($checkKuisionerHas,true);}
         else{$dataKuisionerHas = null;}
 
 
-        return view('registrasi.unggahData', compact('data','dataHas','dataMaterial','dataMatriksProduk','dataKuisionerHas','dataRegistrasi'));
-    }
-    public function listUnggahDataSertifikasi(){
-        return view('pelanggan.unggahDataSertifikasi.index');
+        return view('registrasi.unggahDokumenSertifikasi', compact('data','dataHas','dataRegistrasi'));
     }
     public function getDataRegistrasi($id){
         $detailRegistrasi =  DB::table('registrasi')
@@ -1140,6 +1114,7 @@ class RegistrasiController extends Controller
 
         return $dataRegistrasi;
     }
+
 
     public function detailUnggahDataSertifikasi($id_registrasi){
         //get data registrasi
@@ -1483,6 +1458,8 @@ class RegistrasiController extends Controller
 
     public function storeDokumenHas(Request $request){
 
+    // public function storeDokumenSertifikasi(Request $request){
+
         $data_real = $request->except('_token','_method');
         $data = $request->except('_token','_method','has_selected');
 
@@ -1544,7 +1521,7 @@ class RegistrasiController extends Controller
                     DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_has' => $id_has]);
 
                     Session::flash('success', "data berhasil disimpan!");
-                    $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
+                    $redirect = redirect()->route('registrasi.unggahDokumenSertifikasi');
                     return $redirect;
 
                 }catch (\Exception $e){
@@ -1553,7 +1530,7 @@ class RegistrasiController extends Controller
                     //$this->debugs($e->getMessage());
 
                     Session::flash('error', $e->getMessage());
-                    $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
+                    $redirectPass = redirect()->route('registrasi.unggahDokumenSertifikasi');
                     return $redirectPass;
                 }
 
@@ -1656,253 +1633,14 @@ class RegistrasiController extends Controller
                                     $e->tgl_penyerahan_16 = $currentDateTime;
                                 }
                               
-                            }
-                                                                  
-                            $e->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-                            FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);                            
-                        }
-                        $no++;
-                    }
-
-                    $e->save();
-
-                    $checkHasLengkap = "SELECT *
-                       FROM dokumen_has
-                       WHERE id_registrasi = ".$id_registrasi."
-                       AND(
-                        has_1 IS NULL
-                        OR has_2 IS NULL
-                        OR has_3 IS NULL
-                        OR has_5 IS NULL
-                        OR has_8 IS NULL
-                        OR has_9 IS NULL
-                        OR has_10 IS NULL
-                        OR has_11 IS NULL
-                        OR has_12 IS NULL
-                        OR has_13 IS NULL
-                        OR has_14 IS NULL
-                        OR has_15 IS NULL
-                        OR has_16 IS NULL)
-                        ";
-
-                   // dd($checkHasLengkap);
-                    $dataLengkap = DB::select($checkHasLengkap);
-
-                    if(isset($dataLengkap[0])){
-                         //dd($dataLengkap[0]);
-                        $e->status_has = 0;
-                    }else{
-                        //dd("masuk");
-                        $e->status_has = 1;
-                        //masukan fungsi untuk pindah ke tahapan akad..
-                        $this->updateStatusRegistrasi($r->id, $r->no_registrasi, $r->id_user, 6);
-                        //update status table registrasi dan update tanggal updated at nya
-
-                    }
-
-                    $mytime = Carbon::now();
-                    $now=  $mytime->toDateTimeString();
-
-                    $r->updated_at= $now;
-                    $r->status_berkas = 1;
-                    //dd($r);
-                    $r->save();
-                    $e->save();
-
-                    DB::commit();
-
-
-                    Session::flash('success', "data berhasil diupdate!");
-                    $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-                    return $redirect;
-
-            }catch (\Exception $e){
-                    DB::rollBack();
-
-                    //$this->debugs($e->getMessage());
-
-                    Session::flash('error', $e->getMessage());
-                    $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
-                    return $redirectPass;
-            }
-            $checkDataHas = DB::table('dokumen_has')
-                         ->where('id_user','=',$id_user)
-                         ->where('id_registrasi',$id_registrasi)
-                         ->get();
-            $id_has = $checkDataHas[0]->id;
-
-            DB::table('unggah_data_sertifikasi')
-                    ->where('id_registrasi', $id_registrasi)
-                    ->update(['id_has' => $id_has]);
-        }
-    }
-
-    public function storeDokumenHasAdmin(Request $request, $id){
-
-        $data_real = $request->except('_token','_method');
-        $data = $request->except('_token','_method','has_selected');
-
-        //dd($data);
-
-        $model = new DokumenHas;
-        $model2 = new Registrasi;
-
-        $status = "HPAS";
-        $dh = $model->find($id);
-        $id_user = $dh->user_id;
-        $r = $model2->find($dh->registrasi_id);
-
-
-        if($data["status"] == "0"){
-           
-                try{
-                    DB::beginTransaction();
-
-                    unset($data["status"]);
-                    $model->id_user = $id_user;
-                    $model->id_registrasi = $id_registrasi;
-
-                    foreach ($data as $key => $value) {
-                        if($key == $data_real['has_selected']){
-                            
-                            $model->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-                            FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-
-                        }
-
-                    }
-
-                     //dd($key);
-                    //print_r(count($data)) ;
-                    
-                    $model->status_has = 0;
-                    $r->status_berkas = 1;
-                    $r->save();
-
-                    $model->save();
-                    DB::commit();
-
-                    //update unggah data sertifikasi
-                    $checkDataHas = DB::table('dokumen_has')
-                         ->where('id_user','=',$id_user)
-                         ->where('id_registrasi',$id_registrasi)
-                         ->get();
-
-                    $id_has = $checkDataHas[0]->id;
-
-                    DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_has' => $id_has]);
-
-                    Session::flash('success', "data berhasil disimpan!");
-                    $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-                    return $redirect;
-
-                }catch (\Exception $e){
-                    DB::rollBack();
-
-                    //$this->debugs($e->getMessage());
-
-                    Session::flash('error', $e->getMessage());
-                    $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
-                    return $redirectPass;
-                }
-
-        }elseif($data["status"] == "1"){
-
-            // echo "<pre>";
-            // print_r($data);
-            // echo "</pre>";
-            try{
-                    DB::beginTransaction();
-
-                    $id = $data["id"];
-                    $e = $model->find($id);
-
-                    unset($data["id"]);
-                    unset($data["status"]);
-
-                    $no=1;
-                    foreach ($data as $key => $value) {
-                        $currentDateTime = Carbon::now();                                                
-
-                        if($key == $data_real['has_selected']){
-
-                            if($key == 'has_1'){
-                                if($e->keterangan_has_1 != null){
-                                    $e->tgl_penyerahan_1 = $currentDateTime;
-                                }
-                                
-                            }else if($key == 'has_2'){
-                                if($e->keterangan_has_2 != null){
-                                    $e->tgl_penyerahan_2 = $currentDateTime;
+                            }else if($key == 'has_17'){
+                                if($e->keterangan_has_17 != null){
+                                    $e->tgl_penyerahan_17 = $currentDateTime;
                                 }
                                
-                            }else if($key == 'has_3'){
-                                if($e->keterangan_has_3 != null){
-                                    $e->tgl_penyerahan_3 = $currentDateTime;
-                                }
-                                
-                            }else if($key == 'has_4'){
-                                if($e->keterangan_has_4 != null){
-                                    $e->tgl_penyerahan_4 = $currentDateTime;
-                                }
-                              
-                            }else if($key == 'has_5'){
-                                if($e->keterangan_has_5 != null){
-                                    $e->tgl_penyerahan_5 = $currentDateTime;
-                                }
-                                
-                            }else if($key == 'has_6'){
-                                if($e->keterangan_has_6 != null){
-                                    $e->tgl_penyerahan_6 = $currentDateTime;
-                                }
-                                
-                            }else if($key == 'has_7'){
-                                if($e->keterangan_has_7 != null){
-                                     $e->tgl_penyerahan_7 = $currentDateTime;
-                                }
-                            }else if($key == 'has_8'){
-                                if($e->keterangan_has_8 != null){
-                                    $e->tgl_penyerahan_8 = $currentDateTime;
-                                }
-                               
-                            }else if($key == 'has_9'){
-                                if($e->keterangan_has_9 != null){
-                                    $e->tgl_penyerahan_9 = $currentDateTime;
-                                }
-                               
-                            }else if($key == 'has_10'){
-                                if($e->keterangan_has_10 != null){
-                                    $e->tgl_penyerahan_10 = $currentDateTime;
-                                }
-                               
-                            }else if($key == 'has_11'){
-                                if($e->keterangan_has_11 != null){
-                                    $e->tgl_penyerahan_11 = $currentDateTime;
-                                }
-                                
-                            }else if($key == 'has_12'){
-                                if($e->keterangan_has_12 != null){
-                                    $e->tgl_penyerahan_12 = $currentDateTime;
-                                }
-                                
-                            }else if($key == 'has_13'){
-                                if($e->keterangan_has_13 != null){
-                                    $e->tgl_penyerahan_13 = $currentDateTime;
-                                }
-                               
-                            }else if($key == 'has_14'){
-                                if($e->keterangan_has_14 != null){
-                                    $e->tgl_penyerahan_14 = $currentDateTime;
-                                }
-                               
-                            }else if($key == 'has_15'){
-                                if($e->keterangan_has_15 != null){
-                                    $e->tgl_penyerahan_15 = $currentDateTime;
-                                }
-                               
-                            }else if($key == 'has_16'){
-                                if($e->keterangan_has_16 != null){
-                                    $e->tgl_penyerahan_16 = $currentDateTime;
+                            }else if($key == 'has_18'){
+                                if($e->keterangan_has_18 != null){
+                                    $e->tgl_penyerahan_18 = $currentDateTime;
                                 }
                               
                             }
@@ -1932,6 +1670,8 @@ class RegistrasiController extends Controller
                         OR has_14 IS NULL
                         OR has_15 IS NULL
                         OR has_16 IS NULL)
+                        OR has_17 IS NULL
+                        OR has_18 IS NULL)
                         ";
 
                    // dd($checkHasLengkap);
@@ -1944,7 +1684,7 @@ class RegistrasiController extends Controller
                         //dd("masuk");
                         $e->status_has = 1;
                         //masukan fungsi untuk pindah ke tahapan akad..
-                        $this->updateStatusRegistrasi($r->id, $r->no_registrasi, $r->id_user, 6);
+                        $this->updateStatusRegistrasi($r->id, $r->no_registrasi, $r->id_user, '2_1');
                         //update status table registrasi dan update tanggal updated at nya
 
                     }
@@ -1962,7 +1702,7 @@ class RegistrasiController extends Controller
 
 
                     Session::flash('success', "data berhasil diupdate!");
-                    $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
+                    $redirect = redirect()->route('registrasi.unggahDokumenSertifikasi');
                     return $redirect;
 
             }catch (\Exception $e){
@@ -1971,7 +1711,7 @@ class RegistrasiController extends Controller
                     //$this->debugs($e->getMessage());
 
                     Session::flash('error', $e->getMessage());
-                    $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
+                    $redirectPass = redirect()->route('registrasi.unggahDokumenSertifikasi');
                     return $redirectPass;
             }
             $checkDataHas = DB::table('dokumen_has')
@@ -1986,9 +1726,52 @@ class RegistrasiController extends Controller
         }
     }
 
-    
+    public function deleteDokumenSertifikasi($id){
 
-    public function updateStatusVerifikasi(Request $request, $id){
+        $model = new DokumenHas();
+        $status = "HAS";
+        $id_user = Auth::user()->id;
+        $id_registrasi  = Auth::user()->registrasi_id;
+        try{
+            DB::beginTransaction();
+            $model = $model->find($id);
+            $model->delete();
+            DB::commit();
+
+            FileUploadServices::deleteUploadFile($id_user,$id_registrasi,$status);
+            DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_has' => null]);
+
+            Session::flash('success', 'data berhasil di dihapus!');
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+
+        return redirect()->route('registrasi.unggahDokumenSertifikasi');
+    }
+
+
+    //Admin
+    public function verifikasiDokumenSertifikasi($id_registrasi){
+        //get data registrasi
+        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+
+        //check data dokumen has
+        $checkHas =  DB::table('dokumen_has')
+                     ->where('id_registrasi',$id_registrasi)
+                     ->get();
+
+       // dd($checkHas);
+        if(isset($checkHas[0])){ $dataHas = json_decode($checkHas,true);}
+        else{ $dataHas = null;}
+
+        return view('pelanggan.dokumenSertifikasi.verifikasiDokumenSertifikasi', compact('dataRegistrasi','dataHas'));
+
+    }
+
+    public function updateStatusVerifikasiDokumen(Request $request, $id){
         
         $data = $request->except('_token','_method','status','has_selected');
         $currentDateTime = Carbon::now();
@@ -2014,10 +1797,10 @@ class RegistrasiController extends Controller
             if($data['status_has_1']==null || $data['status_has_2']==null || $data['status_has_3']==null || $data['status_has_4']==null || $data['status_has_5']==null || $data['status_has_6']==null || $data['status_has_7']==null || $data['status_has_8']==null || $data['status_has_9']==null || $data['status_has_10']==null || $data['status_has_11']==null || $data['status_has_12']==null|| $data['status_has_13']==null || $data['status_has_14']==null|| $data['status_has_15']==null || $data['status_has_16']==null|| $data['status_has_17']==null || $data['status_has_18']==null){
 
                 //dd($data);
-                $e->status_berkas = 2;
+                $e->status_berkas = 1;
                 $e->updated_at =  $currentDateTime;
                 $f->updated_at =  $currentDateTime;
-                $f->status_berkas = 2;
+                $f->status_berkas = 1;
                 $e->save();
                 $f->save();
                 DB::commit();
@@ -2034,7 +1817,7 @@ class RegistrasiController extends Controller
                     $f->status_berkas = 2;
                     $e->updated_at =  $currentDateTime;
                     $f->updated_at =  $currentDateTime;
-                    $f->status = 4;
+                    $f->status = '2_2';
                     $e->save();
                     $f->save();
                     DB::commit();
@@ -2051,14 +1834,17 @@ class RegistrasiController extends Controller
                     $e->updated_at =  $currentDateTime;
                     $f->updated_at =  $currentDateTime;
                     
-                    $f->status = 5;
-                   
+                    $f->status = '2_3';
+                    $f->save();
                     $e->save();
+                    //SendEmailP::dispatch($u,$f,$p,$f->status);
+                    
+                    $f->status = 3;
                     $f->save();
                     //SendEmailP::dispatch($u,$f,$p,$f->status);
                     DB::commit();
 
-                    $this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
+                    //$this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
                     
                     $model4->updated_by = Auth::user()->id;
                     $model4->status_audit1 = '0';
@@ -2079,7 +1865,72 @@ class RegistrasiController extends Controller
 
         return redirect()->back();
     }
-    public function updateStatusHas(Request $request, $id){
+
+
+    //Audit Tahap1
+
+    //pelanggan
+    public function unggahDokumenAuditTahap1(){
+
+        $id_registrasi  = Auth::user()->registrasi_id;
+        $id_user = Auth::user()->id;
+
+        $data   = new Registrasi;
+        $data   = $data->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
+                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok')
+                 ->where('registrasi.id','=',$id_registrasi)
+                 ->orderBy('registrasi.id','desc')->get();
+
+        $data   = $data[0];
+
+        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+
+        //check data dokumen has
+        $checkHas =  DB::table('dokumen_has')
+                     ->where('id_user','=',$id_user)
+                     ->where('id_registrasi',$id_registrasi)
+                     ->get();
+
+        if(isset($checkHas[0])){ $dataHas = json_decode($checkHas,true);}
+        else{ $dataHas = null;}
+
+        
+
+        return view('audit.tahap1.unggahDokumenAuditTahap1', compact('data','dataHas'));
+    }
+    //auditor
+    public function auditTahap1($id_registrasi){
+        //dd("masuk");
+        //get data registrasi
+        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+
+        $model2 = new Registrasi();
+        $model3 = new KelompokProduk();
+        
+        $dataRegis = $model2->find($id_registrasi);        
+
+        $dataRegis = json_decode($dataRegis,true);        
+
+        $dataJenisProduk = $model3->find($dataRegis['id_kelompok_produk']);
+
+        // dd($dataJenisProduk);
+
+        //check data dokumen has
+        $checkHas =  DB::table('dokumen_has')
+                     ->where('id_registrasi',$id_registrasi)
+                     ->get();
+
+        if(isset($checkHas[0])){ $dataHas = json_decode($checkHas,true);}
+        else{ $dataHas = null;}
+
+        
+
+        return view('audit.tahap1.auditTahap1', compact('dataRegistrasi','dataHas','dataRegis'));
+
+    }
+
+    public function updateStatusAuditTahap1(Request $request, $id){
         
         $data = $request->except('_token','_method','status');
         
@@ -2253,619 +2104,9 @@ class RegistrasiController extends Controller
 
         return redirect()->back();
     }
-
-    public function deleteDokumenHas($id){
-
-        $model = new DokumenHas();
-        $status = "HAS";
-        $id_user = Auth::user()->id;
-        $id_registrasi  = Auth::user()->registrasi_id;
-        try{
-            DB::beginTransaction();
-            $model = $model->find($id);
-            $model->delete();
-            DB::commit();
-
-            FileUploadServices::deleteUploadFile($id_user,$id_registrasi,$status);
-            DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_has' => null]);
-
-            Session::flash('success', 'data berhasil di dihapus!');
-
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            Session::flash('error', $e->getMessage());
-        }
-
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
-
-
-    //tab dokumen material
-    public function listMaterial(){
-        $xdata = DB::table('material')
-                 ->where('id_user','=',Auth::user()->id)
-                 ->where('id_registrasi','=',Auth::user()->registrasi_id)
-                 ->orderBy('id','desc');
-
-        return Datatables::of($xdata)->make();
-    }
-    public function createMaterial(){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        return view('registrasi.createMaterial',compact('dataRegistrasi'));
-    }
-    public function storeMaterial(Request $request){
-        $data = $request->except('_token','_method');
-
-        $model = new Material();
-        $status = "MATERIAL";
-        $id_user = Auth::user()->id;
-        $id_registrasi  = Auth::user()->registrasi_id;
-
-        $getRegistrasi = DB::table('registrasi')->where('id','=',Auth::user()->registrasi_id)->get();
-
-        foreach ($getRegistrasi as $key => $value) {
-            $no_registrasi = $value->no_registrasi;
-        }
-
-        try{
-
-            DB::beginTransaction();
-            $model->fill($data);
-            $model->id_user = Auth::user()->id;
-            $model->id_registrasi = Auth::user()->registrasi_id;
-            $model->save();
-            if(isset($data['file_material'])){
-                $value = $data["file_material"];
-            $key   = $model->id;
-            $model->file_material = FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-            FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key, $no_registrasi);
-            $model->save();
-            }
-            DB::commit();
-
-            Session::flash('success', "data berhasil disimpan!");
-            $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-            return $redirect;
-
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            //$this->debugs($e->getMessage());
-
-            Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('tambahmaterial');
-            return $redirectPass;
-        }
-    }
-    public function editMaterial($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $data = Material::find($id);
-
-        return view('registrasi.editMaterial',compact('data','dataRegistrasi'));
-    }
-    public function updateMaterial(Request $request, $id){
-        $data = $request->except('_token','_method');
-
-        $model = new Material();
-        $status = "MATERIAL";
-        $id_user = Auth::user()->id;
-        $id_registrasi  = Auth::user()->registrasi_id;
-
-        $getRegistrasi = DB::table('registrasi')->where('id','=',Auth::user()->registrasi_id)->get();
-
-        foreach ($getRegistrasi as $key => $value) {
-            $no_registrasi = $value->no_registrasi;
-        }
-
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $e->fill($data);
-            if(isset($data['file_material'])){
-                $value = $data["file_material"];
-                $key   = $id;
-                $e->file_material = FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-                FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-            }
-            $e->save();
-            DB::commit();
-
-            Session::flash('success', 'data berhasil di update!');
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            Session::flash('error', $e->getMessage());
-        }
-
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
-    public function detailMaterial($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailMaterial = DB::table('material')
-                            ->where('id',$id)
-                            ->get();
-        $dataMaterial = json_decode($detailMaterial,true);
-        return view('registrasi.detailMaterial',compact('dataMaterial','dataRegistrasi'));
-    }
-
-
-    //tab dokumen matriks produk
-    public function storeMatriksProduk(Request $request){
-        $data = $request->except('_token','_method');
-
-        $model = new DokumenMatriksProduk;
-
-        $status = "MATRIKSPRODUK";
-        $id_user = Auth::user()->id;
-        $id_registrasi = Auth::user()->registrasi_id;
-
-        $getRegistrasi = DB::table('registrasi')->where('id','=',Auth::user()->registrasi_id)->get();
-
-        foreach ($getRegistrasi as $key => $value) {
-            $no_registrasi = $value->no_registrasi;
-        }
-
-        if($data["status"] == "0"){
-            try{
-                DB::beginTransaction();
-
-                unset($data["status"]);
-                $model->id_user = $id_user;
-                $model->id_registrasi = $id_registrasi;
-
-                foreach($data as $key => $value){
-                    if($key){
-
-                        $model->$key = FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-                        FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-
-                    }
-                }
-
-                $model->status_matriks_produk = 1;
-
-                $model->save();
-                DB::commit();
-
-
-                //update unggah data sertifikasi
-                    $checkDataMatriks = DB::table('dokumen_matriks_produk')
-                         ->where('id_user','=',$id_user)
-                         ->where('id_registrasi',$id_registrasi)
-                         ->get();
-
-                    $id_matriks = $checkDataMatriks[0]->id;
-
-                    DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_matriks' => $id_matriks]);
-
-                Session::flash('success', "data berhasil disimpan!");
-                $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-                return $redirect;
-            }catch(\Exception $e){
-                DB::rollBack();
-
-                Session::flash('error', $e->getMessage());
-                $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
-                return $redirectPass;
-            }
-        }elseif($data["status"] == "1"){
-            try{
-                DB::beginTransaction();
-
-                $id = $data['id'];
-                $e = $model->find($id);
-
-                unset($data["id"]);
-                unset($data["status"]);
-
-                foreach ($data as $key => $value) {
-                   if($key){
-
-                        $e->$key =  FileUploadServices::getFileName($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-                        FileUploadServices::getUploadFile($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-
-                   }
-                }
-                $e->save();
-                DB::commit();
-
-                Session::flash('success', "data berhasil diupdate!");
-                $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-                return $redirect;
-
-            }catch (\Exception $e){
-                DB::rollBack();
-                Session::flash('error', $e->getMessage());
-                $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
-                return $redirectPass;
-            }
-        }
-    }
-    public function deleteMatriksProduk($id){
-        $model = new DokumenMatriksProduk();
-        $status = "MATRIKSPRODUK";
-        $id_user = Auth::user()->id;
-        $id_registrasi  = Auth::user()->registrasi_id;
-        try{
-            DB::beginTransaction();
-            $model = $model->find($id);
-            $model->delete();
-            DB::commit();
-
-            FileUploadServices::deleteUploadFile($id_user,$id_registrasi,$status);
-
-            Session::flash('success', 'data berhasil di dihapus!');
-
-        }catch (\Exception $e){
-            DB::rollBack();
-            Session::flash('error', $e->getMessage());
-        }
-
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
-
-
-    //tab kuisioner has
-    public function storeKuisionerHas(Request $request){
-        $data = $request->except('_token','_method');
-
-        $model = new KuisionerHas();
-        $id_user = Auth::user()->id;
-        $id_registrasi = Auth::user()->registrasi_id;
-
-        if($data["status"] == "0"){
-            try{
-                DB::beginTransaction();
-                unset($data["status"]);
-                $model->fill($data);
-                $model->id_user = $id_user;
-                $model->id_registrasi = $id_registrasi;
-                $model->status_kuis = 1;
-                $model->save();
-                DB::commit();
-
-
-                //update unggah data sertifikasi
-                    $checkDataKuis = DB::table('kuisioner_has')
-                         ->where('id_user','=',$id_user)
-                         ->where('id_registrasi',$id_registrasi)
-                         ->get();
-
-                    $id_kuis = $checkDataKuis[0]->id;
-
-                    DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_kuis' => $id_kuis]);
-
-
-                Session::flash('success', "data berhasil disimpan!");
-                $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-                return $redirect;
-
-            }catch (\Exception $e){
-                DB::rollBack();
-                Session::flash('error', $e->getMessage());
-                $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
-                return $redirectPass;
-            }
-        }elseif($data["status"] == "1"){
-            try{
-                DB::beginTransaction();
-
-                $id = $data['id'];
-                $e = $model->find($id);
-
-                unset($data["id"]);
-                unset($data["status"]);
-
-                $e->fill($data);
-                $e->save();
-                DB::commit();
-
-                Session::flash('success', "data berhasil disimpan!");
-                $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-                return $redirect;
-
-            }catch (\Exception $e){
-                DB::rollBack();
-                Session::flash('error', $e->getMessage());
-                $redirectPass = redirect()->route('registrasi.unggahDataSertifikasi');
-                return $redirectPass;
-            }
-        }
-    }
-    public function deleteKuisionerHas($id){
-        $model = new KuisionerHas();
-        $status = "MATRIKSPRODUK";
-        $id_user = Auth::user()->id;
-        $id_registrasi  = Auth::user()->registrasi_id;
-        try{
-            DB::beginTransaction();
-            $model = $model->find($id);
-            $model->delete();
-            DB::commit();
-
-            DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_kuis' => null]);
-
-            Session::flash('success', 'data berhasil di dihapus!');
-
-        }catch (\Exception $e){
-            DB::rollBack();
-            Session::flash('error', $e->getMessage());
-        }
-
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
-
-
-    //tab kantor pusat
-    public function listKantorPusat(){
-        $xdata = DB::table('kantor_pusat')
-                 ->where('id_user','=',Auth::user()->id)
-                 ->where('id_registrasi','=',Auth::user()->registrasi_id)
-                 ->orderBy('id','desc');
-
-        return Datatables::of($xdata)->make();
-    }
-    public function createKantorPusat(){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        return view('registrasi.createKantorPusat',compact('dataRegistrasi'));
-    }
-    public function storeKantorPusat(Request $request){
-        $data = $request->except('_token','_method');
-
-        $model = new KantorPusat();
-
-        try{
-            //$this->debugs($data);
-            DB::beginTransaction();
-            $model->fill($data);
-            $model->id_user = Auth::user()->id;
-            $model->id_registrasi = Auth::user()->registrasi_id;
-            $model->save();
-            DB::commit();
-
-            Session::flash('success', "data berhasil disimpan!");
-            $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-            return $redirect;
-
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            //$this->debugs($e->getMessage());
-
-            Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('tambahkantorpusat');
-            return $redirectPass;
-        }
-    }
-    public function detailKantorPusat($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailKantorPusat = DB::table('kantor_pusat')
-                            ->where('id',$id)
-                            ->get();
-        $dataKantorPusat = json_decode($detailKantorPusat,true);
-        return view('registrasi.detailKantorPusat',compact('dataKantorPusat','dataRegistrasi'));
-    }
-    public function editKantorPusat($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $data = KantorPusat::find($id);
-
-        return view('registrasi.editKantorPusat',compact('data','dataRegistrasi'));
-    }
-    public function updateKantorPusat(Request $request, $id){
-        $data = $request->except('_token','_method');
-
-        $model = new KantorPusat();
-
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $e->fill($data);
-            $e->save();
-            DB::commit();
-
-            Session::flash('success', 'data berhasil di update!');
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            Session::flash('error', $e->getMessage());
-        }
-
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
-
-    //tab menu restoran
-    public function listMenuRestoran(){
-        $xdata = DB::table('menu_restoran')
-                 ->where('id_user','=',Auth::user()->id)
-                 ->where('id_registrasi','=',Auth::user()->registrasi_id)
-                 ->orderBy('id','desc');
-
-        return Datatables::of($xdata)->make();
-    }
-    public function createMenuRestoran(){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        return view('registrasi.createMenuRestoran',compact('dataRegistrasi'));
-    }
-    public function storeMenuRestoran(Request $request){
-        $data = $request->except('_token','_method');
-
-        $model = new MenuRestoran();
-
-        try{
-            //$this->debugs($data);
-            DB::beginTransaction();
-            $model->fill($data);
-            $model->id_user = Auth::user()->id;
-            $model->id_registrasi = Auth::user()->registrasi_id;
-            $model->save();
-            DB::commit();
-
-            Session::flash('success', "data berhasil disimpan!");
-            $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-            return $redirect;
-
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            //$this->debugs($e->getMessage());
-
-            Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('tambahmenurestoran');
-            return $redirectPass;
-        }
-    }
-    public function detailMenuRestoran($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailMenuRestoran = DB::table('menu_restoran')
-                            ->where('id',$id)
-                            ->get();
-        $dataMenuRestoran = json_decode($detailMenuRestoran,true);
-        return view('registrasi.detailMenuRestoran',compact('dataMenuRestoran','dataRegistrasi'));
-    }
-    public function editMenuRestoran($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $data = MenuRestoran::find($id);
-
-        return view('registrasi.editMenuRestoran',compact('data','dataRegistrasi'));
-    }
-    public function updateMenuRestoran(Request $request, $id){
-        $data = $request->except('_token','_method');
-
-        $model = new MenuRestoran();
-
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $e->fill($data);
-            $e->save();
-            DB::commit();
-
-            Session::flash('success', 'data berhasil di update!');
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            Session::flash('error', $e->getMessage());
-        }
-
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
-
-    //tab menu restoran
-    public function listJagal(){
-        $xdata = DB::table('jagal')
-                 ->where('id_user','=',Auth::user()->id)
-                 ->where('id_registrasi','=',Auth::user()->registrasi_id)
-                 ->orderBy('id','desc');
-
-        return Datatables::of($xdata)->make();
-    }
-    public function createJagal(){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailFasilitas = DB::table('fasilitas')
-                            ->where('id_registrasi',$id_registrasi)
-                            ->get();
-        $fasilitas = json_decode($detailFasilitas,true);
-        return view('registrasi.createJagal',compact('dataRegistrasi','fasilitas'));
-    }
-    public function storeJagal(Request $request){
-        $data = $request->except('_token','_method');
-
-        $model = new Jagal();
-
-        try{
-            //$this->debugs($data);
-            DB::beginTransaction();
-            $model->fill($data);
-            $model->id_user = Auth::user()->id;
-            $model->id_registrasi = Auth::user()->registrasi_id;
-            $model->save();
-            DB::commit();
-
-            Session::flash('success', "data berhasil disimpan!");
-            $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-            return $redirect;
-
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            //$this->debugs($e->getMessage());
-
-            Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('tambahjagal');
-            return $redirectPass;
-        }
-    }
-    public function detailJagal($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailJagal = DB::table('jagal')
-                            ->select('jagal.*','fasilitas.*')
-                            ->join('fasilitas','fasilitas.id','=','jagal.id_fasilitas')
-                            ->where('jagal.id',$id)
-                            ->where('fasilitas.id_registrasi',$id_registrasi)
-                            ->get();
-        $dataJagal = json_decode($detailJagal,true);
-        return view('registrasi.detailJagal',compact('dataJagal','dataRegistrasi'));
-    }
-    public function editJagal($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailFasilitas = DB::table('fasilitas')
-                            ->where('id_registrasi',$id_registrasi)
-                            ->get();
-        $fasilitas = json_decode($detailFasilitas,true);
-
-        $data = Jagal::find($id);
-
-        return view('registrasi.editJagal',compact('data','dataRegistrasi','fasilitas'));
-    }
-    public function updateJagal(Request $request, $id){
-        $data = $request->except('_token','_method');
-
-        $model = new Jagal();
-
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $e->fill($data);
-            $e->save();
-            DB::commit();
-
-            Session::flash('success', 'data berhasil di update!');
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            Session::flash('error', $e->getMessage());
-        }
-
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
+    
 ////////////////////////////END Unggah Data////////////////////////////
-
-    public function penjadualanAudit(){
-        return view('registrasi.penjadualanAudit');
-    }
-    public function dokumenTravel(){
-        return view('registrasi.dokumenTravel');
-    }
-
-
-    ////////////////////////AKAD////////////////////////////////////////
+////////////////////////AKAD////////////////////////////////////////
     public function uploadAkadAdmin($id){
         // dd($id);
         $data = Registrasi::find($id);

@@ -233,100 +233,101 @@ Route::get('download','RegistrasiController@download');
 
 
 //unggah data sertifikasi - uds
-Route::get('unggahDataSertifikasi','RegistrasiController@unggahDataSertifikasi')->name('registrasi.unggahDataSertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
-//Route::get('list_unggah_data_sertifikasi','RegistrasiController@listUnggahDataSertifikasi')->name('listunggahdatasertifikasi');
+//pelanggan
+Route::get('unggah_dokumen_sertifikasi','RegistrasiController@unggahDokumenSertifikasi')->name('registrasi.unggahDokumenSertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
 Route::get('get_data_registrasi','RegistrasiController@getDataRegistrasi')->name('getdataregistrasi')->middleware('role:1,2,3,6,9,10,11,12,13');
-Route::get('detail_unggah_data_sertifikasi/{id_registrasi}','RegistrasiController@detailUnggahDataSertifikasi')->name('detailunggahdatasertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::post('store_dokumen_sertifikasi','RegistrasiController@storeDokumenSertifikasi')->name("storedokumensertifikasi")->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::get('delete_dokumen_sertifikasi/{id}','RegistrasiController@deleteDokumenSeritfikasi')->name('deletedokumensertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
+//admin
+Route::get('verifikasi_dokumen_sertifikasi/{id_registrasi}','RegistrasiController@verifikasiDokumenSertifikasi')->name('verifikasidokumensertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::put('update_status_verifikasi_dokumen/{id}','RegistrasiController@updateStatusVerifikasiDokumen')->name('updatestatusverifikasidokumen')->middleware('role:1,2,3,6,9,10,11,12,13');
 
-Route::get('detail_unggah_data_sertifikasi_auditor/{id_registrasi}','RegistrasiController@detailUnggahDataSertifikasiAuditor')->name('detailunggahdatasertifikasiauditor')->middleware('role:1,2,3,6,9,10,11,12,13');
+//audit tahap 1
+//pelanggan
+Route::get('unggah_dokumen_audit_tahap1','RegistrasiController@unggahDokumenAuditTahap1')->name('registrasi.unggahDokumenAuditTahap1')->middleware('role:1,2,3,6,9,10,11,12,13');
+//auditor
+Route::get('audit_tahap1/{id_registrasi}','RegistrasiController@auditTahap1')->name('audittahap1')->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::put('update_status_audit_tahap1/{id}','RegistrasiController@updateStatusAuditTahap1')->name('updatestatusaudittahap1')->middleware('role:1,2,3,6,9,10,11,12,13');
 
-Route::get('data_fasilitas/{id_registrasi}','RegistrasiController@dataFasilitas');
-Route::get('data_produk/{id_registrasi}','RegistrasiController@dataProduk');
-Route::get('data_kantor_pusat/{id_registrasi}','RegistrasiController@dataKantorPusat');
-Route::get('data_menu_restoran/{id_registrasi}','RegistrasiController@dataMenuRestoran');
-Route::get('data_jagal/{id_registrasi}','RegistrasiController@dataJagal');
-Route::get('data_material/{id_registrasi}','RegistrasiController@dataMaterial');
+// Route::get('data_fasilitas/{id_registrasi}','RegistrasiController@dataFasilitas');
+// Route::get('data_produk/{id_registrasi}','RegistrasiController@dataProduk');
+// Route::get('data_kantor_pusat/{id_registrasi}','RegistrasiController@dataKantorPusat');
+// Route::get('data_menu_restoran/{id_registrasi}','RegistrasiController@dataMenuRestoran');
+// Route::get('data_jagal/{id_registrasi}','RegistrasiController@dataJagal');
+// Route::get('data_material/{id_registrasi}','RegistrasiController@dataMaterial');
 
-//detail tiap list
-Route::get('fasilitas_detail/{id_registrasi}/{id}','RegistrasiController@fasilitasDetail')->name('fasilitas.detail');
-Route::get('kantor_pusat_detail/{id_registrasi}/{id}','RegistrasiController@kantorPusatDetail')->name('kantorpusat.detail');
-Route::get('material_detail/{id_registrasi}/{id}','RegistrasiController@materialDetail')->name('material.detail');
-Route::get('jagal_detail/{id_registrasi}/{id}','RegistrasiController@jagalDetail')->name('jagal.detail');
-
-
-//fasilitas
-Route::get('list_fasilitas','RegistrasiController@listFasilitas')->name('listfasilitas');
-Route::get('tambah_fasilitas','RegistrasiController@createFasilitas')->name('tambahfasilitas');
-Route::post('store_fasilitas','RegistrasiController@storeFasilitas')->name("storefasilitas");
-Route::get('detail_fasilitas/{id}','RegistrasiController@detailFasilitas')->name('detailfasilitas');
-Route::get('edit_fasilitas/{id}','RegistrasiController@editFasilitas')->name('editfasilitas');
-Route::put('update_fasilitas/{id}','RegistrasiController@updateFasilitas')->name('updatefasilitas');
-
-
-//kantor pusat
-Route::get('list_kantor_pusat','RegistrasiController@listKantorPusat')->name('listkantorpusat');
-Route::get('tambah_kantor_pusat','RegistrasiController@createKantorPusat')->name('tambahkantorpusat');
-Route::post('store_kantor_pusat','RegistrasiController@storeKantorPusat')->name("storekantorpusat");
-Route::get('detail_kantor_pusat/{id}','RegistrasiController@detailKantorPusat')->name('detailkantorpusat');
-Route::get('edit_kantor_pusat/{id}','RegistrasiController@editKantorPusat')->name('editkantorpusat');
-Route::put('update_kantor_pusat/{id}','RegistrasiController@updateKantorPusat')->name('updatekantorpusat');    
+// //detail tiap list
+// Route::get('fasilitas_detail/{id_registrasi}/{id}','RegistrasiController@fasilitasDetail')->name('fasilitas.detail');
+// Route::get('kantor_pusat_detail/{id_registrasi}/{id}','RegistrasiController@kantorPusatDetail')->name('kantorpusat.detail');
+// Route::get('material_detail/{id_registrasi}/{id}','RegistrasiController@materialDetail')->name('material.detail');
+// Route::get('jagal_detail/{id_registrasi}/{id}','RegistrasiController@jagalDetail')->name('jagal.detail');
 
 
-//menu restoran
-Route::get('list_menu_restoran','RegistrasiController@listMenuRestoran')->name('listmenurestoran');
-Route::get('tambah_menu_restoran','RegistrasiController@createMenuRestoran')->name('tambahmenurestoran');
-Route::post('store_menu_restoran','RegistrasiController@storeMenuRestoran')->name("storemenurestoran");
-Route::get('detail_menu_restoran/{id}','RegistrasiController@detailMenuRestoran')->name('detailmenurestoran');
-Route::get('edit_menu_restoran/{id}','RegistrasiController@editMenuRestoran')->name('editmenurestoran');
-Route::put('update_menu_restoran/{id}','RegistrasiController@updateMenuRestoran')->name('updatemenurestoran');
+// //fasilitas
+// Route::get('list_fasilitas','RegistrasiController@listFasilitas')->name('listfasilitas');
+// Route::get('tambah_fasilitas','RegistrasiController@createFasilitas')->name('tambahfasilitas');
+// Route::post('store_fasilitas','RegistrasiController@storeFasilitas')->name("storefasilitas");
+// Route::get('detail_fasilitas/{id}','RegistrasiController@detailFasilitas')->name('detailfasilitas');
+// Route::get('edit_fasilitas/{id}','RegistrasiController@editFasilitas')->name('editfasilitas');
+// Route::put('update_fasilitas/{id}','RegistrasiController@updateFasilitas')->name('updatefasilitas');
 
 
-//jagal
-Route::get('list_jagal','RegistrasiController@listJagal')->name('listjagal');
-Route::get('tambah_jagal','RegistrasiController@createJagal')->name('tambahjagal');
-Route::post('store_jagal','RegistrasiController@storeJagal')->name("storejagal");
-Route::get('detail_jagal/{id}','RegistrasiController@detailJagal')->name('detailjagal');
-Route::get('edit_jagal/{id}','RegistrasiController@editJagal')->name('editjagal');
-Route::put('update_jagal/{id}','RegistrasiController@updateJagal')->name('updatejagal');
+// //kantor pusat
+// Route::get('list_kantor_pusat','RegistrasiController@listKantorPusat')->name('listkantorpusat');
+// Route::get('tambah_kantor_pusat','RegistrasiController@createKantorPusat')->name('tambahkantorpusat');
+// Route::post('store_kantor_pusat','RegistrasiController@storeKantorPusat')->name("storekantorpusat");
+// Route::get('detail_kantor_pusat/{id}','RegistrasiController@detailKantorPusat')->name('detailkantorpusat');
+// Route::get('edit_kantor_pusat/{id}','RegistrasiController@editKantorPusat')->name('editkantorpusat');
+// Route::put('update_kantor_pusat/{id}','RegistrasiController@updateKantorPusat')->name('updatekantorpusat');    
 
 
-//produk
-Route::get('list_produk','RegistrasiController@listProduk')->name('listproduk');
-Route::get('tambah_produk','RegistrasiController@createProduk')->name('tambahproduk');
-Route::post('store_produk','RegistrasiController@storeProduk')->name("storeproduk");
-Route::get('edit_produk/{id}','RegistrasiController@editProduk')->name('editproduk');
-Route::put('update_produk/{id}','RegistrasiController@updateProduk')->name('updateproduk');
+// //menu restoran
+// Route::get('list_menu_restoran','RegistrasiController@listMenuRestoran')->name('listmenurestoran');
+// Route::get('tambah_menu_restoran','RegistrasiController@createMenuRestoran')->name('tambahmenurestoran');
+// Route::post('store_menu_restoran','RegistrasiController@storeMenuRestoran')->name("storemenurestoran");
+// Route::get('detail_menu_restoran/{id}','RegistrasiController@detailMenuRestoran')->name('detailmenurestoran');
+// Route::get('edit_menu_restoran/{id}','RegistrasiController@editMenuRestoran')->name('editmenurestoran');
+// Route::put('update_menu_restoran/{id}','RegistrasiController@updateMenuRestoran')->name('updatemenurestoran');
+
+
+// //jagal
+// Route::get('list_jagal','RegistrasiController@listJagal')->name('listjagal');
+// Route::get('tambah_jagal','RegistrasiController@createJagal')->name('tambahjagal');
+// Route::post('store_jagal','RegistrasiController@storeJagal')->name("storejagal");
+// Route::get('detail_jagal/{id}','RegistrasiController@detailJagal')->name('detailjagal');
+// Route::get('edit_jagal/{id}','RegistrasiController@editJagal')->name('editjagal');
+// Route::put('update_jagal/{id}','RegistrasiController@updateJagal')->name('updatejagal');
+
+
+// //produk
+// Route::get('list_produk','RegistrasiController@listProduk')->name('listproduk');
+// Route::get('tambah_produk','RegistrasiController@createProduk')->name('tambahproduk');
+// Route::post('store_produk','RegistrasiController@storeProduk')->name("storeproduk");
+// Route::get('edit_produk/{id}','RegistrasiController@editProduk')->name('editproduk');
+// Route::put('update_produk/{id}','RegistrasiController@updateProduk')->name('updateproduk');
 //dokumen has
-Route::post('store_dokumen_has','RegistrasiController@storeDokumenHas')->name("storedokumenhas")->middleware('role:1,2,3,6,9,10,11,12,13');
-Route::get('delete_dokumen_has/{id}','RegistrasiController@deleteDokumenHas')->name('deletedokumenhas')->middleware('role:1,2,3,6,9,10,11,12,13');
-Route::get('detail_dokumen_has_pelanggan/{id}','RegistrasiController@detailDokumenHasPelanggan')->name('detaildokumenhas.pelanggan')->middleware('role:1,2,3,6,9,10,11,12,13');
 
-Route::put('update_status_has/{id}','RegistrasiController@updateStatusHas')->name('updatestatushas')->middleware('role:1,2,3,6,9,10,11,12,13');
-Route::put('update_status_verifikasi/{id}','RegistrasiController@updateStatusVerifikasi')->name('updatestatusverifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
-Route::put('store_dokumen_has_admin/{id}','RegistrasiController@storeDokumenHasAdmin')->name("storedokumenhasadmin")->middleware('role:1,2,3,6,9,10,11,12,13');
-
-
-//material
-Route::get('list_material','RegistrasiController@listMaterial')->name('listmaterial');
-Route::get('tambah_material','RegistrasiController@createMaterial')->name('tambahmaterial');
-Route::post('store_material','RegistrasiController@storeMaterial')->name("storematerial");
-Route::get('edit_material/{id}','RegistrasiController@editMaterial')->name('editmaterial');
-Route::put('update_material/{id}','RegistrasiController@updateMaterial')->name('updatematerial');
-Route::get('detail_material/{id}','RegistrasiController@detailMaterial')->name('detailmaterial');
+// //material
+// Route::get('list_material','RegistrasiController@listMaterial')->name('listmaterial');
+// Route::get('tambah_material','RegistrasiController@createMaterial')->name('tambahmaterial');
+// Route::post('store_material','RegistrasiController@storeMaterial')->name("storematerial");
+// Route::get('edit_material/{id}','RegistrasiController@editMaterial')->name('editmaterial');
+// Route::put('update_material/{id}','RegistrasiController@updateMaterial')->name('updatematerial');
+// Route::get('detail_material/{id}','RegistrasiController@detailMaterial')->name('detailmaterial');
 
 
-//dokumen matriks produk
-Route::post('store_matriks_produk','RegistrasiController@storeMatriksProduk')->name("storematriksproduk");
-Route::get('delete_matriks_produk/{id}','RegistrasiController@deleteMatriksProduk')->name('deletematriksproduk');
-Route::get('list_matriks_pelanggan','RegistrasiController@listMatriksPelanggan')->name('listmatriks.pelanggan');
-Route::get('data_matriks_pelanggan','RegistrasiController@dataMatriksPelanggan')->name('datamatriks.pelanggan');
-Route::get('detail_matriks_pelanggan/{id}','RegistrasiController@detailmatriksPelanggan')->name('detailmatriks.pelanggan');
+// //dokumen matriks produk
+// Route::post('store_matriks_produk','RegistrasiController@storeMatriksProduk')->name("storematriksproduk");
+// Route::get('delete_matriks_produk/{id}','RegistrasiController@deleteMatriksProduk')->name('deletematriksproduk');
+// Route::get('list_matriks_pelanggan','RegistrasiController@listMatriksPelanggan')->name('listmatriks.pelanggan');
+// Route::get('data_matriks_pelanggan','RegistrasiController@dataMatriksPelanggan')->name('datamatriks.pelanggan');
+// Route::get('detail_matriks_pelanggan/{id}','RegistrasiController@detailmatriksPelanggan')->name('detailmatriks.pelanggan');
 
 
-//kuisioner has
-Route::post('store_kuisioner_has','RegistrasiController@storeKuisionerHas')->name("storekuisionerhas");
-Route::get('delete_kuisioner_has/{id}','RegistrasiController@deleteKuisionerHas')->name('deletekuisionerhas');
-Route::get('detail_kuisioner_pelanggan/{id}','RegistrasiController@detailKuisionerHasPelanggan')->name('detailkuisionerhas.pelanggan');
+// //kuisioner has
+// Route::post('store_kuisioner_has','RegistrasiController@storeKuisionerHas')->name("storekuisionerhas");
+// Route::get('delete_kuisioner_has/{id}','RegistrasiController@deleteKuisionerHas')->name('deletekuisionerhas');
+// Route::get('detail_kuisioner_pelanggan/{id}','RegistrasiController@detailKuisionerHasPelanggan')->name('detailkuisionerhas.pelanggan');
 
 //Route::get('detailRegistrasi','RegistrasiController@detailRegistrasi')->name('registrasi.detailRegistrasi');
 //Route::get('pembayaranAkad','RegistrasiController@pembayaranAkad')->name('registrasi.pembayaranAkad');

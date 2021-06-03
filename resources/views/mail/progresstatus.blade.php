@@ -111,7 +111,7 @@
        // dd($status);
       @endphp
     
-    @elseif($status== '4')
+    @elseif($status== '2_2')
 
         <h3 style="text-align: center">SILAHKAN MENGUNGGAH KEMBALI KELENGKAPAN BERKAS</h3>
         
@@ -121,9 +121,9 @@
         <b>Periksa catatan pada halaman unggah data sertifikasi dan periksa kembali berkas sebelum anda mengunggah kembali. batas waktu pengunggahan kelengkapan dokumen adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_berkas']}} WIB/GMT+7.<b>
         </p>
 
-    @elseif($status== '5')
+    @elseif($status== '2_3')
 
-        <h3 style="text-align: center">SILAHKAN MELANJUTKAN PADA TAHAP SELANJUTNYA: AKAD</h3>
+        <h3 style="text-align: center">Berkas Sertfikasi Terkonfirmasi</h3>
         
         <br/>
         
@@ -135,15 +135,15 @@
         </p>
         <br/>
 
-    @elseif($status== '6')
+    @elseif($status== '4_1')
 
   
 
-        <h3 style="text-align: center">SILAHKAN MENGUNGGAH FILE KONTRAK AKAD</h3>
+        <h3 style="text-align: center">Berkas Penawaran dan Akad Sudah Tersedia</h3>
         
         <br/>
         
-        <p>Anda menerima email ini dikarenakan file kontrak akad telah diunggah oleh Admin <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan unggah kembali file kontrak akad yang sudah ditanda tangani dengan format pdf batas waktu pengunggahan kontrak akad adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_akad']}} WIB/GMT+7 </p>
+        <p>Anda menerima email ini dikarenakan file kontrak akad telah diunggah oleh Admin <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan lanjutkan pada tahapan berikutnya yaitu proses pembayaran tahap 1</p>
 
         
         <p>
@@ -151,35 +151,9 @@
         </p>
         <br/>    
 
-    @elseif($status== '7')
-
-        <h3 style="text-align: center">SILAHKAN MENGUNGGAH KEMBALI FILE KONTRAK AKAD</h3>
-        
-        <br/>
-        
-        <p>Anda menerima email ini dikarenakan proses akad gagal dikarnakan file yang anda unggah tidak benar/ rusak. Silahkan upload kembali file kontrak akad yang sudah anda tanda tangani. Batas waktu pengunggahan kontrak akad adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_akad']}} WIB/GMT+7 </p>
-
-        
-        <p>
-            <button class="btn btn-green"><a href="{{url('')}}"> WEBSITE LPH SUCOFINDO</a></button></p>
-        <br/>
-
-    @elseif($status== '8')
-   
-
-        <h3 style="text-align: center">FILE KONTRAK AKAD TELAH TERKONFIRMASI</h3>
-        
-        <br/>
-        
-        <p>Anda menerima email ini dikarenakan proses akad sudah selesai, selanjutnya silahkan melanjutkan pada tahapan berikutnya yaitu pembayaran tahap 1. </p>
-
-        
-        <p>
-            <button class="btn btn-green"><a href="{{url('')}}">WEBSITE LPH SUCOFINDO</a></button></p>
-        <br/>
-           
+    
             
-    @elseif($status== '9')
+    @elseif($status== '6')
     
     <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN ANDA :</h3>
             
@@ -238,7 +212,7 @@
                     </tr>             
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal1}} </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
@@ -259,83 +233,9 @@
 
                  <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
 
-    @elseif($status== '10')
-
-            <h3 style="text-align: center">PEMBAYARAN GAGAL</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN GAGAL NOMINAL KURANG  </th>
-                    </tr>             
-                    <tr style="text-align: center; vertical-align: middle;">Mohon maaf, Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} gagal dikarenakan nominal pembayaran tidak sesuai. Harap melkukan transfer kekurangan nominal.
-                    </tr>
-                  
-                     
-                        
-                </table>
-            </div>
-            <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
-
-             <div>
-                <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
-
-                   
-                   
-                    <tr>
-                        <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN  </th>
-                    </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal Kurang: </b> {{$pembayaran['mata_uang']}} {{$nominal_kurang1}} </tr>
-                     
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
-                        
-                </table>
-            </div>
-
-            <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
-
-            <h3><b>PERHTIAN</b></h3>
-
-            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap1']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
-            </p>
-
-            <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
-
-    @elseif($status== '11')
    
 
-            <h3 style="text-align: center">PEMBAYARAN BERHASIL - NOMINAL BERLEBIH</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN BERHASIL NOMINAL LEBIH  </th>
-                    </tr>             
-                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 5 x 24 jam kami akan proses pengembalian dana yang lebih. 
-                    </tr>
-                    <tr style="text-align: center; vertical-align: middle;"> Nominal Lebih : {{$pembayaran['mata_uang']}} {{$nominal_lebih1}}</tr>
-                  
-                     
-                        
-                </table>
-            </div>
-
-            <p><b>Notes :</b> Proses sertifikasi akan segera diproses. Silahkan tunggu 5 x 24 jam untuk pengembalian dana.</p>
-            
-
-    @elseif($status== '12')
+    @elseif($status== '6_2')
 
             <h3 style="text-align: center">PROSES PEMBAYARAN GAGAL</h3>
             
@@ -348,7 +248,7 @@
                     <tr>
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN GAGAL </th>
                     </tr>             
-                    <tr style="text-align: center; vertical-align: middle;">Mohon maaf, Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} gagal dikarenakan bukti transfer tidak sesuai atau file rusak. silahkan uploaad kembali bukti transfer yang benar
+                    <tr style="text-align: center; vertical-align: middle;">Mohon maaf, Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} gagal dikarenakan bukti transfer tidak sesuai atau file rusak. silahkan upload kembali bukti transfer yang benar
                     </tr>
                   
                      
@@ -368,7 +268,7 @@
                               
                      <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal1}} </tr>
                      
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap1']}}</tr>
@@ -385,9 +285,9 @@
 
             <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
             
-    @elseif($status== '13')
+    @elseif($status== '6_3')
 
-            <h3 style="text-align: center">PEMBAYARAN BERHASIL:</h3>
+            <h3 style="text-align: center">PEMBAYARAN TERKONFIRMASI</h3>
             
             <br/>
             
@@ -413,7 +313,45 @@
              <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 1 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 1. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
              </p> 
 
-    @elseif($status== '14')
+    @elseif($status== '5_1')
+            <h3 style="text-align: center">SILAHKAN MENGUNGGAH KEMBALI BERKAS Order Confirmation YANG SUDA DITANDATANGANI</h3>
+                
+            <br/>
+            
+            <p>Anda menerima email ini dikarenakan pendaftaran anda memasuki tahapan penerbitan order confirmation. Selanjutnya, silahkan unggah berkas order confirmation yang sudah ditandatangani. </p>
+
+            
+            <p>
+                <button class="btn btn-green"><a href="{{url('')}}">WEBSITE LPH SUCOFINDO</a></button>
+            </p>
+            <br/>  
+
+    @elseif($status== '5_3')
+            <h3 style="text-align: center">PENERBITAN ORDER CONFIRMATION GAGAL</h3>
+                
+            <br/>
+            
+            <p>Anda menerima email ini dikarenakan berkas order confirmation tidak dapat dikonfirmasi oleh Admin kami. Selanjutnya, silahkan unggah berkas order confirmation yang sudah ditandatangani dan pastikan file tidak rusak.</p>
+
+            
+            <p>
+                <button class="btn btn-green"><a href="{{url('')}}">WEBSITE LPH SUCOFINDO</a></button>
+            </p>
+            <br/>  
+    @elseif($status== '5_4')
+        <h3 style="text-align: center">PENERBITAN ORDER CONFIRMATION TERKONFIRMASI</h3>
+            
+        <br/>
+        
+        <p>Anda menerima email ini dikarenakan order confirmation telah berhasil diterbitkan. Selanjutnya silahkan melakukan pembayaran sesuai akad.</p>
+
+        
+        <p>
+            <button class="btn btn-green"><a href="{{url('')}}">WEBSITE LPH SUCOFINDO</a></button>
+        </p>
+        <br/>  
+
+    @elseif($status== '8')
 
             <h3 style="text-align: center">AUDIT TAHAP 1: DALAM PROSES</h3>
             
@@ -425,457 +363,54 @@
                    
                     <tr>
                         <th  >ORDER {{$registrasi['no_registrasi']}} - PROSES AUDIT TAHAP 1 </th>
-                        <th  >Audit tahap 1 sedang berlangsung silahkan tunggu 1 x 24 jam. setelah proses audit selesai dan silahkan melanjutkan ke tahapan selanjutnya yaitu pembayaran tahap 2 </th>
+                        <th  >Audit tahap 1 sedang berlangsung silahkan menunggu 1 x 24 jam.</th>
                     </tr>             
                      
                         
                 </table>
             </div>
 
+    @elseif($status== '8_2')
 
-             <p><b>Note: </b>Silahkan melakukan pembayaran tahap 2 pada menu registrasi halal tombol aksi lalu pilih menu pembayaran tahap 2 apabila total nominal pada kontrak anda lebih dari <b>Rp.50.000.000,00 (Lima Puluh Juta Rupiah)</b>. Apabila total nominal <b>kurang dari Rp.50.000.000,00 (Lima Puluh Juta Rupiah) </b> Anda dapat melewati proses pembayaran tahap 2 dan silahkan melakukan pembayaran tahap 3 (Pelunasan) apabila pembayaran anda <b>lebih besar dari Rp.10.000.000,00 (Sepuluh Juta Rupiah)</b> pada saat proses Audit tahap 2 telah selesai. Apabila nominal total <b>kurang dari Rp.10.000.000,00 (Sepuluh Juta Rupiah)</b> maka pembayaran anda <b>sudah selesai</b> dan silahkan <b>unduh Invoice pelunasan pada menu pelunasan</b> apabila seluruh proses Audit sudah Selesai.
-             </p> 
-    @elseif($status== '15')
+            <h3 style="text-align: center">VERIFIKASI BERKAS AUDIT TAHAP 1 - PERBAIKAN</h3>
 
-            <h3 style="text-align: center">AUDIT TAHAP 2: DALAM PROSES</h3>
-            
             <br/>
-            
+
 
             <div>
                 <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-                   
+                
                     <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PROSES AUDIT TAHAP 2 </th>
-                       
+                        <th  >ORDER {{$registrasi['no_registrasi']}} - PERBAIKAN AUDIT TAHAP 1 </th>
+                        <th  >Silahkan lakukan perbaikan berkas kelengkapan audit tahap 1 sesuai dengan catatan pada halaman audit tahap 1</th>
                     </tr>             
-                     
-                        
-                </table>
-            </div>
-
-
-    @elseif($status== '16')
-    <h3 style="text-align: center">LAPORAN AUDIT TAHAP 2:</h3>                
-            <br/>
-           @if($registrasi['status_report']== '1' && $registrasi['status_berita_acara']== '1')
-
-            <div>
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th>ORDER {{$registrasi['no_registrasi']}} - LAPORAN AUDIT TAHAP 2 BERHASIL DIUPLOAD </th>
-                    </tr>             
-                              
-                                
-                     <tr style="text-align: center; vertical-align: middle;">Laporan audit tahap 2 dan berita acara audit tahap 2 dengan nomor referensi {{$registrasi['no_registrasi']}} sudah diupload. Silahkan cek Pada Menu Pelaporan dan Unduh File Laporan Audit dan Berita Acara Tahap 2, lalu Klik Konfirmasi.</tr>
-                    {{-- <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr> --}}
-                  
-                     
-                        
-                </table>
-            </div>
-           <!--  <p>
-
-                
-                @if($registrasi['status_report']== '1')
-                <button class="btn btn-green" style="margin-bottom: 10px"><a href="{{url('') .Storage::url('public/buktireport/'.$user['id'].'/'.$registrasi['file_report']) }}" download>{{$registrasi['file_report']}}Unduh Laporan Audit Tahap 2</a></button>
-                @endif                
-
-                @if($registrasi['status_berita_acara']== '1')
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/beritaacara/'.$user['id'].'/'.$registrasi['file_berita_acara']) }}" download>{{$registrasi['file_berita_acara']}}Unduh Berita Acara Tahap 2</a></button>
-                @endif
-            </p> -->
-
-            @else
-                <h3 style="text-align: center">PELAPORAN AUDIT: DALAM PROSES</h3>
-            
-                <br/>
-                
-
-                <div>
-                    <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-                       
-                        <tr>
-                            <th  >ORDER {{$registrasi['no_registrasi']}} - PROSES PELAPORAN AUDIT dan BERITA ACARA </th>
-                           
-                        </tr>             
-                         
-                            
-                    </table>
-                </div>
-                
-            @endif
-
-             <p>Anda dapat meninjau order dan mengunduh bukti laporan audit tahap 2 dan berita acara tahap 2 anda di menu pelaporan pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu report audit dan report berita acara. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
-             </p>     
-    @elseif($status== '20')
-            <h3 style="text-align: center">SIDANG FATWA: DALAM PROSES</h3>
-            
-                <br/>
-                
-
-                <div>
-                    <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-                       
-                        <tr>
-                            <th  >ORDER {{$registrasi['no_registrasi']}} - PROSES SIDANG FATWA </th>
-                           
-                        </tr>             
-                         
-                            
-                    </table>
-                </div>
-           
-
-             <p>silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran). untuk informasi lebih lanjut.
-             </p>
-
-
-    @elseif($status== 'g')
-        @if($pembayaran['nominal_tahap2'] == 0)
-
-            <h3 style="text-align: center">PEMBAYARAN TAHAP 2 BERHASIL</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 TELAH DITERIMA </th>
-                    </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><h5>Anda tidak perlu melakukan pembayaran tahap 2 </h5></tr>
-                     
-                </table>
-            </div>
-           <!--  <p>
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap2']) }}">Unduh Bukti Pembayaran Tahap 2</a></button>
-            </p> -->
-
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
-             </p>          
-
-
-
-        @else
-
-                <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN TAHAP 2 ANDA :</h3>
-                
-                <br/>
-                <div style="border:solid; ">
-                    <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                       
-                        <tr>
-                            <th  >Detail Order</th>
-                        </tr>             
-                                  
-                         <tr style="text-align: center; vertical-align: middle;"><b>Order: </b> {{$registrasi['no_registrasi']}} </tr>
-                        <tr style="text-align: center; vertical-align: middle;"><b>Payment: </b> Transfer</tr>
-                         
-                            
-                    </table>
-                </div>
-
-                <div style="border:solid; ">
-                    <table style="width:100%; margin-top:10px;  border: 1px solid black;">
-                         
-                            <tr>
-                                <th><b>Deskripsi</b></th>
-                                <th><b>Total Biaya</b></th>
-                                <th><b>Batas Waktu</b></th>
-                            </tr>
-                             
-                        
-                            <tr style="text-align: center; vertical-align: middle;">
-                                <td>
-                                    <b>Pembayaran Tahap 2 Sertfikasi Halal dengan no. registrasi {{$registrasi['no_registrasi']}} </b>
-                                </td>
-
-                                <td>
-                                    <b>{{$pembayaran['mata_uang']}} {{$nominal2}} </b>
-                                </td>
-                                <td>
-                                    <b>{{$pembayaran['dl_tahap2']}} </b>
-                                </td>
-                                
-                            </tr>
-
-                        
-                    </table>
-                   
-
-                </div>
-
-                <div>
-                    <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                       
-                        <tr>
-                            <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN TAHAP 2</th>
-                        </tr>             
-                                  
-                         <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
-                        <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
-                        <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
-                        <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
-                        <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$pembayaran['dl_tahap2']}}</tr>
-                         
-                            
-                    </table>
-                </div>
-
-
-                     <p>Anda menerima email ini dikarenakan berkas kontrak akad anda telah disetujui oleh kami <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan lanjutkan pada tahapan selanjutnya yaitu Pembayaran pada menu registrasi halal. silahkan upload bukti transfer sesuai dengan nominal yang tertera </p>
-
-                     <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
-
-                     <h3><b>PERHTIAN</b></h3>
-
-                     <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
-                    </p>
-
-                     <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
-        @endif    
-
-     @elseif($status== 'h')
-   
-        <h3 style="text-align: center">PEMBAYARAN TAHAP 2 GAGAL</h3>      
-        <br/>
-        <div>
-            <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-               
-                <tr>
-                    <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 GAGAL - NOMINAL KURANG  </th>
-                </tr>             
-                <tr style="text-align: center; vertical-align: middle;">Mohon maaf, Pembayaran Tahap 2 Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} gagal dikarenakan nominal pembayaran tidak sesuai. Harap melakukan transfer kekurangan nominal.
-                </tr>          
-            </table>
-        </div>
-        <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
-
-         <div>
-            <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
-
-               
-                <tr>
-                    <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN TAHAP 2  </th>
-                </tr>             
-                          
-                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal_kurang2}} </tr>
-                  <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran TAHAP 2: </b>{{$pembayaran['dl_tahap2']}}</tr>
-                
                     
-            </table>
-        </div>
+                        
+                </table>
+            </div>
+    
+    @elseif($status== '8_3')
 
-        <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
+            <h3 style="text-align: center">VERIFIKASI BERKAS AUDIT TAHAP 1 - TERKONFIRMASI</h3>
 
-        <h3><b>PERHTIAN</b></h3>
-
-        <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Proses sertifikasi tidak dapat dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
-        </p>
-
-        <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pembayaran.</p>
-
-    @elseif($status== 'i')
-
-            <h3 style="text-align: center">PEMBAYARAN TAHAP 2 BERHASIL - NOMINAL BERLEBIH</h3>
-            
             <br/>
-            
+
 
             <div>
                 <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 BERHASIL - NOMINAL LEBIH  </th>
-                    </tr>             
-                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 5 x 24 jam kami akan proses pengembalian dana yang lebih. 
-                    </tr>
-                    <tr style="text-align: center; vertical-align: middle;"> Nominal Lebih : {{$pembayaran['mata_uang']}} {{$nominal_lebih2}}
-                    </tr>
-                  
-                     
-                        
-                </table>
-            </div>
-
-            <p><b>Notes :</b> Proses sertifikasi akan segera dilanjutkan. Silahkan tunggu 5 x 24 jam untuk pengembalian dana.</p>
-    @elseif($status== 'j')
-
-             <h3 style="text-align: center">PEMBAYARAN TAHAP 2 GAGAL</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2GAGAL - SILAHKAN UPLOAD ULANG </th>
-                    </tr>             
-                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} GAGAL. Silahkan upload ulang bukti transfer, pastikan file seusai dan tidak rusak.
-                    </tr>
-                  
-                     
-                        
-                </table>
-            </div>
-             <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
-
-             <div>
-                <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
-
-                   
-                   
-                    <tr>
-                        <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN TAHAP 2  </th>
-                    </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
-                     
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap2']}}</tr>
-                        
-                </table>
-            </div>
-
-            <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
-
-            <h3><b>PERHTIAN</b></h3>
-
-            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Proses sertifikasi tidak akan dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
-            </p>
-
-            <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pelunasan.</p>     
-            
-    @elseif($status== 'l')
-
-        @if($pembayaran['nominal_tahap2'] == 0)
-
-            <h3 style="text-align: center">PEMBAYARAN TAHAP 2 BERHASIL</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 TELAH DITERIMA </th>
-                    </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><h5>Anda tidak perlu melakukan pembayaran tahap 2 </h5></tr>
-                     
-                </table>
-            </div>
-            <!-- <p>
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap2']) }}">Unduh Bukti Pembayaran Tahap 2</a></button>
-            </p> -->
-
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
-             </p>          
-
-
-
-        @else
-
-            <h3 style="text-align: center">PEMBAYARAN TAHAP 2 BERHASIL:</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 TELAH DITERIMA </th>
-                    </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
-                    <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
-                  
-                     
-                        
-                </table>
-            </div>
-           <!--  <p>
-                <button class="btn btn-green"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap2']) }}">Unduh Bukti Pembayaran Tahap 2</a></button>
-            </p> -->
-
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 2 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
-             </p> 
-        @endif         
-   
-      
-    @elseif($status== 'c')
-
-            <h3 style="text-align: center">SILAHKAN MENGUNGGAH FILE KONTRAK AKAD YANG SUDAH DITANDATANGANI</h3>
-            
-            <br/>
-            
-               <p>Anda menerima email ini dikarenakan berkas kontrak akad telah diupload pada website LPH PT.SUCOIFNDO silahkan unduh file kontrak akad lalu tanda tangani setelah nya silahkan upload kembali file kontrak akad yang sudah anda tanda tangani. Order anda tidak akan dapat dilanjutkan ke tahap selanjutnya  apabila tidak ditanda tangani dalam waktu 1 x 24 jam pada hari dan pukul <b> {{$registrasi['dl_akad']}} WIB/GMT+7  </b>
-               </p>
-
                 
-            <p>
-                <button class="btn btn-green"><a href="{{url('')}}">WEBSITE LPH SUCOFINDO</a></button>
-            </p>
-            <br/>
-    @elseif($status== 'd')
-
-            <h3 style="text-align: center">FILE BUKTI TRANSFER SUDAH DITERIMA. MENUNGGU KONFIRMASI ADMIN</h3>
-            
-            
-            <br/>
-            
-               <p>Anda menerima email ini dikarenakan bukti transfer pembayaran tahap 1 telah diterima dan sedang menunggu konfirmasi dari Admin LPH PT.SUCOFINDO. Silahkan tunggu konfirmasi dari Admin LPH PT.SUCOFINDO paling lama dalam waktu 1 x 24 jam.</b>
-               </p>
-               
-     @elseif($status== '21')
-
-        @if($pembayaran['nominal_tahap3'] == 0)
-
-            <h3 style="text-align: center">PEMBAYARAN PELUNASAN BERHASIL</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
                     <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASAN TELAH DITERIMA </th>
+                        <th  >ORDER {{$registrasi['no_registrasi']}} - BERKAS TERKONFIRMASI </th>
+                        <th  >Silahkan melanjutkan ke tahapan berikutnya, apabila nominal pembayaran anda melebihi Rp.50.000.000 silahkan melanjutkan ke tahapan pembayaran tahap2. Apabila nominal total pembayaran kurang dari Rp.50.000.000 anda dapat melanjutkan ke tahapan Audit Tahap 2</th>
                     </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><h5>Anda tidak perlu melakukan Pembayaran Pelunasan</h5></tr>
-                     
+                    
+                        
                 </table>
             </div>
-             <!-- <p>
-                <button class="btn btn-green" style="margin-right: 10px;"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap3']) }}">Unduh Bukti Pembayaran Pelunasan</a></button>
-            </p>
-            @if(is_null($registrasi['inv_pembayaran'])==0)
-                <p>
-                    <button class="btn btn-green"><a href="{{url('') .Storage::url('public/INV/'.$registrasi['inv_pembayaran']) }}">Unduh Invoice Pelunasan</a></button>
-                </p>
-            @endif
- -->
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal, dengan cara tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
-             </p>       
 
-
-
-        @else
-
-            <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN PELUNASAN ANDA :</h3>
+    @elseif($status== '9')
+    
+        <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PEMBAYARAN TAHAP 2 ANDA :</h3>
             
             <br/>
             <div style="border:solid; ">
@@ -902,15 +437,18 @@
                         </tr>
                          
                     
+
+                   
+                        
                         <tr style="text-align: center; vertical-align: middle;">
                             <td>
-                                <b>Pembayaran Tahap 2 Sertfikasi Halal dengan no. registrasi {{$registrasi['no_registrasi']}} </b>
+                                <b>Pembayaran Sertfikasi Halal dengan no. registrasi {{$registrasi['no_registrasi']}} </b>
                             </td>
                             <td>
-                                <b>{{$pembayaran['mata_uang']}} {{$nominal3}} </b>
+                                <b>{{$pembayaran['mata_uang']}} {{$nominal2}} </b>
                             </td>
                             <td>
-                                <b>{{$pembayaran['dl_tahap3']}} </b>
+                                <b>{{$pembayaran['dl_tahap2']}} </b>
                             </td>
                             
                         </tr>
@@ -925,122 +463,53 @@
                 <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
                    
                     <tr>
-                        <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN PELUNASAN</th>
+                        <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
-                     <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Tahap 2: </b> {{$pembayaran['dl_tahap3']}}</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap2']}}</tr>
                      
                         
                 </table>
             </div>
 
 
-                 <p>Anda menerima email ini dikarenakan proses tinjauan audit telah selesai oleh <b>LPH </b>PT.SUCOFINDO. Selanjutnya, silahkan lanjutkan pada tahapan selanjutnya yaitu Pembayaran Pelunasan pada menu registrasi halal. silahkan upload bukti transfer sesuai dengan nominal yang tertera </p>
 
-                 <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
+                 <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara login di akun Anda,kemudian masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
 
-                 <h3><b>PERHTIAN</b></h3>
+                 <h3><b>PERHATIAN</b></h3>
 
-                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Proses tidak akan dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                 <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
                 </p>
 
-                 <p><b>Notes :</b> Proses Sertifikasi akan segera dilanjutkan setelah Anda melakukan pembayaran</p>
-        @endif             
+                 <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
 
-    @elseif($status== '22')
    
-        <h3 style="text-align: center">PEMBAYARAN PELUNASAN GAGAL</h3>      
-        <br/>
-        <div>
-            <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-               
-                <tr>
-                    <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASAN GAGAL - NOMINAL KURANG  </th>
-                </tr>             
-                <tr style="text-align: center; vertical-align: middle;">Mohon maaf, Pembayaran Pelunasan Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} gagal dikarenakan nominal pembayaran tidak sesuai. Harap melakukan transfer kekurangan nominal.
-                </tr>          
-            </table>
-        </div>
-        <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
 
-         <div>
-            <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
+    @elseif($status== '9_2')
 
-               
-                <tr>
-                    <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN PELUNASAN </th>
-                </tr>             
-                          
-                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal_kurang3}} </tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
-                 <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran Pelunasan: </b>{{$pembayaran['dl_tahap3']}}</tr>
-                
-                    
-            </table>
-        </div>
-
-        <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
-
-        <h3><b>PERHTIAN</b></h3>
-
-        <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Proses sertifikasi tidak akan dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
-        </p>
-
-        <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pelunasan.</p>           
-                          
-    
-     @elseif($status== '23')
-
-            <h3 style="text-align: center">PEMBAYARAN PELUNASAN BERHASIL - NOMINAL BERLEBIH</h3>
+            <h3 style="text-align: center">PROSES PEMBAYARAN TAHAP 2 GAGAL</h3>
             
             <br/>
             
 
-            <div>
+           <div>
                 <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
                    
                     <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASAN BERHASIL - NOMINAL LEBIH  </th>
+                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TAHAP 2 GAGAL </th>
                     </tr>             
-                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} berhasil namun ada kelebihan nominal yang ditransfer. Dalam waktu 5 x 24 jam kami akan proses pengembalian dana yang lebih. 
-                    </tr>
-                    <tr style="text-align: center; vertical-align: middle;"> Nominal Lebih : {{$pembayaran['mata_uang']}} {{$nominal_lebih3}}
+                    <tr style="text-align: center; vertical-align: middle;">Mohon maaf, Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} gagal dikarenakan bukti transfer tidak sesuai atau file rusak. silahkan upload kembali bukti transfer yang benar
                     </tr>
                   
                      
                         
                 </table>
             </div>
-
-            <p><b>Notes :</b> Proses sertifikasi akan segera dilanjutkan. Silahkan tunggu 5 x 24 jam untuk pengembalian dana.</p>
-
-     @elseif($status== '24')
-
-            <h3 style="text-align: center">PEMBAYARAN PELUNASAN GAGAL</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASAN GAGAL - SILAHKAN UPLOAD ULANG </th>
-                    </tr>             
-                    <tr style="text-align: center; vertical-align: middle;"> Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} GAGAL. Silahkan upload ulang bukti transfer, pastikan file seusai dan tidak rusak.
-                    </tr>
-                  
-                     
-                        
-                </table>
-            </div>
-             <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
+            <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
 
              <div>
                 <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
@@ -1048,15 +517,15 @@
                    
                    
                     <tr>
-                        <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN PELUNASAN </th>
+                        <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN  </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
                      
-                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO (PERSERO) </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO </tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
                     <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
-                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap3']}}</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap2']}}</tr>
                         
                 </table>
             </div>
@@ -1065,17 +534,12 @@
 
             <h3><b>PERHTIAN</b></h3>
 
-            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Proses sertifikasi tidak akan dilanjutkan jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+            <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap2']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
             </p>
-
-            <p><b>Notes :</b> Silahkan lakukan transfer sejumlah nominal yang kurang lalu unggah kembali bukti transfer pada menu pelunasan.</p>     
-     
             
-    @elseif($status== '25')
+    @elseif($status== '9_3')
 
-        @if($pembayaran['nominal_tahap2'] == 0)
-
-            <h3 style="text-align: center">PEMBAYARAN PELUNASAN BERHASIL</h3>
+            <h3 style="text-align: center">PEMBAYARAN TAHAP 2 TERKONFIRMASI</h3>
             
             <br/>
             
@@ -1084,119 +548,293 @@
                 <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
                    
                     <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASAN TELAH DITERIMA </th>
+                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TELAH DITERIMA </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><h5>Anda tidak perlu melakukan Pembayaran Pelunasan</h5></tr>
-                     
-                </table>
-            </div>
-             <!-- <p>
-                <button class="btn btn-green" style="margin-right: 10px;"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap3']) }}">Unduh Bukti Pembayaran Pelunasan</a></button>
-            </p>
-            @if(is_null($registrasi['inv_pembayaran'])==0)
-                <p>
-                    <button class="btn btn-green"><a href="{{url('') .Storage::url('public/INV/'.$registrasi['inv_pembayaran']) }}">Unduh Invoice Pelunasan</a></button>
-                </p>
-            @endif -->
-
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
-             </p>       
-
-        @else 
-
-            <h3 style="text-align: center">PEMBAYARAN PELUNASAN BERHASIL:</h3>
-            
-            <br/>
-            
-
-            <div>
-                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
-                   
-                    <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN PELUNASN TELAH DITERIMA </th>
-                    </tr>             
-                              
-                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
-                    <tr style="text-align: center; vertical-align: middle;">Pembayaran Pelunasan Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
+                     <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal2}} </tr>
+                    <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
                   
                      
                         
                 </table>
             </div>
-            <!-- <p>
-                <button class="btn btn-green" style="margin-right: 10px;"><a href="{{url('') .Storage::url('public/buktipembayaran/'.$user['id'].'/'.$pembayaran['bt_tahap3']) }}">Unduh Bukti Pembayaran Pelunasan</a></button>
-            </p>
-            @if(is_null($registrasi['inv_pembayaran'])==0)
-                <p>
-                    <button class="btn btn-green"><a href="{{url('') .Storage::url('public/INV/'.$registrasi['inv_pembayaran']) }}">Unduh Invoice Pelunasan</a></button>
-                </p>
-            @endif -->
 
-             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).
+             <p>Anda dapat meninjau order dan mengunduh bukti pembayaran tahap 1 anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pembayaran tahap 2. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id.
              </p> 
-        @endif
-    @elseif($status == '26')   
+    @elseif($status== '10')
 
-             <h3 style="text-align: center">PROSES SERTIFIKASI SUDAH SELESAI</h3>
+            <h3 style="text-align: center">AUDIT TAHAP 2: DALAM PROSES</h3>
             
             <br/>
             
 
             <div>
+                <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
+                   
+                    <tr>
+                        <th  >ORDER {{$registrasi['no_registrasi']}} - PROSES AUDIT TAHAP 2 </th>
+                       
+                    </tr>             
+                     
+                        
+                </table>
+            </div>
+    
+    @elseif($status== '10_1')
+
+            <h3 style="text-align: center">AUDIT TAHAP 2: SILAHKAN MENYETUJUI AUDIT PLAN</h3>
+
+            <br/>
+
+
+            <div>
+                <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
+                
+                    <tr>
+                        <th  >ORDER {{$registrasi['no_registrasi']}} - Silahkan menyetujui audit plan pada menu audit tahap 2 </th>
+                    
+                    </tr>             
+                    
+                        
+                </table>
+            </div>
+
+    @elseif($status== '10_3')
+
+        <h3 style="text-align: center">AUDIT TAHAP 2: AUDIT PLAN TERKONFIRMASI</h3>
+
+        <br/>
+
+
+        <div>
+            <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
+            
+                <tr>
+                    <th  >ORDER {{$registrasi['no_registrasi']}} - Audit Plan sudah terkonfirmasi.</th>
+                
+                </tr>             
+                
+                    
+            </table>
+        </div>
+
+    
+
+
+    @elseif($status== '11_1')
+            <h3 style="text-align: center">BERITA ACARA - SILAHKAN UPLOAD ULANG BERITA ACARA</h3>                
+            <br/>
+        
+            <div>
                 <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
                    
                     <tr>
-                        <th  >ORDER {{$registrasi['no_registrasi']}} - TELAH SELESAI </th>
+                        <th>ORDER {{$registrasi['no_registrasi']}} - BERITA ACARA SUDAH DIUPLOAD OLEH ADMIN </th>
                     </tr>             
                               
-                     <tr style="text-align: center; vertical-align: middle;"><h5>Anda Menerima email ini karena proses sertifikasi sudah selesai silahkan menunggu hasil sertifikat halal/haram dari BPJPH.</h5></tr>
+                                
+                     <tr style="text-align: center; vertical-align: middle;">Berita acara dengan nomor registrasi {{$registrasi['no_registrasi']}} sudah diupload. Silahkan cek Pada Menu Pelaporan dan Unduh File Berita Acara, lalu unggah kembali file yang sudah anda tandatangani.</tr>
+                    
+                  
                      
+                        
                 </table>
             </div>
+         
+    
+    @elseif($status== '12')
+    
+        <h3 style="text-align: center">SILAHKAN MENYELESAIKAN PELUNASAN ANDA :</h3>
             
-
-             <p>Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran).</p>      
-    @else
-
-       
-             <p>Tes Pindah Tahapan </p>
-
-            
-            <p>
-                <button class="btn btn-green"><a href="{{url('')}}">WEBSITE LPH SUCOFINDO</a></button></p>
             <br/>
+            <div style="border:solid; ">
+                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
+                
+                    <tr>
+                        <th  >Detail Order</th>
+                    </tr>             
+                            
+                    <tr style="text-align: center; vertical-align: middle;"><b>Order: </b> {{$registrasi['no_registrasi']}} </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Payment: </b> Transfer</tr>
+                    
+                        
+                </table>
+            </div>
 
+            <div style="border:solid; ">
+                <table style="width:100%; margin-top:10px;  border: 1px solid black;">
+                    
+                        <tr>
+                            <th><b>Deskripsi</b></th>
+                            <th><b>Total Biaya</b></th>
+                            <th><b>Batas Waktu</b></th>
+                        </tr>
+                        
+                    
+
+                
+                        
+                        <tr style="text-align: center; vertical-align: middle;">
+                            <td>
+                                <b>Pembayaran Sertfikasi Halal dengan no. registrasi {{$registrasi['no_registrasi']}} </b>
+                            </td>
+                            <td>
+                                <b>{{$pembayaran['mata_uang']}} {{$nominal3}} </b>
+                            </td>
+                            <td>
+                                <b>{{$pembayaran['dl_tahap3']}} </b>
+                            </td>
+                            
+                        </tr>
+
+                    
+                </table>
+            
+
+            </div>
+
+            <div>
+                <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
+                
+                    <tr>
+                        <th  >HARAP MELAKUKAN TRANSFER PEMBAYARAN</th>
+                    </tr>             
+                            
+                    <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
+                    <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap3']}}</tr>
+                    
+                        
+                </table>
+            </div>
+
+
+
+                <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara login di akun Anda,kemudian masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
+
+                <h3><b>PERHATIAN</b></h3>
+
+                <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+                </p>
+
+                <p><b>Notes :</b> Proses Sertifikasi akan segera diproses setelah Anda melakukan pembayaran</p>
+
+
+
+    @elseif($status== '12_2')    
+
+        <h3 style="text-align: center">PROSES PELUNASAN GAGAL</h3>
+        
+        <br/>
+        
+
+       <div>
+            <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
+               
+                <tr>
+                    <th  >ORDER {{$registrasi['no_registrasi']}} - PELUNASAN GAGAL </th>
+                </tr>             
+                <tr style="text-align: center; vertical-align: middle;">Mohon maaf, Pembayaran Anda dengan nomor registrasi {{$registrasi['no_registrasi']}} gagal dikarenakan bukti transfer tidak sesuai atau file rusak. silahkan upload kembali bukti transfer yang benar
+                </tr>
+              
+                 
+                    
+            </table>
+        </div>
+        <p>Silahkan melakukan pembayaran ulang sesuai nominal agar dapat dilanjutkan ke tahap selanjutnya.</p>
+
+         <div>
+            <table style="width:100%; border: 1px solid black; margin-bottom: 10px;margin-top: 10px;  border-collapse: collapse;" >
+
+               
+               
+                <tr>
+                    <th>HARAP MELAKUKAN TRANSFER PEMBAYARAN  </th>
+                </tr>             
+                          
+                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah Nominal yang Benar: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
+                 
+                <tr style="text-align: center; vertical-align: middle;"><b>Nama Akun: </b> PT SUCOFINDO </tr>
+                <tr style="text-align: center; vertical-align: middle;"><b>Akun Bank: </b> BNI Syariah</tr>
+                <tr style="text-align: center; vertical-align: middle;"><b>Nomor Rekening: </b> 2210195632 </tr>
+                <tr style="text-align: center; vertical-align: middle;"><b>Batas Waktu Pembayaran: </b> {{$pembayaran['dl_tahap3']}}</tr>
+                    
+            </table>
+        </div>
+
+        <p> Setelah Anda melakukan transfer pembayaran, Tolong konfirmasi pembayaran Anda, dengan cara log in di akun Anda, dan masuk pada menu registrasi halal dan klik tombol aksi lalu klik menu pembayaran.</p>
+
+        <h3><b>PERHTIAN</b></h3>
+
+        <p>Mohon pembayaran diselesaikan sebelum {{$pembayaran['dl_tahap3']}}. Pendaftaran anda tidak akan dapat dilanjutkan ke tahap selanjutnya jika anda tidak membayar sesuai nominal dan melakukan konfirmasi pembayaran hingga batas waktu yang ditentukan.
+        </p>
+        
+    @elseif($status== '12_3')
+
+        <h3 style="text-align: center">PELUNASAN TERKONFIRMASI</h3>
+        
+        <br/>
+        
+
+        <div>
+            <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >
+               
+                <tr>
+                    <th  >ORDER {{$registrasi['no_registrasi']}} - PEMBAYARAN TELAH DITERIMA </th>
+                </tr>             
+                          
+                 <tr style="text-align: center; vertical-align: middle;"><b>Jumlah: </b> {{$pembayaran['mata_uang']}} {{$nominal3}} </tr>
+                <tr style="text-align: center; vertical-align: middle;">Pembayaran Anda untuk Order dengan nomor referensi {{$registrasi['no_registrasi']}} berhasil diproses.</tr>
+              
+                 
+                    
+            </table>
+        </div>
+
+         <p>Anda dapat meninjau order dan mengunduh bukti pelunasan anda di menu pembayaran pada menu navigasi registrasi halal tekan tombol aksi lalu pilih menu pembayaran pada kolom bukti pelunasan. Untuk informasi lebih lanjut, silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id.
+         </p> 
+        
+    @elseif($status== '13')
+            <h3 style="text-align: center">SIDANG FATWA: DALAM PROSES</h3>
+            
+                <br/>
+                
+
+                <div>
+                    <table style="width:100%; border: 1px solid black; margin-bottom: 10px;  border-collapse: collapse;" >
+                       
+                        <tr>
+                            <th  >ORDER {{$registrasi['no_registrasi']}} - PROSES SIDANG FATWA </th>
+                           
+                        </tr>             
+                         
+                            
+                    </table>
+                </div>
+           
+
+             <p>silahkan menghubungi Customer Care kami melalui email lph@sucofindo.co.id atau whatsapp ke 0812-8957-7157 an. Visi Hardiani (Bagian Pemasaran). untuk informasi lebih lanjut.
+             </p>
+
+
+    
+
+     
+               
+     
     @endif
 
     
-            <p><b>Informasi</b></p>
-            <p>Tahapan proses yang harus dilalui pelanggan dalam rangka mendapatkan Sertifikat Halal SUCOFINDO:</p>
-            <ol>
-                <li>Pembuatan akun email melalui aplikasi <a href="{{url('login')}}">{{url('login')}}</a></li>
-                <li>Pendaftaran formulir sertifikasi halal</li>
-                <li>Unggah dokumen persyaratan audit sertifikasi halal</li>
-                <li>Verifikasi berkas persyaratan</li>
-                <li>Akad</li>
-                <li>Pembayaran akad</li>
-                <li>Proses audit oleh Tim auditor halal SUCOFINDO</li>
-                <li>Tinjauan hasil audit</li>
-                <li>Rekomendasi hasil pemeriksaan halal</li>
-                <li>Proses sertifikasi oleh BPJPH</li>
-                <li>Penetapan keputusan kehalalan oleh Komisi Fatwa MUI</li>
-                <li>Penertiban Sertifikat Halal oleh BPJPH</li> 
-            </ol>
-            <br/>
-
-            <p>Terima kasih,</p>
-            <br/>
+           
             <p><b>Admin LPH PT.SUCOFINDO</b></p>
         </div>
 
         <footer style="text-align:center;">
             <div style="background-color:#00acac; color:white; height: 50px;">
                 <a><b>Call Center:  021-7983666 ext 1324</b></a><br>
-                <a><b>WhatsApp: 0812-8957-7157</b></a>
+                <a><b>WhatsApp: 0857-7420-7966</b></a>
             </div>
         </footer>
 </body>

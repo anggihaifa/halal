@@ -95,12 +95,12 @@
                             var pembayaran2 = `<a href="{{url('pembayaran_tahap2')}}/`+full.id+`"  class="dropdown-item"> Pembayaran Tahap 2</a> `;
                             var pelunasan = `<a href="{{url('pelunasan')}}/`+full.id+`"  class="dropdown-item" >Pelunasan</a>` ;
                             var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit dan Berita Acara</a>`;
-                            var uploadBerkas = `<a href="{{url('unggahDataSertifikasi')}}"  class="dropdown-item" >Berkas Sertifikasi</a>`;
+                           
 
                             if(full.id == aktif_reg ){
                                 var aktif =`<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-yellow btn-xs" >Non Aktifkan</a>`;
-                                var uploadBerkas = `<a href="{{url('unggahDataSertifikasi')}}"  class="dropdown-item" ><i class="fa fa-edit"></i>Berkas Sertifikasi</a>`;
-                                var div_aktif = `<div class="col-lg-12 row border-left border-primary" style="background-color:#fafbfc" >`;
+                                var uploadBerkas = `<a href="{{url('unggah_dokumen_sertifikasi')}}"  class="dropdown-item" ><i class="fa fa-edit"></i>Berkas Sertifikasi</a>`;
+                                var div_aktif = `<div class="col-lg-12 row border-left rounded-lg border-primary" style="background-color:#fafbfc" >`;
                             }else{
                                 var aktif = `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-green btn-xs" >Aktifkan</a>`;
                                 var uploadBerkas = `<a href="#"  class="dropdown-item" >Aktifkan Untuk edit berkas</a>`;
