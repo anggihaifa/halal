@@ -23,6 +23,7 @@ use App\Models\Penjadwalan;
 use App\Models\Negara;
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
+use App\Models\KebutuhanWaktuAudit;
 use App\Models\System\User;
 use App\Models\Master\JenisRegistrasi;
 use App\Models\Master\KelompokProduk;
@@ -5347,32 +5348,31 @@ class PenjadwalanController extends Controller
         //start
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
-                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+               
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')
-                 ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')                 
+                 ->join('kebutuhan_waktu_audit','registrasi.id_kebutuhan_waktu_audit','=','kebutuhan_waktu_audit.id')                 
                  ->where('registrasi.status_cancel','=',0)
                  ->orWhere('registrasi.status','=','3')
                  ->orWhere('registrasi.status','=','3_1')
                  ->orWhere('registrasi.status','=','3_2')
                  ->orWhere('registrasi.status','=','3_3')
-                 ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','registrasi.no_registrasi_bpjph','registrasi.status_registrasi as status_registrasi','penjadwalan.*');
+                 ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as ruang_lingkup','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','registrasi.no_registrasi_bpjph','registrasi.status_registrasi as status_registrasi','kebutuhan_waktu_audit.*');
         }else{
 
             $xdata = DB::table('registrasi')
-                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')
-                ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
-                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+                ->join('kebutuhan_waktu_audit','registrasi.id_kebutuhan_waktu_audit','=','kebutuhan_waktu_audit.id')     
                 ->where('registrasi.kode_wilayah','=',$kodewilayah)
                 ->where('registrasi.status_cancel','=',0)
                 ->orWhere('registrasi.status','=','3')
                 ->orWhere('registrasi.status','=','3_1')
                 ->orWhere('registrasi.status','=','3_2')
                 ->orWhere('registrasi.status','=','3_3')
-                ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+                ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as ruang_lingkup','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','kebutuhan_waktu_audit.*');
 
 
         }
@@ -5401,24 +5401,24 @@ class PenjadwalanController extends Controller
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')
                  ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
                 
                  ->where('registrasi.status_cancel','=',0)
-                 ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+                 ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
         }else{
 
             $xdata = DB::table('registrasi')
-                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')
                 ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
                 ->where('registrasi.kode_wilayah','=',$kodewilayah)
                 ->where('registrasi.status_cancel','=',0)
-                ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+                ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
 
 
         }
@@ -5448,7 +5448,7 @@ class PenjadwalanController extends Controller
         //start
        
         $xdata = DB::table('registrasi')
-             ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
@@ -5463,7 +5463,7 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.pelaksana2_audit1','LIKE','%'.$id_user.'%');
   
             })               
-            ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+            ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
         //filter condition
@@ -5487,7 +5487,7 @@ class PenjadwalanController extends Controller
         //start
        
         $xdata = DB::table('registrasi')
-             ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
@@ -5501,7 +5501,7 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
   
             })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
         //filter condition
@@ -5517,8 +5517,8 @@ class PenjadwalanController extends Controller
         if(isset($gdata['tgl_registrasi'])){
             $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
         }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        if(isset($gdata['ruang_lingkup'])){
+            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
         }
         if(isset($gdata['status_registrasi'])){
             $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
@@ -5540,7 +5540,7 @@ class PenjadwalanController extends Controller
         //start
        
         $xdata = DB::table('registrasi')
-             ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
@@ -5559,7 +5559,7 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.pelaksana3_rapat','LIKE','%'.$id_user.'%');
   
             })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
         //filter condition
@@ -5575,8 +5575,8 @@ class PenjadwalanController extends Controller
         if(isset($gdata['tgl_registrasi'])){
             $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
         }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        if(isset($gdata['ruang_lingkup'])){
+            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
         }
         if(isset($gdata['status_registrasi'])){
             $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
@@ -5597,7 +5597,7 @@ class PenjadwalanController extends Controller
         //start
        
         $xdata = DB::table('registrasi')
-             ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
@@ -5616,7 +5616,7 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.pelaksana3_tinjauan','LIKE','%'.$id_user.'%');
   
             })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
         //filter condition
@@ -5632,8 +5632,8 @@ class PenjadwalanController extends Controller
         if(isset($gdata['tgl_registrasi'])){
             $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
         }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        if(isset($gdata['ruang_lingkup'])){
+            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
         }
         if(isset($gdata['status_registrasi'])){
             $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
@@ -5754,7 +5754,7 @@ class PenjadwalanController extends Controller
         //start
        
         $dataAudit1 = DB::table('registrasi')
-             ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
@@ -5771,12 +5771,12 @@ class PenjadwalanController extends Controller
                 //$query->where('penjadwalan.status_audit1','=', 4);
   
             })               
-            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit1 as mulai','penjadwalan.selesai_audit1 as selesai','penjadwalan.pelaksana1_audit1 as pelaksana1','penjadwalan.pelaksana2_audit1 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg');
+            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit1 as mulai','penjadwalan.selesai_audit1 as selesai','penjadwalan.pelaksana1_audit1 as pelaksana1','penjadwalan.pelaksana2_audit1 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg');
 
         
 
         $dataAudit2 = DB::table('registrasi')
-             ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
@@ -5793,7 +5793,7 @@ class PenjadwalanController extends Controller
                 //$query->where('penjadwalan.status_audit2','=', 4);
   
             })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit2 as mulai','penjadwalan.selesai_audit2 as selesai','penjadwalan.pelaksana1_audit2 as pelaksana1','penjadwalan.pelaksana2_audit2 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg' );
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit2 as mulai','penjadwalan.selesai_audit2 as selesai','penjadwalan.pelaksana1_audit2 as pelaksana1','penjadwalan.pelaksana2_audit2 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg' );
        
 
 

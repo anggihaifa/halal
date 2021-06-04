@@ -120,7 +120,7 @@
 					<h4>REGISTRASI AKTIF</h4>
 					@foreach($dataCurrent as $key => $value)
 							<div><a class="text-white" href="{{url('detail_registrasi')}}/{{$value['id']}}"><span>{{$value['no_registrasi']}}</span></a></div>
-							<div><span>{{$value['jenis_registrasi']}}</span></div>
+							<div><span>{{$value['ruang_lingkup']}}</span></div>
 							{{-- @php $id_prog = $value['progress'] @endphp --}}
 							<!--
 							<div id="stat_val" style="display: none"><span>

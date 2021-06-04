@@ -123,7 +123,7 @@
                                                 <i class="fa fa-info text-primary" ></i> 
                                                 `+full.kelompok+`<br>
                                                 <i class="fa fa-info text-primary" ></i>
-                                                `+full.jenis+`<br>
+                                                `+full.ruang_lingkup+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Aktivasi: 
                                                 `+aktif+`<br>
                                              </div>     

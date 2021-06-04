@@ -34,7 +34,7 @@ class HomeController extends Controller
                             ->where('usergroup_id',2)
                             ->get();                    
         $checkRegistrasiActive =  DB::table('registrasi')
-                                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                                  //->join('users','registrasi.id_user','=','users.id')
                                  //->join('users','registrasi.id','=','users.registrasi_id')
@@ -52,9 +52,9 @@ class HomeController extends Controller
                                     ->where('status_cancel',0)
                                     ->get();
         $currentRegistrasi = DB::table('users')
-                            ->select('users.registrasi_id','registrasi.*','jenis_registrasi.jenis_registrasi')
+                            ->select('users.registrasi_id','registrasi.*','ruang_lingkup.ruang_lingkup')
                             ->join('registrasi','registrasi.id','=','users.registrasi_id')
-                            ->join('jenis_registrasi','jenis_registrasi.id','=','registrasi.id_jenis_registrasi')
+                            ->join('ruang_lingkup','ruang_lingkup.id','=','registrasi.id_ruang_lingkup')
                             ->where('users.id',Auth::user()->id)
                             ->get();    
         $statistikregistrasi = DB::table('registrasi')                            
@@ -85,7 +85,7 @@ class HomeController extends Controller
 
         $id_user = Auth::user()->id;
         $cekAudit = DB::table('registrasi')
-             ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
@@ -99,7 +99,7 @@ class HomeController extends Controller
                 $query->where('penjadwalan.pelaksana2_audit1','LIKE','%'.$id_user.'%');
   
             })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*')
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*')
              ->get();
 
         $dataAudit = count($cekAudit);

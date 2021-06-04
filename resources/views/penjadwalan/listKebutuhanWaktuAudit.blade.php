@@ -116,15 +116,15 @@
                             <div class="form-group">
                                 <label>ID Registrasi</label>
                                 <input type="text" class="form-control"
-                                id="idregis1" name="idregis1" readonly />
+                                id="idregis1" name="idregis1" readonly/>
                             </div>
                            
                             
                         <!-- Text input-->
                             <div class="form-group">
-                                <label class="control-label" for="noreg_bpjph">Nomor Registrasi BPJPH</label>  
+                                <label class="control-label" for="no_registrasi_bpjph">Nomor Registrasi BPJPH</label>  
                                 <div class="">
-                                    <input id="noreg_bpjph" name="noreg_bpjph" type="text" placeholder="Nomor Registrasi BPJPH" class="form-control">
+                                    <input id="no_registrasi_bpjph" type="text" readonly class="form-control">
                                     
                                 </div>
                             </div>
@@ -135,18 +135,18 @@
                                 <div>
                                     <div class="form-check form-check-inline"> 
                                         <label class="form-check-label" for="jenis_registrasi-0">
-                                            <input class="form-check-input" type="radio" name="status_registrasi" id="jenis_registrasi-0" value="Permohonan Baru" checked="checked">Permohonan Baru
+                                            <input class="form-check-input" name="status_registrasi" type="radio"  id="status_registrasi-0" value="permohonan Baru" readonly>Permohonan Baru
                                         </label> 
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="jenis_registrasi-1">
-                                            <input class="form-check-input" type="radio" name="status_registrasi" id="jenis_registrasi-1" value="Pembaruan">Pembaruan
+                                            <input class="form-check-input" name="status_registrasi" type="radio" " id="status_registrasi-1" value="pembaruan" readonly>Pembaruan
                                         </label> 
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="jenis_registrasi-2">
-                                            <input class="form-check-input" type="radio" name="status_registrasi" id="jenis_registrasi-2" value="Perluasan">Perluasan
+                                            <input class="form-check-input" name="status_registrasi" type="radio"  id="status_registrasi-2" value="perluasan" readonly>Perluasan
                                         </label>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                             <div class="form-group">
                                 <label class=" control-label" for="ruang_lingkup">Ruang Lingkup Sertifikasi</label>  
                                 <div >
-                                    <input id="ruang_lingkup" name="ruang_lingkup" type="text" placeholder="" class="form-control ">
+                                    <input id="ruang_lingkup"  type="text" placeholder="" class="form-control " readonly>
                                 
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
                             <div class="form-group">
                                 <label class="ccontrol-label" for="name">Nama Pelaku Usaha</label>  
                                 <div >
-                                    <input id="name" name="name" type="text" placeholder="" class="form-control ">
+                                    <input id="name"  type="text" placeholder="" class="form-control " readonly>
                                 
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="alamat_perusahaan">Alamat Pelaku Usaha</label>  
                                 <div >
-                                    <input id="alamat_perusahaan" name="alamat_perusahaan" type="text" placeholder="" class="form-control ">
+                                    <input id="alamat_perusahaan" type="text" placeholder="" class="form-control " readonly>
                                 
                                 </div>
                             </div>
@@ -273,12 +273,12 @@
                                 
                                         <tbody>
                                             <tr>
-                                                <td>waktu dasar audit lapangan</td>
-                                                <td>hari audit untuk tambahan studi keamanan pangan</td>
-                                                <td>hari audit untuk variasi produk</td>
-                                                <td>hari audit berdasarkan jumlah bahan</td>
+                                                <td>Waktu dasar audit lapangan</td>
+                                                <td>Hari audit untuk tambahan studi keamanan pangan</td>
+                                                <td>Hari audit untuk variasi produk</td>
+                                                <td>Hari audit berdasarkan jumlah bahan</td>
                                                 <td>Full Time Equivalent</td>
-                                                <td>tambahan lokasi yang dikunjungi</td>
+                                                <td>Tambahan lokasi yang dikunjungi</td>
                                             </tr>
                                             <tr>
                                             
@@ -363,66 +363,66 @@
                                             <td>
                                             
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor1" value="persyaratan standar halal">
-                                                    <label class="form-check-label" for="faktor1">persyaratan standar halal</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor1" id="faktor1" value="persyaratan standar halal">
+                                                    <label class="form-check-label" for="faktor1">Persyaratan standar halal</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor2" value="sertifikasi sistem manajemen keamanan pangan ">
-                                                    <label class="form-check-label" for="faktor2">sertifikasi sistem manajemen keamanan pangan </label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor2" id="faktor2" value="sertifikasi sistem manajemen keamanan pangan ">
+                                                    <label class="form-check-label" for="faktor2">Sertifikasi sistem manajemen keamanan pangan </label>
                                                     </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor3" value="sertifikasi multilokasi (jumlah lokasi)">
-                                                    <label class="form-check-label" for="faktor3">sertifikasi multilokasi (jumlah lokasi)</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor3" id="faktor3" value="sertifikasi multilokasi (jumlah lokasi)">
+                                                    <label class="form-check-label" for="faktor3">Sertifikasi multilokasi (jumlah lokasi)</label>
                                                 </div>  
 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor4" value=" tipe produk, ukuran dan kompleksitas organisasi">
-                                                    <label class="form-check-label" for="faktor4">tipe produk, ukuran dan kompleksitas organisasi</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor4" id="faktor4" value=" tipe produk, ukuran dan kompleksitas organisasi">
+                                                    <label class="form-check-label" for="faktor4">Tipe produk, ukuran dan kompleksitas organisasi</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor5" value="jumlah lini produk">
-                                                    <label class="form-check-label" for="faktor5">jumlah lini produk</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor5" id="faktor5" value="jumlah lini produk">
+                                                    <label class="form-check-label" for="faktor5">Jumlah lini produk</label>
                                                     </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor6" value="Critical Control Points (CCP)">
+                                                    <input class="form-check-input" type="checkbox" name="faktor6" id="faktor6" value="Critical Control Points (CCP)">
                                                     <label class="form-check-label" for="faktor6">Critical Control Points (CCP)</label>
                                                 </div> 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor7" value="kegiatan yang dialih daya (outsource)">
-                                                    <label class="form-check-label" for="faktor7">kegiatan yang dialih daya (outsource)</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor7" id="faktor7" value="kegiatan yang dialih daya (outsource)">
+                                                    <label class="form-check-label" for="faktor7">Kegiatan yang dialih daya (outsource)</label>
                                                 </div> 
                                             </td>
                                             <td>
                                                 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor8" value="Prerequisite Program PRP">
+                                                    <input class="form-check-input" type="checkbox" name="faktor8" id="faktor8" value="Prerequisite Program PRP">
                                                     <label class="form-check-label" for="faktor8">Prerequisite Program PRP</label>
                                                     </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor9" value="area bangunan">
+                                                    <input class="form-check-input" type="checkbox" name="faktor9" id="faktor9" value="area bangunan">
                                                     <label class="form-check-label" for="faktor9">area bangunan</label>
                                                 </div>  
 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor10" value="infrastruktur">
-                                                    <label class="form-check-label" for="faktor10">infrastruktur</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor10" id="faktor10" value="infrastruktur">
+                                                    <label class="form-check-label" for="faktor10">Infrastruktur</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor11" value="laboratorium pengujian (in house)">
-                                                    <label class="form-check-label" for="faktor11">laboratorium pengujian (in house)</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor11" id="faktor11" value="laboratorium pengujian (in house)">
+                                                    <label class="form-check-label" for="faktor11">Laboratorium pengujian (in house)</label>
                                                     </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor12" value="teknologi dan regulasi">
-                                                    <label class="form-check-label" for="faktor12">teknologi dan regulasi</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor12" id="faktor12" value="teknologi dan regulasi">
+                                                    <label class="form-check-label" for="faktor12">Teknologi dan regulasi</label>
                                                 </div>  
 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor13" value="hasil audit sebelumnya">
-                                                    <label class="form-check-label" for="faktor13">hasil audit sebelumnya</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor13" id="faktor13" value="hasil audit sebelumnya">
+                                                    <label class="form-check-label" for="faktor13">Hasil audit sebelumnya</label>
                                                 </div>  
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor" id="faktor14" value="kebutuhan penterjemah">
-                                                    <label class="form-check-label" for="faktor14">kebutuhan penterjemah</label>
+                                                    <input class="form-check-input" type="checkbox" name="faktor14" id="faktor14" value="kebutuhan penterjemah">
+                                                    <label class="form-check-label" for="faktor14">Kebutuhan penterjemah</label>
                                                 </div>  
                                             </td>
                                         </tr>
@@ -494,17 +494,30 @@
             var status_registrasi = $this.data('status-registrasi');
             var name = $this.data('name');
             var alamat_perusahaan = $this.data('alamat-perusahaan');
+            var ruang_lingkup = $this.data('ruang-lingkup');
             var modal = $('#modalKebutuhan');
            
           
             if(modal.find('#idregis1').val()){
-
+                //alert(status_registrasi);
             }else{
+
+               
                 modal.find('#idregis1').val(data_id);
                 modal.find('#no_registrasi_bpjph').val(no_registrasi_bpjph);
-                modal.find('#status_registrasi').val(status_registrasi);
+                //$("input[name=mygroup][value=" + value + "]").attr('checked', 'checked');
+                if(status_registrasi == 'permohonan baru'){
+                    modal.find('#status_registrasi-0').attr('checked', 'checked');
+                }else if(status_registrasi == 'pembaruan'){
+                    modal.find('#status_registrasi-1').attr('checked', 'checked');
+                }else if(status_registrasi == 'perluasan'){
+                    modal.find('#status_registrasi-2').attr('checked', 'checked');
+                }
+               
                 modal.find('#name').val(name);
+                modal.find('#ruang_lingkup').val(ruang_lingkup);
                 modal.find('#alamat_perusahaan').val(alamat_perusahaan);
+                
                   
                 modal.find('#modalKebutuhan').attr('action', function (i,old) {
                    return old + '/' + data_id;
@@ -578,8 +591,8 @@
                     
                   
 
-                    {"data":"no_registrasi"},
-                    {"data":"nama_perusahaan"},
+                    {"data":"no_registrasi_bpjph"},
+                    {"data":"name"},
                     {"data":"kelompok"},
                     {
                         
@@ -600,8 +613,8 @@
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
                             // var kebutuhanAudit = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id_registrasi+` data-target='modalKebutuhan'>Penentuan Waktu Audit</a>`;
                 
-                           
-                            return `<button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id=`+full.id_registrasi+` data-no-registrasi-bpjph=`+full.no_registrasi_bpjph+` data-status-registrasi=`+full.status_registrasi+` data-name=`+full.name+` data-alamat-perusahaan=`+full.alamat_perusahaan+` data-target='#modalKebutuhan' >Penentuan Waktu Audit</button>`
+                            // data-no-registrasi-bpjph=`+full.no_registrasi_bpjph+` data-status-registrasi=`+full.status_registrasi+` data-name=`+full.name+` data-alamat-perusahaan=`+full.alamat_perusahaan+`
+                            return `<button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id=`+full.id_regis+` data-status-registrasi='`+full.status_registrasi+`' data-no-registrasi-bpjph=`+full.no_registrasi_bpjph+` data-name='`+full.name+`' data-alamat-perusahaan='`+full.alamat_perusahaan+`' data-ruang-lingkup='`+full.ruang_lingkup+`'  data-target='#modalKebutuhan' >Penentuan Waktu Audit</button>`
                         
                         }
                     }

@@ -23,6 +23,7 @@ use App\Models\Akad;
 use App\Models\Negara;
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
+use App\Models\KebutuhanWaktuAudit;
 use App\Models\System\User;
 use App\Models\Master\JenisRegistrasi;
 use App\Models\Master\KelompokProduk;
@@ -1193,265 +1194,265 @@ class RegistrasiController extends Controller
 
     }
 
-    public function dataFasilitas($id_registrasi){
-        $xdata = DB::table('fasilitas')
-                 ->where('id_registrasi','=',$id_registrasi)
-                 ->orderBy('id','desc');
+    // public function dataFasilitas($id_registrasi){
+    //     $xdata = DB::table('fasilitas')
+    //              ->where('id_registrasi','=',$id_registrasi)
+    //              ->orderBy('id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
-    public function dataProduk($id_registrasi){
+    // public function dataProduk($id_registrasi){
 
-        $xdata = DB::table('produk')
-                 ->join('fasilitas','produk.id_fasilitas','=','fasilitas.id')
-                 ->join('kelompok_produk','produk.jenis_produk','=','kelompok_produk.id')
-                 ->select('produk.*','fasilitas.fasilitas as fasilitas','kelompok_produk.kelompok_produk as kelompok')
-                 ->where('produk.id_registrasi','=',$id_registrasi)
-                 ->orderBy('produk.id','desc');
+    //     $xdata = DB::table('produk')
+    //              ->join('fasilitas','produk.id_fasilitas','=','fasilitas.id')
+    //              ->join('kelompok_produk','produk.jenis_produk','=','kelompok_produk.id')
+    //              ->select('produk.*','fasilitas.fasilitas as fasilitas','kelompok_produk.kelompok_produk as kelompok')
+    //              ->where('produk.id_registrasi','=',$id_registrasi)
+    //              ->orderBy('produk.id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
-    public function dataMenuRestoran($id_registrasi){
-        $xdata = DB::table('menu_restoran')
-                 ->where('id_registrasi','=',$id_registrasi)
-                 ->orderBy('id','desc');
+    // public function dataMenuRestoran($id_registrasi){
+    //     $xdata = DB::table('menu_restoran')
+    //              ->where('id_registrasi','=',$id_registrasi)
+    //              ->orderBy('id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
-    public function dataKantorPusat($id_registrasi){
-        $xdata = DB::table('kantor_pusat')
-                 ->where('id_registrasi','=',$id_registrasi)
-                 ->orderBy('id','desc');
+    // public function dataKantorPusat($id_registrasi){
+    //     $xdata = DB::table('kantor_pusat')
+    //              ->where('id_registrasi','=',$id_registrasi)
+    //              ->orderBy('id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
-    public function dataJagal($id_registrasi){
-        $xdata = DB::table('jagal')
-                 ->where('id_registrasi','=',$id_registrasi)
-                 ->orderBy('id','desc');
+    // public function dataJagal($id_registrasi){
+    //     $xdata = DB::table('jagal')
+    //              ->where('id_registrasi','=',$id_registrasi)
+    //              ->orderBy('id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
-    public function dataMaterial($id_registrasi){
-        $xdata = DB::table('material')
-                 ->where('id_registrasi','=',$id_registrasi)
-                 ->orderBy('id','desc');
+    // public function dataMaterial($id_registrasi){
+    //     $xdata = DB::table('material')
+    //              ->where('id_registrasi','=',$id_registrasi)
+    //              ->orderBy('id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
 
     //for detail
-    public function fasilitasDetail($id_registrasi,$id){
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailFasilitas = DB::table('fasilitas')
-                            ->where('id',$id)
-                            ->get();
-        $dataFasilitas = json_decode($detailFasilitas,true);
+    // public function fasilitasDetail($id_registrasi,$id){
+    //     $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+    //     $detailFasilitas = DB::table('fasilitas')
+    //                         ->where('id',$id)
+    //                         ->get();
+    //     $dataFasilitas = json_decode($detailFasilitas,true);
 
-        return view('registrasi.detailFasilitas',compact('dataRegistrasi','dataFasilitas'));
-    }
-    public function kantorPusatDetail($id_registrasi,$id){
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailKantorPusat = DB::table('kantor_pusat')
-                            ->where('id',$id)
-                            ->get();
-        $dataKantorPusat = json_decode($detailKantorPusat,true);
-        return view('registrasi.detailKantorPusat',compact('dataKantorPusat','dataRegistrasi'));
-    }
-    public function materialDetail($id_registrasi,$id){
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailMaterial = DB::table('material')
-                            ->where('id',$id)
-                            ->get();
-        $dataMaterial = json_decode($detailMaterial,true);
-        return view('registrasi.detailMaterial',compact('dataMaterial','dataRegistrasi'));
-    }
-    public function jagalDetail($id_registrasi,$id){
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailJagal = DB::table('jagal')
-                            ->select('jagal.*','fasilitas.*')
-                            ->join('fasilitas','fasilitas.id','=','jagal.id_fasilitas')
-                            ->where('jagal.id',$id)
-                            ->where('fasilitas.id_registrasi',$id_registrasi)
-                            ->get();
-        $dataJagal = json_decode($detailJagal,true);
-        return view('registrasi.detailJagal',compact('dataJagal','dataRegistrasi'));
-    }
-
-
-    //tab fasilitas
-    public function listFasilitas(){
-        $xdata = DB::table('fasilitas')
-                 ->where('id_user','=',Auth::user()->id)
-                 ->where('id_registrasi','=',Auth::user()->registrasi_id)
-                 ->orderBy('id','desc');
-
-        return Datatables::of($xdata)->make();
-    }
-    public function createFasilitas(){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        return view('registrasi.createFasilitas',compact('dataRegistrasi'));
-    }
-    public function storeFasilitas(Request $request){
-        $data = $request->except('_token','_method');
-
-        $model = new Fasilitas();
-
-        try{
-            //$this->debugs($data);
-            DB::beginTransaction();
-            $model->fill($data);
-            $model->id_user = Auth::user()->id;
-            $model->id_registrasi = Auth::user()->registrasi_id;
-            $model->save();
-            DB::commit();
-
-            Session::flash('success', "data berhasil disimpan!");
-            $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-            return $redirect;
-
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            //$this->debugs($e->getMessage());
-
-            Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('tambahfasilitas');
-            return $redirectPass;
-        }
-    }
-    public function detailFasilitas($id){
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        $detailFasilitas = DB::table('fasilitas')
-                            ->where('id',$id)
-                            ->get();
-        $dataFasilitas = json_decode($detailFasilitas,true);
-
-        return view('registrasi.detailFasilitas',compact('dataRegistrasi','dataFasilitas'));
-    }
-    public function editFasilitas($id){
-        $data = Fasilitas::find($id);
-
-        return view('registrasi.editFasilitas',compact('data'));
-    }
-     public function updateFasilitas(Request $request, $id){
-        $data = $request->except('_token','_method');
-
-        $model = new Fasilitas();
-
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $e->fill($data);
-            $e->save();
-            DB::commit();
-
-            Session::flash('success', 'data berhasil di update!');
-        }catch (\Exception $e){
-            DB::rollBack();
-
-            Session::flash('error', $e->getMessage());
-        }
-
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
+    //     return view('registrasi.detailFasilitas',compact('dataRegistrasi','dataFasilitas'));
+    // }
+    // public function kantorPusatDetail($id_registrasi,$id){
+    //     $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+    //     $detailKantorPusat = DB::table('kantor_pusat')
+    //                         ->where('id',$id)
+    //                         ->get();
+    //     $dataKantorPusat = json_decode($detailKantorPusat,true);
+    //     return view('registrasi.detailKantorPusat',compact('dataKantorPusat','dataRegistrasi'));
+    // }
+    // public function materialDetail($id_registrasi,$id){
+    //     $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+    //     $detailMaterial = DB::table('material')
+    //                         ->where('id',$id)
+    //                         ->get();
+    //     $dataMaterial = json_decode($detailMaterial,true);
+    //     return view('registrasi.detailMaterial',compact('dataMaterial','dataRegistrasi'));
+    // }
+    // public function jagalDetail($id_registrasi,$id){
+    //     $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+    //     $detailJagal = DB::table('jagal')
+    //                         ->select('jagal.*','fasilitas.*')
+    //                         ->join('fasilitas','fasilitas.id','=','jagal.id_fasilitas')
+    //                         ->where('jagal.id',$id)
+    //                         ->where('fasilitas.id_registrasi',$id_registrasi)
+    //                         ->get();
+    //     $dataJagal = json_decode($detailJagal,true);
+    //     return view('registrasi.detailJagal',compact('dataJagal','dataRegistrasi'));
+    // }
 
 
-    //tab produk
-    public function listProduk(){
-        $xdata = DB::table('produk')
-                 ->join('fasilitas','produk.id_fasilitas','=','fasilitas.id')
-                 ->join('kelompok_produk','produk.jenis_produk','=','kelompok_produk.id')
-                 ->select('produk.*','fasilitas.fasilitas as fasilitas','kelompok_produk.kelompok_produk as kelompok')
-                 ->where('produk.id_user','=',Auth::user()->id)
-                 ->where('produk.id_registrasi','=',Auth::user()->registrasi_id)
-                 ->orderBy('produk.id','desc');
+    // //tab fasilitas
+    // public function listFasilitas(){
+    //     $xdata = DB::table('fasilitas')
+    //              ->where('id_user','=',Auth::user()->id)
+    //              ->where('id_registrasi','=',Auth::user()->registrasi_id)
+    //              ->orderBy('id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
-    public function createProduk(){
-        $kelompokProduk = KelompokProduk::all();
-        $id_registrasi  = Auth::user()->registrasi_id;
-        $detailFasilitas = DB::table('fasilitas')
-                            ->where('id_registrasi',$id_registrasi)
-                            ->get();
-        $fasilitas = json_decode($detailFasilitas,true);
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
-        return view('registrasi.createProduk',compact('fasilitas','kelompokProduk','dataRegistrasi'));
-    }
-    public function storeProduk(Request $request){
-        $data = $request->except('_token','_method');
+    //     return Datatables::of($xdata)->make();
+    // }
+    // public function createFasilitas(){
+    //     $id_registrasi  = Auth::user()->registrasi_id;
+    //     $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+    //     return view('registrasi.createFasilitas',compact('dataRegistrasi'));
+    // }
+    // public function storeFasilitas(Request $request){
+    //     $data = $request->except('_token','_method');
 
-        $model = new Produk();
+    //     $model = new Fasilitas();
 
-        try{
-            //$this->debugs($data);
-            DB::beginTransaction();
-            $model->fill($data);
-            $model->id_user = Auth::user()->id;
-            $model->id_registrasi = Auth::user()->registrasi_id;
-            $model->save();
-            DB::commit();
+    //     try{
+    //         //$this->debugs($data);
+    //         DB::beginTransaction();
+    //         $model->fill($data);
+    //         $model->id_user = Auth::user()->id;
+    //         $model->id_registrasi = Auth::user()->registrasi_id;
+    //         $model->save();
+    //         DB::commit();
 
-            Session::flash('success', "data berhasil disimpan!");
-            $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
-            return $redirect;
+    //         Session::flash('success', "data berhasil disimpan!");
+    //         $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
+    //         return $redirect;
 
-        }catch (\Exception $e){
-            DB::rollBack();
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
 
-            //$this->debugs($e->getMessage());
+    //         //$this->debugs($e->getMessage());
 
-            Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('tambahproduk');
-            return $redirectPass;
-        }
-    }
-    public function editProduk($id){
-        $data = Produk::find($id);
-        $fasilitas = Fasilitas::all();
-        $kelompokProduk = KelompokProduk::all();
+    //         Session::flash('error', $e->getMessage());
+    //         $redirectPass = redirect()->route('tambahfasilitas');
+    //         return $redirectPass;
+    //     }
+    // }
+    // public function detailFasilitas($id){
+    //     $id_registrasi  = Auth::user()->registrasi_id;
+    //     $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+    //     $detailFasilitas = DB::table('fasilitas')
+    //                         ->where('id',$id)
+    //                         ->get();
+    //     $dataFasilitas = json_decode($detailFasilitas,true);
 
-        return view('registrasi.editProduk',compact('data','fasilitas','kelompokProduk'));
-    }
-    public function updateProduk(Request $request, $id)
-    {
-        $data = $request->except('_token','_method');
+    //     return view('registrasi.detailFasilitas',compact('dataRegistrasi','dataFasilitas'));
+    // }
+    // public function editFasilitas($id){
+    //     $data = Fasilitas::find($id);
 
-        $model = new Produk();
+    //     return view('registrasi.editFasilitas',compact('data'));
+    // }
+    //  public function updateFasilitas(Request $request, $id){
+    //     $data = $request->except('_token','_method');
 
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
+    //     $model = new Fasilitas();
 
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $e->fill($data);
-            $e->save();
-            DB::commit();
+    //     // echo "<pre>";
+    //     // print_r($data);
+    //     // echo "</pre>";
 
-            Session::flash('success', 'data berhasil di update!');
-        }catch (\Exception $e){
-            DB::rollBack();
+    //     try{
+    //         DB::beginTransaction();
+    //         $e = $model->find($id);
+    //         $e->fill($data);
+    //         $e->save();
+    //         DB::commit();
 
-            Session::flash('error', $e->getMessage());
-        }
+    //         Session::flash('success', 'data berhasil di update!');
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
 
-        return redirect()->route('registrasi.unggahDataSertifikasi');
-    }
+    //         Session::flash('error', $e->getMessage());
+    //     }
+
+    //     return redirect()->route('registrasi.unggahDataSertifikasi');
+    // }
+
+
+    // //tab produk
+    // public function listProduk(){
+    //     $xdata = DB::table('produk')
+    //              ->join('fasilitas','produk.id_fasilitas','=','fasilitas.id')
+    //              ->join('kelompok_produk','produk.jenis_produk','=','kelompok_produk.id')
+    //              ->select('produk.*','fasilitas.fasilitas as fasilitas','kelompok_produk.kelompok_produk as kelompok')
+    //              ->where('produk.id_user','=',Auth::user()->id)
+    //              ->where('produk.id_registrasi','=',Auth::user()->registrasi_id)
+    //              ->orderBy('produk.id','desc');
+
+    //     return Datatables::of($xdata)->make();
+    // }
+    // public function createProduk(){
+    //     $kelompokProduk = KelompokProduk::all();
+    //     $id_registrasi  = Auth::user()->registrasi_id;
+    //     $detailFasilitas = DB::table('fasilitas')
+    //                         ->where('id_registrasi',$id_registrasi)
+    //                         ->get();
+    //     $fasilitas = json_decode($detailFasilitas,true);
+    //     $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+    //     return view('registrasi.createProduk',compact('fasilitas','kelompokProduk','dataRegistrasi'));
+    // }
+    // public function storeProduk(Request $request){
+    //     $data = $request->except('_token','_method');
+
+    //     $model = new Produk();
+
+    //     try{
+    //         //$this->debugs($data);
+    //         DB::beginTransaction();
+    //         $model->fill($data);
+    //         $model->id_user = Auth::user()->id;
+    //         $model->id_registrasi = Auth::user()->registrasi_id;
+    //         $model->save();
+    //         DB::commit();
+
+    //         Session::flash('success', "data berhasil disimpan!");
+    //         $redirect = redirect()->route('registrasi.unggahDataSertifikasi');
+    //         return $redirect;
+
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
+
+    //         //$this->debugs($e->getMessage());
+
+    //         Session::flash('error', $e->getMessage());
+    //         $redirectPass = redirect()->route('tambahproduk');
+    //         return $redirectPass;
+    //     }
+    // }
+    // public function editProduk($id){
+    //     $data = Produk::find($id);
+    //     $fasilitas = Fasilitas::all();
+    //     $kelompokProduk = KelompokProduk::all();
+
+    //     return view('registrasi.editProduk',compact('data','fasilitas','kelompokProduk'));
+    // }
+    // public function updateProduk(Request $request, $id)
+    // {
+    //     $data = $request->except('_token','_method');
+
+    //     $model = new Produk();
+
+    //     // echo "<pre>";
+    //     // print_r($data);
+    //     // echo "</pre>";
+
+    //     try{
+    //         DB::beginTransaction();
+    //         $e = $model->find($id);
+    //         $e->fill($data);
+    //         $e->save();
+    //         DB::commit();
+
+    //         Session::flash('success', 'data berhasil di update!');
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
+
+    //         Session::flash('error', $e->getMessage());
+    //     }
+
+    //     return redirect()->route('registrasi.unggahDataSertifikasi');
+    // }
 
 
     //tab dokumen has
@@ -1779,6 +1780,7 @@ class RegistrasiController extends Controller
         $model2 = new Registrasi();
         $model3 = new User();
         $model4 = new Penjadwalan();
+        $model5 = new KebutuhanWaktuAudit();
 
 
        
@@ -1787,6 +1789,8 @@ class RegistrasiController extends Controller
             $e = $model->find($id);            
             $f = $model2->find($e->id_registrasi);
             $u = $model3->find($e->id_user);
+            $k = $model5->find($e->id_kebutuhan_waktu_audit);
+
 
             $id_user = $u->id;
             //dd($id_user);
@@ -1835,6 +1839,19 @@ class RegistrasiController extends Controller
                     $f->updated_at =  $currentDateTime;
                     
                     $f->status = '2_3';
+
+                   
+                    if($k){
+                       
+                    }else{
+                        //dd($k);
+                        $model5->id_reg = $f->id;     
+                        $model5->save();
+                        $f->id_kebutuhan_waktu_audit=$model5->id;
+                       
+                        //dd($e->id_kebutuhan_waktu_audit);
+                    }
+                    
                     $f->save();
                     $e->save();
                     //SendEmailP::dispatch($u,$f,$p,$f->status);
