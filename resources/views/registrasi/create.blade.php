@@ -63,16 +63,16 @@
                                         <div class="col-lg-8">
                                             <div style="margin-bottom:7px;">
                                                 <div class="radio radio-css radio-inline">
-                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi1" value="baru" checked />
-                                                    <label for="statusRegistrasi1">Baru</label>
+                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi1" value="permohonan baru" checked />
+                                                    <label for="statusRegistrasi1">Permohonan Baru</label>
                                                 </div>
                                                 <div class="radio radio-css radio-inline">
-                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi2"  value="perpanjangan" />
-                                                    <label for="statusRegistrasi2">Perpanjangan</label>
+                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi2"  value="pembaruan" />
+                                                    <label for="statusRegistrasi2">Pembaruan</label>
                                                 </div>
                                                 <div class="radio radio-css radio-inline">
-                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi3"  value="pengembangan" />
-                                                    <label for="statusRegistrasi3">Perubahan</label>                                                
+                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi3"  value="perluasan" />
+                                                    <label for="statusRegistrasi3">Perluasan</label>                                                
                                                 </div>
                                             </div>
                                         </div>

@@ -204,7 +204,7 @@ function checkProgress(data){
             :(data.trim()=='5_3')? 'Penerbitan OC Gagal'
             :(data.trim()=='5_4')? 'Penerbitan OC Terkonfirmasi'
              //pembayaran tahap 1
-             :(data==5)? 'Pembayaran'
+             :(data==6)? 'Pembayaran'
 
              :(data.trim()=='6_0')? 'Belum Upload Bukti Bayar'
              :(data.trim()=='6_1')? 'Menunggu Sales Officer Mengkonfirmasi Pembayaran'

@@ -16,6 +16,7 @@ use App\RegistrasiKU;
 use App\RegistrasiJasa;
 use App\RegistrasiJumlahProduksi;
 use App\DetailKU;
+use App\LogKegiatan;
 use App\Models\Registrasi;
 use App\Models\Pembayaran;
 use App\Models\Penjadwalan;
@@ -123,34 +124,35 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
-        if($kodewilayah == '119'){
+        if($kodewilayah == '119'){            
             $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')
                  /*->leftJoin('pembayaran','registrasi.id','=', 'pembayaran.id_registrasi')*/
                  ->leftJoin('akad','registrasi.id', '=', 'akad.id_registrasi')
                  ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
                  ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
-                 ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
+                //  ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
                 
                 
                  ->where('registrasi.status_cancel','=',0)
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'penjadwalan.status_audit1 as status_audit1', 'penjadwalan.status_audit2 as status_audit2', 'penjadwalan.status_rapat as status_rapat', 'penjadwalan.status_tinjauan as status_tinjauan', 'akad.berkas_akad as berkas_akad', 'akad.total_biaya_sertifikasi as total_biaya_sertifikasi', 'registrasi_alamatkantor.alamat as alamat_kantor');
-        }else{
-
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'penjadwalan.status_audit1 as status_audit1', 'penjadwalan.status_audit2 as status_audit2', 'penjadwalan.status_rapat as status_rapat', 'penjadwalan.status_tinjauan as status_tinjauan', 'akad.berkas_akad as berkas_akad', 'akad.total_biaya_sertifikasi as total_biaya_sertifikasi');
+                //  ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'penjadwalan.status_audit1 as status_audit1', 'penjadwalan.status_audit2 as status_audit2', 'penjadwalan.status_rapat as status_rapat', 'penjadwalan.status_tinjauan as status_tinjauan', 'akad.berkas_akad as berkas_akad', 'akad.total_biaya_sertifikasi as total_biaya_sertifikasi', 'registrasi_alamatkantor.alamat as alamat_kantor');
+        }else{            
             $xdata = DB::table('registrasi')
-                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')
-                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')      
+                // ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')      
                 ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
                  ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
                  ->leftJoin('akad','registrasi.id', '=', 'akad.id_registrasi')
 
                 ->where('registrasi.kode_wilayah','=',$kodewilayah)
                 ->where('registrasi.status_cancel','=',0)
-                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3', 'penjadwalan.status_audit1 as status_audit1', 'penjadwalan.status_audit2 as status_audit2', 'penjadwalan.status_rapat as status_rapat', 'penjadwalan.status_tinjauan as status_tinjauan', 'akad.berkas_akad as berkas_akad', 'akad.total_biaya_sertifikasi as total_biaya_sertifikasi', 'registrasi_alamatkantor.alamat as alamat_kantor');
+                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3', 'penjadwalan.status_audit1 as status_audit1', 'penjadwalan.status_audit2 as status_audit2', 'penjadwalan.status_rapat as status_rapat', 'penjadwalan.status_tinjauan as status_tinjauan', 'akad.berkas_akad as berkas_akad', 'akad.total_biaya_sertifikasi as total_biaya_sertifikasi');
+                // ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3', 'penjadwalan.status_audit1 as status_audit1', 'penjadwalan.status_audit2 as status_audit2', 'penjadwalan.status_rapat as status_rapat', 'penjadwalan.status_tinjauan as status_tinjauan', 'akad.berkas_akad as berkas_akad', 'akad.total_biaya_sertifikasi as total_biaya_sertifikasi', 'registrasi_alamatkantor.alamat as alamat_kantor');
 
 
         }
@@ -173,11 +175,11 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         //start
         $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')                                  
                  //
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan');
 
         
         $xdata = $xdata
@@ -361,12 +363,12 @@ class RegistrasiController extends Controller
         $xdata = DB::table('registrasi')
 
                 // ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
-                 ->leftJoin('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->leftJoin('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->leftJoin('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->leftJoin('users','registrasi.id','=','users.registrasi_id')
                
-                //  ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok', 'users.registrasi_id as registrasi_id','registrasi_alamatkantor.alamat as alamat_kantor')
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis', 'kelompok_produk.kelompok_produk as kelompok','users.registrasi_id as registrasi_id')
+                //  ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok', 'users.registrasi_id as registrasi_id','registrasi_alamatkantor.alamat as alamat_kantor')
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis', 'kelompok_produk.kelompok_produk as kelompok','users.registrasi_id as registrasi_id')
                  ->where('id_user','=',Auth::user()->id)
                  ->where('registrasi.status_cancel','=',0)
                  ->orderBy('registrasi_id','desc')
@@ -380,10 +382,10 @@ class RegistrasiController extends Controller
     }
      public function detailRegistrasi($id){
             $data = DB::table('registrasi')
-                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                 ->join('users','registrasi.id_user','=','users.id')
                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                ->select('registrasi.*','registrasi.status as statusnya','jenis_registrasi.jenis_registrasi as jenis','users.*','kelompok_produk.kelompok_produk as kelompok')
+                ->select('registrasi.*','registrasi.status as statusnya','ruang_lingkup.ruang_lingkup as jenis','users.*','kelompok_produk.kelompok_produk as kelompok')
                 ->where('registrasi.id','=',$id)
                 ->get();
             $data = json_decode($data,true);  
@@ -391,7 +393,7 @@ class RegistrasiController extends Controller
             return view('registrasi.detail',compact('data'));
 
             foreach ($data as $key => $value) {
-                $id_reg = $value['id_jenis_registrasi'];
+                $id_reg = $value['id_ruang_lingkup'];
             }
 
             // $dataKantor = DB::table('registrasi_alamatkantor')
@@ -586,7 +588,7 @@ class RegistrasiController extends Controller
         $data = $request->except('_token','_method');        
         // dd($data);
 
-        $model = new Registrasi();
+        $model = new Registrasi();        
 
         try{
             $length = 8;
@@ -598,7 +600,7 @@ class RegistrasiController extends Controller
             $randomid =$token;            
             $updater = Auth::user()->name;
 
-            DB::beginTransaction();
+            DB::beginTransaction();             
                 $model->id_user = Auth::user()->id;
                 $model->no_registrasi = $randomid;
                 $model->tgl_registrasi = $data['tgl_registrasi'];                
@@ -608,10 +610,12 @@ class RegistrasiController extends Controller
                 $model->alamat_pabrik = $data['alamat_pabrik'];
                 $model->telepon_pabrik = $data['telepon_pabrik'];
                 $model->contact_person = $data['contact_person'];
-                $model->email = $data['email'];
+                $model->email = $data['email'];                
                 $model->status_registrasi = $data['status_registrasi'];
-                $model->id_jenis_registrasi = $data['id_jenis_registrasi'];
-                $model->updated_status_by = $updater;               
+                $model->id_ruang_lingkup = $data['id_ruang_lingkup'];
+                $model->updated_status_by = $updater;
+
+                $model->status = 2;
 
                 if($request->has("ktp")){
                     $file = $request->file("ktp");
@@ -631,7 +635,7 @@ class RegistrasiController extends Controller
                                                 
                 $model->nama_merk_produk = implode(',',$data['merk']);
 
-                $model->jenis_produk = $data['jenis_produk'];
+                $model->jenis_produk = $data['id_kelompok_produk'];
                 $model->rincian_jenis_produk = implode(',',$data['id_rincian_kelompok_produk']);
                 $model->daerah_pemasaran = $data['daerah_pemasaran'];
                 $model->sistem_pemasaran = $data['sistem_pemasaran'];
@@ -639,7 +643,28 @@ class RegistrasiController extends Controller
                 $no_registrasi_bpjph = $data['no_registrasi_bpjph'];
                 $kd_wilayah = explode('-',$no_registrasi_bpjph);
                 $model->kode_wilayah = $kd_wilayah[0];
-                $model->save();
+                $model->save();                                
+            DB::commit();
+
+            $model2 = new LogKegiatan();
+            DB::beginTransaction();
+                $id_registrasi = DB::table('registrasi')            
+                ->select('id')
+                ->orderBy('id','desc')
+                ->limit(1)
+                ->get();
+
+                foreach($id_registrasi as $id){
+                    foreach($id as $id_asli){
+                        $idregis = $id_asli;                        
+                    }                
+                }
+
+                $model2->id_registrasi = $idregis;
+                $model2->id_user = Auth::user()->id;                
+                $model2->id_kegiatan = 1;
+                $model2->judul_kegiatan = "Memasukan Data Registrasi Baru";
+                $model2->save();
             DB::commit();
                 
 
@@ -667,7 +692,7 @@ class RegistrasiController extends Controller
         //     $nosurat = $data['no_surat'];
         //     $expd = explode('-',$nosurat);            
 
-        //     $no_order = date('YmdHis').".".Auth::user()->id . "." .$data['id_jenis_registrasi'];
+        //     $no_order = date('YmdHis').".".Auth::user()->id . "." .$data['id_ruang_lingkup'];
         //     // dd($no_order);
         //     // dd($data);
         //     // //Create PDF
@@ -694,7 +719,7 @@ class RegistrasiController extends Controller
         //     $model->no_surat = $data['no_surat'];
         //     $model->no_registrasi = $randomid;
         //     $model->tgl_registrasi = $data['tgl_registrasi'];
-        //     $model->id_jenis_registrasi = $data['id_jenis_registrasi'];
+        //     $model->id_ruang_lingkup = $data['id_ruang_lingkup'];
         //     $model->status_registrasi = $data['status_registrasi'];
         //     $model->status_halal = $data['status_halal'];
         //     $model->sh_berlaku = $data['sh_berlaku'];
@@ -718,7 +743,7 @@ class RegistrasiController extends Controller
 
         //     $model->progress = 1;
 
-        //     if($data['id_jenis_registrasi'] == 3){
+        //     if($data['id_ruang_lingkup'] == 3){
         //         $model->jenis_usaha = $data['jenis_usaha'];
         //         $model->nama_jenis_usaha = $data['nama_jenis_usaha'];
         //         $model->nkv = $data['nkv'];
@@ -813,7 +838,7 @@ class RegistrasiController extends Controller
         //     $model_regispemilik->save();
         //     DB::commit();            
 
-        //     if($data['id_jenis_registrasi'] == 1 || $data['id_jenis_registrasi'] == 5){
+        //     if($data['id_ruang_lingkup'] == 1 || $data['id_ruang_lingkup'] == 5){
         //         $model_regisdataproduk = new RegistrasiDataProduk();
         //         DB::beginTransaction();
 
@@ -848,7 +873,7 @@ class RegistrasiController extends Controller
         //                 DetailDataProduk::create($data2);
         //             }
         //         }
-        //     }else if($data['id_jenis_registrasi'] == 2){
+        //     }else if($data['id_ruang_lingkup'] == 2){
         //         $model_regiskelompokusaha = new RegistrasiKU();
         //         DB::beginTransaction();
 
@@ -886,7 +911,7 @@ class RegistrasiController extends Controller
         //                 DetailKU::create($data2);
         //             }
         //         }
-        //     }else if($data['id_jenis_registrasi'] == 4){
+        //     }else if($data['id_ruang_lingkup'] == 4){
         //         $model_regisjasa = new RegistrasiJasa();
         //         DB::beginTransaction();
 
@@ -897,7 +922,7 @@ class RegistrasiController extends Controller
 
         //         $model_regisjasa->save();
         //         DB::commit();
-        //     }else if($data['id_jenis_registrasi'] == 3){
+        //     }else if($data['id_ruang_lingkup'] == 3){
         //         // dd($data);
         //         if(count($data['jenis_sdm']) > 0){
         //             foreach($data['jenis_sdm'] as $item => $value){
@@ -1079,9 +1104,9 @@ class RegistrasiController extends Controller
         $id_user = Auth::user()->id;
 
         $data   = new Registrasi;
-        $data   = $data->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+        $data   = $data->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok')
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok')
                  ->where('registrasi.id','=',$id_registrasi)
                  ->orderBy('registrasi.id','desc')->get();
 
@@ -1106,7 +1131,7 @@ class RegistrasiController extends Controller
     }
     public function getDataRegistrasi($id){
         $detailRegistrasi =  DB::table('registrasi')
-                            ->select('registrasi.id','registrasi.no_registrasi','registrasi.id_jenis_registrasi','users.perusahaan','users.name')
+                            ->select('registrasi.id','registrasi.no_registrasi','registrasi.id_ruang_lingkup','users.perusahaan','users.name')
                             ->join('users','users.id','=','registrasi.id_user')
                             ->where('registrasi.id',$id)
                             ->get();
@@ -1456,14 +1481,14 @@ class RegistrasiController extends Controller
 
     //tab dokumen has
 
-    public function storeDokumenHas(Request $request){
+    // public function storeDokumenHas(Request $request){
 
-    // public function storeDokumenSertifikasi(Request $request){
+    public function storeDokumenSertifikasi(Request $request){
 
         $data_real = $request->except('_token','_method');
         $data = $request->except('_token','_method','has_selected');
 
-        //dd($data);
+        // dd("disini");
 
         $model = new DokumenHas;
         $model2 = new Registrasi;
@@ -1478,11 +1503,10 @@ class RegistrasiController extends Controller
 
         foreach ($getRegistrasi as $key => $value) {
             $no_registrasi = $value->no_registrasi;
-        }
+        }        
 
 
-        if($data["status"] == "0"){
-           
+        if($data["status"] == "0"){                
                 try{
                     DB::beginTransaction();
 
@@ -1520,6 +1544,15 @@ class RegistrasiController extends Controller
 
                     DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_has' => $id_has]);
 
+                    // $model3 = new LogKegiatan();
+                    // DB::beginTransaction();                    
+                    //     $model3->id_registrasi = $e->id_registrasi;
+                    //     $model3->id_user = Auth::user()->id;                
+                    //     $model3->id_kegiatan = 2;
+                    //     $model3->judul_kegiatan = "Mengunggah Dokumen Sertifikasi";
+                    //     $model3->save();
+                    // DB::commit();
+
                     Session::flash('success', "data berhasil disimpan!");
                     $redirect = redirect()->route('registrasi.unggahDokumenSertifikasi');
                     return $redirect;
@@ -1534,8 +1567,8 @@ class RegistrasiController extends Controller
                     return $redirectPass;
                 }
 
-        }elseif($data["status"] == "1"){
-
+        }elseif($data["status"] == "1"){            
+            dd("disini");
             // echo "<pre>";
             // print_r($data);
             // echo "</pre>";
@@ -1559,6 +1592,15 @@ class RegistrasiController extends Controller
                                     $e->tgl_penyerahan_1 = $currentDateTime;
                                 }
                                 
+                                // $model3 = new LogKegiatan();
+                                // DB::beginTransaction();                                                    
+                                //     $model3->id_registrasi = $e->id_registrasi;
+                                //     // dd($e->id_registrasi);
+                                //     $model3->id_user = Auth::user()->id;                
+                                //     $model3->id_kegiatan = 2;
+                                //     $model3->judul_kegiatan = "Merubah Dokumen Manual SJPH";
+                                //     $model3->save();
+                                // DB::commit();                                                                
                             }else if($key == 'has_2'){
                                 if($e->keterangan_has_2 != null){
                                     $e->tgl_penyerahan_2 = $currentDateTime;
@@ -1806,6 +1848,15 @@ class RegistrasiController extends Controller
                 DB::commit();
                 Session::flash('success', "Status berhasil diupdate");
 
+                // $model2 = new LogKegiatan();
+                // DB::beginTransaction();                    
+                //     $model2->id_registrasi = $e->id_registrasi;
+                //     $model2->id_user = Auth::user()->id;                
+                //     $model2->id_kegiatan = 2;
+                //     $model2->judul_kegiatan = "Memasukan Data Registrasi Baru";
+                //     $model2->save();
+                // DB::commit();
+
 
             }else{
 
@@ -1876,9 +1927,9 @@ class RegistrasiController extends Controller
         $id_user = Auth::user()->id;
 
         $data   = new Registrasi;
-        $data   = $data->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+        $data   = $data->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.id_kelompok_produk','=','kelompok_produk.id')
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok')
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok')
                  ->where('registrasi.id','=',$id_registrasi)
                  ->orderBy('registrasi.id','desc')->get();
 
@@ -2840,11 +2891,11 @@ class RegistrasiController extends Controller
 
         if($kodewilayah == '119'){
              $xdata = DB::table('registrasi')
-                     ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
                      
-                     ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                     ->where(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                        
@@ -2863,11 +2914,11 @@ class RegistrasiController extends Controller
         }else{
 
             $xdata = DB::table('registrasi')
-                     ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
                      
-                     ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                     ->where(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                         $query->where('registrasi.kode_wilayah','=',$kodewilayah);
@@ -2920,11 +2971,11 @@ class RegistrasiController extends Controller
 
         if($kodewilayah == '119'){
              $xdata = DB::table('registrasi')
-                     ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
                      
-                     ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                     ->where(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                        
@@ -2958,11 +3009,11 @@ class RegistrasiController extends Controller
         }else{
 
             $xdata = DB::table('registrasi')
-                     ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
                      
-                     ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                     ->where(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                         $query->where('registrasi.kode_wilayah','=',$kodewilayah);
@@ -3419,12 +3470,12 @@ class RegistrasiController extends Controller
         //start
         if($kodewilayah == '119'){
              $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
                  ->where(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                     
@@ -3459,12 +3510,12 @@ class RegistrasiController extends Controller
 
         }else{
             $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
                  ->where(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
@@ -3534,10 +3585,10 @@ class RegistrasiController extends Controller
         //start                                
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
-                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')                
-                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                 ->where(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                    
@@ -3550,10 +3601,10 @@ class RegistrasiController extends Controller
                 });
         }else{
              $xdata = DB::table('registrasi')
-                ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')                
-                ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                 ->where(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
@@ -3584,8 +3635,8 @@ class RegistrasiController extends Controller
         if(isset($gdata['tgl_registrasi'])){
             $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
         }
-        if(isset($gdata['jenis_registrasi'])){
-            $xdata = $xdata->where('jenis_registrasi','=',$gdata['jenis_registrasi']);
+        if(isset($gdata['ruang_lingkup'])){
+            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
         }
         if(isset($gdata['status_registrasi'])){
             $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
@@ -3846,12 +3897,12 @@ class RegistrasiController extends Controller
         //start
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
                 ->where(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                     
@@ -3884,12 +3935,12 @@ class RegistrasiController extends Controller
                 }) ;
         }else{
             $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
                 ->where(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
@@ -4197,12 +4248,12 @@ class RegistrasiController extends Controller
         //start
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
                  ->where(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                    
@@ -4235,12 +4286,12 @@ class RegistrasiController extends Controller
                 });
         }else{
             $xdata = DB::table('registrasi')
-                 ->join('jenis_registrasi','registrasi.id_jenis_registrasi','=','jenis_registrasi.id')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
                  ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','jenis_registrasi.jenis_registrasi as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
                  ->where(function($query) use ($kodewilayah){
                     $query->where('registrasi.status_cancel','=',0);
                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);

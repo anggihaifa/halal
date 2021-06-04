@@ -37,9 +37,9 @@
 		
 		@includeWhen($topMenu, 'includes.top-menu')
 		
-		@includeWhen(!$sidebarHide, 'includes.sidebar')
-		
-		{{--@includeWhen($sidebarTwo, 'includes.sidebar-right')--}}
+		@includeWhen(!$sidebarHide, 'includes.sidebar')				
+
+		{{-- @includeWhen(!$sidebarTwo, 'includes.sidebar-right') --}}
 		
 		<div id="content" class="content {{ $contentClass }}">
 			@yield('content')
@@ -47,7 +47,7 @@
 		
 		@includeWhen($footer, 'includes.footer')
 		
-		{{--@include('includes.component.theme-panel')--}}
+		{{-- @include('includes.component.theme-panel') --}}
 		
 		@include('includes.component.scroll-top-btn')
 		
