@@ -5252,47 +5252,36 @@ class PenjadwalanController extends Controller
     {
 
         $data = $request->except('_token','_method');
-        //dd($data);
+        $data_K = $request->except('_token','_method','idregis1','status_registrasi');
+        dd($data);
+        
 
 
         DB::beginTransaction();
         $model = new Registrasi;
         $model2 = new Penjadwalan;
         $model3 = new User;
+        $model4 = new KebutuhanWaktuAudit;
 
         $e = $model->find($data['idregis1']);
-        $j = $model2->find($e->id_penjadwalan);
+        $k = $model4->find($e->id_kebutuhan_waktu_audit);
         //dd($j);
 
-        $j->mulai_audit1 = $data['mulai_audit1'];
-        $j->status_audit1 = 1;
-        $j->selesai_audit1 = $data['selesai_audit1'];
-
-        $j->pelaksana1_audit1 = $data['pelaksana1_audit1'];
-        $j->pelaksana2_audit1 = $data['pelaksana2_audit1'];
-
-        $j->save();
+        $k->fill($data_K);
+        //dd($k);
+        $k->hasil_review = "";
+        $k->catatan_review_kebutuhan_audit = "";
+        $k->updated_by =  Auth::user()->id;
+        $k->status_kebutuhan_audit= '1';
+        $k->save();
 
         
 
         try{
             DB::Commit();
 
-            if($data['pelaksana1_audit1']){
-                $str =  explode("_",$data['pelaksana1_audit1']);
-                $u = $model3->find($str[0]);
-               
-                SendEmailAuditor::dispatch($u,$e,$j,'audit1');
-
-            }if($data['pelaksana2_audit1']){
-
-                $str2 =  explode("_",$data['pelaksana2_audit1']);
-                $u2 = $model3->find($str2[0]);
-                
-                SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
-            }
             Session::flash('success', "data berhasil disimpan!");            
-            $redirect = redirect()->route('listpenjadwalanadmin');
+            $redirect = redirect()->route('listkebutuhanwaktuaudit');
 
 
          return $redirect;
@@ -5303,10 +5292,114 @@ class PenjadwalanController extends Controller
             //$this->debugs($e->getMessage());
 
             Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('listpenjadwalanadmin');
+            $redirectPass = redirect()->route('listkebutuhanwaktuaudit');
             return $redirectPass;
         }
   
+    }
+
+    public function storeReviewKebutuhanWaktuAudit(Request $request)
+    {
+
+        $data = $request->except('_token','_method');
+        //$data_K = $request->except('_token','_method','idregis1','status_registrasi');
+        //dd($data);
+        
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model3 = new User;
+        $model4 = new KebutuhanWaktuAudit;
+
+        $e = $model->find($data['idregis1']);
+        $k = $model4->find($e->id_kebutuhan_waktu_audit);
+        //dd($j);
+
+        //$k->fill($data_K);
+        //dd($k);
+        if($data['hasil_review']== 'perbaikan'){
+            $k->status_kebutuhan_audit= '2';
+            $e->status = '3_2';
+        }else{
+            
+            $k->status_kebutuhan_audit= '3';
+            $e->status = '4';
+        }
+
+        $k->hasil_review = $data['hasil_review'];
+        $k->catatan_review_kebutuhan_audit = $data['catatan_review_kebutuhan_audit'];
+
+        $k->updated_by =  Auth::user()->id;;
+        $k->save();
+        $e->save();
+
+        
+
+        try{
+            DB::Commit();
+
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('reviewkebutuhanwaktuaudit');
+
+
+         return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('reviewkebutuhanwaktuaudit');
+            return $redirectPass;
+        }
+  
+    }
+    public function perbaikanKebutuhanWaktuAudit(Request $request){
+        $data = $request->except('_token','_method');
+        //$data_K = $request->except('_token','_method','idregis1','status_registrasi');
+        dd($request);
+        
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model3 = new User;
+        $model4 = new KebutuhanWaktuAudit;
+
+        $e = $model->find($data['idregis1']);
+        $k = $model4->find($e->id_kebutuhan_waktu_audit);
+        //dd($j);
+
+        //$k->fill($data_K);
+        //dd($k);
+        $k->updated_by =  Auth::user()->id;;
+        $k->status_kebutuhan_audit= '2';
+        $k->save();
+
+        
+
+        try{
+            DB::Commit();
+
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('reviewkebutuhanwaktuaudit');
+
+
+         return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('reviewkebutuhanwaktuaudit');
+            return $redirectPass;
+        }
     }
 
     public function listPenjadwalanAdmin(){
@@ -5320,6 +5413,10 @@ class PenjadwalanController extends Controller
     public function listKebutuhanWaktuAudit(){
 
         return view('penjadwalan.listKebutuhanWaktuAudit');
+    }
+    public function reviewKebutuhanWaktuAudit(){
+
+        return view('penjadwalan.reviewKebutuhanWaktuAudit');
     }
 
     public function listAudit1(){

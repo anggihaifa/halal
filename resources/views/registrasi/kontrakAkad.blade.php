@@ -23,7 +23,7 @@
             <!-- begin panel -->
             <div class="panel panel-inverse" data-sortable-id="form-plugins-7">
 				<!-- begin panel-heading -->
-				@if ($data->status_akad == 0)		
+				@if ($data->status_akad == 0)	
 					<div class="panel-heading">
 						<h4 class="panel-title">Proses Belum Memasuki Tahap Ini</h4>
 						<div class="panel-heading-btn">

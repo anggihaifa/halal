@@ -12,7 +12,7 @@
     <!-- begin page-header -->
     <h1 class="page-header">List Registrasi Halal  <small></small></h1>
     <!-- end page-header -->
-    <!-- begin panel -->
+    <!-- begin panel -->    
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
@@ -41,9 +41,11 @@
             </table>
         </div>
         <!-- end panel-body -->
-    </div>
-
+    </div>   
     
+    <div class="panel panel-inverse">
+        a
+    </div>
     
 @endsection
 @push('scripts')
@@ -100,7 +102,7 @@
                             if(full.id == aktif_reg ){
                                 var aktif =`<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-yellow btn-xs" >Non Aktifkan</a>`;
                                 var uploadBerkas = `<a href="{{url('unggah_dokumen_sertifikasi')}}"  class="dropdown-item" ><i class="fa fa-edit"></i>Berkas Sertifikasi</a>`;
-                                var div_aktif = `<div class="col-lg-12 row border-left rounded-lg border-primary" style="background-color:#fafbfc" >`;
+                                var div_aktif = `<div class="col-lg-12 row border-left border-primary" style="background-color:#fafbfc" >`;
                             }else{
                                 var aktif = `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-green btn-xs" >Aktifkan</a>`;
                                 var uploadBerkas = `<a href="#"  class="dropdown-item" >Aktifkan Untuk edit berkas</a>`;
@@ -172,9 +174,8 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </table>
-                                                    
-                                        </div>
+                                            </table>                                                  
+                                        </div>                                        
                                     </div>`  
                         }
                     }

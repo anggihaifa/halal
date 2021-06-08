@@ -375,54 +375,44 @@ return [
             'icon' => 'ion-ios-stats',
             'title' => 'Dashboard',
             'url' => 'home.index'
-        ],        
+        ],
         [
             'icon' => 'ion-md-book',
             'title' => 'Registrasi',
-            'url' => '#',
-            'caret' => true,
-            'sub_menu' => [
-                /*[
-                    'url' => 'listregistrasipelanggan',
-                    'title' => 'List Registrasi Halal '
-                ],*/
-                 [
-                    'url' => 'listregistrasipelangganaktif',
-                    'title' => 'List Registrasi Aktif'
-                ],
-                [
-                    'url' => 'listakadadmin',
-                    'title' => 'List Kontrak Akad'
-                ],
-                [
-                    'url' => 'listpembayaranregistrasi',
-                    'title' => 'List Pembayaran Tahap 1'
-                ],
-                [
-                    'url' => 'listpembayarantahap2',
-                    'title' => 'List Pembayaran Tahap 2'
-                ],
-                [   
-                    'url' => 'listberitaacara',       
-                    'title' => 'Berita Acara'                    
-                ],
-                 [
-                    'url' => 'listpelunasan',
-                    'title' => 'List Pelunasan'
-                ],
-               
-            ],
-        ],
+            'url' => 'listregistrasipelangganaktif',
+          
+        ],  
         [
             'icon' => 'ion-ios-calendar',
             'title' => 'Penentuan Kebutuhan Waktu Audit',
-            'url' => 'listkebutuhanwaktuaudit'
+            'url' => 'reviewkebutuhanwaktuaudit'
         ],
         [
-            'icon' => 'ion-md-book',
-            'title' => 'Reporsitory Dokumen Halal',
-            'url' => 'dokumen.indexuser'
+            'icon' => 'ion-ios-cube',
+            'title' => 'Master',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+               
+                [
+                    
+                    'url' => 'dokumen.index',
+                    'title' => 'Reporsitory Dokumen Halal'
+                ],   
+                [    
+                   
+                    'url' => 'guideline.index',
+                    'title' => 'Guideline'
+                ],    
+                
+                [
+                    'url' => 'detailpelaksana.index',
+                    'title' => 'Data Auditor'
+                ],        
+            ],
         ],        
+        
+      
     ],        
     'menu7' => [
         [

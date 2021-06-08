@@ -59,6 +59,12 @@ Route::post('download_laporan_produk','PHPWordController@downloadLaporanProduk')
 Route::post('download_laporan_produk_fix','PHPWordController@downloadLaporanProdukFix')->name('downloadlaporanprodukfix');
 
 //verifikator kebutuhan waktu audit
+Route::get('review_kebutuhan_waktu_audit','PenjadwalanController@reviewKebutuhanWaktuAudit')->name('reviewkebutuhanwaktuaudit');
+Route::get('data_review_kebutuhan_waktu_audit','PenjadwalanController@dataReviewKebutuhanWaktuAudit')->name('datareviewkebutuhanwaktuaudit');
+Route::put('store_review_kebutuhan_waktu_audit', 'PenjadwalanController@storeReviewKebutuhanWaktuAudit')->name('storereviewkebutuhanwaktuaudit');
+Route::get('perbaikan_kebutuhan_waktu_audit', 'PenjadwalanController@perbaikanKebutuhanWaktuAudit')->name('perbaikankebutuhanwaktuaudit');
+
+
 Route::get('list_kebutuhan_waktu_audit','PenjadwalanController@listKebutuhanWaktuAudit')->name('listkebutuhanwaktuaudit');
 Route::get('data_kebutuhan_waktu_audit','PenjadwalanController@dataKebutuhanWaktuAudit')->name('datakebutuhanwaktuaudit');
 Route::put('store_kebutuhan_waktu_audit', 'PenjadwalanController@storeKebutuhanWaktuAudit')->name('storekebutuhanwaktuaudit');

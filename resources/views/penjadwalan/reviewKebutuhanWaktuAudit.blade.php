@@ -91,7 +91,7 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <form action="{{route('storekebutuhanwaktuaudit')}}" method="post" name="registerForm">
+            <form action="{{route('storereviewkebutuhanwaktuaudit')}}" method="post" name="registerForm">
                 @csrf
                 @method('PUT')
                 <div class="modal-content">
@@ -283,22 +283,22 @@
                                             <tr>
                                             
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_dasar" id="w_dasar" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="w_dasar" placeholder="hari"  ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="h_keamanan_pangan" id="h_keamanan_pangan" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="h_keamanan_pangan" placeholder="hari"  ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="h_variasi_produk" id="h_variasi_produk" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="h_variasi_produk" placeholder="hari" ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="h_jumlah_bahan" id="h_jumlah_bahan" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="h_jumlah_bahan" placeholder="hari" ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="ft_equivalent" id="ft_equivalent" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="ft_equivalent" placeholder="hari"  ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="t_lokasi_dikunjungi" id="t_lokasi_dikunjungi" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="t_lokasi_dikunjungi" placeholder="hari"  ></input>
                                                 </td>
                                             </tr>
                                             
@@ -326,23 +326,23 @@
                                             <tr>
                                             
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_p_audit" id="w_p_audit" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="w_p_audit" placeholder="hari" ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_pengujian" id="w_pengujian" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="w_pengujian" placeholder="hari"  ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_pelaporan_audit" id="w_pelaporan_audit" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="w_pelaporan_audit" placeholder="hari" ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_verifikasi" id="w_verifikasi" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="w_verifikasi" placeholder="hari"  ></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_tehnical_review" id="w_tehnical_review" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="w_tehnical_review" placeholder="hari" ></input>
                                                 </td>
                                                 
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_rapat_komite" id="w_rapat_komite" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" readonly id="w_rapat_komite" placeholder="hari" ></input>
                                                 </td>
                                             </tr>
                                             
@@ -363,65 +363,65 @@
                                             <td>
                                             
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor1" id="faktor1" value="persyaratan standar halal">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor1" value="persyaratan standar halal">
                                                     <label class="form-check-label" for="faktor1">Persyaratan standar halal</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor2" id="faktor2" value="sertifikasi sistem manajemen keamanan pangan ">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor2" value="sertifikasi sistem manajemen keamanan pangan ">
                                                     <label class="form-check-label" for="faktor2">Sertifikasi sistem manajemen keamanan pangan </label>
                                                     </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor3" id="faktor3" value="sertifikasi multilokasi (jumlah lokasi)">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor3" value="sertifikasi multilokasi (jumlah lokasi)">
                                                     <label class="form-check-label" for="faktor3">Sertifikasi multilokasi (jumlah lokasi)</label>
                                                 </div>  
 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor4" id="faktor4" value=" tipe produk, ukuran dan kompleksitas organisasi">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor4" value=" tipe produk, ukuran dan kompleksitas organisasi">
                                                     <label class="form-check-label" for="faktor4">Tipe produk, ukuran dan kompleksitas organisasi</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor5" id="faktor5" value="jumlah lini produk">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor5" value="jumlah lini produk">
                                                     <label class="form-check-label" for="faktor5">Jumlah lini produk</label>
                                                     </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor6" id="faktor6" value="Critical Control Points (CCP)">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor6" value="Critical Control Points (CCP)">
                                                     <label class="form-check-label" for="faktor6">Critical Control Points (CCP)</label>
                                                 </div> 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor7" id="faktor7" value="kegiatan yang dialih daya (outsource)">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor7" value="kegiatan yang dialih daya (outsource)">
                                                     <label class="form-check-label" for="faktor7">Kegiatan yang dialih daya (outsource)</label>
                                                 </div> 
                                             </td>
                                             <td>
                                                 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor8" id="faktor8" value="Prerequisite Program PRP">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor8" value="Prerequisite Program PRP">
                                                     <label class="form-check-label" for="faktor8">Prerequisite Program PRP</label>
                                                     </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor9" id="faktor9" value="area bangunan">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor9" value="area bangunan">
                                                     <label class="form-check-label" for="faktor9">area bangunan</label>
                                                 </div>  
 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor10" id="faktor10" value="infrastruktur">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor10" value="infrastruktur">
                                                     <label class="form-check-label" for="faktor10">Infrastruktur</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor11" id="faktor11" value="laboratorium pengujian (in house)">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor11" value="laboratorium pengujian (in house)">
                                                     <label class="form-check-label" for="faktor11">Laboratorium pengujian (in house)</label>
                                                     </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor12" id="faktor12" value="teknologi dan regulasi">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor12" value="teknologi dan regulasi">
                                                     <label class="form-check-label" for="faktor12">Teknologi dan regulasi</label>
                                                 </div>  
 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor13" id="faktor13" value="hasil audit sebelumnya">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor13" value="hasil audit sebelumnya">
                                                     <label class="form-check-label" for="faktor13">Hasil audit sebelumnya</label>
                                                 </div>  
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="faktor14" id="faktor14" value="kebutuhan penterjemah">
+                                                    <input class="form-check-input" type="checkbox" readonly id="faktor14" value="kebutuhan penterjemah">
                                                     <label class="form-check-label" for="faktor14">Kebutuhan penterjemah</label>
                                                 </div>  
                                             </td>
@@ -441,12 +441,13 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input type="text"  class="form-control input-sm" name="total_waktu_kebutuhan_audit" id="total_waktu_kebutuhan_audit" placeholder="hari"></input>
+                                                <input type="text"  class="form-control input-sm" readonly id="total_waktu_kebutuhan_audit" placeholder="hari"></input>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+
                             <div class="">
                                 <table class="table  table-sm">
                             
@@ -458,7 +459,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input type="text"  class="form-control input-sm" id="catatan_review_kebutuhan_audit" readonly></input>
+                                                <input type="text"  class="form-control input-sm" name="catatan_review_kebutuhan_audit" id="catatan_review_kebutuhan_audit"></input>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -476,7 +477,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <select id="hasil_review" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" readonly>
+                                                <select id="hasil_review" name="hasil_review" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                                     <option value="">==Pilih Hasil Review==</option>
                                                     <option value="konfirmasi">Konfirmasi Penghitungan Waktu Audit</option>
                                                     <option value="perbaikan">Perbaikan</option>                                                               
@@ -488,8 +489,18 @@
                                
                                   
                             </div>
+
+                           
                         <div class="modal-footer">
-                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan penjadwalan?')">Submit</button>
+                        
+                           
+                            <!-- <a href="{{url('perbaikan_kebutuhan_waktu_audit')}}" method="post">
+                                <button type="button" class="btn btn-sm btn-warning m-r-5">Perbaikan</button>
+                                    @csrf
+                                    @method('PUT')
+                            
+                            </a> -->
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5">Setuju</button>
                         </div>
                     </form>
                 </div>  
@@ -524,175 +535,174 @@
     <script>
 
 
-            $('#modalKebutuhan').on('show.bs.modal', function(e) {
+         $('#modalKebutuhan').on('show.bs.modal', function(e) {
 
 
 
-                var $this = $(e.relatedTarget);
+            var $this = $(e.relatedTarget);
+            
+            var data_id = $this.data('id');
+            var no_registrasi_bpjph = $this.data('no-registrasi-bpjph');
+            var status_registrasi = $this.data('status-registrasi');
+            var name = $this.data('name');
+            var alamat_perusahaan = $this.data('alamat-perusahaan');
+            var ruang_lingkup = $this.data('ruang-lingkup');
+            var ktgprod = $this.data('ktgprod');
+            var h1 = $this.data('w-dasar');
+            var h2 = $this.data('h-keamanan-pangan');
+            var h3 = $this.data('h-variasi-produk');
+            var h4 = $this.data('h-jumlah-bahan');
+            var h5 = $this.data('ft-equivalent');
+            var h6 = $this.data('t-lokasi-dikunjungi');
+            var h7 = $this.data('w-p-audit');
+            var h8 = $this.data('w-pengujian');
+            var h9 = $this.data('w-pelaporan-audit');
+            var h10= $this.data('w-verifikasi');
+            var h11 = $this.data('w-tehnical-review');
+            var h12 = $this.data('w-rapat-komite');
+            var f1 = $this.data('faktor1');
+            var f2 = $this.data('faktor2');
+            var f3 = $this.data('faktor3');
+            var f4 = $this.data('faktor4');
+            var f5 = $this.data('faktor5');
+            var f6 = $this.data('faktor6');
+            var f7 = $this.data('faktor7');
+            var f8 = $this.data('faktor8');
+            var f9 = $this.data('faktor9');
+            var f10= $this.data('faktor10');
+            var f11 = $this.data('faktor11');
+            var f12 = $this.data('faktor12');
+            var f13 = $this.data('faktor13');
+            var f14 = $this.data('faktor14');
+            var hasil_review = $this.data('hasil-review');
+            var catatan_review_kebutuhan_audit = $this.data('catatan-review-kebutuhan-audit');
+            var total = $this.data('total-waktu-kebutuhan-audit');
 
-                var data_id = $this.data('id');
-                var no_registrasi_bpjph = $this.data('no-registrasi-bpjph');
-                var status_registrasi = $this.data('status-registrasi');
-                var name = $this.data('name');
-                var alamat_perusahaan = $this.data('alamat-perusahaan');
-                var ruang_lingkup = $this.data('ruang-lingkup');
-                var ktgprod = $this.data('ktgprod');
-                var h1 = $this.data('w-dasar');
-                var h2 = $this.data('h-keamanan-pangan');
-                var h3 = $this.data('h-variasi-produk');
-                var h4 = $this.data('h-jumlah-bahan');
-                var h5 = $this.data('ft-equivalent');
-                var h6 = $this.data('t-lokasi-dikunjungi');
-                var h7 = $this.data('w-p-audit');
-                var h8 = $this.data('w-pengujian');
-                var h9 = $this.data('w-pelaporan-audit');
-                var h10= $this.data('w-verifikasi');
-                var h11 = $this.data('w-tehnical-review');
-                var h12 = $this.data('w-rapat-komite');
-                var f1 = $this.data('faktor1');
-                var f2 = $this.data('faktor2');
-                var f3 = $this.data('faktor3');
-                var f4 = $this.data('faktor4');
-                var f5 = $this.data('faktor5');
-                var f6 = $this.data('faktor6');
-                var f7 = $this.data('faktor7');
-                var f8 = $this.data('faktor8');
-                var f9 = $this.data('faktor9');
-                var f10= $this.data('faktor10');
-                var f11 = $this.data('faktor11');
-                var f12 = $this.data('faktor12');
-                var f13 = $this.data('faktor13');
-                var f14 = $this.data('faktor14');
-                var hasil_review = $this.data('hasil-review');
-                var catatan_review_kebutuhan_audit = $this.data('catatan-review-kebutuhan-audit');
-                var total = $this.data('total-waktu-kebutuhan-audit');
+            var modal = $('#modalKebutuhan');
+           
+          
+            if(modal.find('#idregis1').val()){
+               
+            }else{
 
-                var modal = $('#modalKebutuhan');
+               
+                modal.find('#idregis1').val(data_id);
+                modal.find('#no_registrasi_bpjph').val(no_registrasi_bpjph);
+                //$("input[name=mygroup][value=" + value + "]").attr('checked', 'checked');
+                if(status_registrasi == 'permohonan baru'){
+                    modal.find('#status_registrasi-0').attr('checked', 'checked');
+                }else if(status_registrasi == 'pembaruan'){
+                    modal.find('#status_registrasi-1').attr('checked', 'checked');
+                }else if(status_registrasi == 'perluasan'){
+                    modal.find('#status_registrasi-2').attr('checked', 'checked');
+                }
+               
+                modal.find('#name').val(name);
+                modal.find('#ruang_lingkup').val(ruang_lingkup);
+                modal.find('#alamat_perusahaan').val(alamat_perusahaan);
 
+                modal.find('#w_dasar').val(h1);
+                modal.find('#h_keamanan_pangan').val(h2);
+                modal.find('#h_variasi_produk').val(h3);
+                modal.find('#h_jumlah_bahan').val(h4);
+                modal.find('#ft_equivalent').val(h5);
+                modal.find('#t_lokasi_dikunjungi').val(h6);
+                modal.find('#w_p_audit').val(h7);
+                modal.find('#w_pengujian').val(h8);
+                modal.find('#w_pelaporan_audit').val(h9);
+                modal.find('#w_verifikasi').val(h10);
+                modal.find('#w_tehnical_review').val(h11);
+                modal.find('#w_rapat_komite').val(h12);  
+                modal.find('#hasil_review').val(hasil_review).change();  
+                modal.find('#catatan_review_kebutuhan_audit').val(catatan_review_kebutuhan_audit);  
+                //alert(total);
+                modal.find('#total_waktu_kebutuhan_audit').val(total);        
+               
+                if(ktgprod == 'Produk tidak berisiko'){
+                    modal.find('#ktgprod1').attr('checked', 'checked');
+                }else if(ktgprod == 'Produk olahan pangan'){
+                    modal.find('#ktgprod2').attr('checked', 'checked');
+                }else if(ktgprod == 'Flavor, seasoning, fragrance'){
+                    modal.find('#ktgprod3').attr('checked', 'checked');
+                } else if(ktgprod == 'Whey, gelatin, kolagen, kondroitin, enzim hewani'){
+                    modal.find('#ktgprod4').attr('checked', 'checked');
+                }else if(ktgprod == 'Produk mikrobial'){
+                    modal.find('#ktgprod5').attr('checked', 'checked');
+                }else if(ktgprod == 'Jamu dan obat-obatan'){
+                    modal.find('#ktgprod6').attr('checked', 'checked');
+                }else if(ktgprod == 'Vaksin'){
+                    modal.find('#ktgprod7').attr('checked', 'checked');
+                }else if(ktgprod == 'Produk kosmetik'){
+                    modal.find('#ktgprod8').attr('checked', 'checked');
+                }else if(ktgprod == 'Restoran, katering, dapur'){
+                    modal.find('#ktgprod9').attr('checked', 'checked');
+                }else if(ktgprod == 'RPH'){
+                    modal.find('#ktgprod10').attr('checked', 'checked');
+                }else if(ktgprod == 'Industri jasa'){
+                    modal.find('#ktgprod11').attr('checked', 'checked');
+                }else if(ktgprod == 'Barang gunaan'){
+                    modal.find('#ktgprod12').attr('checked', 'checked');
+                }else if(ktgprod == 'Kelompok pabrik lainnya'){
+                    modal.find('#ktgprod13').attr('checked', 'checked');
+                }
 
-                if(modal.find('#idregis1').val()){
-                
-                }else{
+                if(f1 ){
+                    modal.find('#faktor1').attr('checked', 'checked');
+                } 
+                if(f2 ){
+                    modal.find('#faktor2').attr('checked', 'checked');
+                } 
+                if(f3){
+                    modal.find('#faktor3').attr('checked', 'checked');
+                }  
+                if(f4 ){
+                    modal.find('#faktor4').attr('checked', 'checked');
+                } 
+                if(f5 ){
+                    modal.find('#faktor5').attr('checked', 'checked');
+                } 
+                if(f6 ){
+                    modal.find('#faktor6').attr('checked', 'checked');
+                } 
+                if(f7 ){
+                   
+                    modal.find('#faktor7').attr('checked', 'checked');
+                    //alert(f7);
+                    //modal.find('#name').val(f7);
+                } 
+                if(f8  ){
+                    modal.find('#faktor8').attr('checked', 'checked');
+                } 
+                if(f9 ){
+                    modal.find('#faktor9').attr('checked', 'checked');
+                } 
+                if(f10 ){
+                    modal.find('#faktor10').attr('checked', 'checked');
+                } 
+                if(f11 ){
+                    modal.find('#faktor11').attr('checked', 'checked');
+                } 
+                if(f12){
+                    modal.find('#faktor12').attr('checked', 'checked');
+                } 
+                if(f13){
+                    modal.find('#faktor13').attr('checked', 'checked');
+                } 
+                if(f14){
+                    modal.find('#faktor14').attr('checked', 'checked');
+                }
 
-                
-                    modal.find('#idregis1').val(data_id);
-                    modal.find('#no_registrasi_bpjph').val(no_registrasi_bpjph);
-                    //$("input[name=mygroup][value=" + value + "]").attr('checked', 'checked');
-                    if(status_registrasi == 'permohonan baru'){
-                        modal.find('#status_registrasi-0').attr('checked', 'checked');
-                    }else if(status_registrasi == 'pembaruan'){
-                        modal.find('#status_registrasi-1').attr('checked', 'checked');
-                    }else if(status_registrasi == 'perluasan'){
-                        modal.find('#status_registrasi-2').attr('checked', 'checked');
-                    }
-                
-                    modal.find('#name').val(name);
-                    modal.find('#ruang_lingkup').val(ruang_lingkup);
-                    modal.find('#alamat_perusahaan').val(alamat_perusahaan);
-
-                    modal.find('#w_dasar').val(h1);
-                    modal.find('#h_keamanan_pangan').val(h2);
-                    modal.find('#h_variasi_produk').val(h3);
-                    modal.find('#h_jumlah_bahan').val(h4);
-                    modal.find('#ft_equivalent').val(h5);
-                    modal.find('#t_lokasi_dikunjungi').val(h6);
-                    modal.find('#w_p_audit').val(h7);
-                    modal.find('#w_pengujian').val(h8);
-                    modal.find('#w_pelaporan_audit').val(h9);
-                    modal.find('#w_verifikasi').val(h10);
-                    modal.find('#w_tehnical_review').val(h11);
-                    modal.find('#w_rapat_komite').val(h12);  
-                    //$("div.id_100 select").val("val2").change();
-                    modal.find('#hasil_review').val(hasil_review).change();  
-                    modal.find('#catatan_review_kebutuhan_audit').val(catatan_review_kebutuhan_audit);  
-                    //alert(total);
-                    modal.find('#total_waktu_kebutuhan_audit').val(total);        
-                
-                    if(ktgprod == 'Produk tidak berisiko'){
-                        modal.find('#ktgprod1').attr('checked', 'checked');
-                    }else if(ktgprod == 'Produk olahan pangan'){
-                        modal.find('#ktgprod2').attr('checked', 'checked');
-                    }else if(ktgprod == 'Flavor, seasoning, fragrance'){
-                        modal.find('#ktgprod3').attr('checked', 'checked');
-                    } else if(ktgprod == 'Whey, gelatin, kolagen, kondroitin, enzim hewani'){
-                        modal.find('#ktgprod4').attr('checked', 'checked');
-                    }else if(ktgprod == 'Produk mikrobial'){
-                        modal.find('#ktgprod5').attr('checked', 'checked');
-                    }else if(ktgprod == 'Jamu dan obat-obatan'){
-                        modal.find('#ktgprod6').attr('checked', 'checked');
-                    }else if(ktgprod == 'Vaksin'){
-                        modal.find('#ktgprod7').attr('checked', 'checked');
-                    }else if(ktgprod == 'Produk kosmetik'){
-                        modal.find('#ktgprod8').attr('checked', 'checked');
-                    }else if(ktgprod == 'Restoran, katering, dapur'){
-                        modal.find('#ktgprod9').attr('checked', 'checked');
-                    }else if(ktgprod == 'RPH'){
-                        modal.find('#ktgprod10').attr('checked', 'checked');
-                    }else if(ktgprod == 'Industri jasa'){
-                        modal.find('#ktgprod11').attr('checked', 'checked');
-                    }else if(ktgprod == 'Barang gunaan'){
-                        modal.find('#ktgprod12').attr('checked', 'checked');
-                    }else if(ktgprod == 'Kelompok pabrik lainnya'){
-                        modal.find('#ktgprod13').attr('checked', 'checked');
-                    }
-
-                    if(f1 ){
-                        modal.find('#faktor1').attr('checked', 'checked');
-                    } 
-                    if(f2 ){
-                        modal.find('#faktor2').attr('checked', 'checked');
-                    } 
-                    if(f3){
-                        modal.find('#faktor3').attr('checked', 'checked');
-                    }  
-                    if(f4 ){
-                        modal.find('#faktor4').attr('checked', 'checked');
-                    } 
-                    if(f5 ){
-                        modal.find('#faktor5').attr('checked', 'checked');
-                    } 
-                    if(f6 ){
-                        modal.find('#faktor6').attr('checked', 'checked');
-                    } 
-                    if(f7 ){
-                    
-                        modal.find('#faktor7').attr('checked', 'checked');
-                        //alert(f7);
-                        //modal.find('#name').val(f7);
-                    } 
-                    if(f8  ){
-                        modal.find('#faktor8').attr('checked', 'checked');
-                    } 
-                    if(f9 ){
-                        modal.find('#faktor9').attr('checked', 'checked');
-                    } 
-                    if(f10 ){
-                        modal.find('#faktor10').attr('checked', 'checked');
-                    } 
-                    if(f11 ){
-                        modal.find('#faktor11').attr('checked', 'checked');
-                    } 
-                    if(f12){
-                        modal.find('#faktor12').attr('checked', 'checked');
-                    } 
-                    if(f13){
-                        modal.find('#faktor13').attr('checked', 'checked');
-                    } 
-                    if(f14){
-                        modal.find('#faktor14').attr('checked', 'checked');
-                    }
-
-                    
-                    modal.find('#modalKebutuhan').attr('action', function (i,old) {
-                    return old + '/' + data_id;
-                });  
+                  
+                modal.find('#modalKebutuhan').attr('action', function (i,old) {
+                   return old + '/' + data_id;
+            });  
             }
-
+           
 
         });
 
 
-
+       
 
 
         $(document).ready(function () {
@@ -702,10 +712,10 @@
                 });
 
                 
+          
+           
 
-
-
-
+         
 
             var xTable = $('#table').DataTable({
                 ajax:{
@@ -718,7 +728,7 @@
                 },
                 
                 columns:[
-                
+                   
                     {
                         "data":null,
                         "searchable":false,
@@ -728,7 +738,7 @@
                         }
                     },
                     
-                
+                  
 
                     {"data":"no_registrasi"},
                     {"data":"perusahaan"},
@@ -742,7 +752,7 @@
                         }
                     },
                 
-                
+                   
                     {
                         "data":null,
                         "searchable":false,
@@ -772,16 +782,19 @@
                 ],
                 'columnDefs': [
                 {
-                    "targets": [0,1,2,3,4,5],
-                    "className": "text-center",
-                    
+                      "targets": [0,1,2,3,4,5],
+                      "className": "text-center",
+                     
                 }],
                 
                 processing:true,
                 serverSide:true,
                 order:[[0,'asc']],
                 "searching": false,
-            });  
+
+            });
+
+           
         
     
         });

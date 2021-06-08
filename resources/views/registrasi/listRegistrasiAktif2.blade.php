@@ -69,7 +69,7 @@
                                                     <option value="">--Pilih Jenis Registrasi--</option>
                                                     @if(isset($dataJenis))
                                                         @foreach($dataJenis as $index => $value)
-                                                            <option value="{{$value['jenis_registrasi']}}"> - {{$value['jenis_registrasi']}}</i></option>
+                                                            <option value="{{$value['ruang_lingkup']}}"> - {{$value['jenis_registrasi']}}</i></option>
                                                         @endforeach
                                                     @endif
                                                 </select>
