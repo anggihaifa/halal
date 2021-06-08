@@ -661,7 +661,8 @@ class RegistrasiController extends Controller
                 }
 
                 $model2->id_registrasi = $idregis;
-                $model2->id_user = Auth::user()->id;                
+                $model2->id_user = Auth::user()->id;
+                $model2->nama_user = Auth::user()->name;              
                 $model2->id_kegiatan = 1;
                 $model2->judul_kegiatan = "Memasukan Data Registrasi Baru";
                 $model2->save();
@@ -1486,9 +1487,7 @@ class RegistrasiController extends Controller
     public function storeDokumenSertifikasi(Request $request){
 
         $data_real = $request->except('_token','_method');
-        $data = $request->except('_token','_method','has_selected');
-
-        // dd("disini");
+        $data = $request->except('_token','_method','has_selected');                
 
         $model = new DokumenHas;
         $model2 = new Registrasi;
@@ -1506,7 +1505,7 @@ class RegistrasiController extends Controller
         }        
 
 
-        if($data["status"] == "0"){                
+        if($data["status"] == "0"){
                 try{
                     DB::beginTransaction();
 
@@ -1542,16 +1541,7 @@ class RegistrasiController extends Controller
 
                     $id_has = $checkDataHas[0]->id;
 
-                    DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_has' => $id_has]);
-
-                    // $model3 = new LogKegiatan();
-                    // DB::beginTransaction();                    
-                    //     $model3->id_registrasi = $e->id_registrasi;
-                    //     $model3->id_user = Auth::user()->id;                
-                    //     $model3->id_kegiatan = 2;
-                    //     $model3->judul_kegiatan = "Mengunggah Dokumen Sertifikasi";
-                    //     $model3->save();
-                    // DB::commit();
+                    DB::table('unggah_data_sertifikasi')->where('id_registrasi', $id_registrasi)->update(['id_has' => $id_has]);                    
 
                     Session::flash('success', "data berhasil disimpan!");
                     $redirect = redirect()->route('registrasi.unggahDokumenSertifikasi');
@@ -1567,133 +1557,484 @@ class RegistrasiController extends Controller
                     return $redirectPass;
                 }
 
-        }elseif($data["status"] == "1"){            
-            dd("disini");
+        }elseif($data["status"] == "1"){
             // echo "<pre>";
             // print_r($data);
             // echo "</pre>";
             try{
                     DB::beginTransaction();
 
-                    $id = $data["id"];
-                    $e = $model->find($id);
+                    $id = $data["id"];                    
+                    $e = $model->find($id);                                                             
 
                     unset($data["id"]);
                     unset($data["status"]);
-
+                    
                     $no=1;
-                    foreach ($data as $key => $value) {
-                        $currentDateTime = Carbon::now();                                                
+                    foreach ($data as $key => $value) {                        
+                        $currentDateTime = Carbon::now();                                                                 
 
                         if($key == $data_real['has_selected']){
+                            // dd($key);
 
                             if($key == 'has_1'){
                                 if($e->keterangan_has_1 != null){
+                                    // dd("ulang");
                                     $e->tgl_penyerahan_1 = $currentDateTime;
-                                }
-                                
-                                // $model3 = new LogKegiatan();
-                                // DB::beginTransaction();                                                    
-                                //     $model3->id_registrasi = $e->id_registrasi;
-                                //     // dd($e->id_registrasi);
-                                //     $model3->id_user = Auth::user()->id;                
-                                //     $model3->id_kegiatan = 2;
-                                //     $model3->judul_kegiatan = "Merubah Dokumen Manual SJPH";
-                                //     $model3->save();
-                                // DB::commit();                                                                
-                            }else if($key == 'has_2'){
-                                if($e->keterangan_has_2 != null){
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Memperbaiki Dokumen Manual SJPH";
+                                        $model3->save();
+                                    DB::commit();                  
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Manual SJPH";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                                                
+                            }else if($key == 'has_2'){                                                              
+                                if($e->keterangan_has_2 != null){                                    
                                     $e->tgl_penyerahan_2 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Memperbaiki Dokumen Matriks Bahan";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Matriks Bahan";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                
                             }else if($key == 'has_3'){
                                 if($e->keterangan_has_3 != null){
                                     $e->tgl_penyerahan_3 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Data Produk Yang Dihasilkan";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Data Produk Yang Dihasilkan";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                 
                             }else if($key == 'has_4'){
                                 if($e->keterangan_has_4 != null){
                                     $e->tgl_penyerahan_4 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                               
                             }else if($key == 'has_5'){
                                 if($e->keterangan_has_5 != null){
                                     $e->tgl_penyerahan_5 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Data Bahan Baku, Bahan Tambahan dan Bahan Penolong";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Data Bahan Baku, Bahan Tambahan dan Bahan Penolong";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                 
                             }else if($key == 'has_6'){
                                 if($e->keterangan_has_6 != null){
                                     $e->tgl_penyerahan_6 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Sertifikat Halal Sebelumnya";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Sertifikat Halal Sebelumnya";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                 
                             }else if($key == 'has_7'){
                                 if($e->keterangan_has_7 != null){
-                                     $e->tgl_penyerahan_7 = $currentDateTime;
+                                    $e->tgl_penyerahan_7 = $currentDateTime;
+                                     
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)";
+                                        $model3->save();
+                                    DB::commit();
                                 }
+                                
                             }else if($key == 'has_8'){
                                 if($e->keterangan_has_8 != null){
                                     $e->tgl_penyerahan_8 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                
                             }else if($key == 'has_9'){
                                 if($e->keterangan_has_9 != null){
                                     $e->tgl_penyerahan_9 = $currentDateTime;
-                                }
+
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Diagram Alir Proses Untuk Produk Yang Disertifikasi";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Diagram Alir Proses Untuk Produk Yang Disertifikasi";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                
                             }else if($key == 'has_10'){
                                 if($e->keterangan_has_10 != null){
                                     $e->tgl_penyerahan_10 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Pernyataan Dari Pemilik Fasilitas Produksi";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Pernyataan Dari Pemilik Fasilitas Produksi";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                
                             }else if($key == 'has_11'){
                                 if($e->keterangan_has_11 != null){
                                     $e->tgl_penyerahan_11 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Daftar Alamat Seluruh Fasilitas Produksi";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Daftar Alamat Seluruh Fasilitas Produksi";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                 
                             }else if($key == 'has_12'){
                                 if($e->keterangan_has_12 != null){
                                     $e->tgl_penyerahan_12 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                 
                             }else if($key == 'has_13'){
                                 if($e->keterangan_has_13 != null){
                                     $e->tgl_penyerahan_13 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Bukti Sertifikat Penyelia Halal";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Bukti Sertifikat Penyelia Halal";
+                                        $model3->save();
+                                    DB::commit();   
+                                }                                
                                
                             }else if($key == 'has_14'){
                                 if($e->keterangan_has_14 != null){
                                     $e->tgl_penyerahan_14 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Bukti Pelaksanaan Pelatihan Internal";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Bukti Pelaksanaan Pelatihan Internal";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                
                             }else if($key == 'has_15'){
                                 if($e->keterangan_has_15 != null){
                                     $e->tgl_penyerahan_15 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Bukti Pelaksanaan Audit Internal";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Bukti Pelaksanaan Audit Internal";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                
                             }else if($key == 'has_16'){
                                 if($e->keterangan_has_16 != null){
                                     $e->tgl_penyerahan_16 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Bukti Kaji Ulang Manajemen";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Bukti Kaji Ulang Manajemen";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                               
                             }else if($key == 'has_17'){
                                 if($e->keterangan_has_17 != null){
                                     $e->tgl_penyerahan_17 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Informasi Layout Fasilitas Produksi";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Informasi Layout Fasilitas Produksi";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                                
                             }else if($key == 'has_18'){
                                 if($e->keterangan_has_18 != null){
                                     $e->tgl_penyerahan_18 = $currentDateTime;
-                                }
+
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Perbaikan Dokumen Bukti Registrasi BPJPH";
+                                        $model3->save();
+                                    DB::commit();
+                                }else{
+                                    $model3 = new LogKegiatan();
+                                    DB::beginTransaction();                                                    
+                                        $model3->id_registrasi = $e->id_registrasi;                                    
+                                        $model3->id_user = Auth::user()->id;
+                                        $model3->nama_user = Auth::user()->name;
+                                        $model3->id_kegiatan = 2;
+                                        $model3->judul_kegiatan = "Upload Dokumen Bukti Registrasi BPJPH";
+                                        $model3->save();
+                                    DB::commit();
+                                }                                
                               
-                            }
-                                                                  
-                            $e->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
-                            FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);                            
+                            }                                                        
+                            $e->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);                            
+                            FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
+                            // dd(FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi));                  
                         }
                         $no++;
                     }
 
-                    $e->save();
+                    $e->save();                    
 
                     $checkHasLengkap = "SELECT *
                        FROM dokumen_has
@@ -1702,6 +2043,7 @@ class RegistrasiController extends Controller
                         has_1 IS NULL
                         OR has_2 IS NULL
                         OR has_3 IS NULL
+                        OR has_4 IS NULL
                         OR has_5 IS NULL
                         OR has_8 IS NULL
                         OR has_9 IS NULL
@@ -1711,7 +2053,7 @@ class RegistrasiController extends Controller
                         OR has_13 IS NULL
                         OR has_14 IS NULL
                         OR has_15 IS NULL
-                        OR has_16 IS NULL)
+                        OR has_16 IS NULL
                         OR has_17 IS NULL
                         OR has_18 IS NULL)
                         ";
@@ -1737,8 +2079,8 @@ class RegistrasiController extends Controller
                     $r->updated_at= $now;
                     $r->status_berkas = 1;
                     //dd($r);
-                    $r->save();
-                    $e->save();
+                    $r->save();                    
+                    $e->save();                    
 
                     DB::commit();
 
@@ -1751,7 +2093,7 @@ class RegistrasiController extends Controller
                     DB::rollBack();
 
                     //$this->debugs($e->getMessage());
-
+                    // dd($e->getMessage());
                     Session::flash('error', $e->getMessage());
                     $redirectPass = redirect()->route('registrasi.unggahDokumenSertifikasi');
                     return $redirectPass;
@@ -1821,8 +2163,6 @@ class RegistrasiController extends Controller
         $model2 = new Registrasi();
         $model3 = new User();
         $model4 = new Penjadwalan();
-
-
        
         try{
             DB::beginTransaction();
@@ -1848,14 +2188,15 @@ class RegistrasiController extends Controller
                 DB::commit();
                 Session::flash('success', "Status berhasil diupdate");
 
-                // $model2 = new LogKegiatan();
-                // DB::beginTransaction();                    
-                //     $model2->id_registrasi = $e->id_registrasi;
-                //     $model2->id_user = Auth::user()->id;                
-                //     $model2->id_kegiatan = 2;
-                //     $model2->judul_kegiatan = "Memasukan Data Registrasi Baru";
-                //     $model2->save();
-                // DB::commit();
+                $model2 = new LogKegiatan();
+                DB::beginTransaction();                    
+                    $model2->id_registrasi = $e->id_registrasi;
+                    $model2->id_user = Auth::user()->id;
+                    $model2->nama_user = Auth::user()->name;
+                    $model2->id_kegiatan = 2;
+                    $model2->judul_kegiatan = "Admin telah memeriksa berkas, namun ada berkas yang belum diperiksa";
+                    $model2->save();
+                DB::commit();
 
 
             }else{
@@ -1871,9 +2212,19 @@ class RegistrasiController extends Controller
                     $f->status = '2_2';
                     $e->save();
                     $f->save();
-                    DB::commit();
+                    DB::commit();                    
                     //SendEmailP::dispatch($u,$f,$p,$f->status);
                     Session::flash('success', "Status berhasil diupdate");
+
+                    $model2 = new LogKegiatan();
+                    DB::beginTransaction();                    
+                        $model2->id_registrasi = $e->id_registrasi;
+                        $model2->id_user = Auth::user()->id;
+                        $model2->nama_user = Auth::user()->name;
+                        $model2->id_kegiatan = 2;
+                        $model2->judul_kegiatan = "Admin telah memeriksa berkas, namun ada berkas yang belum memenuhi. Silahkan untuk diperbaiki.";
+                        $model2->save();
+                    DB::commit();
 
                 }else{
                     //dd($data);
@@ -1896,6 +2247,16 @@ class RegistrasiController extends Controller
                     DB::commit();
 
                     //$this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
+
+                    $model2 = new LogKegiatan();
+                    DB::beginTransaction();                    
+                        $model2->id_registrasi = $e->id_registrasi;
+                        $model2->id_user = Auth::user()->id; 
+                        $model2->nama_user = Auth::user()->name;               
+                        $model2->id_kegiatan = 2;
+                        $model2->judul_kegiatan = "Admin telah memeriksa berkas, dan semua berkas telah sesuai.";
+                        $model2->save();
+                    DB::commit();
                     
                     $model4->updated_by = Auth::user()->id;
                     $model4->status_audit1 = '0';
@@ -2395,6 +2756,8 @@ class RegistrasiController extends Controller
            
             DB::commit(); 
 
+            $this->LogKegiatan($e->id, Auth::user()->id, Auth::user()->name, 5, "Berkas OC Berhasil Dikonfirmasi");
+
             Session::flash('success', "OC telahh terkonfirmasi dan dikirim emailnya");            
 
         }catch (\Exception $e){
@@ -2422,7 +2785,7 @@ class RegistrasiController extends Controller
         try{            
             DB::beginTransaction();
             // $cekAkad = new Akad::where('id_registrasi', $id)->first();
-            $e = $model->find($id);
+            $e = $model->find($id);            
             $u = $model2->find($e->id_user);
             // $p = $model3->find($e->id_pembayaran);
 
@@ -2446,6 +2809,8 @@ class RegistrasiController extends Controller
             $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
             $bp2 = str_replace('.', '', $bp1);            
             $e->total_biaya = $bp2;
+            // dd($e->id);
+            $this->LogKegiatan($e->id, Auth::user()->id, Auth::user()->name, 4, "Sales Account Officer Upload Berkas Penawaran & Kontrak Akad");
             
             // dd($model4);
             // if($e->id_akad != null){
@@ -2539,7 +2904,7 @@ class RegistrasiController extends Controller
 
             $e->tanggal_oc = $date;            
             $e->status_oc = 1;
-            $e->status = '6_1'; 
+            $e->status = '5_1'; 
 
             if($request->has("file")){
                 $file = $request->file("file");
@@ -2547,10 +2912,12 @@ class RegistrasiController extends Controller
                 $filename = "ORDER_CONFIRMATION-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                 $file->storeAs("public/buktioc/".$e->id_user."/", $filename);
                 $e->file_oc = $filename;                
-            }            
+            }          
 
-            $e->save();
+            $e->save();            
             DB::commit();
+
+            $this->LogKegiatan($e->id, Auth::user()->id, Auth::user()->name, 5, "Sales Account Officer Upload Berkas Order Confirmation (OC)");
             // SendEmailP::dispatch($e,$u,$p, $e->status);
             Session::flash('success', "Upload OC Berhasil");
 
@@ -2583,7 +2950,7 @@ class RegistrasiController extends Controller
 
             $e->tanggal_oc = $date;            
             $e->status_oc = 2;
-            $e->status = '6_2'; 
+            $e->status = '5_2'; 
 
             if($request->has("file")){
                 $file = $request->file("file");
@@ -2595,6 +2962,8 @@ class RegistrasiController extends Controller
 
             $e->save();
             DB::commit();
+            
+            $this->LogKegiatan($e->id, Auth::user()->id, Auth::user()->name, 5, "Upload Berkas Order Confirmation (OC) Yang Sudah Ditanda Tangani");
             // SendEmailP::dispatch($e,$u,$p, $e->status);
             Session::flash('success', "Upload OC Berhasil");
 
@@ -2894,22 +3263,23 @@ class RegistrasiController extends Controller
                      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
+                     ->orderBy('registrasi.updated_at','desc')
                      
                      ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                     ->where(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                        
-                        $query->where('registrasi.status','=',4);
+                        // $query->where('registrasi.status','=',4);
                     })
                     ->orWhere(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                        
-                        $query->where('registrasi.status','=','4_0');
+                        // $query->where('registrasi.status','=','4_0');
                     }) 
                      ->orWhere(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                        
-                        $query->where('registrasi.status','=','4_1');
+                        // $query->where('registrasi.status','=','4_1');
                     });
         }else{
 
@@ -2917,22 +3287,23 @@ class RegistrasiController extends Controller
                      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
+                     ->orderBy('registrasi.updated_at','desc')
                      
                      ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
                     ->where(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                         $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=',4);
+                        // $query->where('registrasi.status','=',4);
                     })
                     ->orWhere(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                         $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=','4_0');
+                        // $query->where('registrasi.status','=','4_0');
                     }) 
                      ->orWhere(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                         $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=','4_1');
+                        // $query->where('registrasi.status','=','4_1');
                     });
         }
                           
@@ -2976,36 +3347,36 @@ class RegistrasiController extends Controller
                      ->join('users','registrasi.id_user','=','users.id')
                      
                      ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                     ->orderBy('registrasi.updated_at','desc')
                     ->where(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                       
-                        $query->where('registrasi.status','=',6);
+                        $query->where('registrasi.status_cancel','=',0);                                               
                     })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
                        
-                        $query->where('registrasi.status','=','6_0');
-                    }) 
-                     ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
+                    //     // $query->where('registrasi.status','=','6_0');
+                    // }) 
+                    //  ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
                        
-                        $query->where('registrasi.status','=','6_1');
-                    })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
+                    //     // $query->where('registrasi.status','=','6_1');
+                    // })
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
                        
-                        $query->where('registrasi.status','=','6_2');
-                    })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
+                    //     // $query->where('registrasi.status','=','6_2');
+                    // })
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
                        
-                        $query->where('registrasi.status','=','6_3');
-                    })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
+                    //     // $query->where('registrasi.status','=','6_3');
+                    // })
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
                        
-                        $query->where('registrasi.status','=','6_4');
-                    });
+                    //     // $query->where('registrasi.status','=','6_4');
+                    // })
+                    ;
         }else{
 
             $xdata = DB::table('registrasi')
@@ -3014,39 +3385,40 @@ class RegistrasiController extends Controller
                      ->join('users','registrasi.id_user','=','users.id')
                      
                      ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+                     ->orderBy('registrasi.updated_at','desc')
                     ->where(function($query) use ($kodewilayah){
                         $query->where('registrasi.status_cancel','=',0);
                         $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=',6);
+                        // $query->where('registrasi.status','=',6);
                     })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=','6_0');
-                    }) 
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=','6_1');
-                    })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=','6_2');
-                    })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=','6_3');
-                    })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        $query->where('registrasi.status','=','6_4');
-                    });
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
+                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    //     $query->where('registrasi.status','=','6_0');
+                    // }) 
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
+                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    //     $query->where('registrasi.status','=','6_1');
+                    // })
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
+                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    //     $query->where('registrasi.status','=','6_2');
+                    // })
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
+                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    //     $query->where('registrasi.status','=','6_3');
+                    // })
+                    // ->orWhere(function($query) use ($kodewilayah){
+                    //     $query->where('registrasi.status_cancel','=',0);
+                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    //     $query->where('registrasi.status','=','6_4');
+                    // })
+                    ;
         }
                           
-
         //filter condition
         if(isset($gdata['no_registrasi'])){
             $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
@@ -3177,14 +3549,10 @@ class RegistrasiController extends Controller
             $e->status = $status;
             $e->updated_status_by = $updater;
             $e->status_oc = '3';
+            $e->status = '5_3';
             $e->save();
-            
-            // if($status =='6_3'){
-            //     $e->status_oc = '3';
-            //     $e->save();
-            // }
-            
-            
+
+            $this->LogKegiatan($e->id, Auth::user()->id, Auth::user()->name, 5, "Berkas OC Gagal Dikonfirmasi, Silahkan Cek Kembali Berkas OC.");
         
             try{
                 SendEmailP::dispatch($e,$u,"-", $status);
@@ -4825,6 +5193,18 @@ class RegistrasiController extends Controller
 
         $redirect = redirect()->route('listregistrasipelangganaktif');
         return $redirect;
+    }
+
+    public function LogKegiatan($id_registrasi, $id_user, $nama, $id_kegiatan, $judul_kegiatan){
+        $model3 = new LogKegiatan();
+        DB::beginTransaction();
+            $model3->id_registrasi = $id_registrasi;
+            $model3->id_user = $id_user;
+            $model3->nama_user = $nama;
+            $model3->id_kegiatan = $id_kegiatan;
+            $model3->judul_kegiatan = $judul_kegiatan;
+            $model3->save();
+        DB::commit();
     }
 
     

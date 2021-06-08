@@ -20,15 +20,14 @@ class FileUploadServices{
 		
 	}
 
-	public static function getFileNameHPAS($x,$id_user,$id_registrasi,$status,$key,$no_registrasi){
-
+	public static function getFileNameHPAS($x,$id_user,$id_registrasi,$status,$key,$no_registrasi){		
 		$originalName = $x->getClientOriginalName();
 		$originalExtension = $x->getClientOriginalExtension();
 		//dd($key);
 		if($key == 'has_1'){
 			$filename = strtoupper("HPAS_1_Manual_SJH_").$no_registrasi.".".$originalExtension;
-		}elseif($key == 'has_2'){
-			$filename = strtoupper("HPAS_2_Matriks_Bahan_").$no_registrasi.".".$originalExtension;
+		}elseif($key == 'has_2'){			
+			$filename = strtoupper("HPAS_2_Matriks_Bahan_").$no_registrasi.".".$originalExtension;			
 		}elseif($key == 'has_3'){
 			$filename = strtoupper("HPAS_3_Produk_Hasil_Sendiri_").$no_registrasi.".".$originalExtension;
 		}elseif($key == 'has_4'){
@@ -63,7 +62,7 @@ class FileUploadServices{
 			$filename = strtoupper("HPAS_18_Bukti_Registrasi_BPJPH_").$no_registrasi.".".$originalExtension;
 		}
 		
-
+		// dd($filename);
 		return $filename;
 		
 	}

@@ -51,10 +51,10 @@
 								@endif
 							</div>
 
-							<label class="col-lg-4 col-form-label">Skala Usaha</label>
+							{{-- <label class="col-lg-4 col-form-label">Skala Usaha</label>
 							<div class="col-lg-8">
-								<input id="skala_usaha" class="form-control"  name="skala_usaha" value={{ $data->skala_usaha }} type="text" readonly/>                              
-                            </div>
+								<input id="skala_usaha" class="form-control"  name="skala_usaha" value="{{$data->skala_usaha}}" type="text" readonly/>                              
+                            </div> --}}
 							
 							
 								<label class="col-lg-12 col-form-label">Biaya Sertifikasi</label>
@@ -273,7 +273,8 @@
 								
 										@component('components.buttonback',['href' => route("listakadadmin")])@endcomponent											
 										@if($data->status_akad == 1)
-											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad dan Penawaran Sudah Dikirim Kepada Pelaku Usaha</button>
+											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi Ulang</button>
+											<br><button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad dan Penawaran Sudah Dikirim Kepada Pelaku Usaha</button>
 										@elseif($data->status_akad == 0 || $data->status_akad ==9)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi</button>
 										@endif								

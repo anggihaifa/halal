@@ -23,9 +23,9 @@
             <!-- begin panel -->
             <div class="panel panel-inverse" data-sortable-id="form-plugins-7">
 				<!-- begin panel-heading -->
-                @if ($data->status_akad == 0)	
+                @if ($data->status_oc == 0)	
 					<div class="panel-heading">
-						<h4 class="panel-title">Proses Belum Memasuki Tahap Ini</h4>
+						<h4 class="panel-title">Proses Belum Memasuki Tahap Ini / Sales Account Officer Belum Mengupload Berkas OC</h4>
 						<div class="panel-heading-btn">
 							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 						</div>

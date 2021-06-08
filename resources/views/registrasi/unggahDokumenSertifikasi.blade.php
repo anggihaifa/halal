@@ -314,7 +314,7 @@
 															<button type="submit" style="margin-right:5px;"  class="btn btn-xs btn-primary" id="btn_has2" onclick="setHas('has_2')">Unggah</button><a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a>
 														</td>
 													@else
-														{!! $fieldBelum !!}
+														{!! $fieldBelum !!}														
 														<td class="   valign-middle">
 															{{$value['keterangan_has_2']}}
 														</td>

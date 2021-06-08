@@ -68,6 +68,14 @@ class HomeController extends Controller
                             ->groupBy(DB::raw('MONTH(created_at)'))
                             ->orderBy(DB::raw('YEAR(created_at)'),'ASC')
                             ->get();
+
+        $logKegiatan = DB::table('users')
+                            ->select('users.registrasi_id','log_kegiatan.*','users.name as nama',)
+                            ->join('log_kegiatan','log_kegiatan.id_registrasi','=','users.registrasi_id')
+                            ->where('users.id',Auth::user()->id)                            
+                            ->get(); 
+        // dd($logKegiatan);
+        
         // dd($statistikregistrasi);
 
         $dataRegistrasi = count($checkRegistrasi);
@@ -105,17 +113,12 @@ class HomeController extends Controller
         $dataAudit = count($cekAudit);
         // dd($dataAudit);
 
-        // echo "<pre>";
-        // print_r(count($checkRegistrasi));
-        // print_r(count($checkUserActive));
-        // echo "</pre>"; 
-
         if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 4 || Auth::user()->usergroup_id == 5 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7 || Auth::user()->usergroup_id == 8 || Auth::user()->usergroup_id == 9 || Auth::user()->usergroup_id == 13 || Auth::user()->usergroup_id == 14){
             return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan'));
         }else if(Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12){
             return view('homeAuditor',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan','dataAudit'));
         }else if(Auth::user()->usergroup_id == 2){
-            return view('homeUser',compact('dataDetailUser','totalRegistrasiUser','dataCurrent'));
+            return view('homeUser',compact('dataDetailUser','totalRegistrasiUser','dataCurrent','logKegiatan'));
         }
         //return view('home');
     }        

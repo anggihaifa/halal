@@ -75,7 +75,7 @@
 							
 								<div class="col-md-12 offset-md-5">									
 								
-										@component('components.buttonback',['href' => route("listakadadmin")])@endcomponent											
+										@component('components.buttonback',['href' => route("listpenerbitanoc")])@endcomponent
 										@if($data->status_oc == 1)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Menunggu Konfirmasi Pelaku Usaha</button>
 										@elseif($data->status_oc == 2)

@@ -41,11 +41,7 @@
             </table>
         </div>
         <!-- end panel-body -->
-    </div>   
-    
-    <div class="panel panel-inverse">
-        a
-    </div>
+    </div>           
     
 @endsection
 @push('scripts')

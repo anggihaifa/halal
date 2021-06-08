@@ -195,8 +195,8 @@
                                
                                 var upload = `<a href="{{url('upload_oc_admin')}}/`+full.id+`"  class="dropdown-item" >OC</a> `;
 
-                                var status8 = `<a href="{{url('update_status_oc')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_3"   class="dropdown-item"> OC Gagal</a> `;
-                                var konfirm = `<a href="{{url('konfirmasi_oc_admin')}}/`+full.id+`/6_4"  class="dropdown-item" >Konfirmasi OC</a>` ;
+                                var status8 = `<a href="{{url('update_status_oc')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_3"   class="dropdown-item"> OC Gagal</a> `;
+                                var konfirm = `<a href="{{url('konfirmasi_oc_admin')}}/`+full.id+`/5_4"  class="dropdown-item" >Konfirmasi OC</a>` ;
 
                                 return `<div class="btn-group m-r-5 show">
                                         <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>

@@ -144,6 +144,12 @@ select.list-dt:focus {
     color: lightgrey
 }
 
+#progressbar2 {
+    margin-top: -20px;
+    overflow: hidden;
+    color: #2C3E50
+}
+
 #progressbar .notyet {
     color: #2d353c
 }
@@ -168,22 +174,31 @@ select.list-dt:focus {
     position: relative
 }
 
-#progressbar #account:before {
+#progressbar2 li {
+    list-style-type: none;
+    font-size: 10px;
+    width: 70%;
+    height: 50px;   
+    position: relative;
+    margin-left: 20px;    
+}
+
+#progressbar #account:before, #progressbar2 #logKegiatan:before {
     font-family: FontAwesome;
     content: ""
 }
 
-#progressbar #personal:before {
+#progressbar #personal:before, #progressbar2 #logKegiatan:before {
     font-family: FontAwesome;
     content: ""
 }
 
-#progressbar #payment:before {
+#progressbar #payment:before, #progressbar2 #logKegiatan:before {
     font-family: FontAwesome;
     content: ""
 }
 
-#progressbar #confirm:before {
+#progressbar #confirm:before, #progressbar2 #logKegiatan:before {
     font-family: FontAwesome;
     content: ""
 }
@@ -201,6 +216,17 @@ select.list-dt:focus {
     padding: 2px
 }
 
+#progressbar2 li:before {
+    width: 10px;
+    height: 10px;
+    line-height: 45px;
+    display: block;
+    font-size: 18px;    
+    background: #32a932;
+    border-radius: 50%;
+    margin-left: -19px;     
+}
+
 #progressbar li:after {
     content: '';
     width: 100%;
@@ -209,6 +235,17 @@ select.list-dt:focus {
     position: absolute;
     left: 0;
     top: 15px;
+    z-index: -1
+}
+
+#progressbar2 li:after {
+    content: '';
+    width: 2px;
+    height: 100%;
+    background: #32a932;
+    position: absolute;
+    left: -15px;
+    top: 0;
     z-index: -1
 }
 
