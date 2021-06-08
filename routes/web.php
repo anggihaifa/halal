@@ -58,6 +58,16 @@ Route::post('download_laporan_audit_fasilitas_produksi_fix','PHPWordController@d
 Route::post('download_laporan_produk','PHPWordController@downloadLaporanProduk')->name('downloadlaporanproduk');
 Route::post('download_laporan_produk_fix','PHPWordController@downloadLaporanProdukFix')->name('downloadlaporanprodukfix');
 
+//verifikator kebutuhan waktu audit
+Route::get('review_kebutuhan_waktu_audit','PenjadwalanController@reviewKebutuhanWaktuAudit')->name('reviewkebutuhanwaktuaudit');
+Route::get('data_review_kebutuhan_waktu_audit','PenjadwalanController@dataReviewKebutuhanWaktuAudit')->name('datareviewkebutuhanwaktuaudit');
+Route::put('store_review_kebutuhan_waktu_audit', 'PenjadwalanController@storeReviewKebutuhanWaktuAudit')->name('storereviewkebutuhanwaktuaudit');
+Route::get('perbaikan_kebutuhan_waktu_audit', 'PenjadwalanController@perbaikanKebutuhanWaktuAudit')->name('perbaikankebutuhanwaktuaudit');
+
+
+Route::get('list_kebutuhan_waktu_audit','PenjadwalanController@listKebutuhanWaktuAudit')->name('listkebutuhanwaktuaudit');
+Route::get('data_kebutuhan_waktu_audit','PenjadwalanController@dataKebutuhanWaktuAudit')->name('datakebutuhanwaktuaudit');
+Route::put('store_kebutuhan_waktu_audit', 'PenjadwalanController@storeKebutuhanWaktuAudit')->name('storekebutuhanwaktuaudit');
 //penjadwalan
 Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('list_audit1','PenjadwalanController@listAudit1')->name('listaudit1')->middleware('role:1,3,6,9,10,11,12,13');
@@ -68,11 +78,12 @@ Route::get('list_tinjauan','PenjadwalanController@listTinjauan')->name('listtinj
 Route::get('list_log','PenjadwalanController@listLog')->name('listlog')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('data_log','PenjadwalanController@dataLog')->name('datalog')->middleware('role:1,3,6,9,10,11,12,13');
 
-Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin')->middleware('role:1,3,9,11,6');
+Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
 Route::get('data_audit1','PenjadwalanController@dataAudit1')->name('dataaudit1');
 Route::get('data_audit2','PenjadwalanController@dataAudit2')->name('dataaudit2');
 Route::get('data_rapat','PenjadwalanController@dataRapat')->name('datarapat');
 Route::get('data_tinjauan','PenjadwalanController@dataTinjauan')->name('datatinjauan');
+
 
 Route::get('audit_plan/{id}','PenjadwalanController@auditPlan')->name('auditplan')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('laporan_audit/{id}','PenjadwalanController@laporanAudit')->name('laporanaudit')->middleware('role:1,3,6,9,10,11,12,13');
