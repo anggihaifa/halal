@@ -80,7 +80,8 @@
                
                 columns:[
                    
-                   {                       
+                   {     
+                        "data":'no_registrasi',              
                         "render":function (data,type,full,meta) {
 
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
@@ -189,7 +190,7 @@
                 processing:true,
                 serverSide:true,
                 ajax:"{{route('registrasi.datatable')}}",
-                order:[[0,'asc']]
+              
 
             });
 

@@ -313,19 +313,9 @@ return [
         ],        
         [
             'icon' => 'ion-md-book',
-            'title' => 'Registrasi',
-            'url' => '#',
-            'caret' => true,
-            'sub_menu' => [
-                [
-                    'url' => 'listpenawaranharga',
-                    'title' => 'Penawaran Harga dan Kontrak Akad'
-                ],               
-                [
-                    'url' => 'listpenerbitanoc',
-                    'title' => 'Penerbitan OC'
-                ],               
-            ],
+            'title' => 'Menu Keuangan',
+            'url' => 'listkeuangan',
+            
         ],
         [
             'icon' => 'ion-md-book',

@@ -1154,9 +1154,8 @@
                 columns:[
                    
                    {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
+                        "data":'no_registrasi',
+                        
                         "render":function (data,type,full,meta) {
 
                             
