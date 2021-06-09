@@ -86,6 +86,37 @@ class RegistrasiController extends Controller
         $dataJenis = JenisRegistrasi::all();
         return view('registrasi.listRegistrasi',compact('dataKelompok','dataJenis'));
     }
+    public function listMonitoringRegistrasi(){
+        $dataKelompok = KelompokProduk::all();
+        $dataJenis = JenisRegistrasi::all();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
+
+        $response = curl_exec($curl);   
+        curl_close($curl);
+
+        $response = json_decode($response);
+        $cabang = $response->data;
+
+        $regis = DB::table('registrasi')                
+                 ->where('registrasi.status_cancel','=',0)
+                 ->select('registrasi.*')
+                 ->orderBy('registrasi.updated_at','desc')
+                 ->get();
+
+        return view('registrasi.listMonitoringRegistrasi',compact('dataKelompok','dataJenis','regis','cabang'));
+    }
     public function listRegistrasiPelangganAktif(){
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
@@ -3461,6 +3492,75 @@ class RegistrasiController extends Controller
                  ->orderBy('registrasi.id','desc');
 
         return Datatables::of($xdata)->make();
+    }
+
+    public function dataMonitoringRegistrasi(Request $request){
+        // dd("disini");
+        $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
+        //start
+
+        if($kodewilayah == '119'){
+             $xdata = DB::table('registrasi')
+                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')                     
+                     ->join('users','registrasi.id_user','=','users.id')
+                     ->join('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
+                     ->select('registrasi.no_registrasi','registrasi.nama_perusahaan','registrasi.tgl_registrasi','registrasi.status','registrasi.id as id_regis','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log')
+                     ->orderBy('registrasi.updated_at','desc')
+                     ->groupBy('registrasi.id')
+                    ->where(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);                                               
+                    });
+        }else{
+
+            $xdata = DB::table('registrasi')
+                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+                     ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                     ->join('users','registrasi.id_user','=','users.id')
+                     ->join('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                     
+                     ->select('registrasi.no_registrasi','registrasi.nama_perusahaan','registrasi.tgl_registrasi','registrasi.status','registrasi.id as id_regis','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log')
+                     ->orderBy('registrasi.updated_at','desc')
+                    ->where(function($query) use ($kodewilayah){
+                        $query->where('registrasi.status_cancel','=',0);
+                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);                        
+                    });
+        }
+                          
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['name'])){
+            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+        }
+        if(isset($gdata['perusahaan'])){
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+        }
+        if(isset($gdata['kelompok_produk'])){
+            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+        }
+        if(isset($gdata['tgl_registrasi'])){
+            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+        }
+       
+        if(isset($gdata['status_akad'])){
+            $xdata = $xdata->where('status_akad','=',$gdata['status_akad']);
+        }
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
+    }
+
+    public function monitoringLogRegistrasi($id){
+        // dd($id$id_user);        
+        $getLog =   DB::table('log_kegiatan')
+                    ->where('id_registrasi',$id)                    
+                    ->get();
+        $dataLog = json_decode($getLog,true);                
+        
+        return view('registrasi.dataLog',compact('dataLog'));        
     }
 
     public function uploadOCAdmin($id){

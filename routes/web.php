@@ -40,6 +40,9 @@ Route::get('data_registrasi_pelanggan','RegistrasiController@dataRegistrasiPelan
 Route::get('list_registrasi_pelanggan_aktif','RegistrasiController@listRegistrasiPelangganAktif')->name('listregistrasipelangganaktif')->middleware('role:1,3');
 Route::get('data_registrasi_pelanggan_aktif','RegistrasiController@dataRegistrasiPelangganAktif')->name('dataregistrasipelangganaktif')->middleware('role:1,3');
 
+Route::get('list_monitoring_registrasi','RegistrasiController@listMonitoringRegistrasi')->name('listmonitoringregistrasi')->middleware('role:1,3,6,7,8,10,11,12');
+Route::get('data_monitoring_registrasi','RegistrasiController@dataMonitoringRegistrasi')->name('datamonitoringregistrasi')->middleware('role:1,3,6,7,8,10,11,12');
+
 //phpword
 Route::post('download_auditplan','PHPWordController@downloadAuditPlan')->name('downloadauditplan')->middleware('role:1,3,6,9,10,11,12,13');
 Route::post('upload_auditplan','PHPWordController@uploadAuditPlan')->name('uploadauditplan')->middleware('role:1,3,6,9,10,11,12,13');
@@ -194,8 +197,8 @@ Route::get('list_akad_approver','ReviewerController@listAkadApprover')->name('li
 Route::get('data_akad_approver','ReviewerController@dataAkadApprover')->name('dataakadapprover')->middleware('role:1,3,9');
 
 //admin
-Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listakadadmin')->middleware('role:1,3,5,7,9');
-Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin')->middleware('role:1,3,5,7,9');
+Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listakadadmin')->middleware('role:1,3,5,6,7,9');
+Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin')->middleware('role:1,3,5,6,7,9');
 Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin')->middleware('role:1,3,5,7,9');
 Route::put('upload_file_akad_admin/{id}','RegistrasiController@uploadFileAkadAdmin')->name('registrasi.uploadfileakadadmin')->middleware('role:1,3,5,7,9');
 Route::get('konfirmasi_akad_admin/{id}/{status}','RegistrasiController@konfirmasiAkadAdmin')->middleware('role:1,3,5,7,9');
@@ -210,6 +213,8 @@ Route::put('upload_file_oc_admin/{id}','RegistrasiController@uploadFileOCAdmin')
 Route::put('upload_file_oc_user/{id}','RegistrasiController@uploadFileOCUser')->name('registrasi.uploadfileocuser')->middleware('role:1,2,3,5');
 Route::get('update_status_oc/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusOC')->middleware('role:1,3,5,7,9');
 Route::get('konfirmasi_oc_admin/{id}/{status}','RegistrasiController@konfirmasiOCAdmin')->middleware('role:1,3,5');
+
+Route::get('monitoring_log_registrasi/{id}','RegistrasiController@monitoringLogRegistrasi')->name('registrasi.monitoringlogregistrasi')->middleware('role:1,3,6,7,8,11,12');
 
 //Route::put('acc_audit_admin/{id}','RegistrasiController@accAuditAdmin')->name('registrasi.accauditadmin');
 //Route::put('acc_berita_acara_admin/{id}','RegistrasiController@accBeritaAcaraAdmin')->name('registrasi.accberitaacaraadmin');
