@@ -219,39 +219,38 @@ class RegistrasiController extends Controller
             }
             
            
-            if($status == '4' ||$status == '5' ||$status == '7' ||$status == '8' ||$status == '10' ||$status == '11' ||$status == '12' ||$status == '14'  ||$status == '15'    ||$status == '20' ||$status == '22' ||$status == '23' ||$status == '24' ||$status == '25' || $status == '2'||$status == '6' || $status == '9'||$status == 'g' || $status == '21'|| $status == '26'){
+            if($status == '2' ||$status == '2_1' ||$status == '6' ||$status == '8_3' ||$status == '12' ||$status == '12_2'  ||$status == '12_3'    ||$status == '6_2' ||$status =='6_3' ||$status == '9_2' ||$status == '9_3' ||$status == '2_2' || $status == '2_3'||$status == '5_1' || $status == '9'||$status == '8_1' || $status == '8_2'){
                 
                      if( $status == '2'){
                         $e->dl_berkas = $dl;
                       
                        
-                     }elseif( $status == '5'){
+                     }elseif( $status == '2_1'){
                         $e->status_berkas = '1';
                        
 
-                     }elseif( $status == '6'){
+                     }elseif( $status == '4'){
                         $e->dl_akad = $dl;
                        
 
                        
 
-                     }elseif( $status == '9'){
+                     }elseif( $status == '6'){
                         $p->dl_tahap1 = $dl;
                         
 
-                     }elseif($status == 'g'){
+                     }elseif($status == '8_3'){
                         if($p->nominal_tahap2 == 0){                            
-                            $status=15;
+                            $status=10;
                             $e->status = $status;
-                            // $this->konfirmasiPembayaranTahap22($e->id,$e->no_registrasi,$e->id_user,15);                                                                
-
+                            
                         }else{
 
                             // dd($status);
                             $p->dl_tahap2 = $dl;
                         }
                            
-                    }elseif( $status == '21'){
+                    }elseif( $status == '12'){
                        
 
                         $p->dl_tahap3 = $dl;
@@ -271,35 +270,14 @@ class RegistrasiController extends Controller
                     $u->save();
                 }                
 
-                // $p->save();
-                // $e->save();
-                // $u->save();
-               
-                //Session::flash('success', "data berhasil disimpan!");                                                       
-                        
-                //dd($e);
-                
-                if(is_null($p)== 0){
-
-                     $e->save();
-                     $u->save();
-                     $p->save();
-
-                }else{
-                    $e->save();
-                    $u->save();
-                }
-               
-                //Session::flash('success', "data berhasil disimpan!");
-
                    
                 try{
                     // dd($e->status);
 
 
-                    if($e->status=='g' && $p->nominal_tahap2=='0'){
+                    if($e->status=='8_3' && $p->nominal_tahap2=='0'){
                             // dd($e->status);   
-                    }else if($e->status == 15){                        
+                    }else if($e->status == 10){                        
                         DB::commit();
                     }else{
                         DB::commit();
@@ -2795,16 +2773,16 @@ class RegistrasiController extends Controller
 
         $model = new Registrasi();
         $model2 = new User();
-        // $model3 = new Pembayaran();
-        $model4 = new Akad();             
-        // dd($id);        
+        $model3 = new Pembayaran();
+        //$model4 = new Akad();             
+        //dd($id);        
 
         try{            
             DB::beginTransaction();
             // $cekAkad = new Akad::where('id_registrasi', $id)->first();
             $e = $model->find($id);            
             $u = $model2->find($e->id_user);
-            // $p = $model3->find($e->id_pembayaran);
+            $p = $model3->find($e->id_pembayaran);
 
             date_default_timezone_set('Asia/Jakarta');
             $date = date("Y-m-d h:i:sa");
@@ -2812,81 +2790,106 @@ class RegistrasiController extends Controller
             $e->tanggal_akad = $date;
             $e->mata_uang = $data['mata_uang'];            
             $e->status_akad = 1;
-            $e->status = '4_1'; 
+            $e->status = '6_0'; 
 
+            $updater =  Auth::user()->id;
+
+            //dd("masuk sini");
             if($request->has("file")){
+                //dd("masuk sini");
                 $file = $request->file("file");
                 $file = $data["file"];
                 $filename = "PENAWARAN_AKAD-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
                 $file->storeAs("public/buktiakad/".$e->id_user."/", $filename);
                 $e->file_akad = $filename;
-                $model4->berkas_akad = $filename;
+                //$model4->berkas_akad = $filename;
+               
             }
 
             $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
             $bp2 = str_replace('.', '', $bp1);            
             $e->total_biaya = $bp2;
+           
+            if($p == null){
+               // dd("masuk_null");
+                if($e->total_biaya >10000000 && $e->total_biaya <= 50000000){
+               // dd($e->total_biaya);
+
+                    $model3->nominal_tahap1 = ((int)$e->total_biaya)/2;
+                    $model3->nominal_tahap3 = ((int)$e->total_biaya)/2;
+                    $model3->nominal_total =((int)$e->total_biaya);
+                    $model3->id_registrasi = $e->id;
+                    $model3->updated_by=$updater;
+                    $model3->mata_uang = $e->mata_uang;
+                    $model3->tanggal_tahap1 = $date;
+                    $model3->save();
+                    }
+                elseif($e->total_biaya > 50000000){
+                   // dd($e->total_biaya);
+                    $model3->nominal_tahap1 = ((int)$e->total_biaya)*30/100;
+                    $model3->nominal_tahap2 = ((int)$e->total_biaya)*30/100;
+                    $model3->nominal_tahap3 =  ((int)$e->total_biaya)*40/100;
+                    $model3->nominal_total =  ((int)$e->total_biaya);
+                    $model3->id_registrasi = $e->id;
+                    $model3->updated_by=$updater;
+                    $model3->mata_uang = $e->mata_uang;
+                    $model3->tanggal_tahap1 = $date;
+                    $model3->save();
+                }else{
+                     //dd($e->total_biaya);
+                    $model3->nominal_tahap1 = ((int)$e->total_biaya);
+                    $model3->nominal_total = ((int)$e->total_biaya);
+                    $model3->id_registrasi = $e->id;
+                    $model3->updated_by=$updater;
+                    $model3->mata_uang = $e->mata_uang;
+                    $model3->tanggal_tahap1 = $date;
+                    $model3->save();
+
+                }
+                $e->id_pembayaran = $model3->id;
+                $e->save();
+                SendEmailP::dispatch($e,$u,$model3, '4_1');
+            }else{
+                //dd("masuk");
+                if($e->total_biaya >10000000 && $e->total_biaya <= 50000000){
+               // dd($e->total_biaya);
+
+                    $p->nominal_tahap1 = ((int)$e->total_biaya)/2;
+                    $p->nominal_tahap3 = ((int)$e->total_biaya)/2;
+                    $p->nominal_total =((int)$e->total_biaya);
+                    $p->id_registrasi = $e->id;
+                    $p->updated_by=$updater;
+                    $p->mata_uang = $e->mata_uang;
+                    $p->tanggal_tahap1 = $date;
+                    $p->save();
+                    }
+                elseif($e->total_biaya > 50000000){
+                   // dd($e->total_biaya);
+                    $p->nominal_tahap1 = ((int)$e->total_biaya)*30/100;
+                    $p->nominal_tahap2 = ((int)$e->total_biaya)*30/100;
+                    $p->nominal_tahap3 =  ((int)$e->total_biaya)*40/100;
+                    $p->nominal_total =  ((int)$e->total_biaya);
+                    $p->id_registrasi = $e->id;
+                    $p->updated_by=$updater;
+                    $p->mata_uang = $e->mata_uang;
+                    $p->tanggal_tahap1 = $date;
+                    $p->save();
+                }else{
+                     //dd($e->total_biaya);
+                    $p->nominal_tahap1 = ((int)$e->total_biaya);
+                    $p->nominal_total = ((int)$e->total_biaya);
+                    $p->id_registrasi = $e->id;
+                    $p->updated_by=$updater;
+                    $p->mata_uang = $e->mata_uang;
+                    $p->tanggal_tahap1 = $date;
+                     $p->save();
+                }
+                SendEmailP::dispatch($e,$u,$p, '4_1');
+            }
             // dd($e->id);
             $this->LogKegiatan($e->id, Auth::user()->id, Auth::user()->name, 4, "Sales Account Officer Upload Berkas Penawaran & Kontrak Akad");
             
-            // dd($model4);
-            // if($e->id_akad != null){
-            //     $a = $model4->find($e->id_akad);
-            //     // dd($a);
-
-            //     // $a->id_registrasi = $id;
-            //     $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
-            //     $bp2 = str_replace('.', '', $bp1);            
-            //     $a->biaya_pemeriksaan = $bp2;
-
-            //     // $bpe1 = str_replace('Rp', '', $data['biaya_pengujian']);
-            //     // $bpe2 = str_replace('.', '', $bpe1);
-            //     // $a->biaya_pengujian = $bpe2;
-
-            //     // $bsf1 = str_replace('Rp', '', $data['biaya_sidang_fatwa']);
-            //     // $bsf2 = str_replace('.', '', $bsf1);
-            //     // $a->biaya_sidang_fatwa = $bsf2;
-
-            //     // $z = str_replace('Rp', '', $data['total_biaya']);
-            //     // $b = str_replace('.', '',$z);
-
-            //     $a->total_biaya_sertifikasi = $b;
-            //     $a->save();
-            //     $e->total_biaya = $b;                
-            // }else{
-            //     $model4->id_registrasi = $id;         
-            //     $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
-            //     $bp2 = str_replace('.', '', $bp1);            
-            //     $model4->biaya_pemeriksaan = $bp2;
-
-            //     $bpe1 = str_replace('Rp', '', $data['biaya_pengujian']);
-            //     $bpe2 = str_replace('.', '', $bpe1);
-            //     $model4->biaya_pengujian = $bpe2;
-
-            //     $bsf1 = str_replace('Rp', '', $data['biaya_sidang_fatwa']);
-            //     $bsf2 = str_replace('.', '', $bsf1);
-            //     $model4->biaya_sidang_fatwa = $bsf2;
-
-            //     $z = str_replace('Rp', '', $data['total_biaya']);
-            //     $b = str_replace('.', '',$z);
-
-            //     $model4->total_biaya_sertifikasi = $b;
-            //     $model4->save();
-            //     $e->total_biaya = $b;
-            //     $e->id_akad = $model4->id;
-            // }
-                                                 
-            // $e->status_akad = 1;
-            // $e->status='c';
-
-            // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);            
-            // $b = str_replace('.', '', $a);
-            // $total = (int)$b;
-            // $a = $data['total_biaya'].split('.').join("");
-			// $total = $a.split('Rp').join("");                            
-            // $e->total_biaya = $data['total_biaya'];
-            // dd($data['total_biaya']);
-            // dd($e->total_biaya);                        
+           
             $e->save();
             DB::commit();
             // SendEmailP::dispatch($e,$u,$p, $e->status);
@@ -2898,7 +2901,7 @@ class RegistrasiController extends Controller
 
             Session::flash('error', $e->getMessage());
         }
-            $redirect = redirect()->route('listakadadmin');
+            $redirect = redirect()->route('listkeuangan');
             return $redirect;
     }
 
@@ -2944,7 +2947,7 @@ class RegistrasiController extends Controller
 
             Session::flash('error', $e->getMessage());
         }
-            $redirect = redirect()->route('listpenerbitanoc');
+            $redirect = redirect()->route('listkeuangan');
             return $redirect;
     }
 
@@ -2994,35 +2997,35 @@ class RegistrasiController extends Controller
             return $redirect;
     }
 
-    public function accAuditAdmin(Request $request, $id){
-        $data = $request->except('_token','_method');
-        //dd($data);
-        $model = new Registrasi();
-        $model2 = new User();        
+    // public function accAuditAdmin(Request $request, $id){
+    //     $data = $request->except('_token','_method');
+    //     //dd($data);
+    //     $model = new Registrasi();
+    //     $model2 = new User();        
 
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $u = $model2->find($e->id_user);    
+    //     try{
+    //         DB::beginTransaction();
+    //         $e = $model->find($id);
+    //         $u = $model2->find($e->id_user);    
             
-            $e->status_report = 2;
-            $e->status_berita_acara = 2;
-            $e->status = 17;       
+    //         $e->status_report = 2;
+    //         $e->status_berita_acara = 2;
+    //         $e->status = 17;       
             
-            $e->save();
-            DB::commit();
-            //  SendEmailP::dispatch($e,$u,$p, $status);
-            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 18);
-            Session::flash('success', "Konfirmasi File Report dan Berita Acara Audit Berhasil");
+    //         $e->save();
+    //         DB::commit();
+    //         //  SendEmailP::dispatch($e,$u,$p, $status);
+    //         $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 11_2);
+    //         Session::flash('success', "Konfirmasi File Report dan Berita Acara Audit Berhasil");
             
-        }catch (\Exception $e){
-            DB::rollBack();
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
 
-            Session::flash('error', $e->getMessage());
-        }
-            $redirect = redirect()->route('registrasiHalal.index');            
-            return $redirect;
-    }
+    //         Session::flash('error', $e->getMessage());
+    //     }
+    //         $redirect = redirect()->route('registrasiHalal.index');            
+    //         return $redirect;
+    // }
 
     public function accBeritaAcaraAdmin(Request $request, $id){
         $data = $request->except('_token','_method');
@@ -3045,7 +3048,7 @@ class RegistrasiController extends Controller
             $e->save();
 
             DB::commit();
-            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 18);
+            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 12);
             //  SendEmailP::dispatch($e,$u,$p, $status);
             Session::flash('success', "Konfirmasi File Berita Acara Berhasil");
             
@@ -3058,55 +3061,55 @@ class RegistrasiController extends Controller
             return $redirect;
     }    
 
-    public function uploadFileReportAdmin(Request $request, $id){
-        $data = $request->except('_token','_method');
-        //dd($data);
+    // public function uploadFileReportAdmin(Request $request, $id){
+    //     $data = $request->except('_token','_method');
+    //     //dd($data);
 
-        $model = new Registrasi();
-        $model2 = new User();
-        $model3 = new Pembayaran();
+    //     $model = new Registrasi();
+    //     $model2 = new User();
+    //     $model3 = new Pembayaran();
 
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $u = $model2->find($e->id_user); 
-            $p = $model3->find($e->id_pembayaran);           
+    //     try{
+    //         DB::beginTransaction();
+    //         $e = $model->find($id);
+    //         $u = $model2->find($e->id_user); 
+    //         $p = $model3->find($e->id_pembayaran);           
 
-            // $e->tanggal_akad = $data['tgl_akad'];
-            // $e->status_akad = 1;
-            // $e->mata_uang = $data['mata_uang'];
-            // $e->status=31;
-            $e->status_report=1;
+    //         // $e->tanggal_akad = $data['tgl_akad'];
+    //         // $e->status_akad = 1;
+    //         // $e->mata_uang = $data['mata_uang'];
+    //         // $e->status=31;
+    //         //$e->status_report=1;
 
-            if($e->status_berita_acara==1){
-                $e->status=16;
-            }
-            // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
-            // $e->total_biaya = $data['total_biaya'];
-            if($request->has("file")){
-                $file = $request->file("file");
-                $file = $data["file"];
-                $filename = "REPORT-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktireport/".$e->id_user."/", $filename);
-                $e->file_report = $filename;
-            }
-            $e->save();
-            DB::commit();
-            // dd($data);
-            if($e->status_berita_acara==1){
-                SendEmailP::dispatch($e,$u,$p, $e->status);
+    //         if($e->status_berita_acara==1){
+    //             $e->status=11_1;
+    //         }
+    //         // $data['total_biaya'] = str_replace(',', '', $data['total_biaya']);
+    //         // $e->total_biaya = $data['total_biaya'];
+    //         if($request->has("file")){
+    //             $file = $request->file("file");
+    //             $file = $data["file"];
+    //             $filename = "REPORT-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+    //             $file->storeAs("public/buktireport/".$e->id_user."/", $filename);
+    //             $e->file_report = $filename;
+    //         }
+    //         $e->save();
+    //         DB::commit();
+    //         // dd($data);
+    //         if($e->status_berita_acara==1){
+    //             SendEmailP::dispatch($e,$u,$p, $e->status);
 
-            }
-            // Session::flash('success', "Upload Dokumen Report Berhasil");            
+    //         }
+    //         // Session::flash('success', "Upload Dokumen Report Berhasil");            
             
-        }catch (\Exception $e){
-            DB::rollBack();
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
 
-            Session::flash('error', $e->getMessage());
-        }
-            $redirect = redirect()->route('listberitaacara');
-            return $redirect;
-    }
+    //         Session::flash('error', $e->getMessage());
+    //     }
+    //         $redirect = redirect()->route('listberitaacara');
+    //         return $redirect;
+    // }
 
     public function uploadFileBeritaAcaraAdmin(Request $request, $id){
         $data = $request->except('_token','_method');        
@@ -3125,9 +3128,7 @@ class RegistrasiController extends Controller
             // $e->status_akad = 1;
             // $e->mata_uang = $data['mata_uang'];
             $e->status_berita_acara=1;
-            if($e->status_report==1){
-                $e->status=16;
-            }
+            
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
@@ -3138,11 +3139,11 @@ class RegistrasiController extends Controller
             $e->save();
             DB::commit();
 
-            if($e->status_report==1){  
+            // if($e->status_report==1){  
 
                 SendEmailP::dispatch($e,$u,$p, $e->status);
                 
-            }            
+            // }            
             // dd($data);
             Session::flash('success', "Upload Dokumen Berita Acara Berhasil");
 
@@ -3156,312 +3157,312 @@ class RegistrasiController extends Controller
             return $redirect;
     }
 
-    public function uploadFileMUI(Request $request, $id){
-        $data = $request->except('_token','_method');
-        //dd($data);
+    // public function uploadFileMUI(Request $request, $id){
+    //     $data = $request->except('_token','_method');
+    //     //dd($data);
 
-        $model = new Registrasi();
-        $model2 = new User();
-        $model3 = new Pembayaran();
+    //     $model = new Registrasi();
+    //     $model2 = new User();
+    //     $model3 = new Pembayaran();
 
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $u = $model2->find($e->id_user); 
-            $p = $model2->find($e->id_pembayaran); 
-            $e->status_mui=1;        
-            $e->status=20;
+    //     try{
+    //         DB::beginTransaction();
+    //         $e = $model->find($id);
+    //         $u = $model2->find($e->id_user); 
+    //         $p = $model2->find($e->id_pembayaran); 
+    //         $e->status_mui=1;        
+    //         $e->status=20;
             
-            if($request->has("file")){
-                $file = $request->file("file");
-                $file = $data["file"];
-                $filename = "HASIL_TINJAUAN_KOMITE-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/filemui/".Auth::user()->id."/", $filename);
-                $e->file_mui = $filename;
-            }
-            $e->save();
-            DB::commit();
-            SendEmailP::dispatch($e,$u,$p, $e->status);
-            Session::flash('success', "Upload Hasil Tinjauan Komite Ke MUI Berhasil");
+    //         if($request->has("file")){
+    //             $file = $request->file("file");
+    //             $file = $data["file"];
+    //             $filename = "HASIL_TINJAUAN_KOMITE-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+    //             $file->storeAs("public/filemui/".Auth::user()->id."/", $filename);
+    //             $e->file_mui = $filename;
+    //         }
+    //         $e->save();
+    //         DB::commit();
+    //         SendEmailP::dispatch($e,$u,$p, $e->status);
+    //         Session::flash('success', "Upload Hasil Tinjauan Komite Ke MUI Berhasil");
 
             
-        }catch (\Exception $e){
-            DB::rollBack();
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
 
-            Session::flash('error', $e->getMessage());
-        }
-            $redirect = redirect()->route('listberitaacara');
-            return $redirect;
-    }
+    //         Session::flash('error', $e->getMessage());
+    //     }
+    //         $redirect = redirect()->route('listberitaacara');
+    //         return $redirect;
+    // }
 
-    public function uploadFileAkadUser(Request $request, $id){
-        $data = $request->except('_token','_method');        
-        $model = new Registrasi();         
-        $akad = Akad::where('id_registrasi', $id)->first();
+    // public function uploadFileAkadUser(Request $request, $id){
+    //     $data = $request->except('_token','_method');        
+    //     $model = new Registrasi();         
+    //     $akad = Akad::where('id_registrasi', $id)->first();
         
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);                                    
+    //     try{
+    //         DB::beginTransaction();
+    //         $e = $model->find($id);                                    
 
-            if(isset($data['tidaksetuju'])){
-                $e->status='s';
-                $akad->catatan_user = $data['catatan_user'];
-                $akad->save();
-                $e->status_akad = 9;
-            }else{
-                $e->status='f';
-                $e->status_akad = 2;
-            }            
-            // dd($akad);
+    //         if(isset($data['tidaksetuju'])){
+    //             $e->status='s';
+    //             $akad->catatan_user = $data['catatan_user'];
+    //             $akad->save();
+    //             $e->status_akad = 9;
+    //         }else{
+    //             $e->status='f';
+    //             $e->status_akad = 2;
+    //         }            
+    //         // dd($akad);
             
-            if($request->has("file")){
-                $file = $request->file("file");
-                $file = $data["file"];
-                $CountA = $e->count_akad+1;
-                if($e->status == 4){
+    //         if($request->has("file")){
+    //             $file = $request->file("file");
+    //             $file = $data["file"];
+    //             $CountA = $e->count_akad+1;
+    //             if($e->status == 4){
 
-                    if($e->file_akad == NULL){
-                        $filename = "AKAD-".$e->count_akad."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                        $file->storeAs("public/buktiakad/".Auth::user()->id."/", $filename);
-                        $e->file_akad = $filename;
-                        $e->count_akad = $e->count_akad+1;
+    //                 if($e->file_akad == NULL){
+    //                     $filename = "AKAD-".$e->count_akad."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+    //                     $file->storeAs("public/buktiakad/".Auth::user()->id."/", $filename);
+    //                     $e->file_akad = $filename;
+    //                     $e->count_akad = $e->count_akad+1;
 
-                    }else{
-                         $filename = "AKAD-".$CountA."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                        $file->storeAs("public/buktiakad/".Auth::user()->id."/", $filename);
-                        $e->file_akad = $filename;
-                        $e->count_akad = $e->count_akad+1;
-                    }
-                }else{
+    //                 }else{
+    //                      $filename = "AKAD-".$CountA."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+    //                     $file->storeAs("public/buktiakad/".Auth::user()->id."/", $filename);
+    //                     $e->file_akad = $filename;
+    //                     $e->count_akad = $e->count_akad+1;
+    //                 }
+    //             }else{
 
-                     $filename = "AKAD-".$e->count_akad."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                    $file->storeAs("public/buktiakad/".Auth::user()->id."/", $filename);
-                    $e->file_akad = $filename;
-                    //$e->count_akad = $e->count_akad+1;
-                }
+    //                  $filename = "AKAD-".$e->count_akad."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+    //                 $file->storeAs("public/buktiakad/".Auth::user()->id."/", $filename);
+    //                 $e->file_akad = $filename;
+    //                 //$e->count_akad = $e->count_akad+1;
+    //             }
                 
                 
-            }            
+    //         }            
            
-            $e->save();        
-            DB::commit();
+    //         $e->save();        
+    //         DB::commit();
 
-            Session::flash('success', "Upload Bukti Dokumen Kontrak Berhasil");
+    //         Session::flash('success', "Upload Bukti Dokumen Kontrak Berhasil");
 
             
-        }catch (\Exception $e){
-            DB::rollBack();
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
 
-            Session::flash('error', $e->getMessage());
-        }
-            $redirect = redirect()->route('registrasiHalal.index');
-            return $redirect;
-    }
+    //         Session::flash('error', $e->getMessage());
+    //     }
+    //         $redirect = redirect()->route('registrasiHalal.index');
+    //         return $redirect;
+    // }
 
-     public function listAkadAdmin(){
-        $dataKelompok = KelompokProduk::all();
-        $dataJenis = JenisRegistrasi::all();
-        return view('registrasi.listKontrakAkad',compact('dataKelompok','dataJenis'));
-    }
+    //  public function listAkadAdmin(){
+    //     $dataKelompok = KelompokProduk::all();
+    //     $dataJenis = JenisRegistrasi::all();
+    //     return view('registrasi.listKontrakAkad',compact('dataKelompok','dataJenis'));
+    // }
 
-    public function listBeritaAcara(){
-        $dataKelompok = KelompokProduk::all();
-        $dataJenis = JenisRegistrasi::all();
-        return view('registrasi.listBeritaAcara',compact('dataKelompok','dataJenis'));
-    }
+    // public function listBeritaAcara(){
+    //     $dataKelompok = KelompokProduk::all();
+    //     $dataJenis = JenisRegistrasi::all();
+    //     return view('registrasi.listBeritaAcara',compact('dataKelompok','dataJenis'));
+    // }
 
-    public function dataAkadAdmin(Request $request){
-        $gdata = $request->except('_token','_method');
-        $kodewilayah = Auth::user()->kode_wilayah;
-        //start
+    // public function dataAkadAdmin(Request $request){
+    //     $gdata = $request->except('_token','_method');
+    //     $kodewilayah = Auth::user()->kode_wilayah;
+    //     //start
 
-        if($kodewilayah == '119'){
-             $xdata = DB::table('registrasi')
-                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                     ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                     ->join('users','registrasi.id_user','=','users.id')
-                     ->orderBy('registrasi.updated_at','desc')
+    //     if($kodewilayah == '119'){
+    //          $xdata = DB::table('registrasi')
+    //                  ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //                  ->join('users','registrasi.id_user','=','users.id')
+    //                  ->orderBy('registrasi.updated_at','desc')
                      
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                    ->where(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
+    //                  ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+    //                 ->where(function($query) use ($kodewilayah){
+    //                     $query->where('registrasi.status_cancel','=',0);
                        
-                        // $query->where('registrasi.status','=',4);
-                    })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
+    //                     // $query->where('registrasi.status','=',4);
+    //                 })
+    //                 ->orWhere(function($query) use ($kodewilayah){
+    //                     $query->where('registrasi.status_cancel','=',0);
                        
-                        // $query->where('registrasi.status','=','4_0');
-                    }) 
-                     ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
+    //                     // $query->where('registrasi.status','=','4_0');
+    //                 }) 
+    //                  ->orWhere(function($query) use ($kodewilayah){
+    //                     $query->where('registrasi.status_cancel','=',0);
                        
-                        // $query->where('registrasi.status','=','4_1');
-                    });
-        }else{
+    //                     // $query->where('registrasi.status','=','4_1');
+    //                 });
+    //     }else{
 
-            $xdata = DB::table('registrasi')
-                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                     ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                     ->join('users','registrasi.id_user','=','users.id')
-                     ->orderBy('registrasi.updated_at','desc')
+    //         $xdata = DB::table('registrasi')
+    //                  ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //                  ->join('users','registrasi.id_user','=','users.id')
+    //                  ->orderBy('registrasi.updated_at','desc')
                      
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                    ->where(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        // $query->where('registrasi.status','=',4);
-                    })
-                    ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        // $query->where('registrasi.status','=','4_0');
-                    }) 
-                     ->orWhere(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        // $query->where('registrasi.status','=','4_1');
-                    });
-        }
+    //                  ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+    //                 ->where(function($query) use ($kodewilayah){
+    //                     $query->where('registrasi.status_cancel','=',0);
+    //                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                     // $query->where('registrasi.status','=',4);
+    //                 })
+    //                 ->orWhere(function($query) use ($kodewilayah){
+    //                     $query->where('registrasi.status_cancel','=',0);
+    //                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                     // $query->where('registrasi.status','=','4_0');
+    //                 }) 
+    //                  ->orWhere(function($query) use ($kodewilayah){
+    //                     $query->where('registrasi.status_cancel','=',0);
+    //                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                     // $query->where('registrasi.status','=','4_1');
+    //                 });
+    //     }
                           
 
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
+    //     //filter condition
+    //     if(isset($gdata['no_registrasi'])){
+    //         $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+    //     }
+    //     if(isset($gdata['name'])){
+    //         $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+    //     }
+    //     if(isset($gdata['perusahaan'])){
+    //         $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+    //     }
+    //     if(isset($gdata['kelompok_produk'])){
+    //         $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+    //     }
+    //     if(isset($gdata['tgl_registrasi'])){
+    //         $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+    //     }
        
-        if(isset($gdata['status_akad'])){
-            $xdata = $xdata->where('status_akad','=',$gdata['status_akad']);
-        }
-        //end
-        $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+    //     if(isset($gdata['status_akad'])){
+    //         $xdata = $xdata->where('status_akad','=',$gdata['status_akad']);
+    //     }
+    //     //end
+    //     $xdata = $xdata
+    //              ->orderBy('registrasi.id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
-    public function dataPenerbitanOC(Request $request){
-        $gdata = $request->except('_token','_method');
-        $kodewilayah = Auth::user()->kode_wilayah;
-        //start
+    // public function dataPenerbitanOC(Request $request){
+    //     $gdata = $request->except('_token','_method');
+    //     $kodewilayah = Auth::user()->kode_wilayah;
+    //     //start
 
-        if($kodewilayah == '119'){
-             $xdata = DB::table('registrasi')
-                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                     ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                     ->join('users','registrasi.id_user','=','users.id')
+    //     if($kodewilayah == '119'){
+    //          $xdata = DB::table('registrasi')
+    //                  ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //                  ->join('users','registrasi.id_user','=','users.id')
                      
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                     ->orderBy('registrasi.updated_at','desc')
-                    ->where(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);                                               
-                    })
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
+    //                  ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+    //                  ->orderBy('registrasi.updated_at','desc')
+    //                 ->where(function($query) use ($kodewilayah){
+    //                     $query->where('registrasi.status_cancel','=',0);                                               
+    //                 })
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
                        
-                    //     // $query->where('registrasi.status','=','6_0');
-                    // }) 
-                    //  ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     // $query->where('registrasi.status','=','6_0');
+    //                 // }) 
+    //                 //  ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
                        
-                    //     // $query->where('registrasi.status','=','6_1');
-                    // })
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     // $query->where('registrasi.status','=','6_1');
+    //                 // })
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
                        
-                    //     // $query->where('registrasi.status','=','6_2');
-                    // })
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     // $query->where('registrasi.status','=','6_2');
+    //                 // })
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
                        
-                    //     // $query->where('registrasi.status','=','6_3');
-                    // })
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     // $query->where('registrasi.status','=','6_3');
+    //                 // })
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
                        
-                    //     // $query->where('registrasi.status','=','6_4');
-                    // })
-                    ;
-        }else{
+    //                 //     // $query->where('registrasi.status','=','6_4');
+    //                 // })
+    //                 ;
+    //     }else{
 
-            $xdata = DB::table('registrasi')
-                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                     ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                     ->join('users','registrasi.id_user','=','users.id')
+    //         $xdata = DB::table('registrasi')
+    //                  ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //                  ->join('users','registrasi.id_user','=','users.id')
                      
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                     ->orderBy('registrasi.updated_at','desc')
-                    ->where(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                        // $query->where('registrasi.status','=',6);
-                    })
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
-                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    //     $query->where('registrasi.status','=','6_0');
-                    // }) 
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
-                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    //     $query->where('registrasi.status','=','6_1');
-                    // })
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
-                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    //     $query->where('registrasi.status','=','6_2');
-                    // })
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
-                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    //     $query->where('registrasi.status','=','6_3');
-                    // })
-                    // ->orWhere(function($query) use ($kodewilayah){
-                    //     $query->where('registrasi.status_cancel','=',0);
-                    //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    //     $query->where('registrasi.status','=','6_4');
-                    // })
-                    ;
-        }
+    //                  ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+    //                  ->orderBy('registrasi.updated_at','desc')
+    //                 ->where(function($query) use ($kodewilayah){
+    //                     $query->where('registrasi.status_cancel','=',0);
+    //                     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                     // $query->where('registrasi.status','=',6);
+    //                 })
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 //     $query->where('registrasi.status','=','6_0');
+    //                 // }) 
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 //     $query->where('registrasi.status','=','6_1');
+    //                 // })
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 //     $query->where('registrasi.status','=','6_2');
+    //                 // })
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 //     $query->where('registrasi.status','=','6_3');
+    //                 // })
+    //                 // ->orWhere(function($query) use ($kodewilayah){
+    //                 //     $query->where('registrasi.status_cancel','=',0);
+    //                 //     $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 //     $query->where('registrasi.status','=','6_4');
+    //                 // })
+    //                 ;
+    //     }
                           
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
+    //     //filter condition
+    //     if(isset($gdata['no_registrasi'])){
+    //         $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+    //     }
+    //     if(isset($gdata['name'])){
+    //         $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+    //     }
+    //     if(isset($gdata['perusahaan'])){
+    //         $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+    //     }
+    //     if(isset($gdata['kelompok_produk'])){
+    //         $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+    //     }
+    //     if(isset($gdata['tgl_registrasi'])){
+    //         $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+    //     }
        
-        if(isset($gdata['status_akad'])){
-            $xdata = $xdata->where('status_akad','=',$gdata['status_akad']);
-        }
-        //end
-        $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+    //     if(isset($gdata['status_akad'])){
+    //         $xdata = $xdata->where('status_akad','=',$gdata['status_akad']);
+    //     }
+    //     //end
+    //     $xdata = $xdata
+    //              ->orderBy('registrasi.id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
     public function uploadOCAdmin($id){
         // dd($id);
@@ -3617,34 +3618,28 @@ class RegistrasiController extends Controller
             $redirect = redirect()->route('registrasiHalal.index');
             return $redirect;
         }
-         
-            
-
-           
-       
-           
-        
+    
     }
 
-    //report
-    public function reportAudit($id){        
-            //dd($id);
-            $data = Registrasi::find($id);
-            //get Data from FAQ Transfer            
+    // //report
+    // public function reportAudit($id){        
+    //         //dd($id);
+    //         $data = Registrasi::find($id);
+    //         //get Data from FAQ Transfer            
            
 
-            if($data['status_report']==0  || $data['status_berita_acara']==0 ){
-                Session::flash('error', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
-                $redirect = redirect()->route('registrasiHalal.index');
-                return $redirect;
+    //         if($data['status_report']==0  || $data['status_berita_acara']==0 ){
+    //             Session::flash('error', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
+    //             $redirect = redirect()->route('registrasiHalal.index');
+    //             return $redirect;
             
-            }else{
+    //         }else{
                 
-                 return view('registrasi.reportAudit',compact('data'));
-            }
+    //              return view('registrasi.reportAudit',compact('data'));
+    //         }
 
 
-    }
+    // }
 
     public function reportBeritaAcara($id){        
         //dd($id);
@@ -3687,37 +3682,16 @@ class RegistrasiController extends Controller
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
-                $Count1 = $p->count_tahap1+1;
-                //dd($Count1);
-                if($e->status == 10 || $e->status == 12){
-
-                    if($p->bb_tahap1 == NULL){
-                         $filename = "BB1-".$p->count_tahap1."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                        $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                        $p->bb_tahap1 = $filename;
-                        $p->count_tahap1 = $p->count_tahap1 +1;
-                    }else{
-                        //dd($Count1);
-                        $filename = "BB1-".$Count1."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                        $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                        $p->bb_tahap1 = $filename;
-                        $p->count_tahap1 = $p->count_tahap1 +1;
-                    }
-                }else{
-                    //dd($e->status);
-                    //dd($Count1);
-
-                    $filename = "BB1-".$p->count_tahap1."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                    $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                    $p->bb_tahap1 = $filename;
-                    //$p->count_tahap1 = $p->count_tahap1 +1;
-
-                }    
                
+                $filename = "BB1-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                $p->bb_tahap1 = $filename;
+                $p->count_tahap1 = $p->count_tahap1 +1;
+                   
             }
-            $e->status='d';
+            $e->status='6_1';
             $e->save();
-            $u->save();
+            //$u->save();
             $p->save();
             DB::commit();
 
@@ -3735,32 +3709,32 @@ class RegistrasiController extends Controller
 
    
 
-    //list pembayaran registrasi
-    public function listPembayaranRegistrasi(){
-        $dataKelompok = KelompokProduk::all();
-        $dataJenis = JenisRegistrasi::all();
-        return view('registrasi.listPembayaran',compact('dataKelompok','dataJenis'));
-    }
+    // //list pembayaran registrasi
+    // public function listPembayaranRegistrasi(){
+    //     $dataKelompok = KelompokProduk::all();
+    //     $dataJenis = JenisRegistrasi::all();
+    //     return view('registrasi.listPembayaran',compact('dataKelompok','dataJenis'));
+    // }
 
-    public function unduhBuktiBayar($id){
+    // public function unduhBuktiBayar($id){
         
-         $pdfName=DB::table('registrasi')->select('inv_pembayaran')->where('id', $id)->get();
+    //      $pdfName=DB::table('registrasi')->select('inv_pembayaran')->where('id', $id)->get();
          
-         foreach($pdfName as $name)
-        {
-            foreach($name as $file_name)
-            {
+    //      foreach($pdfName as $name)
+    //     {
+    //         foreach($name as $file_name)
+    //         {
             
-                $name2 = $file_name;
-            }
+    //             $name2 = $file_name;
+    //         }
            
-        }
+    //     }
 
-        $file= public_path(). '/storage/pembayaran/'.$name2;
-        $headers = array('Content-Type: application/pdf',);
-        return Response::download($file, 'Bukti Pembayaran.pdf', $headers);
-        //return download("40305628_INV_PAYMENT.pdf");
-    }
+    //     $file= public_path(). '/storage/pembayaran/'.$name2;
+    //     $headers = array('Content-Type: application/pdf',);
+    //     return Response::download($file, 'Bukti Pembayaran.pdf', $headers);
+    //     //return download("40305628_INV_PAYMENT.pdf");
+    // }
     public function konfirmasiPembayaranRegistrasi($id){
         //retrieve data
         $getUserId = Registrasi::where('id','=',$id)->get();
@@ -3781,9 +3755,14 @@ class RegistrasiController extends Controller
 
        
 
-        $e->status = '13';
+        $e->status = '7';
         $e->updated_status_by = $updater;
-        $e->id_penjadwalan = $model4->id;
+        if($e->id_penjadwalan){
+
+        }else{
+            $e->id_penjadwalan = $model4->id;
+        }
+       
         
         $e->save();
         
@@ -3804,10 +3783,10 @@ class RegistrasiController extends Controller
             
         
         if($p->nominal_total <10000000 ){
-            $p->status_tahap1 = '2';
-            $p->status_tahap2 = '2';
+            $p->status_tahap1 = '3';
+            $p->status_tahap2 = '3';
             $p->bb_tahap2 = $p->bb_tahap1;
-            $p->status_tahap3 = '2';
+            $p->status_tahap3 = '3';
             $p->bb_tahap3 = $p->bb_tahap1;
 
             $p->reminder12_tahap2 = 1;
@@ -3818,15 +3797,15 @@ class RegistrasiController extends Controller
 
         }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
 
-            $p->status_tahap1 = '2';     
-            $p->status_tahap2 = '2';
+            $p->status_tahap1 = '3';     
+            $p->status_tahap2 = '3';
             $p->bb_tahap2 = $p->bb_tahap1;
 
             $p->reminder12_tahap2 = 1;
             $p->reminder6_tahap2 = 1;
         
         }else{
-             $p->status_tahap1 = '2';
+             $p->status_tahap1 = '3';
         }
 
         $p->bt_tahap1 = $fileName;
@@ -3837,205 +3816,205 @@ class RegistrasiController extends Controller
 
         SendEmailP::dispatch($e,$u,$p, $e->status);
 
-        $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 14);
+        $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 7);
         DB::commit();  
 
         
 
          Session::flash('success', "Pembayaran berhasil dikonfirmasi dan email telah dikirim!");
-         $redirect = redirect()->route('listpembayaranregistrasi');
+         $redirect = redirect()->route('listkeuangan');
          return $redirect;
     }
 
 
 
-    public function dataPembayaranRegistrasi(Request $request){
-        $gdata = $request->except('_token','_method');
-        $kodewilayah = Auth::user()->kode_wilayah;
-        //start
-        if($kodewilayah == '119'){
-             $xdata = DB::table('registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
-                 ->join('users','registrasi.id_user','=','users.id')
+    // public function dataPembayaranRegistrasi(Request $request){
+    //     $gdata = $request->except('_token','_method');
+    //     $kodewilayah = Auth::user()->kode_wilayah;
+    //     //start
+    //     if($kodewilayah == '119'){
+    //          $xdata = DB::table('registrasi')
+    //              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //              ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+    //              ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
-                 ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //              ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
+    //              ->where(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                     
-                    $query->where('registrasi.status','=',8);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',8);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=',9);
-                }) 
+    //                 $query->where('registrasi.status','=',9);
+    //             }) 
 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                     
-                    $query->where('registrasi.status','=',10);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',10);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=',11);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',11);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                   
-                    $query->where('registrasi.status','=',12);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',12);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=','d');
-                });          
+    //                 $query->where('registrasi.status','=','d');
+    //             });          
 
-        }else{
-            $xdata = DB::table('registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
-                 ->join('users','registrasi.id_user','=','users.id')
+    //     }else{
+    //         $xdata = DB::table('registrasi')
+    //              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //              ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+    //              ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
-                 ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',8);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',9);
-                }) 
+    //              ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1', 'pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.bb_tahap1 as bb_tahap1' )                 
+    //              ->where(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',8);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',9);
+    //             }) 
 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',10);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',11);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',12);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','d');
-                });          
-        }
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',10);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',11);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',12);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=','d');
+    //             });          
+    //     }
         
                            
 
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
+    //     //filter condition
+    //     if(isset($gdata['no_registrasi'])){
+    //         $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+    //     }
+    //     if(isset($gdata['name'])){
+    //         $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+    //     }
+    //     if(isset($gdata['perusahaan'])){
+    //         $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+    //     }
+    //     if(isset($gdata['kelompok_produk'])){
+    //         $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+    //     }
+    //     if(isset($gdata['tgl_registrasi'])){
+    //         $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+    //     }
         
-        if(isset($gdata['status_tahap1'])){
-            $xdata = $xdata->where('status_tahap1','=',$gdata['status_tahap1']);
-        }
+    //     if(isset($gdata['status_tahap1'])){
+    //         $xdata = $xdata->where('status_tahap1','=',$gdata['status_tahap1']);
+    //     }
         
-        //end
-        $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+    //     //end
+    //     $xdata = $xdata
+    //              ->orderBy('registrasi.id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
-    public function dataBeritaAcaraAdmin(Request $request){
-        $gdata = $request->except('_token','_method');
-        $kodewilayah = Auth::user()->kode_wilayah;        
-        //start                                
-        if($kodewilayah == '119'){
-            $xdata = DB::table('registrasi')
-                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                ->join('users','registrasi.id_user','=','users.id')                
-                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    // public function dataBeritaAcaraAdmin(Request $request){
+    //     $gdata = $request->except('_token','_method');
+    //     $kodewilayah = Auth::user()->kode_wilayah;        
+    //     //start                                
+    //     if($kodewilayah == '119'){
+    //         $xdata = DB::table('registrasi')
+    //             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //             ->join('users','registrasi.id_user','=','users.id')                
+    //             ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+    //             ->where(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=',15);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',15);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=',16);
-                });
-        }else{
-             $xdata = DB::table('registrasi')
-                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                ->join('users','registrasi.id_user','=','users.id')                
-                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
-                ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',15);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',16);
-                });
-        }
+    //                 $query->where('registrasi.status','=',16);
+    //             });
+    //     }else{
+    //          $xdata = DB::table('registrasi')
+    //             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //             ->join('users','registrasi.id_user','=','users.id')                
+    //             ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan')
+    //             ->where(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',15);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',16);
+    //             });
+    //     }
        
 
 
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
-        if(isset($gdata['ruang_lingkup'])){
-            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
-        }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
+    //     //filter condition
+    //     if(isset($gdata['no_registrasi'])){
+    //         $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+    //     }
+    //     if(isset($gdata['name'])){
+    //         $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+    //     }
+    //     if(isset($gdata['perusahaan'])){
+    //         $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+    //     }
+    //     if(isset($gdata['kelompok_produk'])){
+    //         $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+    //     }
+    //     if(isset($gdata['tgl_registrasi'])){
+    //         $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+    //     }
+    //     if(isset($gdata['ruang_lingkup'])){
+    //         $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
+    //     }
+    //     if(isset($gdata['status_registrasi'])){
+    //         $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
+    //     }
+    //     if(isset($gdata['status'])){
+    //         $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+    //     }
 
-        //end
-        $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+    //     //end
+    //     $xdata = $xdata
+    //              ->orderBy('registrasi.id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
 
 
@@ -4056,32 +4035,25 @@ class RegistrasiController extends Controller
             $e->updated_status_by = $updater;
             $e->save();
             
-            if($status =='11'){
-                $p->status_tahap1 = '2';
-                $p->updated_by = $updater;
-                $p->save();
-            }else{
-                $p->status_tahap1 = '0';
-                $p->updated_by = $updater;
-                $p->save();
-            }
-            
            
+            $p->status_tahap1 = '2';
+            $p->updated_by = $updater;
+            $p->save();
         
-                try{
-                    SendEmailP::dispatch($e,$u,$p, $status);
-                    //Session::flash('success', "data berhasil disimpan!");
-                    Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
+            try{
+                SendEmailP::dispatch($e,$u,$p, $status);
+                //Session::flash('success', "data berhasil disimpan!");
+                Session::flash('success', 'data dengan no registrasi '.$no_registrasi.' berhasil di kirim emailnya!');
 
-                    DB::commit();
+                DB::commit();
 
-                }catch(\Exception $u){
+            }catch(\Exception $u){
 
-                    Session::flash('error', $u->getMessage());
-                    //Session::flash('success', "data berhasil disimpan!");
-                    //$statusreg = $e->getMessage();
+                Session::flash('error', $u->getMessage());
+                //Session::flash('success', "data berhasil disimpan!");
+                //$statusreg = $e->getMessage();
 
-                }
+            }
             
         }catch (\Exception $e){
             DB::rollBack();
@@ -4091,11 +4063,89 @@ class RegistrasiController extends Controller
            
         }
 
-        $redirect = redirect()->route('listpembayaranregistrasi');
+        $redirect = redirect()->route('listkeuangan');
          return $redirect;
 
     }
 
+
+    public function listKeuangan(){
+        $dataKelompok = KelompokProduk::all();
+        $dataJenis = JenisRegistrasi::all();
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
+
+        $response = curl_exec($curl);   
+        curl_close($curl);
+
+        $response = json_decode($response);
+        $cabang = $response->data;
+
+
+        $kw = DB::table('registrasi')
+                
+                 ->where('registrasi.status_cancel','=',0)
+                 ->select('registrasi.kode_wilayah')
+                 ->orderBy('registrasi.updated_at','desc')
+                 ->get();
+
+        //dd($cabang);
+
+        return view('registrasi.listKeuangan',compact('dataKelompok','dataJenis','cabang','kw'));
+    }
+
+    public function dataKeuangan(Request $request){
+        $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
+        //start
+        if($kodewilayah == '119'){            
+            $xdata = DB::table('registrasi')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 /*->leftJoin('pembayaran','registrasi.id','=', 'pembayaran.id_registrasi')*/
+                 ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
+                //  ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
+                
+                
+                 ->where('registrasi.status_cancel','=',0)
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'registrasi.file_akad as berkas_akad', 'registrasi.total_biaya as total_biaya_sertifikasi');
+               
+        }else{            
+            $xdata = DB::table('registrasi')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                ->join('users','registrasi.id_user','=','users.id')
+                // ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')      
+                ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
+
+                ->where('registrasi.kode_wilayah','=',$kodewilayah)
+                ->where('registrasi.status_cancel','=',0)
+                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3',  'registrasi.file_akad as berkas_akad', 'registrasi.total_biaya as total_biaya_sertifikasi');
+               
+
+
+        }
+
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+
+        $xdata = $xdata
+                 ->orderBy('registrasi.updated_at','desc');
+       
+        return Datatables::of($xdata)->make();
+    }
 
 /////////////////////END of Pembayaran////////////////////////////////
 
@@ -4151,32 +4201,18 @@ class RegistrasiController extends Controller
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
-                $Count2 = $p->count_tahap2+1;
+               
 
-                if($e->status == 'h' || $e->status == 'j'){
-
-                    if($p->bb_tahap2 == NULL){
-                         $filename = "BB2-".$p->count_tahap2."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                        $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                        $p->bb_tahap2 = $filename;
-                        $p->count_tahap2 = $p->count_tahap2+1;
-                    }else{
-                        $filename = "BB2-".$Count2."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                        $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                        $p->bb_tahap2 = $filename;
-                        $p->count_tahap2 = $p->count_tahap2+1;
-                    }
-                }else{
-
-                    $filename = "BB2-".$p->count_tahap2."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                    $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                    $p->bb_tahap2 = $filename;
-                    //$p->count_tahap2 = $p->count_tahap2+1;
-                }    
+               
+                $filename = "BB2-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                $p->bb_tahap2 = $filename;
+                //$p->count_tahap2 = $p->count_tahap2+1;
+            }    
 
               
-            }
-            $e->status='k';
+            
+            $e->status='9_1';
             $e->save();
             $u->save();
             $p->save();
@@ -4203,11 +4239,6 @@ class RegistrasiController extends Controller
         return view('registrasi.listPembayaranTahap2',compact('dataKelompok','dataJenis'));
     }
 
-    public function konfirmasiPembayaranTahap22($id,$noregis,$iduser,$status){
-        // Mail::to($u->email)->send(new KonfirmasiPembayaran($e,$u,$p,$status));            
-        $this->updateStatusRegistrasi($id,$noregis,$iduser,$status);         
-    }
-
     
     public function konfirmasiPembayaranTahap2($id){
         //retrieve data
@@ -4226,7 +4257,7 @@ class RegistrasiController extends Controller
         $u = $model2->find($e->id_user);
         $p = $model3->find($e->id_pembayaran);
         
-        $e->status = 'l';
+        $e->status = '9_3';
 
         $e->updated_status_by = $updater;
 
@@ -4250,7 +4281,7 @@ class RegistrasiController extends Controller
             // save
             Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                 
-            $p->status_tahap2 = '2';
+            $p->status_tahap2 = '3';
             
 
             $p->bt_tahap2 = $fileName;
@@ -4265,129 +4296,129 @@ class RegistrasiController extends Controller
             SendEmailP::dispatch($e,$u,$p, $e->status);
             //dd("masuk");
 
-            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 15);
+            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 10);
 
         }
 
-         Session::flash('success', "Pelunasan berhasil dikonfirmasi!");
-         $redirect = redirect()->route('listpembayarantahap2');
+         Session::flash('success', "Pembayara Tahap 2 berhasil dikonfirmasi!");
+         $redirect = redirect()->route('listkeuangan');
          return $redirect;
     }
 
 
 
-    public function dataPembayaranTahap2(Request $request){
-        $gdata = $request->except('_token','_method');
-        $kodewilayah = Auth::user()->kode_wilayah;
-        //start
-        if($kodewilayah == '119'){
-            $xdata = DB::table('registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
-                 ->join('users','registrasi.id_user','=','users.id')
+    // public function dataPembayaranTahap2(Request $request){
+    //     $gdata = $request->except('_token','_method');
+    //     $kodewilayah = Auth::user()->kode_wilayah;
+    //     //start
+    //     if($kodewilayah == '119'){
+    //         $xdata = DB::table('registrasi')
+    //              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //              ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+    //              ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
-                ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //              ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
+    //             ->where(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                     
-                    $query->where('registrasi.status','=',14);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',14);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=','g');
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=','g');
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                     
-                    $query->where('registrasi.status','=','h');
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=','h');
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                     
-                    $query->where('registrasi.status','=','i');
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=','i');
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=','j');
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=','j');
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                     
-                    $query->where('registrasi.status','=','k');
-                }) ;
-        }else{
-            $xdata = DB::table('registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
-                 ->join('users','registrasi.id_user','=','users.id')
+    //                 $query->where('registrasi.status','=','k');
+    //             }) ;
+    //     }else{
+    //         $xdata = DB::table('registrasi')
+    //              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //              ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+    //              ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
-                ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',14);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','g');
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','h');
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','i');
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','j');
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','k');
-                }) ;
-        }
+    //              ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap2 as status_tahap2', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.bb_tahap2 as bb_tahap2' )
+    //             ->where(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',14);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=','g');
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=','h');
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=','i');
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=','j');
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=','k');
+    //             }) ;
+    //     }
         
                            
 
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
+    //     //filter condition
+    //     if(isset($gdata['no_registrasi'])){
+    //         $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+    //     }
+    //     if(isset($gdata['name'])){
+    //         $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+    //     }
+    //     if(isset($gdata['perusahaan'])){
+    //         $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+    //     }
+    //     if(isset($gdata['kelompok_produk'])){
+    //         $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+    //     }
+    //     if(isset($gdata['tgl_registrasi'])){
+    //         $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+    //     }
        
-        if(isset($gdata['status_tahap2'])){
-            $xdata = $xdata->where('status_tahap2','=',$gdata['status_tahap2']);
-        }
+    //     if(isset($gdata['status_tahap2'])){
+    //         $xdata = $xdata->where('status_tahap2','=',$gdata['status_tahap2']);
+    //     }
     
 
-        //end
-        $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+    //     //end
+    //     $xdata = $xdata
+    //              ->orderBy('registrasi.id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
 
 
@@ -4408,15 +4439,10 @@ class RegistrasiController extends Controller
             $e->updated_status_by = $updater;
             $e->save();
             
-            if($status == 'i'){
-                $p->status_tahap2 = '2';
-                $p->updated_by = $updater;
-                $p->save();
-            }else{
-                $p->status_tahap2 = '0';
-                $p->updated_by = $updater;
-                $p->save();
-            }
+         
+            $p->status_tahap2 = '2';
+            $p->updated_by = $updater;
+            $p->save();
              
         
                 try{
@@ -4442,7 +4468,7 @@ class RegistrasiController extends Controller
            
         }
 
-        $redirect = redirect()->route('listpembayarantahap2');
+        $redirect = redirect()->route('listkeuangan');
          return $redirect;
 
     }
@@ -4502,31 +4528,15 @@ class RegistrasiController extends Controller
             if($request->has("file")){
                 $file = $request->file("file");
                 $file = $data["file"];
-                $Count3 = $p->count_tahap3+1;
-
-                if($e->status == '22' || $e->status == '24'){
-
-                    if($p->bb_tahap3 == NULL){
-                         $filename = "BB3-".$p->count_tahap3."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                        $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                        $p->bb_tahap3 = $filename;
-                        $p->count_tahap3 = $p->count_tahap3+1;
-                    }else{
-                        $filename = "BB3-".$Count3."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                        $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                        $p->bb_tahap3 = $filename;
-                        $p->count_tahap3 = $p->count_tahap3+1;
-                    }
-                }else{
-
-                    $filename = "BB3-".$p->count_tahap3."-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                    $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
-                    $p->bb_tahap3 = $filename;
+               
+                $filename = "BB3-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                $p->bb_tahap3 = $filename;
                    // $p->count_tahap3 = $p->count_tahap3+1;
-                }    
+                 
                
             }
-            $e->status='e';
+            $e->status='12_1';
             $e->save();
             $u->save();
             $p->save();
@@ -4546,12 +4556,12 @@ class RegistrasiController extends Controller
 
    
 
-    //list pembayaran registrasi
-    public function listPelunasan(){
-        $dataKelompok = KelompokProduk::all();
-        $dataJenis = JenisRegistrasi::all();
-        return view('registrasi.listPelunasan',compact('dataKelompok','dataJenis'));
-    }
+    // //list pembayaran registrasi
+    // public function listPelunasan(){
+    //     $dataKelompok = KelompokProduk::all();
+    //     $dataJenis = JenisRegistrasi::all();
+    //     return view('registrasi.listPelunasan',compact('dataKelompok','dataJenis'));
+    // }
 
     
     public function konfirmasiPelunasanInvoiceAdmin(Request $request, $id){
@@ -4569,7 +4579,7 @@ class RegistrasiController extends Controller
         $e = $model->find($id);
         $u = $model2->find($e->id_user);
         $p = $model3->find($e->id_pembayaran);
-        $e->status = 25;
+        $e->status = 12_3;
         $e->updated_status_by = $updater;
         $e->save();
 
@@ -4600,7 +4610,7 @@ class RegistrasiController extends Controller
             $p->tanggal_tahap3 = $tanggal;
             //dd($p->tanggal_tahap1 );
             $p->updated_at = $tanggal;
-            $p->status_tahap3 = 2;
+            $p->status_tahap3 = 3;
             $p->save();
 
             if($request->has("file")){
@@ -4615,133 +4625,133 @@ class RegistrasiController extends Controller
             DB::commit(); 
             SendEmailP::dispatch($e,$u,$p, $e->status);
 
-            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 26);
+            $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 13);
              
 
         }
 
          Session::flash('success', "Pembayaran Pelunasan berhasil dikonfirmasi!");
-         $redirect = redirect()->route('listpelunasan');
+         $redirect = redirect()->route('listkeuangan');
          return $redirect;
     }
 
 
 
-    public function dataPelunasan(Request $request){
-        $gdata = $request->except('_token','_method');
-        $kodewilayah = Auth::user()->kode_wilayah;
-        //start
-        if($kodewilayah == '119'){
-            $xdata = DB::table('registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
-                 ->join('users','registrasi.id_user','=','users.id')
+    // public function dataPelunasan(Request $request){
+    //     $gdata = $request->except('_token','_method');
+    //     $kodewilayah = Auth::user()->kode_wilayah;
+    //     //start
+    //     if($kodewilayah == '119'){
+    //         $xdata = DB::table('registrasi')
+    //              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //              ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+    //              ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
-                 ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //              ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
+    //              ->where(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=',20);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',20);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=',21);
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                   $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',21);
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=',22);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',22);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=',23);
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',23);
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                  
-                    $query->where('registrasi.status','=',24);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.status','=',24);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
                    
-                    $query->where('registrasi.status','=','e');
-                });
-        }else{
-            $xdata = DB::table('registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
-                 ->join('users','registrasi.id_user','=','users.id')
+    //                 $query->where('registrasi.status','=','e');
+    //             });
+    //     }else{
+    //         $xdata = DB::table('registrasi')
+    //              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+    //              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+    //              ->join('pembayaran', 'registrasi.id','=','pembayaran.id_registrasi')
+    //              ->join('users','registrasi.id_user','=','users.id')
                  
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
-                 ->where(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',20);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',21);
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                   $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',22);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',23);
-                }) 
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=',24);
-                })
-                ->orWhere(function($query) use ($kodewilayah){
-                    $query->where('registrasi.status_cancel','=',0);
-                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);
-                    $query->where('registrasi.status','=','e');
-                });
-        }
+    //              ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap3 as status_tahap3', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'pembayaran.bb_tahap3 as bb_tahap3' )
+    //              ->where(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',20);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',21);
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',22);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',23);
+    //             }) 
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=',24);
+    //             })
+    //             ->orWhere(function($query) use ($kodewilayah){
+    //                 $query->where('registrasi.status_cancel','=',0);
+    //                 $query->where('registrasi.kode_wilayah','=',$kodewilayah);
+    //                 $query->where('registrasi.status','=','e');
+    //             });
+    //     }
         
                
 
                            
 
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
+    //     //filter condition
+    //     if(isset($gdata['no_registrasi'])){
+    //         $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+    //     }
+    //     if(isset($gdata['name'])){
+    //         $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+    //     }
+    //     if(isset($gdata['perusahaan'])){
+    //         $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+    //     }
+    //     if(isset($gdata['kelompok_produk'])){
+    //         $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+    //     }
+    //     if(isset($gdata['tgl_registrasi'])){
+    //         $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+    //     }
         
        
-        if(isset($gdata['status_tahap3'])){
-            $xdata = $xdata->where('status_tahap3','=',$gdata['status_tahap3']);
-        }
+    //     if(isset($gdata['status_tahap3'])){
+    //         $xdata = $xdata->where('status_tahap3','=',$gdata['status_tahap3']);
+    //     }
         
 
-        //end
-        $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+    //     //end
+    //     $xdata = $xdata
+    //              ->orderBy('registrasi.id','desc');
 
-        return Datatables::of($xdata)->make();
-    }
+    //     return Datatables::of($xdata)->make();
+    // }
 
 
 
@@ -4762,16 +4772,10 @@ class RegistrasiController extends Controller
             $e->updated_status_by = $updater;
             $e->save();
             
-            if($status == 23){
-                $p->status_tahap3 = '2';
-                $p->updated_by = $updater;
-                $p->save();
-            }else{
-                $p->status_tahap3 = '0';
-                $p->updated_by = $updater;
-                $p->save();
-            }
-             
+         
+            $p->status_tahap3 = '2';
+            $p->updated_by = $updater;
+            $p->save();
         
                 try{
                     SendEmailP::dispatch($e,$u,$p, $status);
@@ -4796,7 +4800,7 @@ class RegistrasiController extends Controller
            
         }
 
-        $redirect = redirect()->route('listpelunasan');
+        $redirect = redirect()->route('listkeuangan');
          return $redirect;
 
     }
@@ -4864,7 +4868,7 @@ class RegistrasiController extends Controller
 
             Session::flash('error', $e->getMessage());
         }
-            $redirect = redirect()->route('listpelunasan');
+            $redirect = redirect()->route('listkeuangan');
             return $redirect;
     }
 
@@ -4875,313 +4879,313 @@ class RegistrasiController extends Controller
 
 
 
-    public function lebih($id,$tahap){
-        //dd($id);
-        $data = Registrasi::find($id);
-        $dataP = Pembayaran::find($data->id_pembayaran);
-        //get Data from FAQ Transfer
+    // public function lebih($id,$tahap){
+    //     //dd($id);
+    //     $data = Registrasi::find($id);
+    //     $dataP = Pembayaran::find($data->id_pembayaran);
+    //     //get Data from FAQ Transfer
        
 
-        return view('registrasi.lebih',compact('data','dataP','tahap'));
-    }
-      public function kurang($id,$tahap){
-        //dd($id);
-        $data = Registrasi::find($id);
-        $dataP = Pembayaran::find($data->id_pembayaran);
-        //get Data from FAQ Transfer
+    //     return view('registrasi.lebih',compact('data','dataP','tahap'));
+    // }
+    //   public function kurang($id,$tahap){
+    //     //dd($id);
+    //     $data = Registrasi::find($id);
+    //     $dataP = Pembayaran::find($data->id_pembayaran);
+    //     //get Data from FAQ Transfer
        
-        return view('registrasi.kurang',compact('data','dataP','tahap'));
-    }
+    //     return view('registrasi.kurang',compact('data','dataP','tahap'));
+    // }
 
    
 
-     public function updateStatusLebih(Request $request, $id){
-        //retrieve data
-        $data = $request->except('_token','_method');
-        $updater = Auth::user()->name;
+    //  public function updateStatusLebih(Request $request, $id){
+    //     //retrieve data
+    //     $data = $request->except('_token','_method');
+    //     $updater = Auth::user()->name;
 
-        $model = new Registrasi();
-        $model2 = new User();
-        $model3 = new Pembayaran();
-        $model4 = new Penjadwalan();
+    //     $model = new Registrasi();
+    //     $model2 = new User();
+    //     $model3 = new Pembayaran();
+    //     $model4 = new Penjadwalan();
 
-        date_default_timezone_set('Asia/Jakarta');
-        $tanggal = date("Y-m-d H:i:s");
+    //     date_default_timezone_set('Asia/Jakarta');
+    //     $tanggal = date("Y-m-d H:i:s");
 
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $u = $model2->find($e->id_user);
-            $p = $model3->find($e->id_pembayaran);
+    //     try{
+    //         DB::beginTransaction();
+    //         $e = $model->find($id);
+    //         $u = $model2->find($e->id_user);
+    //         $p = $model3->find($e->id_pembayaran);
 
-            $e->status = $data['status'];
+    //         $e->status = $data['status'];
 
-            $e->updated_status_by = $updater;
+    //         $e->updated_status_by = $updater;
 
         
             
-            if($data['status'] =='11'){
-                $p->status_tahap1 = '2';                
-                $lebih1 = str_replace('.', '', $data['lebih_tahap1']);
-                $lebihTotal = str_replace('Rp', '', $lebih1);
+    //         if($data['status'] =='11'){
+    //             $p->status_tahap1 = '2';                
+    //             $lebih1 = str_replace('.', '', $data['lebih_tahap1']);
+    //             $lebihTotal = str_replace('Rp', '', $lebih1);
 
-                $p->lebih_tahap1 = (int)$lebihTotal;                
-                $p->updated_by = $updater;
+    //             $p->lebih_tahap1 = (int)$lebihTotal;                
+    //             $p->updated_by = $updater;
 
-                $model4->updated_by = $updater;
-                $model4->status_audit1 = '0';
-                $model4->progres_penjadwalan = 'audit1';
-                $model4->id_registrasi = $e->id;
-                $model4->save();
+    //             $model4->updated_by = $updater;
+    //             $model4->status_audit1 = '0';
+    //             $model4->progres_penjadwalan = 'audit1';
+    //             $model4->id_registrasi = $e->id;
+    //             $model4->save();
 
-                        //create PDF File
+    //                     //create PDF File
                        
-                $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
-                $fileName = $e->no_registrasi.'_BT_TAHAP1.pdf';
-                $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+    //             $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+    //             $fileName = $e->no_registrasi.'_BT_TAHAP1.pdf';
+    //             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                     
-                // save
-                 Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+    //             // save
+    //              Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                     
                 
-                if($p->nominal_total <10000000 ){
-                    $p->status_tahap1 = '2';
-                    $p->status_tahap2 = '2';
-                    $p->bb_tahap2 = $p->bb_tahap1;
-                    $p->status_tahap3 = '2';
-                    $p->bb_tahap3 = $p->bb_tahap1;
+    //             if($p->nominal_total <10000000 ){
+    //                 $p->status_tahap1 = '2';
+    //                 $p->status_tahap2 = '2';
+    //                 $p->bb_tahap2 = $p->bb_tahap1;
+    //                 $p->status_tahap3 = '2';
+    //                 $p->bb_tahap3 = $p->bb_tahap1;
 
-                    $p->reminder12_tahap2 = 1;
-                    $p->reminder12_tahap3 = 1;
+    //                 $p->reminder12_tahap2 = 1;
+    //                 $p->reminder12_tahap3 = 1;
 
-                    $p->reminder6_tahap2 = 1;
-                    $p->reminder6_tahap3 = 1;
+    //                 $p->reminder6_tahap2 = 1;
+    //                 $p->reminder6_tahap3 = 1;
 
-                }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
+    //             }elseif($p->nominal_total >=10000000 && $p->nominal_total< 50000000 ){
 
-                    $p->status_tahap1 = '2';     
-                    $p->status_tahap2 = '2';
-                    $p->bb_tahap2 = $p->bb_tahap1;
+    //                 $p->status_tahap1 = '2';     
+    //                 $p->status_tahap2 = '2';
+    //                 $p->bb_tahap2 = $p->bb_tahap1;
 
-                    $p->reminder12_tahap2 = 1;
-                    $p->reminder6_tahap2 = 1;
+    //                 $p->reminder12_tahap2 = 1;
+    //                 $p->reminder6_tahap2 = 1;
                 
-                }else{
-                     $p->status_tahap1 = '2';
-                }
+    //             }else{
+    //                  $p->status_tahap1 = '2';
+    //             }
 
-                $p->bt_tahap1 = $fileName;
-                $p->tanggal_tahap1 = $tanggal;
-                //dd($p->tanggal_tahap1 );
-                $p->updated_at = $tanggal;
-                $p->save();
+    //             $p->bt_tahap1 = $fileName;
+    //             $p->tanggal_tahap1 = $tanggal;
+    //             //dd($p->tanggal_tahap1 );
+    //             $p->updated_at = $tanggal;
+    //             $p->save();
                         
                 
 
 
-            }elseif($data['status'] =='i'){
-                $p->status_tahap2 = '2';
-                $lebih2 = str_replace('.', '', $data['lebih_tahap2']);
-                $lebihTotal2 = str_replace('Rp', '', $lebih2);
+    //         }elseif($data['status'] =='i'){
+    //             $p->status_tahap2 = '2';
+    //             $lebih2 = str_replace('.', '', $data['lebih_tahap2']);
+    //             $lebihTotal2 = str_replace('Rp', '', $lebih2);
 
-                $p->lebih_tahap2 = (int)$lebihTotal2;
-                // $p->lebih_tahap2 = $data['lebih_tahap2'];
-                $p->updated_by = $updater;
+    //             $p->lebih_tahap2 = (int)$lebihTotal2;
+    //             // $p->lebih_tahap2 = $data['lebih_tahap2'];
+    //             $p->updated_by = $updater;
 
-                $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
-                $fileName = $e->no_registrasi.'_BT_TAHAP2.pdf';
-                $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+    //             $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+    //             $fileName = $e->no_registrasi.'_BT_TAHAP2.pdf';
+    //             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                     
-                // save
-                 Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+    //             // save
+    //              Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                     
 
-                $p->bt_tahap2 = $fileName;
-                $p->tanggal_tahap2 = $tanggal;
-                //dd($p->tanggal_tahap1 );
-                $p->updated_at = $tanggal;
-                $p->save();
+    //             $p->bt_tahap2 = $fileName;
+    //             $p->tanggal_tahap2 = $tanggal;
+    //             //dd($p->tanggal_tahap1 );
+    //             $p->updated_at = $tanggal;
+    //             $p->save();
 
                 
-            }elseif($data['status'] =='23'){
-                $p->status_tahap3 = '2';
-                $lebih3 = str_replace('.', '', $data['lebih_tahap3']);
-                $lebihTotal3 = str_replace('Rp', '', $lebih3);
+    //         }elseif($data['status'] =='23'){
+    //             $p->status_tahap3 = '2';
+    //             $lebih3 = str_replace('.', '', $data['lebih_tahap3']);
+    //             $lebihTotal3 = str_replace('Rp', '', $lebih3);
 
-                $p->lebih_tahap3 = (int)$lebihTotal3;
-                // $p->lebih_tahap3 = $data['lebih_tahap3'];
-                $p->updated_by = $updater;
+    //             $p->lebih_tahap3 = (int)$lebihTotal3;
+    //             // $p->lebih_tahap3 = $data['lebih_tahap3'];
+    //             $p->updated_by = $updater;
 
-                 $p->updated_by = $updater;
+    //              $p->updated_by = $updater;
 
-                $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
-                $fileName = $e->no_registrasi.'_BT_TAHAP3.pdf';
-                $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+    //             $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+    //             $fileName = $e->no_registrasi.'_BT_TAHAP3.pdf';
+    //             $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                     
-                // save
-                 Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+    //             // save
+    //              Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                     
 
-                $p->bt_tahap3 = $fileName;
-                $p->tanggal_tahap3 = $tanggal;
-                //dd($p->tanggal_tahap1 );
-                $p->updated_at = $tanggal;
-                $p->save();
+    //             $p->bt_tahap3 = $fileName;
+    //             $p->tanggal_tahap3 = $tanggal;
+    //             //dd($p->tanggal_tahap1 );
+    //             $p->updated_at = $tanggal;
+    //             $p->save();
                 
                 
-            }
+    //         }
             
-           $e->save();
-           $p->save();
+    //        $e->save();
+    //        $p->save();
         
-            try{
+    //         try{
 
-                DB::commit();
+    //             DB::commit();
 
-               SendEmailP::dispatch($e,$u,$p, $data['status']);
-                //Session::flash('success', "data berhasil disimpan!");
-                Session::flash('success', 'data dengan no registrasi '.$e->no_registrasi.' berhasil di kirim emailnya!');
+    //            SendEmailP::dispatch($e,$u,$p, $data['status']);
+    //             //Session::flash('success', "data berhasil disimpan!");
+    //             Session::flash('success', 'data dengan no registrasi '.$e->no_registrasi.' berhasil di kirim emailnya!');
 
                 
 
-                if($data['status'] =='11'){
+    //             if($data['status'] =='11'){
                 
-                    $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 14);
+    //                 $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 14);
 
-                }elseif($data['status'] =='i'){
+    //             }elseif($data['status'] =='i'){
 
-                    $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 15);
+    //                 $this->updateStatusRegistrasi($e->id, $e->no_registrasi, $e->id_user, 15);
                     
-                }
+    //             }
 
 
-            }catch(\Exception $u){
+    //         }catch(\Exception $u){
 
-                Session::flash('error', $u->getMessage());
-                //Session::flash('success', "data berhasil disimpan!");
-                //$statusreg = $e->getMessage();
+    //             Session::flash('error', $u->getMessage());
+    //             //Session::flash('success', "data berhasil disimpan!");
+    //             //$statusreg = $e->getMessage();
 
-            }
+    //         }
             
-        }catch (\Exception $e){
-            DB::rollBack();
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
 
-            Session::flash('error', $e->getMessage());
+    //         Session::flash('error', $e->getMessage());
 
            
-        }
+    //     }
 
 
-            if($data['status'] =='11'){
+    //         if($data['status'] =='11'){
             
-                 $redirect = redirect()->route('listpembayaranregistrasi');
+    //              $redirect = redirect()->route('listpembayaranregistrasi');
 
-            }elseif($data['status'] =='i'){
+    //         }elseif($data['status'] =='i'){
 
-                $redirect = redirect()->route('listpembayarantahap2');
+    //             $redirect = redirect()->route('listpembayarantahap2');
                 
-            }elseif($data['status'] =='23'){
+    //         }elseif($data['status'] =='23'){
                
-               $redirect = redirect()->route('listpelunasan');
+    //            $redirect = redirect()->route('listpelunasan');
                 
-            }
+    //         }
 
-            return $redirect;
-    }
-
-
-    public function updateStatusKurang(Request $request, $id){
-        //retrieve data
-        $data = $request->except('_token','_method');
-        $updater = Auth::user()->name;
-
-        $model = new Registrasi();
-        $model2 = new User();
-        $model3 = new Pembayaran();
+    //         return $redirect;
+    // }
 
 
-        try{
-            DB::beginTransaction();
-            $e = $model->find($id);
-            $u = $model2->find($e->id_user);
-            $p = $model3->find($e->id_pembayaran);
+    // public function updateStatusKurang(Request $request, $id){
+    //     //retrieve data
+    //     $data = $request->except('_token','_method');
+    //     $updater = Auth::user()->name;
 
-            $e->status = $data['status'];
+    //     $model = new Registrasi();
+    //     $model2 = new User();
+    //     $model3 = new Pembayaran();
 
-            $e->updated_status_by = $updater;
+
+    //     try{
+    //         DB::beginTransaction();
+    //         $e = $model->find($id);
+    //         $u = $model2->find($e->id_user);
+    //         $p = $model3->find($e->id_pembayaran);
+
+    //         $e->status = $data['status'];
+
+    //         $e->updated_status_by = $updater;
 
         
             
-            if($data['status'] =='10'){
-                $p->status_tahap1 = '0';
-                $kurang1 = str_replace('.', '', $data['kurang_tahap1']);
-                $kurangTotal = str_replace('Rp', '', $kurang1);
+    //         if($data['status'] =='10'){
+    //             $p->status_tahap1 = '0';
+    //             $kurang1 = str_replace('.', '', $data['kurang_tahap1']);
+    //             $kurangTotal = str_replace('Rp', '', $kurang1);
 
-                $p->kurang_tahap1 = (int)$kurangTotal;                
-                // $p->kurang_tahap1 = $data['kurang_tahap1'];
-                $p->updated_by = $updater;
+    //             $p->kurang_tahap1 = (int)$kurangTotal;                
+    //             // $p->kurang_tahap1 = $data['kurang_tahap1'];
+    //             $p->updated_by = $updater;
 
 
 
-            }elseif($data['status'] =='h'){
-                $p->status_tahap2 = '0';
-                $kurang2 = str_replace('.', '', $data['kurang_tahap2']);
-                $kurangTotal2 = str_replace('Rp', '', $kurang2);
+    //         }elseif($data['status'] =='h'){
+    //             $p->status_tahap2 = '0';
+    //             $kurang2 = str_replace('.', '', $data['kurang_tahap2']);
+    //             $kurangTotal2 = str_replace('Rp', '', $kurang2);
 
-                $p->kurang_tahap2 = (int)$kurangTotal2;
-                // $p->kurang_tahap2 = $data['kurang_tahap2'];
-                $p->updated_by = $updater;
+    //             $p->kurang_tahap2 = (int)$kurangTotal2;
+    //             // $p->kurang_tahap2 = $data['kurang_tahap2'];
+    //             $p->updated_by = $updater;
 
                 
-            }elseif($data['status'] =='22'){
-                $p->status_tahap3 = '0';
-                $kurang3 = str_replace('.', '', $data['kurang_tahap3']);
-                $kurangTotal3 = str_replace('Rp', '', $kurang3);
+    //         }elseif($data['status'] =='22'){
+    //             $p->status_tahap3 = '0';
+    //             $kurang3 = str_replace('.', '', $data['kurang_tahap3']);
+    //             $kurangTotal3 = str_replace('Rp', '', $kurang3);
 
-                $p->kurang_tahap3 = (int)$kurangTotal3;
-                // $p->kurang_tahap3 = $data['kurang_tahap3'];
-                $p->updated_by = $updater;
+    //             $p->kurang_tahap3 = (int)$kurangTotal3;
+    //             // $p->kurang_tahap3 = $data['kurang_tahap3'];
+    //             $p->updated_by = $updater;
                 
                 
-            }
+    //         }
             
-            $e->save();
-            $p->save();
+    //         $e->save();
+    //         $p->save();
         
           
-            DB::commit();
+    //         DB::commit();
 
-            SendEmailP::dispatch($e,$u,$p, $data['status']);
-            //Session::flash('success', "data berhasil disimpan!");
-            Session::flash('success', 'data dengan no registrasi '.$e->no_registrasi.' berhasil di kirim emailnya!');
+    //         SendEmailP::dispatch($e,$u,$p, $data['status']);
+    //         //Session::flash('success', "data berhasil disimpan!");
+    //         Session::flash('success', 'data dengan no registrasi '.$e->no_registrasi.' berhasil di kirim emailnya!');
 
 
            
-        }catch (\Exception $e){
-            DB::rollBack();
+    //     }catch (\Exception $e){
+    //         DB::rollBack();
 
-            Session::flash('error', $e->getMessage());
+    //         Session::flash('error', $e->getMessage());
 
            
-        }
+    //     }
 
 
-            if($data['status'] =='10'){
+    //         if($data['status'] =='10'){
             
-                 $redirect = redirect()->route('listpembayaranregistrasi');
+    //              $redirect = redirect()->route('listpembayaranregistrasi');
 
-            }elseif($data['status'] =='h'){
+    //         }elseif($data['status'] =='h'){
 
-                $redirect = redirect()->route('listpembayarantahap2');
+    //             $redirect = redirect()->route('listpembayarantahap2');
                 
-            }elseif($data['status'] =='22'){
+    //         }elseif($data['status'] =='22'){
                
-               $redirect = redirect()->route('listpelunasan');
+    //            $redirect = redirect()->route('listpelunasan');
                 
-            }
+    //         }
 
-            return $redirect;
-    }
+    //         return $redirect;
+    // }
 /////////////////////END of Pembayaran tahap 3////////////////////////////////
 
     public function updateCabang(Request $request){

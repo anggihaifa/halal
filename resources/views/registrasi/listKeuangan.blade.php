@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Registrasi Halal')
+@section('title', 'List Keuangan Registrasi Halal')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -21,7 +21,7 @@
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="label-primary panel-title">Registrasi Halal</h4>
+            <h4 class="label-primary panel-title">List Keuangan Registrasi Halal</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -126,31 +126,18 @@
            
 
             var xTable = $('#table').DataTable({
-                ajax:{
-                    url:"{{route('dataregistrasipelangganaktif')}}",
-                    data:function(d){
-                        d.no_registrasi = $('input[name=nomor_id]').val();
-                        d.mulai_audit1 = $('input[name=mulai_audit1]').val();
-     
-
-                    }
-                },
+               
                 
                 columns:[
                    
                    {
                         "data":'no_registrasi',
-                        
+                        "searchable":false,
+                        "orderable":false,
                         "render":function (data,type,full,meta) {
 
                             
-                            // var key = 'base64:Vm437YM3oDMW9KbhaCp4eW+iMguVZQYhnjBixWAWI8U=';
-                            // var full.id = encodeURIComponent(CryptoJS.AES.encrypt(full.id.toString(), key).toString());
-                            // var full.id_user = encodeURIComponent(CryptoJS.AES.encrypt(full.id_user.toString(), key).toString());
-                            // var full.no_registrasi = encodeURIComponent(CryptoJS.AES.encrypt(full.no_registrasi.toString(), key).toString());
-                            
-                            //console.log(full.id);
-
+                          
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
                             var status1 = (full.status == 1) ? dButton('Pengajuan Baru'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data?')">Pengajuan Baru</a>`;
@@ -188,12 +175,14 @@
 
                             var status6_1 = (full.status == '6_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pembayaran??')">Menunggu Sales Officer Mengkonfirmasi Pembayaran</a>`;
 
-                            var status6_2 = (full.status == '6_2') ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Gagal??')">Pembayaran Gagal</a>`;
+                            var status6_2 = (full.status == '6_2') ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Gagal??')">Pembayaran Gagal</a>`;
 
-                            var status6_3 = (full.status == '6_3') ? dButton('Pembayaran Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Terkonfirmasi??')">Pembayaran Terkonfirmasi</a>`;
+                            var status6_3 = (full.status == '6_3') ? dButton('Pembayaran Terkonfirmasi'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Terkonfirmasi??')">Pembayaran Terkonfirmasi</a>`;
 
                             
                             var status5 = (full.status == 5) ? dButton('Penerbitan Order Confirmation'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan Order Confirmation??')">Penerbitan Order Confirmation (OC)</a>`;
+
+                           
 
                             var status5_0 = (full.status == '5_0') ? dButton('Belum Upload OC'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload OC??')">Belum Upload OC</a>`;
 
@@ -201,7 +190,7 @@
 
                             var status5_2 = (full.status == '5_2') ? dButton('Menunggu Konfirmasi Admin'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Konfirmasi Admin??')">Menunggu Konfirmasi Admin</a>`;
 
-                            var status5_3 = (full.status == '5_3') ? dButton('Penerbitan OC Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Gagal??')">Penerbitan OC Gagal</a>`;
+                            var status5_3 = `<a href="{{url('update_status_oc')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_3"   class="dropdown-item"> OC Gagal</a> `;
 
                             var status5_4 = (full.status == '5_4') ? dButton('Penerbitan OC Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Terkonfirmasi??')">Penerbitan OC Terkonfirmasi</a>`;
 
@@ -230,9 +219,9 @@
 
                             var status9_1 = (full.status == '9_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2??')">Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2</a>`;
 
-                            var status9_2 = (full.status == '9_2') ? dButton('Pembayaran Tahap 2 Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Gagal??')">Pembayaran Tahap 2 Gagal</a>`;
+                            var status9_2 = (full.status == '9_2') ? dButton('Pembayaran Tahap 2 Gagal'):`<a href="{{url('update_status_pembayaran_tahap2')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Gagal??')">Pembayaran Tahap 2 Gagal</a>`;
 
-                            var status9_3 = (full.status == '9_3') ? dButton('Pembayaran Tahap 2 Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Terkonfirmasi??')">Pembayaran Tahap 2 Terkonfirmasi</a>`;
+                            var status9_3 = (full.status == '9_3') ? dButton('Pembayaran Tahap 2 Terkonfirmasi'):`<a href="{{url('konfirmasi_pembayaran_tahap2')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Terkonfirmasi??')">Pembayaran Tahap 2 Terkonfirmasi</a>`;
 
                             var status10 = (full.status == 10) ? dButton('Proses Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 2??')">Proses Audit Tahap 2</a>`;
 
@@ -266,13 +255,13 @@
 
                             var status12_1 = (full.status == '12_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pelunasan??')">Menunggu Sales Officer Mengkonfirmasi Pelunasan</a>`;
 
-                            var status12_2 = (full.status == '12_2') ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Gagal??')">Pelunasan Gagal</a>`;
+                            var status12_2 = (full.status == '12_2') ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Gagal??')">Pelunasan Gagal</a>`;
 
-                            var status12_3 = (full.status == '12_3') ? dButton('Pelunasan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Terkonfirmasi??')">Pelunasan Terkonfirmasi</a>`;
+                            var status12_3 = (full.status == '12_3') ? dButton('Pelunasan Terkonfirmasi'):`<a href="{{url('upload_invoice')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Terkonfirmasi??')">Pelunasan Terkonfirmasi</a>`;
 
                             var status13 = (full.status == 13) ? dButton('Proses Sidang Fatwa'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/13" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data ke tahapan Proses Sidang Fatwa?')">Proses Sidang Fatwa</a>`;
 
-                            var upload = `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
+                            var uploadAkad =  `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
 
                             
                             var konfirmAkad = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`/`+full.status_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
@@ -281,7 +270,7 @@
                            
                             var konfirmBayar2 = (full.status == '9_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_tahap2')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
                            
-                            var konfirmBayar1 = (full.status == '5_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
+                            var konfirmBayar1 = (full.status == '6_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
 
                             var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
                             
@@ -298,6 +287,13 @@
                             }else{
 
                                 var unduhBayar1 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            }
+                            if(full.status_oc == null || full.status_oc == 0 ){
+                                var unduhOC = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                             
+                            }else{
+
+                                var unduhOC = `<a href="{{ url('').Storage::url('public/buktiOC/`+full.id_user+`/`+full.file_oc+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                             }
                             if(full.status_tahap2 == null || full.status_tahap2 == 0 ){
                                 var unduhBayar2 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
@@ -318,6 +314,10 @@
 
                                 var unduhBeritaAcara = `<a href="{{ url('').Storage::url('public/beritaacara/`+full.id_user+`/`+full.file_berita_acara+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                             } 
+                            var upload_OC = `<a href="{{url('upload_oc_admin')}}/`+full.id+`"  class="dropdown-item" >OC</a> `;
+
+                            
+                            var konfirm_OC = `<a href="{{url('konfirmasi_oc_admin')}}/`+full.id+`/5_4"  class="dropdown-item" >Konfirmasi OC</a>` ;
                            
 
                             //var kw = full.kode_wilayah;
@@ -360,7 +360,7 @@
                                                 <i class="fa fa-info text-primary" ></i>
                                                 `+full.jenis+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Alamat: 
-                                                `+full.alamat_kantor+`<br>
+                                                `+full.alamat_perusahaan+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Status Registrasi: 
                                                 `+full.status_registrasi+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Tanggal Update: 
@@ -372,86 +372,36 @@
                                         </div>
                                       
 
-                                        <div class="col-lg-7 row d-flex justify-content-center" >
+                                        <div class="col-lg-7 row d-flex justify-content-center " >
 
-                                            <div class="card border-0 ">
-                                                <div class="card-header tab-overflow p-t-0 p-b-0 ">
+                                            <div class="card border-0 col-lg-12 align-items-center">
+                                                <div class="card-header  tab-overflow   p-t-0 p-b-0 ">
                                                     <ul class="nav nav-tabs card-header-tabs">
                                                         
                                                         <li class="nav-item text-center">
                                                             
-                                                            
-                                                            <a class="nav-link active" data-toggle="tab" href="#card-tab-1-`+full.id+`">Detail</a>
-                                                        </li>
-                                                        <li class="nav-item text-center">
-                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-4-`+full.id+`">Penjadwalan</a>
+                                                            <a class="nav-link active" data-toggle="tab" href="#card-tab-2-`+full.id+`">Akad</a>
                                                         </li>
                                                         <li class="nav-item text-center">
                                                             
-                                                            <a class="nav-link" data-toggle="tab" href="#card-tab-2-`+full.id+`">Akad</a>
+                                                            
+                                                            <a class="nav-link " data-toggle="tab" href="#card-tab-1-`+full.id+`">Penerbitan OC</a>
                                                         </li>
+                                                       
+                                                       
                                                         <li class="nav-item text-center">
                                                             <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-3-`+full.id+`">Pembayaran</a>
                                                         </li>
                                                        
-                                                        <li class="nav-item text-center">
-                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-5-`+full.id+`">Berita Acara</a>
-                                                        </li>
-                                                        
-                                                        
-                                                        
-
+                                                       
+                                      
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="tab-content p-0 m-0">
-                                                    <div class="tab-pane fade active show" id="card-tab-1-`+full.id+`">
-
-                                                        <table class="table table-sm"> 
-                                                        <tr>
-                                                            <td class="text-center"  style="width:20%">Progres</td>
-                                                            <td class="text-center"  style="width:10%">Status Berkas</td>
-                                                            <td class="text-center"  style="width:25%">Cabang Pelaksana</td>
-                                                            <td class="text-center"  style="width:10%">Aksi</td>
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                        <td class="text-center align-middle"  style="width:20%">
-                                                            `+checkProgress(full.status)+`
-                                                        </td>
-                                                        <td class="text-center align-middle"  style="width:20%">
-                                                            `+checkStatusBerkas(full.status_berkas)+`
-                                                        </td>
-
-                                                        <td class="text-center align-middle" style="width:25%">
-                                                            `+ddCabang+`
-                                                               
-                                                            
-                                                        
-                                                        </td>
-
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                            <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                <a href="{{url('verifikasi_dokumen_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit">
-
-                                                                    </i> Lihat Dokumen
-                                                                </a>
-                                                                <div class="dropdown-divider"></div>
-
-                                                                <div class="dropdown-button-title">Update Progress</div>`+status1+status2+status3+status4+status5+status6+status7+status8+status9+status10+status11+status12+status13+`
-                                                            </div> 
-                                                        </div>
-                                                        </td>
-                                                        </tr>
-                                                        </table>
-                                                    </div>
-
-                                                    <div class="tab-pane fade" id="card-tab-2-`+full.id+`">
+                                                   
+                                                    <div class="tab-pane active show  fade" id="card-tab-2-`+full.id+`">
 
                                                         <table class="table table-sm"> 
                                                         <tr>
@@ -485,13 +435,49 @@
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
 
-                                                                <div class="dropdown-button-title">Update Progress</div>`+upload+`
+                                                                <div class="dropdown-button-title">Update Progress</div>`+uploadAkad+`
                                                                 </div> 
                                                             </div>
                                                         </td>
                                                         </tr>
                                                         </table>
                                                     </div>
+
+                                                    <div class="tab-pane fade " id="card-tab-1-`+full.id+`">
+                                                        <table class="table table-sm"> 
+                                                            <tr>
+                                                                <td class="text-center"  style="width:20%">Status OC</td>
+
+                                                                <td class="text-center"  style="width:20%">Berkas OC</td>
+                                                                
+                                                                <td class="text-center"  style="width:10%">Aksi</td>
+                                                            </tr>
+                                                        
+                                                        <tr>
+                                                            <td class="text-center align-middle"  style="width:20%">
+                                                                `+checkOC(full.status_oc)+`
+                                                            </td>
+
+                                                            <td class="text-center align-middle">
+                                                            `+unduhOC+`
+
+                                                        </td>
+
+                                                            
+
+                                                            <td class="text-center align-middle">
+                                                                <div class="btn-group m-r-5 show">
+                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> 
+                                                                    <div class= "dropdown-button-title"> Update Progress </div>`+upload_OC+status5_3+konfirm_OC+`
+                                                                </div> 
+                                                            </div>
+                                                        </td>
+                                                        </tr>
+                                                        </table>
+                                                    </div>
+
                                                     <div class="tab-pane fade" id="card-tab-3-`+full.id+`">
 
                                                         <table class="table table-sm">
@@ -526,7 +512,7 @@
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
 
-                                                                <div class="dropdown-button-title">Update Progress</div>`+status5_2+konfirmBayar1+`
+                                                                <div class="dropdown-button-title">Update Progress</div>`+status6_2+konfirmBayar1+`
                                                                 </div> 
                                                             </div>
                                                         </td>
@@ -584,107 +570,7 @@
                                                         </tr>
                                                         </table>
                                                     </div>  
-                                                    <div class="tab-pane fade" id="card-tab-4-`+full.id+`">
-
-                                                        <table class="table table-sm">
-                                                        <tr>
-                                                            <td class="text-center align-middle">Tipe</td>
-                                                            <td class="text-center align-middle">Status</td>
-                                                            <td class="text-center align-middle">Tipe</td>
-                                                            <td class="text-center align-middle">Status</td>
-                                                            <td class="text-center align-middle">Aksi</td>
-                                                        </tr>
-
-                                                       
-                                                        
-                                                        <tr>
-                                                            <td class="text-center align-middle">
-                                                                Audit Tahap 1
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkPenjadwalan(full.status_audit1)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                Audit Tahap 2
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkPenjadwalan(full.status_audit2)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                <div class="btn-group m-r-5 show">
-                                                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                        <b class="ion-ios-arrow-down"></b>
-                                                                    </a>
-                                                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                        
-                                                                    <div class="dropdown-button-title">Update Progress</div>`+status8+status10+`
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center align-middle">
-                                                                Rapat Auditor
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkPenjadwalan(full.status_rapat)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                Tinjauan Komite
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkPenjadwalan(full.status_tinjauan)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                <div class="btn-group m-r-5 show">
-                                                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                        <b class="ion-ios-arrow-down"></b>
-                                                                    </a>
-                                                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                        
-                                                                    <div class="dropdown-button-title">Update Progress</div>`+status12_2+konfirmBayar3+`
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        </table>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="card-tab-5-`+full.id+`">
-
-                                                        <table class="table table-sm">
-                                                            <tr>
-                                                                <td class="text-center align-middle">Tipe</td>
-                                                                <td class="text-center align-middle">Status</td>
-                                                                <td class="text-center align-middle">File</td>
-                                                                <td class="text-center align-middle">Aksi</td>
-                                                               
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-center">
-                                                                    Berita Acara
-                                                                </td>
-                                                                <td class="text-center align-middle">
-                                                                    `+checkStatusBeritaAcara(full.status_berita_acara)+`
-                                                                </td>
-                                                                <td class="text-center align-middle">
-                                                                    `+unduhBeritaAcara+`
-                                                                </td>
-                                                                <td class="text-center align-middle">
-                                                                    <div class="btn-group m-r-5 show">
-                                                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                            <b class="ion-ios-arrow-down"></b>
-                                                                        </a>
-                                                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                        <div class="dropdown-button-title">Update Progress</div>`+uploadBeritaAcara+`
-                                                                        </div> 
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -696,16 +582,18 @@
               
                
                //tambahkan bkti bayar 1,2,3, bkti kontrak akad, berita acara,
-                
+                // processing:true,
+                // serverSide:true,
+                // //bFilter: false,
+                // //bSortable: false,              
+                // ordering: false 
+               
+                bSortable: false,
+                ordering: false,
                 processing:true,
                 serverSide:true,
-                order:[[0,'asc']],
-                bFilter: false,
-                bSortable: false,
-                bInfo: false,
-                lengthChange: false,
-                ordering: false
-
+                ajax:"{{route('datakeuangan')}}",
+               
             });
 
 
