@@ -3774,12 +3774,12 @@ class RegistrasiController extends Controller
 
 
    
-        $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
-        $fileName = $e->no_registrasi.'_BT_TAHAP1.pdf';
-        $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+        // $newData = ['userData'=>$u,'registrasiData'=>$e,'pembayaranData'=>$p];
+        // $fileName = $e->no_registrasi.'_BT_TAHAP1.pdf';
+        // $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
             
-        // save
-         Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+        // // save
+        //  Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
             
         
         if($p->nominal_total <10000000 ){
@@ -3808,7 +3808,7 @@ class RegistrasiController extends Controller
              $p->status_tahap1 = '3';
         }
 
-        $p->bt_tahap1 = $fileName;
+       // $p->bt_tahap1 = $fileName;
         $p->tanggal_tahap1 = $tanggal;
         //dd($p->tanggal_tahap1 );
         $p->updated_at = $tanggal;
@@ -4275,16 +4275,16 @@ class RegistrasiController extends Controller
             $getPembayaran= Pembayaran::find($getRegistrasi->id_pembayaran);
             $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi,'pembayaranData'=>$getPembayaran];
             
-            $fileName = $key->no_registrasi.'_BT_TAHAP2.pdf';
-            $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+            // $fileName = $key->no_registrasi.'_BT_TAHAP2.pdf';
+            // $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 
-            // save
-            Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+            // // save
+            // Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                 
             $p->status_tahap2 = '3';
             
 
-            $p->bt_tahap2 = $fileName;
+            //$p->bt_tahap2 = $fileName;
             $p->tanggal_tahap2 = $tanggal;
             //dd($p->tanggal_tahap1 );
             $p->updated_at = $tanggal;
@@ -4597,16 +4597,16 @@ class RegistrasiController extends Controller
             $getPembayaran= Pembayaran::find($getRegistrasi->id_pembayaran);
             $newData = ['userData'=>$getUser,'registrasiData'=>$getRegistrasi,'pembayaranData'=>$getPembayaran];
             
-            $fileName = $key->no_registrasi.'_BT_TAHAP3.pdf';
-            $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
+            // $fileName = $key->no_registrasi.'_BT_TAHAP3.pdf';
+            // $pdf = PDF::loadView('pdf/pdf_pembayaran',$newData);
                 
-            // save
-            Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
+            // // save
+            // Storage::put('public/buktipembayaran/'.$e->id_user.'/'.$fileName, $pdf->output());
                 
-            //$p->status_tahap3 = '3';
+            // //$p->status_tahap3 = '3';
             
 
-            $p->bt_tahap3 = $fileName;
+            // $p->bt_tahap3 = $fileName;
             $p->tanggal_tahap3 = $tanggal;
             //dd($p->tanggal_tahap1 );
             $p->updated_at = $tanggal;
