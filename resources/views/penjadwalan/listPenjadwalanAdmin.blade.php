@@ -181,7 +181,7 @@
     </div>
      <!-- end panel -->
 
-     <!--modal-->
+    <!--modal-->
     <div id="modalPenjadwalan1" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -270,7 +270,6 @@
     </div>
 
     <!--- Modal Audit 2 -->
-
     <div id="modalPenjadwalan2" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -466,7 +465,6 @@
             </form>
         </div>
     </div>
-
 
     <div id="modalPenjadwalan4" class="modal fade" role="dialog">
         <div class="modal-dialog">

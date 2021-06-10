@@ -368,9 +368,8 @@ return [
         ],
         [
             'icon' => 'ion-md-book',
-            'title' => 'Registrasi',
-            'url' => 'listregistrasipelangganaktif',
-          
+            'title' => 'Monitoring Registrasi',
+            'url' => 'listmonitoringregistrasi',          
         ],  
         [
             'icon' => 'ion-ios-calendar',
