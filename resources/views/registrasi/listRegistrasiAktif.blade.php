@@ -159,14 +159,14 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Pelaksana Pekerjaan</label>
                                 <select id="skema_audit" name="skema_audit" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Pelaksana==</option>
                                     <option value="">Kantor Pusat</option>
                                     <option value="">Kantor Cabang</option>                                                                        
                                 </select>
-                            </div>
+                            </div> --}}
                            
                         </div>
                         <div class="modal-footer">
@@ -548,15 +548,8 @@ $('#mulai_audit1').datetimepicker();
                         
                     }
                 })
-
-              
-                
+   
             }
-           
-
-           
-
-
         });
 
 
@@ -985,7 +978,7 @@ $('#mulai_audit1').datetimepicker();
                         id_regis: $('#idregis1').val()
                     },
                     success: function (response) {
-                        dd("disini");
+                    
                         //$('#pelaksana1_audit1').empty();                         
                         $('#pelaksana2_audit1').empty();  
 
@@ -1525,9 +1518,9 @@ $('#mulai_audit1').datetimepicker();
                             var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
 
                             var audit1 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan1' style="cursor:pointer">Audit Tahap 1</a>`;
-                            var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id_registrasi+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-pelaksana2="`+full.pelaksana2_audit1+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
-                            var rapat = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id_registrasi+` data-target='#modalPenjadwalan3' style="cursor:pointer">Rapat Auditor</a>`;
-                            var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id_registrasi+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite Ahli</a>`;
+                            var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`"data-pelaksana2="`+full.pelaksana2_audit1+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
+                            var rapat = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan3' style="cursor:pointer">Rapat Auditor</a>`;
+                            var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite Ahli</a>`;
                             
                             if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
                                 var unduhAkad = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
