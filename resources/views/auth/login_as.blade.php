@@ -34,7 +34,7 @@
             <!-- end login-header -->
             <!-- begin login-content -->
             <div class="login-content">
-                <form action="{{route('authenticate')}}" method="post" class="margin-bottom-0">
+                <form action="{{route('authenticateencripted')}}" method="post" class="margin-bottom-0">
                     @csrf
                     <div class="input-login form-group m-b-15">
                         <div class="label"><i class="fa fa-user"></i></div>

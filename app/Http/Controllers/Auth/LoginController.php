@@ -40,7 +40,7 @@ class LoginController extends Controller
         
         $username = $request->get('username');
         $password = $request->get('password');
-
+        //$password= Crypt::decryptString($password);
         //dd($username);
 
         //$getUSer = User::where('username',$username)->first();
@@ -70,19 +70,79 @@ class LoginController extends Controller
                     $redirect = redirect('login')->with('errstatus',$errstatus);
                     return $redirect;
                 }else{
+                    //dd($getU["password"]);
+                    //dd(Crypt::decryptString($password));
                     
                     if(Auth::attempt(["username"=>$username,"password"=>$password])){
                         return redirect()->route('home.index');
                     }elseif(Auth::attempt(["email"=>$username,"password"=>$password])){
-                        return redirect()->route('home.index');    
-                    }elseif(["username"=>$username,"password"=>$password]){
-                        dd("masuk sini");
+                        return redirect()->route('home.index');  
+                    
+                   
+                    }else{
+                        $errstatus = "Username atau Password tidak sesuai";
+                        $redirect = redirect('login')->with('errstatus',$errstatus);
+                        return $redirect;
+                    }
+                }
+            }     
+        }else{
+            $errstatus = "Username atau email tidak terdaftar";
+            $redirect = redirect('login')->with('errstatus',$errstatus);
+            return $redirect;
+        }
+
+                  
+            
+    }
+
+    public function authenticateEncripted(Request $request)
+    {
+        
+        $username = $request->get('username');
+        $password = $request->get('password');
+        //$password= Crypt::decryptString($password);
+        //dd($username);
+
+        //$getUSer = User::where('username',$username)->first();
+        $getUSer = User::where('username',$username)
+                   ->orWhere('email',$username)
+                   ->get();
+       
+        // print_r($getUSer);
+        // echo "<br>";           
+        // if(count($getUSer)){
+        //     echo "ada";
+        // }else{
+        //     echo "tidak ada";
+        // }           
+                
+        if(count($getUSer)){
+            foreach($getUSer as $getU){
+                $status = $getU->status;
+                /*echo"<pre>";
+                print_r($status);
+                print_r($getU);
+                echo"</pre>";
+                die();  */ 
+                
+                if($status == '0'){
+                    $errstatus = "Email belum diverifikasi, silahkan verifikasi terlebih dahulu";
+                    $redirect = redirect('login')->with('errstatus',$errstatus);
+                    return $redirect;
+                }else{
+                    //dd($getU["password"]);
+                    //dd(Crypt::decryptString($password));
+                    
+                    if(["username"=>$username,"password"=>$password]){
+                            
+                        auth()->loginUsingId($getU->id);
                         return redirect()->route('home.index');
                     }elseif(["email"=>$username,"password"=>$password]){
-                        
-                        return redirect()->route('home.index');
-                    }
-                    else{
+                        auth()->loginUsingId($getU->id);
+                        return redirect()->route('home.index');  
+                    
+                    }else{
                         $errstatus = "Username atau Password tidak sesuai";
                         $redirect = redirect('login')->with('errstatus',$errstatus);
                         return $redirect;

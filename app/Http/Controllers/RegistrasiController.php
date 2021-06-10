@@ -3759,8 +3759,10 @@ class RegistrasiController extends Controller
 
     }    
 
-    public function konfirmasiPembayaranUser(Request $request, $id){
+    public function konfirmasiPembayaranUser(Request $request){
+        
         $data = $request->except('_token','_method');
+        //dd($data);
         //dd($data);
         $model = new Registrasi();
         $model2 = new User();
@@ -3768,7 +3770,7 @@ class RegistrasiController extends Controller
 
         try{
             DB::beginTransaction();
-            $e = $model->find($id);
+            $e = $model->find($data['id1']);
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
 
@@ -3776,20 +3778,20 @@ class RegistrasiController extends Controller
             date_default_timezone_set('Asia/Jakarta');
             $today = Carbon::now()->toDateTimeString();
             $p->tanggal_tahap1 =  $today;
-            $p->status_tahap1 = 1;
+            $p->status_tahap1 = 3;
 
             
-            if($request->has("file")){
-                $file = $request->file("file");
-                $file = $data["file"];
+            if($request->has("bukti_bayar1")){
+                $file = $request->file("bukti_bayar1");
+                $file = $data["bukti_bayar1"];
                
-                $filename = "BB1-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                $filename = "BB1-".$data['id1'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
                 $p->bb_tahap1 = $filename;
                 $p->count_tahap1 = $p->count_tahap1 +1;
                    
             }
-            $e->status='6_1';
+            
             $e->save();
             //$u->save();
             $p->save();
@@ -3803,7 +3805,7 @@ class RegistrasiController extends Controller
 
             Session::flash('error', $e->getMessage());
         }
-            $redirect = redirect()->route('registrasiHalal.index');
+            $redirect = redirect()->route('listkeuangan');
             return $redirect;
     }
 
@@ -4279,7 +4281,7 @@ class RegistrasiController extends Controller
         }
     }
 
-    public function konfirmasiPembayaranUserTahap2(Request $request, $id){
+    public function konfirmasiPembayaranUserTahap2(Request $request){
         $data = $request->except('_token','_method');
         //dd($data);
         $model = new Registrasi();
@@ -4288,31 +4290,31 @@ class RegistrasiController extends Controller
 
         try{
             DB::beginTransaction();
-            $e = $model->find($id);
+            $e = $model->find($data['id2']);
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
 
             date_default_timezone_set('Asia/Jakarta');
             $today = Carbon::now()->toDateTimeString();
             $p->tanggal_tahap2 = $today;
-            $p->status_tahap2 = 1;
+            $p->status_tahap2 = 3;
 
             
-            if($request->has("file")){
-                $file = $request->file("file");
-                $file = $data["file"];
+            if($request->has("bukti_bayar2")){
+                $file = $request->file("bukti_bayar2");
+                $file = $data["bukti_bayar2"];
                
 
                
-                $filename = "BB2-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                $filename = "BB2-".$data['id2'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
                 $p->bb_tahap2 = $filename;
                 //$p->count_tahap2 = $p->count_tahap2+1;
             }    
 
               
             
-            $e->status='9_1';
+          
             $e->save();
             $u->save();
             $p->save();
@@ -4326,7 +4328,7 @@ class RegistrasiController extends Controller
 
             Session::flash('error', $e->getMessage());
         }
-            $redirect = redirect()->route('registrasiHalal.index');
+            $redirect = redirect()->route('listkeuangan');
             return $redirect;
     }
 
@@ -4606,7 +4608,7 @@ class RegistrasiController extends Controller
         }
     }
 
-    public function konfirmasiPelunasanUser(Request $request, $id){
+    public function konfirmasiPelunasanUser(Request $request){
         $data = $request->except('_token','_method');
         //dd($data);
         $model = new Registrasi();
@@ -4615,28 +4617,29 @@ class RegistrasiController extends Controller
 
         try{
             DB::beginTransaction();
-            $e = $model->find($id);
+            $e = $model->find($data['id3']);
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
 
             date_default_timezone_set('Asia/Jakarta');
             $today = Carbon::now()->toDateTimeString();
             $p->tanggal_tahap3 = $today;
-            $p->status_tahap3 = 1;
+            $p->status_tahap3 = 3;
 
             
-            if($request->has("file")){
-                $file = $request->file("file");
-                $file = $data["file"];
+            if($request->has("bukti_bayar3")){
+                //dd("masuk");
+                $file = $request->file("bukti_bayar3");
+                $file = $data["bukti_bayar3"];
                
-                $filename = "BB3-".$data['id']."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktipembayaran/".Auth::user()->id."/", $filename);
+                $filename = "BB3-".$data['id3'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
                 $p->bb_tahap3 = $filename;
                    // $p->count_tahap3 = $p->count_tahap3+1;
                  
                
             }
-            $e->status='12_1';
+       
             $e->save();
             $u->save();
             $p->save();
@@ -4650,7 +4653,7 @@ class RegistrasiController extends Controller
 
             Session::flash('error', $e->getMessage());
         }
-            $redirect = redirect()->route('registrasiHalal.index');
+            $redirect = redirect()->route('listkeuangan');
             return $redirect;
     }
 

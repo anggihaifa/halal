@@ -46,6 +46,19 @@ class UserController extends Controller
         return Datatables::of($xdata)->make();
     }
 
+    public function pelangganDatatable(){
+        //return DataTables::of(User::with('bumn'))->make();
+        //$data = new User();
+        //$xdata = $data->orderBy('id','desc')->leftJoin('usergroup','usergroup_id','=','usergroup.id')->get();
+        $xdata = DB::table('users')
+                ->join('usergroup','users.usergroup_id','=','usergroup.id')
+                ->select('users.*','usergroup.usergroup as role')
+                ->where('usergroup_id','=','2')
+                ->orderBy('users.id','desc');
+                //->get();
+        return Datatables::of($xdata)->make();
+    }
+
     public function listPelanggan(){
         return view('pelanggan.index');
     }

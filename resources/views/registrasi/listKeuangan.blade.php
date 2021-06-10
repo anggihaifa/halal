@@ -90,7 +90,139 @@
     </div>
      <!-- end panel -->
 
-    
+     <div id="modalbayar1" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <form action="{{route('registrasi.konfirmasipembayaran')}}" method="post"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload Bukti Pembayaran Tahap 1</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">
+                        <div class="form-group">
+                            <label class="control-label" for="id1">ID</label>  
+                            <div >
+                                <input id="id1"  name="id1" type="text" placeholder="" class="form-control " readonly>
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class=" control-label" for="id">Bukti Pembayaran</label>  
+                            <div >
+                                <input id="bukti_bayar1"  name="bukti_bayar1" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Unggah</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+           
+            
+        </div>
+    </div>   
+
+    <div id="modalbayar2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <form action="{{route('registrasi.konfirmasipembayaranusertahap2')}}" method="post"   enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload Bukti Pembayaran Tahap 2</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">
+                        <div class="form-group">
+                            <label class="control-label" for="id2">ID</label>  
+                            <div >
+                                <input id="id2"  name="id2" type="text" placeholder="" class="form-control " readonly>
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class=" control-label" for="id">Bukti Pemabayaran</label>  
+                            <div >
+                                <input id="bukti_bayar2"  name="bukti_bayar2" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Unggah</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+           
+            
+        </div>
+    </div>   
+    <div id="modalbayar3" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <form action="{{route('registrasi.konfirmasipelunasanuser')}}" method="post"   enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload Bukti Pelunasan</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">
+                        <div class="form-group">
+                            <label class="control-label" for="id3">ID</label>  
+                            <div >
+                                <input id="id3"  name="id3" type="text" placeholder="" class="form-control " readonly>
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class=" control-label" for="id">Bukti Pelunasan</label>  
+                            <div >
+                                <input id="bukti_bayar3"  name="bukti_bayar3" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Unggah</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+           
+            
+        </div>
+    </div>   
     
 @endsection
 @push('scripts')
@@ -106,6 +238,54 @@
     <script>
 
 
+        $('#modalbayar1').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            var id = $this.data('id');
+            var modal = $('#modalbayar1');
+
+            modal.find('#id1').val(id);
+            modal.find('#modalbayar1').attr('action', function (i,old) {
+            return old + '/' + id;
+
+            });
+
+        });
+
+ 
+        $('#modalbayar2').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            var id = $this.data('id');
+            var modal = $('#modalbayar2');
+
+            modal.find('#id2').val(id);
+            modal.find('#modalbayar2').attr('action', function (i,old) {
+            return old + '/' + id;
+
+            });
+
+        });
+        
+        $('#modalbayar3').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            var id = $this.data('id');
+            var modal = $('#modalbayar3');
+
+            modal.find('#id3').val(id);
+            modal.find('#modalbayar3').attr('action', function (i,old) {
+            return old + '/' + id;
+
+            });
+
+        });
 
         
         $('#btncalendar').datepicker({
@@ -135,131 +315,8 @@
                         "searchable":false,
                         "orderable":false,
                         "render":function (data,type,full,meta) {
-
-                            
-                          
+                       
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
-
-                            var status1 = (full.status == 1) ? dButton('Pengajuan Baru'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data?')">Pengajuan Baru</a>`;
-
-                           
-                            var status2 = (full.status == 2) ? dButton('Verifikasi Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Verifikasi Berkas??')">Verifikasi Berkas</a>`;
-
-                            var status2_0 = (full.status == '2_0') ? dButton('Belum Upload Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Berkas??')">Belum Upload Berkas</a>`;
-
-                            var status2_1 = (full.status == '2_1') ? dButton('Menunggu Admin Memverifikasi Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Admin Memverifikasi Berkas??')">Menunggu Admin Memverifikasi Berkas</a>`;
-
-                            var status2_2 = (full.status == '2_2') ? dButton('Perbaikan Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Berkas??')">Perbaikan Berkas</a>`;
-
-                            var status2_3 = (full.status == '2_3') ? dButton('Berkas Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Berkas Terkonfirmasi??')">Berkas Terkonfirmasi</a>`;
-                            
-                            var status3 = (full.status == 3) ? dButton('Menentukan Kebutuhan Waktu Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menentukan Kebutuhan Waktu Audit??')">Menentukan Kebutuhan Waktu Audit</a>`;
-
-                            var status3_0 = (full.status == '3_0') ? dButton('Belum Ditentukan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Ditentukan??')">Belum Ditentukan</a>`;
-
-                            var status3_1 = (full.status == '3_1') ? dButton('Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit??')">Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit</a>`;
-
-                            var status3_2 = (full.status == '3_2') ? dButton('Perbaikan Kebutuhan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Kebutuhan Audit??')">Perbaikan Kebutuhan Audit</a>`;
-
-                            var status3_3 = (full.status == '3_3') ? dButton('Kebutuhan Waktu Audit Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Kebutuhan Waktu Audit Terkonfirmasi??')">Kebutuhan Waktu Audit Terkonfirmasi</a>`;
-
-                            var status4 = (full.status == 4) ? dButton('Penawaran Harga dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penawaran Harga dan Akad??')">Penawaran Harga dan Akad</a>`;
-
-                            var status4_0 = (full.status == '4_0') ? dButton('Belum Upload Bukti Penawaran dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Penawaran dan Akad??')">Belum Upload Bukti Penawaran dan Akad</a>`;
-
-                            var status4_1 = (full.status == '4_1') ? dButton('Sudah Upload Bukti Penawaran dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Sudah Upload Bukti Penawaran dan Akad??')">Sudah Upload Bukti Penawaran dan Akad</a>`;
-
-                            var status6 = (full.status == 6) ? dButton('Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran??')">Pembayaran</a>`;
-
-                            var status6_0 = (full.status == '6_0') ? dButton('Belum Upload Bukti Bayar'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Bayar??')">Belum Upload Bukti Bayar</a>`;
-
-                            var status6_1 = (full.status == '6_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pembayaran??')">Menunggu Sales Officer Mengkonfirmasi Pembayaran</a>`;
-
-                            var status6_2 = (full.status == '6_2') ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_pembayaran')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Gagal??')">Pembayaran Gagal</a>`;
-
-                            var status6_3 = (full.status == '6_3') ? dButton('Pembayaran Terkonfirmasi'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Terkonfirmasi??')">Pembayaran Terkonfirmasi</a>`;
-
-                            
-                            var status5 = (full.status == 5) ? dButton('Penerbitan Order Confirmation'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan Order Confirmation??')">Penerbitan Order Confirmation (OC)</a>`;
-
-                           
-
-                            var status5_0 = (full.status == '5_0') ? dButton('Belum Upload OC'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload OC??')">Belum Upload OC</a>`;
-
-                            var status5_1 = (full.status == '5_1') ? dButton('Menunggu Pelanggan Upload Ulang OC'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelanggan Upload Ulang OC??')">Menunggu Pelanggan Upload Ulang OC</a>`;
-
-                            var status5_2 = (full.status == '5_2') ? dButton('Menunggu Konfirmasi Admin'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Konfirmasi Admin??')">Menunggu Konfirmasi Admin</a>`;
-
-                            var status5_3 = `<a href="{{url('update_status_oc')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_3"   class="dropdown-item"> OC Gagal</a> `;
-
-                            var status5_4 = (full.status == '5_4') ? dButton('Penerbitan OC Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Terkonfirmasi??')">Penerbitan OC Terkonfirmasi</a>`;
-
-
-                            var status7 = (full.status == 7) ? dButton('Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan??')">Penjadwalan</a>`;
-
-                            var status7_0 = (full.status == '7_0') ? dButton('Belum Dijadwalkan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Dijadwalkan??')">Belum Dijadwalkan</a>`;
-
-                            var status7_1 = (full.status == '7_1') ? dButton('Menunggu Reviewer Mengkonfirmasi Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Mengkonfirmasi Penjadwalan??')">Menunggu Reviewer Mengkonfirmasi Penjadwalan</a>`;
-
-                            var status7_2 = (full.status == '7_2') ? dButton('Perbaikan Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Penjadwalan??')">Menunggu Konfirmasi Admin</a>`;
-
-                            var status7_3 = (full.status == '7_3') ? dButton('Penjadwalan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan Terkonfirmasi??')">Penjadwalan Terkonfirmasi</a>`;
-
-                            var status8 = (full.status == 8) ? dButton('Proses Audit Tahap 1'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 1??')">Proses Audit Tahap 1</a>`;
-
-                            var status8_1 = (full.status == '8_1') ? dButton('Menunggu Auditor Memverifikasi berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Auditor Memverifikasi berkas??')">Menunggu Auditor Memverifikasi berkas</a>`;
-
-                            var status8_2 = (full.status == '8_2') ? dButton('Perbaikan Berkas Audit Tahap 1'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Berkas Audit Tahap 1??')">Perbaikan Berkas Audit Tahap 1</a>`;
-
-                            var status8_3 = (full.status == '8_3') ? dButton('Audit Tahap 1 Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Audit Tahap 1 Selesai??')">Audit Tahap 1 Selesai</a>`;
-
-                            var status9 = (full.status == 9) ? dButton('Pembayaran Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2??')">Pembayaran Tahap 2</a>`;
-
-                            var status9_0 = (full.status == '9_0') ? dButton('Belum Upload Bukti Bayar'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Bayar??')">Belum Upload Bukti Bayar</a>`;
-
-                            var status9_1 = (full.status == '9_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2??')">Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2</a>`;
-
-                            var status9_2 = (full.status == '9_2') ? dButton('Pembayaran Tahap 2 Gagal'):`<a href="{{url('update_status_pembayaran_tahap2')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Gagal??')">Pembayaran Tahap 2 Gagal</a>`;
-
-                            var status9_3 = (full.status == '9_3') ? dButton('Pembayaran Tahap 2 Terkonfirmasi'):`<a href="{{url('konfirmasi_pembayaran_tahap2')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Terkonfirmasi??')">Pembayaran Tahap 2 Terkonfirmasi</a>`;
-
-                            var status10 = (full.status == 10) ? dButton('Proses Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 2??')">Proses Audit Tahap 2</a>`;
-
-                            var status10_0 = (full.status == '10_0') ? dButton('Belum Upload Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Audit Plan??')">Belum Upload Audit Plan</a>`;
-
-                            var status10_1 = (full.status == '10_1') ? dButton('Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan??')">Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan</a>`;
-
-                            var status10_2 = (full.status == '10_2') ? dButton('Pelaku Usaha Menolak Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelaku Usaha Menolak Audit Plan??')">Pelaku Usaha Menolak Audit Plan</a>`;
-
-                            var status10_3 = (full.status == '10_3') ? dButton('Audit Plan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Audit Plan Terkonfirmasi??')">Audit Plan Terkonfirmasi</a>`;
-
-                            var status10_4 = (full.status == '10_4') ? dButton('Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Auditi??')">Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Audit</a>`;
-                            
-                            var status10_5 = (full.status == '10_5') ? dButton('Perbaikan Laporan Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_5" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Laporan Audit Tahap 2??')">Perbaikan Laporan Audit Tahap 2</a>`;
-
-                            var status10_6 = (full.status == '10_6') ? dButton('Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_6" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit??')">Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit</a>`;
-
-                            var status10_7 = (full.status == '10_7') ? dButton('Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit??')">Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit</a>`;
-
-                            var status10_8 = (full.status == '10_8') ? dButton('Laporan Audit Tahap 2 Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_8" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Laporan Audit Tahap 2 Terkonfirmasi??')">Laporan Audit Tahap 2 Terkonfirmasi</a>`;
-
-                            var status11 = (full.status == 11) ? dButton('Penyampaian Berita Acara'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 1??')">Proses Audit Tahap 1</a>`;
-
-                            var status11_1 = (full.status == '11_1') ? dButton('Menunggu Pelanggan Upload Ulang Berita Acara'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelanggan Upload Ulang Berita Acara??')">Menunggu Pelanggan Upload Ulang Berita Acara</a>`;
-
-                            var status11_2 = (full.status == '11_2') ? dButton('Berita Acara Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Berita Acara Terkonfirmasi??')">Berita Acara Terkonfirmasi</a>`;
-
-                            var status12 = (full.status == 12) ? dButton('Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan??')">Pelunasan</a>`;
-
-                            var status12_0 = (full.status == '12_0') ? dButton('Belum Upload Bukti Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Pelunasan??')">Belum Upload Bukti Pelunasan</a>`;
-
-                            var status12_1 = (full.status == '12_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pelunasan??')">Menunggu Sales Officer Mengkonfirmasi Pelunasan</a>`;
-
-                            var status12_2 = (full.status == '12_2') ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_pelunasan')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Gagal??')">Pelunasan Gagal</a>`;
-
-                            var status12_3 = (full.status == '12_3') ? dButton('Pelunasan Terkonfirmasi'):`<a href="{{url('upload_invoice')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Terkonfirmasi??')">Pelunasan Terkonfirmasi</a>`;
-
-                            var status13 = (full.status == 13) ? dButton('Proses Sidang Fatwa'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/13" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data ke tahapan Proses Sidang Fatwa?')">Proses Sidang Fatwa</a>`;
 
                             var uploadAkad =  `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
 
@@ -470,7 +527,7 @@
                                                                 <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> 
-                                                                    <div class= "dropdown-button-title"> Update Progress </div>`+upload_OC+status5_3+konfirm_OC+`
+                                                                    <div class= "dropdown-button-title"> Update Progress </div>`+upload_OC+`
                                                                 </div> 
                                                             </div>
                                                         </td>
@@ -490,82 +547,61 @@
                                                         </tr>
                                                         
                                                         <tr>
-                                                        <td class="text-center align-middle">
-                                                            Pembayaran 1
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                            `+checkStatusPembayaran(full.status_tahap1)+`
-                                                        </td>
+                                                            <td class="text-center align-middle">
+                                                                Pembayaran 1
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                                `+checkStatusPembayaran(full.status_tahap1)+`
+                                                            </td>
 
-                                                        <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap1)+`
-                                                        </td>
-                                                        
-                                                        <td class="text-center align-middle">
-                                                            `+unduhBayar1+`
+                                                            <td class="text-center align-middle">
+                                                                `+formatRupiah(full.nominal_tahap1)+`
+                                                            </td>
+                                                            
+                                                            <td class="text-center align-middle">
+                                                                `+unduhBayar1+`
 
-                                                        </td>
+                                                            </td>
 
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                <div class="dropdown-button-title">Update Progress</div>`+status6_2+konfirmBayar1+`
-                                                                </div> 
-                                                            </div>
-                                                        </td>
+                                                            <td class="text-center align-middle">
+                                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar1' >Unggah</button>
+                                                            </td>
                                                         </tr>
                                                         <tr>
-                                                        <td class="text-center align-middle">
-                                                             Pembayaran 2
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                            `+checkStatusPembayaran(full.status_tahap2)+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap2)+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                             `+unduhBayar2+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                    <div class="dropdown-button-title">Update Progress</div>`+status9_2+konfirmBayar2+`
-                                                                </div> 
-                                                            </div>
-                                                        </td>
+                                                            <td class="text-center align-middle">
+                                                                Pembayaran 2
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                                `+checkStatusPembayaran(full.status_tahap2)+`
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                                `+formatRupiah(full.nominal_tahap2)+`
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                                `+unduhBayar2+`
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                            
+                                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar2' >Unggah</button>
+                                                            </td>
                                                         </tr>
                                                         <tr>
-                                                        <td class="text-center align-middle">
-                                                            Pelunasan 
-                                                        </td>
-                                                        <td class="text-center align-middle"> 
-                                                            `+checkStatusPembayaran(full.status_tahap3)+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap3)+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                             `+unduhBayar3+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                    <b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                       
-                                                                <div class="dropdown-button-title">Update Progress</div>`+status12_2+konfirmBayar3+`
-                                                                </div>
-                                                            </div>
-                                                        </td>
+                                                            <td class="text-center align-middle">
+                                                                Pelunasan 
+                                                            </td>
+                                                            <td class="text-center align-middle"> 
+                                                                `+checkStatusPembayaran(full.status_tahap3)+`
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                                `+formatRupiah(full.nominal_tahap3)+`
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                                `+unduhBayar3+`
+                                                            </td>
+                                                            <td class="text-center align-middle">
+                                                            
+                                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar3' >Unggah</button>
+                                                            </td>
 
                                                         </tr>
                                                         </table>

@@ -150,23 +150,23 @@ Route::get('data_keuangan','RegistrasiController@dataKeuangan')->name('datakeuan
 
 Route::get('list_pembayaran_registrasi','RegistrasiController@listPembayaranRegistrasi')->name('listpembayaranregistrasi')->middleware('role:1,3,5,7,9');
 Route::get('data_pembayaran_registrasi','RegistrasiController@dataPembayaranRegistrasi')->name('datapembayaranregistrasi');
-Route::get('konfirmasi_pembayaran_registrasi/{id}','RegistrasiController@konfirmasiPembayaranRegistrasi');
+Route::get('konfirmasi_pembayaran_registrasi','RegistrasiController@konfirmasiPembayaranRegistrasi');
 
 //pembayaran registrasi
 Route::get('pembayaran_registrasi/{id}','RegistrasiController@pembayaranRegistrasi')->name('registrasi.pembayaranRegistrasi');
-Route::put('konfirmasi_pembayaran/{id}','RegistrasiController@konfirmasiPembayaranUser')->name('registrasi.konfirmasipembayaran');
+Route::put('konfirmasi_pembayaran','RegistrasiController@konfirmasiPembayaranUser')->name('registrasi.konfirmasipembayaran');
 Route::get('download','RegistrasiController@download');
 
 
 //pembayaran tahap 2
 Route::get('list_pembayaran_tahap2','RegistrasiController@listPembayaranTahap2')->name('listpembayarantahap2');
 Route::get('data_pembayaran_Tahap2','RegistrasiController@dataPembayaranTahap2')->name('datapembayarantahap2');
-Route::get('konfirmasi_pembayaran_tahap2/{id}','RegistrasiController@konfirmasiPembayaranTahap2');
+Route::get('konfirmasi_pembayaran_tahap2','RegistrasiController@konfirmasiPembayaranTahap2');
 
 
 //pembayaran tahap 2
 Route::get('pembayaran_tahap2/{id}','RegistrasiController@pembayaranTahap2')->name('registrasi.pembayarantahap2');
-Route::put('konfirmasi_pembayaran_user_tahap2/{id}','RegistrasiController@konfirmasiPembayaranUserTahap2')->name('registrasi.konfirmasipembayaranusertahap2');
+Route::put('konfirmasi_pembayaran_user_tahap2','RegistrasiController@konfirmasiPembayaranUserTahap2')->name('registrasi.konfirmasipembayaranusertahap2');
 
 //report
 //Route::get('report_audit/{id}','RegistrasiController@reportAudit')->name('registrasi.reportaudit');
@@ -178,7 +178,7 @@ Route::get('list_pelunasan','RegistrasiController@listPelunasan')->name('listpel
 Route::put('konfirmasi_pelunasan_admin/{id}','RegistrasiController@konfirmasiPelunasanInvoiceAdmin')->name('registrasi.konfirmasiinvoice');
 //pelunasan
 Route::get('pelunasan/{id}','RegistrasiController@pelunasan')->name('registrasi.pelunasan')->middleware('role:1,2,3,5,7,9');
-Route::put('konfirmasi_pelunasan_user/{id}','RegistrasiController@konfirmasiPelunasanUser')->name('registrasi.konfirmasipelunasanuser')->middleware('role:1,2,3,5,7,9');
+Route::put('konfirmasi_pelunasan_user','RegistrasiController@konfirmasiPelunasanUser')->name('registrasi.konfirmasipelunasanuser')->middleware('role:1,2,3,5,7,9');
 
 Route::get('upload_invoice/{id}','RegistrasiController@uploadInvoice')->name('registrasi.uploadinvoice')->middleware('role:1,3,5,7,9');
 
@@ -437,8 +437,9 @@ Route::prefix('system')->group(function(){
 
     Route::resource('user','System\UserController');
     Route::get('user_datatable','System\UserController@datatable')->name('system.user.datatable');
+    Route::get('data_pelanggan','System\UserController@pelangganDatatable')->name('system.user.datapelanggan');
     Route::get('list_pelanggan','System\UserController@listPelanggan')->name('user.listpelanggan')->middleware('role:1,3,9');
-    Route::get('pelanggan_datatable','System\UserController@dataPelanggan')->name('system.pelanggan.datatable');
+    //Route::get('pelanggan_datatable','System\UserController@dataPelanggan')->name('system.pelanggan.datatable');
 
 
     Route::get('edit_profile/{id}','System\UserController@editProfile')->name('system.user.editprofile');
