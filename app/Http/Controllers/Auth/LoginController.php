@@ -37,14 +37,17 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+        
         $username = $request->get('username');
         $password = $request->get('password');
+
+        //dd($username);
 
         //$getUSer = User::where('username',$username)->first();
         $getUSer = User::where('username',$username)
                    ->orWhere('email',$username)
                    ->get();
-
+       
         // print_r($getUSer);
         // echo "<br>";           
         // if(count($getUSer)){
@@ -52,7 +55,7 @@ class LoginController extends Controller
         // }else{
         //     echo "tidak ada";
         // }           
-                   
+                
         if(count($getUSer)){
             foreach($getUSer as $getU){
                 $status = $getU->status;
@@ -66,12 +69,17 @@ class LoginController extends Controller
                     $errstatus = "Email belum diverifikasi, silahkan verifikasi terlebih dahulu";
                     $redirect = redirect('login')->with('errstatus',$errstatus);
                     return $redirect;
-                }else{                    
-                    if(Auth::attempt(["username"=>$username,"password"=>$password])){                        
+                }else{
+                    
+                    if(Auth::attempt(["username"=>$username,"password"=>$password])){
                         return redirect()->route('home.index');
                     }elseif(Auth::attempt(["email"=>$username,"password"=>$password])){                        
                         return redirect()->route('home.index');    
-                    }elseif(["email"=>$username,"password"=>$password]){                        
+                    }elseif(["username"=>$username,"password"=>$password]){
+                        // dd("masuk sini");
+                        return redirect()->route('home.index');
+                    }elseif(["email"=>$username,"password"=>$password]){
+                        
                         return redirect()->route('home.index');
                     }
                     else{
@@ -91,6 +99,7 @@ class LoginController extends Controller
             
     }
 
+    
     public function login(){
         // if(Auth::user()){
         //     //return redirect()->route('home');
@@ -103,6 +112,19 @@ class LoginController extends Controller
                     ->get();
         $dataFaq = json_decode($getFaq,true);         
         return view('auth/login', compact('dataFaq'));
+    }
+    public function loginAs(){
+        // if(Auth::user()){
+        //     //return redirect()->route('home');
+        // }else{
+        //     return view('auth/login');
+        // }
+        $getFaq =   DB::table('faq')
+                    ->where('status','aktif')
+                    ->orderBy('step','asc') 
+                    ->get();
+        $dataFaq = json_decode($getFaq,true);         
+        return view('auth/login_as', compact('dataFaq'));
     }
 
     public function change_password(){

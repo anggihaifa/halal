@@ -11,6 +11,7 @@ Route::get('report','ReportController@index')->name('report.index');
 
 //user management
 Route::get('login','Auth\LoginController@login')->name("login");
+Route::get('login_as','Auth\LoginController@loginAs')->name("loginas");
 Route::get('register','Auth\RegisterController@registerUser')->name('registeruser');
 Route::post('register_store','Auth\RegisterController@store')->name('register.store');
 Route::get('user/verify/{id}','Auth\RegisterController@verifyUser')->name('register.verifyuser');
@@ -25,6 +26,7 @@ Route::put('store_new_password/{id}','Auth\RegisterController@storeNewPassword')
 Route::get('change_password','Auth\LoginController@change_password')->name('change_password');
 Route::post('change_password','Auth\LoginController@store_change_password')->name('change_password.store');
 Route::post('login','Auth\LoginController@authenticate')->name("authenticate");
+Route::post('login_as','Auth\LoginController@authenticateEncripted')->name("authenticateencripted");
 Route::get('logout','Auth\LoginController@logout')->name("logout");
 
 
