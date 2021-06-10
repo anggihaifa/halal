@@ -465,6 +465,232 @@
     
     <script>
 
+$('#mulai_audit1').datetimepicker();
+        $('#selesai_audit1').datetimepicker();
+        $('#mulai_audit2').datetimepicker();
+        $('#selesai_audit2').datetimepicker();
+        $('#mulai_rapat').datetimepicker();
+        $('#selesai_rapat').datetimepicker();
+        $('#mulai_tinjauan').datetimepicker();
+        $('#selesai_tinjauan').datetimepicker();
+
+         $('#modalPenjadwalan1').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var data_id = $this.data('id');
+            var modal = $('#modalPenjadwalan1');
+           
+          
+            if(modal.find('#idregis1').val()){
+
+            }else{
+                modal.find('#idregis1').val(data_id);
+                  
+                modal.find('#formpenjadwalan1').attr('action', function (i,old) {
+                   return old + '/' + data_id;
+            });  
+            }
+           
+
+        });
+
+
+        $('#modalPenjadwalan2').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var data_id = $this.data('id');
+            var data_saran1 = $this.data('pelaksana1');
+            var data_saran2 = $this.data('pelaksana2');
+            var modal = $('#modalPenjadwalan2');
+
+           //alert($this.data('pelaksana1'));
+           var z = document.getElementById("idregis2"); 
+
+           var x = document.getElementById("saran1"); 
+           var y = document.getElementById("saran2"); 
+          
+            if(modal.find('#idregis2').val()){
+
+            }else{
+
+                z.value = data_id;
+                x.innerHTML = '<b>'+data_saran1+'</b>' ;
+                y.innerHTML = '<b>'+data_saran2+'</b>' ;
+                $.ajax({
+
+                    url: '{{ route('jenis_akomodasi.data') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                       /* mulai: $('#mulai_audit1').val(),
+                        selesai: $('#selesai_audit1').val(),
+                        selected_pelaksana1: $('#pelaksana1_audit1').val(),
+                        id_regis: $('#idregis1').val()*/
+                    },
+                    success: function (response) {
+                    
+                        $('#jenis_akomodasi').empty();  
+                        $('#jenis_akomodasi').append(new Option('==Pilih Jenis Akomodasi==',''))                       
+                        $.each(response, function (jenis_akomodasi, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                            $('#jenis_akomodasi').append(new Option(jenis_akomodasi,id))
+                        })
+
+                        $('#jenis_akomodasi').selectpicker('destroy');
+                        $('#jenis_akomodasi').selectpicker();
+                                     
+                        
+                    }
+                })
+
+              
+                
+            }
+           
+
+           
+
+
+        });
+
+
+         $('#modalPenjadwalan3').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var data_id = $this.data('id');
+            var modal = $('#modalPenjadwalan3');
+           
+          
+            if(modal.find('#idregis3').val()){
+
+            }else{
+                modal.find('#idregis3').val(data_id);
+                  
+                modal.find('#formpenjadwalan3').attr('action', function (i,old) {
+                   return old + '/' + data_id;
+            });  
+            }
+           
+
+        });
+
+
+         $('#modalPenjadwalan4').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var data_id = $this.data('id');
+            var modal = $('#modalPenjadwalan4');
+           
+
+          
+            if(modal.find('#idregis4').val()){
+
+               // console.log(data_id);
+
+            }else{
+                modal.find('#idregis4').val(data_id);
+                  
+                modal.find('#formpenjadwalan4').attr('action', function (i,old) {
+                   return old + '/' + data_id;
+            });  
+            }
+           
+
+        });
+
+
+        function checkNamaAuditor(d,dom) {
+            //var detailNama;
+            $('#loading-image').show();
+            $.ajax({
+
+                   
+                url: '{{ route('detail_auditor.detail') }}',
+                method: 'POST',
+                data: {
+                     _token: "{{ csrf_token() }}",
+                    id: d,
+                  
+                },
+                 success: function (response) {
+                    
+                        //alert(response);
+                        if(response == ""){
+                            document.getElementById(dom).innerHTML = "";
+                        }else{
+                            document.getElementById(dom).innerHTML = response[0];
+                        }
+                        
+                       
+                        //response = parseJSON(response);
+                        //console.log(response[0]);
+                },
+               
+               
+            });   
+
+        }
+
+        var i =0;
+
+        function deleteAkomodasi(d){
+            d.closest('tr').remove();
+
+        }
+
+        function tambahAkomodasi (d) {
+            
+            
+            //var value = 0;
+            var jenis_a = 'jenis_a['+i+']';
+            var opsi_a = 'opsi_a['+i+']';
+
+            var table = document.getElementById("tableAkomodasi").getElementsByTagName('tbody')[0];;
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            //var i =0;
+
+            var jenis = document.getElementById("jenis_akomodasi");
+            var jenisText = jenis.options[jenis.selectedIndex].text;
+
+            var opsi = document.getElementById("opsi_akomodasi");
+            var opsiText = opsi.options[opsi.selectedIndex].text;
+
+            cell1.innerHTML = '<input type="text"  class="form-control" name='+jenis_a+' value="'+jenisText+'">';
+
+            cell2.innerHTML = '<input type="text" class="form-control"  name='+opsi_a+' value="'+opsiText+'">';
+
+            cell3.innerHTML = '<input type="button" class="btn btn-danger btn-sm" id="hapus" style="color:white;" value="X" onClick="deleteAkomodasi(this)">';
+
+            i++;
+
+            //cell3.innerHTML = opsiText;
+
+            console.log(i);
+
+            var x = document.getElementById("tAkomodasi");
+
+            if(x.style.visibility == "hidden"){
+
+                 x.style.visibility = "visible";
+                 x.style.display = "block";
+            }                               
+        }
+
         function format ( d ) {
 
         if(d.mulai_audit1  == null){
@@ -759,6 +985,7 @@
                         id_regis: $('#idregis1').val()
                     },
                     success: function (response) {
+                        dd("disini");
                         //$('#pelaksana1_audit1').empty();                         
                         $('#pelaksana2_audit1').empty();  
 
@@ -1169,7 +1396,6 @@
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
                             var status1 = (full.status == 1) ? dButton('Pengajuan Baru'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data?')">Pengajuan Baru</a>`;
-
                            
                             var status2 = (full.status == 2) ? dButton('Verifikasi Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Verifikasi Berkas??')">Verifikasi Berkas</a>`;
 
@@ -1206,7 +1432,6 @@
                             var status6_2 = (full.status == '6_2') ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Gagal??')">Pembayaran Gagal</a>`;
 
                             var status6_3 = (full.status == '6_3') ? dButton('Pembayaran Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Terkonfirmasi??')">Pembayaran Terkonfirmasi</a>`;
-
                             
                             var status5 = (full.status == 5) ? dButton('Penerbitan Order Confirmation'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan Order Confirmation??')">Penerbitan Order Confirmation (OC)</a>`;
 
@@ -1219,7 +1444,6 @@
                             var status5_3 = (full.status == '5_3') ? dButton('Penerbitan OC Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Gagal??')">Penerbitan OC Gagal</a>`;
 
                             var status5_4 = (full.status == '5_4') ? dButton('Penerbitan OC Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Terkonfirmasi??')">Penerbitan OC Terkonfirmasi</a>`;
-
 
                             var status7 = (full.status == 7) ? dButton('Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan??')">Penjadwalan</a>`;
 
@@ -1352,7 +1576,7 @@
                                                     <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
 
                                                    
-                                                    @foreach($cabang as $dataCabang =>$value){
+                                                    @foreach($cabang as $dataCabang =>$value)
 
                                                         <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
                                                         </option>

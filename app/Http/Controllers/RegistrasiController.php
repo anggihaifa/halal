@@ -2821,7 +2821,7 @@ class RegistrasiController extends Controller
             $e->tanggal_akad = $date;
             $e->mata_uang = $data['mata_uang'];            
             $e->status_akad = 1;
-            $e->status = '6_0'; 
+            $e->status = 8; 
 
             $updater =  Auth::user()->id;
 
@@ -2954,8 +2954,8 @@ class RegistrasiController extends Controller
             $date = date("Y-m-d h:i:sa");
 
             $e->tanggal_oc = $date;            
-            $e->status_oc = 1;
-            $e->status = '5_1'; 
+            $e->status_oc = 2;
+            // $e->status = '5_1'; 
 
             if($request->has("file")){
                 $file = $request->file("file");
