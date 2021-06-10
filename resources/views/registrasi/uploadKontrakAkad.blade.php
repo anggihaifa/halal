@@ -44,7 +44,7 @@
 							
 							<label class="col-lg-4 col-form-label">Tanggal Akad</label>
 							<div class="col-lg-8">
-								@if($data->status_akad == 0 || $data->status_akad ==9)
+								@if($data->status_akad == 0)
 									<input id="tgl_akad" name="tgl_akad" type="text" class="form-control"/>
 								@else
 									<input id="tgl_akad" name="tgl_akad" type="text" class="form-control" value={{ $data->status_akad}} readonly />
@@ -61,7 +61,7 @@
 								
 								<label class="col-lg-4 col-form-label">Mata Uang</label>
 								
-								@if($data->status_akad == 0 || $data->status_akad == 1  || $data->status_akad == 5 || $data->status_akad ==9)
+								@if($data->status_akad == 0 || $data->status_akad == 1)
 								<div class="col-lg-8">
 									<select id="mata_uang" name="mata_uang" class="form-control selectpicker forSearch" data-size="10" data-live-search="true" data-style="btn-white" value={{$data->mata_uang}} >
 	                                    <option value="" selected="selected">--Pilih Mata Uang--</option>
@@ -156,7 +156,7 @@
 
 								<label class="col-lg-4 col-form-label">Biaya Pemeriksaan</label>
 								<div class="col-lg-8">
-									@if ($data->status_akad == 0 || $data->status_akad == 1 || $data->status_akad == 5 || $data->status_akad ==9)
+									@if ($data->status_akad == 0 || $data->status_akad == 1)
 										<input id="biaya_pemeriksaan"  name="biaya_pemeriksaan" type="text" value="" onchange="jml()" class="form-control number-separator"/>
 									@else
 										@if (count($dataAkad) > 0)
@@ -200,7 +200,7 @@
 								</div> --}}
 
 							
-							@if($data->status_akad == 1 || $data->status_akad == 5)
+							@if($data->status_akad == 1)
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">Kontrak Akad</label>
 								<div id="sh" class="col-lg-8">
@@ -212,7 +212,7 @@
 								<div class="col-lg-8">
 									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required   onchange="getValue('file')"/>
 								</div>
-							@elseif($data->status_akad == 0 || $data->status_akad ==9)
+							@elseif($data->status_akad == 0)
 								<label class="col-lg-4 col-form-label">Upload Kontrak Akad</label>
 								<div class="col-lg-8">
 									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')" required />
@@ -275,7 +275,7 @@
 										@if($data->status_akad == 1)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi Ulang</button>
 											<br><button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad dan Penawaran Sudah Dikirim Kepada Pelaku Usaha</button>
-										@elseif($data->status_akad == 0 || $data->status_akad ==9)
+										@elseif($data->status_akad == 0)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi</button>
 										@endif								
 									

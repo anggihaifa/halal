@@ -1,6 +1,7 @@
 <?php
 
-Route::get('','LandingPageController@index')->name('landingpage.index');
+// Route::get('','LandingPageController@index')->name('landingpage.index');
+Route::get('','HomeController@index')->name('home.index');
 Route::get('home','HomeController@index')->name('home.index');
 Route::get('main','LandingPageController@index')->name('landingpage.index');
 Route::get('cari_produk','LandingPageController@cariProduk')->name('landingpage.cariproduk');

@@ -81,7 +81,7 @@
                         </a>
                     </div>
 
-                    <div style="margin-top:15px;" >
+                    {{-- <div style="margin-top:15px;" >
                         <a  href="{{route('landingpage.index')}}"  class="btn btn-inverse btn-block btn-lg forFaq">
                             <h5 style="margin-bottom: 0px;">
                                
@@ -89,7 +89,7 @@
                                 
                             </h5> 
                         </a>
-                    </div>                                            
+                    </div>--}}
                     
                     @if(isset($notes))
                         <div class="login-info-red"><span>{{$notes}}</span></div>

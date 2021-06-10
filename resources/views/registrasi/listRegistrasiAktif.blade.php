@@ -691,9 +691,9 @@
 
             $.ajaxSetup({
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-                });
+            });
 
-                $('#mulai_audit1').on('change', function () {
+            $('#mulai_audit1').on('change', function () {
                 $.ajax({
 
                     url: '{{ route('dropdown1.dataauditor') }}',
@@ -719,7 +719,7 @@
                     }
                 })
             });
-           $('#selesai_audit1').on('change', function () {
+            $('#selesai_audit1').on('change', function () {
                 $.ajax({
 
                     url: '{{ route('dropdown1.dataauditor') }}',
@@ -746,7 +746,7 @@
                 })
             });
 
-           $('#pelaksana1_audit1').on('change', function () {
+            $('#pelaksana1_audit1').on('change', function () {
                 $.ajax({
 
                     url: '{{ route('dropdown1.dataauditor') }}',
@@ -801,7 +801,7 @@
                 })
             });
 
-           $('#selesai_audit2').on('change', function () {
+            $('#selesai_audit2').on('change', function () {
                 $.ajax({
 
                     url: '{{ route('dropdown2.dataauditor') }}',
@@ -829,7 +829,7 @@
                 })
             });
 
-           $('#pelaksana1_audit2').on('change', function () {
+            $('#pelaksana1_audit2').on('change', function () {
                 $.ajax({
 
                     url: '{{ route('dropdown2.dataauditor') }}',
@@ -964,7 +964,7 @@
                 })
             });
 
-           $('#pelaksana1_rapat').on('change', function () {
+            $('#pelaksana1_rapat').on('change', function () {
                 $.ajax({
 
                     url: '{{ route('auditor_dropdown.datarapatauditor') }}',
@@ -1051,7 +1051,7 @@
                     }
                 })
             });
-             $('#selesai_tinjauan').on('change', function () {
+            $('#selesai_tinjauan').on('change', function () {
                 $.ajax({
 
                     url: '{{ route('komite_dropdown.datakomite') }}',
@@ -1082,7 +1082,7 @@
                 })
             });
 
-           $('#pelaksana1_tinjauan').on('change', function () {
+            $('#pelaksana1_tinjauan').on('change', function () {
                 $.ajax({
 
                     url: '{{ route('komite_dropdown.datakomite') }}',
@@ -1712,7 +1712,7 @@
                         }
                     }
                 ],
-
+                
               
                
                //tambahkan bkti bayar 1,2,3, bkti kontrak akad, berita acara,
@@ -1751,7 +1751,7 @@
                      tdi.first().removeClass('fa-plus-square');
                      tdi.first().addClass('fa-minus-square');
                  }
-            });
+             });
         
     
         });
