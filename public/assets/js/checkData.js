@@ -91,7 +91,7 @@ function checkPenjadwalan(data){
 function checkOC(data){
     return  (data==0)? '<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Upload OC"></a><br>Sales Account Officer'
         :(data==1)? '<a   class="ion-ios-clipboard " style="font-size: 200%;color:yellow;" title="Menunggu Konfirmasi Pelaku Usaha"></a> <br>Pelaku Usaha'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#32cd32;  title="OC Telah Di Upload dan Dikonfirmasi Oleh Pelaku Usaha"></a><br>Pelaku Usaha'
+        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#32cd32;  title="OC Telah Di Upload"></a><br>Pelaku Usaha'
         :(data==3)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#e32636;  title="OC Gagal"></a><br>Pelaku Usaha'
         :(data==4)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#32cd32;  title="OC Berhasil"></a><br>Pelaku Usaha'
         :'<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Upload OC"></a><br>Admin';

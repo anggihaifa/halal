@@ -68,8 +68,7 @@ class PenjadwalanController extends Controller
   
 
     public function dataAuditor1(Request $request)
-    {
-
+    {        
         $data = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
 
@@ -146,7 +145,7 @@ class PenjadwalanController extends Controller
                     if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')
+                            ->where('usergroup_id','10')
                             ->pluck('id', 'name');   
                              
                     }else{
@@ -177,7 +176,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -212,7 +211,7 @@ class PenjadwalanController extends Controller
 
                                             $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key2){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -246,7 +245,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key3){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -274,7 +273,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                
@@ -309,7 +308,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$key3){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -338,7 +337,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key2){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                
@@ -365,7 +364,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -391,7 +390,7 @@ class PenjadwalanController extends Controller
                    if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')  
+                            ->where('usergroup_id','10')  
                             ->where('id','!=',$data['selected_pelaksana1'])
                             ->pluck('id', 'name');   
                              
@@ -423,7 +422,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3, $data){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -459,7 +458,7 @@ class PenjadwalanController extends Controller
 
                                             $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key2,$data){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -494,7 +493,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key3,$data){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -523,7 +522,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key,$data){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -559,7 +558,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$key3,$data){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -589,7 +588,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key2,$data){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -617,7 +616,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -647,7 +646,7 @@ class PenjadwalanController extends Controller
                     if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')
+                            ->where('usergroup_id','10')
                             ->where('kode_wilayah',$kodewilayah)
                             ->pluck('id', 'name');   
                              
@@ -683,7 +682,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -719,7 +718,7 @@ class PenjadwalanController extends Controller
 
                                             $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key2,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -754,7 +753,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key3,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -783,7 +782,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('kode_wilayah',$kodewilayah);
@@ -818,7 +817,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$key3,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -848,7 +847,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key2,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                 $query->where('kode_wilayah',$kodewilayah);
@@ -876,7 +875,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -903,7 +902,7 @@ class PenjadwalanController extends Controller
                    if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')
+                            ->where('usergroup_id','10')
                             ->where('kode_wilayah',$kodewilayah)  
                             ->where('id','!=',$data['selected_pelaksana1'])
                             ->pluck('id', 'name');   
@@ -936,7 +935,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3, $data,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -973,7 +972,7 @@ class PenjadwalanController extends Controller
 
                                             $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key2,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -1009,7 +1008,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key3,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -1039,7 +1038,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key,$data,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -1076,7 +1075,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$key3,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -1107,7 +1106,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key2,$data,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -1136,7 +1135,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -1289,7 +1288,7 @@ class PenjadwalanController extends Controller
                     if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')  
+                            ->where('usergroup_id','10')  
                             ->pluck('id', 'name');   
                              
                     }else{
@@ -1320,7 +1319,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -1355,7 +1354,7 @@ class PenjadwalanController extends Controller
 
                                             $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key2){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -1389,7 +1388,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key3){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -1417,7 +1416,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                
@@ -1452,7 +1451,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$key3){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -1481,7 +1480,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key2){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                
@@ -1508,7 +1507,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -1532,7 +1531,7 @@ class PenjadwalanController extends Controller
                    if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')  
+                            ->where('usergroup_id','10')  
                             ->where('id','!=',$data['selected_pelaksana1'])
                             ->pluck('id', 'name');   
                              
@@ -1564,7 +1563,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3, $data){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -1600,7 +1599,7 @@ class PenjadwalanController extends Controller
 
                                             $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key2,$data){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -1635,7 +1634,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key3,$data){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -1664,7 +1663,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key,$key2,$key3,$data){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -1700,7 +1699,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$key3,$data){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -1730,7 +1729,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key2,$data){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -1758,7 +1757,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -1788,7 +1787,7 @@ class PenjadwalanController extends Controller
                     if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')  
+                            ->where('usergroup_id','10')  
                             ->where('kode_wilayah',$kodewilayah)  
                             ->pluck('id', 'name');   
                              
@@ -1820,7 +1819,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -1856,7 +1855,7 @@ class PenjadwalanController extends Controller
 
                                             $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key2,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -1891,7 +1890,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key3,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -1920,7 +1919,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('kode_wilayah',$kodewilayah);
@@ -1956,7 +1955,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$key3,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -1986,7 +1985,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key2,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                 $query->where('kode_wilayah',$kodewilayah);
@@ -2014,7 +2013,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -2039,7 +2038,7 @@ class PenjadwalanController extends Controller
                    if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8') 
+                            ->where('usergroup_id','10') 
                             ->where('kode_wilayah',$kodewilayah)  
                             ->where('id','!=',$data['selected_pelaksana1'])
                             ->pluck('id', 'name');   
@@ -2072,7 +2071,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$key3, $data,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -2110,7 +2109,7 @@ class PenjadwalanController extends Controller
 
                                             $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key2,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -2146,7 +2145,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$key3,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -2176,7 +2175,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key,$key2,$key3,$data,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -2213,7 +2212,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$key3,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -2244,7 +2243,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key2,$data,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -2274,7 +2273,7 @@ class PenjadwalanController extends Controller
 
                                    $dataAuditor2 = DB::table('users')
                                     ->where(function($query) use ($key3,$data,$kodewilayah){
-                                            $query->where('usergroup_id','8')  ;  
+                                            $query->where('usergroup_id','10')  ;  
                                             $query->where('id','!=',$key3['pelaksana1_rapat']);
                                             $query->where('id','!=',$key3['pelaksana2_rapat']);
                                             $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -2401,7 +2400,7 @@ class PenjadwalanController extends Controller
                                 $str6 =  explode("_",$key4['pelaksana2_audit2']);
                                 $key4['pelaksana2_audit2'] = $str6[0];
                                 $dataAuditor2 = DB::table('users')
-                                ->where('usergroup_id','8')  
+                                ->where('usergroup_id','10')  
                                 ->where('id','!=',$key4['pelaksana1_audit1'])
                                 ->where('id','!=',$key4['pelaksana2_audit1'])
                                 ->where('id','!=',$key4['pelaksana1_audit2'])
@@ -2446,7 +2445,7 @@ class PenjadwalanController extends Controller
 
                                                     $dataAuditor2 = DB::table('users')
                                                     ->where(function($query) use ($key,$key2,$key3, $key4){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -2498,7 +2497,7 @@ class PenjadwalanController extends Controller
 
                                                 $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2, $key4){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -2548,7 +2547,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key3, $key4){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -2592,7 +2591,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key, $key4){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('id','!=',$key4['pelaksana1_audit1']);
@@ -2644,7 +2643,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key2,$key3, $key4){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -2688,7 +2687,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2, $key4){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
 
@@ -2732,7 +2731,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3, $key4){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -2769,7 +2768,7 @@ class PenjadwalanController extends Controller
                                 $key4['pelaksana2_audit2'] = $str6[0];
 
                                 $dataAuditor2 = DB::table('users')
-                                ->where('usergroup_id','8')  
+                                ->where('usergroup_id','10')  
                                 ->where('id','!=',$data['selected_pelaksana1'])
                                 ->where('id','!=',$key4['pelaksana1_audit1'])
                                 ->where('id','!=',$key4['pelaksana2_audit1'])
@@ -2817,7 +2816,7 @@ class PenjadwalanController extends Controller
 
                                                    $dataAuditor2 = DB::table('users')
                                                     ->where(function($query) use ($key,$key2,$key3, $data,$key4){
-                                                            $query->where('usergroup_id','8')  ;  
+                                                            $query->where('usergroup_id','10')  ;  
                                                             $query->where('id','!=',$key['pelaksana1_audit1']);
                                                             $query->where('id','!=',$key['pelaksana2_audit1']);
                                                             $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -2870,7 +2869,7 @@ class PenjadwalanController extends Controller
 
                                                 $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$data,$key4){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -2921,7 +2920,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key3,$data,$key4){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -2966,7 +2965,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$data,$key4){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
@@ -3018,7 +3017,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key2,$key3,$data,$key4){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -3064,7 +3063,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$data,$key4){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
@@ -3107,7 +3106,7 @@ class PenjadwalanController extends Controller
 
                                         $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$key4){
-                                            $query->where('usergroup_id','8')  ;  
+                                            $query->where('usergroup_id','10')  ;  
                                             $query->where('id','!=',$key3['pelaksana1_rapat']);
                                             $query->where('id','!=',$key3['pelaksana2_rapat']);
                                             $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -3149,7 +3148,7 @@ class PenjadwalanController extends Controller
                             $key4['pelaksana2_audit2'] = $str6[0];
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')  
+                            ->where('usergroup_id','10')  
                             ->where('id','!=',$key4['pelaksana1_audit1'])
                             ->where('id','!=',$key4['pelaksana2_audit1'])
                             ->where('id','!=',$key4['pelaksana1_audit2'])
@@ -3197,7 +3196,7 @@ class PenjadwalanController extends Controller
 
                                                    $dataAuditor2 = DB::table('users')
                                                     ->where(function($query) use ($key,$key2,$key3, $data,$key4){
-                                                            $query->where('usergroup_id','8')  ;  
+                                                            $query->where('usergroup_id','10')  ;  
                                                             $query->where('id','!=',$key['pelaksana1_audit1']);
                                                             $query->where('id','!=',$key['pelaksana2_audit1']);
                                                             $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -3250,7 +3249,7 @@ class PenjadwalanController extends Controller
 
                                                 $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$data,$key4){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -3302,7 +3301,7 @@ class PenjadwalanController extends Controller
 
                                                 $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key3,$data,$key4){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -3348,7 +3347,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$data,$key4){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -3401,7 +3400,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key2,$key3,$data,$key4){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -3450,7 +3449,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$data,$key4){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -3497,7 +3496,7 @@ class PenjadwalanController extends Controller
 
                                         $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$key4){
-                                            $query->where('usergroup_id','8')  ;  
+                                            $query->where('usergroup_id','10')  ;  
                                             $query->where('id','!=',$key3['pelaksana1_rapat']);
                                             $query->where('id','!=',$key3['pelaksana2_rapat']);
                                             $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -3543,7 +3542,7 @@ class PenjadwalanController extends Controller
                                 $str6 =  explode("_",$key4['pelaksana2_audit2']);
                                 $key4['pelaksana2_audit2'] = $str6[0];
                                 $dataAuditor2 = DB::table('users')
-                                ->where('usergroup_id','8') 
+                                ->where('usergroup_id','10') 
                                 ->where('kode_wilayah',$kodewilayah)  
                                 ->where('id','!=',$key4['pelaksana1_audit1'])
                                 ->where('id','!=',$key4['pelaksana2_audit1'])
@@ -3589,7 +3588,7 @@ class PenjadwalanController extends Controller
 
                                                     $dataAuditor2 = DB::table('users')
                                                     ->where(function($query) use ($key,$key2,$key3, $key4,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -3642,7 +3641,7 @@ class PenjadwalanController extends Controller
 
                                                 $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2, $key4,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -3694,7 +3693,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key3, $key4,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -3739,7 +3738,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key, $key4,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('id','!=',$key4['pelaksana1_audit1']);
@@ -3792,7 +3791,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key2,$key3, $key4,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -3837,7 +3836,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2, $key4,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
 
@@ -3882,7 +3881,7 @@ class PenjadwalanController extends Controller
 
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3, $key4,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key3['pelaksana1_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana2_rapat']);
                                                 $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -3920,7 +3919,7 @@ class PenjadwalanController extends Controller
                                 $key4['pelaksana2_audit2'] = $str6[0];
 
                                 $dataAuditor2 = DB::table('users')
-                                ->where('usergroup_id','8')  
+                                ->where('usergroup_id','10')  
                                 ->where('kode_wilayah',$kodewilayah) 
                                 ->where('id','!=',$data['selected_pelaksana1'])
                                 ->where('id','!=',$key4['pelaksana1_audit1'])
@@ -3969,7 +3968,7 @@ class PenjadwalanController extends Controller
 
                                                    $dataAuditor2 = DB::table('users')
                                                     ->where(function($query) use ($key,$key2,$key3, $data,$key4,$kodewilayah){
-                                                            $query->where('usergroup_id','8')  ;  
+                                                            $query->where('usergroup_id','10')  ;  
                                                             $query->where('id','!=',$key['pelaksana1_audit1']);
                                                             $query->where('id','!=',$key['pelaksana2_audit1']);
                                                             $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -4024,7 +4023,7 @@ class PenjadwalanController extends Controller
 
                                                 $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$data,$key4,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -4077,7 +4076,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key3,$data,$key4,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -4124,7 +4123,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$data,$key4,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
@@ -4177,7 +4176,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key2,$key3,$data,$key4,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -4224,7 +4223,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$data,$key4,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
@@ -4268,7 +4267,7 @@ class PenjadwalanController extends Controller
 
                                         $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$key4,$kodewilayah){
-                                            $query->where('usergroup_id','8')  ;  
+                                            $query->where('usergroup_id','10')  ;  
                                             $query->where('id','!=',$key3['pelaksana1_rapat']);
                                             $query->where('id','!=',$key3['pelaksana2_rapat']);
                                             $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -4311,7 +4310,7 @@ class PenjadwalanController extends Controller
                             $key4['pelaksana2_audit2'] = $str6[0];
 
                            $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','8')  
+                            ->where('usergroup_id','10')  
                             ->where('id','!=',$key4['pelaksana1_audit1'])
                             ->where('id','!=',$key4['pelaksana2_audit1'])
                             ->where('id','!=',$key4['pelaksana1_audit2'])
@@ -4359,7 +4358,7 @@ class PenjadwalanController extends Controller
 
                                                    $dataAuditor2 = DB::table('users')
                                                     ->where(function($query) use ($key,$key2,$key3, $data,$key4,$kodewilayah){
-                                                            $query->where('usergroup_id','8')  ;  
+                                                            $query->where('usergroup_id','10')  ;  
                                                             $query->where('id','!=',$key['pelaksana1_audit1']);
                                                             $query->where('id','!=',$key['pelaksana2_audit1']);
                                                             $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -4414,7 +4413,7 @@ class PenjadwalanController extends Controller
 
                                                 $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key2,$data,$key4,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
@@ -4468,7 +4467,7 @@ class PenjadwalanController extends Controller
 
                                                 $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key,$key3,$data,$key4,$kodewilayah){
-                                                        $query->where('usergroup_id','8')  ;  
+                                                        $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -4516,7 +4515,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key,$data,$key4,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key['pelaksana2_audit1']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -4570,7 +4569,7 @@ class PenjadwalanController extends Controller
 
                                                $dataAuditor2 = DB::table('users')
                                                 ->where(function($query) use ($key2,$key3,$data,$key4,$kodewilayah){
-                                                    $query->where('usergroup_id','8')  ;  
+                                                    $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                     $query->where('id','!=',$key3['pelaksana1_rapat']);
@@ -4620,7 +4619,7 @@ class PenjadwalanController extends Controller
 
                                            $dataAuditor2 = DB::table('users')
                                             ->where(function($query) use ($key2,$data,$key4,$kodewilayah){
-                                                $query->where('usergroup_id','8')  ;  
+                                                $query->where('usergroup_id','10')  ;  
                                                 $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                 $query->where('id','!=',$key2['pelaksana2_audit2']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
@@ -4668,7 +4667,7 @@ class PenjadwalanController extends Controller
 
                                         $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$key4,$kodewilayah){
-                                            $query->where('usergroup_id','8')  ;  
+                                            $query->where('usergroup_id','10')  ;  
                                             $query->where('id','!=',$key3['pelaksana1_rapat']);
                                             $query->where('id','!=',$key3['pelaksana2_rapat']);
                                             $query->where('id','!=',$key3['pelaksana3_rapat']);
@@ -5548,8 +5547,8 @@ class PenjadwalanController extends Controller
              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
-             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
-             ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')            
+             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
+             ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0);  
                 $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');

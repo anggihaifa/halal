@@ -58,16 +58,15 @@
 										<a href="{{url('') .Storage::url('public/buktioc/'.$data->id_user.'/'.$data->file_oc) }}" download>{{$data->file_oc}}</a>
 									</div>
 								</div>
-								<label class="col-lg-4 col-form-label">Upload OC yang sudah di tandatangani</label>
+								{{-- <label class="col-lg-4 col-form-label">Upload OC yang sudah di tandatangani</label>
 								<div class="col-lg-8">
 									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required   onchange="getValue('file')"/>
-								</div>
+								</div> --}}
 							@elseif($data->status_oc == 0)
-								<label class="col-lg-4 col-form-label">Upload OC yang sudah di tandatangani</label>
+								{{-- <label class="col-lg-4 col-form-label">Upload OC yang sudah di tandatangani</label>
 								<div class="col-lg-8">
 									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')" required />
-								</div>
-								
+								</div> --}}								
 							@else
 								
 
@@ -85,12 +84,12 @@
 								
 										@component('components.buttonback',['href' => route("listakadadmin")])@endcomponent											
 										@if($data->status_oc == 1)
-                                            <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Order Confirmation yang sudah ditandatangani???')">Konfirmasi</button>
+                                            {{-- <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Order Confirmation yang sudah ditandatangani???')">Konfirmasi</button> --}}
 											{{-- <button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Menunggu Konfirmasi Pelaku Usaha</button> --}}
 										@elseif($data->status_oc == 2)
-											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Menunggu Konfirmasi Sales Account Officer</button>
+											{{-- <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Menunggu Konfirmasi Sales Account Officer</button> --}}
                                         @elseif($data->status_oc == 3)
-                                        <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Order Confirmation yang sudah ditandatangani???')">Upload Ulang</button>
+                                        	{{-- <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Order Confirmation yang sudah ditandatangani???')">Upload Ulang</button> --}}
                                         @else
                                             {{-- <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi</button> --}}
 										@endif								

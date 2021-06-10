@@ -470,7 +470,7 @@
                                                                 <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> 
-                                                                    <div class= "dropdown-button-title"> Update Progress </div>`+upload_OC+status5_3+konfirm_OC+`
+                                                                    <div class= "dropdown-button-title"> Update Progress </div>`+upload_OC+`
                                                                 </div> 
                                                             </div>
                                                         </td>

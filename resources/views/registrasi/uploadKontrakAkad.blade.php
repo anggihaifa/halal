@@ -271,7 +271,7 @@
 							
 								<div class="col-md-12 offset-md-5">									
 								
-										@component('components.buttonback',['href' => route("listakadadmin")])@endcomponent											
+										@component('components.buttonback',['href' => route("listkeuangan")])@endcomponent											
 										@if($data->status_akad == 1)
 											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi Ulang</button>
 											<br><button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Akad dan Penawaran Sudah Dikirim Kepada Pelaku Usaha</button>

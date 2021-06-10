@@ -793,12 +793,7 @@
 
                  x.style.visibility = "visible";
                  x.style.display = "block";
-            }
-           
-
-           
-
-            
+            }            
         }
          
         function format ( d ) {

@@ -75,11 +75,11 @@
 							
 								<div class="col-md-12 offset-md-5">									
 								
-										@component('components.buttonback',['href' => route("listpenerbitanoc")])@endcomponent
+										@component('components.buttonback',['href' => route("listkeuangan")])@endcomponent
 										@if($data->status_oc == 1)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Menunggu Konfirmasi Pelaku Usaha</button>
 										@elseif($data->status_oc == 2)
-											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Sudah di Konfirmasi Pelaku Usaha</button>
+											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Kirim Ulang</button>
                                         @else
                                             <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi</button>
 										@endif								

@@ -66,11 +66,13 @@ class LoginController extends Controller
                     $errstatus = "Email belum diverifikasi, silahkan verifikasi terlebih dahulu";
                     $redirect = redirect('login')->with('errstatus',$errstatus);
                     return $redirect;
-                }else{
-                    if(Auth::attempt(["username"=>$username,"password"=>$password])){
+                }else{                    
+                    if(Auth::attempt(["username"=>$username,"password"=>$password])){                        
                         return redirect()->route('home.index');
-                    }elseif(Auth::attempt(["email"=>$username,"password"=>$password])){
+                    }elseif(Auth::attempt(["email"=>$username,"password"=>$password])){                        
                         return redirect()->route('home.index');    
+                    }elseif(["email"=>$username,"password"=>$password]){                        
+                        return redirect()->route('home.index');
                     }
                     else{
                         $errstatus = "Username atau Password tidak sesuai";
