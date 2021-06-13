@@ -118,55 +118,38 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_audit1"  name="mulai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
+                                <input id="mulai_audit1"  name="mulai_audit1" class="form-control" data-format="dd-mm-yyyy" type="date" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
                                 </span>       
                             </div>
 
-                            <div class="form-group">
-                              <label>Tanggal Selesai</label>
-                              
-                                <input  id="selesai_audit1" name="selesai_audit1" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
-                                <span class="add-on">
-                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                                  </i>
-                                </span>
-                               
-                            </div>
 
                             <div class="form-group">
-                                <label>Pelaksana 1</label>
+                                <label>Auditor 1</label>
                                 <select id="pelaksana1_audit1" name="pelaksana1_audit1" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label>Pelaksana 2</label>
+                            <!-- <div class="form-group">
+                                <label>Auditor 2</label>
                                 <select id="pelaksana2_audit1" name="pelaksana2_audit1" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
                                 <label>Skema audit</label>
                                 <select id="skema_audit" name="skema_audit" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Skema Audit==</option>
-                                    <option value="">Jaminan Produk Halal</option>
-                                    <option value="">SMH SNI 99001:2016</option>                                                                        
+                                    <option value="SJPH">Sistem Jaminan Produk Halal</option>
+                                    <option value="SMH">SMH SNI 99001:2016</option>                                                                        
                                 </select>
                             </div>
 
-                            {{-- <div class="form-group">
-                                <label>Pelaksana Pekerjaan</label>
-                                <select id="skema_audit" name="skema_audit" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
-                                    <option value="">==Pilih Pelaksana==</option>
-                                    <option value="">Kantor Pusat</option>
-                                    <option value="">Kantor Cabang</option>                                                                        
-                                </select>
-                            </div> --}}
+                           
                            
                         </div>
                         <div class="modal-footer">
@@ -213,28 +196,19 @@
                                 </span>       
                             </div>
 
-                            <div class="form-group">
-                              <label>Tanggal Selesai</label>
-                              
-                                <input  id="selesai_audit2" name="selesai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
-                                <span class="add-on">
-                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                                  </i>
-                                </span>
-                               
-                            </div>
+                           
 
                             <div class="form-group">
-                                <label>Saran Pelaksana 1 :  </label> <a id="saran1"><b></b></a><br>
-                                <label>Pelaksana 1</label>
+                                <label>Saran Auditor 1 :  </label> <a id="saran1"><b></b></a><br>
+                                <label>Auditor 1</label>
                                 <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                 <label>Saran Pelaksana 2 :  </label> <a id="saran2"><b></b></a><br>
-                                <label>Pelaksana 2</label>
+                                <!-- <label>Saran Auditor 2 :  </label> <a id="saran2"><b></b></a><br> -->
+                                <label>Auditor 2</label>
                                 <select id="pelaksana2_audit2" name="pelaksana2_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
@@ -251,7 +225,7 @@
        
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
 
                                 <label >Akomodasi</label> 
                                 <select id="jenis_akomodasi" name="jenis_akomodasi" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
@@ -269,9 +243,7 @@
                                 </select>
                             </div>
 
-                           <!--  <div class="form-group">
-                                <a class="btn btn-default" style="float:right;" onclick="tambahAkomodasi(this)">Tambah</a>
-                            </div> -->
+                           
 
                             <div id="tAkomodasi" name="tAkomodasi" class="form-group" style="visibility:hidden;display:none;">
                                  <table id="tableAkomodasi" name="tableAkomodasi" class="table table-bordered" >
@@ -287,7 +259,7 @@
                                     </tbody>
                                 </table>
                            
-                            </div>
+                            </div> -->
                            
                         </div>
                         <div class="modal-footer">
@@ -303,13 +275,13 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <form action="{{route('rapat')}}" method="post" name="registerForm">
+            <form action="{{route('tehnicalreview')}}" method="post" name="registerForm">
                 @csrf
                 @method('PUT')
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                        <h4 class="modal-title">Penjadwalan Rapat Auditor</h4>
+                        <h4 class="modal-title">Penjadwalan Tehnical Review</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                     </div>
@@ -323,7 +295,7 @@
                             </div>
                            
                            
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
                                 <input id="mulai_rapat"  name="mulai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control" required></input>
@@ -331,39 +303,28 @@
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
                                 </span>       
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
-                              <label>Tanggal Selesai</label>
-                              
-                                <input  id="selesai_rapat" name="selesai_rapat" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
-                                <span class="add-on">
-                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                                  </i>
-                                </span>
-                               
-                            </div>
-
-                            <div class="form-group">
-                                <label>Pelaksana 1</label>
-                                <select id="pelaksana1_rapat" name="pelaksana1_rapat" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
-                                    <option value="">==Pilih Auditor==</option>                                                                        
+                                <label>Tehnical Reviwer 1</label>
+                                <select id="pelaksana1_tr" name="pelaksana1_tr" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
+                                    <option value="">==Pilih Tehnical Reviewer==</option>                                                                        
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label>Pelaksana 2</label>
-                                <select id="pelaksana2_rapat" name="pelaksana2_rapat" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
-                                    <option value="">==Pilih Auditor==</option>                                                                        
+                                <label>Tehnical Reviwer 2</label>
+                                <select id="pelaksana2_tr" name="pelaksana2_tr" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                    <option value="">==Pilih Tehnical Reviewer==</option>                                                                        
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label>Pelaksana 3</label>
-                                <select id="pelaksana3_rapat" name="pelaksana3_rapat" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                            <!-- <div class="form-group">
+                                <label>Auditor 3</label>
+                                <select id="pelaksana3_tr" name="pelaksana3_tr" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
-                            </div>
+                            </div> -->
                            
                         </div>
                         <div class="modal-footer">
@@ -385,7 +346,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                        <h4 class="modal-title">Penjadwalan Tinjauan Komite Ahli</h4>
+                        <h4 class="modal-title">Penjadwalan Tinjauan Komite Sertifikasi</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                     </div>
@@ -399,7 +360,7 @@
                             </div>
                            
                            
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
                                 <input id="mulai_tinjauan"  name="mulai_tinjauan" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
@@ -407,40 +368,29 @@
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
                                 </span>       
-                            </div>
-
-                            <div class="form-group">
-                              <label>Tanggal Selesai</label>
-                              
-                                <input  id="selesai_tinjauan" name="selesai_tinjauan" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"></input>
-                                <span class="add-on"required>
-                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                                  </i>
-                                </span>
-                               
-                            </div>
+                            </div> -->
 
 
                             <div class="form-group">
-                                <label>Pelaksana 1</label>
+                                <label>Komite Sertifikasi 1</label>
                                 <select id="pelaksana1_tinjauan" name="pelaksana1_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label>Pelaksana 2</label>
+                                <label>Komite Sertifikasi 2</label>
                                 <select id="pelaksana2_tinjauan" name="pelaksana2_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label>Pelaksana 3</label>
+                            <!-- <div class="form-group">
+                                <label>Komite Sertifikasi 3</label>
                                 <select id="pelaksana3_tinjauan" name="pelaksana3_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
-                            </div>
+                            </div> -->
                            
                         </div>
                         <div class="modal-footer">
@@ -465,16 +415,38 @@
     
     <script>
 
-$('#mulai_audit1').datetimepicker();
-        $('#selesai_audit1').datetimepicker();
-        $('#mulai_audit2').datetimepicker();
-        $('#selesai_audit2').datetimepicker();
-        $('#mulai_rapat').datetimepicker();
-        $('#selesai_rapat').datetimepicker();
-        $('#mulai_tinjauan').datetimepicker();
-        $('#selesai_tinjauan').datetimepicker();
+        // $('#mulai_audit1').datepicker({ 
+        //     dateFormat: 'dd-mm-yy'
+        //  });
+      
+        // $('#mulai_audit2').datepicker({ 
+        //     dateFormat: 'dd-mm-yy' 
+        // });
+       
+        // $('#mulai_rapat').datepicker();
+      
+        // $('#mulai_tinjauan').datepicker();
+        window.addEventListener('load', (event) => {
+            $('#modalPenjadwalan1').find('form').trigger('reset');
+            $('#modalPenjadwalan2').find('form').trigger('reset');
+            $('#modalPenjadwalan3').find('form').trigger('reset');
+            $('#modalPenjadwalan4').find('form').trigger('reset');
+        });
 
-         $('#modalPenjadwalan1').on('show.bs.modal', function(e) {
+        $('#modalPenjadwalan1').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+        $('#modalPenjadwala2').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+        $('#modalPenjadwalan3').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+        $('#modalPenjadwalan4').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+
+        $('#modalPenjadwalan1').on('show.bs.modal', function(e) {
 
 
 
@@ -506,14 +478,14 @@ $('#mulai_audit1').datetimepicker();
             
             var data_id = $this.data('id');
             var data_saran1 = $this.data('pelaksana1');
-            var data_saran2 = $this.data('pelaksana2');
+            //var data_saran2 = $this.data('pelaksana2');
             var modal = $('#modalPenjadwalan2');
 
            //alert($this.data('pelaksana1'));
            var z = document.getElementById("idregis2"); 
 
            var x = document.getElementById("saran1"); 
-           var y = document.getElementById("saran2"); 
+           //var y = document.getElementById("saran2"); 
           
             if(modal.find('#idregis2').val()){
 
@@ -521,33 +493,33 @@ $('#mulai_audit1').datetimepicker();
 
                 z.value = data_id;
                 x.innerHTML = '<b>'+data_saran1+'</b>' ;
-                y.innerHTML = '<b>'+data_saran2+'</b>' ;
-                $.ajax({
+                //y.innerHTML = '<b>'+data_saran2+'</b>' ;
+                // $.ajax({
 
-                    url: '{{ route('jenis_akomodasi.data') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                       /* mulai: $('#mulai_audit1').val(),
-                        selesai: $('#selesai_audit1').val(),
-                        selected_pelaksana1: $('#pelaksana1_audit1').val(),
-                        id_regis: $('#idregis1').val()*/
-                    },
-                    success: function (response) {
+                //     url: '{{ route('jenis_akomodasi.data') }}',
+                //     method: 'POST',
+                //     data: {
+                //          _token: "{{ csrf_token() }}",
+                //        /* mulai: $('#mulai_audit1').val(),
+                //         selesai: $('#selesai_audit1').val(),
+                //         selected_pelaksana1: $('#pelaksana1_audit1').val(),
+                //         id_regis: $('#idregis1').val()*/
+                //     },
+                //     success: function (response) {
                     
-                        $('#jenis_akomodasi').empty();  
-                        $('#jenis_akomodasi').append(new Option('==Pilih Jenis Akomodasi==',''))                       
-                        $.each(response, function (jenis_akomodasi, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $('#jenis_akomodasi').append(new Option(jenis_akomodasi,id))
-                        })
+                //         $('#jenis_akomodasi').empty();  
+                //         $('#jenis_akomodasi').append(new Option('==Pilih Jenis Akomodasi==',''))                       
+                //         $.each(response, function (jenis_akomodasi, id) {                                                                    
+                //             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                //             $('#jenis_akomodasi').append(new Option(jenis_akomodasi,id))
+                //         })
 
-                        $('#jenis_akomodasi').selectpicker('destroy');
-                        $('#jenis_akomodasi').selectpicker();
+                //         $('#jenis_akomodasi').selectpicker('destroy');
+                //         $('#jenis_akomodasi').selectpicker();
                                      
                         
-                    }
-                })
+                //     }
+                // })
    
             }
         });
@@ -570,8 +542,37 @@ $('#mulai_audit1').datetimepicker();
                   
                 modal.find('#formpenjadwalan3').attr('action', function (i,old) {
                    return old + '/' + data_id;
-            });  
+                });  
             }
+
+            $.ajax({
+
+                url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
+                method: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    //mulai: $('#mulai_rapat').val(),
+                    //selesai: $('#selesai_rapat').val(),
+                    //selected_pelaksana1: $('#pelaksana1_tr').val(),
+                    //selected_pelaksana2: $('#pelaksana2_tr').val(),
+                    id_regis: $('#idregis3').val()
+                },
+                success: function (response) {
+                    //$('#pelaksana1_audit1').empty();   
+                    $('#pelaksana1_tr').empty();  
+
+                    $("#pelaksana1_tr").append(new Option('==Pilih Tehnical Reviewer==',''))                       
+                    $.each(response, function (name, id) {                                                                    
+                        // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                        $("#pelaksana1_tr").append(new Option(id +"_"+ name,id +"_"+ name+"_tr"))
+                    })
+                
+
+                    //$('#pelaksana2_audit1').empty();  
+                    $('#pelaksana1_tr').selectpicker('refresh');                       
+                    
+                }
+            })
            
 
         });
@@ -597,306 +598,328 @@ $('#mulai_audit1').datetimepicker();
                   
                 modal.find('#formpenjadwalan4').attr('action', function (i,old) {
                    return old + '/' + data_id;
-            });  
+                });  
             }
+            $.ajax({
+
+                url: '{{ route('komite_dropdown.datakomite') }}',
+                method: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    //mulai: $('#mulai_tinjauan').val(),
+                    //selesai: $('#selesai_tinjauan').val(),
+                    //selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
+                    //selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
+                    id_regis: $('#idregis4').val()
+                },
+                success: function (response) {
+                    //$('#pelaksana1_audit1').empty();                         
+                    $('#pelaksana1_tinjauan').empty();  
+
+                    $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Sertifikasi==',''))                       
+                    $.each(response, function (name, id) {                                                                    
+                        // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+
+                        $("#pelaksana1_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
+                    })
+
+                    $('#pelaksana1_tinjauan').selectpicker('refresh'); 
+                }
+            })
            
 
         });
 
 
-        function checkNamaAuditor(d,dom) {
-            //var detailNama;
-            $('#loading-image').show();
-            $.ajax({
+        // function checkNamaAuditor(d,dom) {
+        //     //var detailNama;
+        //     $('#loading-image').show();
+        //     $.ajax({
 
                    
-                url: '{{ route('detail_auditor.detail') }}',
-                method: 'POST',
-                data: {
-                     _token: "{{ csrf_token() }}",
-                    id: d,
+        //         url: '{{ route('detail_auditor.detail') }}',
+        //         method: 'POST',
+        //         data: {
+        //              _token: "{{ csrf_token() }}",
+        //             id: d,
                   
-                },
-                 success: function (response) {
+        //         },
+        //          success: function (response) {
                     
-                        //alert(response);
-                        if(response == ""){
-                            document.getElementById(dom).innerHTML = "";
-                        }else{
-                            document.getElementById(dom).innerHTML = response[0];
-                        }
+        //                 //alert(response);
+        //                 if(response == ""){
+        //                     document.getElementById(dom).innerHTML = "";
+        //                 }else{
+        //                     document.getElementById(dom).innerHTML = response[0];
+        //                 }
                         
                        
-                        //response = parseJSON(response);
-                        //console.log(response[0]);
-                },
+        //                 //response = parseJSON(response);
+        //                 //console.log(response[0]);
+        //         },
                
                
-            });   
+        //     });   
 
-        }
+        // }
 
-        var i =0;
+        // var i =0;
 
-        function deleteAkomodasi(d){
-            d.closest('tr').remove();
+        // function deleteAkomodasi(d){
+        //     d.closest('tr').remove();
 
-        }
+        // }
 
-        function tambahAkomodasi (d) {
+        // function tambahAkomodasi (d) {
             
             
-            //var value = 0;
-            var jenis_a = 'jenis_a['+i+']';
-            var opsi_a = 'opsi_a['+i+']';
+        //     //var value = 0;
+        //     var jenis_a = 'jenis_a['+i+']';
+        //     var opsi_a = 'opsi_a['+i+']';
 
-            var table = document.getElementById("tableAkomodasi").getElementsByTagName('tbody')[0];;
-            var row = table.insertRow(0);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            //var i =0;
+        //     var table = document.getElementById("tableAkomodasi").getElementsByTagName('tbody')[0];;
+        //     var row = table.insertRow(0);
+        //     var cell1 = row.insertCell(0);
+        //     var cell2 = row.insertCell(1);
+        //     var cell3 = row.insertCell(2);
+        //     //var i =0;
 
-            var jenis = document.getElementById("jenis_akomodasi");
-            var jenisText = jenis.options[jenis.selectedIndex].text;
+        //     var jenis = document.getElementById("jenis_akomodasi");
+        //     var jenisText = jenis.options[jenis.selectedIndex].text;
 
-            var opsi = document.getElementById("opsi_akomodasi");
-            var opsiText = opsi.options[opsi.selectedIndex].text;
+        //     var opsi = document.getElementById("opsi_akomodasi");
+        //     var opsiText = opsi.options[opsi.selectedIndex].text;
 
-            cell1.innerHTML = '<input type="text"  class="form-control" name='+jenis_a+' value="'+jenisText+'">';
+        //     cell1.innerHTML = '<input type="text"  class="form-control" name='+jenis_a+' value="'+jenisText+'">';
 
-            cell2.innerHTML = '<input type="text" class="form-control"  name='+opsi_a+' value="'+opsiText+'">';
+        //     cell2.innerHTML = '<input type="text" class="form-control"  name='+opsi_a+' value="'+opsiText+'">';
 
-            cell3.innerHTML = '<input type="button" class="btn btn-danger btn-sm" id="hapus" style="color:white;" value="X" onClick="deleteAkomodasi(this)">';
+        //     cell3.innerHTML = '<input type="button" class="btn btn-danger btn-sm" id="hapus" style="color:white;" value="X" onClick="deleteAkomodasi(this)">';
 
-            i++;
+        //     i++;
 
-            //cell3.innerHTML = opsiText;
+        //     //cell3.innerHTML = opsiText;
 
-            console.log(i);
+        //     console.log(i);
 
-            var x = document.getElementById("tAkomodasi");
+        //     var x = document.getElementById("tAkomodasi");
 
-            if(x.style.visibility == "hidden"){
+        //     if(x.style.visibility == "hidden"){
 
-                 x.style.visibility = "visible";
-                 x.style.display = "block";
-            }                               
-        }
+        //          x.style.visibility = "visible";
+        //          x.style.display = "block";
+        //     }                               
+        // }
 
         function format ( d ) {
 
-        if(d.mulai_audit1  == null){
+            if(d.mulai_audit1  == null){
 
-            d.mulai_audit1 ="-";
-        }
-        if(d.selesai_audit1  == null){
-
-            d.selesai_audit1 ="-";
-        }
-        if(d.mulai_audit2  == null){
-
-            d.mulai_audit2 ="-";
-        }
-        if(d.selesai_audit2  == null){
-
-            d.selesai_audit2 ="-";
-        }
-        if(d.mulai_rapat  == null){
-
-            d.mulai_rapat ="-";
-        }
-        if(d.selesai_rapat  == null){
-
-            d.selesai_rapat ="-";
-        }
-        if(d.mulai_tinjauan  == null){
-
-            d.mulai_tinjauan ="-";
-        }
-        if(d.selesai_tinjauan  == null){
-
-            d.selesai_tinjauan ="-";
-        }
-
-
-        if(d.pelaksana1_audit1 != null){
-            if (d.pelaksana1_audit1.indexOf('_') > -1)
-            {
-                $str1 =  d.pelaksana1_audit1.split("_");
-                d.pelaksana1_audit1 = $str1[1];
+                d.mulai_audit1 ="-";
             }
-        
-        }else{
-            d.pelaksana1_audit1 ="-";
-        }
+            if(d.selesai_audit1  == null){
 
-
-        if(d.pelaksana2_audit1 != null){
-
-            if (d.pelaksana2_audit1.indexOf('_') > -1){
-                $str2 =  d.pelaksana2_audit1.split("_");
-                d.pelaksana2_audit1 = $str2[1];
+                d.selesai_audit1 ="-";
             }
+            if(d.mulai_audit2  == null){
+
+                d.mulai_audit2 ="-";
+            }
+            if(d.selesai_audit2  == null){
+
+                d.selesai_audit2 ="-";
+            }
+            if(d.mulai_tr  == null){
+
+                d.mulai_tr ="-";
+            }
+            if(d.selesai_tr  == null){
+
+                d.selesai_tr="-";
+            }
+            if(d.mulai_tinjauan  == null){
+
+                d.mulai_tinjauan ="-";
+            }
+            if(d.selesai_tinjauan  == null){
+
+                d.selesai_tinjauan ="-";
+            }
+
+
+            if(d.pelaksana1_audit1 != null){
+                if (d.pelaksana1_audit1.indexOf('_') > -1)
+                {
+                    $str1 =  d.pelaksana1_audit1.split("_");
+                    d.pelaksana1_audit1 = $str1[1];
+                }
+            
+            }else{
+                d.pelaksana1_audit1 ="-";
+            }
+
+
+            if(d.pelaksana2_audit1 != null){
+
+                if (d.pelaksana2_audit1.indexOf('_') > -1){
+                    $str2 =  d.pelaksana2_audit1.split("_");
+                    d.pelaksana2_audit1 = $str2[1];
+                }
+                        
+            }else{
+                d.pelaksana2_audit1 ="-";
+            }
+
+
+            if(d.pelaksana1_audit2 != null){
+                
+                if (d.pelaksana1_audit2.indexOf('_') > -1){
+                    $str3 = d.pelaksana1_audit2.split("_");
+                    d.pelaksana1_audit2 = $str3[1];
+                }
+                
+            
+            }
+            else{
+            
+                d.pelaksana1_audit2 ="-";
+            }
+
+
+            if(d.pelaksana2_audit2 != null){
+                if (d.pelaksana2_audit2.indexOf('_') > -1){
+                    $str4 =  d.pelaksana2_audit2.split("_");
+                    d.pelaksana2_audit2 = $str4[1];
+                }
+                
+            }else{
+                d.pelaksana2_audit2 ="-";
+            }
+
+            if(d.pelaksana1_tr != null){
+                if (d.pelaksana1_tr.indexOf('_') > -1){
+                    $str5 =  d.pelaksana1_tr.split("_");
+                    d.pelaksana1_tr = $str5[1];
+                }
+                
+            }else{
+                d.pelaksana1_tr ="-";
+            }
+
+            if(d.pelaksana2_tr != null){
+                if (d.pelaksana2_tr.indexOf('_') > -1){
+                    $str6 =  d.pelaksana2_tr.split("_");
+                    d.pelaksana2_tr = $str6[1];
+                }
+                
+            }else{
+                d.pelaksana2_tr ="-";
+            }
+
+            if(d.pelaksana3_tr != null){
+                if (d.pelaksana3_tr.indexOf('_') > -1){
+                    $str7 =  d.pelaksana3_tr.split("_");
+                    d.pelaksana3_tr = $str7[1];
+                }
+                
+            }else{
+                d.pelaksana3_tr ="-";
+            }
+
+            console.log(d.pelaksana1_tinjauan);
+            if(d.pelaksana1_tinjauan != null){
+                if (d.pelaksana1_tinjauan.indexOf('_') > -1){
+                    $str8 =  d.pelaksana1_tinjauan.split("_");
+                    d.pelaksana1_tinjauan = $str8[1];
+                }
+            
+            }else{
+                d.pelaksana1_tinjauan ="-";
+            }
+
+            if(d.pelaksana12_tinjauan != null){
+                if (d.pelaksana2_tinjauan.indexOf('_') > -1){
+                    $str9 =  d.pelaksana2_tinjauan.split("_");
+                    d.pelaksana2_tinjauan = $str9[1];
+                }
+                
+            }else{
+                d.pelaksana2_tinjauan ="-";
+            }
+
+            if(d.pelaksana3_tinjauan != null){
+                if (d.pelaksana3_tinjauan.indexOf('_') > -1){
+                    $str10 = d.pelaksana3_tinjauan.split("_");
+                    d.pelaksana3_tinjauan = $str10[1];
+                }
+            
+            }else{
+                d.pelaksana3_tinjauan ="-";
+            }
+
+
+
+
+
+
+
+            return '<table  class="table" cellspacing="0" style="width:100% padding-left:50px;">'+
+                '<thead style="background-color:#dff3e3;">'+
+                    '<th class="valign-middle text-center">No</th>'+
+                    '<th class="valign-middle text-center">Jenis</th>'+
+                    '<th class="valign-middle text-center">Mulai Audit</th>'+
+                    '<th class="valign-middle text-center">Selesai Audit</th>'+
+                    '<th class="valign-middle text-center">Kategori</th>'+
+                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
+                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
+                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
                     
-        }else{
-            d.pelaksana2_audit1 ="-";
-        }
-
-
-        if(d.pelaksana1_audit2 != null){
+                '</thead>'+
+                '<tr>'+
+                    '<td class="valign-middle text-center">1</td>'+
+                    '<td class="valign-middle text-center">Audit Tahap 1</td>'+
+                    '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
+                    '<td class="valign-middle text-center">'+d.selesai_audit1+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
+                    '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
+                    '<td class="valign-middle text-center">'+d.pelaksana2_audit1+'</td>'+
+                    '<td class="valign-middle text-center">-</td>'+    
+                '</tr>'+
+                '<tr>'+
+                    '<td class="valign-middle text-center">2</td>'+
+                    '<td class="valign-middle text-center">Audit Tahap 2</td>'+
+                    '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
+                    '<td class="valign-middle text-center">'+d.selesai_audit2+'</td>'+
+                    '<td class="valign-middle text-center">'+d.ktg_audit2+'</td>'+
+                    '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
+                    '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
+                    '<td class="valign-middle text-center">-</td>'+    
+                '</tr>'+
+                '<tr>'+
+                    '<td class="valign-middle text-center">3</td>'+
+                    '<td class="valign-middle text-center">Tehnical Review</td>'+
+                    '<td class="valign-middle text-center">'+d.mulai_tr+'</td>'+
+                    '<td class="valign-middle text-center">'+d.selesai_tr+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
+                    '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'</td>'+    
+                    '<td class="valign-middle text-center" >'+d.pelaksana2_tr+'</td>'+ 
+                    '<td class="valign-middle text-center" >'+d.pelaksana3_tr+'</td>'+    
+                '</tr>'+
+                '<tr>'+
+                    '<td class="valign-middle text-center">4</td>'+
+                    '<td class="valign-middle text-center">Tinjauan Komite</td>'+
+                    '<td class="valign-middle text-center">'+d.mulai_tinjauan+'</td>'+
+                    '<td class="valign-middle text-center">'+d.selesai_tinjauan+'</td>'+
+                    '<td class="valign-middle text-center">Remote</td>'+
+                    '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
+                    '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
+                    '<td class="valign-middle text-center" >'+d.pelaksana3_tinjauan+'</td>'+    
+                '</tr>'+
+                    
             
-            if (d.pelaksana1_audit2.indexOf('_') > -1){
-                $str3 = d.pelaksana1_audit2.split("_");
-                d.pelaksana1_audit2 = $str3[1];
-            }
-            
-        
-        }
-        else{
-        
-            d.pelaksana1_audit2 ="-";
+            '</table>';
         }
 
-
-        if(d.pelaksana2_audit2 != null){
-            if (d.pelaksana2_audit2.indexOf('_') > -1){
-                $str4 =  d.pelaksana2_audit2.split("_");
-                d.pelaksana2_audit2 = $str4[1];
-            }
-            
-        }else{
-            d.pelaksana2_audit2 ="-";
-        }
-
-        if(d.pelaksana1_rapat != null){
-            if (d.pelaksana1_rapat.indexOf('_') > -1){
-                $str5 =  d.pelaksana1_rapat.split("_");
-                d.pelaksana1_rapat = $str5[1];
-            }
-            
-        }else{
-            d.pelaksana1_rapat ="-";
-        }
-
-        if(d.pelaksana2_rapat != null){
-            if (d.pelaksana2_rapat.indexOf('_') > -1){
-                $str6 =  d.pelaksana2_rapat.split("_");
-                d.pelaksana2_rapat = $str6[1];
-            }
-            
-        }else{
-            d.pelaksana2_rapat ="-";
-        }
-
-        if(d.pelaksana3_rapat != null){
-            if (d.pelaksana3_rapat.indexOf('_') > -1){
-                $str7 =  d.pelaksana3_rapat.split("_");
-                d.pelaksana3_rapat = $str7[1];
-            }
-            
-        }else{
-            d.pelaksana3_rapat ="-";
-        }
-
-        console.log(d.pelaksana1_tinjauan);
-        if(d.pelaksana1_tinjauan != null){
-            if (d.pelaksana1_tinjauan.indexOf('_') > -1){
-                $str8 =  d.pelaksana1_tinjauan.split("_");
-                d.pelaksana1_tinjauan = $str8[1];
-            }
-        
-        }else{
-            d.pelaksana1_tinjauan ="-";
-        }
-
-        if(d.pelaksana12_tinjauan != null){
-            if (d.pelaksana2_tinjauan.indexOf('_') > -1){
-                $str9 =  d.pelaksana2_tinjauan.split("_");
-                d.pelaksana2_tinjauan = $str9[1];
-            }
-            
-        }else{
-            d.pelaksana2_tinjauan ="-";
-        }
-
-        if(d.pelaksana3_tinjauan != null){
-            if (d.pelaksana3_tinjauan.indexOf('_') > -1){
-                $str10 = d.pelaksana3_tinjauan.split("_");
-                d.pelaksana3_tinjauan = $str10[1];
-            }
-        
-        }else{
-            d.pelaksana3_tinjauan ="-";
-        }
-
-
-
-
-
-
-
-        return '<table  class="table" cellspacing="0" style="width:100% padding-left:50px;">'+
-            '<thead style="background-color:#dff3e3;">'+
-                '<th class="valign-middle text-center">No</th>'+
-                '<th class="valign-middle text-center">Jenis</th>'+
-                '<th class="valign-middle text-center">Mulai Audit</th>'+
-                '<th class="valign-middle text-center">Selesai Audit</th>'+
-                '<th class="valign-middle text-center">Kategori</th>'+
-                '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                
-            '</thead>'+
-            '<tr>'+
-                '<td class="valign-middle text-center">1</td>'+
-                '<td class="valign-middle text-center">Audit Tahap 1</td>'+
-                '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
-                '<td class="valign-middle text-center">'+d.selesai_audit1+'</td>'+
-                '<td class="valign-middle text-center">Remote</td>'+
-                '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
-                '<td class="valign-middle text-center">'+d.pelaksana2_audit1+'</td>'+
-                '<td class="valign-middle text-center">-</td>'+    
-            '</tr>'+
-            '<tr>'+
-                '<td class="valign-middle text-center">2</td>'+
-                '<td class="valign-middle text-center">Audit Tahap 2</td>'+
-                '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
-                '<td class="valign-middle text-center">'+d.selesai_audit2+'</td>'+
-                '<td class="valign-middle text-center">'+d.ktg_audit2+'</td>'+
-                '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
-                '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
-                '<td class="valign-middle text-center">-</td>'+    
-            '</tr>'+
-            '<tr>'+
-                '<td class="valign-middle text-center">3</td>'+
-                '<td class="valign-middle text-center">Rapat Auditor</td>'+
-                '<td class="valign-middle text-center">'+d.mulai_rapat+'</td>'+
-                '<td class="valign-middle text-center">'+d.selesai_rapat+'</td>'+
-                '<td class="valign-middle text-center">Remote</td>'+
-                '<td class="valign-middle text-center" >'+d.pelaksana1_rapat+'</td>'+    
-                '<td class="valign-middle text-center" >'+d.pelaksana2_rapat+'</td>'+ 
-                '<td class="valign-middle text-center" >'+d.pelaksana3_rapat+'</td>'+    
-            '</tr>'+
-            '<tr>'+
-                '<td class="valign-middle text-center">4</td>'+
-                '<td class="valign-middle text-center">Tinjauan Komite</td>'+
-                '<td class="valign-middle text-center">'+d.mulai_tinjauan+'</td>'+
-                '<td class="valign-middle text-center">'+d.selesai_tinjauan+'</td>'+
-                '<td class="valign-middle text-center">Remote</td>'+
-                '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
-                '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
-                '<td class="valign-middle text-center" >'+d.pelaksana3_tinjauan+'</td>'+    
-            '</tr>'+
-                
-        
-        '</table>';
-        }
-
-        $('#btncalendar').datepicker({
-            format: "yyyy-mm-dd",
-            todayHighlight: true,
-        });
         
         function formatRupiah(d) {
             return Number(d).toLocaleString('id', {
@@ -920,8 +943,8 @@ $('#mulai_audit1').datetimepicker();
                     data: {
                          _token: "{{ csrf_token() }}",
                         mulai: $('#mulai_audit1').val(),
-                        selesai: $('#selesai_audit1').val(),
-                        selected_pelaksana1: $('#pelaksana1_audit1').val(),
+                        // selesai: $('#selesai_audit1').val(),
+                        //selected_pelaksana1: $('#pelaksana1_audit1').val(),
                         id_regis: $('#idregis1').val()
                     },
                     success: function (response) {
@@ -938,60 +961,60 @@ $('#mulai_audit1').datetimepicker();
                     }
                 })
             });
-            $('#selesai_audit1').on('change', function () {
-                $.ajax({
+            // $('#selesai_audit1').on('change', function () {
+            //     $.ajax({
 
-                    url: '{{ route('dropdown1.dataauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_audit1').val(),
-                        selesai: $('#selesai_audit1').val(),
-                        selected_pelaksana1: $('#pelaksana1_audit1').val(),
-                        id_regis: $('#idregis1').val()
-                    },
-                    success: function (response) {
+            //         url: '{{ route('dropdown1.dataauditor') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             mulai: $('#mulai_audit1').val(),
+            //             // selesai: $('#selesai_audit1').val(),
+            //             selected_pelaksana1: $('#pelaksana1_audit1').val(),
+            //             id_regis: $('#idregis1').val()
+            //         },
+            //         success: function (response) {
                     
-                        $('#pelaksana1_audit1').empty();  
-                        $("#pelaksana1_audit1").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
-                        })
-                         $('#pelaksana1_audit1').selectpicker('refresh');
-                         //$('#pelaksana2_audit1').empty();                         
+            //             $('#pelaksana1_audit1').empty();  
+            //             $("#pelaksana1_audit1").append(new Option('==Pilih Auditor==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //                 $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
+            //             })
+            //              $('#pelaksana1_audit1').selectpicker('refresh');
+            //              //$('#pelaksana2_audit1').empty();                         
                         
-                    }
-                })
-            });
+            //         }
+            //     })
+            // });
 
-            $('#pelaksana1_audit1').on('change', function () {
-                $.ajax({
+            // $('#pelaksana1_audit1').on('change', function () {
+            //     $.ajax({
 
-                    url: '{{ route('dropdown1.dataauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_audit1').val(),
-                        selesai: $('#selesai_audit1').val(),
-                        selected_pelaksana1: $('#pelaksana1_audit1').val(),
-                        id_regis: $('#idregis1').val()
-                    },
-                    success: function (response) {
+            //         url: '{{ route('dropdown1.dataauditor') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             mulai: $('#mulai_audit1').val(),
+            //             // selesai: $('#selesai_audit1').val(),
+            //             selected_pelaksana1: $('#pelaksana1_audit1').val(),
+            //             id_regis: $('#idregis1').val()
+            //         },
+            //         success: function (response) {
                     
-                        //$('#pelaksana1_audit1').empty();                         
-                        $('#pelaksana2_audit1').empty();  
+            //             //$('#pelaksana1_audit1').empty();                         
+            //             $('#pelaksana2_audit1').empty();  
 
-                        $("#pelaksana2_audit1").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //             $("#pelaksana2_audit1").append(new Option('==Pilih Auditor==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana2_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
-                        })
-                        $('#pelaksana2_audit1').selectpicker('refresh');
-                    }
-                })
-            });
+            //                 $("#pelaksana2_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
+            //             })
+            //             $('#pelaksana2_audit1').selectpicker('refresh');
+            //         }
+            //     })
+            // });
 
             $('#mulai_audit2').on('change', function () {
                 $.ajax({
@@ -1001,7 +1024,7 @@ $('#mulai_audit1').datetimepicker();
                     data: {
                          _token: "{{ csrf_token() }}",
                         mulai: $('#mulai_audit2').val(),
-                        selesai: $('#selesai_audit2').val(),
+                        // selesai: $('#selesai_audit2').val(),
                         selected_pelaksana1: $('#pelaksana1_audit2').val(),
                         id_regis: $('#idregis2').val()
                     },
@@ -1021,33 +1044,33 @@ $('#mulai_audit1').datetimepicker();
                 })
             });
 
-            $('#selesai_audit2').on('change', function () {
-                $.ajax({
+            // $('#selesai_audit2').on('change', function () {
+            //     $.ajax({
 
-                    url: '{{ route('dropdown2.dataauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_audit2').val(),
-                        selesai: $('#selesai_audit2').val(),
-                        selected_pelaksana1: $('#pelaksana1_audit2').val(),
-                        id_regis: $('#idregis2').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();   
-                         $('#pelaksana1_audit2').empty();  
+            //         url: '{{ route('dropdown2.dataauditor') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             mulai: $('#mulai_audit2').val(),
+            //             selesai: $('#selesai_audit2').val(),
+            //             selected_pelaksana1: $('#pelaksana1_audit2').val(),
+            //             id_regis: $('#idregis2').val()
+            //         },
+            //         success: function (response) {
+            //             //$('#pelaksana1_audit1').empty();   
+            //              $('#pelaksana1_audit2').empty();  
 
-                        $("#pelaksana1_audit2").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
-                        })
-                         $('#pelaksana1_audit2').selectpicker('refresh');
-                         //$('#pelaksana2_audit1').empty();                         
+            //             $("#pelaksana1_audit2").append(new Option('==Pilih Auditor==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //                 $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
+            //             })
+            //              $('#pelaksana1_audit2').selectpicker('refresh');
+            //              //$('#pelaksana2_audit1').empty();                         
                         
-                    }
-                })
-            });
+            //         }
+            //     })
+            // });
 
             $('#pelaksana1_audit2').on('change', function () {
                 $.ajax({
@@ -1057,7 +1080,7 @@ $('#mulai_audit1').datetimepicker();
                     data: {
                          _token: "{{ csrf_token() }}",
                         mulai: $('#mulai_audit2').val(),
-                        selesai: $('#selesai_audit2').val(),
+                        //selesai: $('#selesai_audit2').val(),
                         selected_pelaksana1: $('#pelaksana1_audit2').val(),
                         id_regis: $('#idregis2').val()
                     },
@@ -1078,229 +1101,229 @@ $('#mulai_audit1').datetimepicker();
                 
             });
 
-            $('#jenis_akomodasi').on('change', function () {
+            // $('#jenis_akomodasi').on('change', function () {
 
-                  $.ajax({
+            //       $.ajax({
 
-                    url: '{{ route('opsi_akomodasi.data') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        jenis: $('#jenis_akomodasi').val(),
+            //         url: '{{ route('opsi_akomodasi.data') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             jenis: $('#jenis_akomodasi').val(),
                       
-                    },
-                    success: function (response) {
+            //         },
+            //         success: function (response) {
                         
-                        $('#opsi_akomodasi').selectpicker('destroy');
-                        $('#opsi_akomodasi').selectpicker();
+            //             $('#opsi_akomodasi').selectpicker('destroy');
+            //             $('#opsi_akomodasi').selectpicker();
 
-                        $('#opsi_akomodasi').empty();  
-                        $('#opsi_akomodasi').append(new Option('==Pilih Opsi Akomodasi==',''))                       
-                        $.each(response, function (opsi_akomodasi, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $('#opsi_akomodasi').append(new Option(opsi_akomodasi,id))
-                        })
+            //             $('#opsi_akomodasi').empty();  
+            //             $('#opsi_akomodasi').append(new Option('==Pilih Opsi Akomodasi==',''))                       
+            //             $.each(response, function (opsi_akomodasi, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //                 $('#opsi_akomodasi').append(new Option(opsi_akomodasi,id))
+            //             })
 
-                        $('#opsi_akomodasi').selectpicker('refresh');    
-                       // $('#pelaksana1_rapat').selectpicker('refresh');              
+            //             $('#opsi_akomodasi').selectpicker('refresh');    
+            //            // $('#pelaksana1_rapat').selectpicker('refresh');              
 
                         
                                      
                         
-                    }
-                })
+            //         }
+            //     })
                 
 
 
-            });
+            // });
 
-            $('#opsi_akomodasi').on('change', function () {
+        //     $('#opsi_akomodasi').on('change', function () {
 
-                 tambahAkomodasi(this);
-
-
-           });
+        //          tambahAkomodasi(this);
 
 
-            $('#mulai_rapat').on('change', function () {
-                $.ajax({
+        //    });
 
-                    url: '{{ route('auditor_dropdown.datarapatauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_rapat').val(),
-                        selesai: $('#selesai_rapat').val(),
-                        selected_pelaksana1: $('#pelaksana1_rapat').val(),
-                        selected_pelaksana2: $('#pelaksana2_rapat').val(),
-                        id_regis: $('#idregis3').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();   
-                         $('#pelaksana1_rapat').empty();  
 
-                        $("#pelaksana1_rapat").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
-                        })
+            // $('#mulai_rapat').on('change', function () {
+            //     $.ajax({
+
+            //         url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             mulai: $('#mulai_rapat').val(),
+            //             selesai: $('#selesai_rapat').val(),
+            //             selected_pelaksana1: $('#pelaksana1_rapat').val(),
+            //             selected_pelaksana2: $('#pelaksana2_rapat').val(),
+            //             id_regis: $('#idregis3').val()
+            //         },
+            //         success: function (response) {
+            //             //$('#pelaksana1_audit1').empty();   
+            //              $('#pelaksana1_rapat').empty();  
+
+            //             $("#pelaksana1_rapat").append(new Option('==Pilih Auditor==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //                 $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
+            //             })
                      
 
-                         //$('#pelaksana2_audit1').empty();  
-                        $('#pelaksana1_rapat').selectpicker('refresh');                       
+            //              //$('#pelaksana2_audit1').empty();  
+            //             $('#pelaksana1_rapat').selectpicker('refresh');                       
                         
-                    }
-                })
-            });
+            //         }
+            //     })
+            // });
 
-            $('#selesai_rapat').on('change', function () {
-                $.ajax({
+            // $('#selesai_rapat').on('change', function () {
+            //     $.ajax({
 
-                    url: '{{ route('auditor_dropdown.datarapatauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_rapat').val(),
-                        selesai: $('#selesai_rapat').val(),
-                        selected_pelaksana1: $('#pelaksana1_rapat').val(),
-                        selected_pelaksana2: $('#pelaksana2_rapat').val(),
-                        id_regis: $('#idregis3').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();   
-                         $('#pelaksana1_rapat').empty();  
+            //         url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             mulai: $('#mulai_rapat').val(),
+            //             selesai: $('#selesai_rapat').val(),
+            //             selected_pelaksana1: $('#pelaksana1_rapat').val(),
+            //             selected_pelaksana2: $('#pelaksana2_rapat').val(),
+            //             id_regis: $('#idregis3').val()
+            //         },
+            //         success: function (response) {
+            //             //$('#pelaksana1_audit1').empty();   
+            //              $('#pelaksana1_rapat').empty();  
 
-                        $("#pelaksana1_rapat").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
-                        })
+            //             $("#pelaksana1_rapat").append(new Option('==Pilih Auditor==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //                 $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
+            //             })
                        
 
-                         //$('#pelaksana2_audit1').empty();  
-                        $('#pelaksana1_rapat').selectpicker('refresh');                       
+            //              //$('#pelaksana2_audit1').empty();  
+            //             $('#pelaksana1_rapat').selectpicker('refresh');                       
                         
-                    }
-                })
-            });
+            //         }
+            //     })
+            // });
 
-            $('#pelaksana1_rapat').on('change', function () {
+            $('#pelaksana1_tr').on('change', function () {
                 $.ajax({
 
-                    url: '{{ route('auditor_dropdown.datarapatauditor') }}',
+                    url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
                     method: 'POST',
                     data: {
                          _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_rapat').val(),
-                        selesai: $('#selesai_rapat').val(),
-                        selected_pelaksana1: $('#pelaksana1_rapat').val(),
-                        selected_pelaksana2: $('#pelaksana2_rapat').val(),
-                        id_regis: $('#idregis3').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();                         
-                        $('#pelaksana2_rapat').empty();  
-
-                        $("#pelaksana2_rapat").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-
-                            $("#pelaksana2_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
-                        })
-                        $('#pelaksana2_rapat').selectpicker('refresh'); 
-                    }
-                })
-            });
-
-            $('#pelaksana2_rapat').on('change', function () {
-                $.ajax({
-
-                    url: '{{ route('auditor_dropdown.datarapatauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_rapat').val(),
-                        selesai: $('#selesai_rapat').val(),
-                        selected_pelaksana1: $('#pelaksana1_rapat').val(),
-                        selected_pelaksana2: $('#pelaksana2_rapat').val(),
+                        //mulai: $('#mulai_rapat').val(),
+                        //selesai: $('#selesai_rapat').val(),
+                        selected_pelaksana1: $('#pelaksana1_tr').val(),
+                        selected_pelaksana2: $('#pelaksana2_tr').val(),
                         id_regis: $('#idregis3').val()
                     },
                     success: function (response) {
                         //$('#pelaksana1_audit1').empty();                         
-                        $('#pelaksana3_rapat').empty();  
+                        $('#pelaksana2_tr').empty();  
 
-                        $("#pelaksana3_rapat").append(new Option('==Pilih Auditor==',''))                       
+                        $("#pelaksana2_tr").append(new Option('==Pilih Auditor==',''))                       
                         $.each(response, function (name, id) {                                                                    
                             // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana3_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
+                            $("#pelaksana2_tr").append(new Option(id +"_"+ name,id +"_"+ name+"_tr"))
                         })
-                        $('#pelaksana3_rapat').selectpicker('refresh'); 
+                        $('#pelaksana2_tr').selectpicker('refresh'); 
                     }
                 })
             });
 
+            // $('#pelaksana2_tr').on('change', function () {
+            //     $.ajax({
 
-            $('#mulai_tinjauan').on('change', function () {
-                $.ajax({
+            //         url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             //mulai: $('#mulai_rapat').val(),
+            //             //selesai: $('#selesai_rapat').val(),
+            //             selected_pelaksana1: $('#pelaksana1_tr').val(),
+            //             selected_pelaksana2: $('#pelaksana2_tr').val(),
+            //             id_regis: $('#idregis3').val()
+            //         },
+            //         success: function (response) {
+            //             //$('#pelaksana1_audit1').empty();                         
+            //             $('#pelaksana3_tr').empty();  
 
-                    url: '{{ route('komite_dropdown.datakomite') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_tinjauan').val(),
-                        selesai: $('#selesai_tinjauan').val(),
-                        selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
-                        selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
-                        id_regis: $('#idregis4').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();   
-                         $('#pelaksana1_tinjauan').empty();  
+            //             $("#pelaksana3_tr").append(new Option('==Pilih Auditor==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                        $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_tinjauan").append(new Option(nid +"_"+ name,id +"_"+ name+"_tinjauan"))
-                        })
+            //                 $("#pelaksana3_tr").append(new Option(id +"_"+ name,id +"_"+ name+"_tr"))
+            //             })
+            //             $('#pelaksana3_tr').selectpicker('refresh'); 
+            //         }
+            //     })
+            // });
+
+
+            // $('#mulai_tinjauan').on('change', function () {
+            //     $.ajax({
+
+            //         url: '{{ route('komite_dropdown.datakomite') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             mulai: $('#mulai_tinjauan').val(),
+            //             selesai: $('#selesai_tinjauan').val(),
+            //             selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
+            //             selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
+            //             id_regis: $('#idregis4').val()
+            //         },
+            //         success: function (response) {
+            //             //$('#pelaksana1_audit1').empty();   
+            //              $('#pelaksana1_tinjauan').empty();  
+
+            //             $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //                 $("#pelaksana1_tinjauan").append(new Option(nid +"_"+ name,id +"_"+ name+"_tinjauan"))
+            //             })
 
                        
 
-                         //$('#pelaksana2_audit1').empty();                         
+            //              //$('#pelaksana2_audit1').empty();                         
                         
-                    }
-                })
-            });
-            $('#selesai_tinjauan').on('change', function () {
-                $.ajax({
+            //         }
+            //     })
+            // });
+            // $('#selesai_tinjauan').on('change', function () {
+            //     $.ajax({
 
-                    url: '{{ route('komite_dropdown.datakomite') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_tinjauan').val(),
-                        selesai: $('#selesai_tinjauan').val(),
-                        selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
-                        selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
-                        id_regis: $('#idregis4').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();   
-                         $('#pelaksana1_tinjauan').empty();  
+            //         url: '{{ route('komite_dropdown.datakomite') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             mulai: $('#mulai_tinjauan').val(),
+            //             selesai: $('#selesai_tinjauan').val(),
+            //             selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
+            //             selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
+            //             id_regis: $('#idregis4').val()
+            //         },
+            //         success: function (response) {
+            //             //$('#pelaksana1_audit1').empty();   
+            //              $('#pelaksana1_tinjauan').empty();  
 
-                        $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
-                        })
+            //             $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //                 $("#pelaksana1_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
+            //             })
 
                        
 
-                         //$('#pelaksana2_audit1').empty();                         
+            //              //$('#pelaksana2_audit1').empty();                         
                         
-                    }
-                })
-            });
+            //         }
+            //     })
+            // });
 
             $('#pelaksana1_tinjauan').on('change', function () {
                 $.ajax({
@@ -1309,8 +1332,8 @@ $('#mulai_audit1').datetimepicker();
                     method: 'POST',
                     data: {
                          _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_tinjauan').val(),
-                        selesai: $('#selesai_tinjauan').val(),
+                        //mulai: $('#mulai_tinjauan').val(),
+                        //selesai: $('#selesai_tinjauan').val(),
                         selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
                         selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
                         id_regis: $('#idregis4').val()
@@ -1331,34 +1354,34 @@ $('#mulai_audit1').datetimepicker();
                 })
             });
 
-            $('#pelaksana2_tinjauan').on('change', function () {
-                $.ajax({
+            // $('#pelaksana2_tinjauan').on('change', function () {
+            //     $.ajax({
 
-                    url: '{{ route('komite_dropdown.datakomite') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_tinjauan').val(),
-                        selesai: $('#selesai_tinjauan').val(),
-                        selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
-                        selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
-                        id_regis: $('#idregis4').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();                         
-                        $('#pelaksana3_tinjauan').empty();  
+            //         url: '{{ route('komite_dropdown.datakomite') }}',
+            //         method: 'POST',
+            //         data: {
+            //              _token: "{{ csrf_token() }}",
+            //             //mulai: $('#mulai_tinjauan').val(),
+            //             //selesai: $('#selesai_tinjauan').val(),
+            //             selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
+            //             selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
+            //             id_regis: $('#idregis4').val()
+            //         },
+            //         success: function (response) {
+            //             //$('#pelaksana1_audit1').empty();                         
+            //             $('#pelaksana3_tinjauan').empty();  
 
-                        $("#pelaksana3_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+            //             $("#pelaksana3_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
+            //             $.each(response, function (name, id) {                                                                    
+            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
 
-                            $("#pelaksana3_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
-                        })
+            //                 $("#pelaksana3_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
+            //             })
 
-                        $('#pelaksana3_tinjauan').selectpicker('refresh'); 
-                    }
-                })
-            });
+            //             $('#pelaksana3_tinjauan').selectpicker('refresh'); 
+            //         }
+            //     })
+            // });
 
             var xTable = $('#table').DataTable({
                 ajax:{
@@ -1518,8 +1541,8 @@ $('#mulai_audit1').datetimepicker();
                             var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
 
                             var audit1 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan1' style="cursor:pointer">Audit Tahap 1</a>`;
-                            var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`"data-pelaksana2="`+full.pelaksana2_audit1+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
-                            var rapat = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan3' style="cursor:pointer">Rapat Auditor</a>`;
+                            var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
+                            var tehnicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan3' style="cursor:pointer">Tehnical Review</a>`;
                             var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite Ahli</a>`;
                             
                             if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
@@ -1527,7 +1550,7 @@ $('#mulai_audit1').datetimepicker();
                                                                              
                             }else{
 
-                                var unduhAkad = `<a href="{{ url('').Storage::url('public/buktiakad/`+full.id_user+`/`+full.berkas_akad+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                var unduhAkad = `<a href="{{ url('').Storage::url('public/buktiakad/`+full.id_user+`/`+full.file_akad+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                             }
                             if(full.status_tahap1 == null || full.status_tahap1 == 0 ){
                                 var unduhBayar1 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
@@ -1550,10 +1573,21 @@ $('#mulai_audit1').datetimepicker();
 
                                 var unduhBayar3 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap3+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                             }
-                            if(full.status_berita_acara == null || full.status_berita_acara == 0 ){
-                                var unduhBeritaAcara = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            if(full.bap == null ){
+                                var unduhBAP = `<a disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+                            }else{            
+                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}"  download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+                            } 
 
-                                var unduhBeritaAcara = `<a href="{{ url('').Storage::url('public/beritaacara/`+full.id_user+`/`+full.file_berita_acara+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            if(full.surat_tugas == null ){
+                                var unduhST = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;ST&nbsp;&nbsp;</a>`;
+                            }else{              
+                                var unduhST = `<a href="{{ url('').Storage::url('public/laporan/upload/Surat Tugas/`+full.file_surat_tugas+`') }}"   download>&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
+                            } 
+                            if(full.konfirmasi_sk_audit == null ){
+                                var unduhKSA = `<a  disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            }else{              
+                                var unduhKSA = `<a href="{{ url('').Storage::url('public/laporan/upload/Konfirmasi SK Audit/`+full.file_konfirmasi_sk_audit+`') }}" download>&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
                             } 
                            
 
@@ -1597,7 +1631,7 @@ $('#mulai_audit1').datetimepicker();
                                                 <i class="fa fa-info text-primary" ></i>
                                                 `+full.jenis+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Alamat: 
-                                                `+full.alamat_kantor+`<br>
+                                                `+full.alamat_perusahaan+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Status Registrasi: 
                                                 `+full.status_registrasi+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Tanggal Update: 
@@ -1620,21 +1654,19 @@ $('#mulai_audit1').datetimepicker();
                                                             
                                                             <a class="nav-link active" data-toggle="tab" href="#card-tab-1-`+full.id+`">Detail</a>
                                                         </li>
-                                                        <li class="nav-item text-center">
-                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-4-`+full.id+`">Penjadwalan</a>
-                                                        </li>
+                                                      
                                                         <li class="nav-item text-center">
                                                             
                                                             <a class="nav-link" data-toggle="tab" href="#card-tab-2-`+full.id+`">Akad</a>
                                                         </li>
                                                         <li class="nav-item text-center">
+                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-4-`+full.id+`">Penjadwalan</a>
+                                                        </li>
+                                                        <li class="nav-item text-center">
                                                             <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-3-`+full.id+`">Pembayaran</a>
                                                         </li>
                                                        
-                                                        <li class="nav-item text-center">
-                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-5-`+full.id+`">Berita Acara</a>
-                                                        </li>
-                                                        
+                                                       
                                                         
                                                         
 
@@ -1649,7 +1681,7 @@ $('#mulai_audit1').datetimepicker();
                                                         <tr>
                                                             <td class="text-center"  style="width:20%">Progres</td>
                                                             <td class="text-center"  style="width:10%">Status Berkas</td>
-                                                            <td class="text-center"  style="width:25%">Cabang Pelaksana</td>
+                                                            <td class="text-center"  style="width:25%">Cabang Auditor</td>
                                                             <td class="text-center"  style="width:10%">Aksi</td>
                                                         </tr>
                                                         
@@ -1696,7 +1728,7 @@ $('#mulai_audit1').datetimepicker();
                                                             <td class="text-center">Status</td>
                                                             <td class="text-center">Total Biaya</td>
                                                             <td class="text-center">Bukti Akad</td>
-                                                            <td class="text-center">Aksi</td>
+                                                           
                                                         </tr>
                                                         
                                                         <tr>
@@ -1708,7 +1740,7 @@ $('#mulai_audit1').datetimepicker();
                                                         </td>
 
                                                         <td class="text-center align-middle">
-                                                            `+formatRupiah(full.total_biaya_sertifikasi)+`
+                                                            `+formatRupiah(full.total_biaya)+`
                                                         </td>
                                                         
                                                         <td class="text-center align-middle">
@@ -1716,16 +1748,7 @@ $('#mulai_audit1').datetimepicker();
 
                                                         </td>
 
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                <div class="dropdown-button-title">Update Progress</div>`+upload+`
-                                                                </div> 
-                                                            </div>
-                                                        </td>
+                                                       
                                                         </tr>
                                                         </table>
                                                     </div>
@@ -1733,119 +1756,84 @@ $('#mulai_audit1').datetimepicker();
 
                                                         <table class="table table-sm">
                                                         <tr>
-                                                            <td class="text-center">Tipe</td>
-                                                            <td class="text-center">Status</td>
-                                                            <td class="text-center">Nominal</td>
-                                                            <td class="text-center">Bukti Transfer</td>
-                                                            <td class="text-center">Aksi</td>
+                                                            <td class="text-center">Status Tahap 1</td>
+                                                            <td class="text-center">Status Tahap 2</td>
+                                                            <td class="text-center">Status Pelunasan</td>
+                                                            <td class="text-center">Nominal Total</td>
+                                                      
                                                         </tr>
                                                         
                                                         <tr>
-                                                        <td class="text-center align-middle">
-                                                            Pembayaran 1
-                                                        </td>
+                                                       
                                                         <td class="text-center align-middle">
                                                             `+checkStatusPembayaran(full.status_tahap1)+`
-                                                        </td>
-
-                                                        <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap1)+`
-                                                        </td>
-                                                        
-                                                        <td class="text-center align-middle">
-                                                            `+unduhBayar1+`
-
-                                                        </td>
-
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                <div class="dropdown-button-title">Update Progress</div>`+status5_2+konfirmBayar1+`
-                                                                </div> 
-                                                            </div>
-                                                        </td>
-                                                        </tr>
-                                                        <tr>
-                                                        <td class="text-center align-middle">
-                                                             Pembayaran 2
                                                         </td>
                                                         <td class="text-center align-middle">
                                                             `+checkStatusPembayaran(full.status_tahap2)+`
                                                         </td>
                                                         <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap2)+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                             `+unduhBayar2+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                    <div class="dropdown-button-title">Update Progress</div>`+status9_2+konfirmBayar2+`
-                                                                </div> 
-                                                            </div>
-                                                        </td>
-                                                        </tr>
-                                                        <tr>
-                                                        <td class="text-center align-middle">
-                                                            Pelunasan 
-                                                        </td>
-                                                        <td class="text-center align-middle"> 
                                                             `+checkStatusPembayaran(full.status_tahap3)+`
                                                         </td>
-                                                        <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap3)+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                             `+unduhBayar3+`
-                                                        </td>
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                    <b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
 
-                                                                       
-                                                                <div class="dropdown-button-title">Update Progress</div>`+status12_2+konfirmBayar3+`
-                                                                </div>
-                                                            </div>
+                                                        <td class="text-center align-middle">
+                                                            `+formatRupiah(full.total_biaya)+`
                                                         </td>
-
-                                                        </tr>
+                                                         
+                                                       
                                                         </table>
                                                     </div>  
                                                     <div class="tab-pane fade" id="card-tab-4-`+full.id+`">
 
                                                         <table class="table table-sm">
                                                         <tr>
-                                                            <td class="text-center align-middle">Tipe</td>
-                                                            <td class="text-center align-middle">Status</td>
-                                                            <td class="text-center align-middle">Tipe</td>
-                                                            <td class="text-center align-middle">Status</td>
+                                                            <td class="text-center align-middle">Status Tahap 1</td>
+                                                            <td class="text-center align-middle">Status Tahap 2</td>
+                                                            <td class="text-center align-middle">Status TR</td>
+                                                            <td class="text-center align-middle">Status KS</td>
+                                                           
+                                                            <td class="text-center align-middle">File</td>
                                                             <td class="text-center align-middle">Aksi</td>
                                                         </tr>
 
                                                        
                                                         
                                                         <tr>
+                                                           
                                                             <td class="text-center align-middle">
-                                                                Audit Tahap 1
+                                                                `+checkPenjadwalan(full.status_penjadwalan_audit1)+`
+                                                            </td>
+                                                            
+                                                            <td class="text-center align-middle">
+                                                                `+checkPenjadwalan(full.status_penjadwalan_audit2)+`
                                                             </td>
                                                             <td class="text-center align-middle">
-                                                                `+checkPenjadwalan(full.status_audit1)+`
+                                                                `+checkPenjadwalan(full.status_penjadwalan_tr)+`
                                                             </td>
+                                                            
                                                             <td class="text-center align-middle">
-                                                                Audit Tahap 2
+                                                                `+checkPenjadwalan(full.status_penjadwalan_tinjauan)+`
                                                             </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkPenjadwalan(full.status_audit2)+`
+                                                            <td>
+                                                                <table class="table table-borderless">
+                                                                    <tr>
+                                                                        <td>
+                                                                        `+unduhBAP+`
+                                                                        </td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                        <td>
+                                                                        `+unduhST+`
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                        `+unduhKSA+`
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+
+                                                            <td>
                                                             </td>
                                                             <td class="text-center align-middle">
                                                                 <div class="btn-group m-r-5 show">
@@ -1860,68 +1848,10 @@ $('#mulai_audit1').datetimepicker();
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="text-center align-middle">
-                                                                Rapat Auditor
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkPenjadwalan(full.status_rapat)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                Tinjauan Komite
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkPenjadwalan(full.status_tinjauan)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                <div class="btn-group m-r-5 show">
-                                                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                        <b class="ion-ios-arrow-down"></b>
-                                                                    </a>
-                                                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                        
-                                                                    <div class="dropdown-button-title">Update Progress</div>`+rapat+tinjauan+`
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                        
                                                         </table>
                                                     </div>
-                                                    <div class="tab-pane fade" id="card-tab-5-`+full.id+`">
-
-                                                        <table class="table table-sm">
-                                                            <tr>
-                                                                <td class="text-center align-middle">Tipe</td>
-                                                                <td class="text-center align-middle">Status</td>
-                                                                <td class="text-center align-middle">File</td>
-                                                                <td class="text-center align-middle">Aksi</td>
-                                                               
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-center">
-                                                                    Berita Acara
-                                                                </td>
-                                                                <td class="text-center align-middle">
-                                                                    `+checkStatusBeritaAcara(full.status_berita_acara)+`
-                                                                </td>
-                                                                <td class="text-center align-middle">
-                                                                    `+unduhBeritaAcara+`
-                                                                </td>
-                                                                <td class="text-center align-middle">
-                                                                    <div class="btn-group m-r-5 show">
-                                                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                            <b class="ion-ios-arrow-down"></b>
-                                                                        </a>
-                                                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                        <div class="dropdown-button-title">Update Progress</div>`+uploadBeritaAcara+`
-                                                                        </div> 
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
+                                                   
                                                 </div>
                                             </div>
                                         </div>

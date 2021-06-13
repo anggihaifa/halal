@@ -72,38 +72,18 @@ class PenjadwalanController extends Controller
         $data = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
 
-        if($data['mulai'] && $data['selesai']){
-                $dataAuditor1_TidakLuang =  DB::table('penjadwalan')
-                                        ->where(function($query) use ($data){
-                                            $query->where('mulai_audit1','<=', $data['mulai']);
-                                            $query->where('selesai_audit1','>=', $data['mulai']);
-                                            $query->where('id_registrasi','!=', $data['id_regis']);
-                                           
-                                        })
-                                        ->orWhere(function($query) use ($data){
-                                            $query->where('mulai_audit1','>=', $data['mulai']);
-                                            $query->where('mulai_audit1','<=', $data['selesai']);
-                                            $query->where('id_registrasi','!=', $data['id_regis']);
-                                           
-                                           
-                                        })
-                                       
-                                        /*->get();*/
-                                       ->select('pelaksana1_audit1','pelaksana2_audit1')
-                                        ->get();
+        Log::info($data['mulai']);
+        if($data['mulai']){
+                $dataAuditor1_TidakLuangRaw =  DB::table('penjadwalan')
+                                    ->where('mulai_audit1','=', $data['mulai'])
+                                    ->select('pelaksana1_audit1')
+                                    ->get();
 
                 $dataAuditor2_TidakLuang =  DB::table('penjadwalan')
                                         
                                         ->where(function($query) use ($data){
-                                            $query->where('mulai_audit2','<=', $data['mulai']);
-                                            $query->where('selesai_audit2','>=', $data['mulai']);
-                                            //$query->where('id_registrasi','!=', $data['id_regis']);
-                                           
-                                        })
-                                        ->orWhere(function($query) use ($data){
-                                            $query->where('mulai_audit2','>=', $data['mulai']);
-                                            $query->where('mulai_audit2','<=', $data['selesai']);
-                                            //$query->where('id_registrasi','!=', $data['id_regis']);
+                                            $query->where('mulai_audit2', $data['mulai']);
+                                            
                                           
                                         })
                                         
@@ -111,1057 +91,335 @@ class PenjadwalanController extends Controller
                                        ->select('pelaksana1_audit2','pelaksana2_audit2')
                                         ->get();
 
-                $dataAuditor3_TidakLuang =  DB::table('penjadwalan')
-                                        
-                                        ->where(function($query) use ($data){
-                                            $query->where('mulai_rapat','<=', $data['mulai']);
-                                            $query->where('selesai_rapat','>=', $data['mulai']);
-                                            //$query->where('id_registrasi','!=', $data['id_regis']);
-                                           
-                                        })
-                                        ->orWhere(function($query) use ($data){
-                                            $query->where('mulai_rapat','>=', $data['mulai']);
-                                            $query->where('mulai_rapat','<=', $data['selesai']);
-                                            //$query->where('id_registrasi','!=', $data['id_regis']);
-                                          
-                                        })
-                                        
-                                        /*->get();*/
-                                       ->select('pelaksana1_rapat','pelaksana2_rapat','pelaksana3_rapat')
-                                        ->get();
+            $dataAuditor1_TidakLuang = array();
                                        
-           $dataAuditor1_TidakLuang= json_decode($dataAuditor1_TidakLuang, true);
+           $dataAuditor1_TidakLuangRaw= json_decode($dataAuditor1_TidakLuangRaw, true);
+           //Log::info($dataAuditor1_TidakLuangRaw);
+           for( $i=0;$i<count($dataAuditor1_TidakLuangRaw);$i++) {
+            //Log::info($dataAuditor1_TidakLuangRaw[$i]['pelaksana1_audit1']);
+            $count[$dataAuditor1_TidakLuangRaw[$i]['pelaksana1_audit1']] =0;
+                if($i != 0){
+                    for( $j=$i-1;$j<count($dataAuditor1_TidakLuangRaw)-1;$j++) {
+
+                        
+    
+    
+                        if($dataAuditor1_TidakLuangRaw[$j]['pelaksana1_audit1'] == $dataAuditor1_TidakLuangRaw[$i]['pelaksana1_audit1'] ){
+                            $count[$dataAuditor1_TidakLuangRaw[$i]['pelaksana1_audit1']]++;
+                        }
+                    }
+                   
+                    if( $count[$dataAuditor1_TidakLuangRaw[$i]['pelaksana1_audit1']] >= 2){
+                        //$dataAuditor1_TidakLuang = $dataAuditor1_TidakLuangRaw[$i]
+                        $dataAuditor1_TidakLuang[]= array('pelaksana1_audit1'=>$dataAuditor1_TidakLuangRaw[$i]['pelaksana1_audit1']);
+                    }
+                }      
+           }
+
            $dataAuditor2_TidakLuang= json_decode($dataAuditor2_TidakLuang, true);
-           $dataAuditor3_TidakLuang= json_decode($dataAuditor3_TidakLuang, true);
+          
             
            
-            $str =  explode("_",$data['selected_pelaksana1']);
-            $data['selected_pelaksana1'] = $str[0];
+            // $str =  explode("_",$data['selected_pelaksana1']);
+            // $data['selected_pelaksana1'] = $str[0];
 
-            if($kodewilayah == 00){
-                if($data['selected_pelaksana1'] == ''){
+            if($kodewilayah == 119){
+               
                  
                 
-                    if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
+                if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL ){
 
-                           $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','10')
-                            ->pluck('id', 'name');   
-                             
-                    }else{
+                        $dataAuditor1 = DB::table('users')
+                        ->where('usergroup_id','10')
+                        ->orWhere('usergroup_id','11')
+                        ->orWhere('usergroup_id','11')
+                        ->pluck('id', 'name');   
+                            
+                }else{
 
-                         
-                        if($dataAuditor1_TidakLuang){    
-                            if($dataAuditor2_TidakLuang){
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                        foreach ( $dataAuditor2_TidakLuang as $key2) {
-                                            foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                                $aud =  explode("_",$key['pelaksana1_audit1']);
-                                                $key['pelaksana1_audit1'] =$aud[0];
-                                                $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                                $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                                $key2['pelaksana1_audit2'] =$aud3[0];
-                                                $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                                $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
-                                              
-
-                                               $dataAuditor2 = DB::table('users')
-                                                ->where(function($query) use ($key,$key2,$key3){
-                                                        $query->where('usergroup_id','10')  ;  
-                                                        $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                        $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                        $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                        $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
-
-                                                    })
-                                         
-                                             
-                                                ->pluck('id', 'name');   
-                                            }
-                                        }
-                                    }
-
-                                }else{
-
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                        foreach ( $dataAuditor2_TidakLuang as $key2) {
-
-                                            $aud =  explode("_",$key['pelaksana1_audit1']);
-                                            $key['pelaksana1_audit1'] =$aud[0];
-                                            $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                            $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                            $key2['pelaksana1_audit2'] =$aud3[0];
-                                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                            $key2['pelaksana2_audit2'] =$aud4[0];
-                                           
-                                          
-
-                                            $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key,$key2){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                    $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');   
-                                        }
-                                    }
-                                }  
-                            }else{
-
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                         foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                            $aud =  explode("_",$key['pelaksana1_audit1']);
-                                            $key['pelaksana1_audit1'] =$aud[0];
-                                            $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                            $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
-                                           
-                                          
-
-                                           $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key,$key3){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                    $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');   
-                                        }
-                                    }
-
-                                }else{
-
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-
-                                        $aud =  explode("_",$key['pelaksana1_audit1']);
-                                        $key['pelaksana1_audit1'] =$aud[0];
-                                        $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                        $key['pelaksana2_audit1'] =$aud2[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                $query->where('id','!=',$key['pelaksana2_audit1']);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-
-                                }
-                            }      
-                        }else{
-
-                             if($dataAuditor2_TidakLuang){
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor2_TidakLuang as $key2) {
-                                        foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                            $key2['pelaksana1_audit2'] =$aud3[0];
-                                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                            $key2['pelaksana2_audit2'] =$aud4[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
-                                           
-                                          
-
-                                           $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key2,$key3){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');  
-                                        } 
-                                    }
-
-
-                                }else{
-
-                                    foreach ( $dataAuditor2_TidakLuang as $key2) {
-
-                                        $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                        $key2['pelaksana1_audit2'] =$aud3[0];
-                                        $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                        $key2['pelaksana2_audit2'] =$aud4[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key2){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-                                }
-                             }else{
-
-                                 foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key3){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-
-                             }
-
-                        }
                         
-                    }
-
-                  
-
-               }else{
-                    // Log::info('masuk ');
-
-                   if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
-
-                           $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','10')  
-                            ->where('id','!=',$data['selected_pelaksana1'])
-                            ->pluck('id', 'name');   
-                             
-                    }else{
-
-                         
-                        if($dataAuditor1_TidakLuang){    
-                            if($dataAuditor2_TidakLuang){
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                        foreach ( $dataAuditor2_TidakLuang as $key2) {
-                                            foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                                $aud =  explode("_",$key['pelaksana1_audit1']);
-                                                $key['pelaksana1_audit1'] =$aud[0];
-                                                $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                                $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                                $key2['pelaksana1_audit2'] =$aud3[0];
-                                                $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                                $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
-                                              
-
-                                               $dataAuditor2 = DB::table('users')
-                                                ->where(function($query) use ($key,$key2,$key3, $data){
-                                                        $query->where('usergroup_id','10')  ;  
-                                                        $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                        $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                        $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                        $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                        $query->where('id','!=',$data['selected_pelaksana1']);
-
-                                                    })
-                                         
-                                             
-                                                ->pluck('id', 'name');   
-                                            }
-                                        }
-                                    }
-
-                                }else{
-
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                        foreach ( $dataAuditor2_TidakLuang as $key2) {
-
-                                            $aud =  explode("_",$key['pelaksana1_audit1']);
-                                            $key['pelaksana1_audit1'] =$aud[0];
-                                            $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                            $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                            $key2['pelaksana1_audit2'] =$aud3[0];
-                                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                            $key2['pelaksana2_audit2'] =$aud4[0];
-                                           
-                                          
-
-                                            $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key,$key2,$data){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                    $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$data['selected_pelaksana1']);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');   
-                                        }
-                                    }
-                                }  
-                            }else{
-
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                         foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                            $aud =  explode("_",$key['pelaksana1_audit1']);
-                                            $key['pelaksana1_audit1'] =$aud[0];
-                                            $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                            $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
-                                           
-                                          
-
-                                           $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key,$key3,$data){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                    $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                    $query->where('id','!=',$data['selected_pelaksana1']);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');   
-                                        }
-                                    }
-
-                                }else{
-
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-
-                                        $aud =  explode("_",$key['pelaksana1_audit1']);
-                                        $key['pelaksana1_audit1'] =$aud[0];
-                                        $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                        $key['pelaksana2_audit1'] =$aud2[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key,$data){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                $query->where('id','!=',$data['selected_pelaksana1']);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-
-                                }
-                            }      
-                        }else{
-
-                             if($dataAuditor2_TidakLuang){
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor2_TidakLuang as $key2) {
-                                        foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                            $key2['pelaksana1_audit2'] =$aud3[0];
-                                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                            $key2['pelaksana2_audit2'] =$aud4[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
-                                           
-                                          
-
-                                           $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key2,$key3,$data){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                    $query->where('id','!=',$data['selected_pelaksana1']);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');  
-                                        } 
-                                    }
+                    if($dataAuditor1_TidakLuang){    
+                        if($dataAuditor2_TidakLuang){
+                            foreach ( $dataAuditor1_TidakLuang as $key) {
+                                foreach ( $dataAuditor2_TidakLuang as $key2) {
 
 
-                                }else{
-
-                                    foreach ( $dataAuditor2_TidakLuang as $key2) {
-
-                                        $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                        $key2['pelaksana1_audit2'] =$aud3[0];
-                                        $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                        $key2['pelaksana2_audit2'] =$aud4[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key2,$data){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                $query->where('id','!=',$data['selected_pelaksana1']);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-                                }
-                             }else{
-
-                                 foreach ( $dataAuditor3_TidakLuang as $key3) {
+                                    $aud =  explode("_",$key['pelaksana1_audit1']);
+                                    $key['pelaksana1_audit1'] =$aud[0];
                                     
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
-                                       
-                                       
-                                      
+                                    $aud3 =  explode("_",$key2['pelaksana1_audit2']);
+                                    $key2['pelaksana1_audit2'] =$aud3[0];
+                                    $aud4 =  explode("_",$key2['pelaksana2_audit2']);
+                                    $key2['pelaksana2_audit2'] =$aud4[0];
+                                    
+                                    
 
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key3,$data){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                $query->where('id','!=',$data['selected_pelaksana1']);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
+                                    $dataAuditor1 = DB::table('users')
+                                    ->where(function($query) use ($key,$key2){
+                                            $query->where('usergroup_id','10')  ; 
+                                            
+                                            $query->where('id','!=',$key['pelaksana1_audit1']);                     
+                                            $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                            $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                            
 
-                             }
+                                    })
+                                    ->orWhere(function($query) use ($key,$key2){
+                                        $query->where('usergroup_id','11')  ; 
+                               
+                                        $query->where('id','!=',$key['pelaksana1_audit1']);                     
+                                        $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                        $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                        
 
-                        }
+                                    })
+                                    ->orWhere(function($query) use ($key,$key2){
+                                        $query->where('usergroup_id','12')  ; 
+                               
+                                        $query->where('id','!=',$key['pelaksana1_audit1']);                     
+                                        $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                        $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                        
+
+                                    })
+                                
+                                    
+                                    ->pluck('id', 'name');   
+                                    
+                                }
+                            }
+
+                            
+                        }else{
+                            foreach ( $dataAuditor1_TidakLuang as $key) {
+
+                                $aud =  explode("_",$key['pelaksana1_audit1']);
+                                $key['pelaksana1_audit1'] =$aud[0];
+                             
+                                
+                                
+
+                                $dataAuditor1 = DB::table('users')
+                                ->where(function($query) use ($key){
+                                        $query->where('usergroup_id','10')  ;  
+                                        $query->where('id','!=',$key['pelaksana1_audit1']);
+                                                                            
+                                })
+                                ->orWhere(function($query) use ($key){
+                                    $query->where('usergroup_id','11')  ;  
+                                    $query->where('id','!=',$key['pelaksana1_audit1']);
+                                                                        
+                                })
+                                ->orWhere(function($query) use ($key){
+                                        $query->where('usergroup_id','12')  ;  
+                                        $query->where('id','!=',$key['pelaksana1_audit1']);
+                                                                            
+                                }) 
+                                ->pluck('id', 'name');   
+                            }
+                            
+                        }      
+                    }else{
+
+                        foreach ( $dataAuditor2_TidakLuang as $key2) {
+
+                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
+                            $key2['pelaksana1_audit2'] =$aud3[0];
+                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
+                            $key2['pelaksana2_audit2'] =$aud4[0];
+                            
+                            
+                            
+
+                            $dataAuditor1 = DB::table('users')
+                            ->where(function($query) use ($key2){
+                                    $query->where('usergroup_id','10')  ;  
+                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                    
+                                    
+                            })
+                            ->orWhere(function($query) use ($key2){
+                                    $query->where('usergroup_id','10')  ;  
+                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                    
+                                    
+                            })
+                            ->orWhere(function($query) use ($key2){
+                                    $query->where('usergroup_id','10')  ;  
+                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                    
+                                    
+                            })
                         
+                            
+                            ->pluck('id', 'name');   
+                        }
                     }
-                }
+                }          
 
+               
             }else{
 
                 //data kodewilayah selain pusat
+                if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL ){
 
-                if($data['selected_pelaksana1'] == ''){
-                 
-                
-                    if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
-
-                           $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','10')
-                            ->where('kode_wilayah',$kodewilayah)
-                            ->pluck('id', 'name');   
-                             
-                    }else{
-
-
-                         
-                        if($dataAuditor1_TidakLuang){    
-                            if($dataAuditor2_TidakLuang){
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                        foreach ( $dataAuditor2_TidakLuang as $key2) {
-                                            foreach ( $dataAuditor3_TidakLuang as $key3) {
+                        $dataAuditor1 = DB::table('users')
+                        ->where(function($query) use ($kodewilayah){
+                            $query->where('usergroup_id','10');
+                            $query->where('kode_wilayah',$kodewilayah);
+                        })
+                        ->orWhere(function($query) use ($kodewilayah){
+                            $query->where('usergroup_id','11');
+                            $query->where('kode_wilayah',$kodewilayah);
+                        })
+                        ->orWhere(function($query) use ($kodewilayah){
+                            $query->where('usergroup_id','12');
+                            $query->where('kode_wilayah',$kodewilayah);
+                        })
+                            
 
 
+                        ->pluck('id', 'name');   
+                            
+                }else{
 
-                                                $aud =  explode("_",$key['pelaksana1_audit1']);
-                                                $key['pelaksana1_audit1'] =$aud[0];
-                                                $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                                $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                                $key2['pelaksana1_audit2'] =$aud3[0];
-                                                $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                                $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
-                                              
-
-
-                                               $dataAuditor2 = DB::table('users')
-                                                ->where(function($query) use ($key,$key2,$key3,$kodewilayah){
-                                                        $query->where('usergroup_id','10')  ;  
-                                                        $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                        $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                        $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                        $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                        $query->where('kode_wilayah',$kodewilayah);
-
-                                                    })
-                                         
-                                             
-                                                ->pluck('id', 'name');   
-                                            }
-                                        }
-                                    }
-
-                                }else{
-
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                        foreach ( $dataAuditor2_TidakLuang as $key2) {
-
-                                            $aud =  explode("_",$key['pelaksana1_audit1']);
-                                            $key['pelaksana1_audit1'] =$aud[0];
-                                            $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                            $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                            $key2['pelaksana1_audit2'] =$aud3[0];
-                                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                            $key2['pelaksana2_audit2'] =$aud4[0];
-                                           
-                                          
-
-                                            $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key,$key2,$kodewilayah){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                    $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('kode_wilayah',$kodewilayah);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');   
-                                        }
-                                    }
-                                }  
-                            }else{
-
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                         foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                            $aud =  explode("_",$key['pelaksana1_audit1']);
-                                            $key['pelaksana1_audit1'] =$aud[0];
-                                            $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                            $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
-                                           
-                                          
-
-                                           $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key,$key3,$kodewilayah){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                    $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                    $query->where('kode_wilayah',$kodewilayah);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');   
-                                        }
-                                    }
-
-                                }else{
-
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-
-                                        $aud =  explode("_",$key['pelaksana1_audit1']);
-                                        $key['pelaksana1_audit1'] =$aud[0];
-                                        $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                        $key['pelaksana2_audit1'] =$aud2[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key,$kodewilayah){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                $query->where('kode_wilayah',$kodewilayah);
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-
-                                }
-                            }      
-                        }else{
-
-                             if($dataAuditor2_TidakLuang){
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor2_TidakLuang as $key2) {
-                                        foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                            $key2['pelaksana1_audit2'] =$aud3[0];
-                                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                            $key2['pelaksana2_audit2'] =$aud4[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
-                                           
-                                          
-
-                                           $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key2,$key3,$kodewilayah){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                    $query->where('kode_wilayah',$kodewilayah);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');  
-                                        } 
-                                    }
-
-
-                                }else{
-
-                                    foreach ( $dataAuditor2_TidakLuang as $key2) {
-
-                                        $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                        $key2['pelaksana1_audit2'] =$aud3[0];
-                                        $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                        $key2['pelaksana2_audit2'] =$aud4[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key2,$kodewilayah){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                $query->where('kode_wilayah',$kodewilayah);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-                                }
-                             }else{
-
-                                 foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key3,$kodewilayah){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                $query->where('kode_wilayah',$kodewilayah);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-
-                             }
-
-                        }
                         
-                    }
-
-                  
-
-               }else{
-                    // Log::info('masuk ');
-
-                   if($dataAuditor1_TidakLuang == NULL && $dataAuditor2_TidakLuang  == NULL && $dataAuditor3_TidakLuang  == NULL){
-
-                           $dataAuditor2 = DB::table('users')
-                            ->where('usergroup_id','10')
-                            ->where('kode_wilayah',$kodewilayah)  
-                            ->where('id','!=',$data['selected_pelaksana1'])
-                            ->pluck('id', 'name');   
-                             
-                    }else{
-
-                         
-                        if($dataAuditor1_TidakLuang){    
-                            if($dataAuditor2_TidakLuang){
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                        foreach ( $dataAuditor2_TidakLuang as $key2) {
-                                            foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                                $aud =  explode("_",$key['pelaksana1_audit1']);
-                                                $key['pelaksana1_audit1'] =$aud[0];
-                                                $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                                $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                                $key2['pelaksana1_audit2'] =$aud3[0];
-                                                $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                                $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
-                                              
-
-                                               $dataAuditor2 = DB::table('users')
-                                                ->where(function($query) use ($key,$key2,$key3, $data,$kodewilayah){
-                                                        $query->where('usergroup_id','10')  ;  
-                                                        $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                        $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                        $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                        $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                        $query->where('id','!=',$data['selected_pelaksana1']);
-                                                        $query->where('kode_wilayah',$kodewilayah);
-
-                                                    })
-                                         
-                                             
-                                                ->pluck('id', 'name');   
-                                            }
-                                        }
-                                    }
-
-                                }else{
-
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                        foreach ( $dataAuditor2_TidakLuang as $key2) {
-
-                                            $aud =  explode("_",$key['pelaksana1_audit1']);
-                                            $key['pelaksana1_audit1'] =$aud[0];
-                                            $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                            $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                            $key2['pelaksana1_audit2'] =$aud3[0];
-                                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                            $key2['pelaksana2_audit2'] =$aud4[0];
-                                           
-                                          
-
-                                            $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key,$key2,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                    $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$data['selected_pelaksana1']);
-                                                    $query->where('kode_wilayah',$kodewilayah);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');   
-                                        }
-                                    }
-                                }  
-                            }else{
-
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-                                         foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                            $aud =  explode("_",$key['pelaksana1_audit1']);
-                                            $key['pelaksana1_audit1'] =$aud[0];
-                                            $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                            $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
-                                           
-                                          
-
-                                           $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key,$key3,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                    $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                    $query->where('id','!=',$data['selected_pelaksana1']);
-                                                    $query->where('kode_wilayah',$kodewilayah);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');   
-                                        }
-                                    }
-
-                                }else{
-
-                                    foreach ( $dataAuditor1_TidakLuang as $key) {
-
-                                        $aud =  explode("_",$key['pelaksana1_audit1']);
-                                        $key['pelaksana1_audit1'] =$aud[0];
-                                        $aud2 =  explode("_",$key['pelaksana2_audit1']);
-                                        $key['pelaksana2_audit1'] =$aud2[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key,$data,$kodewilayah){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key['pelaksana1_audit1']);
-                                                $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                $query->where('id','!=',$data['selected_pelaksana1']);
-                                                $query->where('kode_wilayah',$kodewilayah);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-
-                                }
-                            }      
-                        }else{
-
-                             if($dataAuditor2_TidakLuang){
-                                if($dataAuditor3_TidakLuang){
-                                    foreach ( $dataAuditor2_TidakLuang as $key2) {
-                                        foreach ( $dataAuditor3_TidakLuang as $key3) {
-
-                                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                            $key2['pelaksana1_audit2'] =$aud3[0];
-                                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                            $key2['pelaksana2_audit2'] =$aud4[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
-                                           
-                                          
-
-                                           $dataAuditor2 = DB::table('users')
-                                            ->where(function($query) use ($key2,$key3,$data,$kodewilayah){
-                                                    $query->where('usergroup_id','10')  ;  
-                                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                    $query->where('id','!=',$data['selected_pelaksana1']);
-                                                    $query->where('kode_wilayah',$kodewilayah);
-                                                   
-                                                })
-                                     
-                                         
-                                            ->pluck('id', 'name');  
-                                        } 
-                                    }
+                    if($dataAuditor1_TidakLuang){    
+                        if($dataAuditor2_TidakLuang){
+                            foreach ( $dataAuditor1_TidakLuang as $key) {
+                                foreach ( $dataAuditor2_TidakLuang as $key2) {
 
 
-                                }else{
-
-                                    foreach ( $dataAuditor2_TidakLuang as $key2) {
-
-                                        $aud3 =  explode("_",$key2['pelaksana1_audit2']);
-                                        $key2['pelaksana1_audit2'] =$aud3[0];
-                                        $aud4 =  explode("_",$key2['pelaksana2_audit2']);
-                                        $key2['pelaksana2_audit2'] =$aud4[0];
-                                       
-                                       
-                                      
-
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key2,$data,$kodewilayah){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key2['pelaksana1_audit2']);
-                                                $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                $query->where('id','!=',$data['selected_pelaksana1']);
-                                                $query->where('kode_wilayah',$kodewilayah);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
-                                }
-                             }else{
-
-                                 foreach ( $dataAuditor3_TidakLuang as $key3) {
+                                    $aud =  explode("_",$key['pelaksana1_audit1']);
+                                    $key['pelaksana1_audit1'] =$aud[0];
                                     
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
-                                       
-                                       
-                                      
+                                    $aud3 =  explode("_",$key2['pelaksana1_audit2']);
+                                    $key2['pelaksana1_audit2'] =$aud3[0];
+                                    $aud4 =  explode("_",$key2['pelaksana2_audit2']);
+                                    $key2['pelaksana2_audit2'] =$aud4[0];
+                                    
+                                    
 
-                                       $dataAuditor2 = DB::table('users')
-                                        ->where(function($query) use ($key3,$data,$kodewilayah){
-                                                $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
-                                                $query->where('id','!=',$data['selected_pelaksana1']);
-                                                $query->where('kode_wilayah',$kodewilayah);
-                                               
-                                               
-                                            })
-                                 
-                                     
-                                        ->pluck('id', 'name');   
-                                    }
+                                    $dataAuditor1 = DB::table('users')
+                                    ->where(function($query) use ($key,$key2,$kodewilayah){
+                                            $query->where('usergroup_id','10')  ; 
+                                            $query->where('kode_wilayah',$kodewilayah);
+                                            $query->where('id','!=',$key['pelaksana1_audit1']);                     
+                                            $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                            $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                            
 
-                             }
+                                    })
+                                    ->orWhere(function($query) use ($key,$key2,$kodewilayah){
+                                        $query->where('usergroup_id','11')  ; 
+                                        $query->where('kode_wilayah',$kodewilayah);
+                                        $query->where('id','!=',$key['pelaksana1_audit1']);                     
+                                        $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                        $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                        
 
-                        }
+                                    })
+                                    ->orWhere(function($query) use ($key,$key2,$kodewilayah){
+                                        $query->where('usergroup_id','12')  ; 
+                                        $query->where('kode_wilayah',$kodewilayah);
+                                        $query->where('id','!=',$key['pelaksana1_audit1']);                     
+                                        $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                        $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                        
+
+                                    })
+                                
+                                    
+                                    ->pluck('id', 'name');   
+                                    
+                                }
+                            }
+
+                            
+                        }else{
+                            foreach ( $dataAuditor1_TidakLuang as $key) {
+
+                                $aud =  explode("_",$key['pelaksana1_audit1']);
+                                $key['pelaksana1_audit1'] =$aud[0];
+                             
+                                
+                                
+
+                                $dataAuditor1 = DB::table('users')
+                                ->where(function($query) use ($key,$kodewilayah){
+                                        $query->where('usergroup_id','10')  ; 
+                                        $query->where('kode_wilayah',$kodewilayah); 
+                                        $query->where('id','!=',$key['pelaksana1_audit1']);
+                                                                            
+                                })
+                                ->orWhere(function($query) use ($key,$kodewilayah){
+                                    $query->where('usergroup_id','11')  ; 
+                                    $query->where('kode_wilayah',$kodewilayah); 
+                                    $query->where('id','!=',$key['pelaksana1_audit1']);
+                                                                        
+                                })
+                                ->orWhere(function($query) use ($key,$kodewilayah){
+                                        $query->where('usergroup_id','12')  ; 
+                                        $query->where('kode_wilayah',$kodewilayah); 
+                                        $query->where('id','!=',$key['pelaksana1_audit1']);
+                                                                            
+                                }) 
+                                ->pluck('id', 'name');   
+                            }
+                            
+                        }      
+                    }else{
+
+                        foreach ( $dataAuditor2_TidakLuang as $key2) {
+
+                            $aud3 =  explode("_",$key2['pelaksana1_audit2']);
+                            $key2['pelaksana1_audit2'] =$aud3[0];
+                            $aud4 =  explode("_",$key2['pelaksana2_audit2']);
+                            $key2['pelaksana2_audit2'] =$aud4[0];
+                            
+                            
+                            
+
+                            $dataAuditor1 = DB::table('users')
+                            ->where(function($query) use ($key2,$kodewilayah){
+                                    $query->where('usergroup_id','10')  ; 
+                                    $query->where('kode_wilayah',$kodewilayah); 
+                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                    
+                                    
+                            })
+                            ->orWhere(function($query) use ($key2,$kodewilayah){
+                                    $query->where('usergroup_id','10')  ;  
+                                    $query->where('kode_wilayah',$kodewilayah);
+                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                    
+                                    
+                            })
+                            ->orWhere(function($query) use ($key2,$kodewilayah){
+                                    $query->where('usergroup_id','10')  ;  
+                                    $query->where('kode_wilayah',$kodewilayah);
+                                    $query->where('id','!=',$key2['pelaksana1_audit2']);
+                                    $query->where('id','!=',$key2['pelaksana2_audit2']);
+                                    
+                                    
+                            })
                         
+                            
+                            ->pluck('id', 'name');   
+                        }
                     }
-                }
+                }       
+               
 
             }
-
-            
             
             //Log::info('ini data auditor: '.$dataAuditor1);
-            return response()->json($dataAuditor2);
+            return response()->json($dataAuditor1);
         }
     }
 
@@ -1251,20 +509,20 @@ class PenjadwalanController extends Controller
                 $dataAuditor3_TidakLuang =  DB::table('penjadwalan')
                                         
                                         ->where(function($query) use ($data){
-                                            $query->where('mulai_rapat','<=', $data['mulai']);
-                                            $query->where('selesai_rapat','>=', $data['mulai']);
+                                            $query->where('mulai_tr','<=', $data['mulai']);
+                                            $query->where('selesai_tr','>=', $data['mulai']);
                                             //$query->where('id_registrasi','!=', $data['id_regis']);
                                            
                                         })
                                         ->orWhere(function($query) use ($data){
-                                            $query->where('mulai_rapat','>=', $data['mulai']);
-                                            $query->where('mulai_rapat','<=', $data['selesai']);
+                                            $query->where('mulai_tr','>=', $data['mulai']);
+                                            $query->where('mulai_tr','<=', $data['selesai']);
                                             //$query->where('id_registrasi','!=', $data['id_regis']);
                                           
                                         })
                                         
                                         /*->get();*/
-                                       ->select('pelaksana1_rapat','pelaksana2_rapat','pelaksana3_rapat')
+                                       ->select('pelaksana1_tr','pelaksana2_tr','pelaksana3_tr')
                                         ->get();
                                        
                                      
@@ -1309,12 +567,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                               
 
                                                $dataAuditor2 = DB::table('users')
@@ -1324,9 +582,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                         $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
 
                                                     })
                                          
@@ -1377,12 +635,12 @@ class PenjadwalanController extends Controller
                                             $key['pelaksana1_audit1'] =$aud[0];
                                             $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                             $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
+                                            $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                            $key3['pelaksana1_tr'] =$aud5[0];
+                                            $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                            $key3['pelaksana2_tr'] =$aud6[0];
+                                            $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                            $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -1391,9 +649,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                    
                                                 })
                                      
@@ -1440,12 +698,12 @@ class PenjadwalanController extends Controller
                                             $key2['pelaksana1_audit2'] =$aud3[0];
                                             $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                             $key2['pelaksana2_audit2'] =$aud4[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
+                                            $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                            $key3['pelaksana1_tr'] =$aud5[0];
+                                            $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                            $key3['pelaksana2_tr'] =$aud6[0];
+                                            $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                            $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -1454,9 +712,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                    
                                                 })
                                      
@@ -1495,12 +753,12 @@ class PenjadwalanController extends Controller
 
                                  foreach ( $dataAuditor3_TidakLuang as $key3) {
 
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -1508,9 +766,9 @@ class PenjadwalanController extends Controller
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3){
                                                 $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                $query->where('id','!=',$key3['pelaksana3_tr']);
                                                
                                                
                                             })
@@ -1553,12 +811,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                               
 
                                                $dataAuditor2 = DB::table('users')
@@ -1568,9 +826,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                         $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
                                                         $query->where('id','!=',$data['selected_pelaksana1']);
 
                                                     })
@@ -1623,12 +881,12 @@ class PenjadwalanController extends Controller
                                             $key['pelaksana1_audit1'] =$aud[0];
                                             $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                             $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
+                                            $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                            $key3['pelaksana1_tr'] =$aud5[0];
+                                            $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                            $key3['pelaksana2_tr'] =$aud6[0];
+                                            $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                            $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -1637,9 +895,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
                                                    
                                                 })
@@ -1688,12 +946,12 @@ class PenjadwalanController extends Controller
                                             $key2['pelaksana1_audit2'] =$aud3[0];
                                             $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                             $key2['pelaksana2_audit2'] =$aud4[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
+                                            $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                            $key3['pelaksana1_tr'] =$aud5[0];
+                                            $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                            $key3['pelaksana2_tr'] =$aud6[0];
+                                            $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                            $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -1702,9 +960,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
                                                    
                                                 })
@@ -1745,12 +1003,12 @@ class PenjadwalanController extends Controller
 
                                  foreach ( $dataAuditor3_TidakLuang as $key3) {
                                     
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -1758,9 +1016,9 @@ class PenjadwalanController extends Controller
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data){
                                                 $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                $query->where('id','!=',$key3['pelaksana3_tr']);
                                                 $query->where('id','!=',$data['selected_pelaksana1']);
                                                
                                                
@@ -1809,12 +1067,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                               
 
                                                $dataAuditor2 = DB::table('users')
@@ -1824,9 +1082,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                         $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
                                                         $query->where('kode_wilayah',$kodewilayah);
 
                                                     })
@@ -1879,12 +1137,12 @@ class PenjadwalanController extends Controller
                                             $key['pelaksana1_audit1'] =$aud[0];
                                             $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                             $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
+                                            $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                            $key3['pelaksana1_tr'] =$aud5[0];
+                                            $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                            $key3['pelaksana2_tr'] =$aud6[0];
+                                            $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                            $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -1893,9 +1151,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('kode_wilayah',$kodewilayah);
 
                                                 })
@@ -1944,12 +1202,12 @@ class PenjadwalanController extends Controller
                                             $key2['pelaksana1_audit2'] =$aud3[0];
                                             $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                             $key2['pelaksana2_audit2'] =$aud4[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
+                                            $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                            $key3['pelaksana1_tr'] =$aud5[0];
+                                            $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                            $key3['pelaksana2_tr'] =$aud6[0];
+                                            $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                            $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -1958,9 +1216,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('kode_wilayah',$kodewilayah);
                                                     
                                                 })
@@ -2001,12 +1259,12 @@ class PenjadwalanController extends Controller
 
                                  foreach ( $dataAuditor3_TidakLuang as $key3) {
 
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -2014,9 +1272,9 @@ class PenjadwalanController extends Controller
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$kodewilayah){
                                                 $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                $query->where('id','!=',$key3['pelaksana3_tr']);
                                                 $query->where('kode_wilayah',$kodewilayah);
                                                     
                                                
@@ -2061,12 +1319,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                               
 
                                                $dataAuditor2 = DB::table('users')
@@ -2076,9 +1334,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                         $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
                                                         $query->where('id','!=',$data['selected_pelaksana1']);
                                                         $query->where('kode_wilayah',$kodewilayah);
                                                     
@@ -2134,12 +1392,12 @@ class PenjadwalanController extends Controller
                                             $key['pelaksana1_audit1'] =$aud[0];
                                             $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                             $key['pelaksana2_audit1'] =$aud2[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
+                                            $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                            $key3['pelaksana1_tr'] =$aud5[0];
+                                            $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                            $key3['pelaksana2_tr'] =$aud6[0];
+                                            $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                            $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -2148,9 +1406,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
                                                     $query->where('kode_wilayah',$kodewilayah);
                                                     
@@ -2201,12 +1459,12 @@ class PenjadwalanController extends Controller
                                             $key2['pelaksana1_audit2'] =$aud3[0];
                                             $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                             $key2['pelaksana2_audit2'] =$aud4[0];
-                                            $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                            $key3['pelaksana1_rapat'] =$aud5[0];
-                                            $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                            $key3['pelaksana2_rapat'] =$aud6[0];
-                                            $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                            $key3['pelaksana3_rapat'] =$aud7[0];
+                                            $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                            $key3['pelaksana1_tr'] =$aud5[0];
+                                            $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                            $key3['pelaksana2_tr'] =$aud6[0];
+                                            $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                            $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -2215,9 +1473,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
                                                     $query->where('kode_wilayah',$kodewilayah);
                                                     
@@ -2261,12 +1519,12 @@ class PenjadwalanController extends Controller
 
                                 foreach ( $dataAuditor3_TidakLuang as $key3) {
                                     
-                                    $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                    $key3['pelaksana1_rapat'] =$aud5[0];
-                                    $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                    $key3['pelaksana2_rapat'] =$aud6[0];
-                                    $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                    $key3['pelaksana3_rapat'] =$aud7[0];
+                                    $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                    $key3['pelaksana1_tr'] =$aud5[0];
+                                    $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                    $key3['pelaksana2_tr'] =$aud6[0];
+                                    $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                    $key3['pelaksana3_tr'] =$aud7[0];
                                    
                                    
                                   
@@ -2274,9 +1532,9 @@ class PenjadwalanController extends Controller
                                    $dataAuditor2 = DB::table('users')
                                     ->where(function($query) use ($key3,$data,$kodewilayah){
                                             $query->where('usergroup_id','10')  ;  
-                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                             $query->where('id','!=',$data['selected_pelaksana1']);
                                             $query->where('kode_wilayah',$kodewilayah);
                                                     
@@ -2301,7 +1559,7 @@ class PenjadwalanController extends Controller
     }
 
 
-    public function dataRapatAuditor(Request $request)
+    public function dataDDTehnicalReview(Request $request)
     {
 
         $data = $request->except('_token','_method');
@@ -2349,20 +1607,20 @@ class PenjadwalanController extends Controller
             $dataAuditor3_TidakLuang =  DB::table('penjadwalan')
                                     
                                     ->where(function($query) use ($data){
-                                        $query->where('mulai_rapat','<=', $data['mulai']);
-                                        $query->where('selesai_rapat','>=', $data['mulai']);
+                                        $query->where('mulai_tr','<=', $data['mulai']);
+                                        $query->where('selesai_tr','>=', $data['mulai']);
                                         $query->where('id_registrasi','!=', $data['id_regis']);
                                        
                                     })
                                     ->orWhere(function($query) use ($data){
-                                        $query->where('mulai_rapat','>=', $data['mulai']);
-                                        $query->where('mulai_rapat','<=', $data['selesai']);
+                                        $query->where('mulai_tr','>=', $data['mulai']);
+                                        $query->where('mulai_tr','<=', $data['selesai']);
                                         $query->where('id_registrasi','!=', $data['id_regis']);
                                       
                                     })
                                     
                                     /*->get();*/
-                                   ->select('pelaksana1_rapat','pelaksana2_rapat','pelaksana3_rapat')
+                                   ->select('pelaksana1_tr','pelaksana2_tr','pelaksana3_tr')
                                     ->get();
             
 
@@ -2435,12 +1693,12 @@ class PenjadwalanController extends Controller
                                                     $key2['pelaksana1_audit2'] =$aud3[0];
                                                     $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                     $key2['pelaksana2_audit2'] =$aud4[0];
-                                                    $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                    $key3['pelaksana1_rapat'] =$aud5[0];
-                                                    $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                    $key3['pelaksana2_rapat'] =$aud6[0];
-                                                    $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                    $key3['pelaksana3_rapat'] =$aud7[0];
+                                                    $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                    $key3['pelaksana1_tr'] =$aud5[0];
+                                                    $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                    $key3['pelaksana2_tr'] =$aud6[0];
+                                                    $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                    $key3['pelaksana3_tr'] =$aud7[0];
                                                   
 
                                                     $dataAuditor2 = DB::table('users')
@@ -2450,9 +1708,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                         $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
 
                                                         $query->where('id','!=',$key4['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key4['pelaksana2_audit1']);
@@ -2536,12 +1794,12 @@ class PenjadwalanController extends Controller
                                                 $key['pelaksana1_audit1'] =$aud[0];
                                                 $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                                 $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -2550,9 +1808,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$key4['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key4['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key4['pelaksana1_audit2']);
@@ -2632,12 +1890,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -2646,9 +1904,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$key4['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key4['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key4['pelaksana1_audit2']);
@@ -2719,12 +1977,12 @@ class PenjadwalanController extends Controller
                                         $str6 =  explode("_",$key4['pelaksana2_audit2']);
                                         $key4['pelaksana2_audit2'] = $str6[0];
 
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -2732,9 +1990,9 @@ class PenjadwalanController extends Controller
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3, $key4){
                                                 $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                $query->where('id','!=',$key3['pelaksana3_tr']);
                                                 $query->where('id','!=',$key4['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key4['pelaksana2_audit1']);
                                                 $query->where('id','!=',$key4['pelaksana1_audit2']);
@@ -2806,12 +2064,12 @@ class PenjadwalanController extends Controller
                                                     $key2['pelaksana1_audit2'] =$aud3[0];
                                                     $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                     $key2['pelaksana2_audit2'] =$aud4[0];
-                                                    $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                    $key3['pelaksana1_rapat'] =$aud5[0];
-                                                    $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                    $key3['pelaksana2_rapat'] =$aud6[0];
-                                                    $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                    $key3['pelaksana3_rapat'] =$aud7[0];
+                                                    $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                    $key3['pelaksana1_tr'] =$aud5[0];
+                                                    $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                    $key3['pelaksana2_tr'] =$aud6[0];
+                                                    $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                    $key3['pelaksana3_tr'] =$aud7[0];
                                                   
 
                                                    $dataAuditor2 = DB::table('users')
@@ -2821,9 +2079,9 @@ class PenjadwalanController extends Controller
                                                             $query->where('id','!=',$key['pelaksana2_audit1']);
                                                             $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                             $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                                             $query->where('id','!=',$data['selected_pelaksana1']);
 
 
@@ -2909,12 +2167,12 @@ class PenjadwalanController extends Controller
                                                 $key['pelaksana1_audit1'] =$aud[0];
                                                 $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                                 $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -2923,9 +2181,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
                                                         $query->where('id','!=',$data['selected_pelaksana1']);
 
                                                         $query->where('id','!=',$key4['pelaksana1_audit1']);
@@ -3006,12 +2264,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -3020,9 +2278,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
 
                                                     $query->where('id','!=',$key4['pelaksana1_audit1']);
@@ -3094,12 +2352,12 @@ class PenjadwalanController extends Controller
                                         $str6 =  explode("_",$key4['pelaksana2_audit2']);
                                         $key4['pelaksana2_audit2'] = $str6[0];
                                     
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -3107,9 +2365,9 @@ class PenjadwalanController extends Controller
                                         $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$key4){
                                             $query->where('usergroup_id','10')  ;  
-                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                             $query->where('id','!=',$data['selected_pelaksana1']);
                                             $query->where('id','!=',$key4['pelaksana1_audit1']);
                                             $query->where('id','!=',$key4['pelaksana2_audit1']);
@@ -3186,12 +2444,12 @@ class PenjadwalanController extends Controller
                                                     $key2['pelaksana1_audit2'] =$aud3[0];
                                                     $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                     $key2['pelaksana2_audit2'] =$aud4[0];
-                                                    $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                    $key3['pelaksana1_rapat'] =$aud5[0];
-                                                    $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                    $key3['pelaksana2_rapat'] =$aud6[0];
-                                                    $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                    $key3['pelaksana3_rapat'] =$aud7[0];
+                                                    $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                    $key3['pelaksana1_tr'] =$aud5[0];
+                                                    $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                    $key3['pelaksana2_tr'] =$aud6[0];
+                                                    $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                    $key3['pelaksana3_tr'] =$aud7[0];
                                                   
 
                                                    $dataAuditor2 = DB::table('users')
@@ -3201,9 +2459,9 @@ class PenjadwalanController extends Controller
                                                             $query->where('id','!=',$key['pelaksana2_audit1']);
                                                             $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                             $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                                             $query->where('id','!=',$data['selected_pelaksana1']);
                                                             $query->where('id','!=',$data['selected_pelaksana2']);
 
@@ -3290,12 +2548,12 @@ class PenjadwalanController extends Controller
                                                 $key['pelaksana1_audit1'] =$aud[0];
                                                 $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                                 $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -3304,9 +2562,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
                                                         $query->where('id','!=',$data['selected_pelaksana1']);
                                                         $query->where('id','!=',$data['selected_pelaksana2']);
 
@@ -3389,12 +2647,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -3403,9 +2661,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
                                                     $query->where('id','!=',$data['selected_pelaksana2']);
 
@@ -3484,12 +2742,12 @@ class PenjadwalanController extends Controller
                                         $str6 =  explode("_",$key4['pelaksana2_audit2']);
                                         $key4['pelaksana2_audit2'] = $str6[0];
                                     
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -3497,9 +2755,9 @@ class PenjadwalanController extends Controller
                                         $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$key4){
                                             $query->where('usergroup_id','10')  ;  
-                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                             $query->where('id','!=',$data['selected_pelaksana1']);
                                             $query->where('id','!=',$data['selected_pelaksana2']);
 
@@ -3578,12 +2836,12 @@ class PenjadwalanController extends Controller
                                                     $key2['pelaksana1_audit2'] =$aud3[0];
                                                     $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                     $key2['pelaksana2_audit2'] =$aud4[0];
-                                                    $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                    $key3['pelaksana1_rapat'] =$aud5[0];
-                                                    $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                    $key3['pelaksana2_rapat'] =$aud6[0];
-                                                    $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                    $key3['pelaksana3_rapat'] =$aud7[0];
+                                                    $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                    $key3['pelaksana1_tr'] =$aud5[0];
+                                                    $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                    $key3['pelaksana2_tr'] =$aud6[0];
+                                                    $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                    $key3['pelaksana3_tr'] =$aud7[0];
                                                   
 
                                                     $dataAuditor2 = DB::table('users')
@@ -3593,9 +2851,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
                                                         $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                         $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
 
                                                         $query->where('id','!=',$key4['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key4['pelaksana2_audit1']);
@@ -3682,12 +2940,12 @@ class PenjadwalanController extends Controller
                                                 $key['pelaksana1_audit1'] =$aud[0];
                                                 $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                                 $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -3696,9 +2954,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$key4['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key4['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key4['pelaksana1_audit2']);
@@ -3780,12 +3038,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -3794,9 +3052,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$key4['pelaksana1_audit1']);
                                                     $query->where('id','!=',$key4['pelaksana2_audit1']);
                                                     $query->where('id','!=',$key4['pelaksana1_audit2']);
@@ -3869,12 +3127,12 @@ class PenjadwalanController extends Controller
                                         $str6 =  explode("_",$key4['pelaksana2_audit2']);
                                         $key4['pelaksana2_audit2'] = $str6[0];
 
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -3882,9 +3140,9 @@ class PenjadwalanController extends Controller
                                        $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3, $key4,$kodewilayah){
                                                 $query->where('usergroup_id','10')  ;  
-                                                $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                $query->where('id','!=',$key3['pelaksana3_tr']);
                                                 $query->where('id','!=',$key4['pelaksana1_audit1']);
                                                 $query->where('id','!=',$key4['pelaksana2_audit1']);
                                                 $query->where('id','!=',$key4['pelaksana1_audit2']);
@@ -3958,12 +3216,12 @@ class PenjadwalanController extends Controller
                                                     $key2['pelaksana1_audit2'] =$aud3[0];
                                                     $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                     $key2['pelaksana2_audit2'] =$aud4[0];
-                                                    $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                    $key3['pelaksana1_rapat'] =$aud5[0];
-                                                    $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                    $key3['pelaksana2_rapat'] =$aud6[0];
-                                                    $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                    $key3['pelaksana3_rapat'] =$aud7[0];
+                                                    $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                    $key3['pelaksana1_tr'] =$aud5[0];
+                                                    $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                    $key3['pelaksana2_tr'] =$aud6[0];
+                                                    $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                    $key3['pelaksana3_tr'] =$aud7[0];
                                                   
 
                                                    $dataAuditor2 = DB::table('users')
@@ -3973,9 +3231,9 @@ class PenjadwalanController extends Controller
                                                             $query->where('id','!=',$key['pelaksana2_audit1']);
                                                             $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                             $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                                             $query->where('id','!=',$data['selected_pelaksana1']);
 
 
@@ -4065,12 +3323,12 @@ class PenjadwalanController extends Controller
                                                 $key['pelaksana1_audit1'] =$aud[0];
                                                 $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                                 $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                            
                                           
 
@@ -4079,9 +3337,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
                                                         $query->where('id','!=',$data['selected_pelaksana1']);
 
                                                         $query->where('id','!=',$key4['pelaksana1_audit1']);
@@ -4165,12 +3423,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -4179,9 +3437,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
 
                                                     $query->where('id','!=',$key4['pelaksana1_audit1']);
@@ -4255,12 +3513,12 @@ class PenjadwalanController extends Controller
                                         $str6 =  explode("_",$key4['pelaksana2_audit2']);
                                         $key4['pelaksana2_audit2'] = $str6[0];
                                     
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -4268,9 +3526,9 @@ class PenjadwalanController extends Controller
                                         $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$key4,$kodewilayah){
                                             $query->where('usergroup_id','10')  ;  
-                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                             $query->where('id','!=',$data['selected_pelaksana1']);
                                             $query->where('id','!=',$key4['pelaksana1_audit1']);
                                             $query->where('id','!=',$key4['pelaksana2_audit1']);
@@ -4348,12 +3606,12 @@ class PenjadwalanController extends Controller
                                                     $key2['pelaksana1_audit2'] =$aud3[0];
                                                     $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                     $key2['pelaksana2_audit2'] =$aud4[0];
-                                                    $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                    $key3['pelaksana1_rapat'] =$aud5[0];
-                                                    $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                    $key3['pelaksana2_rapat'] =$aud6[0];
-                                                    $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                    $key3['pelaksana3_rapat'] =$aud7[0];
+                                                    $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                    $key3['pelaksana1_tr'] =$aud5[0];
+                                                    $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                    $key3['pelaksana2_tr'] =$aud6[0];
+                                                    $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                    $key3['pelaksana3_tr'] =$aud7[0];
                                                   
 
                                                    $dataAuditor2 = DB::table('users')
@@ -4363,9 +3621,9 @@ class PenjadwalanController extends Controller
                                                             $query->where('id','!=',$key['pelaksana2_audit1']);
                                                             $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                             $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                                             $query->where('id','!=',$data['selected_pelaksana1']);
                                                             $query->where('id','!=',$data['selected_pelaksana2']);
 
@@ -4456,12 +3714,12 @@ class PenjadwalanController extends Controller
                                                 $key['pelaksana1_audit1'] =$aud[0];
                                                 $aud2 =  explode("_",$key['pelaksana2_audit1']);
                                                 $key['pelaksana2_audit1'] =$aud2[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -4470,9 +3728,9 @@ class PenjadwalanController extends Controller
                                                         $query->where('usergroup_id','10')  ;  
                                                         $query->where('id','!=',$key['pelaksana1_audit1']);
                                                         $query->where('id','!=',$key['pelaksana2_audit1']);
-                                                        $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                        $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                        $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                        $query->where('id','!=',$key3['pelaksana3_tr']);
                                                         $query->where('id','!=',$data['selected_pelaksana1']);
                                                         $query->where('id','!=',$data['selected_pelaksana2']);
 
@@ -4558,12 +3816,12 @@ class PenjadwalanController extends Controller
                                                 $key2['pelaksana1_audit2'] =$aud3[0];
                                                 $aud4 =  explode("_",$key2['pelaksana2_audit2']);
                                                 $key2['pelaksana2_audit2'] =$aud4[0];
-                                                $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                                $key3['pelaksana1_rapat'] =$aud5[0];
-                                                $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                                $key3['pelaksana2_rapat'] =$aud6[0];
-                                                $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                                $key3['pelaksana3_rapat'] =$aud7[0];
+                                                $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                                $key3['pelaksana1_tr'] =$aud5[0];
+                                                $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                                $key3['pelaksana2_tr'] =$aud6[0];
+                                                $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                                $key3['pelaksana3_tr'] =$aud7[0];
                                                
                                               
 
@@ -4572,9 +3830,9 @@ class PenjadwalanController extends Controller
                                                     $query->where('usergroup_id','10')  ;  
                                                     $query->where('id','!=',$key2['pelaksana1_audit2']);
                                                     $query->where('id','!=',$key2['pelaksana2_audit2']);
-                                                    $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                                    $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                                    $query->where('id','!=',$key3['pelaksana1_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana2_tr']);
+                                                    $query->where('id','!=',$key3['pelaksana3_tr']);
                                                     $query->where('id','!=',$data['selected_pelaksana1']);
                                                     $query->where('id','!=',$data['selected_pelaksana2']);
 
@@ -4655,12 +3913,12 @@ class PenjadwalanController extends Controller
                                         $str6 =  explode("_",$key4['pelaksana2_audit2']);
                                         $key4['pelaksana2_audit2'] = $str6[0];
                                     
-                                        $aud5 =  explode("_",$key3['pelaksana1_rapat']);
-                                        $key3['pelaksana1_rapat'] =$aud5[0];
-                                        $aud6 =  explode("_",$key3['pelaksana2_rapat']);
-                                        $key3['pelaksana2_rapat'] =$aud6[0];
-                                        $aud7 =  explode("_",$key3['pelaksana3_rapat']);
-                                        $key3['pelaksana3_rapat'] =$aud7[0];
+                                        $aud5 =  explode("_",$key3['pelaksana1_tr']);
+                                        $key3['pelaksana1_tr'] =$aud5[0];
+                                        $aud6 =  explode("_",$key3['pelaksana2_tr']);
+                                        $key3['pelaksana2_tr'] =$aud6[0];
+                                        $aud7 =  explode("_",$key3['pelaksana3_tr']);
+                                        $key3['pelaksana3_tr'] =$aud7[0];
                                        
                                        
                                       
@@ -4668,9 +3926,9 @@ class PenjadwalanController extends Controller
                                         $dataAuditor2 = DB::table('users')
                                         ->where(function($query) use ($key3,$data,$key4,$kodewilayah){
                                             $query->where('usergroup_id','10')  ;  
-                                            $query->where('id','!=',$key3['pelaksana1_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana2_rapat']);
-                                            $query->where('id','!=',$key3['pelaksana3_rapat']);
+                                            $query->where('id','!=',$key3['pelaksana1_tr']);
+                                            $query->where('id','!=',$key3['pelaksana2_tr']);
+                                            $query->where('id','!=',$key3['pelaksana3_tr']);
                                             $query->where('id','!=',$data['selected_pelaksana1']);
                                             $query->where('id','!=',$data['selected_pelaksana2']);
 
@@ -4988,36 +4246,51 @@ class PenjadwalanController extends Controller
         $e = $model->find($data['idregis1']);
         $j = $model2->find($e->id_penjadwalan);
         //dd($j);
+        if($j){
+            //dd($data['idregis1']);
+            $j->mulai_audit1 = $data['mulai_audit1'];
+            $j->status_penjadwalan_audit1 = 1;
+            $j->pelaksana1_audit1 = $data['pelaksana1_audit1'];
 
-        $j->mulai_audit1 = $data['mulai_audit1'];
-        $j->status_audit1 = 1;
-        $j->selesai_audit1 = $data['selesai_audit1'];
 
-        $j->pelaksana1_audit1 = $data['pelaksana1_audit1'];
-        $j->pelaksana2_audit1 = $data['pelaksana2_audit1'];
+            $j->save();
+        }else{
+           //dd($data['mulai_audit1']);
+            $model2->mulai_audit1 = $data['mulai_audit1'];
+            $model2->status_penjadwalan_audit1 = 1;
 
-        $j->save();
+            $model2->pelaksana1_audit1 = $data['pelaksana1_audit1'];
+            $model2->id_registrasi = $data['idregis1'];
+               
+            $model2->save();
+            $e->id_penjadwalan = $model2->id;
+            $e->save();  
+           
+            
+            //dd($model2);
+        }
+        
 
         
 
         try{
             DB::Commit();
 
-            if($data['pelaksana1_audit1']){
-                $str =  explode("_",$data['pelaksana1_audit1']);
-                $u = $model3->find($str[0]);
+            // if($data['pelaksana1_audit1']){
+            //     $str =  explode("_",$data['pelaksana1_audit1']);
+            //     $u = $model3->find($str[0]);
                
-                SendEmailAuditor::dispatch($u,$e,$j,'audit1');
+            //     SendEmailAuditor::dispatch($u,$e,$j,'audit1');
 
-            }if($data['pelaksana2_audit1']){
+            // }if($data['pelaksana2_audit1']){
 
-                $str2 =  explode("_",$data['pelaksana2_audit1']);
-                $u2 = $model3->find($str2[0]);
+            //     $str2 =  explode("_",$data['pelaksana2_audit1']);
+            //     $u2 = $model3->find($str2[0]);
                 
-                SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
-            }
+            //     SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
+            // }
             Session::flash('success', "data berhasil disimpan!");            
-            $redirect = redirect()->route('listpenjadwalanadmin');
+            $redirect = redirect()->route('listregistrasipelangganaktif');
 
 
          return $redirect;
@@ -5028,7 +4301,7 @@ class PenjadwalanController extends Controller
             //$this->debugs($e->getMessage());
 
             Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('listpenjadwalanadmin');
+            $redirectPass = redirect()->route('istregistrasipelangganaktif');
             return $redirectPass;
         }
   
@@ -5053,38 +4326,51 @@ class PenjadwalanController extends Controller
         $j = $model2->find($e->id_penjadwalan);
         //dd($j);
 
-        $j->mulai_audit2 = $data['mulai_audit2'];
-        $j->status_audit2 = 1;
-        $j->selesai_audit2 = $data['selesai_audit2'];
+        if($j){
+            //dd($data['idregis1']);
+            $j->mulai_audit2 = $data['mulai_audit2'];
+            $j->status_penjadwalan_audit2 = 1;
+            $j->pelaksana1_audit1 = $data['pelaksana1_audit2'];
+            $j->pelaksana2_audit2 = $data['pelaksana2_audit2'];
 
-        $j->ktg_audit2 = $data['ktg_audit2'];
 
-        $j->akomodasi_audit2 = $full_opsi;
+            $j->save();
+        }else{
+           //dd($data['mulai_audit1']);
+            $model2->mulai_audit2 = $data['mulai_audit2'];
+            $model2->status_penjadwalan_audit2 = 1;
 
-        $j->pelaksana1_audit2 = $data['pelaksana1_audit2'];
-        $j->pelaksana2_audit2 = $data['pelaksana2_audit2'];
-
-        $j->save();
+            $model2->pelaksana1_audit2 = $data['pelaksana1_audit2'];
+            $model2->pelaksana2_audit2 = $data['pelaksana2_audit2'];
+            $model2->id_registrasi = $data['idregis2'];
+               
+            $model2->save();
+            $e->id_penjadwalan = $model2->id;
+            $e->save();  
+           
+            
+            //dd($model2);
+        }
 
         try{
             DB::Commit();
 
-            if($data['pelaksana1_audit2']){
-                $str =  explode("_",$data['pelaksana1_audit2']);
-                $u = $model3->find($str[0]);
+            // if($data['pelaksana1_audit2']){
+            //     $str =  explode("_",$data['pelaksana1_audit2']);
+            //     $u = $model3->find($str[0]);
                
-                SendEmailAuditor::dispatch($u,$e,$j,'audit2');
+            //     SendEmailAuditor::dispatch($u,$e,$j,'audit2');
 
-            }if($data['pelaksana2_audit2']){
+            // }if($data['pelaksana2_audit2']){
 
-                $str2 =  explode("_",$data['pelaksana2_audit2']);
-                $u2 = $model3->find($str2[0]);
+            //     $str2 =  explode("_",$data['pelaksana2_audit2']);
+            //     $u2 = $model3->find($str2[0]);
                 
-                SendEmailAuditor::dispatch($u2,$e,$j,'audit2');
-            }
+            //     SendEmailAuditor::dispatch($u2,$e,$j,'audit2');
+            // }
 
             Session::flash('success', "data berhasil disimpan!");            
-            $redirect = redirect()->route('listpenjadwalanadmin');
+            $redirect = redirect()->route('listregistrasipelangganaktif');
 
 
          return $redirect;
@@ -5095,13 +4381,13 @@ class PenjadwalanController extends Controller
             //$this->debugs($e->getMessage());
 
             Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('listpenjadwalanadmin');
+            $redirectPass = redirect()->route('listregistrasipelangganaktif');
             return $redirectPass;
         }
   
     }
 
-    public function rapat(Request $request)
+    public function tehnicalReview(Request $request)
     {
 
         $data = $request->except('_token','_method');
@@ -5117,41 +4403,58 @@ class PenjadwalanController extends Controller
         $j = $model2->find($e->id_penjadwalan);
         //dd($j);
 
-        $j->mulai_rapat = $data['mulai_rapat'];
-        $j->status_rapat = 1;
-        $j->selesai_rapat = $data['selesai_rapat'];
+        if($j){
+            //dd($data['idregis1']);
+            //$j->mulai_tr = $data['mulai_tr'];
+            $j->status_penjadwalan_tr = 1;
+            $j->pelaksana1_tr1 = $data['pelaksana1_tr'];
+            $j->pelaksana2_tr = $data['pelaksana2_tr'];
 
-        $j->pelaksana1_rapat = $data['pelaksana1_rapat'];
-        $j->pelaksana2_rapat = $data['pelaksana2_rapat'];
 
-        $j->save();
+            $j->save();
+        }else{
+           //dd($data['mulai_audit1']);
+            //$model2->mulai_tr = $data['mulai_tr'];
+            $model2->status_penjadwalan_tr = 1;
+
+            $model2->pelaksana1_tr = $data['pelaksana1_tr'];
+            $model2->pelaksana2_tr = $data['pelaksana2_tr'];
+            $model2->id_registrasi = $data['idregis3'];
+               
+            $model2->save();
+            $e->id_penjadwalan = $model2->id;
+            $e->save();  
+           
+            
+            //dd($model2);
+        }
 
         try{
             DB::Commit();
 
-            if($data['pelaksana1_rapat']){
-                $str =  explode("_",$data['pelaksana1_rapat']);
-                $u = $model3->find($str[0]);
+            // if($data['pelaksana1_tr']){
+            //     $str =  explode("_",$data['pelaksana1_tr']);
+            //     $u = $model3->find($str[0]);
                 
-                //dd($u);
-                SendEmailAuditor::dispatch($u,$e,$j,'rapat');
+            //     //dd($u);
+            //     SendEmailAuditor::dispatch($u,$e,$j,'tehnical_review');
 
-            }if($data['pelaksana2_rapat']){
+            // }if($data['pelaksana2_tr']){
 
-                $str2 =  explode("_",$data['pelaksana2_rapat']);
-                $u2 = $model3->find($str2[0]);
+            //     $str2 =  explode("_",$data['pelaksana2_tr']);
+            //     $u2 = $model3->find($str2[0]);
                 
-                SendEmailAuditor::dispatch($u2,$e,$j,'rapat');
-            }if($data['pelaksana3_rapat']){
+            //     SendEmailAuditor::dispatch($u2,$e,$j,'tehnical_review');
+            // }if($data['pelaksana3_tr']){
 
-                $str3 =  explode("_",$data['pelaksana3_rapat']);
-                $u3 = $model3->find($str3[0]);
+            //     $str3 =  explode("_",$data['pelaksana3_tr']);
+            //     $u3 = $model3->find($str3[0]);
                 
-                SendEmailAuditor::dispatch($u3,$e,$j,'rapat');
-            }
+            //     SendEmailAuditor::dispatch($u3,$e,$j,'tehnical_review');
+            // }
 
             Session::flash('success', "data berhasil disimpan!");            
-            $redirect = redirect()->route('listpenjadwalanadmin');
+            $redirect = redirect()->route('listregistrasipelangganaktif');
 
 
          return $redirect;
@@ -5162,7 +4465,7 @@ class PenjadwalanController extends Controller
             //$this->debugs($e->getMessage());
 
             Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('listpenjadwalanadmin');
+            $redirectPass = redirect()->route('listregistrasipelangganaktif');
             return $redirectPass;
         }
   
@@ -5184,40 +4487,57 @@ class PenjadwalanController extends Controller
         $j = $model2->find($e->id_penjadwalan);
         //dd($j);
 
-        $j->mulai_tinjauan = $data['mulai_tinjauan'];
-        $j->status_tinjauan = 1;
-        $j->selesai_tinjauan = $data['selesai_tinjauan'];
+        if($j){
+            //dd($data['idregis1']);
+            //$j->mulai_tinjauan = $data['mulai_tinjauan'];
+            $j->status_penjadwalan_tinjauan = 1;
+            $j->pelaksana1_tinjauan = $data['pelaksana1_tinjauan'];
+            $j->pelaksana2_tinjauan = $data['pelaksana2_tinjauanr'];
 
-        $j->pelaksana1_tinjauan = $data['pelaksana1_tinjauan'];
-        $j->pelaksana2_tinjauan = $data['pelaksana2_tinjauan'];
 
-        $j->save();
+            $j->save();
+        }else{
+           //dd($data['mulai_audit1']);
+            //$model2->mulai_tinjauan = $data['mulai_tinjauan'];
+            $model2->status_penjadwalan_tinjauan = 1;
+
+            $model2->pelaksana1_tinjauan = $data['pelaksana1_tinjauan'];
+            $model2->pelaksana2_tinjauan = $data['pelaksana2_tinjauan'];
+            $model2->id_registrasi = $data['idregis4'];
+               
+            $model2->save();
+            $e->id_penjadwalan = $model2->id;
+            $e->save();  
+           
+            
+            //dd($model2);
+        }
 
         try{
             DB::Commit();
 
-            if($data['pelaksana1_tinjauan']){
-                $str =  explode("_",$data['pelaksana1_tinjauan']);
-                $u = $model3->find($str[0]);
+            // if($data['pelaksana1_tinjauan']){
+            //     $str =  explode("_",$data['pelaksana1_tinjauan']);
+            //     $u = $model3->find($str[0]);
                
-                SendEmailAuditor::dispatch($u,$e,$j,'tinjauan');
+            //     SendEmailAuditor::dispatch($u,$e,$j,'tinjauan');
 
-            }if($data['pelaksana2_tinjauan']){
+            // }if($data['pelaksana2_tinjauan']){
 
-                $str2 =  explode("_",$data['pelaksana2_tinjauan']);
-                $u2 = $model3->find($str2[0]);
+            //     $str2 =  explode("_",$data['pelaksana2_tinjauan']);
+            //     $u2 = $model3->find($str2[0]);
                 
-                SendEmailAuditor::dispatch($u2,$e,$j,'tinjauan');
-            }if($data['pelaksana3_tinjauan']){
+            //     SendEmailAuditor::dispatch($u2,$e,$j,'tinjauan');
+            // }if($data['pelaksana3_tinjauan']){
 
-                $str3 =  explode("_",$data['pelaksana3_tinjauan']);
-                $u3 = $model3->find($str3[0]);
+            //     $str3 =  explode("_",$data['pelaksana3_tinjauan']);
+            //     $u3 = $model3->find($str3[0]);
                 
-                SendEmailAuditor::dispatch($u3,$e,$j,'tinjauan');
-            }
+            //     SendEmailAuditor::dispatch($u3,$e,$j,'tinjauan');
+            // }
 
             Session::flash('success', "data berhasil disimpan!");            
-            $redirect = redirect()->route('listpenjadwalanadmin');
+            $redirect = redirect()->route('listregistrasipelangganaktif');
 
 
          return $redirect;
@@ -5228,7 +4548,7 @@ class PenjadwalanController extends Controller
             //$this->debugs($e->getMessage());
 
             Session::flash('error', $e->getMessage());
-            $redirectPass = redirect()->route('listpenjadwalanadmin');
+            $redirectPass = redirect()->route('listregistrasipelangganaktif');
             return $redirectPass;
         }
   
@@ -5428,9 +4748,9 @@ class PenjadwalanController extends Controller
         return view('penjadwalan.listAudit2');
     }
 
-    public function listRapat(){
+    public function listTehnicalReview(){
         
-        return view('penjadwalan.listRapat');
+        return view('penjadwalan.listTehnicalReview');
     }
 
     public function listTinjauan(){
@@ -5630,7 +4950,7 @@ class PenjadwalanController extends Controller
         return Datatables::of($xdata)->make();
     }
 
-    public function dataRapat(Request $request){
+    public function dataTehnicalReview(Request $request){
         $gdata = $request->except('_token','_method');
         $id_user = Auth::user()->id;
         //start
@@ -5642,17 +4962,17 @@ class PenjadwalanController extends Controller
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana1_rapat','LIKE','%'.$id_user.'%');
+                $query->where('penjadwalan.pelaksana1_tr','LIKE','%'.$id_user.'%');
   
             })    
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana2_rapat','LIKE','%'.$id_user.'%');
+                $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
   
             })  
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana3_rapat','LIKE','%'.$id_user.'%');
+                $query->where('penjadwalan.pelaksana3_tr','LIKE','%'.$id_user.'%');
   
             })               
              ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
@@ -5858,13 +5178,13 @@ class PenjadwalanController extends Controller
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
                 $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
-                //$query->where('penjadwalan.status_audit1','=', 4);
+                //$query->where('penjadwalan.status_penjadwalan_audit1','=', 4);
   
             })    
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
                 $query->where('penjadwalan.pelaksana2_audit1','LIKE','%'.$id_user.'%');
-                //$query->where('penjadwalan.status_audit1','=', 4);
+                //$query->where('penjadwalan.status_penjadwalan_audit1','=', 4);
   
             })               
             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit1 as mulai','penjadwalan.selesai_audit1 as selesai','penjadwalan.pelaksana1_audit1 as pelaksana1','penjadwalan.pelaksana2_audit1 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg');
@@ -5880,13 +5200,13 @@ class PenjadwalanController extends Controller
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
                 $query->where('penjadwalan.pelaksana1_audit2','LIKE','%'.$id_user.'%');
-                //$query->where('penjadwalan.status_audit2','=', 4);
+                //$query->where('penjadwalan.status_penjadwalan_audit2','=', 4);
   
             })    
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
                 $query->where('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
-                //$query->where('penjadwalan.status_audit2','=', 4);
+                //$query->where('penjadwalan.status_penjadwalan_audit2','=', 4);
   
             })               
              ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit2 as mulai','penjadwalan.selesai_audit2 as selesai','penjadwalan.pelaksana1_audit2 as pelaksana1','penjadwalan.pelaksana2_audit2 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg' );

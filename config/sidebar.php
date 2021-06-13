@@ -425,8 +425,8 @@ return [
                     'title' => 'Audit Tahap 2'
                 ],
                 [
-                    'url' => 'listrapat',
-                    'title' => 'Rapat Auditor'
+                    'url' => 'listtehnicalreview',
+                    'title' => 'Tehnical Review'
                 ],    
             ],
 
@@ -752,7 +752,7 @@ return [
         [
             'icon' => 'ion-ios-calendar',
             'title' => 'Review Laporan Audit',
-            'url' => 'listrapat'
+            'url' => 'listtehnicalreview'
         ],
         [
             'icon' => 'ion-ios-cube',

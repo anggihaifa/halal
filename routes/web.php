@@ -78,7 +78,7 @@ Route::put('store_kebutuhan_waktu_audit', 'PenjadwalanController@storeKebutuhanW
 Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('list_audit1','PenjadwalanController@listAudit1')->name('listaudit1')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('list_audit2','PenjadwalanController@listAudit2')->name('listaudit2')->middleware('role:1,3,6,9,10,11,12,13');
-Route::get('list_rapat','PenjadwalanController@listRapat')->name('listrapat')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('list_tehnical_review','PenjadwalanController@listTehnicalReview')->name('listtehnicalreview')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('list_tinjauan','PenjadwalanController@listTinjauan')->name('listtinjauan')->middleware('role:1,3,6,9,10,11,12,13');
 
 Route::get('list_log','PenjadwalanController@listLog')->name('listlog')->middleware('role:1,3,6,9,10,11,12,13');
@@ -87,7 +87,7 @@ Route::get('data_log','PenjadwalanController@dataLog')->name('datalog');
 Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
 Route::get('data_audit1','PenjadwalanController@dataAudit1')->name('dataaudit1');
 Route::get('data_audit2','PenjadwalanController@dataAudit2')->name('dataaudit2');
-Route::get('data_rapat','PenjadwalanController@dataRapat')->name('datarapat');
+Route::get('data_tehnical_review','PenjadwalanController@dataTehnicalReview')->name('datatehicalreview');
 Route::get('data_tinjauan','PenjadwalanController@dataTinjauan')->name('datatinjauan');
 
 
@@ -99,11 +99,11 @@ Route::post('dropdown1', 'PenjadwalanController@dataAuditor1')->name('dropdown1.
 Route::post('jenis_akomodasi', 'PenjadwalanController@jenisAkomodasi')->name('jenis_akomodasi.data');
 Route::post('opsi_akomodasi', 'PenjadwalanController@opsiAkomodasi')->name('opsi_akomodasi.data');
 Route::post('dropdown2', 'PenjadwalanController@dataAuditor2')->name('dropdown2.dataauditor');
-Route::post('auditor_dropdown', 'PenjadwalanController@dataRapatAuditor')->name('auditor_dropdown.datarapatauditor');
+Route::post('auditor_dropdown', 'PenjadwalanController@dataDDTehnicalReview')->name('auditor_dropdown.dataddtehnicalreview');
 Route::post('komite_dropdown', 'PenjadwalanController@dataKomite')->name('komite_dropdown.datakomite');
 Route::put('audit1', 'PenjadwalanController@audit1')->name('audit1')->middleware('role:1,3,6,9,11');
 Route::put('audit2', 'PenjadwalanController@audit2')->name('audit2')->middleware('role:1,3,6,9,11');
-Route::put('rapat', 'PenjadwalanController@rapat')->name('rapat')->middleware('role:1,3,6,9,11');
+Route::put('tehnical_review', 'PenjadwalanController@tehnicalReview')->name('tehnicalreview')->middleware('role:1,3,6,9,11');
 Route::put('tinjauan', 'PenjadwalanController@tinjauan')->name('tinjauan')->middleware('role:1,3,6,9,11');
 
 Route::get('penjadwalan_viewer/{id_regis}/{hpas}','PenjadwalanController@dokumenView')->name('penjadwalan.viewer')->middleware('role:1,3,6,9,10,11,12,13');
