@@ -55,6 +55,9 @@ Route::post('download_laporan_audit_bahan','PHPWordController@downloadLaporanAud
 Route::post('download_laporan_audit_sjph_fix','PHPWordController@downloadLaporanAuditSJPHFix')->name('downloadlaporanauditsjphfix')->middleware('role:1,3,6,9,10,11,12,13');
 Route::post('download_laporan_audit_bahan_fix','PHPWordController@downloadLaporanAuditBahanFix')->name('downloadlaporanauditbahanfix')->middleware('role:1,3,6,9,10,11,12,13');
 
+Route::post('download_berkas','PHPWordController@downloadBerkas')->name('downloadberkas')->middleware('role:1,3,6,7,8,9,10,11,12,13');
+Route::post('upload_berkas','PHPWordController@uploadBerkas')->name('uploadberkas')->middleware('role:1,3,6,7,8,9,10,11,12,13');
+
 Route::post('download_data','PHPWordController@download')->name('downloaddata');
 Route::post('download_laporan_audit_2','PHPWordController@downloadLaporanAudit2')->name('downloadlaporanaudit2');
 Route::post('download_laporan_audit_tahap2_fix','PHPWordController@downloadLaporanAuditTahap2Fix')->name('downloadlaporanaudittahap2fix');
@@ -239,6 +242,8 @@ Route::get('data_berita_acara_admin','RegistrasiController@dataBeritaAcaraAdmin'
 //user
 Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser')->middleware('role:1,2,3,5,7,9');
 Route::put('upload_file_akad_user/{id}','RegistrasiController@uploadFileAkadUser')->name('registrasi.uploadfileakaduser')->middleware('role:1,2,3,5,7,9');
+
+Route::get('upload_ksb/{id}','PenjadwalanController@uploadKsb')->name('penjadwalan.uploadksb')->middleware('role:1,3');
 
 
 //akad registrasi

@@ -1544,6 +1544,8 @@
                             var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
                             var tehnicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan3' style="cursor:pointer">Tehnical Review</a>`;
                             var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite Ahli</a>`;
+
+                            var ksb = `<a class="dropdown-item" style="cursor:pointer" href="{{url('upload_ksb')}}/`+full.id+`">Input Berkas Konfirmasi, Surat Tugas dan Berita Acara</a>`;
                             
                             if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
                                 var unduhAkad = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
@@ -1843,7 +1845,7 @@
                                                                     <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
 
                                                                         
-                                                                    <div class="dropdown-button-title">Update Progress</div>`+audit1+audit2+`
+                                                                    <div class="dropdown-button-title">Update Progress</div>`+audit1+audit2+tehnicalReview+tinjauan+ksb+`
                                                                     </div>
                                                                 </div>
                                                             </td>
