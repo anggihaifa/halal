@@ -29,6 +29,7 @@ use App\DetailLaporanBahan;
 use App\LaporanFasilitasProduk;
 use App\DetailLaporanFasilitasProduk;
 use App\LaporanProduk;
+use App\LaporanAudit2;
 use App\DetailLaporanProduk;
 use App\DetailLaporanProdukFoto;
 use PhpOffice\PhpWord\Element\TextRun;
@@ -87,72 +88,22 @@ class PHPWordController extends Controller
     public function downloadAuditPlan(Request $request){
 
         $data = $request->except('_token','_method');
-        // dd("disini");
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();        
+        // dd("disini");        
 
         $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
-        
-        // $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/docx/FOR-SCI-HALAL-13 Rencana Audit atau Audit Plan.docx');
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-15 Rencana Audit atau Audit Plan Rev 24022021.docx');        
-
-        $templateProcessor->setValue('judul', 'Rencana Audit');        
-        
-        if($data['skema_audit'] == 'sjph'){
-            $templateProcessor->setValue('sjph', 'x');
-            $templateProcessor->setValue('smh', '');
-        }else if($data['skema_audit'] == 'smh'){
-            $templateProcessor->setValue('sjph', '');
-            $templateProcessor->setValue('smh', 'x');
-        }
-
-        if($data['jenis_audit'] == 'baru'){
-            $templateProcessor->setValue('baru', 'x');
-            $templateProcessor->setValue('perpanjangan', '');
-            $templateProcessor->setValue('perubahan', '');
-        }else if($data['jenis_audit'] == 'perpanjangan'){
-            $templateProcessor->setValue('baru', '');
-            $templateProcessor->setValue('perpanjangan', 'x');
-            $templateProcessor->setValue('perubahan', '');
-        }else if($data['jenis_audit'] == 'perubahan'){
-            $templateProcessor->setValue('baru', '');
-            $templateProcessor->setValue('perpanjangan', '');
-            $templateProcessor->setValue('perubahan', 'x');
-        }
-
-        if($data['tipe_audit'] == 'tahap1'){
-            $templateProcessor->setValue('tahap1', 'x');
-            $templateProcessor->setValue('tahap2', '');
-        }else if($data['tipe_audit'] == 'tahap2'){
-            $templateProcessor->setValue('tahap1', '');
-            $templateProcessor->setValue('tahap2', 'x');
-        }
+                
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-04 Rencana Audit.docx');
 
         $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
-        $templateProcessor->setValue('alamat', $data['alamat_perusahaan']);
-        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);        
 
-        $fileName = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_AuditPlan_'.$data['nama_perusahaan'].'.docx';
-        $templateProcessor->saveAs("storage/docx/download/".$fileName);
+        $fileName = 'FOR-HALAL-OPS-04 Rencana Audit ('.$data['nama_perusahaan'].').docx';
+        $templateProcessor->saveAs("storage/laporan/download/Rencana Audit/".$fileName);
         
-        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
-                
-        $phpWord = $objReader->load("storage/docx/download/".$fileName);
-        
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
-        $fileName2 = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_AuditPlan_'.$data['nama_perusahaan'].'.html';
-        $objWriter->save('storage/docx/download/'.$fileName2);
-        return response()->download('storage/docx/download/'.$fileName);
-
-        $dompdf = new Dompdf();
-        $html = file_get_contents('storage/docx/download/'.$fileName); 
-        $dompdf->loadHtml($html);
-        
-        $dompdf->setPaper('A4', 'landscape');
-        
-        $dompdf->render();
-        
-        $dompdf->stream();
-        
+        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                
+        $phpWord = $objReader->load("storage/laporan/download/Rencana Audit/".$fileName);
+        // $fileName2 = 'FOR-HALAL-OPS-04 Rencana Audit.docx ('.$data['nama_perusahaan'].').docx';
+        // $objWriter->save('storage/docx/download/'.$fileName2);
+        return response()->download('storage/laporan/download/Rencana Audit/'.$fileName);
     }
 
     public function downloadLaporanAuditFasilitasProduk(Request $request){
@@ -3951,8 +3902,129 @@ class PHPWordController extends Controller
         return response()->download('storage/laporan/upload/'.$fileName);
     }
 
+    public function downloadBerkas(Request $request){
+        $data = $request->except('_token','_method');
+
+        // dd($data);
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+        if($data['no'] == 1){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-03 Konfirmasi Jadwal,Syarat & Ketentuan Audit.docx');
+            $templateProcessor->setValue('nama_perusahaan', $data['nama_perusahaan']);
+
+            $fileName = 'FOR-HALAL-OPS-03 Konfirmasi Jadwal,Syarat & Ketentuan Audit ('.$data['nama_perusahaan'].').docx';
+            $templateProcessor->saveAs('storage/laporan/download/Konfirmasi SK Audit/'.$fileName);
+            $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                        
+                
+            return response()->download('storage/laporan/download/Konfirmasi SK Audit/'.$fileName);
+        }else if($data['no'] == 2){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-07 Berita Acara Pemeriksaaan.docx');
+            $templateProcessor->setValue('nama_perusahaan', $data['nama_perusahaan']);
+
+            $fileName = 'FOR-HALAL-OPS-07 Berita Acara Pemeriksaaan ('.$data['nama_perusahaan'].').docx';
+            $templateProcessor->saveAs('storage/laporan/download/BAP/'.$fileName);
+            $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                        
+                
+            return response()->download('storage/laporan/download/BAP/'.$fileName);
+        }                                        
+    }
+
+    public function uploadBerkas(Request $request){
+        $data = $request->except('_token','_method');
+
+        $dataLaporan = DB::table('laporan_audit2')
+            ->where('id_registrasi',$data['idregis'])
+            ->get();        
+        // dd($dataLaporan[0]->id);
+        // dd(count($dataLaporan));
+        
+        if($request->has("berkas_sk")){
+            $file = $request->file("berkas_sk");            
+            $file = $data["berkas_sk"];                        
+
+            $fileName = 'FOR-HALAL-OPS-03 Konfirmasi Jadwal,Syarat & Ketentuan Audit ('.$data['idregis'].').pdf';
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/Konfirmasi SK Audit/", $fileName);                        
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_konfirmasi_sk_audit = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_konfirmasi_sk_audit = $ldate;
+                    $model->save();
+                DB::Commit();
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_konfirmasi_sk_audit = $fileName;
+                $f->tgl_penyerahan_konfirmasi_sk_audit = $ldate;
+                $f->save();                
+            }
+            DB::Commit();
+        }else if($request->has("berkas_bap")){
+            $file = $request->file("berkas_bap");            
+            $file = $data["berkas_bap"];
+
+            $fileName = 'FOR-HALAL-OPS-07 Berita Acara Pemeriksaaan ('.$data['idregis'].').pdf';
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/BAP/", $fileName);
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_bap = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_bap = $ldate;
+                    $model->save();
+                DB::Commit();
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_bap = $fileName;
+                $f->tgl_penyerahan_bap = $ldate;
+                $f->save();                
+            }
+            DB::Commit();
+        }else if($request->has("berkas_ap")){
+            $file = $request->file("berkas_ap");            
+            $file = $data["berkas_ap"];
+
+            $fileName = 'FOR-HALAL-OPS-04 Rencana Audit ('.$data['idregis'].').pdf';
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/AP/", $fileName);
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_rencana_audit = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_rencana_audit = $ldate;
+                    $model->save();
+                DB::Commit();
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_rencana_audit = $fileName;
+                $f->tgl_penyerahan_rencana_audit = $ldate;
+                $f->save();                
+            }
+            DB::Commit();
+        }
+
+        Session::flash('success', "Upload Berkas Berhasil");
+        $redirect = redirect()->route('listaudit2');
+        return $redirect;
+    }
+
     public function downloadLaporanAuditBahanFix(Request $request){
-        $data = $request->except('_token','_method');        
+        $data = $request->except('_token','_method');
 
         // dd($data);
         $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
@@ -4020,17 +4092,7 @@ class PHPWordController extends Controller
         $templateProcessor->saveAs('storage/laporan/upload/'.$fileName);
         // $templateProcessor->saveAs("AuditPlan.docx");
         
-        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                        
-        
-        // DB::beginTransaction();
-        // $model = new Registrasi;
-        // $model2 = new Penjadwalan;
-
-        
-        // $f = $model2->find($data['id_penjadwalan']);
-        // $f->berkas_audit_plan = $fileName;
-        // $f->save();
-        // DB::Commit();
+        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                
 
         return response()->download('storage/laporan/upload/'.$fileName);
     }

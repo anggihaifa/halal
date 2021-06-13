@@ -5796,10 +5796,11 @@ class PenjadwalanController extends Controller
     }
 
     public function auditPlan($id){        
-        $dataRegistrasi = DB::table('registrasi')                
-                ->select('registrasi.*')
+        $dataRegistrasi = DB::table('registrasi')
+                ->join('registrasi_alamatkantor','registrasi.id','=','registrasi_alamatkantor.id_registrasi')                
+                ->select('registrasi.*','registrasi_alamatkantor.alamat as alamat')
                 ->where('registrasi.id',$id)
-                ->get();
+                ->get();        
         // $dataRegistrasi = Registrasi::find($id);
         $dataRegistrasi_ = json_decode($dataRegistrasi, true);
 
@@ -5812,13 +5813,8 @@ class PenjadwalanController extends Controller
                 ->get();               
         // $dataPenjadwalan = Penjadwalan::find($id_penjadwalan);
         $dataPenjadwalan_ = json_decode($dataPenjadwalan, true);
-
-        $laporan2 = DB::table('laporan_audit2')
-                ->where('id_registrasi',$id)
-                ->get();   
-        $laporan2 = json_decode($laporan2, true);        
-        
-        return view('penjadwalan.auditPlan',compact('dataRegistrasi','dataPenjadwalan','laporan2'));
+                
+        return view('penjadwalan.auditPlan',compact('dataRegistrasi','dataPenjadwalan'));
     }
 
     // public function auditPlan($id){
@@ -5926,18 +5922,7 @@ class PenjadwalanController extends Controller
         $id_regis = $id;
         $id_user = Auth::user()->id;
         $data = Registrasi::find($id);
-
-        $laporan2 = DB::table('laporan_audit2')
-                ->where('id_registrasi',$id_regis)
-                ->get();   
-        $laporan2 = json_decode($laporan2, true);     
-
-        if($laporan2 == null){
-            return view('penjadwalan.uploadKsb', compact('data','id_user','id_regis'));
-        }else{
-            // dd($laporan2);
-            return view('penjadwalan.uploadKsb', compact('data','id_user','id_regis','laporan2'));
-        }        
+        return view('penjadwalan.uploadKsb', compact('data','id_user','id_regis'));
     }
     
 

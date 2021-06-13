@@ -49,20 +49,12 @@
                 <div class="card-body table-responsive-lg ">
 					<div class="tab-content p-0 m-0">
                         <div class="tab-pane fade active show" id="card-tab-1">
-                            <form action="{{route('downloadauditplan')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                            {{-- <form action="{{route('downloadauditplan')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                 @csrf
                                 <div class="panel-body panel-form" style="display: none">
                                     @foreach($dataRegistrasi as $index => $value)
                                         @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'jenis_audit','label' => 'Jenis Audit','required'=>true,'placeholder'=>'Jenis Audit','readonly'=>true,'value'=>$value->status_registrasi])@endcomponent
-                                        @component('components.inputtext',['name'=> 'skema_audit','label' => 'Skema Audit','required'=>true,'placeholder'=>'Skema Audit','readonly'=>true,'value'=>"sjph"])@endcomponent
-                                        @component('components.inputtext',['name'=> 'tipe_audit','label' => 'Tipe Audit','required'=>true,'placeholder'=>'Tipe Audit','readonly'=>true,'value'=>"tahap2"])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @component('components.inputtext',['name'=> 'alamat_perusahaan','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$value->alamat])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
+                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
                                     @endforeach                        
                                 </div>
                                 <div class="form-group row">   
@@ -70,29 +62,74 @@
                                         <button type="submit" class="btn btn-sm btn-info offset-md-9">Download Format Audit Plan</button>
                                     </div>
                                 </div>
-                            </form>
+                            </form> --}}
                             @foreach($dataPenjadwalan as $index => $value2)
                                 @if($value2->berkas_audit_plan != null)
                                     <div class="panel-body panel-form">
                                         <div class="wrapper col-lg-12">
                                             <div class="row">                                                
-                                                <label class="col-lg-4 col-form-label"><b>Berkas Audit Plan</b></label>
-                                                <div id="shb" class="col-lg-8">
-                                                    <div class="input-group date">                                                        
-                                                        <a class="form-control" href="{{url('') .Storage::url('docx/upload/'.$value2->berkas_audit_plan) }}" download>{{$value2->berkas_audit_plan}}</a>
-                                                    </div>
-                                                </div>                                                                                                    
+                                                <table class="table table-lg"> 							
+                                                    <tr>
+                                                        <th class="text-center">No</th>
+                                                        <th class="text-center">Jenis Berkas</th>
+                                                        <th class="text-center">Download</th>
+                                                        <th class="text-center">Upload</th>
+                                                        <th class="text-center">Berkas</th>
+                                                        <th class="text-center">Tanggal Upload</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">1</td>
+                                                        <td class="text-center">Rencana Audit</td>
+                                                        <td class="text-center">
+                                                            <form action="{{route('downloadauditplan')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="wrapper col-lg-12" style="display: none">
+                                                                    @foreach($dataRegistrasi as $index => $value)
+                                                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
+                                                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
+                                                                    @endforeach                        
+                                                                </div>                                                                                                                                
+                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Rencana Audit</button>
+                                                            </form>
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            @if (Auth::user()->usergroup_id == 10)
+                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalAuditPlan' style="cursor:pointer">Upload Disini</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_rencana_audit'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/AP/'.$val['file_rencana_audit']) }}" download>{{$val['file_rencana_audit']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_rencana_audit'] == null? "-" : $val['tgl_penyerahan_rencana_audit']}}
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>                                                    
+                                                    </table>                                                
                                             </div>
                                         </div>
                                     </div>
                                 @endif
                             @endforeach
-                            <form action="{{route('uploadauditplan')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                            {{-- <form action="{{route('uploadauditplan')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                 @csrf
                                 <div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12" style="display:none">
                                         @foreach($dataRegistrasi as $index => $value)
-                                            @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent                                        
+                                            @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
                                             @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
                                             @foreach($dataPenjadwalan as $index => $value2)
                                                 @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
@@ -116,7 +153,7 @@
                                         <button type="submit" class="btn btn-sm btn-info">Unggah</button>
                                     </div>
                                 </div>
-                            </form>
+                            </form> --}}
                         </div>
                         <div class="tab-pane fade" id="card-tab-2">
                             <form action="{{route('downloadauditplanfix')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
@@ -140,7 +177,7 @@
                                         </div>
                                         <div class="wrapper col-lg-12">
                                             <div class="row">
-                                                @component('components.inputtext',['name'=> 'alamat_perusahaan','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$value->alamat])@endcomponent
+                                                {{-- @component('components.inputtext',['name'=> 'alamat_perusahaan','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$value->alamat_kantor])@endcomponent --}}
                                             </div>
                                         </div>
                                         <div class="wrapper col-lg-12">
@@ -154,9 +191,10 @@
                                     @endforeach                                
                                 </div>
                                 <div class="panel-body panel-form">
+                                    @foreach($dataRegistrasi as $index => $value)
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'no_organisasi','label' => 'No Organisasi','required'=>true,'placeholder'=>'No Organisasi'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'no_id_bpjph','label' => 'No ID BPJPH','required'=>true,'placeholder'=>'No ID BPJPH','readonly'=>true,'value'=>$value->no_registrasi_bpjph])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">                               
@@ -165,12 +203,12 @@
                                             <div id="shb" class="col-lg-8">
                                                 <div class="input-group date">           
                                                     <div class="radio radio-css radio-inline">                                         
-                                                        <input type="radio" name="skema_audit" value="sjph" id="sjph"/>                                                                                                        
-                                                        <label for="sjph">SJPH</label>
+                                                        <input type="radio" name="skema_audit" value="sjh" id="sjh"/>
+                                                        <label for="sjh">SJH</label>
                                                     </div>
                                                     <div class="radio radio-css radio-inline">                                         
-                                                        <input type="radio" name="skema_audit" value="smh" id="smh"/>
-                                                        <label for="smh">SMH</label>
+                                                        <input type="radio" name="skema_audit" value="sjph" id="sjph"/>
+                                                        <label for="sjph">SJPH</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,7 +216,8 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-lg-4 col-form-label">Jenis Audit</label>
+                                            @component('components.inputtext',['name'=> 'status_sertifikasi','label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','readonly'=>true,'value'=>$value->status_registrasi])@endcomponent
+                                            {{-- <label class="col-lg-4 col-form-label">Jenis Audit</label>
                                             <div class="col-lg-8">
                                                 <div class="input-group date">           
                                                     <div class="radio radio-css radio-inline">                                         
@@ -194,29 +233,12 @@
                                                         <label for="perubahan">Perubahan</label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Tipe Audit</label>
-                                            <div class="col-lg-8">
-                                                <div class="input-group date">           
-                                                    <div class="radio radio-css radio-inline">                                         
-                                                        <input type="radio" name="tipe_audit" value="tahap1" id="tahap1"/>
-                                                        <label for="tahap1">Tahap II</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">                                         
-                                                        <input type="radio" name="tipe_audit" value="tahap2" id="tahap2"/>
-                                                        <label for="tahap2">Tahap I</label>
-                                                    </div>                                                    
-                                                </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>                                    
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'no_audit','label' => 'No Audit','required'=>true,'placeholder'=>'No Audit'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'no_audit','label' => 'No Audit','required'=>true,'placeholder'=>'No Audit','readonly'=>true,'value'=>$value->no_registrasi])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
@@ -264,7 +286,8 @@
                                         <div class="row">
                                             @component('components.inputtext',['name'=> 'tim_audit3','label' => '','required'=>true,'placeholder'=>'Tim Audit 3'])@endcomponent
                                         </div>
-                                    </div>                                            
+                                    </div>
+                                    @endforeach                                            
                                 </div>
                                 <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">
                                     <div class="wrapper col-lg-12">
@@ -352,6 +375,47 @@
         <!-- end col-12 -->
     </div>
     <!-- end row -->
+
+    <div id="modalAuditPlan" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Konfirmasi Jadwal, SK Audit</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="1" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />                                                                        
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_ap" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
 @endsection
 @push('scripts')
     <script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
