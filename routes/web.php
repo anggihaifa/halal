@@ -55,6 +55,8 @@ Route::post('download_laporan_audit_bahan','PHPWordController@downloadLaporanAud
 Route::post('download_laporan_audit_sjph_fix','PHPWordController@downloadLaporanAuditSJPHFix')->name('downloadlaporanauditsjphfix')->middleware('role:1,3,6,9,10,11,12,13');
 Route::post('download_laporan_audit_bahan_fix','PHPWordController@downloadLaporanAuditBahanFix')->name('downloadlaporanauditbahanfix')->middleware('role:1,3,6,9,10,11,12,13');
 
+Route::post('download_checklist_tahap_2','PHPWordController@downloadChecklistTahap2')->name('downloadchecklisttahap2')->middleware('role:1,3,6,9,10,11,12,13');
+
 Route::post('download_berkas','PHPWordController@downloadBerkas')->name('downloadberkas')->middleware('role:1,3,6,7,8,9,10,11,12,13');
 Route::post('upload_berkas','PHPWordController@uploadBerkas')->name('uploadberkas')->middleware('role:1,3,6,7,8,9,10,11,12,13');
 

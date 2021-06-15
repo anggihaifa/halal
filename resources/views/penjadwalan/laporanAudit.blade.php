@@ -17,11 +17,11 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>        
-        <li class="breadcrumb-item active">Laporan Audit</li>
+        <li class="breadcrumb-item active">Laporan Audit Tahap 2</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Laporan Audit<small></small></h1>
+    <h1 class="page-header">Laporan Audit Tahap 2<small></small></h1>
     <!-- end page-header -->
     <!-- begin row -->
     <div class="row">
@@ -31,647 +31,136 @@
             <div class="panel panel-inverse" data-sortable-id="form-plugins-7">
                 <!-- begin panel-heading -->
                 <div class="panel-heading">
-                    <h4 class="panel-title">Laporan Audit</h4>
+                    <h4 class="panel-title">Laporan Audit Tahap 2</h4>
                     <div class="panel-heading-btn">
                         {{-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> --}}
                     </div>
                 </div>
                 <div class="card-header tab-overflow p-t-0 p-b-0">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        {{-- <li class="nav-item text-center">
-                            <a class="nav-link" data-toggle="tab" href="#card-tab-1">Laporan SJPH</a>
-                        </li>                    
+                    <ul class="nav nav-tabs card-header-tabs">                                                
                         <li class="nav-item text-center">                        
-                            <a class="nav-link" data-toggle="tab" href="#card-tab-2">Laporan Bahan</a>
-                        </li>                                    
-                        <li class="nav-item text-center">                        
-                            <a class="nav-link" data-toggle="tab" href="#card-tab-3">Laporan Fasilitas Produksi</a>
-                        </li>
-                        <li class="nav-item text-center">                        
-                            <a class="nav-link" data-toggle="tab" href="#card-tab-4">Laporan Produk</a>
-                        </li> --}}
-                        {{-- <li class="nav-item text-center">                        
-                            <a class="nav-link" data-toggle="tab" href="#card-tab-5">Laporan Bahan</a>
-                        </li> --}}
-                        <li class="nav-item text-center">                        
-                            <a class="nav-link active" data-toggle="tab" href="#card-tab-6">Form Checklist Audit Tahap 2</a>
+                            <a class="nav-link active" data-toggle="tab" href="#card-tab-5">Form Audit Tahap 2</a>
                         </li>
                         <li class="nav-item text-center">                        
                             <a class="nav-link" data-toggle="tab" href="#card-tab-7">Laporan Audit Tahap 2</a>
                         </li>
+                        <li class="nav-item text-center">      
+                            <a class="nav-link" data-toggle="tab" href="#card-tab-6">Form Checklist Audit Tahap 2</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body table-responsive-lg ">
-					<div class="tab-content p-0 m-0">
-                        {{-- <div class="tab-pane fade active show" id="card-tab-1">
-                            <form action="{{route('downloadlaporanauditsjph')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="form-group row">   
-                                    <div class="row col-lg-12">
-                                        <button type="submit" class="btn btn-sm btn-info offset-md-9">Download Format Laporan SJPH</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <form action="{{route('downloadlaporanauditsjphfix')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf                                
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent                                        
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="panel-body panel-form">                         
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'no_organisasi','label' => 'No Organisasi','required'=>true,'placeholder'=>'No Organisasi'])@endcomponent
-                                        </div>
-                                    </div>                                                                                                                                                                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'nama_auditor','label' => 'Nama Auditor','required'=>true,'placeholder'=>'Nama Auditor'])@endcomponent
-                                        </div>
-                                    </div>                                           
-                                </div>
-                                <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">                                    
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-12 col-form-label"><b>Data</b></label>
-                                                </div>
+					<div class="tab-content p-0 m-0">                       
+                        <div class="tab-pane fade active show" id="card-tab-5">
+                            @foreach($dataPenjadwalan as $index => $value2)                                
+                                    <div class="panel-body panel-form">
+                                        <div class="wrapper col-lg-12">
+                                            <div class="row">                                                
+                                                <table class="table table-lg"> 							
+                                                    <tr>
+                                                        <th class="text-center">No</th>
+                                                        <th class="text-center">Jenis Berkas</th>
+                                                        <th class="text-center">Download</th>
+                                                        <th class="text-center">Download</th>
+                                                        <th class="text-center">Upload</th>
+                                                        <th class="text-center">Berkas</th>
+                                                        <th class="text-center">Tanggal Upload</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">1</td>
+                                                        <td class="text-center">Form Laporan Audit Tahap 2</td>
+                                                        <td class="text-center">
+                                                            <form action="{{route('downloadlaporanauditsjph')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="wrapper col-lg-12" style="display: none">
+                                                                    @foreach($dataRegistrasi as $index => $value)
+                                                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
+                                                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
+                                                                    @endforeach                        
+                                                                </div>                                                                                                                                
+                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Rencana Audit</button>
+                                                            </form>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            @if (Auth::user()->usergroup_id == 10)
+                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalLaporanAudit' style="cursor:pointer">Upload Disini</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_laporan_audit_tahap_2'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Laporan Audit Tahap 2/'.$val['file_laporan_audit_tahap_2']) }}" download>{{$val['file_laporan_audit_tahap_2']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_laporan_audit_tahap_2'] == null? "-" : $val['tgl_penyerahan_laporan_audit_tahap_2']}}
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">2</td>
+                                                        <td class="text-center">Form Checklist Audit Tahap 2</td>
+                                                        <td class="text-center">
+                                                            <form action="{{route('downloadchecklisttahap2')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="wrapper col-lg-12" style="display: none">
+                                                                    @foreach($dataRegistrasi as $index => $value)
+                                                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
+                                                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
+                                                                    @endforeach                        
+                                                                </div>                                                                                                                                
+                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Checklist Audit</button>
+                                                            </form>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            @if (Auth::user()->usergroup_id == 10)
+                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalChecklistAudit' style="cursor:pointer">Upload Disini</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_form_ceklis'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Checklist Audit/'.$val['file_form_ceklis']) }}" download>{{$val['file_form_ceklis']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_form_ceklis'] == null? "-" : $val['tgl_penyerahan_form_ceklis']}}
+                                                            @endforeach
+                                                        </td>
+                                                    </tr> 
+                                                    </table>                                                
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Kriteria</label><div class="col-lg-8"><div><input class="form-control" name="kriteria[]" type="text" label="Kriteria" placeholder="Kriteria"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-4 col-form-label">Temuan/Catatan</label>
-                                            <div class="col-lg-8"><div>
-                                                <textarea name="temuan[]" class="form-control" placeholder="Temuan/Catatan"></textarea>
-                                            </div></div>                                
-                                        </div>
-                                    </div>                                    
-                                </div>
-                                <div class="panel-body panel-form">                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <div class="detail_kegiatan" id="detail_kegiatan" style="width: 100%; background: #fff;"></div>
-                                            <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan" class="tam_detail_kegiatan btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                                
-                                <div class="form-group row">   
-                                    <div class="col-md-12 offset-md-5 mb-5">
-                                        <button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
-                                        <button type="submit" class="btn btn-sm btn-info">Kirim</button>
-                                    </div>
-                                </div>
-                            </form>
+                                    </div>                                
+                            @endforeach
                         </div>
-                        <div class="tab-pane fade" id="card-tab-2">
-                            <form action="{{route('downloadlaporanauditbahan')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @component('components.inputtext',['name'=> 'no_registrasi','label' => 'No Registrasi','required'=>true,'placeholder'=>'No Registrasi','readonly'=>true,'value'=>$value->no_registrasi])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="form-group row">   
-                                    <div class="row col-lg-12">
-                                        <button type="submit" class="btn btn-sm btn-info offset-md-9">Download Format Laporan Bahan</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <form action="{{route('downloadlaporanauditbahanfix')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf                                
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent                                        
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @component('components.inputtext',['name'=> 'no_registrasi','label' => 'No Registrasi','required'=>true,'placeholder'=>'No Registrasi','readonly'=>true,'value'=>$value->no_registrasi])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="panel-body panel-form">                                                                                                     
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'nama_auditor','label' => 'Nama Auditor','required'=>true,'placeholder'=>'Nama Auditor'])@endcomponent
-                                        </div>
-                                    </div>                                           
-                                </div>
-                                <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">                                    
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-12 col-form-label"><b>Data</b></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Bahan</label><div class="col-lg-8"><div><input class="form-control" name="bahan[]" type="text" label="Bahan" placeholder="Bahan"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-4 col-form-label">Temuan</label>
-                                            <div class="col-lg-8"><div>
-                                                <textarea name="temuan[]" class="form-control" placeholder="Temuan"></textarea>
-                                            </div></div>                                
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Kategori Bahan</label><div class="col-lg-8"><div><input class="form-control" name="kategori_bahan[]" type="text" label="Kategori Bahan" placeholder="Kategori Bahan"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                </div>
-                                <div class="panel-body panel-form">                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <div class="detail_kegiatan2" id="detail_kegiatan2" style="width: 100%; background: #fff;"></div>
-                                            <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan2" class="tam_detail_kegiatan2 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                                
-                                <div class="form-group row">   
-                                    <div class="col-md-12 offset-md-5 mb-5">
-                                        <button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
-                                        <button type="submit" class="btn btn-sm btn-info">Kirim</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="card-tab-3">
-                            <form action="{{route('downloadlaporanauditfasilitasproduksi')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @component('components.inputtext',['name'=> 'no_registrasi','label' => 'No Registrasi','required'=>true,'placeholder'=>'No Registrasi','readonly'=>true,'value'=>$value->no_registrasi])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-
-                                            @php
-                                            $str = explode("_", $value2->pelaksana1_audit2);
-                                            $auditor1 = $str[1];
-
-                                            $str2 = explode("_", $value2->pelaksana2_audit2);
-                                            $auditor2 = $str2[1];
-                                            @endphp
-                                            
-                                            @component('components.inputtext',['name'=> 'nama_auditor','label' => 'Nama Auditor','required'=>true,'placeholder'=>'Nama Auditor','readonly'=>true,'value'=>$auditor1.' dan '.$auditor2])@endcomponent
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="form-group row">   
-                                    <div class="row col-lg-12">
-                                        <button type="submit" class="btn btn-sm btn-info offset-md-9">Download Format Laporan Fasilitas Produksi</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <form action="{{route('downloadlaporanauditfasilitasproduksifix')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf                                
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent                                        
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @component('components.inputtext',['name'=> 'no_registrasi','label' => 'No Registrasi','required'=>true,'placeholder'=>'No Registrasi','readonly'=>true,'value'=>$value->no_registrasi])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                        @php
-                                            $str = explode("_", $value2->pelaksana1_audit2);
-                                            $auditor1 = $str[1];
-
-                                            $str2 = explode("_", $value2->pelaksana2_audit2);
-                                            $auditor2 = $str2[1];
-                                            @endphp
-                                            
-                                            @component('components.inputtext',['name'=> 'nama_auditor','label' => 'Nama Auditor','required'=>true,'placeholder'=>'Nama Auditor','readonly'=>true,'value'=>$auditor1.' dan '.$auditor2])@endcomponent
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="panel-body panel-form">                                    
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Foto Fasilitas Produksi</label>
-                                            <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="foto_fasilitas_produksi">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Foto Fasilitas Produksi Lainnya</label>
-                                            <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="foto_fasilitas_produksi_lainnya">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Gambar Denah Fasilitas Produksi</label>
-                                            <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="denah_fasilitas_produksi">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-12 col-form-label"><b>Daftar Peralatan Yang Kontak Langsung Dengan Bahan</b></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Daftar Peralatan</label><div class="col-lg-8"><div><input class="form-control" name="daftar_peralatan[]" type="text" label="Daftar Peralatan" placeholder="Daftar Peralatan"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Bahan Peralatan Yang Digunakan</label><div class="col-lg-8"><div><input class="form-control" name="bahan_peralatan[]" type="text" label="Bahan Peralatan Yang Digunakan" placeholder="Kategori Bahan"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                                                      
-                                </div>
-                                <div class="panel-body panel-form">                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <div class="detail_kegiatan3" id="detail_kegiatan3" style="width: 100%; background: #fff;"></div>
-                                            <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan3" class="tam_detail_kegiatan3 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                                
-                                <div class="form-group row">   
-                                    <div class="col-md-12 offset-md-5 mb-5">
-                                        <button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
-                                        <button type="submit" class="btn btn-sm btn-info">Kirim</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="card-tab-4">
-                            <form action="{{route('downloadlaporanproduk')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @component('components.inputtext',['name'=> 'no_registrasi','label' => 'No Registrasi','required'=>true,'placeholder'=>'No Registrasi','readonly'=>true,'value'=>$value->no_registrasi])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-
-                                            @php
-                                            $str = explode("_", $value2->pelaksana1_audit2);
-                                            $auditor1 = $str[1];
-
-                                            $str2 = explode("_", $value2->pelaksana2_audit2);
-                                            $auditor2 = $str2[1];
-                                            @endphp
-                                            
-                                            @component('components.inputtext',['name'=> 'nama_auditor','label' => 'Nama Auditor','required'=>true,'placeholder'=>'Nama Auditor','readonly'=>true,'value'=>$auditor1.' dan '.$auditor2])@endcomponent
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="form-group row">   
-                                    <div class="row col-lg-12">
-                                        <button type="submit" class="btn btn-sm btn-info offset-md-9">Download Format Laporan Produk</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <form action="{{route('downloadlaporanprodukfix')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf                                
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @component('components.inputtext',['name'=> 'no_registrasi','label' => 'No Registrasi','required'=>true,'placeholder'=>'No Registrasi','readonly'=>true,'value'=>$value->no_registrasi])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                        @php
-                                            $str = explode("_", $value2->pelaksana1_audit2);
-                                            $auditor1 = $str[1];
-
-                                            $str2 = explode("_", $value2->pelaksana2_audit2);
-                                            $auditor2 = $str2[1];
-                                            @endphp
-                                            
-                                            @component('components.inputtext',['name'=> 'nama_auditor','label' => 'Nama Auditor','required'=>true,'placeholder'=>'Nama Auditor','readonly'=>true,'value'=>$auditor1.' dan '.$auditor2])@endcomponent
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>                                
-                                <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-12 col-form-label"><b>Daftar Produk Yang Disertifikasi (Industri Pengolahan)</b></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk" placeholder="Nama Produk"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Karakteristik Sensori</label><div class="col-lg-8"><div><input class="form-control" name="karakteristik_sensori[]" type="text" label="Karakteristik Sensori" placeholder="Karakteristik Sensori"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Bentuk</label><div class="col-lg-8"><div><input class="form-control" name="bentuk[]" type="text" label="Bentuk" placeholder="Bentuk"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Penjualan (Retail/Non Retail)</label><div class="col-lg-8"><div><input class="form-control" name="penjualan[]" type="text" label="Penjualan" placeholder="Penjualan (Retail/Non Retail)"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-body panel-form">                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <div class="detail_kegiatan4" id="detail_kegiatan4" style="width: 100%; background: #fff;"></div>
-                                            <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan4" class="tam_detail_kegiatan4 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Foto Produk</label>
-                                            <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="foto_produk[]">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                                                        
-                                </div>
-                                <div class="panel-body panel-form">                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <div class="detail_kegiatan5" id="detail_kegiatan5" style="width: 100%; background: #fff;"></div>
-                                            <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan5" class="tam_detail_kegiatan5 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-12 col-form-label"><b>Daftar Produk Yang Disertifikasi (Restoran/Katering)</b></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk2[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk2[]" type="text" label="Nama Produk" placeholder="Nama Produk"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Karakteristik Sensori</label><div class="col-lg-8"><div><input class="form-control" name="karakteristik_sensori2[]" type="text" label="Karakteristik Sensori" placeholder="Karakteristik Sensori"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Bentuk</label><div class="col-lg-8"><div><input class="form-control" name="bentuk2[]" type="text" label="Bentuk" placeholder="Bentuk"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Penjualan (Retail/Non Retail)</label><div class="col-lg-8"><div><input class="form-control" name="penjualan2[]" type="text" label="Penjualan" placeholder="Penjualan (Retail/Non Retail)"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-body panel-form">                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <div class="detail_kegiatan6" id="detail_kegiatan6" style="width: 100%; background: #fff;"></div>
-                                            <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan6" class="tam_detail_kegiatan6 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Foto Produk</label>
-                                            <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="foto_produk2[]">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto2[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                                                        
-                                </div>
-                                <div class="panel-body panel-form">                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <div class="detail_kegiatan7" id="detail_kegiatan7" style="width: 100%; background: #fff;"></div>
-                                            <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan7" class="tam_detail_kegiatan7 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">   
-                                    <div class="col-md-12 offset-md-5 mb-5">
-                                        <button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
-                                        <button type="submit" class="btn btn-sm btn-info">Kirim</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="card-tab-5">
-                            5
-                        </div> --}}
-                        <div class="tab-pane fade active show" id="card-tab-6">
-                            <form action="{{route('downloadlaporanaudit2')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Perusahaan','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="form-group row">   
-                                    <div class="row col-lg-12">
-                                        <button type="submit" class="btn btn-sm btn-info offset-md-9">Download Format Laporan Audit Tahap 2</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="tab-pane fade" id="card-tab-6">                            
                             <form action="{{route('downloadlaporanaudittahap2fix')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                 @csrf                                
                                 <div class="panel-body panel-form" style="display: none">
@@ -684,68 +173,7 @@
                                         @endforeach
                                     @endforeach                        
                                 </div>
-                                <div class="panel-body panel-form">                         
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'nomor_id','label' => 'No ID','required'=>true,'placeholder'=>'No ID'])@endcomponent
-                                        </div>
-                                    </div>                                                                                                                                                                                                                        
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'skema_audit','label' => 'Skema Audit','required'=>true,'placeholder'=>'Skema Audit'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'jenis_audit','label' => 'Jenis Audit','required'=>true,'placeholder'=>'Jenis Audit'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'no_audit','label' => 'No Audit','required'=>true,'placeholder'=>'No Audit'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtextarea',['name'=> 'alamat','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'tujuan_audit','label' => 'Tujuan Audit','required'=>true,'placeholder'=>'Tujuan Audit'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'lingkup_audit','label' => 'Lingkup Audit','required'=>true,'placeholder'=>'Lingkup Audit'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Jenis Produk & Klasifikasi','required'=>true,'placeholder'=>'Jenis Produk & Kode Klasifikasi'])@endcomponent
-                                            <p><b>&nbsp;&nbsp;&nbsp;*) Khusus skema audit SJPH</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'lokasi_audit1','label' => 'Lokasi Audit','required'=>true,'placeholder'=>'Lokasi Audit 1'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'lokasi_audit2','label' => '','required'=>false,'placeholder'=>'Lokasi Audit 2'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit1','label' => 'Tim Audit','required'=>true,'placeholder'=>'Tim Audit 1'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit2','label' => '','required'=>true,'placeholder'=>'Tim Audit 2'])@endcomponent
-                                        </div>
-                                    </div>
+                                <div class="panel-body panel-form">                                                             
                                     <div class="card-header bg-light">
                                         <ul class="nav nav-tabs card-header-tabs">
                                             <li class="nav-item text-center">
@@ -802,7 +230,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">1. Kebijakan halal telah ditetapkan</td>
+                                                            <td class="valign-middle">1. Pelaku usaha/manajemen puncak perusahaan harus menetapkan Kebijakan halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1a1" value="m" id="1a1m"/>
@@ -846,7 +274,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">3. Kebijakan halal telah dipahami dan diterapkan oleh seluruh personil dalam organisasi</td>
+                                                            <td class="valign-middle">3. Pelaku usaha/manajemen puncak perusahaan harus memastikan bahwa kebijakan halal yang ditetapkan dipahami dan diterapkan oleh seluruh personil dalam organisasi</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1a3" value="m" id="1a3m"/>
@@ -868,7 +296,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Kebijakan halal telah disosialisasikan dan dikomunikasikan kepada seluruh pihak terkait (stakeholder)</td>
+                                                            <td class="valign-middle">4. Pelaku Usaha/manajemen puncak perusahaan harus mensosialisasikan dan mengkomunikasikan kebijakan kepada seluruh pihak terkait (stakeholder)</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1a4" value="m" id="1a4m"/>
@@ -898,7 +326,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">1. Penyelia Halal muslim sudah ditetapkan</td>
+                                                            <td class="valign-middle">1. Pelaku usaha/pimpinan puncak perusahaan menjamin tersedianya sumber daya manusia yang kompeten dan memadai untuk penyusunan, penerapan dan perbaikan berkelanjutan Sistem Jaminan Produk Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1b1" value="m" id="1b1m"/>
@@ -920,7 +348,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">2. Penyelia Halal sudah teregistrasi di Badan Penyelenggara Jaminan Produk Halal (BPJPH)</td>
+                                                            <td class="valign-middle">2. Pelaku Usaha/pimpinan puncak perusahaan harus menetapkan personil muslim sebagai Penyelia Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1b2" value="m" id="1b2m"/>
@@ -942,7 +370,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">3. Personil muslim difasilitasi untuk beribadah</td>
+                                                            <td class="valign-middle">3. Pelaku Usaha/pimpinan puncak perusahaan harus meregistrasi Penyelia Halal kepada Badan Penyelenggara Jaminan Produk Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1b3" value="m" id="1b3m"/>
@@ -964,7 +392,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Komitmen untuk menjaga integritas halal telah diterapkan oleh semua personil di perusahaan termasuk pemasok dan distributor</td>
+                                                            <td class="valign-middle">4. Pelaku Usaha/pimpinan puncak perusahaan berkomitmen mengizinkan personil muslim untuk melaksanakan kewajiban beribadah</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1b4" value="m" id="1b4m"/>
@@ -986,7 +414,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">5. Pelaku Usaha/pimpinan puncak perusahaan berskala besar wajib menetapkan tim manajemen halal yang melibatkan seluruh pihak terkait dan disertai bukti tertulis</td>
+                                                            <td class="valign-middle">5. Pelaku Usaha/pimpinan puncak perusahaan harus memastikan komitmen semua personil di perusahaan termasuk pemasok dan distributor untuk menjaga integritas halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1b5" value="m" id="1b5m"/>
@@ -1008,7 +436,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">6. Pelaku Usaha berskala Mikro dan Kecil (UMK) dapat memiliki tim manajemen halal dan/atau Penyelia Halal melalui fasilitasi oleh pihak lain seperti Pemerintah Pusat, Pemerintah Daerah, BUMN, BUMD, Perguruan Tinggi Negeri melalui Pusat Kajian Halal, dan Lembaga Keagamaan Islam berbadan hukum</td>
+                                                            <td class="valign-middle">6. Pelaku Usaha/pimpinan puncak perusahaan berskala besar harus menetapkan tim manajemen halal yang melibatkan seluruh pihak terkait dan disertai bukti tertulis</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1b6" value="m" id="1b6m"/>
@@ -1029,6 +457,28 @@
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">7. Pelaku Usaha berskala Mikro dan Kecil (UMK) dapat memiliki tim manajemen halal dan/atau Penyelia Halal melalui fasilitasi oleh pihak lain seperti Pemerintah Pusat, Pemerintah Daerah, BUMN, BUMD, Perguruan Tinggi Negeri melalui Pusat Kajian Halal, dan Lembaga Keagamaan Islam berbadan hukum</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb1b7" value="m" id="1b7m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb1b7" value="tm" id="1b7tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb1b7" value="tr" id="1b7tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca1b7" type="text" class="form-control" placeholder="Catatan" id="1b7ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
                                                             <td class="valign-middle text-center">c</td>
                                                             <td class="valign-middle font-weight-bold">Pembinaan Sumber Daya Manusia</td>
                                                             <td class="valign-middle text-center"></td>
@@ -1038,7 +488,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">1. Penyelia halal sudah diikutsertakan dalam pelatihan Penyelia Halal yang dilaksanakan oleh BPJPH dan/atau lembaga eksternal yang bekerja sama dengan BPJPH</td>
+                                                            <td class="valign-middle">1. Pelaku Usaha/pimpinan puncak perusahaan harus mengikutsertakan Penyelia Halal dalam pelatihan Penyelia Halal yang dilaksanakan oleh Badan Penyelenggara Jaminan Produk Halal dan/atau lembaga pendidikan dan pelatihan lain yang bekerja sama dengan Badan Penyelenggara Jaminan Produk Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1c1" value="m" id="1c1m"/>
@@ -1060,7 +510,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">2. Personil terkait sudah difasilitasi pelatihan internal mengenai penerapan Sistem Jaminan Produk Halal</td>
+                                                            <td class="valign-middle">2. Pelaku Usaha/pimpinan puncak perusahaan harus memfasilitasi pelatihan terhadap personil terkait sesuai kebutuhan penerapan Sistem Jaminan Produk Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1c2" value="m" id="1c2m"/>
@@ -1082,7 +532,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">3. Prosedur tertulis pelatihan sudah ditetapkan oleh manajemen puncak</td>
+                                                            <td class="valign-middle">3. Pelaku Usaha/perusahaan harus memiliki prosedur tertulis pelatihan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1c3" value="m" id="1c3m"/>
@@ -1104,7 +554,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Rekaman pelaksanaan pelatihan sudah terdokumentasi</td>
+                                                            <td class="valign-middle">4. Pelaku Usaha/perusahaan harus memelihara bukti pelaksanaan pelatihan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb1c4" value="m" id="1c4m"/>
@@ -1161,8 +611,8 @@
                                                         <td colspan="5" class="valign-middle font-weight-bold">Bahan</td>
                                                     </tr>                                                    
                                                     <tr>
-                                                        <td class="valign-middle text-center"></td>
-                                                        <td class="valign-middle">1. Seluruh bahan yang digunakan untuk Proses Produk Halal wajib memiliki status kehalalan berdasarkan ketetapan Al-Qur’an, Hadits, dan Fatwa Ulama</td>
+                                                        <td class="valign-middle text-center">2.1</td>
+                                                        <td class="valign-middle">Pelaku usaha wajib menggunakan bahan halal untuk Proses Produk Halal yang terdiri atas bahan baku, bahan olahan, bahan tambahan, dan bahan penolong</td>
                                                         <td class="valign-middle text-center">
                                                             <div class="radio">
                                                                 <input type="radio" name="rb21" value="m" id="21m"/>                                  
@@ -1183,8 +633,8 @@
                                                         </td>                                                                                                
                                                     </tr>
                                                     <tr>
-                                                        <td class="valign-middle text-center"></td>
-                                                        <td class="valign-middle">2. Seluruh bahan didukung dengan dokumen yang sesuai dan valid</td>
+                                                        <td class="valign-middle text-center">2.2</td>
+                                                        <td class="valign-middle">Bahan yang dimaksud pada poin 2.1 adalah berasal dari : hewan, tumbuhan, mikroba atau bahan yang dihasilkan melalui proses kimiawi, proses biologi, atau proses rekayasa genetik.</td>
                                                         <td class="valign-middle text-center">
                                                             <div class="radio">
                                                                 <input type="radio" name="rb22" value="m" id="22m"/>
@@ -1205,8 +655,8 @@
                                                         </td>                                                                                                
                                                     </tr>
                                                     <tr>
-                                                        <td class="valign-middle text-center"></td>
-                                                        <td class="valign-middle">3. Seluruh bahan yang digunakan telah tercantum dalam daftar bahan</td>
+                                                        <td class="valign-middle text-center">2.3</td>
+                                                        <td class="valign-middle">Dokumen Pendukung Bahan Pelaku Usaha wajib melengkapi Bahan yang digunakan dengan dokumen pendukung kehalalan yang sesuai dan valid, kecuali Bahan-bahan yang sudah ditetapkan oleh Badan Penyelenggara Jaminan Produk Halal tidak perlu memiliki dokumen pendukung</td>
                                                         <td class="valign-middle text-center">
                                                             <div class="radio">
                                                                 <input type="radio" name="rb23" value="m" id="23m"/>
@@ -1226,7 +676,7 @@
                                                             <input name="ca23" type="text" class="form-control" placeholder="Catatan" id="23ca"/>
                                                         </td>                                                                                                
                                                     </tr>
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td class="valign-middle text-center"></td>
                                                         <td class="valign-middle">4. Bahan yang memerlukan verifikasi lebih lanjut diperlukan pengambilan sampel untuk pengujian laboratorium</td>
                                                         <td class="valign-middle text-center">
@@ -1247,7 +697,7 @@
                                                         <td class="valign-middle">
                                                             <input name="ca24" type="text" class="form-control" placeholder="Catatan" id="24ca"/>
                                                         </td>                                                                                                
-                                                    </tr>
+                                                    </tr> --}}
                                                     <tr>
                                                         <td class="valign-middle text-center"></td>
                                                         <td class="valign-middle font-weight-bold">Reset</td>                                                            
@@ -1286,7 +736,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center">a</td>
-                                                            <td class="valign-middle font-weight-bold">Lokasi, Tempat dan peralatan</td>
+                                                            <td class="valign-middle font-weight-bold">Lokasi, Tempat dan Alat</td>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle text-center"></td>
@@ -1294,7 +744,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">1. Lokasi, tempat dan peralatan PPH bebas dari babi/turunannya, barang haram, dan najis</td>
+                                                            <td class="valign-middle">1. Pelaku usaha wajib memisahkan lokasi, tempat, dan alat proses produk halal dengan proses Produk tidak halal. Lokasi yang wajib dipisahkan yakni lokasi penyembelihan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a1" value="m" id="3a1m"/>
@@ -1316,7 +766,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">2. Lokasi, tempat dan peralatan PPH wajib dipisahkan dari produk yang akan dihalalkan dengan produk yang tidak halal agar tidak terjadi kontaminasi</td>
+                                                            <td class="valign-middle">2. Pelaku usaha wajib memisahkan lokasi penyembelihan hewan halal dengan hewan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a2" value="m" id="3a2m"/>
@@ -1338,95 +788,555 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">3. Lokasi, tempat dan peralatan PPH wajib dijaga kebersihan, higieni sanitasi, dan terpelihara untuk mencegah masuknya hama dan penyakit serangga lainnya, serta bebas dari hewan peliharaan dan hewan liar</td>
+                                                            <td class="valign-middle">3. Pelaku usaha wajib memisahkan lokasi penyembelihan yang memenuhi persyaratan :</td>                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. Terpisah secara fisik antara lokasi rumah potong hewan halal dengan lokasi rumah potong hewan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a3" value="m" id="3a3m"/>
+                                                                    <input type="radio" name="rb3a3a" value="m" id="3a3am"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a3" value="tm" id="3a3tm"/>
+                                                                    <input type="radio" name="rb3a3a" value="tm" id="3a3atm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a3" value="tr" id="3a3tr"/>
+                                                                    <input type="radio" name="rb3a3a" value="tr" id="3a3atr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a3" type="text" class="form-control" placeholder="Catatan" id="3a3ca"/>
+                                                                <input name="ca3a3a" type="text" class="form-control" placeholder="Catatan" id="3a3aca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Fasilitas sanitasi wajib disediakan dalam jumlah yang memadai dan dipelihara kebersihannya</td>
+                                                            <td class="valign-middle">b. Dibatasi dengan pagar tembok paling rendah 3 (tiga) meter untuk mencegah lalu lintas orang, alat, dan Produk antar rumah potong</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a4" value="m" id="3a4m"/>
+                                                                    <input type="radio" name="rb3a3b" value="m" id="3a3bm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a4" value="tm" id="3a4tm"/>
+                                                                    <input type="radio" name="rb3a3b" value="tm" id="3a3btm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a4" value="tr" id="3a4tr"/>
+                                                                    <input type="radio" name="rb3a3b" value="tr" id="3a3btr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a4" type="text" class="form-control" placeholder="Catatan" id="3a4ca"/>
+                                                                <input name="ca3a3b" type="text" class="form-control" placeholder="Catatan" id="3a3bca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">5. Fasilitas display dipisahkan secara fisik antara produk halal dan tidak halal</td>
+                                                            <td class="valign-middle">c. Tidak berada di daerah rawan banjir, tercemar asap, bau, debu, dan kontaminan lainnya</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a5" value="m" id="3a5m"/>
+                                                                    <input type="radio" name="rb3a3c" value="m" id="3a3cm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a5" value="tm" id="3a5tm"/>
+                                                                    <input type="radio" name="rb3a3c" value="tm" id="3a3ctm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a5" value="tr" id="3a5tr"/>
+                                                                    <input type="radio" name="rb3a3c" value="tr" id="3a3ctr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a5" type="text" class="form-control" placeholder="Catatan" id="3a5ca"/>
+                                                                <input name="ca3a3c" type="text" class="form-control" placeholder="Catatan" id="3a3cca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">6. Seluruh penggunaan fasilitas, barang, dan peralatan terpisahkan antara produk halal dan non halal. (compile dengan point 7 & 8.)</td>
+                                                            <td class="valign-middle">d. Memiliki fasilitas penanganan limbah padat dan cair yang terpisah dengan rumah potong hewan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a6" value="m" id="3a6m"/>
+                                                                    <input type="radio" name="rb3a3d" value="m" id="3a3dm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a6" value="tm" id="3a6tm"/>
+                                                                    <input type="radio" name="rb3a3d" value="tm" id="3a3dtm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a6" value="tr" id="3a6tr"/>
+                                                                    <input type="radio" name="rb3a3d" value="tr" id="3a3dtr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a6" type="text" class="form-control" placeholder="Catatan" id="3a6ca"/>
+                                                                <input name="ca3a3d" type="text" class="form-control" placeholder="Catatan" id="3a3dca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">7.  a. Fasilitas Penerimaan/penampungan dan penimbangan bahan dipisahkan antara produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle">e. Konstruksi dasar seluruh bangunan harus mampu mencegah kontaminasi</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a3e" value="m" id="3a3em"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a3e" value="tm" id="3a3etm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a3e" value="tr" id="3a3etr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a3e" type="text" class="form-control" placeholder="Catatan" id="3a3eca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">f. Memiliki pintu yang terpisah untuk masuknya hewan potong dengan keluarnya karkas dan daging</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a3f" value="m" id="3a3fm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a3f" value="tm" id="3a3ftm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a3f" value="tr" id="3a3ftr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a3f" type="text" class="form-control" placeholder="Catatan" id="3a3fca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">4. Pelaku usaha wajib memisahkan tempat penyembelihan hewan halal dengan hewan tidak halal meliputi :</td>                                                                      
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. penampungan hewan </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4a" value="m" id="3a4am"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4a" value="tm" id="3a4atm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4a" value="tr" id="3a4atr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a4a" type="text" class="form-control" placeholder="Catatan" id="3a4aca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">b. penyembelihan hewan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4b" value="m" id="3a4bm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4b" value="tm" id="3a4btm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4b" value="tr" id="3a4btr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a4b" type="text" class="form-control" placeholder="Catatan" id="3a4bca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">c. pengulitan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4c" value="m" id="3a4cm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4c" value="tm" id="3a4ctm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4c" value="tr" id="3a4ctr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a4c" type="text" class="form-control" placeholder="Catatan" id="3a4cca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">d. pengeluaran jeroan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4d" value="m" id="3a4dm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4d" value="tm" id="3a4dtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4d" value="tr" id="3a4dtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a4d" type="text" class="form-control" placeholder="Catatan" id="3a4dca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">e. ruang pelayuan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4e" value="m" id="3a4em"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4e" value="tm" id="3a4etm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4e" value="tr" id="3a4etr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a4e" type="text" class="form-control" placeholder="Catatan" id="3a4eca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">f. penanganan karkas</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4f" value="m" id="3a4fm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4f" value="tm" id="3a4ftm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4f" value="tr" id="3a4ftr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a4f" type="text" class="form-control" placeholder="Catatan" id="3a4fca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">g. ruang pendinginan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4g" value="m" id="3a4gm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4g" value="tm" id="3a4gtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4g" value="tr" id="3a4gtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a4g" type="text" class="form-control" placeholder="Catatan" id="3a4gca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">h. sarana penanganan limbah</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4h" value="m" id="3a4hm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4h" value="tm" id="3a4htm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a4h" value="tr" id="3a4htr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a4h" type="text" class="form-control" placeholder="Catatan" id="3a4hca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">5. Pelaku usaha wajib memisahkan tempat dan alat PPH yang dimaksud pada butir 1 (satu) meliputi tempat :</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. penyembelihan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5a" value="m" id="3a5am"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5a" value="tm" id="3a5atm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5a" value="tr" id="3a5atr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a5a" type="text" class="form-control" placeholder="Catatan" id="3a5aca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">b. pengolahan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5b" value="m" id="3a5bm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5b" value="tm" id="3a5btm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5b" value="tr" id="3a5btr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a5b" type="text" class="form-control" placeholder="Catatan" id="3a5bca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">c. penyimpanan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5c" value="m" id="3a5cm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5c" value="tm" id="3a5ctm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5c" value="tr" id="3a5ctr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a5c" type="text" class="form-control" placeholder="Catatan" id="3a5cca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">d. pengemasan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5d" value="m" id="3a5dm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5d" value="tm" id="3a5dtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5d" value="tr" id="3a5dtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a5d" type="text" class="form-control" placeholder="Catatan" id="3a5dca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">e. pendistribusian</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5e" value="m" id="3a5em"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5e" value="tm" id="3a5etm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5e" value="tr" id="3a5etr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a5e" type="text" class="form-control" placeholder="Catatan" id="3a5eca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">f. penjualan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5f" value="m" id="3a5fm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5f" value="tm" id="3a5ftm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5f" value="tr" id="3a5ftr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a5f" type="text" class="form-control" placeholder="Catatan" id="3a5fca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">g. penyajian</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5g" value="m" id="3a5gm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5g" value="tm" id="3a5gtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a5f" value="tr" id="3a5gtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a5g" type="text" class="form-control" placeholder="Catatan" id="3a5gca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">6. Seluruh penggunaan fasilitas, barang, dan peralatan terpisahkan antara produk halal dan non halal. (compile dengan point 7 & 8.)</td>                                                                                                                                                         
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. Menjaga kebersihan dan higienitas lokasi dan tempat PPH</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6a" value="m" id="3a6am"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6a" value="tm" id="3a6atm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6a" value="tr" id="3a6atr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a6a" type="text" class="form-control" placeholder="Catatan" id="3a6aca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">b. Memiliki lokasi dan tempat PPH yang bebas dari Bahan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6b" value="m" id="3a6bm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6b" value="tm" id="3a6btm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6b" value="tr" id="3a6btr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a6b" type="text" class="form-control" placeholder="Catatan" id="3a6bca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">c. Memiliki lokasi dan tempat PPH yang bebas dari bahan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6c" value="m" id="3a6cm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6c" value="tm" id="3a6ctm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a6c" value="tr" id="3a6ctr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a6c" type="text" class="form-control" placeholder="Catatan" id="3a6cca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">7. Pelaku Usaha wajib memisahkan tempat pengolahan antara yang halal dan tidak halal meliputi : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. penampungan bahan </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a7a" value="m" id="3a7am"/>
@@ -1448,7 +1358,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">&nbsp;&nbsp;&nbsp;&nbsp;b. Fasilitas pencampuran dan pencetakkan bahan dipisahkan antara produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle">b. penimbangan bahan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a7b" value="m" id="3a7bm"/>
@@ -1470,7 +1380,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">&nbsp;&nbsp;&nbsp;&nbsp;c. Fasilitas pemasakan dan proses-proses tambahan lainnya dipisahkan antara produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle">c. pencampuran bahan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a7c" value="m" id="3a7cm"/>
@@ -1492,95 +1402,287 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">8. Fasilitas penyimpanan bahan dan produk serta sarananya telah dipisahkan antara produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle">d. pencetakan produk</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a8" value="m" id="3a8m"/>
+                                                                    <input type="radio" name="rb3a7d" value="m" id="3a7dm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a8" value="tm" id="3a8tm"/>
+                                                                    <input type="radio" name="rb3a7d" value="tm" id="3a7dtm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a8" value="tr" id="3a8tr"/>
+                                                                    <input type="radio" name="rb3a7d" value="tr" id="3a7dtr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a8" type="text" class="form-control" placeholder="Catatan" id="3a8ca"/>
+                                                                <input name="ca3a7d" type="text" class="form-control" placeholder="Catatan" id="3a7dca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">9. Fasilitas pengemasan produk telah dipisahkan antara produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle">e. pemasakan produk dan/atau </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a9" value="m" id="3a9m"/>
+                                                                    <input type="radio" name="rb3a7e" value="m" id="3a7em"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a9" value="tm" id="3a9tm"/>
+                                                                    <input type="radio" name="rb3a7e" value="tm" id="3a7etm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a9" value="tr" id="3a9tr"/>
+                                                                    <input type="radio" name="rb3a7e" value="tr" id="3a7etr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a9" type="text" class="form-control" placeholder="Catatan" id="3a9ca"/>
+                                                                <input name="ca3a7e" type="text" class="form-control" placeholder="Catatan" id="3a7eca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">10. Fasilitas sarana distribusi dari tempat penyimpanan ke distribusi produk dan alat transportasi untuk distribusi produk telah dipisahkan antara produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle">f. proses lainnya yang mempengaruhi pengolahan pangan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a10" value="m" id="3a10m"/>
+                                                                    <input type="radio" name="rb3a7f" value="m" id="3a7fm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a10" value="tm" id="3a10tm"/>
+                                                                    <input type="radio" name="rb3a7f" value="tm" id="3a7ftm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a10" value="tr" id="3a10tr"/>
+                                                                    <input type="radio" name="rb3a7f" value="tr" id="3a7ftr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a10" type="text" class="form-control" placeholder="Catatan" id="3a10ca"/>
+                                                                <input name="ca3a7f" type="text" class="form-control" placeholder="Catatan" id="3a7fca"/>
+                                                            </td>                                                                                                
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">8. Pelaku Usaha wajib memisahkan tempat penyimpanan antara yang halal dan tidak halal meliputi : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. Penerimaan Bahan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8a" value="m" id="3a8am"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8a" value="tm" id="3a8atm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8a" value="tr" id="3a8atr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a8a" type="text" class="form-control" placeholder="Catatan" id="3a8aca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">b. Penerimaan Produk setelah proses pengolahan</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8b" value="m" id="3a8bm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8b" value="tm" id="3a8btm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8b" value="tr" id="3a8btr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a8b" type="text" class="form-control" placeholder="Catatan" id="3a8bca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">c. Sarana yang digunakan untuk penyimpanan Bahan dan Produk</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8c" value="m" id="3a8cm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8c" value="tm" id="3a8ctm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a8c" value="tr" id="3a8ctr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a8c" type="text" class="form-control" placeholder="Catatan" id="3a8cca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">9. Pelaku Usaha wajib memisahkan tempat pengemasan antara yang halal dan tidak halal meliputi :</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. Bahan kemasan yang digunakan untuk mengemas produk</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a9a" value="m" id="3a9am"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a9a" value="tm" id="3a9atm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a9a" value="tr" id="3a9atr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a9a" type="text" class="form-control" placeholder="Catatan" id="3a9aca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">b. Sarana pengemasan produk</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a9b" value="m" id="3a9bm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a9b" value="tm" id="3a9btm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a9b" value="tr" id="3a9btr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a9a" type="text" class="form-control" placeholder="Catatan" id="3a9aca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">10. Pelaku Usaha wajib memisahkan tempat pendistribusian antara produk halal dan tidak halal meliputi :</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. Sarana pengangkutan dari tempat penyimpanan ke alat distribusi produk</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a10a" value="m" id="3a10am"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a10a" value="tm" id="3a10atm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a10a" value="tr" id="3a10atr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a10a" type="text" class="form-control" placeholder="Catatan" id="3a10aca"/>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">11. Fasilitas tempat penjualan dari sarana sampai proses penjualan telah dipisahkan antara produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle">b. Alat transportasi untuk distribusi produk</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a11" value="m" id="3a11m"/>
+                                                                    <input type="radio" name="rb3a10b" value="m" id="3a10bm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a11" value="tm" id="3a11tm"/>
+                                                                    <input type="radio" name="rb3a10b" value="tm" id="3a10btm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3a11" value="tr" id="3a11tr"/>
+                                                                    <input type="radio" name="rb3a10b" value="tr" id="3a10btr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a11" type="text" class="form-control" placeholder="Catatan" id="3a11ca"/>
+                                                                <input name="ca3a10b" type="text" class="form-control" placeholder="Catatan" id="3a10bca"/>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">12. Fasilitas tempat penyajian dari sarana sampai proses penyajian telah dipisahkan antara produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle">11.	Pelaku Usaha wajib memisahkan tempat penjualan antara yang halal dan tidak halal meliputi :</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">a. Sarana penjualan produk</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a11a" value="m" id="3a11am"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a11a" value="tm" id="3a11atm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a11a" value="tr" id="3a11atr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a11a" type="text" class="form-control" placeholder="Catatan" id="3a11aca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">b. Proses penjualan produk</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a11b" value="m" id="3a11bm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a11b" value="tm" id="3a11btm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a11b" value="tr" id="3a11btr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a11b" type="text" class="form-control" placeholder="Catatan" id="3a11bca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">12.	Pelaku Usaha wajib memisahkan </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a12" value="m" id="3a12m"/>
@@ -1602,7 +1704,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">13. Proses pendistribusian, penjualan, dan penyajian, produk hewan segar telah dipisahkan antara halal dan tidak halal</td>
+                                                            <td class="valign-middle">13. Pelaku Usaha wajib menyediakan tempat proses produksi halal yang bebas dari hewan peliharaan dan hewan liar</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a13" value="m" id="3a13m"/>
@@ -1624,7 +1726,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">14. Proses penjualan, penyajian produk hewan segar dan olahan asal hewan  telah dipisahkan antara halal dan tidak halal</td>
+                                                            <td class="valign-middle">14. Pelaku Usaha wajib memisahkan tempat/fasilitas pencucian peralatan produksi antara halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a14" value="m" id="3a14m"/>
@@ -1646,7 +1748,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">15. Tempat produksi dirancang untuk memfasilitasi proses pembersihan dan pengawasan yang tepat</td>
+                                                            <td class="valign-middle">15. Pelaku Usaha wajib menyediakan fasilitas sanitasi dalam jumlah yang memadai dan dipelihara kebersihannya</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a15" value="m" id="3a15m"/>
@@ -1668,7 +1770,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">16. Lokasi proses produksi jauh dari peternakan babi</td>
+                                                            <td class="valign-middle">16. Pelaku Usaha wajib memisahkan secara fisik fasilitas display antara Produk Halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a16" value="m" id="3a16m"/>
@@ -1690,7 +1792,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">17. Tempat proses produksi halal bebas dari hewan peliharaan dan hewan liar</td>
+                                                            <td class="valign-middle">17. Pelaku Usaha wajib memastikan tidak terdapat barang-barang dan peralatan yang tidak terkait dengan proses produksi berada di Area pemrosesan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a17" value="m" id="3a17m"/>
@@ -1712,7 +1814,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">18.	Fasilitasi pencucian peralatan terpisah antara proses produksi halal dan tidak halal</td>
+                                                            <td class="valign-middle">18. Pelaku Usaha wajib memisahkan lokasi dan tempat penyembelihan antara hewan halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a18" value="m" id="3a18m"/>
@@ -1734,7 +1836,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">19. Fasilitas display antara produk halal dan non halal</td>
+                                                            <td class="valign-middle">19. Pelaku Usaha wajib memisahkan tempat pengolahan antara penampungan, penimbangan, dan pencampuran Bahan halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3a19" value="m" id="3a19m"/>
@@ -1753,7 +1855,337 @@
                                                             <td class="valign-middle">
                                                                 <input name="ca3a19" type="text" class="form-control" placeholder="Catatan" id="3a19ca"/>
                                                             </td>
-                                                        </tr>                                                        
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">20. Pelaku Usaha wajib memisahkan tempat pengolahan antara pencetakan dan pemasakan Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a20" value="m" id="3a20m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a20" value="tm" id="3a20tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a20" value="tr" id="3a20tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a20" type="text" class="form-control" placeholder="Catatan" id="3a20ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">21. Pelaku Usaha wajib memisahkan tempat penyimpanan penerimaan Bahan antara halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a21" value="m" id="3a21m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a21" value="tm" id="3a21tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a21" value="tr" id="3a21tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a21" type="text" class="form-control" placeholder="Catatan" id="3a21ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">22. Pelaku Usaha wajib memisahkan tempat penyimpanan penerimaan Produk setelah proses pengolahan antara halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a22" value="m" id="3a22m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a22" value="tm" id="3a22tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a22" value="tr" id="3a22tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a22" type="text" class="form-control" placeholder="Catatan" id="3a22ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">23. Pelaku Usaha wajib memisahkan tempat penyimpanan sarana yang digunakan untuk penyimpanan Bahan dan Produk antara halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a23" value="m" id="3a23m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a23" value="tm" id="3a23tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a23" value="tr" id="3a23tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a23" type="text" class="form-control" placeholder="Catatan" id="3a23ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">24. Pelaku Usaha wajib memisahkan tempat pengemasan Bahan kemasan yang digunakan untuk pengemasan Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a24" value="m" id="3a24m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a24" value="tm" id="3a24tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a24" value="tr" id="3a24tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a24" type="text" class="form-control" placeholder="Catatan" id="3a24ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">25. Pelaku Usaha wajib memisahkan tempat pengemasan sarana pengemasan Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a25" value="m" id="3a25m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a25" value="tm" id="3a25tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a25" value="tr" id="3a25tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a25" type="text" class="form-control" placeholder="Catatan" id="3a25ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">26. Pelaku Usaha wajib memisahkan tempat pendistribusian sarana pengangkutan dari tempat penyimpanan ke alat distribusi Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a26" value="m" id="3a26m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a26" value="tm" id="3a26tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a26" value="tr" id="3a26tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a26" type="text" class="form-control" placeholder="Catatan" id="3a26ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">27. Pelaku Usaha wajib memisahkan tempat pendistribusian alat transportasi untuk distribusi Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a27" value="m" id="3a27m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a27" value="tm" id="3a27tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a27" value="tr" id="3a27tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a27" type="text" class="form-control" placeholder="Catatan" id="3a27ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">28.	Pelaku Usaha wajib memisahkan tempat sarana penjualan Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a28" value="m" id="3a28m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a28" value="tm" id="3a28tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a28" value="tr" id="3a28tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a28" type="text" class="form-control" placeholder="Catatan" id="3a28ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">29. Pelaku Usaha wajib memisahkan tempat proses penjualan Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a29" value="m" id="3a29m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a29" value="tm" id="3a29tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a29" value="tr" id="3a29tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a29" type="text" class="form-control" placeholder="Catatan" id="3a29ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">30. Pelaku Usaha wajib memisahkan tempat sarana penyajian Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a30" value="m" id="3a30m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a30" value="tm" id="3a30tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a30" value="tr" id="3a30tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a30" type="text" class="form-control" placeholder="Catatan" id="3a30ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">31. Pelaku Usaha wajib memisahkan tempat proses penyajian Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a31" value="m" id="3a31m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a31" value="tm" id="3a31tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a31" value="tr" id="3a31tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a31" type="text" class="form-control" placeholder="Catatan" id="3a31ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">32. Pelaku Usaha tidak boleh menggunakan tempat produksi yang pernah digunakan untuk Produk yang mengandung babi atau turunannya</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a32" value="m" id="3a32m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a32" value="tm" id="3a32tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a32" value="tr" id="3a32tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a32" type="text" class="form-control" placeholder="Catatan" id="3a32ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">33. Pelaku Usaha wajib memisahkan tempat penyimpanan material Produk Bahan halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a33" value="m" id="3a33m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a33" value="tm" id="3a33tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a33" value="tr" id="3a33tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a33" type="text" class="form-control" placeholder="Catatan" id="3a33ca"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">34. Pelaku Usaha wajib menjamin tidak ada kontaminasi pada saat pengambilan sampel Bahan dan Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a34" value="m" id="3a34m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a34" value="tm" id="3a343tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3a34" value="tr" id="3a34tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3a34" type="text" class="form-control" placeholder="Catatan" id="3a34ca"/>
+                                                            </td>
+                                                        </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center">b</td>
                                                             <td class="valign-middle font-weight-bold">Peralatan dan Perangkat Proses Produk Halal</td>
@@ -1764,7 +2196,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">1. Peralatan dan perangkat dipisahkan antara Proses Produk Halal dengan Produk yang tidak halal meliputi alat penyembelihan, pengolahan, penyimpanan, pengemasan, pendistribusian, penjualan, dan penyajian</td>
+                                                            <td class="valign-middle">1. Pelaku Usaha wajib memisahkan peralatan dan perangkat Proses Produk Halal dengan Produk yang tidak halal meliputi alat penyembelihan, pengolahan, penyimpanan, pengemasan, pendistribusian, penjualan, dan penyajian</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b1" value="m" id="3b1m"/>
@@ -1786,7 +2218,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">2. Sarana peralatan penyembelihan yang digunakan berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal.</td>
+                                                            <td class="valign-middle">2. Pelaku Usaha wajib menjamin kebersihan dan higienitas peralatan dan perangkat Proses Produk Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b2" value="m" id="3b2m"/>
@@ -1808,7 +2240,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">3. Sarana peralatan pengolahan yang digunakan berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal.</td>
+                                                            <td class="valign-middle">3. Pelaku Usaha wajib menjamin peralatan dan perangkat Proses Produk Halal bebas dari Najis</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b3" value="m" id="3b3m"/>
@@ -1830,7 +2262,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Alat proses produksi halal dijamin kebersihan, higienitas, bebas dari najis, dan bebas dari bahan tidak halal</td>
+                                                            <td class="valign-middle">4. Pelaku Usaha wajib menjamin peralatan dan perangkat Proses Produk Halal bebas dari Bahan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b4" value="m" id="3b4m"/>
@@ -1852,7 +2284,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">5. Peralatan, perangkat, dan mesin yang bersentuhan langsung dengan PPH tidak terbuat dari bahan tidak halal</td>
+                                                            <td class="valign-middle">5. Pelaku Usaha wajib menjamin setiap bagian dari peralatan, perangkat, dan mesin yang bersentuhan langsung dengan Proses Produksi Halal tidak terbuat dari Bahan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b5" value="m" id="3b5m"/>
@@ -1874,7 +2306,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">6. Bahan untuk perawatan perangkat proses produk halal tidak terbuat dari bahan tidak halal</td>
+                                                            <td class="valign-middle">6. Pelaku Usaha wajib menjamin penggunaan Bahan untuk perawatan mesin, peralatan dan perangkat Proses Produk Halal tidak terbuat dari Bahan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b6" value="m" id="3b6m"/>
@@ -1896,7 +2328,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">7. Peralatan/alat penolong tidak menggunakan bahan tidak halal, contoh kuas babi</td>
+                                                            <td class="valign-middle">7. Pelaku Usaha dilarang menggunakan peralatan atau sikat dari bulu babi</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b7" value="m" id="3b7m"/>
@@ -1918,7 +2350,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">8. Sarana peralatan penyimpanan yang digunakan berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal.</td>
+                                                            <td class="valign-middle">8. Pelaku Usaha wajib tidak menggunakan peralatan penyimpanan secara bergantian antara Produk Halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b8" value="m" id="3b8m"/>
@@ -1940,7 +2372,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">9. Sarana peralatan pengemasan yang digunakan berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal.</td>
+                                                            <td class="valign-middle">9. Pelaku Usaha wajib menggunakan sarana peralatan penyimpanan yang berbeda dalam kegiatan pembersihan peralatan yang halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b9" value="m" id="3b9m"/>
@@ -1962,7 +2394,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">10. Sarana peralatan pendistribusian yang digunakan berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal.</td>
+                                                            <td class="valign-middle">10. Pelaku Usaha wajib menggunakan sarana peralatan penyimpanan yang berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b10" value="m" id="3b10m"/>
@@ -1984,7 +2416,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">11. Sarana peralatan penjualan yang digunakan berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal.</td>
+                                                            <td class="valign-middle">11. Pelaku Usaha wajib memiliki tempat penyimpanan peralatan sendiri untuk yang halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b11" value="m" id="3b11m"/>
@@ -2006,7 +2438,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">12. Sarana peralatan penyajian yang digunakan berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal.</td>
+                                                            <td class="valign-middle">12. Pelaku Usaha wajib tidak menggunakan peralatan pengemasan secara bergantian antara Produk halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b12" value="m" id="3b12m"/>
@@ -2028,7 +2460,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">13. Peralatan untuk pengambilan sampel tidak terkontaminasi dengan bahan atau produk tidak halal.</td>
+                                                            <td class="valign-middle">13. Pelaku Usaha wajib menggunakan sarana peralatan pengemasan yang berbeda dalam kegiatan pembersihan peralatan yang halal dan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3b13" value="m" id="3b13m"/>
@@ -2049,6 +2481,336 @@
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">14. Pelaku Usaha wajib menggunakan sarana peralatan pengemasan yang berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b14" value="m" id="3b14m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b14" value="tm" id="3b14tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b14" value="tr" id="3b14tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b14" type="text" class="form-control" placeholder="Catatan" id="3b14ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">15. Pelaku Usaha wajib memiliki tempat pengemasan peralatan sendiri untuk yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b15" value="m" id="3b15m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b15" value="tm" id="3b15tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b15" value="tr" id="3b15tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b15" type="text" class="form-control" placeholder="Catatan" id="3b15ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">16. Pelaku Usaha wajib tidak menggunakan peralatan pendistribusian secara bergantian antara Produk halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b16" value="m" id="3b16m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b16" value="tm" id="3b16tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b16" value="tr" id="3b16tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b16" type="text" class="form-control" placeholder="Catatan" id="3b16ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">17. Pelaku Usaha wajib menggunakan sarana peralatan pendistribusian yang berbeda dalam kegiatan pembersihan peralatan yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b17" value="m" id="3b17m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b17" value="tm" id="3b17tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b17" value="tr" id="3b17tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b17" type="text" class="form-control" placeholder="Catatan" id="3b17ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">18. Pelaku Usaha wajib menggunakan sarana peralatan pendistribusian yang berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b18" value="m" id="3b18m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b18" value="tm" id="3b18tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b18" value="tr" id="3b18tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b18" type="text" class="form-control" placeholder="Catatan" id="3b18ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">19. Pelaku Usaha wajib memiliki tempat pendistribusian peralatan sendiri untuk yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b19" value="m" id="3b19m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b19" value="tm" id="3b19tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b19" value="tr" id="3b19tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b19" type="text" class="form-control" placeholder="Catatan" id="3b19ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">20. Pelaku Usaha wajib tidak menggunakan peralatan penjualan secara bergantian antara Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b20" value="m" id="3b20m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b20" value="tm" id="3b20tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b20" value="tr" id="3b20tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b20" type="text" class="form-control" placeholder="Catatan" id="3b20ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">21. Pelaku Usaha wajib menggunakan sarana peralatan penjualan yang berbeda dalam kegiatan pembersihan peralatan yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b21" value="m" id="3b21m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b21" value="tm" id="3b21tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b21" value="tr" id="3b21tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b21" type="text" class="form-control" placeholder="Catatan" id="3b21ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">22. Pelaku Usaha wajib menggunakan sarana peralatan penjualan yang berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b22" value="m" id="3b22m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b22" value="tm" id="3b22tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b22" value="tr" id="3b22tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b22" type="text" class="form-control" placeholder="Catatan" id="3b22ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">23. Pelaku Usaha wajib tidak menggunakan peralatan penyajian secara bergantian antara Produk Halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b23" value="m" id="3b23m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b23" value="tm" id="3b23tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b23" value="tr" id="3b23tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b23" type="text" class="form-control" placeholder="Catatan" id="3b23ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">24. Pelaku Usaha wajib menggunakan sarana peralatan penyajian yang berbeda dalam kegiatan pembersihan peralatan yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b24" value="m" id="3b24m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b24" value="tm" id="3b24tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b24" value="tr" id="3b24tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b24" type="text" class="form-control" placeholder="Catatan" id="3b24ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">25. Pelaku Usaha wajib menggunakan sarana peralatan penyajian yang berbeda untuk kegiatan pemeliharaan peralatan yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b25" value="m" id="3b25m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b25" value="tm" id="3b25tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b25" value="tr" id="3b25tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b25" type="text" class="form-control" placeholder="Catatan" id="3b25ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">26. Pelaku Usaha wajib memiliki tempat penyimpanan peralatan penyajian sendiri untuk yang halal dan tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b26" value="m" id="3b26m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b26" value="tm" id="3b26tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b26" value="tr" id="3b26tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b26" type="text" class="form-control" placeholder="Catatan" id="3b26ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">27. Pelaku Usaha tidak boleh menggunakan peralatan dan perangkat yang pernah digunakan dalam proses produksi Produk tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b27" value="m" id="3b27m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b27" value="tm" id="3b27tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b27" value="tr" id="3b27tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b27" type="text" class="form-control" placeholder="Catatan" id="3b27ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">28. Pelaku Usaha wajib menjamin peralatan dan perangkat yang digunakan dalam proses display Produk Halal wajib bersih, higienis, aman dan tidak digunakan secara bergantian saat menangani Produk yang tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b28" value="m" id="3b28m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b28" value="tm" id="3b28tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3b28" value="tr" id="3b28tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3b28" type="text" class="form-control" placeholder="Catatan" id="3b28ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>                                                        
+                                                        <tr>
                                                             <td class="valign-middle text-center">c</td>
                                                             <td class="valign-middle font-weight-bold">Prosedur Proses Produk Halal (PPH)</td>
                                                             <td class="valign-middle text-center"></td>
@@ -2059,49 +2821,468 @@
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle">
-                                                                1.	Proses Produk Halal harus dimiliki dan diterapkan sebagai berikut :
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;a.	Penggunaan fasilitas produksi yang kontak dengan Bahan dan/atau Produk antara/akhir bersifat bebas dari Najis berat (Mughalazah)
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;b.	Penggunaan Bahan dan Produk yang diajukan tidak terkontaminasi Najis
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;c.	Penyucian fasilitas produksi sesuai syariat Islam
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;d.	Penggunaan Bahan baru yang akan digunakan untuk Produk Halal
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;e.	Pembelian Bahan
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;f.	Pemeriksaan kedatangan Bahan
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;g.	Proses produksi
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;h.	Penyimpanan Bahan dan Produk
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;i.	Transportasi Bahan dan Produk
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;j.	Ketertelusuran kehalalan
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;k.	Penanganan Produk yang tidak memenuhi kriteria halal
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;l.	Penarikan Produk
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;m.	Peluncuran/penjualan Produk
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;n.	Formulasi produk/pengembangan Produk baru
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;o.	Display Produk
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;p.	Ketentuan pengunjung
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;q.	Penentuan menu
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;r.	Pemingsanan hewan
-                                                                <br>&nbsp;&nbsp;&nbsp;&nbsp;s.	Penyembelihan hewan
+                                                                1.	Pelaku Usaha wajib memiliki dan menerapkan prosedur pelaksanaan Proses Produk Halal sebagai berikut :
+                                                            </td>                                                                                                                                                          
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                a. Pemastian penggunaan fasilitas produksi yang kontak dengan Bahan dan/atau Produk antara/akhir bersifat bebas dari Najis berat (Mughalazah)
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3c1" value="m" id="3c1m"/>
+                                                                    <input type="radio" name="rb3c1a" value="m" id="3c1am"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3c1" value="tm" id="3c1tm"/>
+                                                                    <input type="radio" name="rb3c1a" value="tm" id="3c1atm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb3c1" value="tr" id="3c1tr"/>
+                                                                    <input type="radio" name="rb3c1a" value="tr" id="3c1atr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3c1" type="text" class="form-control" placeholder="Catatan" id="3c1ca"/>
+                                                                <input name="ca3c1a" type="text" class="form-control" placeholder="Catatan" id="3c1aca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">2. Prosedur Proses Produk Halal disosialisasikan ke semua pihak yang terkait</td>
+                                                            <td class="valign-middle">
+                                                                b. Pemastian penggunaan Bahan dan Produk yang diajukan tidak terkontaminasi Najis
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1b" value="m" id="3c1bm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1b" value="tm" id="3c1btm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1b" value="tr" id="3c1btr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1b" type="text" class="form-control" placeholder="Catatan" id="3c1bca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                c. Penyucian fasilitas produksi sesuai syariat Islam
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1c" value="m" id="3c1cm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1c" value="tm" id="3c1ctm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1c" value="tr" id="3c1ctr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1c" type="text" class="form-control" placeholder="Catatan" id="3c1cca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                d. Penggunaan Bahan baru yang akan digunakan untuk Produk Halal
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1d" value="m" id="3c1dm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1d" value="tm" id="3c1dtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1d" value="tr" id="3c1dtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1d" type="text" class="form-control" placeholder="Catatan" id="3c1dca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                e.	Pembelian Bahan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1e" value="m" id="3c1em"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1e" value="tm" id="3c1etm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1e" value="tr" id="3c1etr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1e" type="text" class="form-control" placeholder="Catatan" id="3c1eca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                f. Pemeriksaan kedatangan Bahan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1f" value="m" id="3c1fm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1f" value="tm" id="3c1ftm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1f" value="tr" id="3c1ftr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1f" type="text" class="form-control" placeholder="Catatan" id="3c1fca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                g. Proses produksi
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1g" value="m" id="3c1gm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1g" value="tm" id="3c1gtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1g" value="tr" id="3c1gtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1g" type="text" class="form-control" placeholder="Catatan" id="3c1gca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                h. Penyimpanan Bahan dan Produk
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1h" value="m" id="3c1hm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1h" value="tm" id="3c1htm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1h" value="tr" id="3c1htr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1h" type="text" class="form-control" placeholder="Catatan" id="3c1hca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                i. Transportasi Bahan dan Produk
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1i" value="m" id="3c1im"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1i" value="tm" id="3c1itm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1i" value="tr" id="3c1itr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1i" type="text" class="form-control" placeholder="Catatan" id="3c1ica"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                j.	Ketertelusuran kehalalan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1j" value="m" id="3c1jm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1j" value="tm" id="3c1jtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1j" value="tr" id="3c1jtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1j" type="text" class="form-control" placeholder="Catatan" id="3c1jca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                k. Penanganan Produk yang tidak memenuhi kriteria halal
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1k" value="m" id="3c1km"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1k" value="tm" id="3c1ktm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1k" value="tr" id="3c1ktr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1k" type="text" class="form-control" placeholder="Catatan" id="3c1kca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                l.	Penarikan Produk
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1l" value="m" id="3c1lm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1l" value="tm" id="3c1ltm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1l" value="tr" id="3c1ltr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1l" type="text" class="form-control" placeholder="Catatan" id="3c1lca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                m. Peluncuran/penjualan Produk
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1m" value="m" id="3c1mm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1m" value="tm" id="3c1mtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1m" value="tr" id="3c1mtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1m" type="text" class="form-control" placeholder="Catatan" id="3c1mca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                n.	Formulasi produk/pengembangan Produk baru
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1n" value="m" id="3c1nm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1n" value="tm" id="3c1ntm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1n" value="tr" id="3c1ntr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1n" type="text" class="form-control" placeholder="Catatan" id="3c1nca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                o. Display Produk
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1o" value="m" id="3c1om"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1o" value="tm" id="3c1otm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1o" value="tr" id="3c1otr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1o" type="text" class="form-control" placeholder="Catatan" id="3c1oca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                p. Ketentuan pengunjung
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1p" value="m" id="3c1pm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1p" value="tm" id="3c1ptm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1p" value="tr" id="3c1ptr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1p" type="text" class="form-control" placeholder="Catatan" id="3c1pca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                q.	Penentuan menu
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1q" value="m" id="3c1qm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1q" value="tm" id="3c1qtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1q" value="tr" id="3c1qtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1q" type="text" class="form-control" placeholder="Catatan" id="3c1qca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                r. Pemingsanan hewan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1r" value="m" id="3c1rm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1r" value="tm" id="3c1rtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1r" value="tr" id="3c1rtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1r" type="text" class="form-control" placeholder="Catatan" id="3c1rca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                s. Penyembelihan hewan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1s" value="m" id="3c1sm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1s" value="tm" id="3c1stm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb3c1s" value="tr" id="3c1str"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca3c1s" type="text" class="form-control" placeholder="Catatan" id="3c1sca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">2. Pelaku Usaha wajib mensosialisasikan prosedur Proses Produk Halal ke semua pihak yang terkait</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3c2" value="m" id="3c2m"/>
@@ -2123,7 +3304,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">3. Bukti sosialisasi terdokumentasi</td>
+                                                            <td class="valign-middle">3. Pelaku Usaha wajib memelihara bukti sosialisasi</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3c3" value="m" id="3c3m"/>
@@ -2145,7 +3326,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Proses Produk Halal dilakukan evaluasi secara berkala</td>
+                                                            <td class="valign-middle">4. Pelaku Usaha wajib melakukan evaluasi efektifitas prosedur Proses Produk Halal secara berkala</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3c4" value="m" id="3c4m"/>
@@ -2167,7 +3348,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">5. Hasil evaluasi disampaikan kepada penanggung jawab Proses Produk Halal dan pihak terkait</td>
+                                                            <td class="valign-middle">5. Pelaku Usaha wajib menyampaikan hasil evaluasi kepada penanggung jawab Proses Produk Halal dan pihak terkait</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3c5" value="m" id="3c5m"/>
@@ -2189,7 +3370,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">6. Memiliki prosedur penarikan dan pengendalian serta pengamanan dan pengawasan untuk produk yang tidak memenuhi kriteria halal.</td>
+                                                            <td class="valign-middle">6. Pelaku Usaha wajib menangani Produk yang tidak memenuhi kriteria halal dengan melakukan penarikan untuk mencegah Produk masuk kedalam rantai Proses Produk Halal serta melakukan pengendalian termasuk melakukan pengamanan dan pengawasan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3c6" value="m" id="3c6m"/>
@@ -2211,9 +3392,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">7. Memiliki prosedur identifikasi, analisis bahaya ketidakhalalan dalam proses produksinya dan penetapan
-                                                                titik kritis serta menetapkan tindakan pencegahan dan monitoring terhadap titik kritis tersebut
-                                                                </td>
+                                                            <td class="valign-middle">7. Pelaku Usaha wajib memiliki prosedur identifikasi, analisis bahaya ketidakhalalan dalam proses produksinya dan penetapan titik kritis serta menetapkan tindakan pencegahan dan monitoring terhadap titik kritis tersebut</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3c7" value="m" id="3c7m"/>
@@ -2235,8 +3414,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">8. Tindakan koreksi dan tindakan pencegahan yang diperlukan terhadap hasil evaluasi serta batas waktu penyelesaiannya telah ditetapkan
-                                                                </td>
+                                                            <td class="valign-middle">8. Pelaku Usaha wajib menetapkan tindakan koreksi dan tindakan pencegahan yang diperlukan terhadap hasil evaluasi serta batas waktu penyelesaiannya</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb3c8" value="m" id="3c8m"/>
@@ -2259,9 +3437,7 @@
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle">
-                                                                9. Memiliki prosedur pencucian Najis mughallazah yang masuk ke dalam jalur produksi halal sesuai dengan ketentuan syariat Islam sebagai berikut :
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;a.	Cuci dengan air 7x yang salah satunya dengan tanah (atau pengganti dengan daya pembersih yang sama
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;b.	Tidak menggunakan secara bergantian produk babi dan non babi walaupun sudah melalui proses pencucian
+                                                                9. Pelaku Usaha wajib menjamin prosedur pencucian Najis mughallazah yang masuk ke dalam jalur produksi halal sesuai dengan ketentuan syariat Islam sebagai berikut :
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
@@ -2285,7 +3461,7 @@
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle">
-                                                                10. Memiliki diagram alir Produk atau proses yang dicakup dalam Sistem Jaminan Produk Halal
+                                                                10. Pelaku Usaha wajib harus menyiapkan diagram alir untuk Produk atau proses yang dicakup dalam Sistem Jaminan Produk Halal
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
@@ -2352,7 +3528,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">1. Produk dan bahan yang dihasilkan harus diproses dengan cara sesuai syariat Islam, menggunakan peralatan, fasilitas produksi, sistem pengemasan, penyimpanan, dan distribusi yang tidak terkontaminasi dengan Bahan tidak halal</td>
+                                                            <td class="valign-middle">1. Pelaku Usaha wajib menghasilkan Produk dari Bahan halal, diproses dengan cara sesuai syariat Islam, menggunakan peralatan, fasilitas produksi, sistem pengemasan, penyimpanan, dan distribusi yang tidak terkontaminasi dengan Bahan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4a1" value="m" id="4a1m"/>
@@ -2374,7 +3550,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">2. Produk selama persiapan, pemrosesan, pengemasan, penyimpanan, dan pengangkutannya dijamin terpisahkan secara fisik dari Produk atau materi lain yang tidak halal sesuai dengan syariat Islam</td>
+                                                            <td class="valign-middle">2. Pelaku Usaha wajib menjamin Produk selama persiapan, pemrosesan, pengemasan, penyimpanan, dan pengangkutannya dipisahkan secara fisik dari Produk atau materi lain yang tidak halal sesuai dengan syariat Islam</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4a2" value="m" id="4a2m"/>
@@ -2397,35 +3573,132 @@
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle">
-                                                                3. Produk tidak dapat disertifikasi apabila :
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;a.	Nama Produk yang mengandung nama minuman keras
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;b.	Nama Produk yang mengandung nama babi dan anjing serta turunannya, 
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;c.	Nama Produk yang mengandung nama setan
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;d.	Nama Produk yang mengarah kepada hal-hal yang menimbulkan kekufuran dan kebatilan
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;e.	Nama Produk yang mengandung kata-kata yang berkonotasi erotis, vulgar dan/atau porno
+                                                                3.	Pelaku Usaha tidak dapat melakukan sertifikasi halal terhadap Produk dengan :
+                                                            </td>                                                                                                                                                        
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                a.	Nama Produk yang mengandung nama minuman keras
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb4a3" value="m" id="4a3m"/>
+                                                                    <input type="radio" name="rb4a3a" value="m" id="4a3am"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb4a3" value="tm" id="4a3tm"/>
+                                                                    <input type="radio" name="rb4a3a" value="tm" id="4a3atm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb4a3" value="tr" id="4a3tr"/>
+                                                                    <input type="radio" name="rb4a3a" value="tr" id="4a3atr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca4a3" type="text" class="form-control" placeholder="Catatan" id="4a3ca"/>
+                                                                <input name="ca4a3a" type="text" class="form-control" placeholder="Catatan" id="4a3aca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Sertifikasi halal tidak dapat dilakukan apabila Produk dengan bentuk Produk hewan babi dan anjing. Bentuk Produk atau label kemasan yang sifatnya erotis, vulgar dan/atau porno</td>
+                                                            <td class="valign-middle">
+                                                                b.	Nama Produk yang mengandung nama babi dan anjing serta turunannya,
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3b" value="m" id="4a3bm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3b" value="tm" id="4a3btm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3b" value="tr" id="4a3btr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4a3b" type="text" class="form-control" placeholder="Catatan" id="4a3bca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                c.	Nama Produk yang mengandung nama setan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3c" value="m" id="4a3cm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3c" value="tm" id="4a3ctm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3c" value="tr" id="4a3ctr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4a3c" type="text" class="form-control" placeholder="Catatan" id="4a3cca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                d.	Nama Produk yang mengarah kepada hal-hal yang menimbulkan kekufuran dan kebatilan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3d" value="m" id="4a3dm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3d" value="tm" id="4a3dtm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3d" value="tr" id="4a3dtr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4a3d" type="text" class="form-control" placeholder="Catatan" id="4a3dca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                e.	Nama Produk yang mengandung kata-kata yang berkonotasi erotis, vulgar dan/atau porno
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3e" value="m" id="4a3em"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3e" value="tm" id="4a3etm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4a3e" value="tr" id="4a3etr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4a3e" type="text" class="form-control" placeholder="Catatan" id="4a3eca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">4. Pelaku Usaha tidak dapat melakukan sertifikasi halal Produk dengan bentuk Produk hewan babi dan anjing. Bentuk Produk atau label kemasan yang sifatnya erotis, vulgar dan/atau porno</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4a4" value="m" id="4a4m"/>
@@ -2447,7 +3720,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">5. Sertifikasi halal tidak dapat dilakukan apabila terhadap karakteristik/profil sensori Produk yang memiliki kecenderungan bau atau rasa yang mengarah kepada Produk haram atau yang telah dinyatakan haram berdasarkan ketetapan fatwa</td>
+                                                            <td class="valign-middle">5. Pelaku Usaha tidak dapat melakukan sertifikasi halal terhadap karakteristik/profil sensori Produk yang memiliki kecenderungan bau atau rasa yang mengarah kepada Produk haram atau yang telah dinyatakan haram berdasarkan ketetapan fatwa</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4a5" value="m" id="4a5m"/>
@@ -2469,7 +3742,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">6. Produk atau Bahan yang dihasilkan aman untuk dikonsumsi</td>
+                                                            <td class="valign-middle">6. Pelaku Usaha wajib menghasilkan Produk atau Bahan yang aman untuk dikonsumsi</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4a6" value="m" id="4a6m"/>
@@ -2499,7 +3772,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">1. Bahan pengemas yang digunakan tidak terbuat atau mengandung Bahan yang tidak halal</td>
+                                                            <td class="valign-middle">1. Pelaku Usaha wajib menggunakan Bahan pengemas yang tidak terbuat atau mengandung Bahan yang tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4b1" value="m" id="4b1m"/>
@@ -2521,7 +3794,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">2. Kemasan produk halal sesuai dengan isinya</td>
+                                                            <td class="valign-middle">2. Pelaku Usaha wajib memastikan proses produksi Bahan pengemas menggunakan peralatan yang tidak terkontaminasi dengan  Najis dan Bahan tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4b2" value="m" id="4b2m"/>
@@ -2543,7 +3816,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">3. Produk karkas dengan menggunakan kemasan yang bersih, sehat, tidak berbau, tidak mempengaruhi kualitas dan keamanan daging</td>
+                                                            <td class="valign-middle">3. Pelaku Usaha wajib memastikan Bahan pengemas tidak berbahaya bagi kesehatan manusia</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4b3" value="m" id="4b3m"/>
@@ -2565,7 +3838,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Desain kemasan, tanda, symbol, logo, nama, dan gambaryang digunakan tidak menyesatkan dan melanggar syariat Islam</td>
+                                                            <td class="valign-middle">4. Pelaku Usaha wajib memisahkan Bahan pengemas selama persiapan, proses, penyimpanan, dan transportasi dari Produk atau materi lain yang tidak memenuhi persyaratan kehalalan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4b4" value="m" id="4b4m"/>
@@ -2587,7 +3860,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">5. Label Halal dicantumkan di produk yang sudah disertifikasi halal pada kemasan produk, bagian dan tempat tertentu pada produk.</td>
+                                                            <td class="valign-middle">5. Pelaku Usaha wajib mengemas Produk Halal sesuai dengan isinya</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4b5" value="m" id="4b5m"/>
@@ -2609,7 +3882,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">6. Label halal dicantumkan ditempat yang mudah dibaca, tidak mudah dihapus, dilepas, dan dirusak</td>
+                                                            <td class="valign-middle">6. Pelaku Usaha wajib mengemas dengan menggunakan peralatan yang tidak terkontaminasi Najis dan sesuai persyaratan kebersihan, higenitas, keamanan, dan kualitas Produk</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4b6" value="m" id="4b6m"/>
@@ -2631,7 +3904,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">7. Label halal yang dicantumkan sesuai dengan ketentuan yang ditetapkan BPJPH</td>
+                                                            <td class="valign-middle">7. Pelaku Usaha wajib mengemas Produk karkas dengan menggunakan kemasan yang bersih, sehat, tidak berbau, tidak mempengaruhi kualitas dan keamanan daging</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4b7" value="m" id="4b7m"/>
@@ -2650,7 +3923,51 @@
                                                             <td class="valign-middle">
                                                                 <input name="ca4b7" type="text" class="form-control" placeholder="Catatan" id="4b7ca"/>
                                                             </td>                                                                                                
-                                                        </tr>                                                        
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">8. Pelaku Usaha wajib mendesain kemasan, tanda, simbol, logo, nama, dan gambar yang tidak menyesatkan dan/atau melanggar prinsip syariat Islam</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b8" value="m" id="4b8m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b8" value="tm" id="4b8tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b8" value="tr" id="4b8tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4b8" type="text" class="form-control" placeholder="Catatan" id="4b8ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">9. Pelaku Usaha wajib memberi Label Halal dengan tepat sehingga bisa diidentifikasi dan dibedakan dari Produk yang tidak halal</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b9" value="m" id="4b9m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b9" value="tm" id="4b9tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b9" value="tr" id="4b9tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4b9" type="text" class="form-control" placeholder="Catatan" id="4b8ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center">c</td>
                                                             <td class="valign-middle font-weight-bold">Identifikasi dan Mampu Telusur</td>
@@ -2966,31 +4283,13 @@
                                 </div>                                
                             </form>
                         </div> 
-                        <div class="tab-pane fade" id="card-tab-7">
-                            <form action="{{route('downloadlaporanauditsjph')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                        @foreach($dataPenjadwalan as $index => $value2)
-                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
-                                        @endforeach
-                                    @endforeach                        
-                                </div>
-                                <div class="form-group row">   
-                                    <div class="row col-lg-12">
-                                        <button type="submit" class="btn btn-sm btn-info offset-md-9">Download Format Laporan Audit Tahap 2</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="tab-pane fade" id="card-tab-7">                            
                             <form action="{{route('downloadlaporanaudittahap2fix2')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                 @csrf                                
                                 <div class="panel-body panel-form" style="display: none">
                                     @foreach($dataRegistrasi as $index => $value)
                                         @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent                                        
-                                        {{-- @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent --}}
+                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
                                         @foreach($dataPenjadwalan as $index => $value2)
                                             @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
                                             @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
@@ -3000,57 +4299,133 @@
                                 <div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
+                                            @component('components.inputtext',['name'=> 'no_id_bpjph','label' => 'No ID BPJPH','required'=>true,'placeholder'=>'No ID BPJPH','readonly'=>true,'value'=>$value->no_registrasi_bpjph])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">                               
+                                        <div class="row">
+                                            <label class="col-lg-4 col-form-label">Skema Audit</label>
+                                            <div id="shb" class="col-lg-8">
+                                                <div class="input-group date">           
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="skema_audit" value="sjh" id="sjh"/>
+                                                        <label for="sjh">SJH</label>
+                                                    </div>
+                                                    <div class="radio radio-css radio-inline">                                         
+                                                        <input type="radio" name="skema_audit" value="sjph" id="sjph"/>
+                                                        <label for="sjph">SJPH</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                                                                    
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'status_sertifikasi','label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','readonly'=>true,'value'=>$value->status_registrasi])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'no_registrasi','label' => 'No Registrasi BPJPH','required'=>true,'placeholder'=>'No Registrasi BPJPH'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'no_audit','label' => 'No Audit','required'=>true,'placeholder'=>'No Audit','readonly'=>true,'value'=>$value->no_registrasi])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'merk_dagang','label' => 'Nama Merk Dagang','required'=>true,'placeholder'=>'Nama Merk Dagang'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'nama_organisasi','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtextarea',['name'=> 'alamat_perusahaan','label' => 'Alamat Perusahaan','required'=>true,'value'=>$value->alamat,'placeholder'=>'Alamat Perusahaan'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'alamat','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$value->alamat_perusahaan])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tanggal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
+                                            @component('components.inputtext',['name'=> 'tujuan_audit','label' => 'Tujuan Audit','required'=>true,'placeholder'=>'Tujuan Audit'])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'lingkup_audit','label' => 'Lingkup Audit','required'=>true,'placeholder'=>'Lingkup Audit'])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Jenis Produk & Kode Klasifikasi','required'=>true,'placeholder'=>'Jenis Produk & Kode Klasifikasi','readonly'=>true,'value'=>$value->rincian_jenis_produk])@endcomponent
+                                            <p><b>&nbsp;&nbsp;&nbsp;*) Khusus skema audit SJPH</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'lokasi_audit1','label' => 'Lokasi Audit','required'=>true,'placeholder'=>'Lokasi Audit 1'])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'lokasi_audit2','label' => '','required'=>false,'placeholder'=>'Lokasi Audit 2'])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'tim_audit1','label' => 'Tim Audit','required'=>true,'placeholder'=>'Tim Audit 1 (XX)'])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'tim_audit2','label' => '','required'=>true,'placeholder'=>'Tim Audit 2 (YY)'])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'tim_audit3','label' => '','required'=>true,'placeholder'=>'Tim Audit 3 (ZZ)'])@endcomponent
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="panel-body panel-form">
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-12 col-form-label"><b>I. DESKRIPSI PERUSAHAAN/ PELAKU USAHA</b></label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>                                    
                                     <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'nama_auditor1','label' => 'Nama Auditor','required'=>true,'placeholder'=>'Nama Auditor 1 (Ketua Auditor)'])@endcomponent
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-lg-8"><div><textarea class="form-control" name="deskripsi_perusahaan" label="Deskripsi Perusahaan" placeholder="Deskripsi Perusahaan"></textarea></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="panel-body panel-form">
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-12 col-form-label"><b>II. GAMBARAN UMUM PROSES PRODUKSI HALAL</b></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-lg-8"><div><textarea class="form-control" name="narasi_halal" label="Narasi" placeholder="Narasi"></textarea></div></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'nama_auditor2','label' => '','required'=>true,'placeholder'=>'Nama Auditor 2 (Auditor)'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'nama_auditor3','label' => '','required'=>true,'placeholder'=>'Nama Auditor 3 (Auditor)'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'auditee','label' => 'Nama Auditee','required'=>true,'placeholder'=>'Nama Auditee','value'=>$value->nama_pemilik])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'status_sertifikasi','label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','value'=>$value->status_registrasi,'readonly'=>true])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'penyelia_halal','label' => 'Penyelia Halal','required'=>true,'placeholder'=>'Penyelia Halal'])@endcomponent
+                                            <label class="col-lg-4 col-form-label">Flowchart/ Bagan Alir</label>
+                                            <div class="col-lg-8">
+                                                <input type="file" class="form-control" name="flowchart">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -3059,19 +4434,11 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-12 col-form-label"><b>I. DATA FASILITAS PRODUKSI</b></label>
+                                                    <label class="col-12 col-form-label"><b>III. DAFTAR FASILITAS</b></label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Foto Fasilitas Produksi</label>
-                                            <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="foto_fasilitas_produksi_fix[]">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="wrapper col-lg-12">
                                         <div class="row">                                            
                                             <div class="col-lg-12">
@@ -3124,7 +4491,7 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-12 col-form-label"><b>II. DATA PRODUK</b></label>
+                                                    <label class="col-12 col-form-label"><b>IV. DAFTAR PRODUK</b></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -3150,7 +4517,8 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div>
+                                                    <label class="col-4 col-form-label">Jenis Produk</label>
+                                                    <div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -3159,7 +4527,8 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Rincian Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="rincian_jenis_produk[]" type="text" label="Rincian Jenis Produk" placeholder="Rincian Jenis Produk"></div></div>
+                                                    <label class="col-4 col-form-label">Rincian Jenis Produk</label>
+                                                    <div class="col-lg-8"><div><input class="form-control" name="rincian_jenis_produk[]" type="text" label="Rincian Jenis Produk" placeholder="Rincian Jenis Produk"></div></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -3172,16 +4541,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Status</label><div class="col-lg-8"><div><input class="form-control" name="status[]" type="text" label="Status" placeholder="Status"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                                 <div class="panel-body panel-form">                                                                        
                                     <div class="wrapper col-lg-12">
@@ -3198,76 +4558,76 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-12 col-form-label"><b>III. DATA BAHAN</b></label>
+                                                    <label class="col-12 col-form-label"><b>V. DAFTAR BAHAN</b></label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="wrapper col-lg-12">
+                                    {{-- <div class="wrapper col-lg-12">
                                         <div class="row">
                                             <label class="col-lg-4 col-form-label">Foto Data Bahan</label>
                                             <div class="col-lg-8">
                                                 <input type="file" class="form-control" name="foto_data_bahan[]">
                                             </div>
                                         </div>
+                                    </div> --}}                                    
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Nama Bahan</label><div class="col-lg-8"><div><input class="form-control" name="nama_bahan[]" type="text" label="Nama Bahan" placeholder="Nama Bahan Bentuk/Warna/Rasa/Merk"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Status</label>
+                                                    <label class="col-4 col-form-label">Diragukan</label>
                                                         <div class="col-lg-8"><div>
                                                                 <div style="margin-bottom:7px;">
                                                                     <div class="radio radio-css radio-inline">
-                                                                        <input type="radio" name="rbsesuai1" value="sesuai" id="sesuai1" checked/> 
-                                                                        <label for="sesuai1">Sesuai</label>
+                                                                        <input type="radio" name="rbdiragukan1[]" value="ya" id="diragukan1" checked/> 
+                                                                        <label for="diragukan1">Ya</label>
                                                                     </div>                                                                                                                                
                                                                     <div class="radio radio-css radio-inline">
-                                                                        <input type="radio" name="rbsesuai1" value="tidak sesuai" id="tidak_sesuai1"/>
-                                                                        <label for="tidak_sesuai1">Tidak Sesuai</label>
+                                                                        <input type="radio" name="rbdiragukan1[]" value="tidak" id="tidak_diragukan1"/>
+                                                                        <label for="tidak_diragukan1">Tidak</label>
                                                                     </div>
                                                                 </div>
                                                         </div></div>                                                    
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                    
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Nomor Sertifikat</label><div class="col-lg-8"><div><input class="form-control" name="nomor_sertifikat[]" type="text" label="Nomor Sertifikat" placeholder="Nomor Sertifikat"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Produsen</label><div class="col-lg-8"><div><input class="form-control" name="produsen[]" type="text" label="Produsen" placeholder="Produsen"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Masa Berlaku</label><div class="col-lg-8"><div><input class="form-control" name="masa_berlaku[]" type="text" label="Masa Berlaku" placeholder="Masa Berlaku"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div>
+                                                    <label class="col-4 col-form-label">Temuan</label><div class="col-lg-8"><div><input class="form-control" name="temuan[]" type="text" label="Temuan" placeholder="Temuan"></div></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>           
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Keterangan</label><div class="col-lg-8"><div><input class="form-control" name="keterangan[]" type="text" label="Produsen" placeholder="Produsen"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Komentar</label><div class="col-lg-8"><div><input class="form-control" name="komentar[]" type="text" label="Komentar" placeholder="Masa Berlaku"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
                                 </div>
                                 <div class="panel-body panel-form">                                                                        
                                     <div class="wrapper col-lg-12">
@@ -3283,25 +4643,18 @@
                                     <thead>
                                         <tr>                                                            
                                             <td colspan="6" class="valign-middle font-weight-bold">
-                                                IV. KRITERIA SISTEM JAMINAN PRODUK HALAL<br>
-                                                <br>Keterangan:
-                                                <br>i.	M (Memenuhi): Penilaian dari Auditor menunjukkan implementasi SJPH pada komponen tersebut telah memenuhi.
-                                                <br>ii.	TM (Tidak Memenuhi) : Penilaian dari Auditor menunjukan implementasi SJPH pada komponen tersebut tidak memenuhi (terdapat kelemahan).                                                
+                                                VI. KRITERIA SISTEM JAMINAN HALAL
                                             </td>
                                         </tr>
                                         <tr>
                                             <th width="2%" class="  valign-middle text-center">No</th>
                                             <th width="50%" class=" valign-middle text-center">Kriteria SJPH</th>
                                             <th width="3%" class="  valign-middle text-center">M</th>                                                
-                                            <th width="3%" class="  valign-middle text-center">TM</th>                                            
+                                            <th width="3%" class="  valign-middle text-center">TM</th>
                                             <th width="30%" class="  valign-middle text-center">Keterangan</th>                                                
                                         </tr>
                                     </thead>
-                                    <tbody>                                                    
-                                            <tr>
-                                                <td class="valign-middle text-center">A</td>
-                                                <td colspan="5" class="valign-middle font-weight-bold">Komitmen dan Tanggung Jawab</td>
-                                            </tr>
+                                    <tbody>                                                                                                
                                             <tr>
                                                 <td class="valign-middle text-center">1</td>
                                                 <td class="valign-middle">Kebijakan Halal</td>
@@ -3352,11 +4705,7 @@
                                                 <td class="valign-middle">
                                                     <input name="capelatihanedukasi" type="text" class="form-control" placeholder="Keterangan"/>
                                                 </td>                                                                                                
-                                            </tr>
-                                            <tr>
-                                                <td class="valign-middle text-center">B</td>
-                                                <td colspan="5" class="valign-middle font-weight-bold">Bahan</td>
-                                            </tr>
+                                            </tr>                                            
                                             <tr>
                                                 <td class="valign-middle text-center">4</td>
                                                 <td class="valign-middle">Bahan</td>
@@ -3373,11 +4722,7 @@
                                                 <td class="valign-middle">
                                                     <input name="cabahan" type="text" class="form-control" placeholder="Keterangan"/>
                                                 </td>                                                                                                
-                                            </tr>
-                                            <tr>
-                                                <td class="valign-middle text-center">C</td>
-                                                <td colspan="5" class="valign-middle font-weight-bold">Proses Produk Halal</td>
-                                            </tr>
+                                            </tr>                                            
                                             <tr>
                                                 <td class="valign-middle text-center">5</td>
                                                 <td class="valign-middle">Fasilitas Produksi</td>
@@ -3397,7 +4742,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="valign-middle text-center">6</td>
-                                                <td class="valign-middle">Prosedur Tertulis Aktifitas Kritis</td>
+                                                <td class="valign-middle">Prosedur Tertulis Untuk Aktifitas Kritis</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
                                                         <input type="radio" name="rbprosedurtertulis" value="memenuhi"/>
@@ -3414,7 +4759,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="valign-middle text-center">7</td>
-                                                <td class="valign-middle">Penanganan Produk Tidak Sesuai Kriteria</td>
+                                                <td class="valign-middle">Penanganan Produk Tidak Memenuhi Kriteria</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
                                                         <input type="radio" name="rbpenangananproduk" value="memenuhi"/>
@@ -3428,11 +4773,7 @@
                                                 <td class="valign-middle">
                                                     <input name="capenangananproduk" type="text" class="form-control" placeholder="Keterangan"/>
                                                 </td>                                                                                                
-                                            </tr>
-                                            <tr>
-                                                <td class="valign-middle text-center">D</td>
-                                                <td colspan="5" class="valign-middle font-weight-bold">Produk</td>
-                                            </tr>
+                                            </tr>                                            
                                             <tr>
                                                 <td class="valign-middle text-center">8</td>
                                                 <td class="valign-middle">Produk</td>
@@ -3466,11 +4807,7 @@
                                                 <td class="valign-middle">
                                                     <input name="cakemampuantelusur" type="text" class="form-control" placeholder="Keterangan"/>
                                                 </td>                                                                                                
-                                            </tr>
-                                            <tr>
-                                                <td class="valign-middle text-center">E</td>
-                                                <td colspan="5" class="valign-middle font-weight-bold">Pemantauan dan Evaluasi</td>
-                                            </tr>
+                                            </tr>                                            
                                             <tr>
                                                 <td class="valign-middle text-center">10</td>
                                                 <td class="valign-middle">Audit Internal</td>
@@ -3505,21 +4842,356 @@
                                                     <input name="cakajiulang" type="text" class="form-control" placeholder="Keterangan"/>
                                                 </td>                                                                                                
                                             </tr>
-                                            <tr>                                                
-                                                <td colspan="2" class="valign-middle">Kesimpulan</td>                                                
-                                                <td class="valign-middle" colspan="3">
-                                                    <input name="kesimpulan" type="text" class="form-control" placeholder="Kesimpulan"/>
+                                            <tr>
+                                                <td class="valign-middle text-center">12</td>
+                                                <td class="valign-middle">Manual SJH</td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input type="radio" name="rbksjh" value="memenuhi"/>
+                                                    </div>
+                                                </td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input type="radio" name="rbsjh" value="tidak memenuhi"/>
+                                                    </div>
+                                                </td>                                                
+                                                <td class="valign-middle">
+                                                    <input name="casjh" type="text" class="form-control" placeholder="Keterangan"/>
                                                 </td>                                                                                                
                                             </tr>
-                                            {{-- <tr>
-                                                <td class="valign-middle text-center"></td>
-                                                <td class="valign-middle font-weight-bold">Reset</td>                                                            
-                                                <td class="valign-middle" colspan="4">
-                                                    <input type="button" value="Reset Semua Data" class="btn btn-sm btn-primary" id="btn_reset5">
-                                                </td>                                                                                                
-                                            </tr>--}}
+                                            <tr>                                                
+                                                <td colspan="2" class="valign-middle">Kesimpulan</td>                                                
+                                                {{-- <td class="valign-middle" colspan="3">
+                                                    <input name="kesimpulan" type="text" class="form-control" placeholder="Kesimpulan"/>
+                                                </td> --}}
+                                                <td class="valign-middle" colspan="3">
+                                                    <div class="input-group date">           
+                                                        <div class="radio radio-css radio-inline">                                         
+                                                            <input type="radio" name="kesimpulan" value="memenuhi" id="kesimpulan1"/>
+                                                            <label for="kesimpulan1">Sidang komisi fatwa dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="radio radio-css radio-inline">                                         
+                                                            <input type="radio" name="kesimpulan" value="tidak_memenuhi" id="kesimpulan2"/>
+                                                            <label for="kesimpulan2">Sidang komisi fatwa dapat dilaksanakan</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>                                            
                                     </tbody>
-                                </table>                                
+                                </table>
+
+                                <table class="table table-striped table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%; ">
+                                    <thead>
+                                        <tr>                                                            
+                                            <td colspan="6" class="valign-middle font-weight-bold">
+                                                DAFTAR LAMPIRAN
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th width="2%" class="  valign-middle text-center">No</th>
+                                            <th width="50%" class=" valign-middle text-center">Kegiatan</th>
+                                            <th width="5%" class="  valign-middle text-center">Jenis</th>
+                                            <th width="43%" class="  valign-middle text-center">Dokumentasi</th>                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>                                                                                                
+                                            <tr>
+                                                <td class="valign-middle text-center">1</td>
+                                                <td class="valign-middle">Tampak Luar Lokasi Produksi</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <input id="file" name="foto1" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input id="video3" name="video1" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center">2</td>
+                                                <td class="valign-middle"><i>Opening Meeting</i></td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <input id="file" name="foto2" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input id="video2" name="video2" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center">3</td>
+                                                <td class="valign-middle">Kebijakan Halal</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <input id="file" name="foto3" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input id="video3" name="video3" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center">4</td>
+                                                <td class="valign-middle">Bahan (aktivitas verifikasi bahan)</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <input id="file" name="foto4" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input id="video4" name="video4" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center">5</td>
+                                                <td class="valign-middle">Fasilitas Produksi</td>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle text-center"></td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">a. Penerimaan/penyimpanan bahan</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5a" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5a" name="video5a" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">b. Tempat proses produksi (proses dari bahan baku sampai produk yang telah dikemas)</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5b" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5b" name="video5b" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">c. Peralatan produksi (kuas, mesin, kompor, dll)</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5c" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5c" name="video5c" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">d. Area fasilitas produksi</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5d" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5d" name="video5d" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">e. Tempat pencucian bahan & alat produksi</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5e" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5e" name="video5e" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">f. Penyimpanan produk</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5f" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5f" name="video5f" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">g. Label/ tanda fasilitas hanya diperuntukkan untuk produksi produk halal (sharing facility)</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5g" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5g" name="video5g" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">h. Tempat penyajian</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5h" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5h" name="video5h" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle">i. Media Transportasi/Distribusi</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto5i" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video5i" name="video5i" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center">6</td>
+                                                <td class="valign-middle">Video Proses Produksi (ada/tidak ada)*</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto6" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video6" name="video6" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center">7</td>
+                                                <td class="valign-middle">Mampu Telusur (bon pembelian, bon penjualan)</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto7" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video7" name="video7" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center">8</td>
+                                                <td class="valign-middle">Closing Meeting</td>
+                                                <td class="valign-middle text-center">Foto</td>
+                                                <td class="valign-middle text-center">
+                                                    <input id="file" name="foto8" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="valign-middle text-center"></td>
+                                                <td class="valign-middle"></td>
+                                                <td class="valign-middle text-center">Video</td>
+                                                <td class="valign-middle text-center">                                                    
+                                                    <div class="radio">
+                                                        <input id="video8" name="video8" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
                                 <div class="form-group row">   
                                     <div class="col-md-12 offset-md-5 mb-5">
                                         <button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
@@ -3540,6 +5212,87 @@
         <!-- end col-12 -->
     </div>
     <!-- end row -->
+    <div id="modalLaporanAudit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Laporan Audit Tahap 2</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="4" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_laporan2" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
+
+    <div id="modalChecklistAudit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Checklist Audit</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="4" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_checklist" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
 @endsection
 @push('scripts')
     <script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
@@ -3547,45 +5300,17 @@
     <script src="{{asset('/assets/js/demo/form-plugins.demo.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
-    <script>
-        var detailkegiatan = document.getElementById('detail_kegiatan');
-        var detailkegiatan2 = document.getElementById('detail_kegiatan2');
-        var detailkegiatan3 = document.getElementById('detail_kegiatan3');
-        var detailkegiatan4 = document.getElementById('detail_kegiatan4');
-        var detailkegiatan5 = document.getElementById('detail_kegiatan5');
-        var detailkegiatan6 = document.getElementById('detail_kegiatan6');
-        var detailkegiatan7 = document.getElementById('detail_kegiatan7');
+    <script>        
         var detailkegiatan8 = document.getElementById('detail_kegiatan8');
         var detailkegiatan9 = document.getElementById('detail_kegiatan9');
-        var detailkegiatan10 = document.getElementById('detail_kegiatan10');
-        detailkegiatan.style.display = 'none';
-        detailkegiatan2.style.display = 'none';
-        detailkegiatan3.style.display = 'none';
-        detailkegiatan4.style.display = 'none';
-        detailkegiatan5.style.display = 'none';
-        detailkegiatan6.style.display = 'none';
-        detailkegiatan7.style.display = 'none';
+        var detailkegiatan10 = document.getElementById('detail_kegiatan10');        
         detailkegiatan8.style.display = 'none';
         detailkegiatan9.style.display = 'none';
         detailkegiatan10.style.display = 'none';
-
-        var jmlKegiatan = 0;
-        var jmlKegiatan2 = 0;
-        var jmlKegiatan3 = 0;
-        var jmlKegiatan4 = 0;
-        var jmlKegiatan5 = 0;
-        var jmlKegiatan6 = 0;
-        var jmlKegiatan7 = 0;
+        
         var jmlKegiatan8 = 0;
         var jmlKegiatan9 = 0;
-        var jmlKegiatan10 = 0;
-        var noKegiatan = 1;
-        var noKegiatan2 = 1;
-        var noKegiatan3 = 1;
-        var noKegiatan4 = 1;
-        var noKegiatan5 = 1;
-        var noKegiatan6 = 1;
-        var noKegiatan7 = 1;
+        var jmlKegiatan10 = 0;        
         var noKegiatan8 = 1;
         var noKegiatan9 = 1;
         var noKegiatan10 = 1;
@@ -4034,49 +5759,7 @@
             document.getElementById("5etm").checked = false;
             document.getElementById("5etr").checked = false;
             document.getElementById("5eca").value = "";
-        });
-
-        $('#tam_detail_kegiatan').on('click', function(){            
-            detailkegiatan.style.display = 'block';
-            noKegiatan += 1;
-            addDataKegiatan();
-        });
-
-        $('#tam_detail_kegiatan2').on('click', function(){            
-            detailkegiatan2.style.display = 'block';
-            noKegiatan2 += 1;
-            addDataKegiatan2();
-        });
-
-        $('#tam_detail_kegiatan3').on('click', function(){            
-            detailkegiatan3.style.display = 'block';
-            noKegiatan3 += 1;
-            addDataKegiatan3();
-        });
-
-        $('#tam_detail_kegiatan4').on('click', function(){            
-            detailkegiatan4.style.display = 'block';
-            noKegiatan4 += 1;
-            addDataKegiatan4();
-        });
-
-        $('#tam_detail_kegiatan5').on('click', function(){            
-            detailkegiatan5.style.display = 'block';
-            noKegiatan5 += 1;
-            addDataKegiatan5();
-        });
-
-        $('#tam_detail_kegiatan6').on('click', function(){            
-            detailkegiatan6.style.display = 'block';
-            noKegiatan6 += 1;
-            addDataKegiatan6();
-        });
-
-        $('#tam_detail_kegiatan7').on('click', function(){            
-            detailkegiatan7.style.display = 'block';
-            noKegiatan7 += 1;
-            addDataKegiatan7();
-        });
+        });        
 
         $('#tam_detail_kegiatan8').on('click', function(){            
             detailkegiatan8.style.display = 'block';
@@ -4094,53 +5777,7 @@
             detailkegiatan10.style.display = 'block';
             noKegiatan10 += 1;
             addDataKegiatan10();
-        });
-
-        function addDataKegiatan(){            
-            jmlKegiatan+=1;            
-            var data_kegiatan = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Data</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Kriteria</label><div class="col-lg-8"><div><input class="form-control" name="kriteria[]" type="text" label="Kriteria" placeholder="Kriteria"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Temuan/Catatan</label><div class="col-lg-8"><div><textarea name="temuan[]" class="form-control" placeholder="Temuan/Catatan"></textarea></div></div>                                </div></div>                                    </div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan').append(data_kegiatan);                                                
-        }
-
-        function addDataKegiatan2(){            
-            jmlKegiatan2+=1;            
-            var data_kegiatan2 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form">                                    <div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Data</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Bahan</label><div class="col-lg-8"><div><input class="form-control" name="bahan[]" type="text" label="Bahan" placeholder="Bahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Temuan</label><div class="col-lg-8"><div><textarea name="temuan[]" class="form-control" placeholder="Temuan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Kategori Bahan</label><div class="col-lg-8"><div><input class="form-control" name="kategori_bahan[]" type="text" label="Kategori Bahan" placeholder="Kategori Bahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div></div></div></div></div>                                    </div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain2" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan2').append(data_kegiatan2);
-        }
-
-        function addDataKegiatan3(){
-            jmlKegiatan3+=1;            
-            var data_kegiatan3 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Data</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Daftar Peralatan</label><div class="col-lg-8"><div><input class="form-control" name="daftar_peralatan[]" type="text" label="Daftar Peralatan" placeholder="Daftar Peralatan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Bahan Peralatan Yang Digunakan</label><div class="col-lg-8"><div><input class="form-control" name="bahan_peralatan[]" type="text" label="Bahan Peralatan Yang Digunakan" placeholder="Kategori Bahan"></div></div></div></div></div></div></div><div class="col-lg-12"><div><a id="hapus_datakegiatanlain3" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan3').append(data_kegiatan3);
-        }
-
-        function addDataKegiatan4(){
-            jmlKegiatan4+=1;
-            // var data_kegiatan4 = 'a';
-            var data_kegiatan4 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Daftar Produk Yang Disertifikasi (Industri Pengolahan)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk" placeholder="Nama Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Karakteristik Sensori</label><div class="col-lg-8"><div><input class="form-control" name="karakteristik_sensori[]" type="text" label="Karakteristik Sensori" placeholder="Karakteristik Sensori"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Bentuk</label><div class="col-lg-8"><div><input class="form-control" name="bentuk[]" type="text" label="Bentuk" placeholder="Bentuk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Penjualan (Retail/Non Retail)</label><div class="col-lg-8"><div><input class="form-control" name="penjualan[]" type="text" label="Penjualan" placeholder="Penjualan (Retail/Non Retail)"></div></div></div></div></div></div></div><div class="col-lg-12"><div><a id="hapus_datakegiatanlain4" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan4').append(data_kegiatan4);
-        }
-
-        function addDataKegiatan5(){
-            jmlKegiatan5+=1;
-            // var data_kegiatan5 = 'a';
-            var data_kegiatan5 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_produk[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div></div></div></div></div></div><div class="col-lg-12"><div><a id="hapus_datakegiatanlain5" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan5').append(data_kegiatan5);
-        }
-
-        function addDataKegiatan6(){
-            jmlKegiatan6+=1;
-            // var data_kegiatan6 = 'a';
-            var data_kegiatan6 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Daftar Produk Yang Disertifikasi (Restoran/Katering)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk2[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk2[]" type="text" label="Nama Produk" placeholder="Nama Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Karakteristik Sensori</label><div class="col-lg-8"><div><input class="form-control" name="karakteristik_sensori2[]" type="text" label="Karakteristik Sensori" placeholder="Karakteristik Sensori"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Bentuk</label><div class="col-lg-8"><div><input class="form-control" name="bentuk2[]" type="text" label="Bentuk" placeholder="Bentuk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Penjualan (Retail/Non Retail)</label><div class="col-lg-8"><div><input class="form-control" name="penjualan2[]" type="text" label="Penjualan" placeholder="Penjualan (Retail/Non Retail)"></div></div></div></div></div></div></div><div class="col-lg-12"><div><a id="hapus_datakegiatanlain6" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan6').append(data_kegiatan6);
-        }
-
-        function addDataKegiatan7(){
-            jmlKegiatan7+=1;
-            // var data_kegiatan7 = 'a';
-            var data_kegiatan7 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_produk2[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto2[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain8" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan7').append(data_kegiatan7);
-        }
+        });        
 
         function addDataKegiatan8(){
             jmlKegiatan8+=1;
@@ -4161,77 +5798,7 @@
             var data_kegiatan10 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Data Bahan</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_data_bahan[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Status</label><div class="col-lg-8"><div><div style="margin-bottom:7px;"><div class="radio radio-css radio-inline"><input type="radio" name="rbsesuai'+(jmlKegiatan10+1)+'" value="sesuai" id="sesuai'+(jmlKegiatan10+1)+'" checked/><label for="sesuai'+(jmlKegiatan10+1)+'">Sesuai</label></div><div class="radio radio-css radio-inline"><input type="radio" name="rbsesuai'+(jmlKegiatan10+1)+'" value="tidak sesuai" id="tidak_sesuai'+(jmlKegiatan10+1)+'"/><label for="tidak_sesuai'+(jmlKegiatan10+1)+'">Tidak Sesuai</label></div></div></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nomor Sertifikat</label><div class="col-lg-8"><div><input class="form-control" name="nomor_sertifikat[]" type="text" label="Nomor Sertifikat" placeholder="Nomor Sertifikat"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Produsen</label><div class="col-lg-8"><div><input class="form-control" name="produsen[]" type="text" label="Produsen" placeholder="Produsen"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Masa Berlaku</label><div class="col-lg-8"><div><input class="form-control" name="masa_berlaku[]" type="text" label="Masa Berlaku" placeholder="Masa Berlaku"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain10" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
             // var data_kegiatan8 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_produk2[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto2[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain7" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
             $('.detail_kegiatan10').append(data_kegiatan10);
-        }
-
-        $(document).on('click','#hapus_datakegiatanlain', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan-=1;
-            noKegiatan-=1;            
-
-            if(jmlKegiatan == 0){
-                detailkegiatan.style.display = 'none';
-            }
-        });
-
-        $(document).on('click','#hapus_datakegiatanlain2', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan2-=1;
-            noKegiatan2-=1;            
-
-            if(jmlKegiatan2 == 0){
-                detailkegiatan2.style.display = 'none';
-            }
-        });
-
-        $(document).on('click','#hapus_datakegiatanlain3', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan3-=1;
-            noKegiatan3-=1;            
-
-            if(jmlKegiatan3 == 0){
-                detailkegiatan3.style.display = 'none';
-            }
-        });
-
-        $(document).on('click','#hapus_datakegiatanlain4', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan4-=1;
-            noKegiatan4-=1;
-
-            if(jmlKegiatan4 == 0){
-                detailkegiatan4.style.display = 'none';
-            }
-        });
-
-        $(document).on('click','#hapus_datakegiatanlain5', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan5-=1;
-            noKegiatan5-=1;
-
-            if(jmlKegiatan5 == 0){
-                detailkegiatan5.style.display = 'none';
-            }
-        });
-
-        $(document).on('click','#hapus_datakegiatanlain6', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan6-=1;
-            noKegiatan6-=1;
-
-            if(jmlKegiatan6 == 0){
-                detailkegiatan6.style.display = 'none';
-            }
-        });
-
-        $(document).on('click','#hapus_datakegiatanlain7', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan7-=1;
-            noKegiatan7-=1;
-
-            if(jmlKegiatan7 == 0){
-                detailkegiatan7.style.display = 'none';
-            }
-        });
+        }        
 
         $(document).on('click','#hapus_datakegiatanlain8', function(){
             $(this).parent().parent().parent().remove();
