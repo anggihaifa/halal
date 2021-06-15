@@ -49,22 +49,8 @@
                 <div class="card-body table-responsive-lg ">
 					<div class="tab-content p-0 m-0">
                         <div class="tab-pane fade active show" id="card-tab-1">
-                            {{-- <form action="{{route('downloadauditplan')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                @csrf
-                                <div class="panel-body panel-form" style="display: none">
-                                    @foreach($dataRegistrasi as $index => $value)
-                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
-                                    @endforeach                        
-                                </div>
-                                <div class="form-group row">   
-                                    <div class="row col-lg-12">
-                                        <button type="submit" class="btn btn-sm btn-info offset-md-9">Download Format Audit Plan</button>
-                                    </div>
-                                </div>
-                            </form> --}}
-                            @foreach($dataPenjadwalan as $index => $value2)
-                                @if($value2->berkas_audit_plan != null)
+                            <span class="text-danger">Silahkan refresh jika data form rencana audit belum ada</span>
+                            @foreach($dataPenjadwalan as $index => $value2)                                
                                     <div class="panel-body panel-form">
                                         <div class="wrapper col-lg-12">
                                             <div class="row">                                                
@@ -72,6 +58,7 @@
                                                     <tr>
                                                         <th class="text-center">No</th>
                                                         <th class="text-center">Jenis Berkas</th>
+                                                        <th class="text-center">Download</th>
                                                         <th class="text-center">Download</th>
                                                         <th class="text-center">Upload</th>
                                                         <th class="text-center">Berkas</th>
@@ -89,8 +76,21 @@
                                                                         @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
                                                                     @endforeach                        
                                                                 </div>                                                                                                                                
-                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Rencana Audit</button>
-                                                            </form>
+                                                                <button type="submit" class="btn btn-sm btn-info">Format Rencana Audit</button>
+                                                            </form>                                                            
+                                                        </td>     
+                                                        <td class="text-center">                                                            
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['rencana_audit_isian'])
+                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/upload/AP/Isian/'.$val['rencana_audit_isian']) }}" download>Rencana Audit Isian</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
                                                         </td>                                                        
                                                         <td class="text-center">
                                                             @if (Auth::user()->usergroup_id == 10)
@@ -121,8 +121,7 @@
                                                     </table>                                                
                                             </div>
                                         </div>
-                                    </div>
-                                @endif
+                                    </div>                                
                             @endforeach
                             {{-- <form action="{{route('uploadauditplan')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                 @csrf
@@ -216,24 +215,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'status_sertifikasi','label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','readonly'=>true,'value'=>$value->status_registrasi])@endcomponent
-                                            {{-- <label class="col-lg-4 col-form-label">Jenis Audit</label>
-                                            <div class="col-lg-8">
-                                                <div class="input-group date">           
-                                                    <div class="radio radio-css radio-inline">                                         
-                                                        <input type="radio" name="jenis_audit" value="baru" id="baru"/>
-                                                        <label for="baru">Baru</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">                                         
-                                                        <input type="radio" name="jenis_audit" value="perpanjangan" id="perpanjangan"/>
-                                                        <label for="perpanjangan">Perpanjangan</label>
-                                                    </div>
-                                                    <div class="radio radio-css radio-inline">                                         
-                                                        <input type="radio" name="jenis_audit" value="perubahan" id="perubahan"/>
-                                                        <label for="perubahan">Perubahan</label>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
+                                            @component('components.inputtext',['name'=> 'status_sertifikasi','label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','readonly'=>true,'value'=>$value->status_registrasi])@endcomponent                                            
                                         </div>
                                     </div>                                    
                                     <div class="wrapper col-lg-12">
@@ -243,14 +225,19 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tujuan_audit','label' => 'Tujuan Audit','required'=>true,'placeholder'=>'Tujuan Audit'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'nama_organisasi','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'standar','label' => 'Standar','required'=>true,'placeholder'=>'Standar'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'alamat','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$value->alamat_perusahaan])@endcomponent
                                         </div>
                                     </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'tujuan_audit','label' => 'Tujuan Audit','required'=>true,'placeholder'=>'Tujuan Audit'])@endcomponent
+                                        </div>
+                                    </div>                                    
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
                                             @component('components.inputtext',['name'=> 'lingkup_audit','label' => 'Lingkup Audit','required'=>true,'placeholder'=>'Lingkup Audit'])@endcomponent
@@ -258,7 +245,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Jenis Produk & Kode Klasifikasi','required'=>true,'placeholder'=>'Jenis Produk & Kode Klasifikasi'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Jenis Produk & Kode Klasifikasi','required'=>true,'placeholder'=>'Jenis Produk & Kode Klasifikasi','readonly'=>true,'value'=>$value->rincian_jenis_produk])@endcomponent
                                             <p><b>&nbsp;&nbsp;&nbsp;*) Khusus skema audit SJPH</b></p>
                                         </div>
                                     </div>
@@ -274,17 +261,17 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit1','label' => 'Tim Audit','required'=>true,'placeholder'=>'Tim Audit 1'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'tim_audit1','label' => 'Tim Audit','required'=>true,'placeholder'=>'Tim Audit 1 (XX)'])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit2','label' => '','required'=>true,'placeholder'=>'Tim Audit 2'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'tim_audit2','label' => '','required'=>true,'placeholder'=>'Tim Audit 2 (YY)'])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit3','label' => '','required'=>true,'placeholder'=>'Tim Audit 3'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'tim_audit3','label' => '','required'=>true,'placeholder'=>'Tim Audit 3 (ZZ)'])@endcomponent
                                         </div>
                                     </div>
                                     @endforeach                                            
@@ -310,7 +297,14 @@
                                                     <span class="input-group-addon"><i class="fa fa-clock"></i></span>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-8">
+                                            <label class="col-form-label">-</label>
+                                            <div class="col-lg-2">
+                                                <div class="input-group date">
+                                                    <input id="jam_audit21" name="jam_audit2[]" type='text' class="form-control" placeholder="Jam Audit"/>
+                                                    <span class="input-group-addon"><i class="fa fa-clock"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
                                                 <div class="row">
                                                     <label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        
                                                 </div>
@@ -327,7 +321,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Personil"></div></div>                                
+                                            <label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)"></div></div>                                
                                         </div>
                                     </div>                        
                                 </div>
@@ -451,9 +445,10 @@
         function addDataKegiatan(){
             jmlKegiatan+=1;
             jmlJam+=1;
-            var data_kegiatan = '<div style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-8"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Personil"></div></div>                                </div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
+            var data_kegiatan = '<div style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)"></div></div>                                </div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
             $('.detail_kegiatan').append(data_kegiatan);            
-            jam(jmlJam);                                    
+            jam(jmlJam);
+            jam2(jmlJam);
             document.getElementById('jml_kegiatan1').value = jmlKegiatan + 1;
             // alert(jmlKeg);
         }
@@ -481,10 +476,11 @@
             jmlDetail+=1;
             jmlJam+=1;
             jmlTgl+=1;
-            var data_hari = '<div>  <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label"><b>Tanggal Audit</b></label><div id="shb" class="col-lg-8"><div class="input-group date"><input type="text" id="tgl_audit'+(jmlTgl+1)+'" name="tgl_audit[]" class="form-control" placeholder="Tanggal Audit" value="" data-date-start-date="Date.default" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-8"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Personil"></div></div>                                </div></div</div><div class="panel-body panel-form"><div class="wrapper col-lg-12" style="display:none"><div class="row"><label class="col-4 col-form-label">Jumlah Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="jumlah_kegiatan[]" type="text" label="Jumlah Kegiatan" placeholder="Jumlah Kegiatan" value="1" id="jml_kegiatan'+jmlDetail+'"></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="detail_kegiatan'+jmlDetail+'" id="detail_kegiatan'+jmlDetail+'" style="width: 100%; background: #fff;"></div><div id="isi'+jmlDetail+'" style="display:none">'+jmlDetail+'</div><div class="col-md-12"><a id="tam_detail_kegiatan'+jmlDetail+'" class="tam_detail_kegiatan'+jmlDetail+' btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah Kegiatan</a></div></div></div></div>            <div class="col-lg-12"><div><a id="hapus_dataharilain" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Hari</a></div></div><br></div>';
+            var data_hari = '<div>  <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label"><b>Tanggal Audit</b></label><div id="shb" class="col-lg-8"><div class="input-group date"><input type="text" id="tgl_audit'+(jmlTgl+1)+'" name="tgl_audit[]" class="form-control" placeholder="Tanggal Audit" value="" data-date-start-date="Date.default" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)"></div></div>                                </div></div</div><div class="panel-body panel-form"><div class="wrapper col-lg-12" style="display:none"><div class="row"><label class="col-4 col-form-label">Jumlah Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="jumlah_kegiatan[]" type="text" label="Jumlah Kegiatan" placeholder="Jumlah Kegiatan" value="1" id="jml_kegiatan'+jmlDetail+'"></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="detail_kegiatan'+jmlDetail+'" id="detail_kegiatan'+jmlDetail+'" style="width: 100%; background: #fff;"></div><div id="isi'+jmlDetail+'" style="display:none">'+jmlDetail+'</div><div class="col-md-12"><a id="tam_detail_kegiatan'+jmlDetail+'" class="tam_detail_kegiatan'+jmlDetail+' btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah Kegiatan</a></div></div></div></div>            <div class="col-lg-12"><div><a id="hapus_dataharilain" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Hari</a></div></div><br></div>';
             // var data_hari = '<div> data <div class="col-lg-12"><div><a id="hapus_dataharilain" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Hari</a></div></div><br></div>';
             $('.detail_hari').append(data_hari);
             jam(jmlJam);
+            jam2(jmlJam);
             tanggal(jmlTgl);
             jmlHari+=1;                
             
@@ -513,7 +509,8 @@
                 $('.detail_kegiatan'+isi+'').append(data_kegiatan2);
                 jmlKegiatan2+=1;
                 document.getElementById('jml_kegiatan'+isi+'').value = jmlKegiatan2 + 1;
-                jam(jmlJam);       
+                jam(jmlJam);
+                jam2(jmlJam);
             }
 
             // $(document).on('click','#hapus_datakegiatanlain'+jmlDetail+'', function(){
@@ -554,9 +551,38 @@
             forceParse: 0,            
         });    
 
+        $('#jam_audit21').datetimepicker({            
+            format: 'hh:ii',
+            language:  'id',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0,            
+        });    
+
         function jam(isi) {
             // alert(isi);
             $('#jam_audit'+(isi+1)+'').datetimepicker({
+                format: 'hh:ii',
+                language:  'id',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 1,
+                minView: 0,
+                maxView: 1,
+                forceParse: 0,            
+            }); 
+        }
+
+        function jam2(isi) {
+            // alert(isi);
+            $('#jam_audit2'+(isi+1)+'').datetimepicker({
                 format: 'hh:ii',
                 language:  'id',
                 weekStart: 1,

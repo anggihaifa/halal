@@ -419,17 +419,16 @@ class PHPWordController extends Controller
         // dd("disini");
         $phpWord = new \PhpOffice\PhpWord\PhpWord();                
         
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-07 Format Laporan SJPH.docx');
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-06 Laporan Audit Tahap II.docx');
 
-        $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
-        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);
+        $templateProcessor->setValue('nama_perusahaan', $data['nama_perusahaan']);        
 
-        $fileName = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_LaporanSJPH_'.$data['nama_perusahaan'].'.docx';
-        $templateProcessor->saveAs("storage/laporan/download/".$fileName);        
+        $fileName = 'FOR-HALAL-OPS-06 Laporan Audit Tahap II ('.$data['id_registrasi'].').docx';
+        $templateProcessor->saveAs("storage/laporan/download/Laporan Audit Tahap 2/".$fileName);
         
         $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
                                 
-        return response()->download('storage/laporan/download/'.$fileName);        
+        return response()->download('storage/laporan/download/Laporan Audit Tahap 2/'.$fileName);
     }
 
     public function downloadLaporanAudit2(Request $request){
@@ -477,19 +476,20 @@ class PHPWordController extends Controller
         $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
         
         // $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/docx/FOR-SCI-HALAL-13 Rencana Audit atau Audit Plan Complete.docx');
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-15 Rencana Audit atau Audit Plan Rev 24022021 Complete.docx');
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-04 Rencana Audit Isian.docx');
 
-        $templateProcessor->setValue('no_organisasi', $data['no_organisasi']);
-        $templateProcessor->setValue('judul', 'Rencana Audit');        
+        $templateProcessor->setValue('no_id_bpjph', $data['no_id_bpjph']);        
 
         $model = new PerencanaanAudit();
         DB::beginTransaction();
             $model->id_user = Auth::user()->id;
             $model->id_registrasi = $data['id_registrasi'];
-            $model->no_organisasi = $data['no_organisasi'];            
+            $model->no_id_bpjph = $data['no_id_bpjph'];
+            $model->skema_audit = $data['skema_audit'];
+            $model->status_sertifikasi = $data['status_sertifikasi'];
             $model->no_audit = $data['no_audit'];
             $model->nama_organisasi = $data['nama_perusahaan'];
-            $model->alamat = $data['alamat_perusahaan'];
+            $model->alamat = $data['alamat'];
             $model->tanggal_audit = $data['tanggal_audit'];
             $model->tujuan_audit = $data['tujuan_audit'];
             $model->lingkup_audit = $data['lingkup_audit'];
@@ -501,54 +501,69 @@ class PHPWordController extends Controller
             $model->tim_audit3 = $data['tim_audit3'];                    
 
         $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
-        if($data['skema_audit'] == 'sjph'){
-            $templateProcessor->setValue('sjph', 'x');
-            $templateProcessor->setValue('smh', '');
+        if($data['skema_audit'] == 'sjh'){            
+            $templateProcessor->setValue('sjh', 'SJH');
+
+            $inline = new TextRun();
+            $inline->addText('SJPH', array('strikethrough' => true));
+            $templateProcessor->setComplexValue('sjph', $inline);
             
+            $model->skema_audit = 'sjh';
+        }else if($data['skema_audit'] == 'sjph'){
+            $templateProcessor->setValue('sjph', 'SJPH');
+
+            $inline = new TextRun();
+            $inline->addText('SJH', array('strikethrough' => true));
+            $templateProcessor->setComplexValue('sjh', $inline);
+
             $model->skema_audit = 'sjph';
-        }else if($data['skema_audit'] == 'smh'){
-            $templateProcessor->setValue('sjph', '');
-            $templateProcessor->setValue('smh', 'x');
-
-            $model->skema_audit = 'smh';
         }
 
-        if($data['jenis_audit'] == 'baru'){
-            $templateProcessor->setValue('baru', 'x');
-            $templateProcessor->setValue('perpanjangan', '');
-            $templateProcessor->setValue('perubahan', '');
+        if($data['status_sertifikasi'] == 'baru'){
+            $templateProcessor->setValue('baru', 'Baru');
 
-            $model->jenis_audit = 'baru';
-        }else if($data['jenis_audit'] == 'perpanjangan'){
-            $templateProcessor->setValue('baru', '');
-            $templateProcessor->setValue('perpanjangan', 'x');
-            $templateProcessor->setValue('perubahan', '');
+            $inline = new TextRun();
+            $inline->addText('Perpanjangan', array('strikethrough' => true));
+            $templateProcessor->setComplexValue('perpanjangan', $inline);
 
-            $model->jenis_audit = 'perpanjangan';
-        }else if($data['jenis_audit'] == 'perubahan'){
-            $templateProcessor->setValue('baru', '');
-            $templateProcessor->setValue('perpanjangan', '');
-            $templateProcessor->setValue('perubahan', 'x');
+            $inline2 = new TextRun();
+            $inline2->addText('Perubahan', array('strikethrough' => true));
+            $templateProcessor->setComplexValue('perubahan', $inline2);
 
-            $model->jenis_audit = 'perubahan';
+            $model->status_sertifikasi = 'baru';
+        }else if($data['status_sertifikasi'] == 'perpanjangan'){            
+            $templateProcessor->setValue('perpanjangan', 'Perpanjangan');            
+
+            $inline = new TextRun();
+            $inline->addText('Baru', array('strikethrough' => true));
+            $templateProcessor->setComplexValue('baru', $inline);
+
+            $inline2 = new TextRun();
+            $inline2->addText('Perubahan', array('strikethrough' => true));
+            $templateProcessor->setComplexValue('perubahan', $inline2);            
+
+            $model->status_sertifikasi = 'perpanjangan';
+        }else if($data['status_sertifikasi'] == 'perubahan'){            
+            $templateProcessor->setValue('perubahan', 'Perubahan');
+
+            $inline = new TextRun();
+            $inline->addText('Baru', array('strikethrough' => true));
+            $templateProcessor->setComplexValue('baru', $inline);
+
+            $inline2 = new TextRun();
+            $inline2->addText('Perpanjangan', array('strikethrough' => true));
+            $templateProcessor->setComplexValue('perpanjangan', $inline2);
+
+            $model->status_sertifikasi = 'perubahan';
         }
 
-        if($data['tipe_audit'] == 'tahap1'){
-            $templateProcessor->setValue('tahap1', '&#8730;');
-            $templateProcessor->setValue('tahap2', '');
-
-            $model->tipe_audit = 'tahap1';
-        }else if($data['tipe_audit'] == 'tahap2'){
-            $templateProcessor->setValue('tahap1', '');
-            $templateProcessor->setValue('tahap2', '&#8730;');
-
-            $model->tipe_audit = 'tahap2';
-        }
-        $templateProcessor->setValue('alamat', $data['alamat_perusahaan']);
-        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);        
+        $templateProcessor->setValue('no_audit', $data['no_audit']);
+        $templateProcessor->setValue('nama_organisasi', $data['nama_organisasi']);
+        $templateProcessor->setValue('alamat', $data['alamat']);
+        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);
         $templateProcessor->setValue('no_audit', $data['no_audit']);
         $templateProcessor->setValue('tujuan_audit', $data['tujuan_audit']);
-        $templateProcessor->setValue('standar', $data['standar']);
+        $templateProcessor->setValue('jenis_produk', $data['jenis_produk']);
         $templateProcessor->setValue('lingkup_audit', $data['lingkup_audit']);
         $templateProcessor->setValue('lokasi_audit1', $data['lokasi_audit1']);
         $templateProcessor->setValue('lokasi_audit2', $data['lokasi_audit2']);
@@ -564,6 +579,7 @@ class PHPWordController extends Controller
         
         $temp=0;
         $temp2=0;
+        $harike = 0;
         for ($i=0; $i < sizeof($data['tgl_audit']); $i++) { 
             $tgl = $data['tgl_audit'][$i];
             $tglhari = strtotime($data['tgl_audit'][$i]);
@@ -611,31 +627,32 @@ class PHPWordController extends Controller
             
             $jml = $data['jumlah_kegiatan'][$i];
 
-            $temp2 = $temp;
-            for ($j=$temp; $j < $temp2+$jml; $j++) { 
+            $temp2 = $temp;            
+            for ($j=$temp; $j < $temp2+$jml; $j++) {                 
                 if($j == $temp2){
-                    $arrData[] = array('tgl_waktu' => $hari.', '.$tgl.'','detail_waktu' => $data['jam_audit'][$j], 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $data['detail_kegiatan'][$j], 'personil' => $data['personil'][$j]);
+                    $harike++;
+                    $arrData[] = array('hari_ke' => 'Hari '.$harike.'','tgl_waktu' => $hari.', '.$tgl.'','detail_waktu' => $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j], 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $data['detail_kegiatan'][$j], 'personil' => $data['personil'][$j]);
 
                     $model2 = new DetailPerencanaanAudit();
                     DB::beginTransaction();
                     $model2->id_perencanaan_audit = $idpa;
                     $model2->hari = $hari;
                     $model2->tanggal_audit = $tgl;
-                    $model2->jam_audit = $data['jam_audit'][$j];
+                    $model2->jam_audit = $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j];
                     $model2->judul_kegiatan = $data['judul_kegiatan'][$j];
                     $model2->detail_kegiatan = $data['detail_kegiatan'][$j];
                     $model2->personil = $data['personil'][$j];
                     $model2->save();
                     DB::commit();
                 }else{
-                    $arrData[] = array('tgl_waktu' => "",'detail_waktu' => $data['jam_audit'][$j], 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $data['detail_kegiatan'][$j], 'personil' => $data['personil'][$j]);
+                    $arrData[] = array('hari_ke' => '','tgl_waktu' => $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j],'detail_waktu' => '', 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $data['detail_kegiatan'][$j], 'personil' => $data['personil'][$j]);
 
                     $model2 = new DetailPerencanaanAudit();
                     DB::beginTransaction();
                     $model2->id_perencanaan_audit = $idpa;
                     $model2->hari = $hari;
                     $model2->tanggal_audit = $tgl;
-                    $model2->jam_audit = $data['jam_audit'][$j];
+                    $model2->jam_audit = $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j];
                     $model2->judul_kegiatan = $data['judul_kegiatan'][$j];
                     $model2->detail_kegiatan = $data['detail_kegiatan'][$j];
                     $model2->personil = $data['personil'][$j];
@@ -649,33 +666,33 @@ class PHPWordController extends Controller
         // dd($data);
 
         $values = $arrData;
-        $templateProcessor->cloneRowAndSetValues('tgl_waktu', $values);
+        $templateProcessor->cloneRowAndSetValues('hari_ke', $values);
         
-        $fileName = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_AuditPlan_'.$data['nama_perusahaan'].'_'.$data['no_audit'].'.docx';
-        $templateProcessor->saveAs('storage/docx/upload/'.$fileName);
+        $fileName = 'FOR-HALAL-OPS-04 Rencana Audit ('.$data['id_registrasi'].').docx';
+        $templateProcessor->saveAs('storage/laporan/upload/AP/Isian/'.$fileName);
         // $templateProcessor->saveAs("AuditPlan.docx");
         
         $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
-                
-        $phpWord = $objReader->load('storage/docx/upload/'.$fileName);
-        // $phpWord = $objReader->load("AuditPlan.docx");
         
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
-        $fileName2 = $data['id_registrasi'].'_'.$data['id_penjadwalan'].'_AuditPlan_'.$data['nama_perusahaan'].'_'.$data['no_audit'].'.html';
-        $objWriter->save('storage/docx/upload/'.$fileName2);
-        // $objWriter->save('AuditPlan.html');   
-        DB::beginTransaction();
-        $model = new Registrasi;
-        $model2 = new Penjadwalan;
+        $dataLaporan = DB::table('laporan_audit2')
+            ->where('id_registrasi',$data['id_registrasi'])
+            ->get();                                
 
-        // $e = $model->find($data['id_registrasi']);
-        $f = $model2->find($data['id_penjadwalan']);
-        $f->berkas_audit_plan = $fileName;
-        // dd($f->berkas_audit_plan);
-        $f->save();
-        DB::Commit();
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->rencana_audit_isian = $fileName;                    
+                    $model->id_registrasi = $data['idregis'];                    
+                    $model->save();
+                DB::Commit();
+            }else{
+                $model2 = new LaporanAudit2;                
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->rencana_audit_isian = $fileName;                
+                $f->save();                
+            }
+            DB::Commit();        
 
-        return response()->download('storage/docx/upload/'.$fileName);
+        return response()->download('storage/laporan/upload/AP/Isian/'.$fileName);
         
     }    
 
@@ -750,17 +767,7 @@ class PHPWordController extends Controller
         $templateProcessor->saveAs('storage/laporan/upload/'.$fileName);
         // $templateProcessor->saveAs("AuditPlan.docx");
         
-        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
-        
-        // DB::beginTransaction();
-        // $model = new Registrasi;
-        // $model2 = new Penjadwalan;
-
-        
-        // $f = $model2->find($data['id_penjadwalan']);
-        // $f->berkas_audit_plan = $fileName;
-        // $f->save();
-        // DB::Commit();
+        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');        
 
         return response()->download('storage/laporan/upload/'.$fileName);
     }
@@ -4016,10 +4023,62 @@ class PHPWordController extends Controller
                 $f->save();                
             }
             DB::Commit();
+        }else if($request->has("berkas_laporan2")){
+            $file = $request->file("berkas_laporan2");            
+            $file = $data["berkas_laporan2"];
+
+            $fileName = 'FOR-HALAL-OPS-06 Laporan Audit Tahap II ('.$data['idregis'].').pdf';
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/Laporan Audit Tahap 2/", $fileName);
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_laporan_audit_tahap_2 = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_laporan_audit_tahap_2 = $ldate;
+                    $model->save();
+                DB::Commit();
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_laporan_audit_tahap_2 = $fileName;
+                $f->tgl_penyerahan_laporan_audit_tahap_2 = $ldate;
+                $f->save();                
+            }
+            DB::Commit();
+        }else if($request->has("berkas_checklist")){
+            $file = $request->file("berkas_checklist");            
+            $file = $data["berkas_checklist"];
+
+            $fileName = 'FOR-HALAL-OPS-09 Formulir Ceklist Audit ('.$data['idregis'].').pdf';
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/Checklist Audit/", $fileName);
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_form_ceklis = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_form_ceklis = $ldate;
+                    $model->save();
+                DB::Commit();
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_form_ceklis = $fileName;
+                $f->tgl_penyerahan_form_ceklis = $ldate;
+                $f->save();                
+            }
+            DB::Commit();
         }
 
         Session::flash('success', "Upload Berkas Berhasil");
-        $redirect = redirect()->route('listaudit2');
+        $redirect = redirect()->back();
         return $redirect;
     }
 
@@ -4095,6 +4154,23 @@ class PHPWordController extends Controller
         $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                
 
         return response()->download('storage/laporan/upload/'.$fileName);
+    }
+
+    public function downloadChecklistTahap2(Request $request){
+        $data = $request->except('_token','_method');
+        // dd("disini");
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();                
+        
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-09 Formulir Ceklist Audit.docx');
+
+        // $templateProcessor->setValue('nama_perusahaan', $data['nama_perusahaan']);
+
+        // $fileName = 'FOR-HALAL-OPS-06 Laporan Audit Tahap II ('.$data['id_registrasi'].').docx';
+        // $templateProcessor->saveAs("storage/laporan/download/Laporan Audit Tahap 2/".$fileName);
+        
+        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+                                
+        return response()->download('storage/laporan/fix/FOR-HALAL-OPS-09 Formulir Ceklist Audit.docx');
     }
     
 }

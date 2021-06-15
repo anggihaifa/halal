@@ -6,6 +6,7 @@
                 {{ isset($required) && $required ? 'required' : '' }}
                 {{ isset($disabled) && $disabled ? 'disabled' : '' }}
                 {{ isset($readonly) && $readonly ? 'readonly' : '' }}
+                {{ isset($hidden) && $hidden ? 'hidden' : '' }}
                 {!! isset($placeholder) ? "placeholder='$placeholder'" : '' !!}
                 {!! isset($value) ? "value='$value'" : '' !!}>
 

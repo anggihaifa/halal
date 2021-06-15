@@ -280,15 +280,15 @@
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
                           
-                            var audit_plan = `<a class="dropdown-item" href="{{url('audit_plan')}}/`+full.id_registrasi+`">Perencanaan Audit (Audit Plan)</a>`;
-                            var form_report = `<a class="dropdown-item"  href="{{url('laporan_audit')}}/`+full.id_registrasi+`">Form Laporan</a>`;
+                            var audit_plan = `<a class="dropdown-item" href="{{url('audit_plan')}}/`+full.id_regis+`">Perencanaan Audit (Audit Plan)</a>`;
+                            var form_report = `<a class="dropdown-item"  href="{{url('laporan_audit')}}/`+full.id_regis+`">Form Laporan</a>`;
 
                             return `<div class="btn-group m-r-5 show">
                                     <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
                                     <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">                                        
-                                        <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>                                        
-                                        <a href="{{url('detail_unggah_data_sertifikasi_auditor')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
+                                        <a href="{{url('detail_registrasi')}}/`+full.id_regis+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>
+                                        <a href="{{url('detail_unggah_data_sertifikasi_auditor')}}/`+full.id_regis+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
                                         <div class="dropdown-divider"></div>
 
                                         <div class="dropdown-button-title"></div>`+

@@ -1496,12 +1496,12 @@ class PenjadwalanController extends Controller
     }    
 
     public function laporanAudit($id){
-        $dataRegistrasi = DB::table('registrasi')
-               
-                ->select('registrasi.*','registrasi_alamatkantor.alamat as alamat', 'registrasi_pemilik_perusahaan.nama_pemilik as nama_pemilik')
+        $dataRegistrasi = DB::table('registrasi')                                
+                ->select('registrasi.*')
                 ->where('registrasi.id',$id)
-                ->get();     
+                ->get();        
 
+        $dataKelompok = KelompokProduk::all();
         // $dataRegistrasi = Registrasi::find($id);
         $dataRegistrasi_ = json_decode($dataRegistrasi, true);
 
@@ -1516,8 +1516,13 @@ class PenjadwalanController extends Controller
                 ->get();               
         // $dataPenjadwalan = Penjadwalan::find($id_penjadwalan);
         $dataPenjadwalan_ = json_decode($dataPenjadwalan, true);
+
+        $laporan2 = DB::table('laporan_audit2')
+                ->where('id_registrasi',$id)
+                ->get();   
+        $laporan2 = json_decode($laporan2, true);        
                 
-        return view('penjadwalan.laporanAudit',compact('dataRegistrasi','dataPenjadwalan'));
+        return view('penjadwalan.laporanAudit',compact('dataRegistrasi','dataPenjadwalan','laporan2','dataKelompok'));
     }
 
     public function auditPlan($id){        
@@ -1649,10 +1654,15 @@ class PenjadwalanController extends Controller
                 ->where('id_registrasi',$id_regis)
                 ->get();   
         $laporan2 = json_decode($laporan2, true);     
+<<<<<<< HEAD
 
         
         return view('penjadwalan.uploadKsb', compact('data','id_user','id_regis','laporan2'));
              
+=======
+        
+            return view('penjadwalan.uploadKsb', compact('data','id_user','id_regis','laporan2'));        
+>>>>>>> 65ddfac886d4c5b3ff5b71ff59381201aeeaea09
     }
     
 
