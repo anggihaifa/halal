@@ -20,6 +20,7 @@ use App\LogKegiatan;
 use App\Models\Registrasi;
 use App\Models\Pembayaran;
 use App\Models\Penjadwalan;
+use App\Models\LaporanAudit1;
 use App\Models\Akad;
 use App\Models\Negara;
 use App\Models\Provinsi;
@@ -60,6 +61,7 @@ use DateTimeZone;
 use DateTime; 
 use Carbon\Carbon;
 use App\Jobs\SendEmail;
+use PhpOffice\PhpWord\PhpWord;
 
 class RegistrasiController extends Controller
 {
@@ -170,7 +172,8 @@ class RegistrasiController extends Controller
                 
                 
                  ->where('registrasi.status_cancel','=',0)
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3', 'penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.laporan_audit1_pelaksana1','penjadwalan.laporan_audit1_pelaksana2','penjadwalan.laporan_audit2_pelaksana1','penjadwalan.laporan_audit2_pelaksana2','penjadwalan.sppd_audit2_pelaksana1','penjadwalan.sppd_audit2_pelaksana2',);
+                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.laporan_audit1_pelaksana1','penjadwalan.laporan_audit1_pelaksana2','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','penjadwalan.laporan_audit2_pelaksana1','penjadwalan.laporan_audit2_pelaksana2','penjadwalan.sppd_audit2_pelaksana1','penjadwalan.sppd_audit2_pelaksana2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit');
+               
                
         }else{            
             $xdata = DB::table('registrasi')
@@ -185,7 +188,7 @@ class RegistrasiController extends Controller
 
                 ->where('registrasi.kode_wilayah','=',$kodewilayah)
                 ->where('registrasi.status_cancel','=',0)
-                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana12_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.laporan_audit1_pelaksana1','penjadwalan.laporan_audit1_pelaksana2','penjadwalan.laporan_audit2_pelaksana1','penjadwalan.laporan_audit2_pelaksana2','penjadwalan.sppd_audit2_pelaksana1','penjadwalan.sppd_audit2_pelaksana2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit');
+                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana12_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.laporan_audit1_pelaksana1','penjadwalan.laporan_audit1_pelaksana2','penjadwalan.laporan_audit2_pelaksana1','penjadwalan.laporan_audit2_pelaksana2','penjadwalan.sppd_audit2_pelaksana1','penjadwalan.sppd_audit2_pelaksana2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2');
                
 
         }
@@ -2336,36 +2339,60 @@ class RegistrasiController extends Controller
 
         
 
-        return view('audit.tahap1.unggahDokumenAuditTahap1', compact('data','dataHas'));
+        return view('penjadwalan.unggahDokumenAuditTahap1', compact('data','dataHas'));
     }
     //auditor
     public function auditTahap1($id_registrasi){
         //dd("masuk");
         //get data registrasi
-        $dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
+       //$dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
 
         $model2 = new Registrasi();
         $model3 = new KelompokProduk();
+        $model = new LaporanAudit1();
         
-        $dataRegis = $model2->find($id_registrasi);        
-
-        $dataRegis = json_decode($dataRegis,true);        
-
-        $dataJenisProduk = $model3->find($dataRegis['jenis_produk']);
-
+        $dataRegis = DB::table('registrasi')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+             ->join('users','registrasi.id_user','=','users.id')
+             ->where('registrasi.id',$id_registrasi)
+             ->select('registrasi.*','ruang_lingkup.ruang_lingkup')
+             ->get();
+        //$dataRegis =  json_decode( $dataRegis);
+       
+        $dataRegis = json_decode($dataRegis, true);
         // dd($dataJenisProduk);
-
+        //dd($dataRegis);
         //check data dokumen has
         $checkHas =  DB::table('dokumen_has')
-                     ->where('id_registrasi',$id_registrasi)
-                     ->get();
+        ->where('id_registrasi',$id_registrasi)
+        ->get();
 
-        if(isset($checkHas[0])){ $dataHas = json_decode($checkHas,true);}
-        else{ $dataHas = null;}
+       
 
-        
-
-        return view('audit.tahap1.auditTahap1', compact('dataRegistrasi','dataHas','dataRegis'));
+        $checkLaporanAudit1 =  DB::table('laporan_audit1')
+        ->where('id_registrasi',$id_registrasi)
+        ->get();
+      
+        if(isset($checkHas[0])){ 
+            $dataHas = json_decode($checkHas,true);
+           
+            if(isset($checkLaporanAudit1[0])){ 
+                
+                $laporanAudit1 = json_decode($checkLaporanAudit1,true);
+            }else{
+                //dd("masuk");
+                $model->id_registrasi = $id_registrasi;
+                $model->id_dokumen_has = $dataHas[0]['id'];
+                $model->save();
+                $laporanAudit1= $model;
+            }
+        }else{ 
+            $dataHas = null;
+        }                   
+      
+        //dd($laporanAudit1);
+        return view('penjadwalan.auditTahap1', compact('dataHas','dataRegis','laporanAudit1'));
 
     }
 

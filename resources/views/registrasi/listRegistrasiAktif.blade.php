@@ -127,7 +127,7 @@
 
 
                             <div class="form-group">
-                                <label>Auditor 1</label>
+                                <label>Auditor</label>
                                 <select id="pelaksana1_audit1" name="pelaksana1_audit1" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
@@ -189,7 +189,7 @@
                             <div class="form-group">
                               <label>Tanggal Mulai</label>
                              
-                                <input id="mulai_audit2"  name="mulai_audit2" class="form-control" data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"required></input>
+                                <input id="mulai_audit2"  name="mulai_audit2" class="form-control" data-format="dd-mm-yyyy" type="date" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -199,8 +199,8 @@
                            
 
                             <div class="form-group">
-                                <label>Saran Auditor 1 :  </label> <a id="saran1"><b></b></a><br>
-                                <label>Auditor 1</label>
+                                <label>Saran Ketua Tim Auditor:  </label> <a id="saran1"></a><br>
+                                <label>Ketua Tim Auditor</label>
                                 <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
@@ -208,7 +208,7 @@
 
                             <div class="form-group">
                                 <!-- <label>Saran Auditor 2 :  </label> <a id="saran2"><b></b></a><br> -->
-                                <label>Auditor 2</label>
+                                <label>Auditor</label>
                                 <select id="pelaksana2_audit2" name="pelaksana2_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
@@ -401,6 +401,58 @@
             </form>
         </div>
     </div>
+
+    <div id="modaljadwal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class ="modal-content">
+                <table  class="table" cellspacing="0" style="width:100% padding-left:50px;">
+                    <thead style="background-color:#dff3e3;">
+                        <th class="valign-middle text-center">No</th>
+                        <th class="valign-middle text-center">Jenis</th>
+                        <th class="valign-middle text-center">Mulai Audit</th>
+                        <th class="valign-middle text-center">Kategori</th>
+                        <th class="valign-middle text-center">Ketua Tim Auditor</th>
+                        <th class="valign-middle text-center">Auditor</th>
+                        
+                    </thead>
+                    <tr>
+                        <td class="valign-middle text-center">1</td>
+                        <td class="valign-middle text-center">Audit Tahap 1</td>
+                        <td class="valign-middle text-center" id="t_mulai1">-</td>
+                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center" id="t_p1_a1">d.pelaksana1_audit1</td>    
+                        <td class="valign-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                        <td class="valign-middle text-center">2</td>
+                        <td class="valign-middle text-center">Audit Tahap 2</td>
+                        <td class="valign-middle text-center" id="t_mulai2"></td>
+                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center" id="t_p1_a2"></td>    
+                        <td class="valign-middle text-center" id="t_p2_a2"></td>     
+                    </tr>
+                    <tr>
+                        <td class="valign-middle text-center">3</td>
+                        <td class="valign-middle text-center">Tehnical Review</td>
+                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center" id="t_p1_tr"></td>    
+                        <td class="valign-middle text-center" id="t_p2_tr"></td>    
+                    </tr>
+                    <tr>
+                        <td class="valign-middle text-center">4</td>
+                        <td class="valign-middle text-center">Tinjauan Komite</td>
+                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center" id="t_p1_tk" ></td>    
+                        <td class="valign-middle text-center" id="t_p2_tk"></td>   
+                    </tr>
+                        
+                    
+                </table>
+            </div>
+        </div>
+    </div>
     
 @endsection
 @push('scripts')
@@ -415,6 +467,34 @@
     
     <script>
 
+        window.addEventListener('load', (event) => {
+            $('#modalPenjadwalan1').find('form').trigger('reset');
+            $('#modalPenjadwalan2').find('form').trigger('reset');
+            $('#modalPenjadwalan3').find('form').trigger('reset');
+            $('#modalPenjadwalan4').find('form').trigger('reset');
+            $('#modaljadwal').removeData();
+        });
+
+        $('#modalPenjadwalan1').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+           //$(this).find('#pelaksana1_audit1').empty();  
+            $('#pelaksana1_audit1').selectpicker('destroy');
+            $('#pelaksana1_audit1').selectpicker('refresh'); 
+           
+        })
+        $('#modalPenjadwalan2').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+            $(this).find('#pelaksana1_audit2').empty();
+            $(this).find('#pelaksana2_audit2').empty();
+        })
+        $('#modalPenjadwalan3').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+        $('#modalPenjadwalan4').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+
+
         // $('#mulai_audit1').datepicker({ 
         //     dateFormat: 'dd-mm-yy'
         //  });
@@ -426,25 +506,7 @@
         // $('#mulai_rapat').datepicker();
       
         // $('#mulai_tinjauan').datepicker();
-        window.addEventListener('load', (event) => {
-            $('#modalPenjadwalan1').find('form').trigger('reset');
-            $('#modalPenjadwalan2').find('form').trigger('reset');
-            $('#modalPenjadwalan3').find('form').trigger('reset');
-            $('#modalPenjadwalan4').find('form').trigger('reset');
-        });
-
-        $('#modalPenjadwalan1').on('hidden.bs.modal', function () {
-            $(this).find('form').trigger('reset');
-        })
-        $('#modalPenjadwala2').on('hidden.bs.modal', function () {
-            $(this).find('form').trigger('reset');
-        })
-        $('#modalPenjadwalan3').on('hidden.bs.modal', function () {
-            $(this).find('form').trigger('reset');
-        })
-        $('#modalPenjadwalan4').on('hidden.bs.modal', function () {
-            $(this).find('form').trigger('reset');
-        })
+        
 
         $('#modalPenjadwalan1').on('show.bs.modal', function(e) {
 
@@ -478,6 +540,18 @@
             
             var data_id = $this.data('id');
             var data_saran1 = $this.data('pelaksana1');
+
+            if(data_saran1 != null){
+                if (data_saran1.indexOf('_') > -1)
+                {
+                    $str1 =  data_saran1.split("_");
+                    data_saran1 = $str1[1];
+                }
+            
+            }else{
+                data_saran1 ="-";
+            }
+            console.log(data_saran1);
             //var data_saran2 = $this.data('pelaksana2');
             var modal = $('#modalPenjadwalan2');
 
@@ -491,8 +565,9 @@
 
             }else{
 
-                z.value = data_id;
-                x.innerHTML = '<b>'+data_saran1+'</b>' ;
+                modal.find("#idregis2").val(data_id);
+                //x.innerHTML = '<b>'+data_saran1+'</b>' ;
+                modal.find("#saran1").text(data_saran1);
                 //y.innerHTML = '<b>'+data_saran2+'</b>' ;
                 // $.ajax({
 
@@ -578,6 +653,7 @@
         });
 
 
+
          $('#modalPenjadwalan4').on('show.bs.modal', function(e) {
 
 
@@ -628,6 +704,134 @@
             })
            
 
+        });
+
+         $('#modaljadwal').on('show.bs.modal', function(e) {
+
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var p1_a1 = $this.data('pelaksana1-audit1');
+            var p1_a2 = $this.data('pelaksana1-audit2');
+            var p2_a2 = $this.data('pelaksana2-audit2');
+            var p1_tr = $this.data('pelaksana1-tr');
+            var p2_tr = $this.data('pelaksana2-tr');
+            var p1_tk = $this.data('pelaksana1-tinjauan');
+            var p2_tk = $this.data('pelaksana2-tinjauan');
+            var mulai_audit1 = $this.data('mulai-audit1');
+            var mulai_audit2 = $this.data('mulai-audit2');
+            var modal = $('#modaljadwal');
+            
+           
+            if(mulai_audit1  == null){
+
+                mulai_audit1 ="-";
+            }
+           
+            if(mulai_audit2  == null){
+
+                mulai_audit2 ="-";
+            }
+           
+            
+
+
+            if(p1_a1 != null){
+                if (p1_a1.indexOf('_') > -1)
+                {
+                    $str1 =  p1_a1.split("_");
+                    p1_a1 = $str1[1];
+                }
+            
+            }else{
+                p1_a1 ="-";
+            }
+
+
+            if(p1_a2 != null){
+
+                if (p1_a2.indexOf('_') > -1){
+                    $str2 =  p1_a2.split("_");
+                    p1_a2 = $str2[1];
+                }
+                        
+            }else{
+                p1_a2="-";
+            }
+
+
+           
+
+
+            if(p2_a2 != null){
+                if (p2_a2.indexOf('_') > -1){
+                    $str4 =  p2_a2.split("_");
+                    p2_a2= $str4[1];
+                }
+                
+            }else{
+                p2_a2 ="-";
+            }
+
+            if(p1_tr != null){
+                if (p1_tr.indexOf('_') > -1){
+                    $str5 =  p1_tr.split("_");
+                    p1_tr = $str5[1];
+                }
+                
+            }else{
+                p1_tr ="-";
+            }
+
+            if(p2_tr != null){
+                if (p2_tr.indexOf('_') > -1){
+                    $str6 =  p2_tr.split("_");
+                    p2_tr = $str6[1];
+                }
+                
+            }else{
+                p2_tr ="-";
+            }
+
+            if(p1_tk != null){
+                if (p1_tk.indexOf('_') > -1){
+                    $str8 =  p1_tk.split("_");
+                    p1_tk = $str8[1];
+                }
+            
+            }else{
+                p1_tk ="-";
+            }
+
+            if(p2_tk != null){
+                if (p2_tk.indexOf('_') > -1){
+                    $str9 =  p2_tk.split("_");
+                    p2_tk = $str9[1];
+                }
+                
+            }else{
+                p2_tk ="-";
+            }
+
+          
+          
+        
+            modal.find('#t_p1_a1').html(p1_a1);
+            modal.find('#t_p1_a2').html(p1_a2);
+            modal.find('#t_p2_a2').html(p2_a2);
+            modal.find('#t_p1_tr').html(p1_tr);
+            modal.find('#t_p2_tr').html(p2_tr);
+            modal.find('#t_p1_tk').html(p1_tk);
+            modal.find('#t_p2_tk').html(p2_tk);
+            modal.find('#t_mulai1').html(mulai_audit1);
+            modal.find('#t_mulai2').html(mulai_audit2);
+                
+            modal.find('#modaljadwal').attr('action', function (i,old) {
+                return old + '/' + data_id;
+            });  
+           
         });
 
 
@@ -711,151 +915,151 @@
         //     }                               
         // }
 
-        function format ( d ) {
+        // function format ( d ) {
 
-            if(d.mulai_audit1  == null){
+        //     if(d.mulai_audit1  == null){
 
-                d.mulai_audit1 ="-";
-            }
-            if(d.selesai_audit1  == null){
+        //         d.mulai_audit1 ="-";
+        //     }
+        //     if(d.selesai_audit1  == null){
 
-                d.selesai_audit1 ="-";
-            }
-            if(d.mulai_audit2  == null){
+        //         d.selesai_audit1 ="-";
+        //     }
+        //     if(d.mulai_audit2  == null){
 
-                d.mulai_audit2 ="-";
-            }
-            if(d.selesai_audit2  == null){
+        //         d.mulai_audit2 ="-";
+        //     }
+        //     if(d.selesai_audit2  == null){
 
-                d.selesai_audit2 ="-";
-            }
-            if(d.mulai_tr  == null){
+        //         d.selesai_audit2 ="-";
+        //     }
+        //     if(d.mulai_tr  == null){
 
-                d.mulai_tr ="-";
-            }
-            if(d.selesai_tr  == null){
+        //         d.mulai_tr ="-";
+        //     }
+        //     if(d.selesai_tr  == null){
 
-                d.selesai_tr="-";
-            }
-            if(d.mulai_tinjauan  == null){
+        //         d.selesai_tr="-";
+        //     }
+        //     if(d.mulai_tinjauan  == null){
 
-                d.mulai_tinjauan ="-";
-            }
-            if(d.selesai_tinjauan  == null){
+        //         d.mulai_tinjauan ="-";
+        //     }
+        //     if(d.selesai_tinjauan  == null){
 
-                d.selesai_tinjauan ="-";
-            }
+        //         d.selesai_tinjauan ="-";
+        //     }
 
 
-            if(d.pelaksana1_audit1 != null){
-                if (d.pelaksana1_audit1.indexOf('_') > -1)
-                {
-                    $str1 =  d.pelaksana1_audit1.split("_");
-                    d.pelaksana1_audit1 = $str1[1];
-                }
+        //     if(d.pelaksana1_audit1 != null){
+        //         if (d.pelaksana1_audit1.indexOf('_') > -1)
+        //         {
+        //             $str1 =  d.pelaksana1_audit1.split("_");
+        //             d.pelaksana1_audit1 = $str1[1];
+        //         }
             
-            }else{
-                d.pelaksana1_audit1 ="-";
-            }
+        //     }else{
+        //         d.pelaksana1_audit1 ="-";
+        //     }
 
 
-            if(d.pelaksana2_audit1 != null){
+        //     if(d.pelaksana2_audit1 != null){
 
-                if (d.pelaksana2_audit1.indexOf('_') > -1){
-                    $str2 =  d.pelaksana2_audit1.split("_");
-                    d.pelaksana2_audit1 = $str2[1];
-                }
+        //         if (d.pelaksana2_audit1.indexOf('_') > -1){
+        //             $str2 =  d.pelaksana2_audit1.split("_");
+        //             d.pelaksana2_audit1 = $str2[1];
+        //         }
                         
-            }else{
-                d.pelaksana2_audit1 ="-";
-            }
+        //     }else{
+        //         d.pelaksana2_audit1 ="-";
+        //     }
 
 
-            if(d.pelaksana1_audit2 != null){
+        //     if(d.pelaksana1_audit2 != null){
                 
-                if (d.pelaksana1_audit2.indexOf('_') > -1){
-                    $str3 = d.pelaksana1_audit2.split("_");
-                    d.pelaksana1_audit2 = $str3[1];
-                }
+        //         if (d.pelaksana1_audit2.indexOf('_') > -1){
+        //             $str3 = d.pelaksana1_audit2.split("_");
+        //             d.pelaksana1_audit2 = $str3[1];
+        //         }
                 
             
-            }
-            else{
+        //     }
+        //     else{
             
-                d.pelaksana1_audit2 ="-";
-            }
+        //         d.pelaksana1_audit2 ="-";
+        //     }
 
 
-            if(d.pelaksana2_audit2 != null){
-                if (d.pelaksana2_audit2.indexOf('_') > -1){
-                    $str4 =  d.pelaksana2_audit2.split("_");
-                    d.pelaksana2_audit2 = $str4[1];
-                }
+        //     if(d.pelaksana2_audit2 != null){
+        //         if (d.pelaksana2_audit2.indexOf('_') > -1){
+        //             $str4 =  d.pelaksana2_audit2.split("_");
+        //             d.pelaksana2_audit2 = $str4[1];
+        //         }
                 
-            }else{
-                d.pelaksana2_audit2 ="-";
-            }
+        //     }else{
+        //         d.pelaksana2_audit2 ="-";
+        //     }
 
-            if(d.pelaksana1_tr != null){
-                if (d.pelaksana1_tr.indexOf('_') > -1){
-                    $str5 =  d.pelaksana1_tr.split("_");
-                    d.pelaksana1_tr = $str5[1];
-                }
+        //     if(d.pelaksana1_tr != null){
+        //         if (d.pelaksana1_tr.indexOf('_') > -1){
+        //             $str5 =  d.pelaksana1_tr.split("_");
+        //             d.pelaksana1_tr = $str5[1];
+        //         }
                 
-            }else{
-                d.pelaksana1_tr ="-";
-            }
+        //     }else{
+        //         d.pelaksana1_tr ="-";
+        //     }
 
-            if(d.pelaksana2_tr != null){
-                if (d.pelaksana2_tr.indexOf('_') > -1){
-                    $str6 =  d.pelaksana2_tr.split("_");
-                    d.pelaksana2_tr = $str6[1];
-                }
+        //     if(d.pelaksana2_tr != null){
+        //         if (d.pelaksana2_tr.indexOf('_') > -1){
+        //             $str6 =  d.pelaksana2_tr.split("_");
+        //             d.pelaksana2_tr = $str6[1];
+        //         }
                 
-            }else{
-                d.pelaksana2_tr ="-";
-            }
+        //     }else{
+        //         d.pelaksana2_tr ="-";
+        //     }
 
-            if(d.pelaksana3_tr != null){
-                if (d.pelaksana3_tr.indexOf('_') > -1){
-                    $str7 =  d.pelaksana3_tr.split("_");
-                    d.pelaksana3_tr = $str7[1];
-                }
+        //     if(d.pelaksana3_tr != null){
+        //         if (d.pelaksana3_tr.indexOf('_') > -1){
+        //             $str7 =  d.pelaksana3_tr.split("_");
+        //             d.pelaksana3_tr = $str7[1];
+        //         }
                 
-            }else{
-                d.pelaksana3_tr ="-";
-            }
+        //     }else{
+        //         d.pelaksana3_tr ="-";
+        //     }
 
-            console.log(d.pelaksana1_tinjauan);
-            if(d.pelaksana1_tinjauan != null){
-                if (d.pelaksana1_tinjauan.indexOf('_') > -1){
-                    $str8 =  d.pelaksana1_tinjauan.split("_");
-                    d.pelaksana1_tinjauan = $str8[1];
-                }
+        //     console.log(d.pelaksana1_tinjauan);
+        //     if(d.pelaksana1_tinjauan != null){
+        //         if (d.pelaksana1_tinjauan.indexOf('_') > -1){
+        //             $str8 =  d.pelaksana1_tinjauan.split("_");
+        //             d.pelaksana1_tinjauan = $str8[1];
+        //         }
             
-            }else{
-                d.pelaksana1_tinjauan ="-";
-            }
+        //     }else{
+        //         d.pelaksana1_tinjauan ="-";
+        //     }
 
-            if(d.pelaksana12_tinjauan != null){
-                if (d.pelaksana2_tinjauan.indexOf('_') > -1){
-                    $str9 =  d.pelaksana2_tinjauan.split("_");
-                    d.pelaksana2_tinjauan = $str9[1];
-                }
+        //     if(d.pelaksana12_tinjauan != null){
+        //         if (d.pelaksana2_tinjauan.indexOf('_') > -1){
+        //             $str9 =  d.pelaksana2_tinjauan.split("_");
+        //             d.pelaksana2_tinjauan = $str9[1];
+        //         }
                 
-            }else{
-                d.pelaksana2_tinjauan ="-";
-            }
+        //     }else{
+        //         d.pelaksana2_tinjauan ="-";
+        //     }
 
-            if(d.pelaksana3_tinjauan != null){
-                if (d.pelaksana3_tinjauan.indexOf('_') > -1){
-                    $str10 = d.pelaksana3_tinjauan.split("_");
-                    d.pelaksana3_tinjauan = $str10[1];
-                }
+        //     if(d.pelaksana3_tinjauan != null){
+        //         if (d.pelaksana3_tinjauan.indexOf('_') > -1){
+        //             $str10 = d.pelaksana3_tinjauan.split("_");
+        //             d.pelaksana3_tinjauan = $str10[1];
+        //         }
             
-            }else{
-                d.pelaksana3_tinjauan ="-";
-            }
+        //     }else{
+        //         d.pelaksana3_tinjauan ="-";
+        //     }
 
 
 
@@ -863,62 +1067,62 @@
 
 
 
-            return '<table  class="table" cellspacing="0" style="width:100% padding-left:50px;">'+
-                '<thead style="background-color:#dff3e3;">'+
-                    '<th class="valign-middle text-center">No</th>'+
-                    '<th class="valign-middle text-center">Jenis</th>'+
-                    '<th class="valign-middle text-center">Mulai Audit</th>'+
-                    '<th class="valign-middle text-center">Selesai Audit</th>'+
-                    '<th class="valign-middle text-center">Kategori</th>'+
-                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
+        //     return '<table  class="table" cellspacing="0" style="width:100% padding-left:50px;">'+
+        //         '<thead style="background-color:#dff3e3;">'+
+        //             '<th class="valign-middle text-center">No</th>'+
+        //             '<th class="valign-middle text-center">Jenis</th>'+
+        //             '<th class="valign-middle text-center">Mulai Audit</th>'+
+        //             '<th class="valign-middle text-center">Selesai Audit</th>'+
+        //             '<th class="valign-middle text-center">Kategori</th>'+
+        //             '<th class="valign-middle text-center">Auditor/Komite</th>'+
+        //             '<th class="valign-middle text-center">Auditor/Komite</th>'+
+        //             '<th class="valign-middle text-center">Auditor/Komite</th>'+
                     
-                '</thead>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">1</td>'+
-                    '<td class="valign-middle text-center">Audit Tahap 1</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
-                    '<td class="valign-middle text-center">'+d.selesai_audit1+'</td>'+
-                    '<td class="valign-middle text-center">Remote</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
-                    '<td class="valign-middle text-center">'+d.pelaksana2_audit1+'</td>'+
-                    '<td class="valign-middle text-center">-</td>'+    
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">2</td>'+
-                    '<td class="valign-middle text-center">Audit Tahap 2</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
-                    '<td class="valign-middle text-center">'+d.selesai_audit2+'</td>'+
-                    '<td class="valign-middle text-center">'+d.ktg_audit2+'</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
-                    '<td class="valign-middle text-center">-</td>'+    
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">3</td>'+
-                    '<td class="valign-middle text-center">Tehnical Review</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_tr+'</td>'+
-                    '<td class="valign-middle text-center">'+d.selesai_tr+'</td>'+
-                    '<td class="valign-middle text-center">Remote</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_tr+'</td>'+ 
-                    '<td class="valign-middle text-center" >'+d.pelaksana3_tr+'</td>'+    
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">4</td>'+
-                    '<td class="valign-middle text-center">Tinjauan Komite</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_tinjauan+'</td>'+
-                    '<td class="valign-middle text-center">'+d.selesai_tinjauan+'</td>'+
-                    '<td class="valign-middle text-center">Remote</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
-                    '<td class="valign-middle text-center" >'+d.pelaksana3_tinjauan+'</td>'+    
-                '</tr>'+
+        //         '</thead>'+
+        //         '<tr>'+
+        //             '<td class="valign-middle text-center">1</td>'+
+        //             '<td class="valign-middle text-center">Audit Tahap 1</td>'+
+        //             '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
+        //             '<td class="valign-middle text-center">'+d.selesai_audit1+'</td>'+
+        //             '<td class="valign-middle text-center">Remote</td>'+
+        //             '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
+        //             '<td class="valign-middle text-center">'+d.pelaksana2_audit1+'</td>'+
+        //             '<td class="valign-middle text-center">-</td>'+    
+        //         '</tr>'+
+        //         '<tr>'+
+        //             '<td class="valign-middle text-center">2</td>'+
+        //             '<td class="valign-middle text-center">Audit Tahap 2</td>'+
+        //             '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
+        //             '<td class="valign-middle text-center">'+d.selesai_audit2+'</td>'+
+        //             '<td class="valign-middle text-center">'+d.ktg_audit2+'</td>'+
+        //             '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
+        //             '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
+        //             '<td class="valign-middle text-center">-</td>'+    
+        //         '</tr>'+
+        //         '<tr>'+
+        //             '<td class="valign-middle text-center">3</td>'+
+        //             '<td class="valign-middle text-center">Tehnical Review</td>'+
+        //             '<td class="valign-middle text-center">'+d.mulai_tr+'</td>'+
+        //             '<td class="valign-middle text-center">'+d.selesai_tr+'</td>'+
+        //             '<td class="valign-middle text-center">Remote</td>'+
+        //             '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'</td>'+    
+        //             '<td class="valign-middle text-center" >'+d.pelaksana2_tr+'</td>'+ 
+        //             '<td class="valign-middle text-center" >'+d.pelaksana3_tr+'</td>'+    
+        //         '</tr>'+
+        //         '<tr>'+
+        //             '<td class="valign-middle text-center">4</td>'+
+        //             '<td class="valign-middle text-center">Tinjauan Komite</td>'+
+        //             '<td class="valign-middle text-center">'+d.mulai_tinjauan+'</td>'+
+        //             '<td class="valign-middle text-center">'+d.selesai_tinjauan+'</td>'+
+        //             '<td class="valign-middle text-center">Remote</td>'+
+        //             '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
+        //             '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
+        //             '<td class="valign-middle text-center" >'+d.pelaksana3_tinjauan+'</td>'+    
+        //         '</tr>'+
                     
             
-            '</table>';
-        }
+        //     '</table>';
+        // }
 
         
         function formatRupiah(d) {
@@ -934,6 +1138,12 @@
             $.ajaxSetup({
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
             });
+
+           
+           
+            $('#modaljadwal').on('hidden.bs.modal', function () {
+                $(this).removeData();
+            })
 
             $('#mulai_audit1').on('change', function () {
                 $.ajax({
@@ -1543,7 +1753,7 @@
                             var audit1 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan1' style="cursor:pointer">Audit Tahap 1</a>`;
                             var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
                             var tehnicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan3' style="cursor:pointer">Tehnical Review</a>`;
-                            var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite Ahli</a>`;
+                            var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite</a>`;
 
                             var ksb = `<a class="dropdown-item" style="cursor:pointer" href="{{url('upload_ksb')}}/`+full.id+`">Input Berkas Konfirmasi, Surat Tugas dan Berita Acara</a>`;
                             
@@ -1575,21 +1785,23 @@
 
                                 var unduhBayar3 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap3+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                             }
-                            if(full.bap == null ){
-                                var unduhBAP = `<a disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+                            if(full.file_bap == null ){
+                                var unduhBAP = `<a style="background-color:red; color:white; border-radius:4px;">&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
                             }else{            
-                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}"  download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}" style="background-color:green; color:white; border-radius:4px;"  download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
                             } 
 
-                            if(full.surat_tugas == null ){
-                                var unduhST = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;ST&nbsp;&nbsp;</a>`;
+                            if(full.file_surat_tugas == null ){
+                                var unduhST = `<a  style="background-color:red; color:white; border-radius:4px;">&nbsp;&nbsp;ST&nbsp;&nbsp;</a>`;
                             }else{              
-                                var unduhST = `<a href="{{ url('').Storage::url('public/laporan/upload/Surat Tugas/`+full.file_surat_tugas+`') }}"   download>&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
+                                var unduhST = `<a href="{{ url('').Storage::url('public/laporan/upload/Surat Tugas/`+full.file_surat_tugas+`') }}" style="background-color:green; color:white; border-radius:4px;"   download>&nbsp;&nbsp;ST&nbsp;&nbsp;</a>`;
                             } 
-                            if(full.konfirmasi_sk_audit == null ){
-                                var unduhKSA = `<a  disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            if(full.file_konfirmasi_sk_audit == null ){
+                               
+                                var unduhKSA = `<a style="background-color:red ; color:white; border-radius:4px;">&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
                             }else{              
-                                var unduhKSA = `<a href="{{ url('').Storage::url('public/laporan/upload/Konfirmasi SK Audit/`+full.file_konfirmasi_sk_audit+`') }}" download>&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
+                                
+                                var unduhKSA = `<a style="background-color:green; color:white; border-radius:4px;" href="{{ url('').Storage::url('public/laporan/upload/Konfirmasi SK Audit/`+full.file_konfirmasi_sk_audit+`') }}" download>&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
                             } 
                            
 
@@ -1621,9 +1833,8 @@
                                     
                                        
                                         <div class="col-lg-5 row" >
-                                             <div class="col-lg-4 " >
-                                                <i class="fa fa-building text-primary" style="font-size:1000%; padding-top:20%"></i> 
-                                                    
+                                            <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-building text-primary" style="font-size:600%"></i>
                                             </div>
                                             <div class="col-lg-8 ">
                                                 <h4 class="text-grey" style=>`+full.nama_perusahaan+`</h4>
@@ -1675,7 +1886,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body p-0 m-0" >
                                                 <div class="tab-content p-0 m-0">
                                                     <div class="tab-pane fade active show" id="card-tab-1-`+full.id+`">
 
@@ -1818,36 +2029,53 @@
                                                             <td>
                                                                 <table class="table table-borderless">
                                                                     <tr>
-                                                                        <td>
+                                                                        <td class="text-center">
                                                                         `+unduhBAP+`
                                                                         </td>
                                                                     </tr>
                                                                     
                                                                     <tr>
-                                                                        <td>
+                                                                        <td class="text-center">
                                                                         `+unduhST+`
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>
+                                                                        <td class="text-center">
                                                                         `+unduhKSA+`
                                                                         </td>
                                                                     </tr>
                                                                 </table>
 
-                                                            <td>
-                                                            </td>
+                                                            
                                                             <td class="text-center align-middle">
-                                                                <div class="btn-group m-r-5 show">
-                                                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                        <b class="ion-ios-arrow-down"></b>
-                                                                    </a>
-                                                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+                                                                <table class="table-borderless text-center align-middle">
+                                                                <tr>
+                                                                    <td class="text-center align-middle">
+                                                                        <i class="fa fa-eye" aria-hidden="true" data-toggle='modal' data-pelaksana1-audit1='`+full.pelaksana1_audit1+`' data-pelaksana1-audit2='`+full.pelaksana1_audit2+`' data-pelaksana2-audit2='`+full.pelaksana2_audit2+`' data-pelaksana1-tr='`+full.pelaksana1_tr+`' data-pelaksana2-tr='`+full.pelaksana2_tr+`' data-pelaksana1-tinjauan='`+full.pelaksana1_tinjauan+`' data-pelaksana2-tinjauan='`+full.pelaksana2_tinjauan+`' 
+                                                                        data-mulai-audit1='`+full.mulai_audit1+`' 
+                                                                        data-mulai-audit2='`+full.mulai_audit2+`'  data-target='#modaljadwal'></i>
 
-                                                                        
-                                                                    <div class="dropdown-button-title">Update Progress</div>`+audit1+audit2+tehnicalReview+tinjauan+ksb+`
+                                                                    </td>
+                                                                </tr>
+                                                                <tr >
+                                                                    <td class="text-center align-middle">
+
+                                                                    <div class="btn-group m-r-5 show">
+                                                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
+                                                                            <b class="ion-ios-arrow-down"></b>
+                                                                        </a>
+                                                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                                                            
+                                                                        <div class="dropdown-button-title">Update Progress</div>`+audit1+audit2+tehnicalReview+tinjauan+ksb+`
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                                    </td>
+                                                                   
+
+                                                                </tr>
+                                                                </table>
+                                                                
                                                             </td>
                                                         </tr>
                                                         

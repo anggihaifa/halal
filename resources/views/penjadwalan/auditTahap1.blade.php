@@ -16,14 +16,14 @@
 	</ol>
 	<!-- end breadcrumb -->
 	<!-- begin page-header -->
-	<h1 class="page-header">Unggah Data Sertifikasi  <small>{{$dataRegistrasi[0]['perusahaan']}}</small></h1>
+	<h1 class="page-header">Unggah Data Sertifikasi  <small>{{$dataRegis[0]['nama_perusahaan']}}</small></h1>
 	<!-- end page-header -->
 	<!-- begin panel -->
 	<div class="panel panel-inverse">
 		<!-- begin panel-heading -->
 		<div class="panel-heading">
 			<h4 class="panel-title" style="margin-left:5px">
-                <span>No.Registrasi : {{$dataRegistrasi[0]['no_registrasi']}}</span>
+                <span>No.Registrasi : {{$dataRegis[0]['no_registrasi']}}</span>
             </h4>
 			<div class="panel-heading-btn">
 				<a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
@@ -50,7 +50,7 @@
 							<h5>Dokumen Lengkap</h5>
 																
 							@foreach($dataHas as $has => $value)
-								<form action="{{route('updatestatushas',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+								<form action="{{route('updatestatusaudittahap1',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 							@endforeach
 								@csrf
 								@method('PUT')
@@ -58,27 +58,23 @@
 								<div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'nama_organisasi','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$dataRegis['nama_perusahaan']])@endcomponent
+                                            @component('components.inputtext',['label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$dataRegis[0]['nama_perusahaan']])@endcomponent
                                         </div>
                                     </div>
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'nomor_registrasi_bpjph','label' => 'Nomor Registrasi BPJPH','required'=>true,'placeholder'=>'Nomor Registrasi BPJPH','readonly'=>true,'value'=>$dataRegis['no_surat']])@endcomponent
+                                            @component('components.inputtext',['label' => 'Nomor Registrasi BPJPH','required'=>true,'placeholder'=>'Nomor Registrasi BPJPH','readonly'=>true,'value'=>$dataRegis[0]['no_registrasi_bpjph']])@endcomponent
                                         </div>
                                     </div>
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'ruang_lingkup','label' => 'Ruang Lingkup','required'=>true,'placeholder'=>'Ruang Lingkup','value'=>$dataRegis['jenis_usaha'],'readonly'=>true])@endcomponent
+                                            @component('components.inputtext',['label' => 'Ruang Lingkup','required'=>true,'placeholder'=>'Ruang Lingkup','value'=>$dataRegis[0]['ruang_lingkup'],'readonly'=>true])@endcomponent
                                         </div>
                                     </div>
+									
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Kelompok/Jenis Produk','required'=>true,'placeholder'=>'Kelompok/Jenis Produk','readonly'=>true,'value'=>$dataJenisProduk['kelompok_produk']])@endcomponent
-                                        </div>
-                                    </div>
-									<div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'status_sertifikasi','label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','readonly'=>true,'value'=>$dataRegis['status_registrasi']])@endcomponent
+                                            @component('components.inputtext',['label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','readonly'=>true,'value'=>$dataRegis[0]['status_registrasi']])@endcomponent
                                         </div>
                                     </div>
                                 </div>
@@ -270,36 +266,36 @@
 									@else
 										@foreach($dataHas as $has => $value)
 											<input type="text" name="status" value="1" readonly hidden>
-											<input type="text" name="id" value="{{$value['id']}}" readonly hidden>
+											<input type="text" name="id" value="{{$laporanAudit1[0]['id']}}" readonly hidden>
 											<tr class="odd">
 												<td class="text-nowrap valign-middle text-center">1</td>
 												<td class="valign-middle">Manual Sistem Jaminan Produk Halal (SJPH)</td>
 												@if($value['has_1'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_1')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_1')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_1" name="status_has_1" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_1"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_1"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_1"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_1"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_1"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_1"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_1"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_1"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 
 													</select>
 												</td>
 												<td >
-													<input class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value='{{$value['keterangan_has_1']}}'>
+													<input class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value='{{$laporanAudit1[0]['keterangan_has_1']}}'>
 													</input>
 													
 
 												</td>
 												<td>
-												<input class="form-control" id="tgl_penyerahan_1" type="text" name="tgl_penyerahan_1" value='{{$value['tgl_penyerahan_1']}}' style="font-size:8px;width:100px" readonly>
+												<input class="form-control" id="tgl_penyerahan_1" type="text" name="tgl_penyerahan_1" value='{{$laporanAudit1[0]['tgl_penyerahan_1']}}' style="font-size:8px;width:100px" readonly>
 													</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_1" type="text" name="review_perbaikan_1" value='{{$value['review_perbaikan_1']}}'>
+													<input class="form-control" id="review_perbaikan_1" type="text" name="review_perbaikan_1" value='{{$laporanAudit1[0]['review_perbaikan_1']}}'>
 													</input>
 													
 
@@ -309,27 +305,27 @@
 												<td class="text-nowrap valign-middle text-center">2</td>
 												<td class="valign-middle">Matriks Baham vs Produk</td>
 												@if($value['has_2'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_2')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_2')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_2" name="status_has_2" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_2"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_2"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_2"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_2"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_2"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_2"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_2"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_2"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
 												<td >
-													<input type="text" class="form-control" name="keterangan_has_2" value='{{$value["keterangan_has_2"]}}' ></input>
+													<input type="text" class="form-control" name="keterangan_has_2" value='{{$laporanAudit1[0]["keterangan_has_2"]}}' ></input>
 												</td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_2" type="text" name="tgl_penyerahan_2" value='{{$value['tgl_penyerahan_2']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_2" type="text" name="tgl_penyerahan_2" value='{{$laporanAudit1[0]['tgl_penyerahan_2']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_2" type="text" name="review_perbaikan_2" value='{{$value['review_perbaikan_2']}}'>
+													<input class="form-control" id="review_perbaikan_2" type="text" name="review_perbaikan_2" value='{{$laporanAudit1[0]['review_perbaikan_2']}}'>
 													</input>
 													
 
@@ -339,28 +335,28 @@
 												<td class="text-nowrap valign-middle text-center">3</td>
 												<td class="text-nowrap valign-middle">Data Produk Yang Dihasilkan Sendiri</td>
 												@if($value['has_3'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_3')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_3')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_3" name="status_has_3" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_3"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_3"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_3"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_3"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_3"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_3"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_3"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_3"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
 												<td >
-													<input type="text" class="form-control" name="keterangan_has_3" value='{{$value['keterangan_has_3']}}' >
+													<input type="text" class="form-control" name="keterangan_has_3" value='{{$laporanAudit1[0]['keterangan_has_3']}}' >
 													</input>
 												</td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_3" type="text" name="tgl_penyerahan_3" value='{{$value['tgl_penyerahan_3']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_3" type="text" name="tgl_penyerahan_3" value='{{$laporanAudit1[0]['tgl_penyerahan_3']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_3" type="text" name="review_perbaikan_3" value='{{$value['review_perbaikan_1']}}'>
+													<input class="form-control" id="review_perbaikan_3" type="text" name="review_perbaikan_3" value='{{$laporanAudit1[0]['review_perbaikan_1']}}'>
 													</input>
 													
 
@@ -370,25 +366,25 @@
 												<td class="text-nowrap valign-middle text-center">4</td>
 												<td class="valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 												@if($value['has_4'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_4')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_4')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_4" name="status_has_4" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_4"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_4"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_4"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_4"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_4"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_4"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_4"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_4"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_4" value='{{$value['keterangan_has_4']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_4" value='{{$laporanAudit1[0]['keterangan_has_4']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_4" type="text" name="tgl_penyerahan_4" value='{{$value['tgl_penyerahan_4']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_4" type="text" name="tgl_penyerahan_4" value='{{$laporanAudit1[0]['tgl_penyerahan_4']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_4" type="text" name="review_perbaikan_4" value='{{$value['review_perbaikan_4']}}'>
+													<input class="form-control" id="review_perbaikan_4" type="text" name="review_perbaikan_4" value='{{$laporanAudit1[0]['review_perbaikan_4']}}'>
 													</input>
 													
 
@@ -398,25 +394,25 @@
 												<td class="text-nowrap valign-middle text-center">5</td>
 												<td class="valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
 												@if($value['has_5'] !== null)
-												<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_5')}}"><i class="fa fa-eye"></i></a></td>
+												<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_5')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_5" name="status_has_5" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_5"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_5"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_5"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_5"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_5"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_5"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_5"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_5"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control"  name="keterangan_has_5" value='{{$value['keterangan_has_5']}}'  ></input></td>
+												<td ><input type="text" class="form-control"  name="keterangan_has_5" value='{{$laporanAudit1[0]['keterangan_has_5']}}'  ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_5" type="text" name="tgl_penyerahan_5" value='{{$value['tgl_penyerahan_5']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_5" type="text" name="tgl_penyerahan_5" value='{{$laporanAudit1[0]['tgl_penyerahan_5']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_5" type="text" name="review_perbaikan_5" value='{{$value['review_perbaikan_5']}}'>
+													<input class="form-control" id="review_perbaikan_5" type="text" name="review_perbaikan_5" value='{{$laporanAudit1[0]['review_perbaikan_5']}}'>
 													</input>
 													
 
@@ -425,25 +421,25 @@
 												<td class="text-nowrap valign-middle text-center">6</td>
 												<td class="valign-middle">Sertifikat Halal Sebelumnya (Jika Ada)</td>
 												@if($value['has_6'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_6')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_6')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_6" name="status_has_6" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_6"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_6"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_6"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_6"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_6"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_6"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_6"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_6"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control"  name="keterangan_has_6" value='{{$value['keterangan_has_6']}}' ></input></td>
+												<td ><input type="text" class="form-control"  name="keterangan_has_6" value='{{$laporanAudit1[0]['keterangan_has_6']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_6" type="text" name="tgl_penyerahan_6" value='{{$value['tgl_penyerahan_6']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_6" type="text" name="tgl_penyerahan_6" value='{{$laporanAudit1[0]['tgl_penyerahan_6']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_6" type="text" name="review_perbaikan_6" value='{{$value['review_perbaikan_6']}}'>
+													<input class="form-control" id="review_perbaikan_6" type="text" name="review_perbaikan_6" value='{{$laporanAudit1[0]['review_perbaikan_6']}}'>
 													</input>
 													
 
@@ -453,25 +449,25 @@
 												<td class="text-nowrap valign-middle text-center">7</td>
 												<td class="valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
 												@if($value['has_7'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_7')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_7')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_7" name="status_has_7" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_7"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_7"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_7"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_7"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_7"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_7"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_7"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_7"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_7" value='{{$value['keterangan_has_7']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_7" value='{{$laporanAudit1[0]['keterangan_has_7']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_7" type="text" name="tgl_penyerahan_7" value='{{$value['tgl_penyerahan_7']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_7" type="text" name="tgl_penyerahan_7" value='{{$laporanAudit1[0]['tgl_penyerahan_7']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_7" type="text" name="review_perbaikan_7" value='{{$value['review_perbaikan_7']}}'>
+													<input class="form-control" id="review_perbaikan_7" type="text" name="review_perbaikan_7" value='{{$laporanAudit1[0]['review_perbaikan_7']}}'>
 													</input>
 													
 
@@ -480,25 +476,25 @@
 												<td class="text-nowrap valign-middle text-center">8</td>
 												<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
 												@if($value['has_8'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_8')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_8')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_8" name="status_has_8" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_8"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_8"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_8"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_8"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_8"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_8"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_8"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_8"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_8" value='{{$value['keterangan_has_8']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_8" value='{{$laporanAudit1[0]['keterangan_has_8']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_8" type="text" name="tgl_penyerahan_8" value='{{$value['tgl_penyerahan_8']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_8" type="text" name="tgl_penyerahan_8" value='{{$laporanAudit1[0]['tgl_penyerahan_8']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_8" type="text" name="review_perbaikan_8" value='{{$value['review_perbaikan_8']}}'>
+													<input class="form-control" id="review_perbaikan_8" type="text" name="review_perbaikan_8" value='{{$laporanAudit1[0]['review_perbaikan_8']}}'>
 													</input>
 													
 
@@ -508,25 +504,25 @@
 												<td class="text-nowrap valign-middle text-center">9</td>
 												<td class="valign-middle">Diagram Alir Proses Untuk Produk Yang disertifikasi</td>
 												@if($value['has_9'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_9')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_9')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_9" name="status_has_9" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_9"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_9"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_9"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_9"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_9"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_9"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_9"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_9"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_9" value='{{$value['keterangan_has_9']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_9" value='{{$laporanAudit1[0]['keterangan_has_9']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_9" type="text" name="tgl_penyerahan_9" value='{{$value['tgl_penyerahan_9']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_9" type="text" name="tgl_penyerahan_9" value='{{$laporanAudit1[0]['tgl_penyerahan_9']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_9" type="text" name="review_perbaikan_9" value='{{$value['review_perbaikan_9']}}'>
+													<input class="form-control" id="review_perbaikan_9" type="text" name="review_perbaikan_9" value='{{$laporanAudit1[0]['review_perbaikan_9']}}'>
 													</input>
 													
 
@@ -536,26 +532,26 @@
 												<td class="text-nowrap valign-middle text-center">10</td>
 												<td class="valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
 												@if($value['has_10'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_10')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_10')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_10" name="status_has_10" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_10"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_10"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_10"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_10"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_10"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_10"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_10"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_10"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_10" value='{{$value['keterangan_has_10']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_10" value='{{$laporanAudit1[0]['keterangan_has_10']}}' ></input></td>
 
 												<td>
-													<input class="form-control" id="tgl_penyerahan_10" type="text" name="tgl_penyerahan_10" value='{{$value['tgl_penyerahan_10']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_10" type="text" name="tgl_penyerahan_10" value='{{$laporanAudit1[0]['tgl_penyerahan_10']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_10" type="text" name="review_perbaikan_10" value='{{$value['review_perbaikan_10']}}'>
+													<input class="form-control" id="review_perbaikan_10" type="text" name="review_perbaikan_10" value='{{$laporanAudit1[0]['review_perbaikan_10']}}'>
 													</input>
 													
 
@@ -566,25 +562,25 @@
 												<td class="text-nowrap valign-middle text-center">11</td>
 												<td class="valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)<br><b>*dilampirkan aspek legal perusahaan (NIB dan NPWP)</b></td>
 												@if($value['has_11'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_11')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_11')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_11" name="status_has_11" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_11"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_11"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_11"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_11"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_11"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_11"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_11"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_11"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_11" value='{{$value['keterangan_has_11']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_11" value='{{$laporanAudit1[0]['keterangan_has_11']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_11" type="text" name="tgl_penyerahan_11" value='{{$value['tgl_penyerahan_11']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_11" type="text" name="tgl_penyerahan_11" value='{{$laporanAudit1[0]['tgl_penyerahan_11']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_11" type="text" name="review_perbaikan_11" value='{{$value['review_perbaikan_11']}}'>
+													<input class="form-control" id="review_perbaikan_11" type="text" name="review_perbaikan_11" value='{{$laporanAudit1[0]['review_perbaikan_11']}}'>
 													</input>
 													
 
@@ -595,25 +591,25 @@
 												<td class="text-nowrap valign-middle text-center">12</td>
 												<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
 												@if($value['has_12'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_12')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_12')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_12" name="status_has_12" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_12"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_12"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_12"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_12"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_12"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_12"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_12"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_12"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_12" value='{{$value['keterangan_has_12']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_12" value='{{$laporanAudit1[0]['keterangan_has_12']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_12" type="text" name="tgl_penyerahan_12" value='{{$value['tgl_penyerahan_12']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_12" type="text" name="tgl_penyerahan_12" value='{{$laporanAudit1[0]['tgl_penyerahan_12']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_12" type="text" name="review_perbaikan_12" value='{{$value['review_perbaikan_12']}}'>
+													<input class="form-control" id="review_perbaikan_12" type="text" name="review_perbaikan_12" value='{{$laporanAudit1[0]['review_perbaikan_12']}}'>
 													</input>
 													
 
@@ -624,25 +620,25 @@
 												<td class="text-nowrap valign-middle text-center">13</td>
 												<td class="valign-middle">Bukti Sertifikat Pelatihan Penyelia Halal</td>
 												@if($value['has_13'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_13')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_13')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_13" name="status_has_13" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_13"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_13"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_13"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_13"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_13"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_13"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_13"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_13"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_13" value='{{$value['keterangan_has_13']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_13" value='{{$laporanAudit1[0]['keterangan_has_13']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_13" type="text" name="tgl_penyerahan_13" value='{{$value['tgl_penyerahan_13']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_13" type="text" name="tgl_penyerahan_13" value='{{$laporanAudit1[0]['tgl_penyerahan_13']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_13" type="text" name="review_perbaikan_13" value='{{$value['review_perbaikan_13']}}'>
+													<input class="form-control" id="review_perbaikan_13" type="text" name="review_perbaikan_13" value='{{$laporanAudit1[0]['review_perbaikan_13']}}'>
 													</input>
 													
 
@@ -653,25 +649,25 @@
 												<td class="text-nowrap valign-middle text-center">14</td>
 												<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
 												@if($value['has_14'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_14')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_14')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_14" name="status_has_14" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_14"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_14"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_14"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_14"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_14"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_14"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_14"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_14"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_14" value='{{$value['keterangan_has_14']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_14" value='{{$laporanAudit1[0]['keterangan_has_14']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_14" type="text" name="tgl_penyerahan_14" value='{{$value['tgl_penyerahan_14']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_14" type="text" name="tgl_penyerahan_14" value='{{$laporanAudit1[0]['tgl_penyerahan_14']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_14" type="text" name="review_perbaikan_14" value='{{$value['review_perbaikan_14']}}'>
+													<input class="form-control" id="review_perbaikan_14" type="text" name="review_perbaikan_14" value='{{$laporanAudit1[0]['review_perbaikan_14']}}'>
 													</input>
 													
 
@@ -682,25 +678,25 @@
 												<td class="text-nowrap valign-middle text-center">15</td>
 												<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
 												@if($value['has_15'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_15')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_15')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_15" name="status_has_15" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_15"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_15"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_15"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_15"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_15"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_15"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_15"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_15"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_15" value='{{$value['keterangan_has_15']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_15" value='{{$laporanAudit1[0]['keterangan_has_15']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_15" type="text" name="tgl_penyerahan_15" value='{{$value['tgl_penyerahan_15']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_15" type="text" name="tgl_penyerahan_15" value='{{$laporanAudit1[0]['tgl_penyerahan_15']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_15" type="text" name="review_perbaikan_15" value='{{$value['review_perbaikan_15']}}'>
+													<input class="form-control" id="review_perbaikan_15" type="text" name="review_perbaikan_15" value='{{$laporanAudit1[0]['review_perbaikan_15']}}'>
 													</input>
 													
 
@@ -710,25 +706,25 @@
 												<td class="text-nowrap valign-middle text-center">16</td>
 												<td class="valign-middle">Bukti Pelaksanaan Kaji Ulang Manajemen</td>
 												@if($value['has_16'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_16')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_16')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_16" name="status_has_16" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_16"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_16"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-					                                    <option value="2" {{$value["status_has_16"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-					                                    <option value="3" {{$value["status_has_16"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_16"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_16"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+					                                    <option value="2" {{$laporanAudit1[0]["status_has_16"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+					                                    <option value="3" {{$laporanAudit1[0]["status_has_16"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_16" value='{{$value['keterangan_has_16']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_16" value='{{$laporanAudit1[0]['keterangan_has_16']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_16" type="text" name="tgl_penyerahan_16" value='{{$value['tgl_penyerahan_16']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_16" type="text" name="tgl_penyerahan_16" value='{{$laporanAudit1[0]['tgl_penyerahan_16']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_16" type="text" name="review_perbaikan_16" value='{{$value['review_perbaikan_16']}}'>
+													<input class="form-control" id="review_perbaikan_16" type="text" name="review_perbaikan_16" value='{{$laporanAudit1[0]['review_perbaikan_16']}}'>
 													</input>
 													
 
@@ -739,25 +735,25 @@
 												<td class="text-nowrap valign-middle text-center">17</td>
 												<td class="valign-middle">Informasi Layout Lokasi Produksi</td>
 												@if($value['has_17'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_17')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_17')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 												{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_17" name="status_has_17" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_17"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_17"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-														<option value="2" {{$value["status_has_17"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-														<option value="3" {{$value["status_has_17"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_17"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_17"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+														<option value="2" {{$laporanAudit1[0]["status_has_17"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+														<option value="3" {{$laporanAudit1[0]["status_has_17"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_17" value='{{$value['keterangan_has_17']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_17" value='{{$laporanAudit1[0]['keterangan_has_17']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_17" type="text" name="tgl_penyerahan_17" value='{{$value['tgl_penyerahan_17']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_17" type="text" name="tgl_penyerahan_17" value='{{$laporanAudit1[0]['tgl_penyerahan_17']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_17" type="text" name="review_perbaikan_17" value='{{$value['review_perbaikan_17']}}'>
+													<input class="form-control" id="review_perbaikan_17" type="text" name="review_perbaikan_17" value='{{$laporanAudit1[0]['review_perbaikan_17']}}'>
 													</input>
 
 
@@ -768,25 +764,25 @@
 												<td class="text-nowrap valign-middle text-center">18</td>
 												<td class="valign-middle">Bukti Registrasi dari BPJPH</td>
 												@if($value['has_18'] !== null)
-													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_18')}}"><i class="fa fa-eye"></i></a></td>
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_18')}}"><i class="fa fa-eye"></i></a></td>
 												@else
 												{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
 													<select id="status_has_18" name="status_has_18" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
-														<option value="" {{$value["status_has_18"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
-														<option value="1" {{$value["status_has_18"] == 1 ? 'selected' : ''}}>Memenuhi</option>
-														<option value="2" {{$value["status_has_18"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
-														<option value="3" {{$value["status_has_18"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
+														<option value="" {{$laporanAudit1[0]["status_has_18"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
+														<option value="1" {{$laporanAudit1[0]["status_has_18"] == 1 ? 'selected' : ''}}>Memenuhi</option>
+														<option value="2" {{$laporanAudit1[0]["status_has_18"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
+														<option value="3" {{$laporanAudit1[0]["status_has_18"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_18" value='{{$value['keterangan_has_18']}}' ></input></td>
+												<td ><input type="text" class="form-control" name="keterangan_has_18" value='{{$laporanAudit1[0]['keterangan_has_18']}}' ></input></td>
 												<td>
-													<input class="form-control" id="tgl_penyerahan_18" type="text" name="tgl_penyerahan_18" value='{{$value['tgl_penyerahan_18']}}' style="font-size:8px;width:100px" readonly>
+													<input class="form-control" id="tgl_penyerahan_18" type="text" name="tgl_penyerahan_18" value='{{$laporanAudit1[0]['tgl_penyerahan_18']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_18" type="text" name="review_perbaikan_18" value='{{$value['review_perbaikan_18']}}'>
+													<input class="form-control" id="review_perbaikan_18" type="text" name="review_perbaikan_18" value='{{$laporanAudit1[0]['review_perbaikan_18']}}'>
 													</input>
 
 
@@ -811,7 +807,7 @@
 
                                     <div class="radio radio-css ">
                                         <input  type="radio" name="status_memenuhi" id="tidak_memenuhi" value="tidak memenuhi" />
-                                        <label for="tidak_memenuhi"><b>Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan tanggal {{$dataRegis->dl_berkas}}</b></label>
+                                        <label for="tidak_memenuhi"><b>Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan 5 hari setelah pemeriksaan audit tahap 1</b></label>
 
                                     </div>
 								</div>

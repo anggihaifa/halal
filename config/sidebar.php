@@ -377,6 +377,11 @@ return [
             'url' => 'reviewkebutuhanwaktuaudit'
         ],
         [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Penjadwalan',
+            'url' => 'listpenjadwalanreviewer'
+        ],
+        [
             'icon' => 'ion-ios-cube',
             'title' => 'Master',
             'url' => '#',

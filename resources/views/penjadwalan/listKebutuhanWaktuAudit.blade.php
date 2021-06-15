@@ -523,7 +523,17 @@
 
     <script>
 
+            window.addEventListener('load', (event) => {
+                $('#modalKebutuhan').find('form').trigger('reset');
+                
+            });
 
+            $('#modalKebutuhan').on('hidden.bs.modal', function () {
+                $(this).find('form').trigger('reset');
+           
+            
+            })
+            
             $('#modalKebutuhan').on('show.bs.modal', function(e) {
 
 

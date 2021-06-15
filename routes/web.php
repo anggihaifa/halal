@@ -68,15 +68,15 @@ Route::post('download_laporan_produk','PHPWordController@downloadLaporanProduk')
 Route::post('download_laporan_produk_fix','PHPWordController@downloadLaporanProdukFix')->name('downloadlaporanprodukfix');
 
 //verifikator kebutuhan waktu audit
-Route::get('review_kebutuhan_waktu_audit','PenjadwalanController@reviewKebutuhanWaktuAudit')->name('reviewkebutuhanwaktuaudit');
-Route::get('data_review_kebutuhan_waktu_audit','PenjadwalanController@dataReviewKebutuhanWaktuAudit')->name('datareviewkebutuhanwaktuaudit');
-Route::put('store_review_kebutuhan_waktu_audit', 'PenjadwalanController@storeReviewKebutuhanWaktuAudit')->name('storereviewkebutuhanwaktuaudit');
-Route::get('perbaikan_kebutuhan_waktu_audit', 'PenjadwalanController@perbaikanKebutuhanWaktuAudit')->name('perbaikankebutuhanwaktuaudit');
+Route::get('review_kebutuhan_waktu_audit','ReviewerController@reviewKebutuhanWaktuAudit')->name('reviewkebutuhanwaktuaudit');
+Route::get('data_review_kebutuhan_waktu_audit','ReviewerController@dataReviewKebutuhanWaktuAudit')->name('datareviewkebutuhanwaktuaudit');
+Route::put('store_review_kebutuhan_waktu_audit', 'ReviewerController@storeReviewKebutuhanWaktuAudit')->name('storereviewkebutuhanwaktuaudit');
+Route::get('perbaikan_kebutuhan_waktu_audit', 'ReviewerController@perbaikanKebutuhanWaktuAudit')->name('perbaikankebutuhanwaktuaudit');
 
 
-Route::get('list_kebutuhan_waktu_audit','PenjadwalanController@listKebutuhanWaktuAudit')->name('listkebutuhanwaktuaudit');
-Route::get('data_kebutuhan_waktu_audit','PenjadwalanController@dataKebutuhanWaktuAudit')->name('datakebutuhanwaktuaudit');
-Route::put('store_kebutuhan_waktu_audit', 'PenjadwalanController@storeKebutuhanWaktuAudit')->name('storekebutuhanwaktuaudit');
+Route::get('list_kebutuhan_waktu_audit','ReviewerController@listKebutuhanWaktuAudit')->name('listkebutuhanwaktuaudit');
+Route::get('data_kebutuhan_waktu_audit','ReviewerController@dataKebutuhanWaktuAudit')->name('datakebutuhanwaktuaudit');
+Route::put('store_kebutuhan_waktu_audit', 'ReviewerController@storeKebutuhanWaktuAudit')->name('storekebutuhanwaktuaudit');
 //penjadwalan
 Route::get('list_penjadwalan_admin','PenjadwalanController@listpenjadwalanAdmin')->name('listpenjadwalanadmin')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('list_audit1','PenjadwalanController@listAudit1')->name('listaudit1')->middleware('role:1,3,6,9,10,11,12,13');
@@ -87,7 +87,9 @@ Route::get('list_tinjauan','PenjadwalanController@listTinjauan')->name('listtinj
 Route::get('list_log','PenjadwalanController@listLog')->name('listlog')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('data_log','PenjadwalanController@dataLog')->name('datalog');
 
-Route::get('data_penjadwalan_admin','PenjadwalanController@dataPenjadwalanAdmin')->name('datapenjadwalanadmin');
+Route::get('data_penjadwalan_reviewer','ReviewerController@dataPenjadwalanReviewer')->name('datapenjadwalanreviewer');
+Route::put('approve_penjadwalan_reviewer','ReviewerController@approvePenjadwalanReviewer')->name('approvepenjadwalanreviewer');
+Route::put('reject_penjadwalan_reviewer','ReviewerController@rejectPenjadwalanReviewer')->name('rejectpenjadwalanreviewer');
 Route::get('data_audit1','PenjadwalanController@dataAudit1')->name('dataaudit1');
 Route::get('data_audit2','PenjadwalanController@dataAudit2')->name('dataaudit2');
 Route::get('data_tehnical_review','PenjadwalanController@dataTehnicalReview')->name('datatehicalreview');
@@ -198,7 +200,7 @@ Route::put('upload_file_invoice/{id}','RegistrasiController@uploadFileInvoice')-
 //reviewer dan approver
 Route::get('list_akad_reviewer','ReviewerController@listAkadReviewer')->name('listakadreviewer')->middleware('role:1,3,5,7,9');
 Route::get('data_akad_reviewer','ReviewerController@dataAkadReviewer')->name('dataakadreviewer');
-Route::get('list_penjadwalan_reviewer','ReviewerController@listPenjadwalanReviewer')->name('listpenjadwalanreviewer')->middleware('role:1,3,6,9');
+Route::get('list_penjadwalan_reviewer','ReviewerController@listPenjadwalanReviewer')->name('listpenjadwalanreviewer');
 Route::get('list_pelunasan_reviewer','ReviewerController@listPelunasanReviewer')->name('listpelunasanreviewer')->middleware('role:1,3,5,7,9');
 
 Route::get('list_akad_approver','ReviewerController@listAkadApprover')->name('listakadapprover')->middleware('role:1,3,9');

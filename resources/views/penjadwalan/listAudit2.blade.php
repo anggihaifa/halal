@@ -155,10 +155,8 @@
                         <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                         <th class="text-nowrap valign-middle text-center">Jenis Produk</th>
                         <th class="text-nowrap valign-middle text-center">Tanggal Mulai</th>
-                        <th class="text-nowrap valign-middle text-center">Tanggal Selesai</th>
                         <th class="text-nowrap valign-middle text-center">Auditor 1</th>
                         <th class="text-nowrap valign-middle text-center">Auditor 2</th>
-                        <th class="text-nowrap valign-middle text-center">Akomodasi</th>
                         <th class="text-nowrap valign-middle text-center">Kategori</th>
                         <th class="valign-middle text-center">Status</th>
                         <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -230,14 +228,19 @@
                     {"data":"nama_perusahaan"},
                     {"data":"kelompok"},
                     {"data":"mulai_audit2"},
-                    {"data":"selesai_audit2"},
                     {
                         
                         "data":null,
                         "searchable":false,
                         "render":function (data,type,full,meta) {
-                            var str = full.pelaksana1_audit2.split("_");
-                            return str[1]
+                            if(full.pelaksana1_audit2 !=  null){
+                                
+                                var str = full.pelaksana1_audit2.split("_");
+                                return str[1]
+                            }else{
+                                return ''
+                            }
+                           
                         }
                     },
                     {
@@ -245,7 +248,8 @@
                         "data":null,
                         "searchable":false,
                         "render":function (data,type,full,meta) {
-                            if(full.pelaksana2_audit2){
+                            if(full.pelaksana2_audit2 !=  null){
+                                
                                 var str = full.pelaksana2_audit2.split("_");
                                 return str[1]
                             }else{
@@ -254,19 +258,7 @@
                             
                         }
                     },
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            
-                            var str = full.akomodasi_audit2.split("#");
-                            str = str.join(', ');
-                            return str
-                           
-                            
-                        }
-                    },
+                    
                      {"data":"ktg_audit2"},
                     
                 
@@ -275,7 +267,7 @@
                         "data":null,
                         "searchable":false,
                         "render":function (data,type,full,meta) {
-                            return checkPenjadwalan(full.status_audit2)
+                            return checkPenjadwalan(full.status_penjadwalan_audit2)
                         }
                     },
                    
@@ -309,7 +301,7 @@
                 ],
                 'columnDefs': [
                 {
-                      "targets": [0,1,2,3,4,5,6,7,8,9,10,11],
+                      "targets": [0,1,2,3,4,5,6,7,8,9],
                       "className": "text-center",
                      
                 }],
