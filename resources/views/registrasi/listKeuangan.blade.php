@@ -405,9 +405,8 @@
                                     
                                        
                                         <div class="col-lg-5 row" >
-                                             <div class="col-lg-4 " >
-                                                <i class="fa fa-building text-primary" style="font-size:1000%; padding-top:20%"></i> 
-                                                    
+                                            <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-building text-primary" style="font-size:600%"></i>
                                             </div>
                                             <div class="col-lg-8 ">
                                                 <h4 class="text-grey" style=>`+full.nama_perusahaan+`</h4>

@@ -154,12 +154,9 @@
                         <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                         <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                         <th class="text-nowrap valign-middle text-center">Jenis Produk</th>
-                        <th class="text-nowrap valign-middle text-center">Tanggal Mulai</th>
-                        <th class="text-nowrap valign-middle text-center">Tanggal Selesai</th>
                         <th class="text-nowrap valign-middle text-center">Komite 1</th>
                         <th class="text-nowrap valign-middle text-center">Komite 2</th>
-                        <th class="text-nowrap valign-middle text-center">Komite 3</th>
-                        <th class="valign-middle text-center">Status</th>
+
                         <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                 </thead>
@@ -228,8 +225,6 @@
                     {"data":"no_registrasi"},
                     {"data":"nama_perusahaan"},
                     {"data":"kelompok"},
-                    {"data":"mulai_tinjauan"},
-                    {"data":"selesai_tinjauan"},
                     {
                         
                         "data":null,
@@ -251,30 +246,6 @@
                                 return ''
                             }
                             
-                        }
-                    },
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana3_tinjauan){
-                                var str = full.pelaksana3_tinjauan.split("_");
-                                return str[1]
-                            }else{
-                                return ''
-                            }
-                            
-                        }
-                    },
-                    
-                
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            return checkPenjadwalan(full.status_tinjauan)
                         }
                     },
                    
@@ -308,7 +279,7 @@
                 ],
                 'columnDefs': [
                 {
-                      "targets": [0,1,2,3,4,5,6,7,8,9,10],
+                      "targets": [0,1,2,3,4,5,6],
                       "className": "text-center",
                      
                 }],

@@ -52,91 +52,70 @@
 									<label for="metodePembayaran2">Transfer</label>
 								</div> 
 							</div> -->
+							<label class="col-lg-4 col-form-label">Tanggal Pembayaran Tahap 1</label>
+							<div class="col-lg-8">
+								<input id="tanggal_tahap1" name="tanggal_tahap1" type="text" class="form-control"  value="{{ $dataP->tanggal_tahap1}} " readonly />
+							</div>
+							<label class="col-lg-4 col-form-label">Nominal Tahap 1</label>
+							
+							<div class="col-lg-8">
+								<input type="text" class="form-control" value="Rp. {{ $dataP->nominal_tahap1}} " disabled/>
+							</div>
+							<label class="col-lg-4 col-form-label">Bukti Pembayaran Tahap 1</label>
+							<div id="sh" class="col-lg-8">
+								<div class="form-control" readonly>
+									<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap1) }}" download>{{$dataP->bb_tahap1}}</a>
+								</div>
+							</div>
+							<label class="col-lg-4 col-form-label">Tanggal Pembayaran Tahap 2</label>
+							<div class="col-lg-8">
+								<input id="tanggal_tahap2" name="tanggal_tahap3" type="text" class="form-control"  value="{{ $dataP->tanggal_tahap2}} " readonly />
+							</div>
+							<label class="col-lg-4 col-form-label">Nominal Tahap 2</label>
+							
+							<div class="col-lg-8">
+								<input type="text" class="form-control" value="Rp. {{ $dataP->nominal_tahap2}} " disabled/>
+
+							</div>
+							<label class="col-lg-4 col-form-label">Bukti Pembayaran Tahap 2</label>
+							<div id="sh" class="col-lg-8">
+								<div class="form-control" readonly>
+									<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap2) }}" download>{{$dataP->bb_tahap2}}</a>
+								</div>
+							</div>
 							<label class="col-lg-4 col-form-label">Tanggal Pelunasan</label>
 							<div class="col-lg-8">
-								<input id="tanggal_tahap3" name="tanggal_tahap3" type="text" class="form-control" {{ $dataP->status_tahap3 == 1 ? 'disabled' : ''}} />
+								<input id="tanggal_tahap3" name="tanggal_tahap3" type="text" class="form-control"  value="{{ $dataP->tanggal_tahap3}} " readonly />
 							</div>
-							<label class="col-lg-4 col-form-label">Biaya Sertifikasi</label>
+							
+							<label class="col-lg-4 col-form-label">Nominal Tahap 3</label>
 							
 							<div class="col-lg-8">
 								<input type="text" class="form-control" value="Rp. {{ $dataP->nominal_tahap3}} " disabled/>
 							</div>
+							<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
+							<div id="sh" class="col-lg-8">
+								<div class="form-control" readonly>
+									<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
+								</div>
+							</div>
 							
-							@if($dataP->status_tahap3 == 1)	
-								<!--Auto Download-->
-								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
-								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
-									</div>
+						
+							<label class="col-lg-4 col-form-label">Invoice Pelunasan</label>
+							<div id="sh" class="col-lg-8">
+								<div class="form-control" readonly>
+										<a href="{{url('') .Storage::url('public/INV/'.$data->inv_pembayaran) }}" download>{{$data->inv_pembayaran}}</a>
 								</div>
-								
-							@elseif($dataP->status_tahap3 == 2)	
-								<!--Auto Download-->
-								<label class="col-lg-4 col-form-label">Bukti Pelunasan</label>
-								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bb_tahap3) }}" download>{{$dataP->bb_tahap3}}</a>
-									</div>
-								</div>
-								<label class="col-lg-4 col-form-label">Bukti Konfirmasi Pelunasan Sertifikasi</label>
-								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/buktipembayaran/'.Auth::user()->id.'/'.$dataP->bt_tahap3) }}" download>{{$dataP->bt_tahap3}}</a>
-									</div>
-								</div>
-								<label class="col-lg-4 col-form-label">Invoice Pelunasan</label>
-								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-											<a href="{{url('') .Storage::url('public/INV/'.$data->inv_pembayaran) }}" download>{{$data->inv_pembayaran}}</a>
-									</div>
-								</div>								
-							@else
-								<label class="col-lg-4 col-form-label">Upload Bukti Pelunasan</label>
-								<div class="col-lg-8">
-									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File bukti pelunasan masih kosong')" oninput="setCustomValidity('')" onchange="getValue('file')" accept="image/*" required />
-								</div>
-							@endif
+							</div>
 
-							
-								<label id="ltransfer" class="col-lg-4 col-form-label">Cara Pelunasan Transfer</label>
-	                            <div id="dtransfer" class="col-lg-8">
-	                                <div id="accordionTransfer" class="accordion">
-	                                    @foreach($dataTransfer as $index => $value)
-	                                        <!-- begin card -->
-	                                        <div class="card">
-	                                            <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapse{{$value['id']}}" style="cursor: pointer; padding: 2px 5px">
-	                                                <img class="animated bounceIn " src="{{asset('/assets/img/user/reg-info.png')}}" alt="" style="height: 30px;margin-right: 10px;"> 
-	                                                <span class="faq-ask">{{ucwords($value['question'])}}</span>
-	                                            </div>
-	                                            <div id="collapse{{$value['id']}}" class="collapse" data-parent="#accordionTransfer">
-	                                                <div class="card-body">
-	                                                    <?php echo html_entity_decode($value['answer'])?>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    @endforeach
-	                                </div>
-	                            </div>
-							
-								<div class="col-md-12 offset-md-5">
+							<div class="col-md-12 offset-md-5">
 									
-									<!-- @if($data->metode_pembayaran == 'tunai')
-										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
-									@else -->
-										@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
+									
+								@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent	
 										
-										@if($dataP->status_tahap3 == 2)
-											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Pelunasan Sudah Dikonfirmasi</button>
-										@else
-											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin mengunggah bukti transfer pembayaran pelunasan ?????')">Konfirmasi</button>
-
-											@if($dataP->status_tahap3 == 1)	
-												<button type="submit" class="btn btn-sm btn-warning m-r-5" disabled>Pelunasan Sedang Diproses</button>
-											@endif
-										@endif								
-									<!-- @endif -->
-								</div>
+									
+							</div>								
+							
 						</div>
 					</form>
 				</div>
@@ -152,33 +131,7 @@
 @push('scripts')
 	<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script type="text/javascript">
-    	//var date = new Date();
-        var today = new Date();
-    	$('#tanggal_tahap3').datepicker({
-            format: "yyyy-mm-dd",
-            todayHighlight: true,
-        });
-        $('#tanggal_tahap3').datepicker('setDate', today);
-
-        function getValue(y){
-        	const x  = document.getElementById(y);
-
-        	// var length = x.files[0];
-        	// console.log(length);
-
-            var getSize = x.files[0].size;
-            //var maxSize = 5120*1024;
-            var maxSize = 2048*1024;
-            var values = x.value;
-            var ext = values.split('.').pop();
-            if(getSize > maxSize){
-                    alert("File terlalu besar, ukuran file maksimal 2MB");
-                    x.value = "";
-                    return false;
-            }
-
-          
-        }
+    	
     </script>
 
 @endpush

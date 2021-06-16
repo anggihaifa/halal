@@ -187,7 +187,20 @@
                         "searchable":false,
                         "orderable":false,
                         "render":function (data,type,full,meta) {
+                            
+                            if(full.pelaksana1_audit1){
+                                var str = full.pelaksana1_audit1.split("_");
+                                p1_a1 = str[1];
+                            }else{
+                                p1_a1 = '';
+                            }
 
+                            if(full.pelaksana2_audit1){
+                                var str2 = full.pelaksana2_audit1.split("_");
+                                p2_a1 = str2[1];
+                            }else{
+                                p2_a1 = '';
+                            }
                           
                          
                             return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
@@ -196,12 +209,12 @@
                                                     <div class="col-lg-7" style="padding-left:10%; padding-top:2%">
                                                         <label class="inline text-center">
 
-                                                            <i class="fa fa-calendar text-primary" style="zoom:7.0"></i>
+                                                            <i class="fa fa-calendar text-primary" style="font-size:600%"></i>
                                                             <br>
                                                             <h2 class="text-grey" style=>`+full.mulai_audit1+`</h2>
                                                             <span class="label label-primary"><a style="color: white;">NOMOR ID: `+full.id_registrasi+`</a></span>
-                                                            <span class="label label-success"><a style="color: white;">NOMOR AUDIT</a></span>
-                                                            <span class="label label-info"><a style="color: white;">NOMOR AKAD</a></span>
+                                                            <span class="label label-success"><a style="color: white;">NOMOR REG : `+full.no_registrasi+`</a></span>
+                                                           
      
                                                             
                                                         </label>
@@ -211,30 +224,47 @@
                                                     <div class="col-lg-4 >
 
                                                             <span class="lbl">
-                                                                <br>`+full.nama_perusahaan+`<br>
-                                                                Alamat: `+full.alamat_kantor+`<br>
-                                                                Lokasi Audit:<br>
-                                                                <i class="fa fa-map-marker fa-fw text-primary"></i>Lokasi Audit dari db<br>
-                                                                <br>
+                                                                <br><b>`+full.nama_perusahaan+`</b><br>
+                                                                <i class="fa fa-map-marker fa-fw text-primary"></i>: `+full.alamat_kantor+`<br>
+                                                                
+                                                                
+                                                               
                                                             </span>    
-
-                                                        
                                                             <span style="font-weight:bold;">
-                                                                `+full.pelaksana1_audit1+`<br>
-                                                            </span> 
-                                                            `+full.pelaksana2_audit1+`<br>
+                                                            <table class = "table table-borderless table-xs p-0 m-0">
+                                                                <tr class="p-0 m-0" >
+                                                                    <td class="p-0 m-0" style="font-weight:bold">
+                                                                        Ketua Tim Auditor:
+                                                                    </td>
+                                                                       
+                                                                    <td class="p-0 m-0" >
+                                                                        `+p1_a1+`
+                                                                    </td>
 
-                                                            <br>Skema Audit: Ambil Skema dari DB<br>
+                                                                </tr>
+                                                                <tr class="p-0 m-0" >
+                                                                    <td  style="font-weight:bold" class="p-0 m-0" >
+                                                                        Auditor:
+                                                                    </td>
+
+                                                                    <td class="p-0 m-0" >
+                                                                        `+p2_a1+`
+                                                                    </td>
+
+                                                                </tr>
+                                                            </table
+                                                          
+                                                            Skema Audit:`+full.skema+`<br>
 
                                                            
                                                         
                                                         <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`"   class="label label-primary" style="color: white;">
                                                             <i class="ace-icon fa fa-eye" ></i style="color: white; margin-right: 5px; ">Detail Data
                                                         </a>
-                                                        <a href="{{url('detail_unggah_data_sertifikasi_auditor')}}/`+full.id_registrasi+`" class="label label-info" style="color: white;">
+                                                        <a href="{{url('audit_tahap1')}}/`+full.id_registrasi+`" class="label label-info" style="color: white;">
                                                             <i class="ace-icon fa fa-edit bigger-130" ></i> Report Audit Tahap 1
                                                         </a>
-                                                        <br><br><span class="text-muted small">Pelaksana Pekerjaan:</span><br><i class="fa fa-send fa-fw"></i>Cabang yang menangani <i class="fa fa-clock-o fa-fw"></i>  
+                                                        <br><br><span class="text-muted small">Pelaksana Pekerjaan:</span><br><i class="fa fa-send fa-fw"></i>`+checkWilayah(full.kode_wilayah)+`
                                                     </div>
                                                     
                                                

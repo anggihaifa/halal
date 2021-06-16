@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Registrasi;
 use App\Models\Pembayaran;
+use App\Models\Penjadwalan;
 use App\Models\Akad;
 use App\Models\System\User;
+use App\Models\KebutuhanWaktuAudit;
 use Illuminate\Support\Facades\Session;
 
 
@@ -210,6 +212,72 @@ class ReviewerController extends Controller
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
         return view('reviewer.listPenjadwalanReviewer',compact('dataKelompok','dataJenis'));
+    }
+
+    public function dataPenjadwalanReviewer(Request $request){
+        $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
+        //start
+        if($kodewilayah == '119'){
+            $xdata = DB::table('registrasi')
+                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
+                
+                 ->where('penjadwalan.status_penjadwalan_audit1','=',1)
+                 ->orWhere('penjadwalan.status_penjadwalan_audit2','=',1)
+                 ->orWhere('penjadwalan.status_penjadwalan_tr','=',1)
+                 ->orWhere('penjadwalan.status_penjadwalan_tinjauan','=',1)
+                 ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+        }else{
+
+            $xdata = DB::table('registrasi')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                ->join('users','registrasi.id_user','=','users.id')
+                ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
+                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+               
+                ->where(function($query) use ($kodewilayah){
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);  
+                    $query->where('penjadwalan.status_penjadwalan_audit1','=',1);
+                    
+                    
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);  
+                    $query->where('penjadwalan.status_penjadwalan_audit2','=',1);  
+                        
+                        
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);  
+                    $query->where('penjadwalan.status_penjadwalan_tr','=',1); 
+                        
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query->where('registrasi.kode_wilayah','=',$kodewilayah);  
+                    $query->where('penjadwalan.status_penjadwalan_tinjauan','=',1); 
+                        
+                })
+                
+              
+                ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+
+
+        }
+
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
     }
 
     public function listPelunasanReviewer()
@@ -411,4 +479,359 @@ class ReviewerController extends Controller
          return $redirect;
 
     }
+
+    public function approvePenjadwalanReviewer(Request $request)
+    {
+
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model3 = new User;
+
+        $e = $model->find($data['idregis']);
+        $j = $model2->find($e->id_penjadwalan);
+
+
+        //dd($j);
+       
+            //dd($data['idregis1']);
+        if($data['jenis']== 'audit1'){
+            $j->status_penjadwalan_audit1 = 3;
+        }else if($data['jenis']== 'audit2'){
+            $j->status_penjadwalan_audit2 = 3;
+        }else if($data['jenis']== 'tr'){
+            $j->status_penjadwalan_tr = 3;
+        }else if($data['jenis']== 'tinjauan'){
+            $j->status_penjadwalan_tinjauan = 3;
+        }
+
+        $j->save();
+    
+        
+
+        
+
+        try{
+            DB::Commit();
+
+            // if($data['pelaksana1_audit1']){
+            //     $str =  explode("_",$data['pelaksana1_audit1']);
+            //     $u = $model3->find($str[0]);
+               
+            //     SendEmailAuditor::dispatch($u,$e,$j,'audit1');
+
+            // }if($data['pelaksana2_audit1']){
+
+            //     $str2 =  explode("_",$data['pelaksana2_audit1']);
+            //     $u2 = $model3->find($str2[0]);
+                
+            //     SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
+            // }
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('listpenjadwalanreviewer');
+
+
+         return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('listpenjadwalanreviewer');
+            return $redirectPass;
+        }
+  
+    }
+
+    public function rejectPenjadwalanReviewer(Request $request)
+    {
+
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model3 = new User;
+
+        $e = $model->find($data['idregis']);
+        $j = $model2->find($e->id_penjadwalan);
+
+
+        //dd($j);
+       
+            //dd($data['idregis1']);
+        if($data['jenis']== 'audit1'){
+            $j->status_penjadwalan_audit1 = 2;
+        }else if($data['jenis']== 'audit2'){
+            $j->status_penjadwalan_audit2 = 2;
+        }else if($data['jenis']== 'tr'){
+            $j->status_penjadwalan_tr = 2;
+        }else if($data['jenis']== 'tinjauan'){
+            $j->status_penjadwalan_tinjauan = 2;
+        }
+
+        $j->save();
+    
+        
+
+        
+
+        try{
+            DB::Commit();
+
+            // if($data['pelaksana1_audit1']){
+            //     $str =  explode("_",$data['pelaksana1_audit1']);
+            //     $u = $model3->find($str[0]);
+               
+            //     SendEmailAuditor::dispatch($u,$e,$j,'audit1');
+
+            // }if($data['pelaksana2_audit1']){
+
+            //     $str2 =  explode("_",$data['pelaksana2_audit1']);
+            //     $u2 = $model3->find($str2[0]);
+                
+            //     SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
+            // }
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('listpenjadwalanreviewer');
+
+
+         return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('listpenjadwalanreviewer');
+            return $redirectPass;
+        }
+  
+    }
+
+
+    public function storeKebutuhanWaktuAudit(Request $request)
+    {
+
+        $data = $request->except('_token','_method');
+        $data_K = $request->except('_token','_method','idregis1','status_registrasi');
+        dd($data);
+        
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model3 = new User;
+        $model4 = new KebutuhanWaktuAudit;
+
+        $e = $model->find($data['idregis1']);
+        $k = $model4->find($e->id_kebutuhan_waktu_audit);
+        //dd($j);
+
+        $k->fill($data_K);
+        //dd($k);
+        $k->hasil_review = "";
+        $k->catatan_review_kebutuhan_audit = "";
+        $k->updated_by =  Auth::user()->id;
+        $k->status_kebutuhan_audit= '1';
+        $k->save();
+
+        
+
+        try{
+            DB::Commit();
+
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('listkebutuhanwaktuaudit');
+
+
+         return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('listkebutuhanwaktuaudit');
+            return $redirectPass;
+        }
+  
+    }
+
+    public function storeReviewKebutuhanWaktuAudit(Request $request)
+    {
+
+        $data = $request->except('_token','_method');
+        //$data_K = $request->except('_token','_method','idregis1','status_registrasi');
+        //dd($data);
+        
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model3 = new User;
+        $model4 = new KebutuhanWaktuAudit;
+
+        $e = $model->find($data['idregis1']);
+        $k = $model4->find($e->id_kebutuhan_waktu_audit);
+        //dd($j);
+
+        //$k->fill($data_K);
+        //dd($k);
+        if($data['hasil_review']== 'perbaikan'){
+            $k->status_kebutuhan_audit= '2';
+            $e->status = '3_2';
+        }else{
+            
+            $k->status_kebutuhan_audit= '3';
+            $e->status = '4';
+        }
+
+        $k->hasil_review = $data['hasil_review'];
+        $k->catatan_review_kebutuhan_audit = $data['catatan_review_kebutuhan_audit'];
+
+        $k->updated_by =  Auth::user()->id;;
+        $k->save();
+        $e->save();
+
+        
+
+        try{
+            DB::Commit();
+
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('reviewkebutuhanwaktuaudit');
+
+
+         return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('reviewkebutuhanwaktuaudit');
+            return $redirectPass;
+        }
+  
+    }
+    public function perbaikanKebutuhanWaktuAudit(Request $request){
+        $data = $request->except('_token','_method');
+        //$data_K = $request->except('_token','_method','idregis1','status_registrasi');
+        //dd($request);
+        
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model3 = new User;
+        $model4 = new KebutuhanWaktuAudit;
+
+        $e = $model->find($data['idregis1']);
+        $k = $model4->find($e->id_kebutuhan_waktu_audit);
+        //dd($j);
+
+        //$k->fill($data_K);
+        //dd($k);
+        $k->updated_by =  Auth::user()->id;;
+        $k->status_kebutuhan_audit= '2';
+        $k->save();
+
+        
+
+        try{
+            DB::Commit();
+
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('reviewkebutuhanwaktuaudit');
+
+
+         return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('reviewkebutuhanwaktuaudit');
+            return $redirectPass;
+        }
+    }
+
+    public function listKebutuhanWaktuAudit(){
+
+        return view('penjadwalan.listKebutuhanWaktuAudit');
+    }
+    public function reviewKebutuhanWaktuAudit(){
+
+        return view('penjadwalan.reviewKebutuhanWaktuAudit');
+    }
+
+    public function dataKebutuhanWaktuAudit(Request $request){
+        $gdata = $request->except('_token','_method');
+        $kodewilayah = Auth::user()->kode_wilayah;
+        //start
+        if($kodewilayah == '119'){
+            $xdata = DB::table('registrasi')
+               
+                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                 ->join('users','registrasi.id_user','=','users.id')
+                 ->join('kebutuhan_waktu_audit','registrasi.id_kebutuhan_waktu_audit','=','kebutuhan_waktu_audit.id')                 
+                 ->where('registrasi.status_cancel','=',0)
+                 ->orWhere('registrasi.status','=','3')
+                 ->orWhere('registrasi.status','=','3_1')
+                 ->orWhere('registrasi.status','=','3_2')
+                 ->orWhere('registrasi.status','=','3_3')
+                 ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as ruang_lingkup','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','registrasi.no_registrasi_bpjph','registrasi.status_registrasi as status_registrasi','kebutuhan_waktu_audit.*');
+        }else{
+
+            $xdata = DB::table('registrasi')
+                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                ->join('users','registrasi.id_user','=','users.id')
+                ->join('kebutuhan_waktu_audit','registrasi.id_kebutuhan_waktu_audit','=','kebutuhan_waktu_audit.id')     
+                ->where('registrasi.kode_wilayah','=',$kodewilayah)
+                ->where('registrasi.status_cancel','=',0)
+                ->orWhere('registrasi.status','=','3')
+                ->orWhere('registrasi.status','=','3_1')
+                ->orWhere('registrasi.status','=','3_2')
+                ->orWhere('registrasi.status','=','3_3')
+                ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as ruang_lingkup','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','kebutuhan_waktu_audit.*');
+
+
+        }
+
+       
+
+
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        
+
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
+    }
+
+
 }
