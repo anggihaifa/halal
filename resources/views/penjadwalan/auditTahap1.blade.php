@@ -50,34 +50,61 @@
 							<h5>Dokumen Lengkap</h5>
 																
 							@foreach($dataHas as $has => $value)
-								<form action="{{route('updatestatusaudittahap1',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+								<form action="{{route('updatestatusaudittahap1',$laporanAudit1[0]['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 							@endforeach
 								@csrf
 								@method('PUT')
 
 								<div class="panel-body panel-form">
-                                    <div class="wrapper col-lg-12">
+									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$dataRegis[0]['nama_perusahaan']])@endcomponent
+                                            @component('components.inputtext',['label' => 'Tujuan Audit','required'=>true,'placeholder'=>'Tujuan Audit','name'=>'tujuan_audit'])@endcomponent
                                         </div>
                                     </div>
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['label' => 'Nomor Registrasi BPJPH','required'=>true,'placeholder'=>'Nomor Registrasi BPJPH','readonly'=>true,'value'=>$dataRegis[0]['no_registrasi_bpjph']])@endcomponent
+											@component('components.inputtext',['label' => 'Lokasi Audit','required'=>true,'placeholder'=>'Lokasi Audit','name'=>'lokasi_audit'])@endcomponent
                                         </div>
                                     </div>
 									<div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['label' => 'Ruang Lingkup','required'=>true,'placeholder'=>'Ruang Lingkup','value'=>$dataRegis[0]['ruang_lingkup'],'readonly'=>true])@endcomponent
+											@component('components.inputtext',['label' => 'Lingkup Audit','required'=>true,'placeholder'=>'Lingkup Audit','name'=>'lingkup_audit', 'value'=>$dataRegis[0]['ruang_lingkup'],'readonly'=>'true'])@endcomponent
                                         </div>
                                     </div>
+									<div class="wrapper col-lg-12">
+                                        <div class="row">
+											@component('components.inputtext',['label' => 'Tanggal Audit','required'=>true,'placeholder'=>'Tanggal Audit','name'=>'mulai_audit1', 'value'=>$dataRegis[0]['mulai_audit1'],'readonly'=>'true'])@endcomponent
+                                        </div>
+                                    </div>
+									<div class="wrapper col-lg-12">
+										@php
+											if($dataRegis[0]['pelaksana1_audit1']){
+												$str =  explode("_",$dataRegis[0]['pelaksana1_audit1']);
+												$dataRegis[0]['pelaksana1_audit1'] = $str[1];
+											}
+											if($dataRegis[0]['pelaksana2_audit1']){
+												$str2 =  explode("_",$dataRegis[0]['pelaksana2_audit1']);
+												$dataRegis[0]['pelaksana2_audit1'] = $str2[1];
+											}
+											
+										
+											
+										@endphp
+										
+											
+										
+
+                                        <div class="row">
+											@component('components.inputtext',['label' => 'Ketua Tim Audit','required'=>true,'placeholder'=>'Ketua Tim Audit','name'=>'pelaksana1_audit1', 'value'=>$dataRegis[0]['pelaksana1_audit1'],'readonly'=>'true'])@endcomponent
+                                        </div>
+                                    </div>
+									<div class="wrapper col-lg-12">
+                                        <div class="row">
 									
-									<div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['label' => 'Status Sertifikasi','required'=>true,'placeholder'=>'Status Sertifikasi','readonly'=>true,'value'=>$dataRegis[0]['status_registrasi']])@endcomponent
+											@component('components.inputtext',['label' => 'Auditor','required'=>true,'placeholder'=>'Auditor','name'=>'pelaksana2_audit1', 'value'=>$dataRegis[0]['pelaksana2_audit1'],'readonly'=>'true'])@endcomponent
                                         </div>
                                     </div>
-                                </div>
+                                    
 	
 								<table id="hasTable" class="table  table-bordered table-td-valign-middle table-sm table-responsive" cellspacing="0" style="width:100%">
 									<thead>
@@ -810,6 +837,16 @@
                                         <label for="tidak_memenuhi"><b>Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan 5 hari setelah pemeriksaan audit tahap 1</b></label>
 
                                     </div>
+									<div>
+										<label><b>Catatan Akhir Audit:</b></label>
+									</div>
+
+									<div class="col-lg-12">
+										
+										<textarea class="col-lg-12" name="catatan_akhir_audit1" id="catatan_akhir_audit1" placeholder="Masukan catatan disini apabila pelaku usaha dapat lanjut ke tahap dua namun masih ada dokumen yang tidak memenuhi" readonly></textarea>
+										
+
+                                    </div>
 								</div>
 								<div class=" offset-md-5">
 					               <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
@@ -873,6 +910,7 @@
 			if(h1 == '2' || h2 == '2'|| h3 == '2'|| h4== '2'|| h5 == '2'|| h6 == '2'|| h7 == '2'|| h8 == '2'|| h9 == '2'|| h10 == '2'|| h11 == '2'|| h12 == '2'|| h13 == '2'|| h14 == '2'|| h15 == '2'|| h16 == '2'){
 
 		  		$("#tidak_memenuhi").prop('checked', true);
+				$("#catatan_akhir_audit").removeAttr()('readonly');
 		  	}else{
 		  		
 		  		$("#memenuhi").prop('checked', true);

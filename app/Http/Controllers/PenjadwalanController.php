@@ -1278,6 +1278,31 @@ class PenjadwalanController extends Controller
              ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0);  
+                $query->where('registrasi.status','=',8);  
+                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);  
+                $query->where('registrasi.status','=','8_1');  
+                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);  
+                $query->where('registrasi.status','=','8_2');  
+                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);  
+                $query->where('registrasi.status','=','8_3');  
+                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+  
+            })    
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);  
+                $query->where('registrasi.status','=','8_0');  
                 $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
   
             })    
@@ -1373,11 +1398,7 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
   
             })  
-            ->orWhere(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana3_tr','LIKE','%'.$id_user.'%');
-  
-            })               
+                     
              ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
@@ -1430,11 +1451,7 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
   
             })  
-            ->orWhere(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana3_tinjauan','LIKE','%'.$id_user.'%');
-  
-            })               
+                  
              ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
@@ -1595,12 +1612,7 @@ class PenjadwalanController extends Controller
                 //$query->where('penjadwalan.status_penjadwalan_audit1','=', 4);
   
             })    
-            ->orWhere(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana2_audit1','LIKE','%'.$id_user.'%');
-                //$query->where('penjadwalan.status_penjadwalan_audit1','=', 4);
-  
-            })               
+                    
             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit1 as mulai','penjadwalan.selesai_audit1 as selesai','penjadwalan.pelaksana1_audit1 as pelaksana1','penjadwalan.pelaksana2_audit1 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg');
 
         
@@ -1654,15 +1666,10 @@ class PenjadwalanController extends Controller
                 ->where('id_registrasi',$id_regis)
                 ->get();   
         $laporan2 = json_decode($laporan2, true);     
-<<<<<<< HEAD
 
         
         return view('penjadwalan.uploadKsb', compact('data','id_user','id_regis','laporan2'));
              
-=======
-        
-            return view('penjadwalan.uploadKsb', compact('data','id_user','id_regis','laporan2'));        
->>>>>>> 65ddfac886d4c5b3ff5b71ff59381201aeeaea09
     }
     
 

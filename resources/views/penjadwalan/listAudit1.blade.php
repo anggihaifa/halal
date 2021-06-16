@@ -187,7 +187,20 @@
                         "searchable":false,
                         "orderable":false,
                         "render":function (data,type,full,meta) {
+                            
+                            if(full.pelaksana1_audit1){
+                                var str = full.pelaksana1_audit1.split("_");
+                                p1_a1 = str[1];
+                            }else{
+                                p1_a1 = '';
+                            }
 
+                            if(full.pelaksana2_audit1){
+                                var str2 = full.pelaksana2_audit1.split("_");
+                                p2_a1 = str2[1];
+                            }else{
+                                p2_a1 = '';
+                            }
                           
                          
                             return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
@@ -213,12 +226,33 @@
                                                             <span class="lbl">
                                                                 <br><b>`+full.nama_perusahaan+`</b><br>
                                                                 <i class="fa fa-map-marker fa-fw text-primary"></i>: `+full.alamat_kantor+`<br>
-                                                                Lokasi Audit:<br>
+                                                                
                                                                 
                                                                
                                                             </span>    
                                                             <span style="font-weight:bold;">
-                                                                Auditor: `+full.pelaksana1_audit1+`<br>
+                                                            <table class = "table table-borderless table-xs p-0 m-0">
+                                                                <tr class="p-0 m-0" >
+                                                                    <td class="p-0 m-0" style="font-weight:bold">
+                                                                        Ketua Tim Auditor:
+                                                                    </td>
+                                                                       
+                                                                    <td class="p-0 m-0" >
+                                                                        `+p1_a1+`
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr class="p-0 m-0" >
+                                                                    <td  style="font-weight:bold" class="p-0 m-0" >
+                                                                        Auditor:
+                                                                    </td>
+
+                                                                    <td class="p-0 m-0" >
+                                                                        `+p2_a1+`
+                                                                    </td>
+
+                                                                </tr>
+                                                            </table
                                                           
                                                             Skema Audit:`+full.skema+`<br>
 

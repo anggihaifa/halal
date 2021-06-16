@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Rapat Auditor')
+@section('title', 'Tehnical Review')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -15,18 +15,18 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Rapat Auditor</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Rapat Auditor</a></li>
+        <li class="breadcrumb-item"><a href="#">Tehnical Review</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Tehnical Review</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Rapat Auditor  <small></small></h1>
+    <h1 class="page-header">List Tehnical Review  <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Rapat Auditor</h4>
+            <h4 class="panel-title">List Tehnical Review</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -112,26 +112,8 @@
                                                     <option value="11">Nominal Pembayaran Lebih</option>
                                                     <option value="12">Pembayaran Gagal</option>
                                                     <option value="13">Pembayaran Terkonfirmasi</option>
-                                                    <option value="14">Proses Rapat Auditor</option>
-                                                    <option value="15">Proses Audit Tahap 2</option>
-                                                    <option value="16">Pelaporan Audit Tahap 2</option>
-                                                    <option value="17">Konfirmasi Berita Acara</option>
-                                                    <option value="18">Tinjauan Hasil Audit</option>
-                                                    <option value="19">Rekomendasi Hasil Pemeriksaan</option>
-                                                    <option value="20">Proses Sidang Fatwa</option>
-                                                    <option value="21">Pelunasan</option>
-                                                    <option value="22">Nominal Pelunasan Kurang</option>
-                                                    <option value="23">Nominal Pelunasan Lebih</option>
-                                                    <option value="24">Pelunasan Gagal</option>
-                                                    <option value="25">Pelunasan Terkonfirmasi</option>
-                                                    <option value="26">Proses Penerbitan Sertifikat</option>
-                                                    <option value="27">Keputusan Halal/ Haram</option>
-                                                    <option value="28">Sertifikat Halal</option>
-                                                    <option value="g">Pembayaran Tahap2</option>
-                                                    <option value="h">Nominal Pembayaran Tahap2 Kurang</option>
-                                                    <option value="i">Nominal Pembayaran Tahap2 Lebih</option>
-                                                    <option value="j">Pembayaran Tahap2 Gagal</option>
-                                                    <option value="l">Pembayaran Tahap2 Terkonfirmasi</option>
+                                                    <option value="14">Proses Tehnical Review</option>
+                                                    <
                                                     
                                                 </select>
                                             </div>
@@ -154,12 +136,9 @@
                         <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                         <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                         <th class="text-nowrap valign-middle text-center">Jenis Produk</th>
-                        <th class="text-nowrap valign-middle text-center">Tanggal Mulai</th>
-                        <th class="text-nowrap valign-middle text-center">Tanggal Selesai</th>
                         <th class="text-nowrap valign-middle text-center">Auditor 1</th>
                         <th class="text-nowrap valign-middle text-center">Auditor 2</th>
-                        <th class="text-nowrap valign-middle text-center">Auditor 3</th>
-                        <th class="valign-middle text-center">Status</th>
+                        
                         <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                 </thead>
@@ -199,7 +178,7 @@
 
             var xTable = $('#table').DataTable({
                 ajax:{
-                    url:"{{route('datarapat')}}",
+                    url:"{{route('datatehicalreview')}}",
                     data:function(d){
                         d.no_registrasi = $('input[name=no_registrasi]').val();
                         d.perusahaan = $('input[name=perusahaan]').val();
@@ -228,87 +207,53 @@
                     {"data":"no_registrasi"},
                     {"data":"nama_perusahaan"},
                     {"data":"kelompok"},
-                    {"data":"mulai_rapat"},
-                    {"data":"selesai_rapat"},
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            var str = full.pelaksana1_rapat.split("_");
-                            return str[1]
-                        }
-                    },
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana2_rapat){
-                                var str = full.pelaksana2_rapat.split("_");
-                                return str[1]
-                            }else{
-                                return ''
-                            }
-                            
-                        }
-                    },
-                     {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana3_rapat){
-                                var str = full.pelaksana3_rapat.split("_");
-                                return str[1]
-                            }else{
-                                return ''
-                            }
-                            
-                        }
-                    },
-                    
-                
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            return checkPenjadwalan(full.status_rapat)
-                        }
-                    },
                    
+                    {
+                        
+                        "data":null,
+                        "searchable":false,
+                        "render":function (data,type,full,meta) {
+                            if(full.pelaksana1_tr){
+                                var str = full.pelaksana1_tr.split("_");
+                                return str[1]
+                            }else{
+                                return ''
+                            }
+                        }
+                    },
+                    {
+                        
+                        "data":null,
+                        "searchable":false,
+                        "render":function (data,type,full,meta) {
+                            if(full.pelaksana2_tr){
+                                var str = full.pelaksana2_tr.split("_");
+                                return str[1]
+                            }else{
+                                return ''
+                            }
+                            
+                        }
+                    },
+
                     {
                         "data":null,
                         "searchable":false,
                         "orderable":false,
                         "render":function (data,type,full,meta) {
 
-                            var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+                            //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                          
-                            var audit_plan = `<a class="dropdown-item" href="{{url('audit_plan')}}/`+full.id_registrasi+`">Perencanaan Audit (Audit Plan)</a>`;
-                            var form_report = `<a class="dropdown-item"  href="">Form Laporan</a>`;
+                            //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
 
-                            return `<div class="btn-group m-r-5 show">
-                                    <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
-                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">                                        
-                                        <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Detail Data</a>                                        
-                                        <a href="{{url('detail_unggah_data_sertifikasi_auditor')}}/`+full.id_registrasi+`" class="dropdown-item" ><i class="fa fa-edit"></i> Lihat Dokumen</a>
-                                        <div class="dropdown-divider"></div>
-
-                                        <div class="dropdown-button-title"></div>`+
-                                       form_report+
-                                    `</div>
-                                </div>`
+                            return `<button class="btn btn-success btn-xs"  href="">Form Laporan</button>`
                            
                         }
                     }
                 ],
                 'columnDefs': [
                 {
-                      "targets": [0,1,2,3,4,5,6,7,8,9,10],
+                      "targets": [0,1,2,3,4,5],
                       "className": "text-center",
                      
                 }],
