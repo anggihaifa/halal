@@ -2448,7 +2448,7 @@ class RegistrasiController extends Controller
 
                     $phpWord = new \PhpOffice\PhpWord\PhpWord();
             
-                    $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-04 Laporan Audit Tahap I.docx');
+                    $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/FOR-SCI-HALAL-04 Laporan Audit Tahap I.docx');                    
 
                     $templateProcessor->setValue('nama_organisasi', $data['nama_organisasi']);
                     $templateProcessor->setValue('nomor_registrasi', $data['nomor_registrasi_bpjph']);

@@ -5795,9 +5795,17 @@ class PenjadwalanController extends Controller
         $laporan2 = DB::table('laporan_audit2')
                 ->where('id_registrasi',$id)
                 ->get();   
-        $laporan2 = json_decode($laporan2, true);        
+        $laporan2 = json_decode($laporan2, true);
+
+        $dataKetidaksesuaian = DB::table('ketidaksesuaian')
+                ->where('id_registrasi',$id)
+                ->where('id_penjadwalan',$id_penjadwalan)
+                ->orderBy('id','desc')
+                ->limit(1)
+                ->get();               
+        $kt = json_decode($dataKetidaksesuaian, true);        
                 
-        return view('penjadwalan.laporanAudit',compact('dataRegistrasi','dataPenjadwalan','laporan2','dataKelompok'));
+        return view('penjadwalan.laporanAudit',compact('dataRegistrasi','dataPenjadwalan','laporan2','dataKelompok','kt'));
     }
 
     public function auditPlan($id){        

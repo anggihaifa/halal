@@ -41,11 +41,14 @@
                         <li class="nav-item text-center">                        
                             <a class="nav-link active" data-toggle="tab" href="#card-tab-5">Form Audit Tahap 2</a>
                         </li>
-                        <li class="nav-item text-center">                        
+                        {{-- <li class="nav-item text-center">                        
                             <a class="nav-link" data-toggle="tab" href="#card-tab-7">Laporan Audit Tahap 2</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item text-center">      
                             <a class="nav-link" data-toggle="tab" href="#card-tab-6">Form Checklist Audit Tahap 2</a>
+                        </li>
+                        <li class="nav-item text-center">      
+                            <a class="nav-link" data-toggle="tab" href="#card-tab-8">Form Temuan Ketidaksesuaian</a>
                         </li>
                     </ul>
                 </div>
@@ -63,8 +66,12 @@
                                                         <th class="text-center">Download</th>
                                                         <th class="text-center">Download</th>
                                                         <th class="text-center">Upload</th>
-                                                        <th class="text-center">Berkas</th>
+                                                        <th class="text-center">Berkas</th>                                                        
                                                         <th class="text-center">Tanggal Upload</th>
+                                                        <th class="text-center">Upload Ulang (Jika Ada)</th>
+                                                        <th class="text-center">Berkas</th>
+                                                        <th class="text-center">Tanggal Upload Ulang</th>
+                                                        <th class="text-center">Keterangan</th>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-center">1</td>
@@ -78,7 +85,7 @@
                                                                         @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
                                                                     @endforeach                        
                                                                 </div>                                                                                                                                
-                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Rencana Audit</button>
+                                                                <button type="submit" class="btn btn-sm btn-info">Download Kosongan</button>
                                                             </form>
                                                         </td>
                                                         <td class="text-center">
@@ -97,17 +104,52 @@
                                                             @else                                                            
                                                                 @foreach ($laporan2 as $val)
                                                                     @if ($val['file_laporan_audit_tahap_2'])
-                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Laporan Audit Tahap 2/'.$val['file_laporan_audit_tahap_2']) }}" download>{{$val['file_laporan_audit_tahap_2']}}</a>
+                                                                        <a style="font-size: 9px" href="{{url('') .Storage::url('public/laporan/upload/Laporan Audit Tahap 2/'.$val['file_laporan_audit_tahap_2']) }}" download>{{$val['file_laporan_audit_tahap_2']}}</a>
                                                                     @else		
                                                                     -																
                                                                     @endif																			
                                                                 @endforeach									
                                                             @endif
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td class="text-center" style="font-size: 9px">
                                                             @foreach ($laporan2 as $val)										
                                                                 {{$val['tgl_penyerahan_laporan_audit_tahap_2'] == null? "-" : $val['tgl_penyerahan_laporan_audit_tahap_2']}}
                                                             @endforeach
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Auth::user()->usergroup_id == 10)                                                            
+                                                                @if (isset($kt))
+                                                                    @foreach ($kt as $val2)
+                                                                        <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalLaporanAuditUlang' style="cursor:pointer">Upload Ulang</a>
+                                                                        {{-- <p>Temuan : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p> --}}
+                                                                    @endforeach
+                                                                @else
+                                                                -
+                                                                @endif                                                                
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_laporan_audit_tahap_2_ulang'])
+                                                                        <a style="font-size: 9px" href="{{url('') .Storage::url('public/laporan/upload/Laporan Audit Tahap 2/'.$val['file_laporan_audit_tahap_2_ulang']) }}" download>{{$val['file_laporan_audit_tahap_2_ulang']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_laporan_audit_tahap_2_ulang'] == null? "-" : $val['tgl_penyerahan_laporan_audit_tahap_2_ulang']}}
+                                                            @endforeach
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -122,11 +164,21 @@
                                                                         @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
                                                                     @endforeach                        
                                                                 </div>                                                                                                                                
-                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Checklist Audit</button>
+                                                                <button type="submit" class="btn btn-sm btn-info">Download Kosongan</button>
                                                             </form>
                                                         </td>
                                                         <td class="text-center">
-                                                            -
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['form_checlist_isian'])
+                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/upload/Checklist Audit/Isian/'.$val['form_checlist_isian']) }}" download>Ketidak Isian</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
                                                         </td>                                                        
                                                         <td class="text-center">
                                                             @if (Auth::user()->usergroup_id == 10)
@@ -141,7 +193,145 @@
                                                             @else                                                            
                                                                 @foreach ($laporan2 as $val)
                                                                     @if ($val['file_form_ceklis'])
-                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Checklist Audit/'.$val['file_form_ceklis']) }}" download>{{$val['file_form_ceklis']}}</a>
+                                                                        <a style="font-size: 9px" href="{{url('') .Storage::url('public/laporan/upload/Checklist Audit/'.$val['file_form_ceklis']) }}" download>{{$val['file_form_ceklis']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_form_ceklis'] == null? "-" : $val['tgl_penyerahan_form_ceklis']}}
+                                                            @endforeach
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td class="text-center">3</td>
+                                                        <td class="text-center">Form Temuan Ketidaksesuaian</td>
+                                                        <td class="text-center">
+                                                            {{-- <form action="{{route('downloadketidaksesuaian')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="wrapper col-lg-12" style="display: none">
+                                                                    @foreach($dataRegistrasi as $index => $value)
+                                                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
+                                                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
+                                                                    @endforeach                        
+                                                                </div>                                                                                                                                
+                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Temuan Ketidaksesuaian</button>
+                                                            </form> --}}
+                                                            -
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['ketidaksesuaian_isian'])
+                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/download/Laporan Ketidaksesuaian/Isian/'.$val['ketidaksesuaian_isian']) }}" download>Download Isian</a>                                                                        
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            @if (Auth::user()->usergroup_id == 10)
+                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian' style="cursor:pointer">Upload Disini</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_laporan_ketidaksesuaian'])
+                                                                        <a style="font-size: 9px" href="{{url('') .Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/'.$val['file_laporan_ketidaksesuaian']) }}" download>{{$val['file_laporan_ketidaksesuaian']}}</a>                                                                        
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_laporan_ketidaksesuaian'] == null? "-" : $val['tgl_penyerahan_laporan_ketidaksesuaian']}}
+                                                            @endforeach
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            @if (isset($kt))
+                                                                @foreach ($kt as $val2)
+                                                                    <p style="font-size: 9px;">Ketidaksesuaian : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>
+                                                                @endforeach
+                                                            @else
+                                                            -
+                                                            @endif
+                                                        </td>
+                                                    </tr> 
+                                                    {{-- <tr>
+                                                        <td class="text-center">4</td>
+                                                        <td class="text-center">Berita Acara Pemeriksaan</td>
+                                                        <td class="text-center">
+                                                            <form action="{{route('downloadberkas')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                                                                @csrf																			
+                                                                    <div class="wrapper col-lg-12" style="display: none">
+                                                                    @component('components.inputtext',['name'=> 'no','label' => 'No','required'=>true,'placeholder'=>'No','readonly'=>true,'value'=>2])@endcomponent
+                                                                    @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
+                                                                    @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Perusahaan','required'=>true,'placeholder'=>'Nama Perusahaan','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
+                                                                    </div>
+                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Berita Acara Pemeriksaan</button>
+                                                            </form>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['ketidaksesuaian_isian'])
+                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/download/Laporan Ketidaksesuaian/Isian/'.$val['ketidaksesuaian_isian']) }}" download>Temuan Ketidaksesuaian Isian</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            @if (Auth::user()->usergroup_id == 10)
+                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian' style="cursor:pointer">Upload Disini</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_laporan_ketidaksesuaian'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/'.$val['file_laporan_ketidaksesuaian']) }}" download>{{$val['file_laporan_ketidaksesuaian']}}</a>                                                                        
                                                                     @else		
                                                                     -																
                                                                     @endif																			
@@ -150,10 +340,19 @@
                                                         </td>
                                                         <td class="text-center">
                                                             @foreach ($laporan2 as $val)										
-                                                                {{$val['tgl_penyerahan_form_ceklis'] == null? "-" : $val['tgl_penyerahan_form_ceklis']}}
+                                                                {{$val['tgl_penyerahan_laporan_ketidaksesuaian'] == null? "-" : $val['tgl_penyerahan_laporan_ketidaksesuaian']}}
                                                             @endforeach
                                                         </td>
-                                                    </tr> 
+                                                        <td class="text-center">
+                                                            @if (isset($kt))
+                                                                @foreach ($kt as $val2)
+                                                                    <p>Temuan : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>
+                                                                @endforeach
+                                                            @else
+                                                            -
+                                                            @endif
+                                                        </td>
+                                                    </tr>  --}}
                                                     </table>                                                
                                             </div>
                                         </div>
@@ -1581,7 +1780,7 @@
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca3a9a" type="text" class="form-control" placeholder="Catatan" id="3a9aca"/>
+                                                                <input name="ca3a9b" type="text" class="form-control" placeholder="Catatan" id="3a9bca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
@@ -3965,12 +4164,78 @@
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca4b9" type="text" class="form-control" placeholder="Catatan" id="4b8ca"/>
+                                                                <input name="ca4b9" type="text" class="form-control" placeholder="Catatan" id="4b9ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">10. Pelaku Usaha wajib mencantumkan Label Halal pada Produk yang telah mendapat Sertifikat Halal pada : kemasan produk; bagian tertentu dari Produk; Tempat tertentu pada Produk</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b10" value="m" id="4b10m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b10" value="tm" id="4b10tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b10" value="tr" id="4b10tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4b10" type="text" class="form-control" placeholder="Catatan" id="4b10ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">11. Pelaku Usaha wajib mencantumkan Label Halal pada tempat yang mudah dilihat dan dibaca, serta tidak mudah dihapus, dilepas, dan dirusak</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b11" value="m" id="4b11m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b11" value="tm" id="4b11tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b11" value="tr" id="4b11tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4b11" type="text" class="form-control" placeholder="Catatan" id="4b11ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">12. Pelaku Usaha wajib mencantumkan Label Halal sesuai ketentuan yang ditetapkan oleh Badan Penyelenggara Jaminan Produk Halal dan tetap memperhatikan peraturan perundangan yang terkait Label sesuai dengan komoditinya</td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b12" value="m" id="4b12m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b12" value="tm" id="4b12tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4b12" value="tr" id="4b12tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4b12" type="text" class="form-control" placeholder="Catatan" id="4b12ca"/>
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center">c</td>
-                                                            <td class="valign-middle font-weight-bold">Identifikasi dan Mampu Telusur</td>
+                                                            <td class="valign-middle font-weight-bold">Penyimpanan, Display, Pelayanan, dan Penyajian</td>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle text-center"></td>
@@ -3979,7 +4244,7 @@
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle">
-                                                                1.	Produk yang disimpan teridentifikasi seperti tanggal masuk, lokasi penyimpanan, kode tempat penyimpanan, bar code, tanggal produksi,dan lainnya.
+                                                                1. Pelaku Usaha wajib memberi identifikasi Produk yang disimpan seperti diantaranya tanggal masuk, lokasi penyimpanan, kode tempat penyimpanan, barcode, tanggal produksi, dan lainya sesuai ketentuan yang ditetapkan
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
@@ -4002,7 +4267,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">2. Ketertelusuran kehalalan produk sudah terjamin</td>
+                                                            <td class="valign-middle">2. Pelaku Usaha wajib menyimpan Produk Halal terpisah secara fisik dari Produk yang tidak halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4c2" value="m" id="4c2m"/>
@@ -4024,7 +4289,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">3. Prosedur terdokumentasi dimiliki dan diimplementasikan untuk menjamin ketertelusuran kehalalan Produk yang disertifikasi</td>
+                                                            <td class="valign-middle">3. Pelaku Usaha wajib menjamin Produk Halal bebas dari kontaminasi atau tercampur dengan Bahan yang tidak halal, selama proses penanganan dan penyimpanan</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4c3" value="m" id="4c3m"/>
@@ -4046,7 +4311,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">4. Bahan dengan kode yang sama mempunyai status halal yang sama bila menerapkan pengkodean Bahan</td>
+                                                            <td class="valign-middle">4. Pelaku Usaha tidak diperbolehkan menyajikan makanan dan minuman yang tidak halal termasuk menyajikan minuman beralkohol (Khusus Katering dan Restoran)</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4c4" value="m" id="4c4m"/>
@@ -4068,7 +4333,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">5.	Ketertelusuran informasi asal Bahan dijamin pada setiap kegiatan</td>
+                                                            <td class="valign-middle">5. Pelaku Usaha wajib menerapkan aturan larangan bagi pengunjung dan karyawan membawa dan mengonsumsi makanan dan minuman yang tidak halal atau tidak jelas kehalalannya (Khusus Restoran).</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb4c5" value="m" id="4c5m"/>
@@ -4089,27 +4354,133 @@
                                                             </td>                                                                                                
                                                         </tr>
                                                         <tr>
+                                                            <td class="valign-middle text-center">d</td>
+                                                            <td class="valign-middle font-weight-bold">Identifikasi dan Mampu Telusur</td>
                                                             <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle">6. Tidak ada perubahan informasi Bahan (nama Produk, nama produsen, nama Bahan, negara produsen, dan Label Halal) pada saat melakukan pengemasan ulang</td>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                1. Pelaku Usaha wajib menjamin ketertelusuran kehalalan Produk
+                                                            </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb4c6" value="m" id="4c6m"/>
+                                                                    <input type="radio" name="rb4d1" value="m" id="4d1m"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb4c6" value="tm" id="4c6tm"/>
+                                                                    <input type="radio" name="rb4d1" value="tm" id="4d1tm"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
-                                                                    <input type="radio" name="rb4c6" value="tr" id="4c6tr"/>
+                                                                    <input type="radio" name="rb4d1" value="tr" id="4d1tr"/>
                                                                 </div>
                                                             </td>
                                                             <td class="valign-middle">
-                                                                <input name="ca4c6" type="text" class="form-control" placeholder="Catatan" id="4c6ca"/>
+                                                                <input name="ca4d1" type="text" class="form-control" placeholder="Catatan" id="4d1ca"/>
                                                             </td>                                                                                                
-                                                        </tr> 
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                2. Pelaku Usaha wajib mempunyai prosedur terdokumentasi untuk menjamin ketertelusuran kehalalan Produk yang disertifikasi
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d2" value="m" id="4d2m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d2" value="tm" id="4d2tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d2" value="tr" id="4d2tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4d2" type="text" class="form-control" placeholder="Catatan" id="4d2ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                3. Pelaku Usaha wajib menjamin Bahan dengan kode yang sama mempunyai status halal yang sama bila menerapkan pengkodena Bahan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d3" value="m" id="4d3m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d3" value="tm" id="4d3tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d3" value="tr" id="4d3tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4d3" type="text" class="form-control" placeholder="Catatan" id="4d3ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                4. Pelaku Usaha wajib menjamin ketertelusuran informasi asal Bahan di setiap kegiatan
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d4" value="m" id="4d4m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d4" value="tm" id="4d4tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d4" value="tr" id="4d4tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4d4" type="text" class="form-control" placeholder="Catatan" id="4d4ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="valign-middle text-center"></td>
+                                                            <td class="valign-middle">
+                                                                5. Pelaku Usaha wajib menjamin tidak ada perubahan informasi Bahan (nama Produk, nama produsen, nama Bahan, negara produsen, dan Label Halal) pada saat melakukan pengemasan ulang
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d5" value="m" id="4d5m"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d5" value="tm" id="4d5tm"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle text-center">
+                                                                <div class="radio">
+                                                                    <input type="radio" name="rb4d5" value="tr" id="4d5tr"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="valign-middle">
+                                                                <input name="ca4d5" type="text" class="form-control" placeholder="Catatan" id="4d5ca"/>
+                                                            </td>                                                                                                
+                                                        </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle font-weight-bold">Reset</td>                                                            
@@ -4147,7 +4518,7 @@
                                                         </tr>                                                        
                                                         <tr>
                                                             <td class="valign-middle text-center">a</td>
-                                                            <td class="valign-middle">Audit internal dilakukan setiap enam bulan untuk memantau penerapan Sistem Jaminan Produk Halal</td>
+                                                            <td class="valign-middle">Pelaku Usaha wajib melakukan audit internal setiap enam bulan untuk memantau penerapan Sistem Jaminan Produk Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb5a" value="m" id="5am"/>                                  
@@ -4169,7 +4540,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center">b</td>
-                                                            <td class="valign-middle">Kaji ulang manajemen dilakukan untuk mengevaluasi penerapan Sistem Jaminan Produk Halal</td>
+                                                            <td class="valign-middle">Pelaku Usaha wajib melakukan kaji ulang manajemen untuk mengevaluasi penerapan Sistem Jaminan Produk Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb5b" value="m" id="5bm"/>
@@ -4192,7 +4563,7 @@
                                                         <tr>
                                                             <td class="valign-middle text-center">c</td>
                                                             <td class="valign-middle">
-                                                                Prosedur audit internal dimiliki dan kaji ulang manajemen diimplementasikan
+                                                                Pelaku Usaha wajib memiliki prosedur audit internal dan kaji ulang manajemen
                                                             </td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
@@ -4215,7 +4586,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center">d</td>
-                                                            <td class="valign-middle">Bukti pelaksanaan audit internal dan kaji ulang manajemen harus didokumentasikan</td>
+                                                            <td class="valign-middle">Pelaku Usaha wajib memelihara bukti pelaksanaan audit internal dan kaji ulang manajemen harus dipelihara</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb5d" value="m" id="5dm"/>
@@ -4237,7 +4608,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="valign-middle text-center">e</td>
-                                                            <td class="valign-middle">Hasil audit internal dan kaji ulang manajemen dilaporkan sesuai ketentuan dari Badan Penyelenggara Jaminan Produk Halal</td>
+                                                            <td class="valign-middle">Pelaku Usaha wajib melaporkan hasil audit internal dan kaji ulang manajemen sesuai ketentuan dari Badan Penyelenggara Jaminan Produk Halal</td>
                                                             <td class="valign-middle text-center">
                                                                 <div class="radio">
                                                                     <input type="radio" name="rb5e" value="m" id="5em"/>
@@ -4479,9 +4850,9 @@
                                 <div class="panel-body panel-form">                                                                        
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <div class="detail_kegiatan8" id="detail_kegiatan8" style="width: 100%; background: #fff;"></div>
+                                            <div class="detail_kegiatan8" id="detail_kegiatan{{$value->id}}" style="width: 100%; background: #fff;"></div>
                                             <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan8" class="tam_detail_kegiatan8 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
+                                                <a onClick="addDataKegiatan8({{$value->id}})" class="btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>                                                
                                             </div>
                                         </div>
                                     </div>
@@ -5200,12 +5571,138 @@
                                 </div>
                             </form>
                         </div>                       
+                        <div class="tab-pane fade" id="card-tab-8">
+                            <form action="{{route('downloadketidaksesuaianfix')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                                @csrf                                
+                                <div class="panel-body panel-form" style="display: none">
+                                    @foreach($dataRegistrasi as $index => $value)
+                                        @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent                                        
+                                        @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
+                                        @foreach($dataPenjadwalan as $index => $value2)
+                                            @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
+                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
+                                        @endforeach
+                                    @endforeach                        
+                                </div>
+                                <div class="panel-body panel-form">
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'nama_organisasi','label' => 'Nama Perusahaan','required'=>true,'placeholder'=>'Nama Perusahaan','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                            
+                                        </div>
+                                    </div>                                    
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'no_id_bpjph','label' => 'No ID BPJPH','required'=>true,'placeholder'=>'No ID BPJPH','readonly'=>true,'value'=>$value->no_registrasi_bpjph])@endcomponent
+                                        </div>
+                                    </div>                                    
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'standar_acuan','label' => 'Standar/Acuan','required'=>true,'placeholder'=>'Standar/Acuan'])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'nama_auditor','label' => 'Nama Auditor','required'=>true,'placeholder'=>'Nama Auditor'])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tanggal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit2." s/d ".$value2->selesai_audit2])@endcomponent
+                                        </div>
+                                    </div>                                                                                                                                      
+                                </div>                                                                
+                                <div class="panel-body panel-form">
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-12 col-form-label"><b>KETIDAKSESUAIAN</b></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Klausul</label><div class="col-lg-8"><div><input class="form-control" name="klausul[]" type="text" label="Klausul" placeholder="Klausul"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Auditor</label><div class="col-lg-8"><div><textarea class="form-control" name="auditor[]" label="Auditor" placeholder="Auditor"></textarea></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Deskripsi</label><div class="col-lg-8"><div><input class="form-control" name="deskripsi[]" type="text" label="Deskripsi" placeholder="Kota"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Investigasi Akar Permasalahan</label><div class="col-lg-8"><div><input class="form-control" name="investigasi[]" type="text" label="Investasi Akar Permasalahan" placeholder="Investigasi Akar Permasalahan"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Tindakan Perbaikan dan Pencegahan</label><div class="col-lg-8"><div><input class="form-control" name="tindakan[]" type="text" label="Tindakan Perbaikan dan Pencegahan" placeholder="Tindakan Perbaikan dan Pencegahan"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Hasil Tinjauan Tim Audit</label>
+                                                    <div class="col-lg-8"><div>
+                                                        <select name="hasil[]" class="form-control">
+                                                            <option value="open">Open</option>
+                                                            <option value="close">Close</option>
+                                                        </select>                                                        
+                                                    </div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body panel-form">                                                                        
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            <div id="detail_kegiatan_ketidaksesuaian{{$value->id}}" style="width: 100%; background: #fff;"></div>
+                                            <div class="col-md-12">
+                                                <a onClick="addDataKetidaksesuaian({{$value->id}})" class="btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                                                
+                                <div class="form-group row">   
+                                    <div class="col-md-12 offset-md-5 mb-5">
+                                        <button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
+                                        <button type="submit" class="btn btn-sm btn-info">Kirim</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>                       
                     </div>
                 </div>
-                <!-- end panel-heading -->
-                <!-- begin panel-body -->                            
                 
-                <!-- end panel-body -->
             </div>
             <!-- end panel -->
         </div>
@@ -5241,6 +5738,47 @@
                             <div class="form-group">
                                 <label>Berkas</label>
                                 <input id="file" name="berkas_laporan2" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
+
+    <div id="modalLaporanAuditUlang" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload Ulang File Laporan Audit Tahap 2</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="4" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_laporan2_ulang" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
                             </div>                                                                                    
                            
                         </div>
@@ -5293,6 +5831,48 @@
             </form>
         </div>
     </div>
+
+    <div id="modalKetidaksesuaian" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Laporan Ketidaksesuaian</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="4" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_ketidaksesuaian" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
+    
 @endsection
 @push('scripts')
     <script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
@@ -5302,8 +5882,11 @@
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
     <script>        
         var detailkegiatan8 = document.getElementById('detail_kegiatan8');
+        // var detailkegiatan8 = $('.detail_kegiatan8');
         var detailkegiatan9 = document.getElementById('detail_kegiatan9');
-        var detailkegiatan10 = document.getElementById('detail_kegiatan10');        
+        // var detailkegiatan9 = $('.detail_kegiatan9');
+        var detailkegiatan10 = document.getElementById('detail_kegiatan10');
+        // var detailkegiatan10 = $('.detail_kegiatan10');
         detailkegiatan8.style.display = 'none';
         detailkegiatan9.style.display = 'none';
         detailkegiatan10.style.display = 'none';
@@ -5314,6 +5897,9 @@
         var noKegiatan8 = 1;
         var noKegiatan9 = 1;
         var noKegiatan10 = 1;
+
+        var jmlKetidaksesuaian = 0;
+        var noKetidaksesuaian = 1;
 
         $('#btn_reset').on('click', function () {
             // alert("dsn");
@@ -5761,11 +6347,12 @@
             document.getElementById("5eca").value = "";
         });        
 
-        $('#tam_detail_kegiatan8').on('click', function(){            
-            detailkegiatan8.style.display = 'block';
-            noKegiatan8 += 1;
-            addDataKegiatan8();
-        });
+        // $('.tam_detail_kegiatan8').on('click', function(){            
+        //     alert("disini");
+        //     detailkegiatan8.style.display = 'block';
+        //     noKegiatan8 += 1;
+        //     addDataKegiatan8();
+        // });
 
         $('#tam_detail_kegiatan9').on('click', function(){            
             detailkegiatan9.style.display = 'block';
@@ -5779,26 +6366,52 @@
             addDataKegiatan10();
         });        
 
-        function addDataKegiatan8(){
-            jmlKegiatan8+=1;
-            var data_kegiatan8 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Fasilitas Produksi</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_fasilitas_produksi_fix[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Fasilitas</label><div class="col-lg-8"><div><input class="form-control" name="nama_fasilitas[]" type="text" label="Nama Fasilitas" placeholder="Nama Fasilitas"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Alamat</label><div class="col-lg-8"><div><textarea class="form-control" name="alamat_fasilitas[]" label="Alamat Fasilitas" placeholder="Alamat Fasilitas"></textarea></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Kota</label><div class="col-lg-8"><div><input class="form-control" name="kota_fasilitas[]" type="text" label="Kota Fasilitas" placeholder="Kota"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Negara</label><div class="col-lg-8"><div><input class="form-control" name="negara_fasilitas[]" type="text" label="Negara Fasilitas" placeholder="Negara"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain8" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
-            // var data_kegiatan8 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_produk2[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto2[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain7" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan8').append(data_kegiatan8);
+        function addDataKegiatan8($id){            
+            noKegiatan8 += 1;
+            jmlKegiatan8+=1;            
+            var data_kegiatan8 = '<div id="kegiatan'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Fasilitas Produksi</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_fasilitas_produksi_fix[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Fasilitas</label><div class="col-lg-8"><div><input class="form-control" name="nama_fasilitas[]" type="text" label="Nama Fasilitas" placeholder="Nama Fasilitas"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Alamat</label><div class="col-lg-8"><div><textarea class="form-control" name="alamat_fasilitas[]" label="Alamat Fasilitas" placeholder="Alamat Fasilitas"></textarea></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Kota</label><div class="col-lg-8"><div><input class="form-control" name="kota_fasilitas[]" type="text" label="Kota Fasilitas" placeholder="Kota"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Negara</label><div class="col-lg-8"><div><input class="form-control" name="negara_fasilitas[]" type="text" label="Negara Fasilitas" placeholder="Negara"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
+            $('#detail_kegiatan'+$id).append(data_kegiatan8);            
+        }
+
+        function addDataKetidaksesuaian($id){
+            noKetidaksesuaian += 1;
+            jmlKetidaksesuaian +=1;            
+            var data_kegiatan_ketidaksesuaian = '<div id="kegiatanketidaksesuaian'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);">  <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Klausul</label><div class="col-lg-8"><div><input class="form-control" name="klausul[]" type="text" label="Klausul" placeholder="Klausul"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Auditor</label><div class="col-lg-8"><div><textarea class="form-control" name="auditor[]" label="Auditor" placeholder="Auditor"></textarea></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Deskripsi</label><div class="col-lg-8"><div><input class="form-control" name="deskripsi[]" type="text" label="Deskripsi" placeholder="Kota"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Investigasi Akar Permasalahan</label><div class="col-lg-8"><div><input class="form-control" name="investigasi[]" type="text" label="Investasi Akar Permasalahan" placeholder="Investigasi Akar Permasalahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Tindakan Perbaikan dan Pencegahan</label><div class="col-lg-8"><div><input class="form-control" name="tindakan[]" type="text" label="Tindakan Perbaikan dan Pencegahan" placeholder="Tindakan Perbaikan dan Pencegahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Hasil Tinjauan Tim Audit</label><div class="col-lg-8"><div><select name="hasil[]" class="form-control"><option value="open">Open</option><option value="close">Close</option></select>                                                        </div></div></div></div></div></div><div class="col-lg-12"><div><a onClick="hapusKetidaksesuaian('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
+            // var data_kegiatan_ketidaksesuaian = 'disini';
+            $('#detail_kegiatan_ketidaksesuaian'+$id).append(data_kegiatan_ketidaksesuaian);
         }
 
         function addDataKegiatan9(){
             jmlKegiatan9+=1;
             var data_kegiatan9 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Data Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_data_produk[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Produk</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk" placeholder="Nama Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Rincian Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="rincian_jenis_produk[]" type="text" label="Rincian Jenis Produk" placeholder="Rincian Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Pabrik</label><div class="col-lg-8"><div><input class="form-control" name="nama_pabrik[]" type="text" label="Nama Pabrik" placeholder="Nama Pabrik"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Status</label><div class="col-lg-8"><div><input class="form-control" name="status[]" type="text" label="Status" placeholder="Status"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain9" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
             // var data_kegiatan8 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_produk2[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto2[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain7" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan9').append(data_kegiatan9);
+            $('#detail_kegiatan9').append(data_kegiatan9);
         }
 
         function addDataKegiatan10(){
-            jmlKegiatan10+=1;
+            jmlKegiatan10+=1;            
             var data_kegiatan10 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Data Bahan</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_data_bahan[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Status</label><div class="col-lg-8"><div><div style="margin-bottom:7px;"><div class="radio radio-css radio-inline"><input type="radio" name="rbsesuai'+(jmlKegiatan10+1)+'" value="sesuai" id="sesuai'+(jmlKegiatan10+1)+'" checked/><label for="sesuai'+(jmlKegiatan10+1)+'">Sesuai</label></div><div class="radio radio-css radio-inline"><input type="radio" name="rbsesuai'+(jmlKegiatan10+1)+'" value="tidak sesuai" id="tidak_sesuai'+(jmlKegiatan10+1)+'"/><label for="tidak_sesuai'+(jmlKegiatan10+1)+'">Tidak Sesuai</label></div></div></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nomor Sertifikat</label><div class="col-lg-8"><div><input class="form-control" name="nomor_sertifikat[]" type="text" label="Nomor Sertifikat" placeholder="Nomor Sertifikat"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Produsen</label><div class="col-lg-8"><div><input class="form-control" name="produsen[]" type="text" label="Produsen" placeholder="Produsen"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Masa Berlaku</label><div class="col-lg-8"><div><input class="form-control" name="masa_berlaku[]" type="text" label="Masa Berlaku" placeholder="Masa Berlaku"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain10" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
             // var data_kegiatan8 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_produk2[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto2[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain7" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('.detail_kegiatan10').append(data_kegiatan10);
+            $('#detail_kegiatan10').append(data_kegiatan10);
         }        
+
+        function hapusKegiatan($id){            
+            var select1 = document.getElementById('detail_kegiatan'+$id);
+            var select2 = document.getElementById('kegiatan'+$id);
+            select1.removeChild(select2);
+            
+            jmlKegiatan8-=1;
+            noKegiatan8-=1;
+        }
+
+        function hapusKetidaksesuaian($id){            
+            var select1 = document.getElementById('detail_kegiatan_ketidaksesuaian'+$id);
+            var select2 = document.getElementById('kegiatanketidaksesuaian'+$id);
+            select1.removeChild(select2);
+            
+            jmlKegiatan8-=1;
+            noKegiatan8-=1;
+        }
 
         $(document).on('click','#hapus_datakegiatanlain8', function(){
             $(this).parent().parent().parent().remove();
@@ -5806,7 +6419,7 @@
             noKegiatan8-=1;
 
             if(jmlKegiatan8 == 0){
-                detailkegiatan8.style.display = 'none';
+                // detailkegiatan8.style.display = 'none';
             }
         });
 
