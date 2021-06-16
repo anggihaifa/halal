@@ -2361,6 +2361,7 @@ class RegistrasiController extends Controller
              ->get();
         //$dataRegis =  json_decode( $dataRegis);
        
+        $reg = $model2->find($id_registrasi);
         $dataRegis = json_decode($dataRegis, true);
         // dd($dataJenisProduk);
         //dd($dataRegis);
@@ -2386,6 +2387,8 @@ class RegistrasiController extends Controller
                 $model->id_registrasi = $id_registrasi;
                 $model->id_dokumen_has = $dataHas[0]['id'];
                 $model->save();
+                $reg->id_laporan_audit1 = $model->id;
+                $reg->save();
                 $laporanAudit1= $model;
             }
         }else{ 
@@ -3891,42 +3894,41 @@ class RegistrasiController extends Controller
     }
 
     // //report
-    // public function reportAudit($id){        
-    //         //dd($id);
-    //         $data = Registrasi::find($id);
-    //         //get Data from FAQ Transfer            
-           
+    public function reportAudit($id){        
+            //dd($id);
+            $data = DB::table('registrasi')
+                    ->leftjoin('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
+                    ->leftjoin('laporan_audit2','registrasi.id_laporan_audit2','=','laporan_audit2.id')
+                    ->where('registrasi.id',$id)
+                    ->select('registrasi.*','laporan_audit1.file_laporan_audit1', 'laporan_audit2.file_konfirmasi_sk_audit','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_rencana_audit','laporan_audit2.file_laporan_audit_tahap_2')
+                    ->get();
 
-    //         if($data['status_report']==0  || $data['status_berita_acara']==0 ){
-    //             Session::flash('error', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
-    //             $redirect = redirect()->route('registrasiHalal.index');
-    //             return $redirect;
+            $data = json_decode($data, true);
+                   // dd($data);
+            //get Data from FAQ Transfer                         
+                 return view('registrasi.reportAudit',compact('data'));
             
-    //         }else{
-                
-    //              return view('registrasi.reportAudit',compact('data'));
-    //         }
 
 
-    // }
+    }
 
-    public function reportBeritaAcara($id){        
-        //dd($id);
-        $data = Registrasi::find($id);
-        //get Data from FAQ Transfer            
+    // public function reportBeritaAcara($id){        
+    //     //dd($id);
+    //     $data = Registrasi::find($id);
+    //     //get Data from FAQ Transfer            
       
-         if($data['status_report']==0  || $data['status_berita_acara']==0 ){
-            Session::flash('warning', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
-            $redirect = redirect()->route('registrasiHalal.index');
-            return $redirect;
+    //      if($data['status_report']==0  || $data['status_berita_acara']==0 ){
+    //         Session::flash('warning', 'Anda belum dapat memasuki tahapan ini. Silahkan selesaikan tahapan sebelumnya');
+    //         $redirect = redirect()->route('registrasiHalal.index');
+    //         return $redirect;
             
-        }else{
+    //     }else{
             
-            return view('registrasi.reportBeritaAcara',compact('data'));
+    //         return view('registrasi.reportBeritaAcara',compact('data'));
 
-        }
+    //     }
 
-    }    
+    // }    
 
     public function konfirmasiPembayaranUser(Request $request){
         

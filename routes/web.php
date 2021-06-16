@@ -176,7 +176,7 @@ Route::get('pembayaran_tahap2/{id}','RegistrasiController@pembayaranTahap2')->na
 Route::put('konfirmasi_pembayaran_user_tahap2','RegistrasiController@konfirmasiPembayaranUserTahap2')->name('registrasi.konfirmasipembayaranusertahap2');
 
 //report
-//Route::get('report_audit/{id}','RegistrasiController@reportAudit')->name('registrasi.reportaudit');
+Route::get('report_audit/{id}','RegistrasiController@reportAudit')->name('registrasi.reportaudit');
 //Route::get('report_berita_acara/{id}','RegistrasiController@reportBeritaAcara')->name('registrasi.reportberitaacara');
 // Route::get('upload_kontrak_akad_user/{id}','RegistrasiController@uploadAkadUser')->name('registrasi.uploadakaduser');
 

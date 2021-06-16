@@ -92,7 +92,7 @@
 
                             var pembayaran = `<a href="{{url('pembayaran_registrasi')}}/`+full.id+`"  class="dropdown-item"> Pembayaran</a> `;
                             var pembayaran2 = `<a href="{{url('pembayaran_tahap2')}}/`+full.id+`"  class="dropdown-item"> Pembayaran Tahap 2</a> `;
-                            var pelunasan = `<a href="{{url('pelunasan')}}/`+full.id+`"  class="dropdown-item" >Pelunasan</a>` ;
+                            var pelunasan = `<a href="{{url('pelunasan')}}/`+full.id+`"  class="dropdown-item" >Bukti Pembayaran</a>` ;
                             var reportA = `<a href="{{url('report_audit')}}/`+full.id+`"  class="dropdown-item" >Report Audit dan Berita Acara</a>`;
                            
 
@@ -165,7 +165,7 @@
                                                             <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
                                                                 `+uploadBerkas+`
                                                                 <div class="dropdown-divider"></div>
-                                                                <div class="dropdown-button-title">Update Progress</div>`+akad+oc+pembayaran+pembayaran2+reportA+pelunasan+`
+                                                                `+akad+oc+reportA+pelunasan+`
                                                                
                                                             </div> 
                                                         </div>

@@ -264,6 +264,10 @@
                                                         <a href="{{url('laporan_audit')}}/`+full.id_registrasi+`" class="label label-info" style="color: white;">
                                                             <i class="ace-icon fa fa-edit bigger-130" ></i> Laporan Audit Tahap 2
                                                         </a>
+                                                        <br><a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="label label-green" style="color: white;" download>
+                                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Audit Tahap 1
+                                                        </a>
+                                                        
                                                         <br><br><span class="text-muted small">Pelaksana Pekerjaan:</span><br><i class="fa fa-send fa-fw"></i>`+checkWilayah(full.kode_wilayah)+`
                                                     </div>
                                                     
