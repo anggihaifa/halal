@@ -269,7 +269,7 @@ Route::get('download','RegistrasiController@download');
 Route::get('unggah_dokumen_sertifikasi','RegistrasiController@unggahDokumenSertifikasi')->name('registrasi.unggahDokumenSertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
 Route::get('get_data_registrasi','RegistrasiController@getDataRegistrasi')->name('getdataregistrasi');
 Route::post('store_dokumen_sertifikasi','RegistrasiController@storeDokumenSertifikasi')->name("storedokumensertifikasi")->middleware('role:1,2,3,6,9,10,11,12,13');
-Route::get('delete_dokumen_sertifikasi/{id}','RegistrasiController@deleteDokumenSeritfikasi')->name('deletedokumensertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
+Route::get('delete_dokumen_sertifikasi/{id}','RegistrasiController@deleteDokumenSertifikasi')->name('deletedokumensertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
 //admin
 Route::get('verifikasi_dokumen_sertifikasi/{id_registrasi}','RegistrasiController@verifikasiDokumenSertifikasi')->name('verifikasidokumensertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
 Route::put('update_status_verifikasi_dokumen/{id}','RegistrasiController@updateStatusVerifikasiDokumen')->name('updatestatusverifikasidokumen')->middleware('role:1,2,3,6,9,10,11,12,13');

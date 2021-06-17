@@ -1275,7 +1275,7 @@ class PenjadwalanController extends Controller
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
-             ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+             //->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0);  
                 $query->where('registrasi.status','=',8);  
@@ -1307,7 +1307,7 @@ class PenjadwalanController extends Controller
   
             })    
                      
-            ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.kode_wilayah','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.kode_wilayah','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
         //filter condition

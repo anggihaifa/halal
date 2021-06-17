@@ -6,129 +6,159 @@ function checkStatus(data){
 
 function checkStatusPembayaran(data){
 
-     return  (data==0)? '<a class=" ion-ios-clipboard" title="Belum Bayar" style="font-size: 200%;"></a> <br>Pelaku Usaha'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow  ;" title="Pelaku Usaha Sudah Upload dan Menunggu Konfirmasi"></a> <br>Sales'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #e32636;;"title="Pembayaran Gagal"></a>'
-        :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #32cd32;"title="Pembayaran Terkonfirmasi"></a>'
-        :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Bayar"></a><br>Pelaku Usaha';
+     return  (data==0)? '<a  class="btn btn-xs"  style="background-color:black  ; color:white; ">Belum Bayar</a>'
+        :(data==1)? '<a  class="btn btn-xs"  style="background-color:yellow  ; color:black;">Menunggu Konfirmasi Admin</a>'
+        :(data==2)? '<a  class="btn btn-xs" class="btn btn-xs" style="background-color:red  ; color:white;">Pembayaran Gagal</a>'
+        :(data==3)? '<a  class="btn btn-xs"    style="background-color:green  ; color:white;">Pembayaran Berhasil</a>'
+        : '<a  class="btn btn-xs"   style="background-color:black  ; color:white;">Belum Bayar</a>';
             
 }
 
 function checkStatusPenerbitanOrderConfirmation(data){
 
-    return  (data==0)? '<a class=" ion-ios-clipboard" title="Belum diupload" style="font-size: 200%;"></a> <br>Admin'
-       :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow  ;" title="Menunggu Pelaku Usaha Upload Ulang OC"></a> <br>Pelaku Usaha'
-       :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow  ;" title="Menunggu Konfirmasi Admin"></a> <br>Admin'
-       :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #e32636;;"title="Penerbitan OC Gagal"></a>'
-       :(data==4)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #32cd32;"title="Penerbitan OC Terkonfirmasi"></a>'
-       :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Bayar"></a><br>Admin';
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload OC</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:yellow  ; color:black;">Menunggu Konfirmasi Pelaku Usaha</a>'
+    :(data==2)? '<a  class="btn btn-xs" style="background-color:yellow  ; color:black;">Menunggu Konfirmasi Admin</a>'
+    :(data==3)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Penerbitan OC Gagal</a>'
+    :(data==4)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Penerbitan OC Terkonfirmasi</a>'
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload OC</a>';
+
+  
            
 }
 
 function checkStatusPelunasan(data){
 
-    return  (data==0)? '<a class=" ion-ios-clipboard" title="Belum Bayar Pelunasan" style="font-size: 200%;"></a><br>Pelaku Usaha'
-       :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow  ;" title="Pelaku Usaha Sudah Upload dan Menunggu Konfirmasi"></a> <br>Sales'
-       :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #e32636;;"title="Pembayaran Gagal"></a>'
-       :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center; color: #32cd32;"title="Pembayaran Terkonfirmasi"></a>'
-       :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Bayar"></a><br>Pelaku Usaha';
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Bayar</a>'
+        :(data==1)? '<a  class="btn btn-xs" style="background-color:yellow  ; color:black;">Menunggu Konfirmasi Admin</a>'
+        :(data==2)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Pembayaran Gagal</a>'
+        :(data==3)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Pembayaran Berhasil</a>'
+        : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Bayar</a>';
            
 }
 
 function checkStatusBerkas(data){
-    return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum Upload"></a><br>Pelaku Usaha'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Admin Memverifikasi Berkas"></a> <br>Admin'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan"></a><br>Pelaku Usaha'
-        :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Berkas Terkonfirmasi"></a>'
-        :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum Upload"></a><br>Pelaku Usaha';
+
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Berkas</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:yellow  ; color:black;">Menunggu Admin Verfikasi Berkas</a>'
+    :(data==2)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Perbaikan Berkas</a>'
+    :(data==3)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Berkas Terverifikasi</a>'
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Berkas</a>';
+   
+}
+
+function checkStatusAuditTahap1(data){
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Berkas</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:yellow  ; color:black;">Menunggu Auditor Memverifikasi Berkas</a>'
+    :(data==2)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Perbaikan Berkas</a>'
+    :(data==3)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Audit tahap 1 Selesai</a>'
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Berkas</a>';
+
+    
+}
+
+function checkStatusAuditTahap2(data){
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Laporan Audit</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Perbaikan Audit Tahap 2</a>'
+    :(data==2)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Audit Tahap 2 Selesai</a>'
+   
+   
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Audit Plan</a>';
+
+    
             
 }
 
-function checkStatusBerkasAuditTahap1(data){
-    return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum Upload"></a><br>Pelaku Usaha'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Auditor Memverifikasi Berkas"></a> <br>Auditor'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan"></a><br>Pelaku Usaha'
-        :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Audit Tahap 1 Selesai"></a>'
-        :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum Upload"></a><br>Pelaku Usaha';
+function checkStatusTehnicalReview(data){
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Tehnical Reviewer Belum Upload Review Laporan Audit</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:green; color:white;">Proses Tehnical Review Selesai</a>'
+   
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Tehnical Reviewer Belum Upload Review Laporan Audit</a>';
+
+    
             
 }
 
-function checkStatusBerkasAuditTahap2(data){
-    return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum Upload Audit Plan"></a><br>Auditor'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi Audit Plan Pelaku Usaha"></a><br>Pelaku Usaha'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Pelaku Usaha Menolak Audit Plan"></a>'
-        :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Audit Plan Terkonfirmasi"></a>'
-        :(data==4)? '<a  class="ion-ios-clipboard " style="color:yellow font-size: 200%;" title="Menunggu Konfirmasi Tehnical Reviewer"></a><br>Tehnical Reviewer'
-        :(data==5)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan Audit Tahap 2"></a><br>Auditor'
-        :(data==6)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi Komite Sertifikasi"></a><br>Komite Sertifikasi'
-        :(data==7)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi Reviewer Operasi"><br>Reviewer Operasi</a>'
-        :(data==8)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Laporan Audit Tahap 2 Terkonfirmasi"></a>'
-        :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum Upload Audit Plan"></a><br>Auditor';
+function checkStatusKomite(data){
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:yellow  ; color:black;">Proses Tehnical Review Selesai</a>'
+   
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit</a>';
+
+    
             
 }
+
+function checkStatusPersiapanKomisiFatwa(data){
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:yellow  ; color:black;">Proses Tehnical Review Selesai</a>'
+   
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit</a>';
+
+    
+            
+}
+
+            
+
 
 
 function checkStatusKebutuhanAudit(data){
-    return  (data==0)? '<a class="ion-ios-clipboard " style="font-size: 200%;" 0.73em; title="Belum ditentukan"></a><br>Verifikator'
-        :(data==1)? '<a  class="ion-ios-clipboard " style="color:yellow; font-size: 200%;" title="Menunggu Konfirmasi"></a><br>Reviewer Operasi'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center;color:#e32636; font-size: 200%;" title="Perbaikan"></a><br>Verifikator'
-        :(data==3)? '<a  class="ion-ios-clipboard " style=" align-center; color: #32cd32; font-size: 200%;"title="Formulir Perhitungan Waktu Audit Terkonfirmasi"></a>'
-        :'<a  class="ion-ios-clipboard " style="font-size: 200%;"  title="Belum ditentukan"></a><br>Verifikator';
+
+    return  (data==0)? '<a  class="btn btn-xs" style="word-wrap:break-word; max-width:10%; background-color:black  ; color:white;">Kebutuhan Waktu Audit Belum Ditentukan</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="word-wrap:break-word; max-width:20px; background-color:yellow  ; color:black;">Menunggu Reviewer Mengkonfirmasi Kebutuhan Waktu Audit</a>'
+    :(data==2)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Perbaikan Kebutuhan Waktu Audit</a>'
+    :(data==3)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Kebutuhan Waktu Audit Terkonfirmasi</a>'
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Kebutuhan Waktu Audit Belum Ditentukan</a>';
+
+
+    
             
 }
 
 
 
 function checkPenjadwalan(data){
-    return  (data==0)? '<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Dijadwalkan"></a><br>Admin'
-        :(data==1)? '<a   class="ion-ios-clipboard " style="font-size: 200%;color:yellow;" title="Menunggu Konfirmasi Reviewer"></a> <br>Reviewer Operasi'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#e32636;  title="Perbaikan"></a><br>Admin'
-        :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%; align-center;color:#32cd32;"title="Perjadwalan Terkonfirmasi"></a>'
-        :'<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Dijadwalkan"></a><br>Admin';
-            
+    return  (data==0)? '<a  class="btn btn-xs " style="background-color:black  ; color:white;">Belum Dijadwalkan</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:yellow  ; color:black;">Menunggu Reviewer Mengkonfirmasi Jadwal</a>'
+    :(data==2)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Perbaikan Penjadwalan</a>'
+    :(data==3)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Penjadwalan Terkonfirmasi</a>'
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Dijadwalkan</a>';
+  
 }
 
-function checkOC(data){
-    return  (data==0)? '<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Upload OC"></a><br>Sales Account Officer'
-        :(data==1)? '<a   class="ion-ios-clipboard " style="font-size: 200%;color:yellow;" title="Menunggu Konfirmasi Pelaku Usaha"></a> <br>Pelaku Usaha'
-        :(data==2)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#32cd32;  title="OC Telah Di Upload"></a><br>Pelaku Usaha'
-        :(data==3)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#e32636;  title="OC Gagal"></a><br>Pelaku Usaha'
-        :(data==4)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%;color:#32cd32;  title="OC Berhasil"></a><br>Pelaku Usaha'
-        :'<a  class="ion-ios-clipboard " style="font-size: 200%; color:black;" title="Belum Upload OC"></a><br>Admin';
-            
-}
 
 // function checkStatusAkad(data){
 
-//      return  (data==0)? '<a class="ion-ios-clipboard" title="Belum Akad" style="font-size: 200%;"></a>'
-//             :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Konfirmasi"></a>'
-//             :(data==2)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:#e32636 ;" title="Perbaikan"></a>'
-//             :(data==3)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:#32cd32 ;" title="Penawaran Terkonfirmasi"></a>'
-//             :(data==4)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Pelaku Usaha Megupload Ulang Kontrak"></a>'
-//             :(data==5)? '<a  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color: #e32636;"title="Pelaku Usaha Menolak Penawaran"></a>'
-//             :(data==6)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%; color:yellow; " title="Pelaku Usaha Sudah Upload Ulang dan Menunggu Konfirmasi Sales"></a>'
-//             :(data==7)? '<a  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color: #e32636;"title="Penawaran Gagal"></a>'
-//             :(data==8)? '<a  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color:#32cd32 ;"title="Penawaran Terkonfirmasi"></a>'
-//             :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Akad"></a>';
+//      return  (data==0)? '<a  class="btn btn-xs" class="ion-ios-clipboard" title="Belum Akad" style="font-size: 200%;"></a>'
+//             :(data==1)? '<a  class="btn btn-xs"  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Konfirmasi"></a>'
+//             :(data==2)? '<a  class="btn btn-xs"  class="ion-ios-clipboard " style="font-size: 200%;color:#e32636 ;" title="Perbaikan"></a>'
+//             :(data==3)? '<a  class="btn btn-xs"  class="ion-ios-clipboard " style="font-size: 200%;color:#32cd32 ;" title="Penawaran Terkonfirmasi"></a>'
+//             :(data==4)? '<a  class="btn btn-xs"  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Pelaku Usaha Megupload Ulang Kontrak"></a>'
+//             :(data==5)? '<a  class="btn btn-xs"  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color: #e32636;"title="Pelaku Usaha Menolak Penawaran"></a>'
+//             :(data==6)? '<a  class="btn btn-xs"  class="ion-ios-clipboard " style="align-center; font-size: 200%; color:yellow; " title="Pelaku Usaha Sudah Upload Ulang dan Menunggu Konfirmasi Sales"></a>'
+//             :(data==7)? '<a  class="btn btn-xs"  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color: #e32636;"title="Penawaran Gagal"></a>'
+//             :(data==8)? '<a  class="btn btn-xs"  class="ion-ios-clipboard  " style="font-size: 200%; align-center; color:#32cd32 ;"title="Penawaran Terkonfirmasi"></a>'
+//             :'<a  class="btn btn-xs"  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Akad"></a>';
             
 // }
 
 function checkStatusAkad(data){
-
-     return  (data==0)? '<a class="ion-ios-clipboard" title="Belum Upload Bukti Akad" style="font-size: 200%;"></a><br>Sales Account Officer'
-            :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:#32cd32; ;" title="Sudah Upload Bukti Penawaran dan Akad"></a><br>Sales Account Officer'
-            :'<a  class="ion-ios-clipboard " style="font-size: 200%;" title="Belum Penawaran dan Akad"></a>';
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Dokumen Penawaran dan Akad</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Sudah Upload Bukti Penawaran dan Akad</a>'
+    : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Dokumen Penawaran dan Akad</a>';
+    
             
 }
 
-function checkStatusBeritaAcara(data){
+// function checkStatusBeritaAcara(data){
 
-     return  (data==0)? '<a class="ion-ios-clipboard" title="Berita Acara Belum Diupload" style="font-size: 200%;"></a><br>Admin'
-            :(data==1)? '<a  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Pelaku Usaha Megupload Ulang Berita Acara"></a><br>Pelaku Usaha'
-            :(data==2)? '<a  class="ion-ios-clipboard " style="align-center; font-size: 200%; color:#32cd32; " title="Pelaku Usaha Sudah Upload Ulang Berita Acara"></a>'
-            :'<a  class="ion-ios-clipboard " style="zoom:2.0;" title="Berita Acara Belum Diupload"></a>';
+//      return  (data==0)? '<a  class="btn btn-xs" class="ion-ios-clipboard" title="Berita Acara Belum Diupload" style="font-size: 200%;"></a><br>Admin'
+//             :(data==1)? '<a  class="btn btn-xs"  class="ion-ios-clipboard " style="font-size: 200%;color:yellow ;" title="Menunggu Pelaku Usaha Megupload Ulang Berita Acara"></a><br>Pelaku Usaha'
+//             :(data==2)? '<a  class="btn btn-xs"  class="ion-ios-clipboard " style="align-center; font-size: 200%; color:#32cd32; " title="Pelaku Usaha Sudah Upload Ulang Berita Acara"></a>'
+//             :'<a  class="btn btn-xs"  class="ion-ios-clipboard " style="zoom:2.0;" title="Berita Acara Belum Diupload"></a>';
             
-}
+// }
 
 function checkStatusFaq(data){
     return  (data=='nonaktif')? 'Non Aktif'
@@ -211,46 +241,53 @@ function checkProgress(data){
              :(data.trim()=='6_2')? 'Pembayaran Gagal'
              :(data.trim()=='6_3')? 'Pembayaran Terkonfirmasi'
             //Penjadwalan
-            :(data==7)? 'Penjadwalan'
+            :(data==7)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Persiapan Audit Tahap1</a>'
             :(data.trim()=='7_0')? 'Belum Dijadwalkan'
             :(data.trim()=='7_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
             :(data.trim()=='7_2')? 'Perbaikan Penjadwalan'
             :(data.trim()=='7_3')? 'Penjadwalan Terkonfirmasi'
             //Proses Audit Tahap 1
             :(data==8)? 'Proses Audit Tahap 1'
-            :(data.trim()=='8_1')? 'Menunggu Auditor Memverifikasi berkas'
+            :(data.trim()=='8_1')? 'Menunggu Auditor Membuat Laporan Audit'
             :(data.trim()=='8_2')? 'Perbaikan Berkas Audit Tahap 1'
             :(data.trim()=='8_3')? 'Audit Tahap 1 Selesai'
             //Pembayaran Tahap 2
-            :(data==9)? 'Pembayaran Tahap 2'
-            :(data.trim()=='9_0')? 'Belum Upload Bukti Bayar'
-            :(data.trim()=='9_1')? 'Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2'
-            :(data.trim()=='9_2')? 'Pembayaran Tahap 2 Gagal'
-            :(data.trim()=='9_3')? 'Pembayaran Tahap 2 Terkonfirmasi'
+            :(data==9)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Persiapan Audit Tahap2</a>'
+            :(data.trim()=='9_0')? 'Belum Dijadwalkan'
+            :(data.trim()=='9_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
+            :(data.trim()=='9_2')? 'Perbaikan Penjadwalan'
+            :(data.trim()=='9_3')? 'Penjadwalan Terkonfirmasi'
             //Proses Audit Tahap 2
             :(data==10)? 'Proses Audit Tahap 2'
-            :(data.trim()=='10_0')? 'Belum Upload Audit Plan'
-            :(data.trim()=='10_1')? 'Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan'
-            :(data.trim()=='10_2')? 'Pelaku Usaha Menolak Audit Plan'
-            :(data.trim()=='10_3')? 'Audit Plan Terkonfirmasi'
-            :(data.trim()=='10_4')? 'Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Audit'
-            :(data.trim()=='10_5')? 'Perbaikan Laporan Audit Tahap 2'
-            :(data.trim()=='10_6')? 'Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit'
-            :(data.trim()=='10_7')? 'Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit'
-            :(data.trim()=='10_8')? 'Laporan Audit Tahap 2 Terkonfirmasi'
-            //Berita Acara
-            :(data==11)? 'Penyampaian Berita Acara'
-            :(data.trim()=='11_0')? 'Belum Upload Berita Acara'
-            :(data.trim()=='11_1')? 'Menunggu Pelaku Usaha Upload Ulang Berita Acara'
-            :(data.trim()=='11_2')? 'Berita Acara Terkonfirmasi'
-            //Pelunasan
-            :(data==12)? 'Pelunasan'
-            :(data.trim()=='12_0')? 'Belum Upload Bukti Bayar'
-            :(data.trim()=='12_1')? 'Menunggu Sales Officer Mengkonfirmasi Pelunasan'
-            :(data.trim()=='12_2')? 'Pelunasan Gagal'
-            :(data.trim()=='12_3')? 'Pelunasan Terkonfirmasi'
-            //Proses Sidang Fatwa
-            :(data==13)? 'Proses Sidang Fatwa'
+            :(data.trim()=='10_1')? 'Perbaikan Audit Tahap 2'
+            :(data.trim()=='10_2')? 'Audit Tahap 2 Selesai'
+
+            :(data==11)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Persiapan Tehnical Review</a>'
+            :(data.trim()=='11_0')? 'Belum Dijadwalkan'
+            :(data.trim()=='11_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
+            :(data.trim()=='11_2')? 'Perbaikan Penjadwalan'
+            :(data.trim()=='11_3')? 'Penjadwalan Terkonfirmasi'
+
+            :(data==12)? 'Proses Tehnical Review'
+            :(data.trim()=='12_0')? 'Reviewer Belum Upload Review Laporan Audit'
+            :(data.trim()=='12_1')? 'Proses Tehnical Review Selesai'
+
+            :(data==13)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Persiapan Audit Tahap1</a>'
+            :(data.trim()=='13_0')? 'Belum Dijadwalkan'
+            :(data.trim()=='13_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
+            :(data.trim()=='13_2')? 'Perbaikan Penjadwalan'
+            :(data.trim()=='13_3')? 'Penjadwalan Terkonfirmasi'
+
+            :(data==14_0)? 'Proses Komite Sertifikasi'
+            :(data.trim()=='14_0')? 'Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit'
+            :(data.trim()=='14_1')? 'Proses Komite Sertifkasi Selesai'
+
+            :(data==15)? 'Proses Persiapan Komisi Fatwa'
+            :(data.trim()=='15_0')? 'Reviwer Belum Mereview Laporan Hasil Akhir Audit'
+            :(data.trim()=='15_1')? 'Laporan Akhir Audit Terkonfirmasi'
+            
+            :(data==16)? 'Proses Sidang Fatwa'
+            :(data==17)? 'Ketetapan Halal'
             :'_';
 }
 
@@ -272,61 +309,71 @@ function notifProgress(data){
             :(data.trim()=='3_3')? 'Kebutuhan Waktu Audit Terkonfirmasi'
             //penawaran harga dan akad
             :(data==4)? 'Penawaran Harga dan Akad'
-            //pembayaran tahap 1
-            :(data==6)? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
-            :(data.trim()=='6_0')? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
-            :(data.trim()=='6_1')? 'Silahkan Menunggu Berkas Bukti Transfer Dikonfirmasi oleh Sales Admin'
-            :(data.trim()=='6_2')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
-            :(data.trim()=='6_3')? 'Pembayaran  Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
-            //penerbitan OC
+         
+             //penerbitan OC
             :(data==5)? 'Penerbitan OC'
             :(data.trim()=='5_0')? 'Penerbitan OC'
             :(data.trim()=='5_1')? 'Silahkan mengupload Order Confirmation yang Sudah Ditandatangani'
             :(data.trim()=='5_2')? 'Silahkan Menunggu Admin Memverifikasi Order Confirmation'
             :(data.trim()=='5_3')? 'Order Confirmation Tidak Sesuai, Gagal Diterbitkan. Silahkan Upload Ulang dan Pastikan Dokumen Sudah Ditandatangani'
             :(data.trim()=='5_4')? 'Order COnfirmation Sudah Terkonfirmasi Silahkan Melanjutkan Ke Tahapan Selanjutnya Penjadwalan'
+               //pembayaran tahap 1
+            :(data==6)? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
+            :(data.trim()=='6_0')? 'Silahkan Melakukan Pembayaran Sesuai dengan Akad'
+            :(data.trim()=='6_1')? 'Silahkan Menunggu Berkas Bukti Transfer Dikonfirmasi oleh Sales Admin'
+            :(data.trim()=='6_2')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Uang Muka Pastikan Foto Terlihat Jelas'
+            :(data.trim()=='6_3')? 'Pembayaran  Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
+           
+            
             //Penjadwalan
-            :(data==7)? 'Penjadwalan'
+            :(data==7)? 'Persiapan Audit Tahap1'
             :(data.trim()=='7_0')? 'Belum Dijadwalkan'
-            :(data.trim()=='7_1')? 'Silahkan Menunggu Reviewer Menyetujui Penjadwalan'
+            :(data.trim()=='7_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
             :(data.trim()=='7_2')? 'Perbaikan Penjadwalan'
-            :(data.trim()=='7_3')? 'Penjadwalan Terkonfirmasi Silahkan Melanjutkan ke Tahapan Selanjutnya : Proses Audit Tahap 1 Audit Tahap 1'
+            :(data.trim()=='7_3')? 'Penjadwalan Terkonfirmasi'
             //Proses Audit Tahap 1
-            :(data==8)? 'Proses Audit Tahap 1: Silahkan Lengkapi Berkas'
-            :(data.trim()=='8_1')? 'Silahkan Menunggu Auditor Untuk Memeriksa Kesesuaian Berkas'
-            :(data.trim()=='8_2')? 'Berkas Tidak Sesuai, Silahkan Cek Kembali Catatan Ketidaksesuaian Pada Halaman Laporan Audit Tahap 1'
-            :(data.trim()=='8_3')? 'Audit Tahap 1 Selesai, Silahkan Melanjutkan ke Tahapan Selanjutnya Pembayaran Tahap 2. (Apabila Nominal diatas 50 Jt)'
+            :(data==8)? 'Proses Audit Tahap 1'
+            :(data.trim()=='8_1')? 'Menunggu Auditor Memverifikasi berkas'
+            :(data.trim()=='8_2')? 'Perbaikan Berkas Audit Tahap 1'
+            :(data.trim()=='8_3')? 'Audit Tahap 1 Selesai'
             //Pembayaran Tahap 2
-            :(data==9)? 'Silahkan Melakukan Pembayaran Tahap 2 Sesuai dengan Akad'
-            :(data.trim()=='9_0')? 'Silahkan Melakukan Pembayaran Tahap 2 Sesuai dengan Akad'
-            :(data.trim()=='9_1')? 'Silahkan  Menunggu Berkas Bukti Transfer Pembayaran Tahap 2 Dikonfirmasi oleh Sales Admin'
-            :(data.trim()=='9_2')? 'Pembayaran Gagal Silahkan Upload Ulang Bukti Transfer Pembayaran Tahap 2 Pastikan Foto Terlihat Jelas'
-            :(data.trim()=='9_3')? 'Pembayaran Tahap 2 Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaiut Proses Audit'
+            :(data==9)? 'Persiapan Audit Tahap2'
+            :(data.trim()=='9_0')? 'Belum Dijadwalkan'
+            :(data.trim()=='9_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
+            :(data.trim()=='9_2')? 'Perbaikan Penjadwalan'
+            :(data.trim()=='9_3')? 'Penjadwalan Terkonfirmasi'
             //Proses Audit Tahap 2
-            :(data==10)? 'Proses Audit Tahap 2 : Silahkan Kontak CS Kami Untuk Infromasi Lebih Lengkap Terkait Audit Lapangan'
-            :(data.trim()=='10_0')? 'Belum Upload Audit Plan'
-            :(data.trim()=='10_1')? 'Menunggu Konfirmasi Pelaku Usaha'
-            :(data.trim()=='10_2')? 'Audit Plan Ditolak'
-            :(data.trim()=='10_3')? 'Audit Plan Terkonfirmasi'
-            :(data.trim()=='10_4')? 'Menunggu Konfirmasi Tehnical Review'
-            :(data.trim()=='10_5')? 'Perbaikan Laporan Audit Tahap 2'
-            :(data.trim()=='10_6')? 'Menunggu Konfirmasi Komite Sertifikasi'
-            :(data.trim()=='10_7')? 'Menunggu Konfirmasi Reviewer Operasi (Pak Juli)'
-            :(data.trim()=='10_8')? 'Laporan Audit Tahap 2 Terkonfirmasi'
-            //Berita Acara
-            :(data==11)? 'Berita Acara'
-            :(data.trim()=='11_0')? 'Belum Upload Berita Acara'
-            :(data.trim()=='11_1')? 'Silahkan Upload Ulang Berita Acara Yang Sudah Ditandatangani'
-            :(data.trim()=='11_2')? 'Berita Acara Terkonfirmasi Silahkan Lanjutkan Tahapan Berikutnya : Pelunasan dan Penerbitan Invoice'
-            //Pelunasan
-            :(data==12)? 'Silahkan Melakukan Pelunasan Sesuai Dengan Akad'
-            :(data.trim()=='12_0')? 'Silahkan Upload Bukti Pelunasan'
-            :(data.trim()=='12_1')? 'Silahkan Menunggu Konfirmasi Sales'
-            :(data.trim()=='12_2')? 'Pelunasan Gagal Silahkan Upload Ulang Bukti Pelunasan'
-            :(data.trim()=='12_3')? 'Pelunasan Sesuai dan Akan Dilanjutkan Pada Proses Selanjutnya Yaitu Penerbitan Invoice'
-            //Proses Sidang Fatwa
-            :(data==13)? 'Proses Sidang Fatwa'
-            :'_'; 
+            :(data==10)? 'Proses Audit Tahap 2'
+            :(data.trim()=='10_1')? 'Perbaikan Audit Tahap 2'
+            :(data.trim()=='10_2')? 'Audit Tahap 2 Selesai'
+
+            :(data==11)? 'Persiapan Tehnical Review'
+            :(data.trim()=='11_0')? 'Belum Dijadwalkan'
+            :(data.trim()=='11_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
+            :(data.trim()=='11_2')? 'Perbaikan Penjadwalan'
+            :(data.trim()=='11_3')? 'Penjadwalan Terkonfirmasi'
+
+            :(data==12)? 'Proses Tehnical Review'
+            :(data.trim()=='12_0')? 'Reviewer Belum Upload Review Laporan Audit'
+            :(data.trim()=='12_1')? 'Proses Tehnical Review Selesai'
+
+            :(data==13)? 'Persiapan Komite Sertifikasi'
+            :(data.trim()=='13_0')? 'Belum Dijadwalkan'
+            :(data.trim()=='13_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
+            :(data.trim()=='13_2')? 'Perbaikan Penjadwalan'
+            :(data.trim()=='13_3')? 'Penjadwalan Terkonfirmasi'
+
+            :(data==14_0)? 'Proses Komite Sertifikasi'
+            :(data.trim()=='14_0')? 'Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit'
+            :(data.trim()=='14_1')? 'Proses Komite Sertifkasi Selesai'
+
+            :(data==15)? 'Proses Persiapan Komisi Fatwa'
+            :(data.trim()=='15_0')? 'Reviwer Belum Mereview Laporan Hasil Akhir Audit'
+            :(data.trim()=='15_1')? 'Laporan Akhir Audit Terkonfirmasi'
+            
+            :(data==16)? 'Proses Sidang Fatwa'
+            :(data==17)? 'Ketetapan Halal'
+            :'_';
            
 }
 /*

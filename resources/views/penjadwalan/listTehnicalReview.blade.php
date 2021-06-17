@@ -246,7 +246,54 @@
 
                             //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
 
-                            return `<button class="btn btn-success btn-xs"  href="">Form Laporan</button>`
+                            if(full.file_laporan_audit1 ){
+
+                                var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Audit Tahap 1&nbsp;&nbsp;</a>`;
+
+                                                                            
+                                }else{
+                                var unduhLaporan1 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Audit Tahap 1&nbsp;&nbsp;</a>`;
+
+                                }
+
+                            if(full.file_laporan_audit_tahap_2 ){
+
+                                var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Audit Tahap 2&nbsp;&nbsp;</a>`;
+                               
+                                                                             
+                            }else{
+                                var unduhLaporan2 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Audit Tahap 2&nbsp;&nbsp;</a>`;
+                               
+                            }
+
+                            // if(full.status_dpra == '0'){
+
+                            //     var dpra = ` <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
+
+                                                                            
+                            // }else{
+                            //     var dpra = `<button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
+
+                            // }
+
+                            return `<table class="table-xs table-borderless">
+                                        <tr>
+                                            <td>
+                                               `+unduhLaporan1+`
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                `+unduhLaporan2+`
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Rekomendasi Audit</button>
+                                            </td>
+                                        </tr>
+                                    </table>`
+                                       
                            
                         }
                     }

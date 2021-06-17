@@ -843,7 +843,7 @@
 
 									<div class="col-lg-12">
 										
-										<textarea class="col-lg-12" name="catatan_akhir_audit1" id="catatan_akhir_audit1" placeholder="Masukan catatan disini apabila pelaku usaha dapat lanjut ke tahap dua namun masih ada dokumen yang tidak memenuhi" readonly></textarea>
+										<textarea class="col-lg-12" name="catatan_akhir_audit1" id="catatan_akhir_audit1" placeholder="Masukan catatan disini apabila pelaku usaha dapat lanjut ke tahap dua namun masih ada dokumen yang tidak memenuhi" ></textarea>
 										
 
                                     </div>
@@ -910,7 +910,7 @@
 			if(h1 == '2' || h2 == '2'|| h3 == '2'|| h4== '2'|| h5 == '2'|| h6 == '2'|| h7 == '2'|| h8 == '2'|| h9 == '2'|| h10 == '2'|| h11 == '2'|| h12 == '2'|| h13 == '2'|| h14 == '2'|| h15 == '2'|| h16 == '2'){
 
 		  		$("#tidak_memenuhi").prop('checked', true);
-				$("#catatan_akhir_audit").removeAttr()('readonly');
+				//$("#catatan_akhir_audit").removeAttr()('readonly');
 		  	}else{
 		  		
 		  		$("#memenuhi").prop('checked', true);

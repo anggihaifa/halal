@@ -318,7 +318,7 @@
                        
                             var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                            var uploadAkad =  `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
+                            var uploadAkad =  `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Upload Kontrak Akad</a> `;
 
                             
                             var konfirmAkad = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`/`+full.status_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
@@ -371,7 +371,7 @@
 
                                 var unduhBeritaAcara = `<a href="{{ url('').Storage::url('public/beritaacara/`+full.id_user+`/`+full.file_berita_acara+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                             } 
-                            var upload_OC = `<a href="{{url('upload_oc_admin')}}/`+full.id+`"  class="dropdown-item" >OC</a> `;
+                            var upload_OC = `<a href="{{url('upload_oc_admin')}}/`+full.id+`"  class="dropdown-item" >Upload OC</a> `;
 
                             
                             var konfirm_OC = `<a href="{{url('konfirmasi_oc_admin')}}/`+full.id+`/5_4"  class="dropdown-item" >Konfirmasi OC</a>` ;
@@ -388,13 +388,14 @@
 
                                                     <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
 
-                                                   
+                                                   @if($cabang != null)
                                                     @foreach($cabang as $dataCabang =>$value){
 
                                                         <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
                                                         </option>
                                                       
                                                     @endforeach
+                                                    @endif
 
                                                 </select>
                                             </form>`;
@@ -472,7 +473,7 @@
                                                         <td class="text-center">
                                                             Akad
                                                         </td>
-                                                        <td class="text-center align-middle">
+                                                        <td class="text-center align-middle" style="width:20%">
                                                             `+checkStatusAkad(full.status_akad)+`
                                                         </td>
 
@@ -511,7 +512,7 @@
                                                         
                                                         <tr>
                                                             <td class="text-center align-middle"  style="width:20%">
-                                                                `+checkOC(full.status_oc)+`
+                                                                `+checkStatusPenerbitanOrderConfirmation(full.status_oc)+`
                                                             </td>
 
                                                             <td class="text-center align-middle">

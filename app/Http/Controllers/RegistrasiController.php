@@ -110,6 +110,7 @@ class RegistrasiController extends Controller
 
         $response = json_decode($response);
         $cabang = $response->data;
+        //$cabang = new object;
 
         $regis = DB::table('registrasi')                
                  ->where('registrasi.status_cancel','=',0)
@@ -122,24 +123,26 @@ class RegistrasiController extends Controller
     public function listRegistrasiPelangganAktif(){
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
-        $curl = curl_init();
+        // $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-        ));
+        // curl_setopt_array($curl, array(
+        //   CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+        //   CURLOPT_RETURNTRANSFER => true,
+        //   CURLOPT_ENCODING => '',
+        //   CURLOPT_MAXREDIRS => 10,
+        //   CURLOPT_TIMEOUT => 0,
+        //   CURLOPT_FOLLOWLOCATION => true,
+        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //   CURLOPT_CUSTOMREQUEST => 'POST',
+        // ));
 
-        $response = curl_exec($curl);   
-        curl_close($curl);
+        // $response = curl_exec($curl);   
+        // curl_close($curl);
 
-        $response = json_decode($response);
-        $cabang = $response->data;
+        // $response = json_decode($response);
+        // $cabang = $response->data;
+
+        $cabang = null;
 
 
         $kw = DB::table('registrasi')
@@ -564,6 +567,7 @@ class RegistrasiController extends Controller
     }
     public function create(){
         $jenisRegistrasi = JenisRegistrasi::all();
+        //dd($jenisRegistrasi);
         $kelompokProduk = KelompokProduk::all();
         $detailkelompokProduk = DetailKelompokProduk::all();
 
@@ -2076,7 +2080,7 @@ class RegistrasiController extends Controller
                     
                     if(isset($dataLengkap[0])){
                         // dd($dataLengkap[0]);
-                        dd("masuk");
+                        //dd("masuk");
                         $e->status_has = 0;
                     }else{
                         dd("masuk");
@@ -2165,6 +2169,8 @@ class RegistrasiController extends Controller
         if(isset($checkHas[0])){ $dataHas = json_decode($checkHas,true);}
         else{ $dataHas = null;}
 
+        //dd($dataHas);
+
         return view('pelanggan.dokumenSertifikasi.verifikasiDokumenSertifikasi', compact('dataRegistrasi','dataHas'));
 
     }
@@ -2176,7 +2182,7 @@ class RegistrasiController extends Controller
         $model = new DokumenHas();
         $model2 = new Registrasi();
         $model3 = new User();
-        $model4 = new Penjadwalan();
+        //$model4 = new Penjadwalan();
         $model5 = new KebutuhanWaktuAudit();
        
         try{
@@ -2288,11 +2294,11 @@ class RegistrasiController extends Controller
                         $model2->save();
                     DB::commit();
                     
-                    $model4->updated_by = Auth::user()->id;
-                    $model4->status_penjadwalan_audit1 = '0';
-                    $model4->progres_penjadwalan = 'audit1';
-                    $model4->id_registrasi = $e->id;
-                    $model4->save();
+                    //$model4->updated_by = Auth::user()->id;
+                    //$model4->status_penjadwalan_audit1 = '0';
+                    //$model4->progres_penjadwalan = 'audit1';
+                   // $model4->id_registrasi = $e->id;
+                    //$model4->save();
                     
                 }
 
@@ -2349,7 +2355,7 @@ class RegistrasiController extends Controller
 
         $model2 = new Registrasi();
         $model3 = new KelompokProduk();
-        $model = new LaporanAudit1();
+        
         
         $dataRegis = DB::table('registrasi')
              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
@@ -2379,23 +2385,31 @@ class RegistrasiController extends Controller
         if(isset($checkHas[0])){ 
             $dataHas = json_decode($checkHas,true);
            
-            if(isset($checkLaporanAudit1[0])){ 
-                
-                $laporanAudit1 = json_decode($checkLaporanAudit1,true);
-            }else{
-                //dd("masuk");
-                $model->id_registrasi = $id_registrasi;
-                $model->id_dokumen_has = $dataHas[0]['id'];
-                $model->save();
-                $reg->id_laporan_audit1 = $model->id;
-                $reg->save();
-                $laporanAudit1= $model;
-            }
+           
         }else{ 
             $dataHas = null;
-        }                   
+        }     
+        
+        if(isset($checkLaporanAudit1[0])){ 
+                
+            $laporanAudit1 = json_decode($checkLaporanAudit1,true);
+        }else{
+            $model = new LaporanAudit1();
+            DB::beginTransaction();
+            //dd("masuk");
+            $model->id_registrasi = $id_registrasi;
+            $model->id_dokumen_has = $dataHas[0]['id'];
+            $model->save();
+            $reg->id_laporan_audit1 = $model->id;
+            $reg->save();
+
+            $laporanAudit1= $model;
+            DB::commit();
+
+            
+        }
       
-        //dd($laporanAudit1);
+        //dd($dataHas);
         return view('penjadwalan.auditTahap1', compact('dataHas','dataRegis','laporanAudit1'));
 
     }
@@ -2448,14 +2462,14 @@ class RegistrasiController extends Controller
 
                     
                    
-                    if($data['catatan_akhir audit1']){
+                    if($data['catatan_akhir_audit1']){
                         //$e->status_memenuhi = $data['status_memenuhi'];
                         $e->status_laporan_audit1 = 3;
                         //$e->catatan_akhir_audit = $data['catatan_akhir_audit'];
                         //$e->updated_at =  $currentDateTime;                 
                         $f->updated_at =  $currentDateTime;                 
-                        $f->status = '8_3'; 
-                        $f->status = '10'; 
+                        //$f->status = '8_3'; 
+                        $f->status = '9'; 
                         $e->save();
                         $f->save();
                         //SendEmailP::dispatch($u,$f,$p,$f->status);
@@ -2552,7 +2566,7 @@ class RegistrasiController extends Controller
                         // dd($newDateTime);
     
                         $fileName = $e->id_registrasi.'_'.$f->id_penjadwalan.'_Laporan Audit 1_'.$f->nama_perusahaan.'.docx';
-                        $e->file_laporan_audt= $fileName ;
+                        $e->file_laporan_audit1= $fileName ;
                         $templateProcessor->saveAs("storage/laporan/download/Laporan Audit1/".$fileName);
                         
                         $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
@@ -2587,8 +2601,8 @@ class RegistrasiController extends Controller
                     $e->status_laporan_audit1 = 3;
                     //$e->updated_at =  $currentDateTime;                 
                     $f->updated_at =  $currentDateTime;                 
-                    $f->status = '8_3'; 
-                    $f->status = '8_3'; 
+                    //$f->status = '8_3'; 
+                    $f->status = '9'; 
                     $e->save();
                     $f->save();
                     //SendEmailP::dispatch($u,$f,$p,$f->status);
@@ -2994,7 +3008,7 @@ class RegistrasiController extends Controller
             $e->tanggal_akad = $date;
             $e->mata_uang = $data['mata_uang'];            
             $e->status_akad = 1;
-            $e->status = 8; 
+            $e->status = 7; 
 
             $updater =  Auth::user()->id;
 
@@ -3949,34 +3963,45 @@ class RegistrasiController extends Controller
 
             date_default_timezone_set('Asia/Jakarta');
             $today = Carbon::now()->toDateTimeString();
-            $p->tanggal_tahap1 =  $today;
-            $p->status_tahap1 = 3;
+            if($p){
 
-            
-            if($request->has("bukti_bayar1")){
-                $file = $request->file("bukti_bayar1");
-                $file = $data["bukti_bayar1"];
-               
-                $filename = "BB1-".$data['id1'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
-                $p->bb_tahap1 = $filename;
-                $p->count_tahap1 = $p->count_tahap1 +1;
+                $p->tanggal_tahap1 =  $today;
+                $p->status_tahap1 = 3;
+    
+                
+                if($request->has("bukti_bayar1")){
+                    $file = $request->file("bukti_bayar1");
+                    $file = $data["bukti_bayar1"];
                    
+                    $filename = "BB1-".$data['id1'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
+                    $p->bb_tahap1 = $filename;
+                    $p->count_tahap1 = $p->count_tahap1 +1;
+                       
+                }
+                
+                $e->save();
+                //$u->save();
+                $p->save();
+                DB::commit();
+    
+                Session::flash('success', "Upload Bukti Pembayaran Berhasil");
+                
+
+
+            }else{
+                //DB::rollBack();
+
+                Session::flash('error',"Silahkan Lakukan Upload Kontrak Akad Terlebih Dahulu");
             }
-            
-            $e->save();
-            //$u->save();
-            $p->save();
-            DB::commit();
-
-            Session::flash('success', "Upload Bukti Pembayaran Berhasil");
-
-            
         }catch (\Exception $e){
             DB::rollBack();
 
             Session::flash('error', $e->getMessage());
         }
+          
+            
+       
             $redirect = redirect()->route('listkeuangan');
             return $redirect;
     }
@@ -4018,7 +4043,7 @@ class RegistrasiController extends Controller
         $model = new Registrasi();
         $model2 = new User();
         $model3 = new Pembayaran();
-        $model4 = new Penjadwalan();
+        //$model4 = new Penjadwalan();
 
          DB::beginTransaction();
         $e = $model->find($id);
@@ -4348,22 +4373,24 @@ class RegistrasiController extends Controller
         $dataJenis = JenisRegistrasi::all();
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-        ));
+        // curl_setopt_array($curl, array(
+        //   CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+        //   CURLOPT_RETURNTRANSFER => true,
+        //   CURLOPT_ENCODING => '',
+        //   CURLOPT_MAXREDIRS => 10,
+        //   CURLOPT_TIMEOUT => 0,
+        //   CURLOPT_FOLLOWLOCATION => true,
+        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //   CURLOPT_CUSTOMREQUEST => 'POST',
+        // ));
 
-        $response = curl_exec($curl);   
-        curl_close($curl);
+        // $response = curl_exec($curl);   
+        // curl_close($curl);
 
-        $response = json_decode($response);
-        $cabang = $response->data;
+        // $response = json_decode($response);
+        // $cabang = $response->data;
+
+        $cabang = null;
 
 
         $kw = DB::table('registrasi')
@@ -4468,32 +4495,40 @@ class RegistrasiController extends Controller
 
             date_default_timezone_set('Asia/Jakarta');
             $today = Carbon::now()->toDateTimeString();
-            $p->tanggal_tahap2 = $today;
-            $p->status_tahap2 = 3;
+            if($p){
 
-            
-            if($request->has("bukti_bayar2")){
-                $file = $request->file("bukti_bayar2");
-                $file = $data["bukti_bayar2"];
-               
-
-               
-                $filename = "BB2-".$data['id2'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
-                $p->bb_tahap2 = $filename;
-                //$p->count_tahap2 = $p->count_tahap2+1;
-            }    
-
+                $p->tanggal_tahap2 = $today;
+                $p->status_tahap2 = 3;
+    
+                
+                if($request->has("bukti_bayar2")){
+                    $file = $request->file("bukti_bayar2");
+                    $file = $data["bukti_bayar2"];
+                   
+    
+                   
+                    $filename = "BB2-".$data['id2'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
+                    $p->bb_tahap2 = $filename;
+                    //$p->count_tahap2 = $p->count_tahap2+1;
+                }    
+    
+                  
+                
               
-            
-          
-            $e->save();
-            $u->save();
-            $p->save();
-            DB::commit();
+                $e->save();
+                $u->save();
+                $p->save();
+                DB::commit();
+    
+                Session::flash('success', "Upload Bukti Pembayaran Berhasil");
+    
+            }else{
+                //DB::rollBack();
 
-            Session::flash('success', "Upload Bukti Pembayaran Berhasil");
-
+                Session::flash('error',"Silahkan Lakukan Upload Kontrak Akad Terlebih Dahulu");
+            }
+           
             
         }catch (\Exception $e){
             DB::rollBack();
@@ -4795,29 +4830,38 @@ class RegistrasiController extends Controller
 
             date_default_timezone_set('Asia/Jakarta');
             $today = Carbon::now()->toDateTimeString();
-            $p->tanggal_tahap3 = $today;
-            $p->status_tahap3 = 3;
 
+            if($p){
+                $p->tanggal_tahap3 = $today;
+                $p->status_tahap3 = 3;
+    
+                
+                if($request->has("bukti_bayar3")){
+                    //dd("masuk");
+                    $file = $request->file("bukti_bayar3");
+                    $file = $data["bukti_bayar3"];
+                   
+                    $filename = "BB3-".$data['id3'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
+                    $p->bb_tahap3 = $filename;
+                       // $p->count_tahap3 = $p->count_tahap3+1;
+                     
+                   
+                }
+           
+                $e->save();
+                $u->save();
+                $p->save();
+                DB::commit();
+    
+                Session::flash('success', "Upload Bukti Pembayaran Berhasil");
             
-            if($request->has("bukti_bayar3")){
-                //dd("masuk");
-                $file = $request->file("bukti_bayar3");
-                $file = $data["bukti_bayar3"];
-               
-                $filename = "BB3-".$data['id3'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/buktipembayaran/".$u->id."/", $filename);
-                $p->bb_tahap3 = $filename;
-                   // $p->count_tahap3 = $p->count_tahap3+1;
-                 
-               
-            }
-       
-            $e->save();
-            $u->save();
-            $p->save();
-            DB::commit();
+            }else{
+                //DB::rollBack();
 
-            Session::flash('success', "Upload Bukti Pembayaran Berhasil");
+                Session::flash('error',"Silahkan Lakukan Upload Kontrak Akad Terlebih Dahulu");
+            }
+           
 
             
         }catch (\Exception $e){
