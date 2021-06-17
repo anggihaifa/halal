@@ -2596,7 +2596,8 @@ class RegistrasiController extends Controller
 
                     //$this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
 
-                    $phpWord = new \PhpOffice\PhpWord\PhpWord();
+                    $phpWord = new \PhpOffice\PhpWord\PhpWord();                            
+
                   
                     $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-05 Laporan Audit Tahap I Isian.docx');
                    // 
