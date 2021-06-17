@@ -1334,8 +1334,8 @@ class PenjadwalanController extends Controller
              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
-             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
-             ->join('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')             
+             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
+            //  ->join('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
                 $query->where('penjadwalan.pelaksana1_audit2','LIKE','%'.$id_user.'%');
@@ -1346,7 +1346,8 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
   
             })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','laporan_audit1.file_laporan_audit1');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+            //  ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','laporan_audit1.file_laporan_audit1');
        
 
         //filter condition

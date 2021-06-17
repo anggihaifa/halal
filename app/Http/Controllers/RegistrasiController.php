@@ -652,7 +652,7 @@ class RegistrasiController extends Controller
                 $model->jenis_produk = $data['id_kelompok_produk'];
                 $model->rincian_jenis_produk = implode(',',$data['id_rincian_kelompok_produk']);
                 $model->daerah_pemasaran = $data['daerah_pemasaran'];
-                $model->sistem_pemasaran = $data['sistem_pemasaran'];
+                // $model->sistem_pemasaran = $data['sistem_pemasaran'];
                 $model->no_registrasi_bpjph = $data['no_registrasi_bpjph'];
                 $no_registrasi_bpjph = $data['no_registrasi_bpjph'];
                 $kd_wilayah = explode('-',$no_registrasi_bpjph);

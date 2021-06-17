@@ -42,6 +42,13 @@
                 <div class="panel-body panel-form">
                     <form action="{{route('registrasiHalal.store')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data" id="msform">                        
 
+                        <ul id="progressbar">
+                            <li class="active text-center" id="umum"><strong>Data Registrasi</strong></li>
+                            <li id="kantor" class="text-center"><strong>Data Perusahaan</strong></li>
+                            <li id="pabrik" class="text-center"><strong>Data KTP dan NPWP</strong></li>
+                            <li id="pemilik" class="text-center"><strong>Data Produk</strong></li>                            
+                        </ul> <!-- fieldsets -->
+
                         <div class="form-group row">
                             <fieldset>
                             <div class="form-card row">
@@ -59,20 +66,20 @@
 
                                 <div class="wrapper col-lg-12">
                                     <div class="row">
-                                        <label class="col-lg-4 col-form-label">Status Registrasi</label>
+                                        <label class="col-lg-4 col-form-label">Jenis Pengajuan</label>
                                         <div class="col-lg-8">
                                             <div style="margin-bottom:7px;">
                                                 <div class="radio radio-css radio-inline">
-                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi1" value="permohonan baru" checked />
-                                                    <label for="statusRegistrasi1">Permohonan Baru</label>
+                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi1" value="baru" checked />
+                                                    <label for="statusRegistrasi1" class="text-dark"><b>Baru</b></label>
                                                 </div>
                                                 <div class="radio radio-css radio-inline">
-                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi2"  value="pembaruan" />
-                                                    <label for="statusRegistrasi2">Pembaruan</label>
+                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi2"  value="perpanjangan" />
+                                                    <label for="statusRegistrasi2" class="text-dark"><b>Perpanjangan</b></label>
                                                 </div>
                                                 <div class="radio radio-css radio-inline">
-                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi3"  value="perluasan" />
-                                                    <label for="statusRegistrasi3">Perluasan</label>                                                
+                                                    <input type="radio" name="status_registrasi" id="statusRegistrasi3"  value="perubahan" />
+                                                    <label for="statusRegistrasi3" class="text-dark"><b>Perubahan</b></label>                                                
                                                 </div>
                                             </div>
                                         </div>
@@ -81,12 +88,12 @@
 
                                 <div class="wrapper col-lg-12">
                                     <div class="row">
-                                        <label class="col-lg-4 col-form-label">Jenis Registrasi</label>
+                                        <label class="col-lg-4 col-form-label">Jenis Layanan</label>
                                         <div class="col-lg-8">
-                                            <select id="id_jenis_reg" onchange="getSelectedValue();"  name="id_jenis_registrasi" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                            <select id="id_jenis_reg" onchange="getSelectedValue();"  name="id_ruang_lingkup" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
                                                 @php
                                                 foreach ($jenisRegistrasi as $jenis) {
-                                                    echo "<option value='$jenis->id'>$jenis->jenis_registrasi</option>";
+                                                    echo "<option value='$jenis->id'>$jenis->ruang_lingkup</option>";
                                                 }                                    
                                                 @endphp                             
                                             </select>
@@ -96,7 +103,8 @@
                                                                 
                                 <div class="wrapper col-lg-12">
                                 <div class="row">
-                                    @component('components.inputtext',['name'=> 'no_registrasi_bpjph','id' => 'no_registrasi_bpjph','label' => 'No. Registrasi BPJPH *','required'=>true,'placeholder'=>'xx-x-xxxx-xxxx'])@endcomponent
+                                    @component('components.inputtext',['name'=> 'no_registrasi_bpjph','id' => 'no_registrasi_bpjph','label' => 'No. Pendaftaran BPJPH *','required'=>true,'placeholder'=>'No. Pendaftaran BPJPH'])@endcomponent
+                                    <p style="margin-left: 35%;">Contoh: 00-0-0000-0000 / SH2021-0-000000</p>
                                 </div>
                                 </div>                                
                                                                 
@@ -140,10 +148,16 @@
                                             @component('components.inputtext',['name'=> 'telepon_pabrik','label' => 'Telepon Pabrik *','required'=>true,'placeholder'=>'Telepon Pabrik','id'=>'teleponPabrik'])@endcomponent
                                         </div>
                                         </div>
+
+                                        <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'nama_contact_person','label' => 'Nama Contact Person *','required'=>true,'placeholder'=>'Nama Contact Person','id'=>'namacontactPerson'])@endcomponent
+                                        </div>
+                                        </div>
         
                                         <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'contact_person','label' => 'Contact Person *','required'=>true,'placeholder'=>'Contact Person','id'=>'contactPerson'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'contact_person','label' => 'No Telp Contact Person *','required'=>true,'placeholder'=>'No Telp Contact Person','id'=>'nocontactPerson'])@endcomponent
                                         </div>
                                         </div>
         
@@ -172,18 +186,18 @@
 
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">KTP*</label>
+                                            <label class="col-4 col-form-label">KTP Pelaku Usaha*</label>
                                             <div class="col-lg-8"><div>                                            
-                                                <input type="file" name="ktp" required>
+                                                <input type="file" name="ktp" accept="application/pdf,image/*" onChange="getValue('ktp')" id="ktp" required>
                                             </div></div>
                                         </div>
                                     </div>
     
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">NPWP*</label>
+                                            <label class="col-4 col-form-label">NPWP Pelaku Usaha*</label>
                                             <div class="col-lg-8"><div>                                            
-                                                <input type="file" name="npwp" required>
+                                                <input type="file" name="npwp" accept="application/pdf,image/*" onChange="getValue('npwp')" id="npwp" required>
                                             </div></div>
                                         </div>
                                     </div>                                                                    
@@ -202,25 +216,7 @@
                                         <div class="row">
                                             <label class="col-12"><h4>Data Produk</h4></label>
                                         </div>
-                                    </div>                                    
-    
-                                    <div id="wrapperdataproduk" class="wrapper col-lg-12 row">
-                                        {{-- <div class="wrapper row"> --}}
-                                            <div class="wrapper col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Merk/Brand*</label><div class="col-lg-8"><div><input class="form-control" id="merk" name="merk[]" type="text" label="Merk/Brand" placeholder="Merk/Brand"></div></div>
-                                                </div>
-                                            </div>
-                                            <div class="wrapper col-lg-12">
-                                                <div class="row">                                                
-                                                    <div class="detail_dataproduk" id="detail_dataproduk" style="width: 100%; margin-left:-3px"></div>
-                                                    <div class="col-md-12">
-                                                        <a id="tam_data_produk" class="tam_data_produk btn btn-sm btn-primary m-r-5" style="color:white">Tambah Data Merk/Brand</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {{-- </div> --}}
-                                    </div> 
+                                    </div>                                                                        
     
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
@@ -244,12 +240,31 @@
                                             <label for="kelompok" class="col-lg-4 col-form-label">Rincian Jenis Produk*</label>
     
                                             <div class="col-lg-8">
-                                                <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
+                                                <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" class="form-control selectpicker multiple-select" data-size="30" data-live-search="true" data-style="btn-white" style="height:100%">
+                                                {{-- <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" data-size="30"> --}}
                                                     <option value="">--Pilih Jenis Produk--</option>
                                                 </select>
                                             </div>   
                                         </div>
                                     </div>
+
+                                    <div id="wrapperdataproduk" class="wrapper col-lg-12 row">
+                                        {{-- <div class="wrapper row"> --}}
+                                            <div class="wrapper col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Merk/Brand*</label><div class="col-lg-8"><div><input class="form-control" id="merk" name="merk[]" type="text" label="Merk/Brand" placeholder="Merk/Brand"></div></div>
+                                                </div>
+                                            </div>
+                                            <div class="wrapper col-lg-12">
+                                                <div class="row">                                                
+                                                    <div class="detail_dataproduk" id="detail_dataproduk" style="width: 100%; margin-left:-3px"></div>
+                                                    <div class="col-md-12">
+                                                        <a id="tam_data_produk" class="tam_data_produk btn btn-sm btn-primary m-r-5" style="color:white">Tambah Data Merk/Brand</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{-- </div> --}}
+                                    </div> 
     
                                     <div class="wrapper col-lg-12">
                                     <div class="row">
@@ -258,21 +273,21 @@
                                         <div class="col-lg-8">
                                             <div class="radio radio-css radio-inline">
                                                 <input type="radio" name="daerah_pemasaran" id="daerahPemasaran1" value="Provinsi" checked />
-                                                <label for="daerahPemasaran1">Provinsi</label>
+                                                <label for="daerahPemasaran1" class="text-dark"><b>Provinsi (Maks 3 Provinsi)</b></label>
                                             </div>
                                             <div class="radio radio-css radio-inline">
                                                 <input type="radio" name="daerah_pemasaran" id="daerahPemasaran2" value="Nasional"/>
-                                                <label for="daerahPemasaran2">Nasional</label>
+                                                <label for="daerahPemasaran2" class="text-dark"><b>Nasional (Lebih dari 3 Provinsi)</b></label>
                                             </div>
                                             <div class="radio radio-css radio-inline">
                                                 <input type="radio" name="daerah_pemasaran" id="daerahPemasaran3" value="Internasional"/>
-                                                <label for="daerahPemasaran3">Internasional</label>
+                                                <label for="daerahPemasaran3" class="text-dark"><b>Internasional</b></label>
                                             </div>
                                         </div>
                                     </div>
                                     </div>
     
-                                    <div class="wrapper col-lg-12">
+                                    {{-- <div class="wrapper col-lg-12">
                                         <div class="row">
                                             <label class="col-lg-4 col-form-label">Sistem Pemasaran*</label>
                                             <div class="col-lg-8">
@@ -286,7 +301,7 @@
                                                 </div>                                            
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>  --}}
                                 </div>
                                 
                                 <div class="text-center">
@@ -1572,7 +1587,7 @@
                     success: function (response) {                                                
                         $('#id_rincian_kelompok_produk').empty();                               
                         $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
-                            $("#id_rincian_kelompok_produk").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, rincian_kelompok_produk))
+                            $("#id_rincian_kelompok_produk").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'_'+rincian_kelompok_produk))
                         })
                         $('#id_rincian_kelompok_produk').selectpicker('refresh');
                     }                   
@@ -1653,9 +1668,24 @@
         })
 
         });   
+
+        function getValue(y){
+        	const x  = document.getElementById(y);        	
+
+            var getSize = x.files[0].size;
+            //var maxSize = 5120*1024;
+            var maxSize = 2048*1024;
+            var values = x.value;
+            var ext = values.split('.').pop();
+            if(getSize > maxSize){
+                    alert("File terlalu besar, ukuran file maksimal 2MB");
+                    x.value = "";
+                    return false;
+            }           
+        }
     </script>
 
     <script src="{{asset('/assets/js/cleave.js')}}"></script>
-    <script src="{{asset('/assets/js/main.js')}}"></script>    
+    {{-- <script src="{{asset('/assets/js/main.js')}}"></script>     --}}
                     
 @endpush
