@@ -1,9 +1,15 @@
 <td class="valign-middle text-center">
-	@if($value == null)
-		<i class="ion-ios-paper fa-lg" style="color:#ababab" title="Belum diperiksa"></i>
-	@elseif($value == 1)
-		<i class="ion-ios-paper fa-lg" style="color:#2fca2f" title="Sesuai"></i>
+	@if($value == null || $value == '0')
+	 	<a style="background-color:black; color:white">Belum Diperiksa</a>
+		
+	@elseif($value == 2)
+		<a style="background-color:red ; color:white">Perbaikan</a>
+		
+		
 	@else
-		<i class="ion-ios-paper fa-lg" style="color:#e46464" title="Revisi"></i>
+		<a style="background-color:green ; color:white">Sesuai</a>
+
+	
+		
 	@endif
 </td>

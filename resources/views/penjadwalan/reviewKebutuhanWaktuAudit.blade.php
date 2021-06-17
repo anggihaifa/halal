@@ -75,7 +75,7 @@
                         <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                         <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                         <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
-                        <th class="valign-middle text-center">Status</th>
+                        <th class="valign-middle text-center" style="max-width:20%">Status</th>
                         <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                 </thead>
@@ -500,7 +500,7 @@
                                     @method('PUT')
                             
                             </a> -->
-                           <button type="submit" class="btn btn-sm btn-primary m-r-5">Setuju</button>
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5">Submit</button>
                         </div>
                     </form>
                 </div>  

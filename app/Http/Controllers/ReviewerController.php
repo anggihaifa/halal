@@ -16,6 +16,7 @@ use App\Models\Akad;
 use App\Models\System\User;
 use App\Models\KebutuhanWaktuAudit;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 
 class ReviewerController extends Controller
@@ -220,17 +221,18 @@ class ReviewerController extends Controller
         //start
         if($kodewilayah == '119'){
             $xdata = DB::table('registrasi')
-                ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+                 //->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')
+                  ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('users','registrasi.id_user','=','users.id')
+                  ->join('users','registrasi.id_user','=','users.id')
                  ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')  
                 
                  ->where('penjadwalan.status_penjadwalan_audit1','=',1)
                  ->orWhere('penjadwalan.status_penjadwalan_audit2','=',1)
                  ->orWhere('penjadwalan.status_penjadwalan_tr','=',1)
                  ->orWhere('penjadwalan.status_penjadwalan_tinjauan','=',1)
-                 ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+                 ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+                //->select('registrasi.*');
         }else{
 
             $xdata = DB::table('registrasi')
@@ -264,7 +266,7 @@ class ReviewerController extends Controller
                 })
                 
               
-                ->select('registrasi_alamatkantor.alamat as alamat_kantor','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+                ->select('registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
 
 
         }
@@ -276,6 +278,8 @@ class ReviewerController extends Controller
         //end
         $xdata = $xdata
                  ->orderBy('registrasi.id','desc');
+
+       // Log::Info(json_encode($xdata,true));
 
         return Datatables::of($xdata)->make();
     }
@@ -629,7 +633,7 @@ class ReviewerController extends Controller
 
         $data = $request->except('_token','_method');
         $data_K = $request->except('_token','_method','idregis1','status_registrasi');
-        dd($data);
+        //dd($data);
         
 
 
@@ -701,7 +705,8 @@ class ReviewerController extends Controller
         }else{
             
             $k->status_kebutuhan_audit= '3';
-            $e->status = '4';
+            $e->status = 4;
+           
         }
 
         $k->hasil_review = $data['hasil_review'];
@@ -710,6 +715,7 @@ class ReviewerController extends Controller
         $k->updated_by =  Auth::user()->id;;
         $k->save();
         $e->save();
+        //dd( $e->status);
 
         
 
@@ -797,13 +803,31 @@ class ReviewerController extends Controller
                  ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                  ->join('users','registrasi.id_user','=','users.id')
-                 ->join('kebutuhan_waktu_audit','registrasi.id_kebutuhan_waktu_audit','=','kebutuhan_waktu_audit.id')                 
-                 ->where('registrasi.status_cancel','=',0)
-                 ->orWhere('registrasi.status','=','3')
-                 ->orWhere('registrasi.status','=','3_1')
-                 ->orWhere('registrasi.status','=','3_2')
-                 ->orWhere('registrasi.status','=','3_3')
-                 ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as ruang_lingkup','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','registrasi.no_registrasi_bpjph','registrasi.status_registrasi as status_registrasi','kebutuhan_waktu_audit.*');
+                 ->join('kebutuhan_waktu_audit','registrasi.id_kebutuhan_waktu_audit','=','kebutuhan_waktu_audit.id')   
+                 
+                 ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.kode_wilayah as kode_wilayah','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as ruang_lingkup','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','registrasi.no_registrasi_bpjph','registrasi.status_registrasi as status_registrasi','kebutuhan_waktu_audit.*')
+               
+                ->where(function($query) use ($kodewilayah){
+                    $query ->where('registrasi.status_cancel','=',0);
+                     $query ->where('registrasi.status','=','3');
+                })
+                ->orWhere(function($query) use ($kodewilayah ){
+                    $query ->where('registrasi.status_cancel','=',0);
+                    
+                    $query ->where('registrasi.status','=','3_1');
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query ->where('registrasi.status_cancel','=',0);
+                    
+                    $query ->where('registrasi.status','=','3_2');
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query ->where('registrasi.status_cancel','=',0);
+                    
+                    $query ->where('registrasi.status','=','3_3');
+                });
+                
+                
         }else{
 
             $xdata = DB::table('registrasi')
@@ -811,13 +835,31 @@ class ReviewerController extends Controller
                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                 ->join('users','registrasi.id_user','=','users.id')
                 ->join('kebutuhan_waktu_audit','registrasi.id_kebutuhan_waktu_audit','=','kebutuhan_waktu_audit.id')     
-                ->where('registrasi.kode_wilayah','=',$kodewilayah)
-                ->where('registrasi.status_cancel','=',0)
-                ->orWhere('registrasi.status','=','3')
-                ->orWhere('registrasi.status','=','3_1')
-                ->orWhere('registrasi.status','=','3_2')
-                ->orWhere('registrasi.status','=','3_3')
-                ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as ruang_lingkup','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','kebutuhan_waktu_audit.*');
+
+                ->select('registrasi.alamat_perusahaan as alamat_perusahaan','registrasi.id as id_regis','registrasi.no_registrasi as no_registrasi', 'registrasi.kode_wilayah as kode_wilayah', 'registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as ruang_lingkup','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','kebutuhan_waktu_audit.*')
+
+                ->where(function($query) use ($kodewilayah){
+                    $query ->where('registrasi.status_cancel','=',0);
+                    $query ->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    
+                    $query ->where('registrasi.status','=','3');
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query ->where('registrasi.status_cancel','=',0);
+                    $query ->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query ->where('registrasi.status','=','3_1');
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query ->where('registrasi.status_cancel','=',0);
+                    $query ->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query ->where('registrasi.status','=','3_2');
+                })
+                ->orWhere(function($query) use ($kodewilayah){
+                    $query ->where('registrasi.status_cancel','=',0);
+                    $query ->where('registrasi.kode_wilayah','=',$kodewilayah);
+                    $query ->where('registrasi.status','=','3_3');
+                });
+                
 
 
         }

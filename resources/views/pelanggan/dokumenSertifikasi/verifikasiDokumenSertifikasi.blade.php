@@ -99,19 +99,7 @@
 											{!! $buttonUnduhDisabled !!}
 											<td></td>
 											<td></td>
-											<!-- <td class="valign-middle text-center">
-												
-												<form action="{{route('storedokumenhasadmin',$value['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
-													@csrf
-													@method('PUT')
-													<input type="text" id="has_selected" name="has_selected" hidden value="tes">
-													
-													<input type="file" id="has_1" name="has_1">
-													<button type="submit" id="btn_has1" class="btn btn-xs btn-primary" onclick="setHas('has_1')" >Unggah
-												</form>
-												</button>
-												
-											</td> -->
+										
 
 										</tr>
 										<tr class="even">

@@ -71,11 +71,11 @@
             <table id="table" class="table table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%">
                 <thead class="thead-light">
                     <tr>
-                        <th class="text-nowrap valign-middle text-center">No</th>                      
+                        <th class="text-nowrap valign-middle text-center" >No</th>                      
                         <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
                         <th class="text-nowrap valign-middle text-center">Perusahaan</th>
                         <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
-                        <th class="valign-middle text-center">Status</th>
+                        <th class="valign-middle text-center" style="max-width:20%">Status</th>
                         <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                 </thead>

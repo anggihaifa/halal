@@ -96,7 +96,7 @@ class ProgresStatus extends Mailable
         }elseif($this->status == '8_3'){
 
             $this->subject('Verifikasi Berkas Audit Tahap 1 Dengan Nomor Registrasi '.$this->registrasi['no_registrasi'].'- Terkonfirmasi ');                
-        elseif($this->status == 9){
+        }elseif($this->status == 9){
 
             $this->subject('Registrasi Dengan No registrasi'.$this->registrasi['no_registrasi'].' - Silahkan Menyelesaikan Pembayaran Tahap 2');
 

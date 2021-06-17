@@ -83,10 +83,10 @@
                                     <div class="row">
                                         <label class="col-lg-4 col-form-label">Jenis Registrasi</label>
                                         <div class="col-lg-8">
-                                            <select id="id_jenis_reg" onchange="getSelectedValue();"  name="id_jenis_registrasi" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                            <select id="id_jenis_reg" onchange="getSelectedValue();"  name="id_ruang_lingkup" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
                                                 @php
                                                 foreach ($jenisRegistrasi as $jenis) {
-                                                    echo "<option value='$jenis->id'>$jenis->jenis_registrasi</option>";
+                                                    echo "<option value='$jenis->id'>$jenis->ruang_lingkup</option>";
                                                 }                                    
                                                 @endphp                             
                                             </select>
@@ -312,18 +312,18 @@
                                 </div>
 
                                 <div class="wrapper col-lg-12">
-                                <div class="row">
-                                    <label class="col-lg-4 col-form-label">Jenis Registrasi</label>
-                                    <div class="col-lg-8">
-                                        <select id="id_jenis_reg" onchange="getSelectedValue();"  name="id_jenis_registrasi" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
-                                            @php
-                                            foreach ($jenisRegistrasi as $jenis) {
-                                                echo "<option value='$jenis->id'>$jenis->jenis_registrasi</option>";
-                                            }                                    
-                                            @endphp                             
-                                        </select>
+                                    <div class="row">
+                                        <label class="col-lg-4 col-form-label">Jenis Registrasi</label>
+                                        <div class="col-lg-8">
+                                            <select id="id_jenis_reg" onchange="getSelectedValue();"  name="id_ruang_lingkup" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                @php
+                                                foreach ($jenisRegistrasi as $jenis) {
+                                                    echo "<option value='$jenis->id'>$jenis->ruang_lingkup</option>";
+                                                }                                    
+                                                @endphp                             
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
 
                                 <div class="wrapper col-lg-12" id="wrapperip" style="display: none">

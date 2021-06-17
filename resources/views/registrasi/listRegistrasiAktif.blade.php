@@ -1803,6 +1803,20 @@
                                 
                                 var unduhKSA = `<a style="background-color:green; color:white; border-radius:4px;" href="{{ url('').Storage::url('public/laporan/upload/Konfirmasi SK Audit/`+full.file_konfirmasi_sk_audit+`') }}" download>&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
                             } 
+
+                            
+                            if(full.status == 7 || full.status == '7_1' || full.status == '7_2' || full.status == '7_3' ){
+                                  var penjadwalan = audit1  ;
+                            }else if(full.status == 9 || full.status == '9_1' || full.status == '9_2' || full.status == '9_3' ){
+                                var penjadwalan = audit2+ksb;
+                            }else if(full.status == 11 || full.status == '11_1' || full.status == '11_2' || full.status == '11_3' ){
+                                var penjadwalan = tehnicalReview;
+                            }else if(full.status == 13 || full.status == '13_1' || full.status == '13_2' || full.status == '13_3' ){
+                                var penjadwalan = tinjauan;
+                            }else{
+                                var penjadwalan = "Belum masuk tahapan";
+                            }
+                           
                            
 
                             //var kw = full.kode_wilayah;
@@ -1815,14 +1829,15 @@
                                                 <select id="kode_wilayah" name="kode_wilayah" class="form-control" onchange="this.form.submit()">
 
                                                     <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
+                                                    
+                                                    @if($cabang != null)
+                                                        @foreach($cabang as $dataCabang =>$value)
 
-                                                   
-                                                    @foreach($cabang as $dataCabang =>$value)
-
-                                                        <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
-                                                        </option>
-                                                      
-                                                    @endforeach
+                                                            <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
+                                                            </option>
+                                                        
+                                                        @endforeach
+                                                    @endif
 
                                                 </select>
                                             </form>`;
@@ -1948,7 +1963,7 @@
                                                         <td class="text-center">
                                                             Akad
                                                         </td>
-                                                        <td class="text-center align-middle">
+                                                        <td class="text-center align-middle" style="max-width:20%;">
                                                             `+checkStatusAkad(full.status_akad)+`
                                                         </td>
 
@@ -1978,13 +1993,13 @@
                                                         
                                                         <tr>
                                                        
-                                                        <td class="text-center align-middle">
+                                                        <td class="text-center align-middle"  style="max-width:20%;">
                                                             `+checkStatusPembayaran(full.status_tahap1)+`
                                                         </td>
-                                                        <td class="text-center align-middle">
+                                                        <td class="text-center align-middle"  style="max-width:20%;">
                                                             `+checkStatusPembayaran(full.status_tahap2)+`
                                                         </td>
-                                                        <td class="text-center align-middle">
+                                                        <td class="text-center align-middle"  style="max-width:20%;">
                                                             `+checkStatusPembayaran(full.status_tahap3)+`
                                                         </td>
 
@@ -2012,18 +2027,18 @@
                                                         
                                                         <tr>
                                                            
-                                                            <td class="text-center align-middle">
+                                                            <td class="text-center align-middle"  style="max-width:20%;">
                                                                 `+checkPenjadwalan(full.status_penjadwalan_audit1)+`
                                                             </td>
                                                             
-                                                            <td class="text-center align-middle">
+                                                            <td class="text-center align-middle"  style="max-width:20%;">
                                                                 `+checkPenjadwalan(full.status_penjadwalan_audit2)+`
                                                             </td>
-                                                            <td class="text-center align-middle">
+                                                            <td class="text-center align-middle"  style="max-width:20%;">
                                                                 `+checkPenjadwalan(full.status_penjadwalan_tr)+`
                                                             </td>
                                                             
-                                                            <td class="text-center align-middle">
+                                                            <td class="text-center align-middle"  style="max-width:20%;">
                                                                 `+checkPenjadwalan(full.status_penjadwalan_tinjauan)+`
                                                             </td>
                                                             <td>
@@ -2064,11 +2079,9 @@
                                                                         <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
                                                                             <b class="ion-ios-arrow-down"></b>
                                                                         </a>
-                                                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                            
-                                                                        <div class="dropdown-button-title">Update Progress</div>`+audit1+audit2+tehnicalReview+tinjauan+ksb+`
-                                                                        </div>
+                                                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> `
+                                                                            +penjadwalan+
+                                                                        `</div>
                                                                     </div>
                                                                     </td>
                                                                    
