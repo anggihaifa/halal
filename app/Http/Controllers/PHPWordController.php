@@ -680,14 +680,14 @@ class PHPWordController extends Controller
 
             if(count($dataLaporan) == 0){
                 $model = new LaporanAudit2;
-                    $model->rencana_audit_isian = $fileName;                    
+                    //$model->rencana_audit_isian = $fileName;                    
                     $model->id_registrasi = $data['idregis'];                    
                     $model->save();
                 DB::Commit();
             }else{
                 $model2 = new LaporanAudit2;                
                 $f = $model2->find($dataLaporan[0]->id);
-                $f->rencana_audit_isian = $fileName;                
+                //$f->rencana_audit_isian = $fileName;                
                 $f->save();                
             }
             DB::Commit();        
@@ -907,7 +907,7 @@ class PHPWordController extends Controller
     public function downloadLaporanAuditTahap2Fix(Request $request){
         $data = $request->except('_token','_method');
 
-        dd($data);
+        //dd($data);
         // dd("disini");
         $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
 

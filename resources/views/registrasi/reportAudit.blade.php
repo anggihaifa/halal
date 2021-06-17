@@ -41,7 +41,7 @@
 								<input type="text" class="form-control" name='no_registrasi' value="{{$data[0]['no_registrasi']}}" readonly/>
 							</div>
 
-							<label class="col-lg-4 col-form-label">File Pelaporan Audit Tahap 1</label>
+							<label class="col-lg-4 col-form-label">File Laporan Audit Tahap 1</label>
 							<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
 										<a href="{{url('') .Storage::url('public/laporan/download/Laporan Audit1/'.$data[0]['file_laporan_audit1']) }}" download>{{$data[0]['file_laporan_audit1']}}</a>
@@ -62,7 +62,7 @@
 									</div>
 							</div>  
 														
-							<label class="col-lg-4 col-form-label">File Pelaporan Audit Tahap 2</label>
+							<label class="col-lg-4 col-form-label">File Laporan Audit Tahap 2</label>
 							<div id="sh" class="col-lg-8">
 									<div class="form-control" readonly>
 										<a href="{{url('') .Storage::url('public/laporan/download/Laporan Audit2/'.$data[0]['file_laporan_audit_tahap_2']) }}" download>{{$data[0]['file_laporan_audit_tahap_2']}}</a>

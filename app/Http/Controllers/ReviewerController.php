@@ -501,14 +501,19 @@ class ReviewerController extends Controller
             //dd($data['idregis1']);
         if($data['jenis']== 'audit1'){
             $j->status_penjadwalan_audit1 = 3;
+            $e->status = 8;
+            //dd("masuk");
         }else if($data['jenis']== 'audit2'){
             $j->status_penjadwalan_audit2 = 3;
+            $e->status = 10;
         }else if($data['jenis']== 'tr'){
+            $e->status = '10_4';
             $j->status_penjadwalan_tr = 3;
         }else if($data['jenis']== 'tinjauan'){
+            $e->status = '10_6';
             $j->status_penjadwalan_tinjauan = 3;
         }
-
+        $e->save();
         $j->save();
     
         

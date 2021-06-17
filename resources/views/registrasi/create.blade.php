@@ -142,9 +142,10 @@
                                         </div>
         
                                         <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'contact_person','label' => 'Contact Person *','required'=>true,'placeholder'=>'Contact Person','id'=>'contactPerson'])@endcomponent
-                                        </div>
+                                            <div class="row col-lg-6">
+                                                @component('components.inputtext',['name'=> 'contact_person','label' => 'Contact Person *','required'=>true,'placeholder'=>'Contact Person','id'=>'contactPerson'])@endcomponent
+                                            </div>
+                                            
                                         </div>
         
                                         <div class="wrapper col-lg-12">

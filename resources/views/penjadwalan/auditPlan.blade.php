@@ -84,11 +84,13 @@
                                                                 -
                                                             @else                                                            
                                                                 @foreach ($laporan2 as $val)
+                                                                @if(isset($val['rencana_audit_isian']))
                                                                     @if ($val['rencana_audit_isian'])
                                                                         <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/upload/AP/Isian/'.$val['rencana_audit_isian']) }}" download>Rencana Audit Isian</a>
                                                                     @else		
                                                                     -																
-                                                                    @endif																			
+                                                                    @endif		
+                                                                @endif																	
                                                                 @endforeach									
                                                             @endif
                                                         </td>                                                        

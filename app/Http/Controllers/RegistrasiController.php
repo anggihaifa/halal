@@ -2076,7 +2076,7 @@ class RegistrasiController extends Controller
                     
                     if(isset($dataLengkap[0])){
                         // dd($dataLengkap[0]);
-                        dd("masuk");
+                        //dd("masuk");
                         $e->status_has = 0;
                     }else{
                         dd("masuk");
@@ -2448,7 +2448,7 @@ class RegistrasiController extends Controller
 
                     
                    
-                    if($data['catatan_akhir audit1']){
+                    if($data['catatan_akhir_audit1']){
                         //$e->status_memenuhi = $data['status_memenuhi'];
                         $e->status_laporan_audit1 = 3;
                         //$e->catatan_akhir_audit = $data['catatan_akhir_audit'];
@@ -2552,7 +2552,7 @@ class RegistrasiController extends Controller
                         // dd($newDateTime);
     
                         $fileName = $e->id_registrasi.'_'.$f->id_penjadwalan.'_Laporan Audit 1_'.$f->nama_perusahaan.'.docx';
-                        $e->file_laporan_audt= $fileName ;
+                        $e->file_laporan_audit1= $fileName ;
                         $templateProcessor->saveAs("storage/laporan/download/Laporan Audit1/".$fileName);
                         
                         $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
