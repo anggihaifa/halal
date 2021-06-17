@@ -995,7 +995,8 @@ class PenjadwalanController extends Controller
             $j->status_penjadwalan_audit2 = 1;
             $j->pelaksana1_audit2 = $data['pelaksana1_audit2'];
             $j->pelaksana2_audit2 = $data['pelaksana2_audit2'];
-
+            $e->status= '9_1';
+            $e->save();  
 
             $j->save();
         }else{
@@ -1009,6 +1010,7 @@ class PenjadwalanController extends Controller
                
             $model2->save();
             $e->id_penjadwalan = $model2->id;
+            $e->status= '9_1';
             $e->save();  
            
             
@@ -1072,8 +1074,9 @@ class PenjadwalanController extends Controller
             $j->status_penjadwalan_tr = 1;
             $j->pelaksana1_tr = $data['pelaksana1_tr'];
             $j->pelaksana2_tr = $data['pelaksana2_tr'];
+            $e->status = '11_1';
 
-
+            $e->save();
             $j->save();
         }else{
            //dd($data['mulai_audit1']);
@@ -1085,6 +1088,7 @@ class PenjadwalanController extends Controller
             $model2->id_registrasi = $data['idregis3'];
                
             $model2->save();
+            $e->status = '11_1';
             $e->id_penjadwalan = $model2->id;
             $e->save();  
            
