@@ -295,6 +295,19 @@
                                                             @if (isset($kt))
                                                                 @foreach ($kt as $val2)
                                                                     <p style="font-size: 9px;">Ketidaksesuaian : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>
+
+                                                                    {{-- <form action="{{route('downloadchecklisttahap2')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                                                                        @csrf
+                                                                        <div class="wrapper col-lg-12" style="display: none">
+                                                                            @foreach($dataRegistrasi as $index => $value)
+                                                                                @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
+                                                                                @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
+                                                                            @endforeach                        
+                                                                        </div>                                                                                                                                
+                                                                        <button type="submit" class="btn btn-sm btn-info" style="font-size: 9px;">Lanjut ke tahapan Technical Review</button>
+                                                                    </form> --}}
+
+                                                                    <a href="{{url('update_status_audit_tahap2')}}/{{$value->id}}/11/{{Auth::user()->name }}" class="btn btn-sm btn-info" style="font-size: 9px;">Lanjut ke tahapan Technical Review</a>
                                                                 @endforeach
                                                             @else
                                                             -

@@ -11048,11 +11048,11 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                     ->get();
                     // dd($dataKT);
                     
-                        $model2 = new LaporanAudit2;                
-                        $f = $model2->find($dataLaporan[0]->id);
-                        $f->ketidaksesuaian_isian = $fileName;                
-                        $f->save();
-                        DB::Commit();
+                        // $model2 = new LaporanAudit2;                
+                        // $f = $model2->find($dataLaporan[0]->id);
+                        // $f->ketidaksesuaian_isian = $fileName;                
+                        // $f->save();
+                        // DB::Commit();                        
 
                 $modelkt = new KetidakSesuaian;
                 $kt = $modelkt->find($dataKT[0]->id);
@@ -11075,11 +11075,22 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                     ->get();
                     // dd($dataKT);
                     
+                        // $model2 = new LaporanAudit2;                
+                        // $f = $model2->find($dataLaporan[0]->id);
+                        // $f->ketidaksesuaian_isian = $fileName;                
+                        // $f->save();
+                        // DB::Commit();
+
                         $model2 = new LaporanAudit2;                
                         $f = $model2->find($dataLaporan[0]->id);
-                        $f->ketidaksesuaian_isian = $fileName;                
+                        $f->status = 1;
                         $f->save();
                         DB::Commit();
+
+                        $modelReg = new Registrasi;
+                        $x = $modelReg->find($data['idregis']);
+                        $x->status = 11;
+                        $x->save();
 
                 $modelkt = new KetidakSesuaian;
                 $kt = $modelkt->find($dataKT[0]->id);
