@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Registrasi Halal')
+@section('title', 'Penjadwalan Reviewer')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -15,18 +15,18 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Registrasi Halal</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Registrasi Aktif</a></li>
+        <li class="breadcrumb-item"><a href="#">Penjadwalan Reviewe</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Penjadwalan Reviewe</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Registrasi Halal  <small></small></h1>
+    <h1 class="page-header">List Penjadwalan Reviewe<small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Registrasi Halal</h4>
+            <h4 class="panel-title">List Penjadwalan Reviewer</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -390,7 +390,7 @@
                 '</tr>'+
                 '<tr>'+
                     '<td class="valign-middle text-center">3</td>'+
-                    '<td class="valign-middle text-center">Rapat Auditor</td>'+
+                    '<td class="valign-middle text-center">Tehnical Review</td>'+
                     '<td class="valign-middle text-center">-</td>'+
                     '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'</td>'+    
                     '<td class="valign-middle text-center" >'+d.pelaksana2_tr+'</td>'+ 

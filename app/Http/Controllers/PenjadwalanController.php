@@ -38,6 +38,8 @@ use App\Models\UnggahData\unggahDataSertifikasi;
 use App\Models\UnggahData\KantorPusat;
 use App\Models\UnggahData\MenuRestoran;
 use App\Models\UnggahData\Jagal;
+use App\Models\LaporanTehnicalReview;
+use App\Models\LaporanTinjauan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -1161,8 +1163,9 @@ class PenjadwalanController extends Controller
             $j->pelaksana1_tinjauan = $data['pelaksana1_tinjauan'];
             $j->pelaksana2_tinjauan = $data['pelaksana2_tinjauan'];
 
-
+            $e->status = '13_1';
             $j->save();
+            $e->save();
         }else{
            //dd($data['mulai_audit1']);
             //$model2->mulai_tinjauan = $data['mulai_tinjauan'];
@@ -1173,6 +1176,7 @@ class PenjadwalanController extends Controller
             $model2->id_registrasi = $data['idregis4'];
                
             $model2->save();
+            $e->status = '13_1';
             $e->id_penjadwalan = $model2->id;
             $e->save();  
            
@@ -1392,19 +1396,42 @@ class PenjadwalanController extends Controller
              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
+             ->leftjoin('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
+             ->leftjoin('laporan_audit2','registrasi.id_laporan_audit2','=','laporan_audit2.id')
+             ->leftjoin('laporan_tehnical_review','registrasi.id_tehnical_review','=','laporan_tehnical_review.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=',12)  ;  
                 $query->where('penjadwalan.pelaksana1_tr','LIKE','%'.$id_user.'%');
   
             })    
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_12_0')  ;
+                $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_12_1')  ;
+                $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_12_2')  ;
+                $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_12_3')  ;
                 $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
   
             })  
                      
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.catatan_tr', 'laporan_tehnical_review.status_laporan_tr', 'laporan_tehnical_review.status_lanjut_ks');
        
 
         //filter condition
@@ -1445,19 +1472,43 @@ class PenjadwalanController extends Controller
              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
+             ->leftjoin('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
+             ->leftjoin('laporan_audit2','registrasi.id_laporan_audit2','=','laporan_audit2.id')
+             ->leftjoin('laporan_tehnical_review','registrasi.id_tehnical_review','=','laporan_tehnical_review.id')
+             ->leftjoin('laporan_tinjauan','registrasi.id_tinjauan_komite','=','laporan_tinjauan.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=',14)  ;  
                 $query->where('penjadwalan.pelaksana1_tinjauan','LIKE','%'.$id_user.'%');
   
             })    
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_14_0')  ;
                 $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
   
             })  
-                  
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_14_1')  ;
+                $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_14_2')  ;
+                $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_14_3')  ;
+                $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
+  
+            })  
+                     
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan');
        
 
         //filter condition
@@ -1683,6 +1734,237 @@ class PenjadwalanController extends Controller
         
         return view('penjadwalan.uploadKsb', compact('data','id_user','id_regis','laporan2'));
              
+    }
+
+    public function storeLaporanTR(Request $request)
+    {
+
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model4 = new LaporanTehnicalReview;
+        $model3 = new User;
+
+        $e = $model->find($data['id']);
+        $j = $model4->find($e->id_tehnical_review);
+        $u = $model3->find($e->id_user);
+
+        if($j){
+
+            if($data['status_laporan_tr']== '1'){
+                $j->status_laporan_tr = 1;
+                
+                if($data['status_lanjut_ks']=='0'){
+                    $e->status = 15;
+                }else if($data['status_lanjut_ks']=='1'){
+                    $e->status = 13;
+    
+                }
+               
+                //dd("masuk");
+            }else if($data['status_laporan_tr']== '0'){
+                $j->status_laporan_tr = 2;
+                $e->status = '10_2';
+            }
+    
+            if($request->has("file_laporan_tr")){
+                $file = $request->file("file_laporan_tr");
+                $file = $data["file_laporan_tr"];
+               
+                $filename = "TR-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/laporan/upload/Laporan Tehnical Review/".$u->id."/", $filename);
+                $j->file_laporan_tr = $filename;
+                   
+            }
+            $j->id_registrasi = $e->id;
+            $j->catatan_tr = $data['catatan_tr'];
+            $j->status_lanjut_ks = $data['status_lanjut_ks'];
+            $e->save();
+            $j->save();
+
+        }else{
+
+            if($data['status_laporan_tr']== '1'){
+                $model4->status_laporan_tr = 1;
+                
+                if($data['status_lanjut_ks']=='0'){
+                    $e->status = 15;
+                }else if($data['status_lanjut_ks']=='1'){
+                    $e->status = 13;
+    
+                }
+               
+                //dd("masuk");
+            }else if($data['status_laporan_tr']== '0'){
+                $model4->status_laporan_tr = 2;
+                $e->status = '10_2';
+            }
+    
+            if($request->has("file_laporan_tr")){
+                $file = $request->file("file_laporan_tr");
+                $file = $data["file_laporan_tr"];
+               
+                $filename = "TR-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/laporan/upload/Laporan Tehnical Review/".$u->id."/", $filename);
+                $model4->file_laporan_tr = $filename;
+                   
+            }
+            $model4->catatan_tr = $data['catatan_tr'];
+            $model4->status_lanjut_ks = $data['status_lanjut_ks'];
+            $model4->id_registrasi = $e->id;
+            $model4->save();
+            $e->id_tehnical_review = $model4->id;      
+            $e->save();
+            
+
+        }
+
+        try{
+            DB::Commit();
+
+            // if($data['pelaksana1_audit1']){
+            //     $str =  explode("_",$data['pelaksana1_audit1']);
+            //     $u = $model3->find($str[0]);
+            
+            //     SendEmailAuditor::dispatch($u,$e,$j,'audit1');
+
+            // }if($data['pelaksana2_audit1']){
+
+            //     $str2 =  explode("_",$data['pelaksana2_audit1']);
+            //     $u2 = $model3->find($str2[0]);
+                
+            //     SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
+            // }
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('listtehnicalreview');
+
+
+        return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('listtehnicalreview');
+            return $redirectPass;
+        }
+
+    }
+
+    public function storeLaporanKS(Request $request)
+    {
+
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model4 = new LaporanTinjauan;
+        $model3 = new User;
+
+        $e = $model->find($data['id']);
+        $j = $model4->find($e->id_tinjauan_komite);
+        $u = $model3->find($e->id_user);
+
+        if($j){
+
+            if($data['status_laporan_tinjauan']== '1'){
+                $j->status_laporan_tinjauan = 1;
+                $e->status = 15;
+                
+            
+                //dd("masuk");
+            }else if($data['status_laporan_tinjauan']== '0'){
+                $j->status_laporan_tinjauan = 0 ;
+                $e->status = '10_2';
+            }
+    
+            if($request->has("file_laporan_tinjauan")){
+                $file = $request->file("file_laporan_tinjauan");
+                $file = $data["file_laporan_tinjauan"];
+            
+                $filename = "KS-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/laporan/upload/Laporan Tinjauan Komite/".$u->id."/", $filename);
+                $j->file_laporan_tinjauan = $filename;
+                
+            }
+            $j->id_registrasi = $e->id;
+            $j->catatan_tinjauan = $data['catatan_tinjauan'];
+            $e->save();
+            $j->save();
+
+        }else{
+
+            if($data['status_laporan_tinjauan']== '1'){
+                $model4->status_laporan_tinjauan = 1;
+                $e->status = 15;
+                
+            
+                //dd("masuk");
+            }else if($data['status_laporan_tinjauan']== '0'){
+                $model4->status_laporan_tinjauan = 0 ;
+                $e->status = '10_2';
+            }
+    
+            if($request->has("file_laporan_tinjauan")){
+                $file = $request->file("file_laporan_tinjauan");
+                $file = $data["file_laporan_tinjauan"];
+            
+                $filename = "KS-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/laporan/upload/Laporan Tinjauan Komite/".$u->id."/", $filename);
+                $model4->file_laporan_tinjauan = $filename;
+                
+            }
+            $model4->id_registrasi = $e->id;
+            $model4->catatan_tinjauan = $data['catatan_tinjauan'];
+            $model4->save();
+            $e->id_tinjauan_komite = $model4->id; 
+            $e->save();
+            
+            
+
+        }
+            
+        try{
+            DB::Commit();
+
+            // if($data['pelaksana1_audit1']){
+            //     $str =  explode("_",$data['pelaksana1_audit1']);
+            //     $u = $model3->find($str[0]);
+            
+            //     SendEmailAuditor::dispatch($u,$e,$j,'audit1');
+
+            // }if($data['pelaksana2_audit1']){
+
+            //     $str2 =  explode("_",$data['pelaksana2_audit1']);
+            //     $u2 = $model3->find($str2[0]);
+                
+            //     SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
+            // }
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('listtinjauan');
+
+
+        return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('listtinjauan');
+            return $redirectPass;
+        }
+
     }
     
 

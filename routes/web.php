@@ -281,6 +281,11 @@ Route::get('unggah_dokumen_audit_tahap1','RegistrasiController@unggahDokumenAudi
 Route::get('audit_tahap1/{id_registrasi}','RegistrasiController@auditTahap1')->name('audittahap1')->middleware('role:1,2,3,6,9,10,11,12,13');
 Route::put('update_status_audit_tahap1/{id}','RegistrasiController@updateStatusAuditTahap1')->name('updatestatusaudittahap1')->middleware('role:1,2,3,6,9,10,11,12,13');
 
+//tehnicalreview
+//auditor
+Route::put('store_laporan_tr','PenjadwalanController@storeLaporanTR')->name('storelaporantr');
+Route::put('store_laporan_ks','PenjadwalanController@storeLaporanKS')->name('storelaporanks');
+
 // Route::get('data_fasilitas/{id_registrasi}','RegistrasiController@dataFasilitas');
 // Route::get('data_produk/{id_registrasi}','RegistrasiController@dataProduk');
 // Route::get('data_kantor_pusat/{id_registrasi}','RegistrasiController@dataKantorPusat');

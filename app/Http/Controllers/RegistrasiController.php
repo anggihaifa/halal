@@ -125,24 +125,24 @@ class RegistrasiController extends Controller
         $dataJenis = JenisRegistrasi::all();
         // $curl = curl_init();
 
-        // curl_setopt_array($curl, array(
-        //   CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-        //   CURLOPT_RETURNTRANSFER => true,
-        //   CURLOPT_ENCODING => '',
-        //   CURLOPT_MAXREDIRS => 10,
-        //   CURLOPT_TIMEOUT => 0,
-        //   CURLOPT_FOLLOWLOCATION => true,
-        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //   CURLOPT_CUSTOMREQUEST => 'POST',
-        // ));
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
 
-        // $response = curl_exec($curl);   
-        // curl_close($curl);
+        $response = curl_exec($curl);   
+        curl_close($curl);
 
-        // $response = json_decode($response);
-        // $cabang = $response->data;
+        $response = json_decode($response);
+        $cabang = $response->data;
 
-        $cabang = null;
+        //$cabang = null;
 
 
         $kw = DB::table('registrasi')
@@ -4373,24 +4373,24 @@ class RegistrasiController extends Controller
         $dataJenis = JenisRegistrasi::all();
         $curl = curl_init();
 
-        // curl_setopt_array($curl, array(
-        //   CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-        //   CURLOPT_RETURNTRANSFER => true,
-        //   CURLOPT_ENCODING => '',
-        //   CURLOPT_MAXREDIRS => 10,
-        //   CURLOPT_TIMEOUT => 0,
-        //   CURLOPT_FOLLOWLOCATION => true,
-        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //   CURLOPT_CUSTOMREQUEST => 'POST',
-        // ));
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
 
-        // $response = curl_exec($curl);   
-        // curl_close($curl);
+        $response = curl_exec($curl);   
+        curl_close($curl);
 
-        // $response = json_decode($response);
-        // $cabang = $response->data;
+        $response = json_decode($response);
+        $cabang = $response->data;
 
-        $cabang = null;
+        //$cabang = null;
 
 
         $kw = DB::table('registrasi')

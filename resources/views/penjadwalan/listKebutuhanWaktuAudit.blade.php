@@ -131,22 +131,22 @@
 
                             <!-- Multiple Radios (inline) -->
                             <div class="form-group">
-                                <label class="control-label" for="status_registrasi">Jenis Registrasi</label>
+                                <label class="control-label" for="status_registrasi">Status Sertifikasi</label>
                                 <div>
                                     <div class="form-check form-check-inline"> 
                                         <label class="form-check-label" for="jenis_registrasi-0">
-                                            <input class="form-check-input" name="status_registrasi" type="radio"  id="status_registrasi-0" value="permohonan Baru" readonly>Permohonan Baru
+                                            <input class="form-check-input" name="status_registrasi" type="radio"  id="status_registrasi-0" value="baru" readonly>Baru
                                         </label> 
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="jenis_registrasi-1">
-                                            <input class="form-check-input" name="status_registrasi" type="radio" " id="status_registrasi-1" value="pembaruan" readonly>Pembaruan
+                                            <input class="form-check-input" name="status_registrasi" type="radio" " id="status_registrasi-1" value="perpanjangan" readonly>Perpanjangan
                                         </label> 
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="jenis_registrasi-2">
-                                            <input class="form-check-input" name="status_registrasi" type="radio"  id="status_registrasi-2" value="perluasan" readonly>Perluasan
+                                            <input class="form-check-input" name="status_registrasi" type="radio"  id="status_registrasi-2" value="perubahan" readonly>Perubahan
                                         </label>
                                     </div>
                                 </div>
@@ -588,11 +588,11 @@
                     modal.find('#idregis1').val(data_id);
                     modal.find('#no_registrasi_bpjph').val(no_registrasi_bpjph);
                     //$("input[name=mygroup][value=" + value + "]").attr('checked', 'checked');
-                    if(status_registrasi == 'permohonan baru'){
+                    if(status_registrasi == 'baru'){
                         modal.find('#status_registrasi-0').attr('checked', 'checked');
-                    }else if(status_registrasi == 'pembaruan'){
+                    }else if(status_registrasi == 'perpanjangan'){
                         modal.find('#status_registrasi-1').attr('checked', 'checked');
-                    }else if(status_registrasi == 'perluasan'){
+                    }else if(status_registrasi == 'perubahan'){
                         modal.find('#status_registrasi-2').attr('checked', 'checked');
                     }
                 

@@ -272,13 +272,13 @@ function checkProgress(data){
             :(data.trim()=='12_0')? 'Reviewer Belum Upload Review Laporan Audit'
             :(data.trim()=='12_1')? 'Proses Tehnical Review Selesai'
 
-            :(data==13)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Persiapan Audit Tahap1</a>'
+            :(data==13)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Persiapan Komite Sertifikasi</a>'
             :(data.trim()=='13_0')? 'Belum Dijadwalkan'
             :(data.trim()=='13_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
             :(data.trim()=='13_2')? 'Perbaikan Penjadwalan'
             :(data.trim()=='13_3')? 'Penjadwalan Terkonfirmasi'
 
-            :(data==14_0)? 'Proses Komite Sertifikasi'
+            :(data==14)? 'Proses Komite Sertifikasi'
             :(data.trim()=='14_0')? 'Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit'
             :(data.trim()=='14_1')? 'Proses Komite Sertifkasi Selesai'
 

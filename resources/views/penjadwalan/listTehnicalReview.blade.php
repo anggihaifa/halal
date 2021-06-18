@@ -132,14 +132,15 @@
             <table id="table" class="table table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%">
                 <thead class="thead-light">
                     <tr>
-                        <th class="text-nowrap valign-middle text-center">No</th>      
-                        <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
-                        <th class="text-nowrap valign-middle text-center">Perusahaan</th>
-                        <th class="text-nowrap valign-middle text-center">Jenis Produk</th>
-                        <th class="text-nowrap valign-middle text-center">Auditor 1</th>
-                        <th class="text-nowrap valign-middle text-center">Auditor 2</th>
+                        <th class="valign-middle text-center">No</th>      
+                        <th class="valign-middle text-center">No. Registrasi</th>
+                        <th class="valign-middle text-center">Perusahaan</th>
+                        <th class="valign-middle text-center">Jenis Produk</th>
+                        <th class="valign-middle text-center" style="max-width:20%">Auditor 1</th>
+                        <th class="valign-middle text-center" style="max-width:20%">Auditor 2</th>
+                        <th class="valign-middle text-center" >Unduh</th>
                         
-                        <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th class="valign-middle text-center" style="max-width:20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                 </thead>
             </table>
@@ -147,6 +148,137 @@
         <!-- end panel-body -->
 
     </div>
+
+    <div id="modaltr" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <form action="{{route('storelaporantr')}}" method="post"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Review Laporan Audit</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">
+                        
+
+                        <div>
+                            <table class="table  table-sm table-borderless border-none">
+                            
+                                <thead class="table-success">   
+                                <th >Upload File</th>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class="control-label font-weight-bold" for="id">ID</label>  
+                                            <div >
+                                                <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly>
+                                            
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class=" control-label font-weight-bold" for="id">Review Laporan Audit</label>  
+                                            <div >
+                                                <input id="file_laporan_tr"  name="file_laporan_tr" type="file" placeholder="" >
+                                            
+                                            </div>
+                                            </div
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                                
+                        </div>
+
+                        <div>
+                            <table class="table  table-sm table-borderless border-none">
+                            
+                                <thead class="table-success">   
+                                <th >Hasil Tehnical Review Review</th>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class=" control-label font-weight-bold" for="id">Catatan Tehnical Review</label>  
+                                                <div >
+                                                    <input type="text" id="catatan_tr" class="form-control"  name="catatan_tr" placeholder="" >
+                                                
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class=" control-label font-weight-bold" for="id">Hasil</label>  
+                                            <select id="status_laporan_tr" name="status_laporan_tr" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" readonly>
+                                                <option value="">==Pilih==</option>
+                                                <option value="1">Laporan Audit Dapat Dilanjutkan Ke Tahapan Bertikutnya</option>
+                                                <option value="0">Laporan Audit Harus Diperbaiki Sesuai Catatan</option>                                                               
+                                            </select>
+                                            </div
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                                
+                        </div>
+
+                    <div>
+                        <table class="table  table-sm">
+                        
+                            <thead class="table-success">   
+                            <th >Apakah Membutuhkan Tahapan Komite Sertifikasi ?</th>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select id="status_lanjut_ks" name="status_lanjut_ks" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" readonly>
+                                            <option value="">==Pilih==</option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak, Lanjutkan Ke Tahapan Persiapan Sidang Komisi Fatwa</option>                                                               
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                            
+                    </div>
+
+                      
+                    </div>
+                 
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Submit</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+           
+            
+        </div>
+    </div>   
+
      <!-- end panel -->
 
     
@@ -163,6 +295,52 @@
 
     
     <script>
+        window.addEventListener('load', (event) => {
+            $('#modaltr').find('form').trigger('reset');
+            
+        });
+
+        $('#modaltr').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+    
+        
+        })
+
+         $('#modaltr').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var id = $this.data('id');
+            var status_laporan_tr = $this.data('status-laporan-tr');
+            var catatan_tr = $this.data('catatan-tr');
+            var status_lanjut_ks = $this.data('status-lanjut-ks');
+
+            var modal = $('#modaltr');
+           
+          
+            if(modal.find('#id').val()){
+               
+            }else{
+
+               
+                modal.find('#id').val(id);
+
+                modal.find('#status_laporan_tr').val(status_laporan_tr).change();   
+                modal.find('#status_lanjut_ks').val(status_lanjut_ks).change();   
+                //alert(total);
+                modal.find('#catatan_tr').val(catatan_tr);        
+               
+               
+                  
+                modal.find('#modaltr').attr('action', function (i,old) {
+                   return old + '/' + data_id;
+            });  
+            }
+           
+
+        });
 
 
 
@@ -248,23 +426,44 @@
 
                             if(full.file_laporan_audit1 ){
 
-                                var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Audit Tahap 1&nbsp;&nbsp;</a>`;
+                                var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
 
                                                                             
                                 }else{
-                                var unduhLaporan1 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Audit Tahap 1&nbsp;&nbsp;</a>`;
+                                var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit1&nbsp;&nbsp;</a>`;
 
                                 }
 
                             if(full.file_laporan_audit_tahap_2 ){
 
-                                var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Audit Tahap 2&nbsp;&nbsp;</a>`;
+                                var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
                                
                                                                              
                             }else{
-                                var unduhLaporan2 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Audit Tahap 2&nbsp;&nbsp;</a>`;
+                                var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
                                
                             }
+
+                            if(full.file_bap ){
+
+                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/download/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+
+                                                                            
+                            }else{
+                                var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+
+                            }
+                            if(full.file_laporan_ketidaksesuaian ){
+
+                                var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+
+                                                                            
+                                }else{
+                                var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+
+                            }
+
+                            var unduhDPR = `<a href="{{ url('').Storage::url('public/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi.docx') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Daftar Periksa&nbsp;&nbsp;</a>`;
 
                             // if(full.status_dpra == '0'){
 
@@ -276,20 +475,54 @@
 
                             // }
 
-                            return `<table class="table-xs table-borderless">
-                                        <tr>
-                                            <td>
+                            return `<table class="table-xs table-borderless p-0 m-0">
+                                        <tr class="text-center align-midle">
+                                            <td class="text-center align-midle">
                                                `+unduhLaporan1+`
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
+                                        <tr class="text-center align-midle">
+                                            <td class="text-center align-midle">
                                                 `+unduhLaporan2+`
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Rekomendasi Audit</button>
+                                        <tr class="text-center align-midle">
+                                            <td class="text-center align-midle">
+                                                `+unduhBAP+`
+                                            </td>
+                                        </tr>
+                                        <tr class="text-center align-midle">
+                                            <td class="text-center align-midle">
+                                                `+unduhTS+`
+                                            </td>
+                                        </tr>
+                                        <tr class="text-center align-midle">
+                                            <td class="text-center align-midle">
+                                                `+unduhDPR+`
+                                            </td>
+                                        </tr>
+                                      
+                                    </table>`
+                                       
+                           
+                        }
+                    },
+                    {
+                        "data":null,
+                        "searchable":false,
+                        "orderable":false,
+                        "render":function (data,type,full,meta) {
+
+                            //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+
+                            //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
+
+                           
+
+                            return `<table class="table-xs table-borderless text-center">
+                                        <tr class="text-center align-midle">
+                                            <td class="text-center">
+                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan-tr='`+full.catatan_tr+`' data-status-laporan-tr='`+full.status_laporan_tr+`' data-status-lanjut-ks='`+full.status_lanjut_ks+`' data-target='#modaltr' > Upload Review Laporan Audit</button>
                                             </td>
                                         </tr>
                                     </table>`
@@ -300,7 +533,7 @@
                 ],
                 'columnDefs': [
                 {
-                      "targets": [0,1,2,3,4,5],
+                      "targets": [0,1,2,3,4,5,6,7],
                       "className": "text-center",
                      
                 }],
