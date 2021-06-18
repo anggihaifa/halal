@@ -14,6 +14,7 @@ use App\RegistrasiDataSDM;
 use App\RegistrasiLokasiLain;
 use App\RegistrasiKU;
 use App\RegistrasiJasa;
+use App\Ketidaksesuaian;
 use App\RegistrasiJumlahProduksi;
 use App\DetailKU;
 use App\LogKegiatan;
@@ -656,7 +657,7 @@ class RegistrasiController extends Controller
                 $model->jenis_produk = $data['id_kelompok_produk'];
                 $model->rincian_jenis_produk = implode(',',$data['id_rincian_kelompok_produk']);
                 $model->daerah_pemasaran = $data['daerah_pemasaran'];
-                $model->sistem_pemasaran = $data['sistem_pemasaran'];
+                // $model->sistem_pemasaran = $data['sistem_pemasaran'];
                 $model->no_registrasi_bpjph = $data['no_registrasi_bpjph'];
                 $no_registrasi_bpjph = $data['no_registrasi_bpjph'];
                 $kd_wilayah = explode('-',$no_registrasi_bpjph);
@@ -2478,6 +2479,53 @@ class RegistrasiController extends Controller
                         $phpWord = new \PhpOffice\PhpWord\PhpWord();
             
                         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-05 Laporan Audit Tahap I Isian.docx');
+
+                        if($data['skema_audit'] == 'sjh'){            
+                            $templateProcessor->setValue('sjh', 'SJH');
+                
+                            $inline = new TextRun();
+                            $inline->addText('SJPH', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('sjph', $inline);
+                                    
+                        }else if($data['skema_audit'] == 'sjph'){
+                            $templateProcessor->setValue('sjph', 'SJPH');
+                
+                            $inline = new TextRun();
+                            $inline->addText('SJH', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('sjh', $inline);            
+                        }
+
+                        if($data['status_sertifikasi'] == 'baru'){
+                            $templateProcessor->setValue('baru', 'Baru');
+                
+                            $inline = new TextRun();
+                            $inline->addText('Perpanjangan', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('perpanjangan', $inline);
+                
+                            $inline2 = new TextRun();
+                            $inline2->addText('Perubahan', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('perubahan', $inline2);            
+                        }else if($data['status_sertifikasi'] == 'perpanjangan'){            
+                            $templateProcessor->setValue('perpanjangan', 'Perpanjangan');            
+                
+                            $inline = new TextRun();
+                            $inline->addText('Baru', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('baru', $inline);
+                
+                            $inline2 = new TextRun();
+                            $inline2->addText('Perubahan', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('perubahan', $inline2);                
+                        }else if($data['status_sertifikasi'] == 'perubahan'){            
+                            $templateProcessor->setValue('perubahan', 'Perubahan');
+                
+                            $inline = new TextRun();
+                            $inline->addText('Baru', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('baru', $inline);
+                
+                            $inline2 = new TextRun();
+                            $inline2->addText('Perpanjangan', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('perpanjangan', $inline2);            
+                        }
     
                         $templateProcessor->setValue('nama_organisasi', $f->nama_perusahaan);
                         $templateProcessor->setValue('no_id_bpjph', $f->nomor_registrasi_bpjph);
@@ -3789,11 +3837,32 @@ class RegistrasiController extends Controller
         return view('registrasi.uploadOCUser',compact('data','dataTransfer','dataTunai'));
     }
 
+    public function updateStatusAuditTahap2($id,$status,$user,$id_kt){
+        // dd($id_kt);
+        $model = new Registrasi();
+        DB::beginTransaction();
+        $e = $model->find($id);
+        $e->status = $status;
+        $e->updated_status_by = $user;
+        $e->save();
+        DB::commit();
+
+        $model2 = new Ketidaksesuaian();
+        DB::beginTransaction();
+        $f = $model2->find($id_kt);
+        $f->status = 'close';
+        $f->save();
+        DB::commit();
+
+        Session::flash('success', 'Status berhasil di update, silahkan lanjut ke Persiapan Technical Reviewer');
+        return redirect()->back();
+    }
+
      public function updateStatusAkad($id,$no_registrasi,$id_user,$status){
         
         $updater = Auth::user()->name;
 
-         $model = new Registrasi();
+        $model = new Registrasi();
         $model2 = new User();
         $model3 = new Pembayaran();
 

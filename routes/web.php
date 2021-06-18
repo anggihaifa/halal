@@ -130,6 +130,8 @@ Route::put('update_status_kurang/{id}','RegistrasiController@updateStatusKurang'
 
 Route::get('update_status_pembayaran_tahap2/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPembayaranTahap2')->middleware('role:1,3,5,7,9');
 
+Route::get('update_status_audit_tahap2/{id}/{status}/{user}/{id_kt}','RegistrasiController@updateStatusAuditTahap2')->middleware('role:10,11,12');
+
 Route::get('update_status_akad/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusAkad')->middleware('role:1,3,5,7,9');
 Route::get('update_status_pelunasan/{id}/{no_registrasi}/{id_user}/{status}','RegistrasiController@updateStatusPelunasan')->middleware('role:1,3,5,7,9');
 //

@@ -1,9 +1,3 @@
-new Cleave('#no_registrasi_bpjph',{    
-    delimiter: '-',
-    blocks: [2,1,4,4],    
-    uppercase: true
-})
-
 new Cleave('.ktp',{    
     delimiter: '-',
     blocks: [16],

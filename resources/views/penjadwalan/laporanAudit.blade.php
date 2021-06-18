@@ -41,9 +41,9 @@
                         <li class="nav-item text-center">                        
                             <a class="nav-link active" data-toggle="tab" href="#card-tab-5">Form Audit Tahap 2</a>
                         </li>
-                        {{-- <li class="nav-item text-center">                        
+                        <li class="nav-item text-center">                        
                             <a class="nav-link" data-toggle="tab" href="#card-tab-7">Laporan Audit Tahap 2</a>
-                        </li> --}}
+                        </li>
                         <li class="nav-item text-center">      
                             <a class="nav-link" data-toggle="tab" href="#card-tab-6">Form Checklist Audit Tahap 2</a>
                         </li>
@@ -89,7 +89,17 @@
                                                             </form>
                                                         </td>
                                                         <td class="text-center">
-                                                            -
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['laporan_audit2_isian'])
+                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/upload/Laporan Audit Tahap 2/Isian/'.$val['laporan_audit2_isian']) }}" download>Laporan Audit 2 Isian</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
                                                         </td>                                                        
                                                         <td class="text-center">
                                                             @if (Auth::user()->usergroup_id == 10)
@@ -248,8 +258,14 @@
                                                             @endif
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)
-                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian' style="cursor:pointer">Upload Disini</a>
+                                                            @if (Auth::user()->usergroup_id == 10)                                                                
+                                                                @if (isset($kt))
+                                                                    @if (count($kt) == 0)
+                                                                        <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian2' style="cursor:pointer">Upload Disini</a>                                                                        
+                                                                    @else                                                                                                                                            
+                                                                        <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian' style="cursor:pointer">Upload Disini</a>
+                                                                    @endif
+                                                                @endif
                                                             @else
                                                                 -
                                                             @endif
@@ -284,28 +300,124 @@
                                                         <td class="text-center">
                                                             @if (isset($kt))
                                                                 @foreach ($kt as $val2)
-                                                                    <p style="font-size: 9px;">Ketidaksesuaian : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>
+                                                                    <p style="font-size: 9px;">Ketidaksesuaian : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>                                                                    
+                                                                    @if($val2['status'] == 'open')
+                                                                        <a href="{{url('update_status_audit_tahap2')}}/{{$value->id}}/11/{{Auth::user()->name }}/{{$val2['id']}}" class="btn btn-sm btn-info" style="font-size: 9px;">Lanjut ke tahapan Technical Review</a>
+                                                                    @endif
                                                                 @endforeach
                                                             @else
                                                             -
                                                             @endif
                                                         </td>
                                                     </tr> 
-                                                    {{-- <tr>
+                                                    <tr>
                                                         <td class="text-center">4</td>
                                                         <td class="text-center">Berita Acara Pemeriksaan</td>
-                                                        <td class="text-center">
-                                                            <form action="{{route('downloadberkas')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                                                @csrf																			
-                                                                    <div class="wrapper col-lg-12" style="display: none">
-                                                                    @component('components.inputtext',['name'=> 'no','label' => 'No','required'=>true,'placeholder'=>'No','readonly'=>true,'value'=>2])@endcomponent
-                                                                    @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                                                    @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Perusahaan','required'=>true,'placeholder'=>'Nama Perusahaan','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                                                    </div>
-                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Berita Acara Pemeriksaan</button>
-                                                            </form>
+                                                        <td class="text-center">                                                            
+                                                            -
                                                         </td>
                                                         <td class="text-center">
+                                                            -
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            @if (Auth::user()->usergroup_id == 10)
+                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalBAP' style="cursor:pointer">Upload Disini</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_bap'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/BAP/'.$val['file_bap']) }}" download>{{$val['file_bap']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_bap'] == null? "-" : $val['tgl_penyerahan_bap']}}
+                                                            @endforeach
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            -    
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">5</td>
+                                                        <td class="text-center">Konfirmasi Jadwal, Syarat & Ketentuan Audit</td>
+                                                        <td class="text-center">                                                            
+                                                            -
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{-- @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['ketidaksesuaian_isian'])
+                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/download/Laporan Ketidaksesuaian/Isian/'.$val['ketidaksesuaian_isian']) }}" download>Temuan Ketidaksesuaian Isian</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif --}}
+                                                            -
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_konfirmasi_sk_audit'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Konfirmasi SK Audit/'.$val['file_konfirmasi_sk_audit']) }}" download>{{$val['file_konfirmasi_sk_audit']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_konfirmasi_sk_audit'] == null? "-" : $val['tgl_penyerahan_konfirmasi_sk_audit']}}
+                                                            @endforeach
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">6</td>
+                                                        <td class="text-center">Surat Tugas</td>
+                                                        <td class="text-center">                                                            
+                                                            -
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
                                                             @if (count($laporan2) == 0)
                                                                 -
                                                             @else                                                            
@@ -319,40 +431,42 @@
                                                             @endif
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)
-                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian' style="cursor:pointer">Upload Disini</a>
-                                                            @else
-                                                                -
-                                                            @endif
+                                                            -
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td class="text-center" style="font-size: 9px;">
                                                             @if (count($laporan2) == 0)
                                                                 -
                                                             @else                                                            
                                                                 @foreach ($laporan2 as $val)
-                                                                    @if ($val['file_laporan_ketidaksesuaian'])
-                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/'.$val['file_laporan_ketidaksesuaian']) }}" download>{{$val['file_laporan_ketidaksesuaian']}}</a>                                                                        
+                                                                    @if ($val['file_surat_tugas'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Surat Tugas/'.$val['file_surat_tugas']) }}" download>{{$val['file_surat_tugas']}}</a>
                                                                     @else		
                                                                     -																
                                                                     @endif																			
                                                                 @endforeach									
                                                             @endif
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td class="text-center" style="font-size: 9px;">
                                                             @foreach ($laporan2 as $val)										
-                                                                {{$val['tgl_penyerahan_laporan_ketidaksesuaian'] == null? "-" : $val['tgl_penyerahan_laporan_ketidaksesuaian']}}
+                                                                {{$val['tgl_penyerahan_surat_tugas'] == null? "-" : $val['tgl_penyerahan_surat_tugas']}}
                                                             @endforeach
                                                         </td>
-                                                        <td class="text-center">
-                                                            @if (isset($kt))
-                                                                @foreach ($kt as $val2)
-                                                                    <p>Temuan : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>
-                                                                @endforeach
-                                                            @else
-                                                            -
-                                                            @endif
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
                                                         </td>
-                                                    </tr>  --}}
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                    </tr>
                                                     </table>                                                
                                             </div>
                                         </div>
@@ -4702,7 +4816,12 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'nama_organisasi','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
+                                            @component('components.inputtext',['name'=> 'nama_organisasi','label' => 'Nama Pelaku Usaha','required'=>true,'placeholder'=>'Nama Pelaku Usaha','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'nama_usaha','label' => 'Nama Usaha/Merk Dagang','required'=>true,'placeholder'=>'Nama Usaha','readonly'=>true,'value'=>$value->nama_merk_produk])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
@@ -4710,6 +4829,13 @@
                                             @component('components.inputtext',['name'=> 'alamat','label' => 'Alamat','required'=>true,'placeholder'=>'Alamat','readonly'=>true,'value'=>$value->alamat_perusahaan])@endcomponent
                                         </div>
                                     </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @foreach($dataPenjadwalan as $index => $value2)                                                
+                                                @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>false,'value'=>$value2->mulai_audit2])@endcomponent
+                                            @endforeach
+                                        </div>
+                                    </div>                                    
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
                                             @component('components.inputtext',['name'=> 'tujuan_audit','label' => 'Tujuan Audit','required'=>true,'placeholder'=>'Tujuan Audit'])@endcomponent
@@ -4722,7 +4848,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Jenis Produk & Kode Klasifikasi','required'=>true,'placeholder'=>'Jenis Produk & Kode Klasifikasi','readonly'=>true,'value'=>$value->rincian_jenis_produk])@endcomponent
+                                            @component('components.inputtext',['name'=> 'jenis_produk2','label' => 'Jenis Produk & Kode Klasifikasi','required'=>true,'placeholder'=>'Jenis Produk & Kode Klasifikasi','readonly'=>true,'value'=>$value->rincian_jenis_produk])@endcomponent
                                             <p><b>&nbsp;&nbsp;&nbsp;*) Khusus skema audit SJPH</b></p>
                                         </div>
                                     </div>
@@ -4738,19 +4864,19 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit1','label' => 'Tim Audit','required'=>true,'placeholder'=>'Tim Audit 1 (XX)'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'ketua_tim','label' => 'Ketua Tim Audit','required'=>true,'placeholder'=>'Ketua Tim (XX)'])@endcomponent
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit2','label' => '','required'=>true,'placeholder'=>'Tim Audit 2 (YY)'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit3','label' => '','required'=>true,'placeholder'=>'Tim Audit 3 (ZZ)'])@endcomponent
+                                            @component('components.inputtext',['name'=> 'tim_audit1','label' => 'Tim Audit','required'=>true,'placeholder'=>'Tim Audit 1 (YY)'])@endcomponent
                                         </div>
                                     </div>                                    
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['name'=> 'pimpinan_perusahaan','label' => 'Pimpinan Perusahaan','required'=>true,'placeholder'=>'Pimpinan Perusahaan'])@endcomponent
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
@@ -4795,7 +4921,7 @@
                                         <div class="row">
                                             <label class="col-lg-4 col-form-label">Flowchart/ Bagan Alir</label>
                                             <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="flowchart">
+                                                <input type="file" class="form-control" name="flowchart" accept="application/pdf,image/*">
                                             </div>
                                         </div>
                                     </div>
@@ -4823,36 +4949,27 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
+                                                    <label class="col-4 col-form-label">Fungsi</label><div class="col-lg-8"><div><input class="form-control" name="fungsi[]" type="text" label="Fungsi" placeholder="Fungsi"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
                                                     <label class="col-4 col-form-label">Alamat</label><div class="col-lg-8"><div><textarea class="form-control" name="alamat_fasilitas[]" label="Alamat Fasilitas" placeholder="Alamat Fasilitas"></textarea></div></div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Kota</label><div class="col-lg-8"><div><input class="form-control" name="kota_fasilitas[]" type="text" label="Kota Fasilitas" placeholder="Kota"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Negara</label><div class="col-lg-8"><div><input class="form-control" name="negara_fasilitas[]" type="text" label="Negara Fasilitas" placeholder="Negara"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
-                                <div class="panel-body panel-form">                                                                        
+                                <div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
                                             <div class="detail_kegiatan8" id="detail_kegiatan{{$value->id}}" style="width: 100%; background: #fff;"></div>
                                             <div class="col-md-12">
-                                                <a onClick="addDataKegiatan8({{$value->id}})" class="btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>                                                
+                                                <a onClick="addDataKegiatan8({{$value->id}})" class="btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
                                             </div>
                                         </div>
                                     </div>
@@ -4868,19 +4985,19 @@
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Foto Data Produk</label>
-                                            <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="foto_data_produk[]">
+                                        <div class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <label class="col-4 col-form-label">Nama Produk/Menu - Merk</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk" placeholder="Nama Produk"></div></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Nama Produk</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk" placeholder="Nama Produk"></div></div>
-                                                </div>
+                                        <div class="row">
+                                            <label class="col-lg-4 col-form-label">Foto Produk</label>
+                                            <div class="col-lg-8">
+                                                <input type="file" class="form-control" name="foto_data_produk[]">
                                             </div>
                                         </div>
                                     </div>                                    
@@ -4903,23 +5020,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">                                            
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <label class="col-4 col-form-label">Nama Pabrik</label><div class="col-lg-8"><div><input class="form-control" name="nama_pabrik[]" type="text" label="Nama Pabrik" placeholder="Nama Pabrik"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                </div>
-                                <div class="panel-body panel-form">                                                                        
+                                    </div>                                                                      
+                                </div>                                
+                                <div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <div class="detail_kegiatan9" id="detail_kegiatan9" style="width: 100%; background: #fff;"></div>
+                                            <div class="detail_kegiatan9" id="detail_kegiatan9{{$value->id}}" style="width: 100%; background: #fff;"></div>
                                             <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan9" class="tam_detail_kegiatan9 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
+                                                <a onClick="addDataKegiatan9({{$value->id}})" class="btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
                                             </div>
                                         </div>
                                     </div>
@@ -4933,20 +5041,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    {{-- <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-4 col-form-label">Foto Data Bahan</label>
-                                            <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="foto_data_bahan[]">
-                                            </div>
-                                        </div>
-                                    </div> --}}                                    
+                                    </div>                                    
                                     <div class="wrapper col-lg-12">
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Nama Bahan</label><div class="col-lg-8"><div><input class="form-control" name="nama_bahan[]" type="text" label="Nama Bahan" placeholder="Nama Bahan Bentuk/Warna/Rasa/Merk"></div></div>
+                                                    <label class="col-4 col-form-label">Nama Bahan Bentuk/Warna/Rasa/Merk</label><div class="col-lg-8"><div><input class="form-control" name="nama_bahan[]" type="text" label="Nama Bahan" placeholder="Nama Bahan Bentuk/Warna/Rasa/Merk"></div></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -4955,19 +5055,7 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Diragukan</label>
-                                                        <div class="col-lg-8"><div>
-                                                                <div style="margin-bottom:7px;">
-                                                                    <div class="radio radio-css radio-inline">
-                                                                        <input type="radio" name="rbdiragukan1[]" value="ya" id="diragukan1" checked/> 
-                                                                        <label for="diragukan1">Ya</label>
-                                                                    </div>                                                                                                                                
-                                                                    <div class="radio radio-css radio-inline">
-                                                                        <input type="radio" name="rbdiragukan1[]" value="tidak" id="tidak_diragukan1"/>
-                                                                        <label for="tidak_diragukan1">Tidak</label>
-                                                                    </div>
-                                                                </div>
-                                                        </div></div>                                                    
+                                                    <label class="col-4 col-form-label">Kategori</label><div class="col-lg-8"><div><input class="form-control" name="kategori[]" type="text" label="Kategori" placeholder="Kategori"></div></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -4976,7 +5064,7 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Temuan</label><div class="col-lg-8"><div><input class="form-control" name="temuan[]" type="text" label="Temuan" placeholder="Temuan"></div></div>
+                                                    <label class="col-4 col-form-label">Produsen</label><div class="col-lg-8"><div><input class="form-control" name="produsen[]" type="text" label="Produsen" placeholder="Produsen"></div></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -4985,7 +5073,7 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Keterangan</label><div class="col-lg-8"><div><input class="form-control" name="keterangan[]" type="text" label="Produsen" placeholder="Produsen"></div></div>
+                                                    <label class="col-4 col-form-label">Dokumen Pendukung</label><div class="col-lg-8"><div><input class="form-control" name="dokumen_pendukung[]" type="text" label="Dokumen Pendukung" placeholder="Dokumen Pendukung"></div></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -4994,22 +5082,22 @@
                                         <div class="row">                                            
                                             <div class="col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Komentar</label><div class="col-lg-8"><div><input class="form-control" name="komentar[]" type="text" label="Komentar" placeholder="Masa Berlaku"></div></div>
+                                                    <label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Komentar" placeholder="Masa Berlaku"></div></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>                                    
                                 </div>
-                                <div class="panel-body panel-form">                                                                        
+                                <div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <div class="detail_kegiatan10" id="detail_kegiatan10" style="width: 100%; background: #fff;"></div>
+                                            <div class="detail_kegiatan10" id="detail_kegiatan10{{$value->id}}" style="width: 100%; background: #fff;"></div>
                                             <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan10" class="tam_detail_kegiatan10 btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
+                                                <a onClick="addDataKegiatan10({{$value->id}})" class="btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>                                                             
                                 <table class="table table-striped table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%; ">
                                     <thead>
                                         <tr>                                                            
@@ -5093,9 +5181,26 @@
                                                 <td class="valign-middle">
                                                     <input name="cabahan" type="text" class="form-control" placeholder="Keterangan"/>
                                                 </td>                                                                                                
-                                            </tr>                                            
+                                            </tr>      
                                             <tr>
                                                 <td class="valign-middle text-center">5</td>
+                                                <td class="valign-middle">Produk</td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input type="radio" name="rbproduk" value="memenuhi"/>
+                                                    </div>
+                                                </td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input type="radio" name="rbproduk" value="tidak memenuhi"/>
+                                                    </div>
+                                                </td>                                                
+                                                <td class="valign-middle">
+                                                    <input name="caproduk" type="text" class="form-control" placeholder="Keterangan"/>
+                                                </td>                                                                                                
+                                            </tr>                                      
+                                            <tr>
+                                                <td class="valign-middle text-center">6</td>
                                                 <td class="valign-middle">Fasilitas Produksi</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -5112,7 +5217,7 @@
                                                 </td>                                                                                                
                                             </tr>
                                             <tr>
-                                                <td class="valign-middle text-center">6</td>
+                                                <td class="valign-middle text-center">7</td>
                                                 <td class="valign-middle">Prosedur Tertulis Untuk Aktifitas Kritis</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -5129,41 +5234,7 @@
                                                 </td>                                                                                                
                                             </tr>
                                             <tr>
-                                                <td class="valign-middle text-center">7</td>
-                                                <td class="valign-middle">Penanganan Produk Tidak Memenuhi Kriteria</td>
-                                                <td class="valign-middle text-center">
-                                                    <div class="radio">
-                                                        <input type="radio" name="rbpenangananproduk" value="memenuhi"/>
-                                                    </div>
-                                                </td>
-                                                <td class="valign-middle text-center">
-                                                    <div class="radio">
-                                                        <input type="radio" name="rbpenangananproduk" value="tidak memenuhi"/>
-                                                    </div>
-                                                </td>                                                
-                                                <td class="valign-middle">
-                                                    <input name="capenangananproduk" type="text" class="form-control" placeholder="Keterangan"/>
-                                                </td>                                                                                                
-                                            </tr>                                            
-                                            <tr>
                                                 <td class="valign-middle text-center">8</td>
-                                                <td class="valign-middle">Produk</td>
-                                                <td class="valign-middle text-center">
-                                                    <div class="radio">
-                                                        <input type="radio" name="rbproduk" value="memenuhi"/>
-                                                    </div>
-                                                </td>
-                                                <td class="valign-middle text-center">
-                                                    <div class="radio">
-                                                        <input type="radio" name="rbproduk" value="tidak memenuhi"/>
-                                                    </div>
-                                                </td>                                                
-                                                <td class="valign-middle">
-                                                    <input name="caproduk" type="text" class="form-control" placeholder="Keterangan"/>
-                                                </td>                                                                                                
-                                            </tr>
-                                            <tr>
-                                                <td class="valign-middle text-center">9</td>
                                                 <td class="valign-middle">Kemampuan Telusur</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -5178,7 +5249,24 @@
                                                 <td class="valign-middle">
                                                     <input name="cakemampuantelusur" type="text" class="form-control" placeholder="Keterangan"/>
                                                 </td>                                                                                                
-                                            </tr>                                            
+                                            </tr>  
+                                            <tr>
+                                                <td class="valign-middle text-center">9</td>
+                                                <td class="valign-middle">Penanganan Produk Tidak Memenuhi Kriteria</td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input type="radio" name="rbpenangananproduk" value="memenuhi"/>
+                                                    </div>
+                                                </td>
+                                                <td class="valign-middle text-center">
+                                                    <div class="radio">
+                                                        <input type="radio" name="rbpenangananproduk" value="tidak memenuhi"/>
+                                                    </div>
+                                                </td>                                                
+                                                <td class="valign-middle">
+                                                    <input name="capenangananproduk" type="text" class="form-control" placeholder="Keterangan"/>
+                                                </td>                                                                                                
+                                            </tr>                                                                                      
                                             <tr>
                                                 <td class="valign-middle text-center">10</td>
                                                 <td class="valign-middle">Audit Internal</td>
@@ -5872,6 +5960,88 @@
             </form>
         </div>
     </div>
+
+    <div id="modalKetidaksesuaian2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Laporan Ketidaksesuaian</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="4" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_ketidaksesuaian2" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
+
+    <div id="modalBAP" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Berita Acara Pemeriksaan</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="4" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_bap" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
     
 @endsection
 @push('scripts')
@@ -6345,32 +6515,28 @@
             document.getElementById("5etm").checked = false;
             document.getElementById("5etr").checked = false;
             document.getElementById("5eca").value = "";
-        });        
-
-        // $('.tam_detail_kegiatan8').on('click', function(){            
-        //     alert("disini");
-        //     detailkegiatan8.style.display = 'block';
-        //     noKegiatan8 += 1;
-        //     addDataKegiatan8();
-        // });
-
-        $('#tam_detail_kegiatan9').on('click', function(){            
-            detailkegiatan9.style.display = 'block';
-            noKegiatan9 += 1;
-            addDataKegiatan9();
-        });
-
-        $('#tam_detail_kegiatan10').on('click', function(){            
-            detailkegiatan10.style.display = 'block';
-            noKegiatan10 += 1;
-            addDataKegiatan10();
-        });        
+        });       
 
         function addDataKegiatan8($id){            
             noKegiatan8 += 1;
-            jmlKegiatan8+=1;            
-            var data_kegiatan8 = '<div id="kegiatan'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Fasilitas Produksi</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_fasilitas_produksi_fix[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Fasilitas</label><div class="col-lg-8"><div><input class="form-control" name="nama_fasilitas[]" type="text" label="Nama Fasilitas" placeholder="Nama Fasilitas"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Alamat</label><div class="col-lg-8"><div><textarea class="form-control" name="alamat_fasilitas[]" label="Alamat Fasilitas" placeholder="Alamat Fasilitas"></textarea></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Kota</label><div class="col-lg-8"><div><input class="form-control" name="kota_fasilitas[]" type="text" label="Kota Fasilitas" placeholder="Kota"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Negara</label><div class="col-lg-8"><div><input class="form-control" name="negara_fasilitas[]" type="text" label="Negara Fasilitas" placeholder="Negara"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
+            jmlKegiatan8+=1;   
+            // alert("disini");         
+            var data_kegiatan8 = '<div id="kegiatan'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;">                    <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Fasilitas</label><div class="col-lg-8"><div><input class="form-control" name="nama_fasilitas[]" type="text" label="Nama Fasilitas" placeholder="Nama Fasilitas"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Fungsi</label><div class="col-lg-8"><div><input class="form-control" name="fungsi[]" type="text" label="Fungsi" placeholder="Fungsi"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Alamat</label><div class="col-lg-8"><div><textarea class="form-control" name="alamat_fasilitas[]" label="Alamat Fasilitas" placeholder="Alamat Fasilitas"></textarea></div></div></div></div></div></div>                    <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div></div>';
             $('#detail_kegiatan'+$id).append(data_kegiatan8);            
+        }
+
+        function addDataKegiatan9($id){            
+            noKegiatan9 += 1;
+            jmlKegiatan9 +=1;                        
+            var data_kegiatan9 = '<div id="kegiatan9'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Produk</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk/Menu - Merk" placeholder="Nama Produk/Menu - Merk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_data_produk[]"></div></div></div>                <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Rincian Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="rincian_jenis_produk[]" type="text" label="Rincian Jenis Produk" placeholder="Rincian Jenis Produk"></div></div></div></div></div></div>                <div class="col-lg-12"><div><a onClick="hapusKegiatan2('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> </div>';
+            $('#detail_kegiatan9'+$id).append(data_kegiatan9);
+        }
+                
+        function addDataKegiatan10($id){            
+            noKegiatan10 += 1;
+            jmlKegiatan10 +=1;            
+            var data_kegiatan10 = '<div id="kegiatan10'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Bahan Bentuk/Warna/Rasa/Merk</label><div class="col-lg-8"><div><input class="form-control" name="nama_bahan[]" type="text" label="Nama Bahan" placeholder="Nama Bahan Bentuk/Warna/Rasa/Merk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Kategori</label><div class="col-lg-8"><div><input class="form-control" name="kategori[]" type="text" label="Kategori" placeholder="Kategori"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Produsen</label><div class="col-lg-8"><div><input class="form-control" name="produsen[]" type="text" label="Produsen" placeholder="Produsen"></div></div></div></div></div></div>           <div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Dokumen Pendukung</label><div class="col-lg-8"><div><input class="form-control" name="dokumen_pendukung[]" type="text" label="Dokumen Pendukung" placeholder="Dokumen Pendukung"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div></div></div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan3('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
+            $('#detail_kegiatan10'+$id).append(data_kegiatan10);
         }
 
         function addDataKetidaksesuaian($id){
@@ -6379,21 +6545,7 @@
             var data_kegiatan_ketidaksesuaian = '<div id="kegiatanketidaksesuaian'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);">  <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Klausul</label><div class="col-lg-8"><div><input class="form-control" name="klausul[]" type="text" label="Klausul" placeholder="Klausul"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Auditor</label><div class="col-lg-8"><div><textarea class="form-control" name="auditor[]" label="Auditor" placeholder="Auditor"></textarea></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Deskripsi</label><div class="col-lg-8"><div><input class="form-control" name="deskripsi[]" type="text" label="Deskripsi" placeholder="Kota"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Investigasi Akar Permasalahan</label><div class="col-lg-8"><div><input class="form-control" name="investigasi[]" type="text" label="Investasi Akar Permasalahan" placeholder="Investigasi Akar Permasalahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Tindakan Perbaikan dan Pencegahan</label><div class="col-lg-8"><div><input class="form-control" name="tindakan[]" type="text" label="Tindakan Perbaikan dan Pencegahan" placeholder="Tindakan Perbaikan dan Pencegahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Hasil Tinjauan Tim Audit</label><div class="col-lg-8"><div><select name="hasil[]" class="form-control"><option value="open">Open</option><option value="close">Close</option></select>                                                        </div></div></div></div></div></div><div class="col-lg-12"><div><a onClick="hapusKetidaksesuaian('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
             // var data_kegiatan_ketidaksesuaian = 'disini';
             $('#detail_kegiatan_ketidaksesuaian'+$id).append(data_kegiatan_ketidaksesuaian);
-        }
-
-        function addDataKegiatan9(){
-            jmlKegiatan9+=1;
-            var data_kegiatan9 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Data Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_data_produk[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Produk</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk" placeholder="Nama Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Rincian Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="rincian_jenis_produk[]" type="text" label="Rincian Jenis Produk" placeholder="Rincian Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Pabrik</label><div class="col-lg-8"><div><input class="form-control" name="nama_pabrik[]" type="text" label="Nama Pabrik" placeholder="Nama Pabrik"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Status</label><div class="col-lg-8"><div><input class="form-control" name="status[]" type="text" label="Status" placeholder="Status"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain9" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
-            // var data_kegiatan8 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_produk2[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto2[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain7" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('#detail_kegiatan9').append(data_kegiatan9);
-        }
-
-        function addDataKegiatan10(){
-            jmlKegiatan10+=1;            
-            var data_kegiatan10 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Data Bahan</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_data_bahan[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Status</label><div class="col-lg-8"><div><div style="margin-bottom:7px;"><div class="radio radio-css radio-inline"><input type="radio" name="rbsesuai'+(jmlKegiatan10+1)+'" value="sesuai" id="sesuai'+(jmlKegiatan10+1)+'" checked/><label for="sesuai'+(jmlKegiatan10+1)+'">Sesuai</label></div><div class="radio radio-css radio-inline"><input type="radio" name="rbsesuai'+(jmlKegiatan10+1)+'" value="tidak sesuai" id="tidak_sesuai'+(jmlKegiatan10+1)+'"/><label for="tidak_sesuai'+(jmlKegiatan10+1)+'">Tidak Sesuai</label></div></div></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nomor Sertifikat</label><div class="col-lg-8"><div><input class="form-control" name="nomor_sertifikat[]" type="text" label="Nomor Sertifikat" placeholder="Nomor Sertifikat"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Produsen</label><div class="col-lg-8"><div><input class="form-control" name="produsen[]" type="text" label="Produsen" placeholder="Produsen"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Masa Berlaku</label><div class="col-lg-8"><div><input class="form-control" name="masa_berlaku[]" type="text" label="Masa Berlaku" placeholder="Masa Berlaku"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain10" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
-            // var data_kegiatan8 = '<div style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-12 col-form-label"><b>Foto Produk Yang Disertifikasi (Beserta dengan kemasan primernya)</b></label></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_produk2[]"></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Keterangan Foto</label><div class="col-lg-8"><div><input class="form-control" name="keterangan_foto2[]" type="text" label="Keterangan Foto" placeholder="Keterangan Foto"></div></div></div></div></div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain7" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
-            $('#detail_kegiatan10').append(data_kegiatan10);
-        }        
+        }                
 
         function hapusKegiatan($id){            
             var select1 = document.getElementById('detail_kegiatan'+$id);
@@ -6404,6 +6556,24 @@
             noKegiatan8-=1;
         }
 
+        function hapusKegiatan2($id){            
+            var select1 = document.getElementById('detail_kegiatan9'+$id);
+            var select2 = document.getElementById('kegiatan9'+$id);
+            select1.removeChild(select2);
+            
+            jmlKegiatan9-=1;
+            noKegiatan9-=1;
+        }
+
+        function hapusKegiatan3($id){            
+            var select1 = document.getElementById('detail_kegiatan10'+$id);
+            var select2 = document.getElementById('kegiatan10'+$id);
+            select1.removeChild(select2);
+            
+            jmlKegiatan10-=1;
+            noKegiatan10-=1;
+        }
+
         function hapusKetidaksesuaian($id){            
             var select1 = document.getElementById('detail_kegiatan_ketidaksesuaian'+$id);
             var select2 = document.getElementById('kegiatanketidaksesuaian'+$id);
@@ -6411,37 +6581,7 @@
             
             jmlKegiatan8-=1;
             noKegiatan8-=1;
-        }
-
-        $(document).on('click','#hapus_datakegiatanlain8', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan8-=1;
-            noKegiatan8-=1;
-
-            if(jmlKegiatan8 == 0){
-                // detailkegiatan8.style.display = 'none';
-            }
-        });
-
-        $(document).on('click','#hapus_datakegiatanlain9', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan9-=1;
-            noKegiatan9-=1;
-
-            if(jmlKegiatan9 == 0){
-                detailkegiatan9.style.display = 'none';
-            }
-        });
-
-        $(document).on('click','#hapus_datakegiatanlain10', function(){
-            $(this).parent().parent().parent().remove();
-            jmlKegiatan10-=1;
-            noKegiatan10-=1;
-
-            if(jmlKegiatan10 == 0){
-                detailkegiatan10.style.display = 'none';
-            }
-        });
+        }         
 
         $('#tgl_audit').datepicker({
             format: "yyyy-mm-dd",
