@@ -511,10 +511,10 @@ class ReviewerController extends Controller
             $j->status_penjadwalan_audit2 = 3;
             $e->status = 10;
         }else if($data['jenis']== 'tr'){
-            $e->status = '10_4';
+            $e->status = '12';
             $j->status_penjadwalan_tr = 3;
         }else if($data['jenis']== 'tinjauan'){
-            $e->status = '10_6';
+            $e->status = '14';
             $j->status_penjadwalan_tinjauan = 3;
         }
         $e->save();
@@ -579,15 +579,20 @@ class ReviewerController extends Controller
             //dd($data['idregis1']);
         if($data['jenis']== 'audit1'){
             $j->status_penjadwalan_audit1 = 2;
+            $e->status = '7_2';
         }else if($data['jenis']== 'audit2'){
             $j->status_penjadwalan_audit2 = 2;
+            $e->status = '9_2';
         }else if($data['jenis']== 'tr'){
             $j->status_penjadwalan_tr = 2;
+            $e->status = '11_2';
         }else if($data['jenis']== 'tinjauan'){
             $j->status_penjadwalan_tinjauan = 2;
+            $e->status = '13_2';
         }
 
         $j->save();
+        $e->save();
     
         
 
