@@ -1341,12 +1341,14 @@ class PenjadwalanController extends Controller
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
             //  ->join('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
             ->where(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('penjadwalan.status_penjadwalan_audit2','=',3);
                 $query->where('penjadwalan.pelaksana1_audit2','LIKE','%'.$id_user.'%');
   
             })    
             ->orWhere(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status_cancel','=',0)  ;
+                $query->where('penjadwalan.status_penjadwalan_audit2','=',3);  
                 $query->where('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
   
             })               
@@ -1547,7 +1549,7 @@ class PenjadwalanController extends Controller
 
         $dataKetidaksesuaian = DB::table('ketidaksesuaian')
                 ->where('id_registrasi',$id)
-                ->where('id_penjadwalan',$id_penjadwalan)
+                // ->where('id_penjadwalan',$id_penjadwalan)
                 ->orderBy('id','desc')
                 ->limit(1)
                 ->get();               

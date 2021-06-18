@@ -258,8 +258,14 @@
                                                             @endif
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)
-                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian' style="cursor:pointer">Upload Disini</a>
+                                                            @if (Auth::user()->usergroup_id == 10)                                                                
+                                                                @if (isset($kt))
+                                                                    @if (count($kt) == 0)
+                                                                        <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian2' style="cursor:pointer">Upload Disini</a>                                                                        
+                                                                    @else                                                                                                                                            
+                                                                        <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian' style="cursor:pointer">Upload Disini</a>
+                                                                    @endif
+                                                                @endif
                                                             @else
                                                                 -
                                                             @endif
@@ -294,41 +300,124 @@
                                                         <td class="text-center">
                                                             @if (isset($kt))
                                                                 @foreach ($kt as $val2)
-                                                                    <p style="font-size: 9px;">Ketidaksesuaian : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>
-
-                                                                    {{-- <form action="{{route('downloadchecklisttahap2')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                                                        @csrf
-                                                                        <div class="wrapper col-lg-12" style="display: none">
-                                                                            @foreach($dataRegistrasi as $index => $value)
-                                                                                @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                                                                @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Organisasi','required'=>true,'placeholder'=>'Nama Organisasi','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent                                        
-                                                                            @endforeach                        
-                                                                        </div>                                                                                                                                
-                                                                        <button type="submit" class="btn btn-sm btn-info" style="font-size: 9px;">Lanjut ke tahapan Technical Review</button>
-                                                                    </form> --}}
-
-                                                                    <a href="{{url('update_status_audit_tahap2')}}/{{$value->id}}/11/{{Auth::user()->name }}" class="btn btn-sm btn-info" style="font-size: 9px;">Lanjut ke tahapan Technical Review</a>
+                                                                    <p style="font-size: 9px;">Ketidaksesuaian : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>                                                                    
+                                                                    @if($val2['status'] == 'open')
+                                                                        <a href="{{url('update_status_audit_tahap2')}}/{{$value->id}}/11/{{Auth::user()->name }}/{{$val2['id']}}" class="btn btn-sm btn-info" style="font-size: 9px;">Lanjut ke tahapan Technical Review</a>
+                                                                    @endif
                                                                 @endforeach
                                                             @else
                                                             -
                                                             @endif
                                                         </td>
                                                     </tr> 
-                                                    {{-- <tr>
+                                                    <tr>
                                                         <td class="text-center">4</td>
                                                         <td class="text-center">Berita Acara Pemeriksaan</td>
-                                                        <td class="text-center">
-                                                            <form action="{{route('downloadberkas')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                                                @csrf																			
-                                                                    <div class="wrapper col-lg-12" style="display: none">
-                                                                    @component('components.inputtext',['name'=> 'no','label' => 'No','required'=>true,'placeholder'=>'No','readonly'=>true,'value'=>2])@endcomponent
-                                                                    @component('components.inputtext',['name'=> 'id_registrasi','label' => 'ID Registrasi','required'=>true,'placeholder'=>'ID Registrasi','readonly'=>true,'value'=>$value->id])@endcomponent
-                                                                    @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Perusahaan','required'=>true,'placeholder'=>'Nama Perusahaan','readonly'=>true,'value'=>$value->nama_perusahaan])@endcomponent
-                                                                    </div>
-                                                                <button type="submit" class="btn btn-sm btn-info">Download Format Berita Acara Pemeriksaan</button>
-                                                            </form>
+                                                        <td class="text-center">                                                            
+                                                            -
                                                         </td>
                                                         <td class="text-center">
+                                                            -
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            @if (Auth::user()->usergroup_id == 10)
+                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalBAP' style="cursor:pointer">Upload Disini</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_bap'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/BAP/'.$val['file_bap']) }}" download>{{$val['file_bap']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_bap'] == null? "-" : $val['tgl_penyerahan_bap']}}
+                                                            @endforeach
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            -    
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">5</td>
+                                                        <td class="text-center">Konfirmasi Jadwal, Syarat & Ketentuan Audit</td>
+                                                        <td class="text-center">                                                            
+                                                            -
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{-- @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['ketidaksesuaian_isian'])
+                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/download/Laporan Ketidaksesuaian/Isian/'.$val['ketidaksesuaian_isian']) }}" download>Temuan Ketidaksesuaian Isian</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif --}}
+                                                            -
+                                                        </td>                                                        
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @if (count($laporan2) == 0)
+                                                                -
+                                                            @else                                                            
+                                                                @foreach ($laporan2 as $val)
+                                                                    @if ($val['file_konfirmasi_sk_audit'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Konfirmasi SK Audit/'.$val['file_konfirmasi_sk_audit']) }}" download>{{$val['file_konfirmasi_sk_audit']}}</a>
+                                                                    @else		
+                                                                    -																
+                                                                    @endif																			
+                                                                @endforeach									
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                            @foreach ($laporan2 as $val)										
+                                                                {{$val['tgl_penyerahan_konfirmasi_sk_audit'] == null? "-" : $val['tgl_penyerahan_konfirmasi_sk_audit']}}
+                                                            @endforeach
+                                                        </td>
+                                                        <td class="text-center">
+                                                            -
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">6</td>
+                                                        <td class="text-center">Surat Tugas</td>
+                                                        <td class="text-center">                                                            
+                                                            -
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
                                                             @if (count($laporan2) == 0)
                                                                 -
                                                             @else                                                            
@@ -342,40 +431,42 @@
                                                             @endif
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)
-                                                                <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian' style="cursor:pointer">Upload Disini</a>
-                                                            @else
-                                                                -
-                                                            @endif
+                                                            -
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td class="text-center" style="font-size: 9px;">
                                                             @if (count($laporan2) == 0)
                                                                 -
                                                             @else                                                            
                                                                 @foreach ($laporan2 as $val)
-                                                                    @if ($val['file_laporan_ketidaksesuaian'])
-                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/'.$val['file_laporan_ketidaksesuaian']) }}" download>{{$val['file_laporan_ketidaksesuaian']}}</a>                                                                        
+                                                                    @if ($val['file_surat_tugas'])
+                                                                        <a href="{{url('') .Storage::url('public/laporan/upload/Surat Tugas/'.$val['file_surat_tugas']) }}" download>{{$val['file_surat_tugas']}}</a>
                                                                     @else		
                                                                     -																
                                                                     @endif																			
                                                                 @endforeach									
                                                             @endif
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td class="text-center" style="font-size: 9px;">
                                                             @foreach ($laporan2 as $val)										
-                                                                {{$val['tgl_penyerahan_laporan_ketidaksesuaian'] == null? "-" : $val['tgl_penyerahan_laporan_ketidaksesuaian']}}
+                                                                {{$val['tgl_penyerahan_surat_tugas'] == null? "-" : $val['tgl_penyerahan_surat_tugas']}}
                                                             @endforeach
                                                         </td>
-                                                        <td class="text-center">
-                                                            @if (isset($kt))
-                                                                @foreach ($kt as $val2)
-                                                                    <p>Temuan : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>
-                                                                @endforeach
-                                                            @else
-                                                            -
-                                                            @endif
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
                                                         </td>
-                                                    </tr>  --}}
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                        <td class="text-center" style="font-size: 9px;">
+                                                        -    
+                                                        </td>
+                                                    </tr>
                                                     </table>                                                
                                             </div>
                                         </div>
@@ -5858,6 +5949,88 @@
                             <div class="form-group">
                                 <label>Berkas</label>
                                 <input id="file" name="berkas_ketidaksesuaian" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
+
+    <div id="modalKetidaksesuaian2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Laporan Ketidaksesuaian</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="4" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_ketidaksesuaian2" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
+
+    <div id="modalBAP" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Berita Acara Pemeriksaan</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan4">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control" id="no" name="no" value="4" readonly />
+                                @foreach($dataRegistrasi as $index => $value)               
+                                    <input type="text" class="form-control" id="noregis" name="noregis" value="{{$value->no_registrasi}}" readonly />
+                                    <input type="text" class="form-control" id="idregis" name="idregis" value="{{$value->id}}" readonly />
+                                @endforeach                        								                                
+                            </div>
+                                                      
+                            <div class="form-group">
+                                <label>Berkas</label>
+                                <input id="file" name="berkas_bap" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
                             </div>                                                                                    
                            
                         </div>

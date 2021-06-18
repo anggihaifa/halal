@@ -46,7 +46,7 @@
 							<tr>
 								<td class="text-center">1</td>
 								<td class="text-center">Konfirmasi Jadwal, Syarat & Ketentuan Audit</td>
-								<td>
+								<td class="text-center">
 								<form action="{{route('downloadberkas')}}" method="post" name="registerForm" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                 @csrf																	
 									<div class="wrapper col-lg-12" style="display: none">
@@ -121,7 +121,13 @@
 								<td class="text-center">3</td>
 								<td class="text-center">Surat Tugas</td>
 								<td class="text-center">-</td>
-								<td class="text-center">-</td>
+								<td class="text-center">
+									@if (Auth::user()->usergroup_id == 10)
+										<a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$id_regis}}` data-target='#modalST' style="cursor:pointer">Upload Disini</a>
+									@else
+										<a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$id_regis}}` data-target='#modalST' style="cursor:pointer">Upload Disini</a>										
+									@endif
+								</td>
 								<td class="text-center">
 									@foreach ($laporan2 as $val)
 										@if ($val['file_surat_tugas'])
@@ -221,6 +227,49 @@
                             <div class="form-group">
                               <label>Berkas</label>                            
                                 <input id="file" name="berkas_bap" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
+                            </div>                                                                                    
+                           
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                        </div>
+                    </form>
+                </div>  
+            </form>
+        </div>
+    </div>
+
+	<div id="modalST" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form action="{{route('uploadberkas')}}" method="post" name="registerForm" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Upload File Surat Tugas</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <form id="formpenjadwalan5">
+                        <div class="modal-body">
+                            <div class="form-group" style="display: none">
+                                <label>ID Registrasi</label>
+								<input type="text" class="form-control"
+                                id="no" name="no" value="2" readonly />
+								<input type="text" class="form-control"
+                                id="noregis" name="noregis" value="{{$data->no_registrasi}}" readonly />
+                                <input type="text" class="form-control"
+                                id="idregis" name="idregis" value="{{$id_regis}}" readonly />
+                            </div>
+                           
+                           
+                            <div class="form-group">
+                              <label>Berkas</label>                            
+                                <input id="file" name="berkas_surattugas" class="form-control" type="file" class="form-control" accept="application/pdf" required/>
                             </div>                                                                                    
                            
                         </div>

@@ -682,14 +682,14 @@ class PHPWordController extends Controller
 
             if(count($dataLaporan) == 0){
                 $model = new LaporanAudit2;
-                    //$model->rencana_audit_isian = $fileName;                    
+                    $model->rencana_audit_isian = $fileName;                    
                     $model->id_registrasi = $data['idregis'];                    
                     $model->save();
                 DB::Commit();
             }else{
                 $model2 = new LaporanAudit2;                
                 $f = $model2->find($dataLaporan[0]->id);
-                //$f->rencana_audit_isian = $fileName;                
+                $f->rencana_audit_isian = $fileName;                
                 $f->save();                
             }
             DB::Commit();        
@@ -10883,6 +10883,41 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $f->save();                
             }
             DB::Commit();
+        }else if($request->has("berkas_surattugas")){
+            $file = $request->file("berkas_surattugas");            
+            $file = $data["berkas_surattugas"];
+
+            $fileName = 'Surat Tugas ('.$data['idregis'].').pdf';
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/Surat Tugas/", $fileName);
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_surat_tugas = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_surat_tugas = $ldate;
+                    $model->save();
+                DB::Commit();
+
+                $dataLaporanBaru = DB::table('laporan_audit2')
+                    ->where('id_registrasi',$data['idregis'])                    
+                    ->get();
+
+                $modelRe = new Registrasi;
+                $x = $modelRe->find($data['idregis']);
+                $x->id_laporan_audit2 = $dataLaporanBaru[0]->id;
+                $x->save();
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_surat_tugas = $fileName;
+                $f->tgl_penyerahan_surat_tugas = $ldate;
+                $f->save();                
+            }
+            DB::Commit();
         }else if($request->has("berkas_ap")){
             $file = $request->file("berkas_ap");            
             $file = $data["berkas_ap"];
@@ -11073,6 +11108,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                     ->orderBy('id','desc')
                     ->limit(1)
                     ->get();
+                    
                     // dd($dataKT);
                     
                         // $model2 = new LaporanAudit2;                
@@ -11097,6 +11133,60 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $kt->status = 'close';
                 $kt->jumlah_tidak_sesuai = 0;
                 $kt->save();
+                DB::Commit();
+            }
+            DB::Commit();
+        }else if($request->has("berkas_ketidaksesuaian2")){
+            $file = $request->file("berkas_ketidaksesuaian2");            
+            $file = $data["berkas_ketidaksesuaian2"];
+
+            $fileName = 'FOR-HALAL-OPS-08 Laporan Temuan Ketidaksesuaian ('.$data['idregis'].').pdf';
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/Laporan Ketidaksesuaian/", $fileName);
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_laporan_ketidaksesuaian = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_laporan_ketidaksesuaian = $ldate;
+                    $model->save();
+                DB::Commit();
+
+                $dataLaporanBaru = DB::table('laporan_audit2')
+                    ->where('id_registrasi',$data['idregis'])                    
+                    ->get();
+
+                $modelRe = new Registrasi;
+                $x = $modelRe->find($data['idregis']);
+                $x->id_laporan_audit2 = $dataLaporanBaru[0]->id;
+                $x->save();                
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_laporan_ketidaksesuaian = $fileName;
+                $f->tgl_penyerahan_laporan_ketidaksesuaian = $ldate;
+                $f->save();                                  
+
+                        // $model2 = new LaporanAudit2;                
+                        // $f = $model2->find($dataLaporan[0]->id);
+                        // $f->status = 1;
+                        // $f->save();
+                        // DB::Commit();
+
+                        // $modelReg = new Registrasi;
+                        // $x = $modelReg->find($data['idregis']);
+                        // $x->status = 11;
+                        // $x->save();
+
+                $modelkt = new KetidakSesuaian;
+                $modelkt->id_registrasi = $data['idregis'];
+                // $modelkt->id_penjadwalan = $data['id_penjadwalan'];
+                $modelkt->status = 'open';
+                // $kt->jumlah_tidak_sesuai = 0;
+                $modelkt->save();
                 DB::Commit();
             }
             DB::Commit();

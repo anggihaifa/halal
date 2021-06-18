@@ -14,6 +14,7 @@ use App\RegistrasiDataSDM;
 use App\RegistrasiLokasiLain;
 use App\RegistrasiKU;
 use App\RegistrasiJasa;
+use App\Ketidaksesuaian;
 use App\RegistrasiJumlahProduksi;
 use App\DetailKU;
 use App\LogKegiatan;
@@ -3836,14 +3837,21 @@ class RegistrasiController extends Controller
         return view('registrasi.uploadOCUser',compact('data','dataTransfer','dataTunai'));
     }
 
-    public function updateStatusAuditTahap2($id,$status,$user){
-        // dd("disini");
+    public function updateStatusAuditTahap2($id,$status,$user,$id_kt){
+        // dd($id_kt);
         $model = new Registrasi();
         DB::beginTransaction();
         $e = $model->find($id);
         $e->status = $status;
         $e->updated_status_by = $user;
         $e->save();
+        DB::commit();
+
+        $model2 = new Ketidaksesuaian();
+        DB::beginTransaction();
+        $f = $model2->find($id_kt);
+        $f->status = 'close';
+        $f->save();
         DB::commit();
 
         Session::flash('success', 'Status berhasil di update, silahkan lanjut ke Persiapan Technical Reviewer');
