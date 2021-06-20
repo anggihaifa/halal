@@ -70,9 +70,10 @@ class HomeController extends Controller
                             ->get();
 
         $logKegiatan = DB::table('users')
-                            ->select('users.registrasi_id','log_kegiatan.*','users.name as nama',)
+                            ->select('users.registrasi_id','log_kegiatan.*','users.name as nama',)                            
                             ->join('log_kegiatan','log_kegiatan.id_registrasi','=','users.registrasi_id')
-                            ->where('users.id',Auth::user()->id)                            
+                            ->where('users.id',Auth::user()->id)
+                            ->where('log_kegiatan.usergroup_id','=','2')
                             ->get(); 
         // dd($logKegiatan);
         

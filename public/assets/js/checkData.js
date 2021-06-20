@@ -283,7 +283,7 @@ function checkProgress(data){
             :(data.trim()=='14_1')? 'Proses Komite Sertifkasi Selesai'
 
             :(data==15)? 'Proses Persiapan Komisi Fatwa'
-            :(data.trim()=='15_0')? 'Reviwer Belum Mereview Laporan Hasil Akhir Audit'
+            :(data.trim()=='15_0')? 'Reviewer Belum Mereview Laporan Hasil Akhir Audit'
             :(data.trim()=='15_1')? 'Laporan Akhir Audit Terkonfirmasi'
             
             :(data==16)? 'Proses Sidang Fatwa'

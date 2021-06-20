@@ -169,7 +169,7 @@ select.list-dt:focus {
 #progressbar li {
     list-style-type: none;
     font-size: 10px;
-    width: 7.5%;
+    width: 9%;
     float: left;
     position: relative
 }
