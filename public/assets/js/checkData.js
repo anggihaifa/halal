@@ -105,8 +105,8 @@ function checkStatusPersiapanKomisiFatwa(data){
 
 function checkStatusKebutuhanAudit(data){
 
-    return  (data==0)? '<a  class="btn btn-xs" style="word-wrap:break-word; max-width:10%; background-color:black  ; color:white;">Kebutuhan Waktu Audit Belum Ditentukan</a>'
-    :(data==1)? '<a  class="btn btn-xs" style="word-wrap:break-word; max-width:20px; background-color:yellow  ; color:black;">Menunggu Reviewer Mengkonfirmasi Kebutuhan Waktu Audit</a>'
+    return  (data==0)? '<a  class="btn btn-xs" style="word-wrap:break-word; background-color:black  ; color:white;">Kebutuhan Waktu Audit Belum Ditentukan</a>'
+    :(data==1)? '<a  class="btn btn-xs" style="word-wrap:break-word; background-color:yellow  ; color:black;">Menunggu Reviewer Mengkonfirmasi Kebutuhan Waktu Audit</a>'
     :(data==2)? '<a  class="btn btn-xs" style="background-color:red  ; color:white;">Perbaikan Kebutuhan Waktu Audit</a>'
     :(data==3)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Kebutuhan Waktu Audit Terkonfirmasi</a>'
     : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Kebutuhan Waktu Audit Belum Ditentukan</a>';

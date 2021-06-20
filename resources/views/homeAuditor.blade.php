@@ -191,17 +191,17 @@
 			</div>
 		</div> --}}
 		<!-- end col-3 -->
-		<div class="row col-xl-6">
+		{{-- <div class="row col-xl-6">
             <div class="col-xl-12">
                 <div class="card mb-4 animated zoomIn delay-5s">
                     <div class="card-header">
                         <i class="fas fa-chart-area mr-1"></i>
                             AUDIT
-                    </div>
+                    </div> --}}
                 	{{-- <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div> --}}
-                </div>
-            </div>			                
-        </div>
+                {{-- </div> --}}
+            {{-- </div>			                 --}}
+        {{-- </div> --}}
 
         <figure class="highcharts-figure">
             {{-- <div id="container-speed" class="chart-container"></div>
@@ -215,7 +215,7 @@
             </p> --}}
         </figure>
 
-		<div class="row col-xl-6">
+		{{-- <div class="row col-xl-6">
             <div class="col-xl-12">
                 <div class="card mb-4 animated zoomIn delay-5s">
                     <div class="card-header">
@@ -229,11 +229,10 @@
                                 <span class="title">PENGETAHUAN MySQL</span>
                             </div>
                         </div>
-                    </div>
-                	{{-- <div class="card-body"><canvas id="myAreaChart2" width="100%" height="40"></canvas></div> --}}
+                    </div>                	
                 </div>
             </div>			                
-        </div>		
+        </div>		 --}}
     </div>
     <!-- end row -->    
 @endsection

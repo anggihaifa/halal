@@ -1056,3 +1056,10 @@ select.list-dt:focus {
     width: 100%;
     object-fit: cover
 }
+
+.bootstrap-select .dropdown-menu li a span.text {
+    display: inline-block;
+    word-wrap: break-word!important;
+    text-overflow: inherit!important;
+    white-space: normal!important;
+}

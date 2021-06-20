@@ -63,7 +63,7 @@
                                                                             
                                             <div class="col-lg-5"></div>
                                             <div class="col-lg-4">
-                                                <a type="button" class="btn btn-sm btn-success " style="color:white;float:right;">Search</a>
+                                                <button type="submit" class="btn btn-sm btn-success " style="color:white;float:right;">Search</button>
                                                
                                             </div>
                                             <div class="col-lg-2"></div>
@@ -457,12 +457,13 @@
 @endsection
 @push('scripts')
 
- 
+    
     <script src="{{asset('/assets/js/checkData.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="{{asset('/assets/js/filterData.js')}}"></script>
 
     
     <script>
@@ -1132,473 +1133,13 @@
               currency: 'IDR'
             });
         }
-      
-        $(document).ready(function () {
 
-            $.ajaxSetup({
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-            });
-
-           
-           
-            $('#modaljadwal').on('hidden.bs.modal', function () {
-                $(this).removeData();
-            })
-
-            $('#mulai_audit1').on('change', function () {
-                $.ajax({
-
-                    url: '{{ route('dropdown1.dataauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_audit1').val(),
-                        // selesai: $('#selesai_audit1').val(),
-                        //selected_pelaksana1: $('#pelaksana1_audit1').val(),
-                        id_regis: $('#idregis1').val()
-                    },
-                    success: function (response) {
-                    
-                        $('#pelaksana1_audit1').empty();  
-                        $("#pelaksana1_audit1").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
-                        })
-                         $('#pelaksana1_audit1').selectpicker('refresh');
-                         //$('#pelaksana2_audit1').empty();                         
-                        
-                    }
-                })
-            });
-            // $('#selesai_audit1').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('dropdown1.dataauditor') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             mulai: $('#mulai_audit1').val(),
-            //             // selesai: $('#selesai_audit1').val(),
-            //             selected_pelaksana1: $('#pelaksana1_audit1').val(),
-            //             id_regis: $('#idregis1').val()
-            //         },
-            //         success: function (response) {
-                    
-            //             $('#pelaksana1_audit1').empty();  
-            //             $("#pelaksana1_audit1").append(new Option('==Pilih Auditor==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-            //                 $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
-            //             })
-            //              $('#pelaksana1_audit1').selectpicker('refresh');
-            //              //$('#pelaksana2_audit1').empty();                         
-                        
-            //         }
-            //     })
-            // });
-
-            // $('#pelaksana1_audit1').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('dropdown1.dataauditor') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             mulai: $('#mulai_audit1').val(),
-            //             // selesai: $('#selesai_audit1').val(),
-            //             selected_pelaksana1: $('#pelaksana1_audit1').val(),
-            //             id_regis: $('#idregis1').val()
-            //         },
-            //         success: function (response) {
-                    
-            //             //$('#pelaksana1_audit1').empty();                         
-            //             $('#pelaksana2_audit1').empty();  
-
-            //             $("#pelaksana2_audit1").append(new Option('==Pilih Auditor==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-
-            //                 $("#pelaksana2_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
-            //             })
-            //             $('#pelaksana2_audit1').selectpicker('refresh');
-            //         }
-            //     })
-            // });
-
-            $('#mulai_audit2').on('change', function () {
-                $.ajax({
-
-                    url: '{{ route('dropdown2.dataauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_audit2').val(),
-                        // selesai: $('#selesai_audit2').val(),
-                        selected_pelaksana1: $('#pelaksana1_audit2').val(),
-                        id_regis: $('#idregis2').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();   
-                         $('#pelaksana1_audit2').empty();  
-
-                        $("#pelaksana1_audit2").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-                            $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
-                        })
-                         $('#pelaksana1_audit2').selectpicker('refresh');
-                         //$('#pelaksana2_audit1').empty();                         
-                        
-                    }
-                })
-            });
-
-            // $('#selesai_audit2').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('dropdown2.dataauditor') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             mulai: $('#mulai_audit2').val(),
-            //             selesai: $('#selesai_audit2').val(),
-            //             selected_pelaksana1: $('#pelaksana1_audit2').val(),
-            //             id_regis: $('#idregis2').val()
-            //         },
-            //         success: function (response) {
-            //             //$('#pelaksana1_audit1').empty();   
-            //              $('#pelaksana1_audit2').empty();  
-
-            //             $("#pelaksana1_audit2").append(new Option('==Pilih Auditor==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-            //                 $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
-            //             })
-            //              $('#pelaksana1_audit2').selectpicker('refresh');
-            //              //$('#pelaksana2_audit1').empty();                         
-                        
-            //         }
-            //     })
-            // });
-
-            $('#pelaksana1_audit2').on('change', function () {
-                $.ajax({
-
-                    url: '{{ route('dropdown2.dataauditor') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        mulai: $('#mulai_audit2').val(),
-                        //selesai: $('#selesai_audit2').val(),
-                        selected_pelaksana1: $('#pelaksana1_audit2').val(),
-                        id_regis: $('#idregis2').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();                         
-                        $('#pelaksana2_audit2').empty();  
-
-                        $("#pelaksana2_audit2").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-
-                            $("#pelaksana2_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
-                        })
-                         $('#pelaksana2_audit2').selectpicker('refresh');
-                    }
-                })
-
-                
-            });
-
-            // $('#jenis_akomodasi').on('change', function () {
-
-            //       $.ajax({
-
-            //         url: '{{ route('opsi_akomodasi.data') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             jenis: $('#jenis_akomodasi').val(),
-                      
-            //         },
-            //         success: function (response) {
-                        
-            //             $('#opsi_akomodasi').selectpicker('destroy');
-            //             $('#opsi_akomodasi').selectpicker();
-
-            //             $('#opsi_akomodasi').empty();  
-            //             $('#opsi_akomodasi').append(new Option('==Pilih Opsi Akomodasi==',''))                       
-            //             $.each(response, function (opsi_akomodasi, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-            //                 $('#opsi_akomodasi').append(new Option(opsi_akomodasi,id))
-            //             })
-
-            //             $('#opsi_akomodasi').selectpicker('refresh');    
-            //            // $('#pelaksana1_rapat').selectpicker('refresh');              
-
-                        
-                                     
-                        
-            //         }
-            //     })
-                
-
-
-            // });
-
-        //     $('#opsi_akomodasi').on('change', function () {
-
-        //          tambahAkomodasi(this);
-
-
-        //    });
-
-
-            // $('#mulai_rapat').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             mulai: $('#mulai_rapat').val(),
-            //             selesai: $('#selesai_rapat').val(),
-            //             selected_pelaksana1: $('#pelaksana1_rapat').val(),
-            //             selected_pelaksana2: $('#pelaksana2_rapat').val(),
-            //             id_regis: $('#idregis3').val()
-            //         },
-            //         success: function (response) {
-            //             //$('#pelaksana1_audit1').empty();   
-            //              $('#pelaksana1_rapat').empty();  
-
-            //             $("#pelaksana1_rapat").append(new Option('==Pilih Auditor==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-            //                 $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
-            //             })
-                     
-
-            //              //$('#pelaksana2_audit1').empty();  
-            //             $('#pelaksana1_rapat').selectpicker('refresh');                       
-                        
-            //         }
-            //     })
-            // });
-
-            // $('#selesai_rapat').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             mulai: $('#mulai_rapat').val(),
-            //             selesai: $('#selesai_rapat').val(),
-            //             selected_pelaksana1: $('#pelaksana1_rapat').val(),
-            //             selected_pelaksana2: $('#pelaksana2_rapat').val(),
-            //             id_regis: $('#idregis3').val()
-            //         },
-            //         success: function (response) {
-            //             //$('#pelaksana1_audit1').empty();   
-            //              $('#pelaksana1_rapat').empty();  
-
-            //             $("#pelaksana1_rapat").append(new Option('==Pilih Auditor==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-            //                 $("#pelaksana1_rapat").append(new Option(id +"_"+ name,id +"_"+ name+"_rapat"))
-            //             })
-                       
-
-            //              //$('#pelaksana2_audit1').empty();  
-            //             $('#pelaksana1_rapat').selectpicker('refresh');                       
-                        
-            //         }
-            //     })
-            // });
-
-            $('#pelaksana1_tr').on('change', function () {
-                $.ajax({
-
-                    url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        //mulai: $('#mulai_rapat').val(),
-                        //selesai: $('#selesai_rapat').val(),
-                        selected_pelaksana1: $('#pelaksana1_tr').val(),
-                        selected_pelaksana2: $('#pelaksana2_tr').val(),
-                        id_regis: $('#idregis3').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();                         
-                        $('#pelaksana2_tr').empty();  
-
-                        $("#pelaksana2_tr").append(new Option('==Pilih Auditor==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-
-                            $("#pelaksana2_tr").append(new Option(id +"_"+ name,id +"_"+ name+"_tr"))
-                        })
-                        $('#pelaksana2_tr').selectpicker('refresh'); 
-                    }
-                })
-            });
-
-            // $('#pelaksana2_tr').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             //mulai: $('#mulai_rapat').val(),
-            //             //selesai: $('#selesai_rapat').val(),
-            //             selected_pelaksana1: $('#pelaksana1_tr').val(),
-            //             selected_pelaksana2: $('#pelaksana2_tr').val(),
-            //             id_regis: $('#idregis3').val()
-            //         },
-            //         success: function (response) {
-            //             //$('#pelaksana1_audit1').empty();                         
-            //             $('#pelaksana3_tr').empty();  
-
-            //             $("#pelaksana3_tr").append(new Option('==Pilih Auditor==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-
-            //                 $("#pelaksana3_tr").append(new Option(id +"_"+ name,id +"_"+ name+"_tr"))
-            //             })
-            //             $('#pelaksana3_tr').selectpicker('refresh'); 
-            //         }
-            //     })
-            // });
-
-
-            // $('#mulai_tinjauan').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('komite_dropdown.datakomite') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             mulai: $('#mulai_tinjauan').val(),
-            //             selesai: $('#selesai_tinjauan').val(),
-            //             selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
-            //             selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
-            //             id_regis: $('#idregis4').val()
-            //         },
-            //         success: function (response) {
-            //             //$('#pelaksana1_audit1').empty();   
-            //              $('#pelaksana1_tinjauan').empty();  
-
-            //             $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-            //                 $("#pelaksana1_tinjauan").append(new Option(nid +"_"+ name,id +"_"+ name+"_tinjauan"))
-            //             })
-
-                       
-
-            //              //$('#pelaksana2_audit1').empty();                         
-                        
-            //         }
-            //     })
-            // });
-            // $('#selesai_tinjauan').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('komite_dropdown.datakomite') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             mulai: $('#mulai_tinjauan').val(),
-            //             selesai: $('#selesai_tinjauan').val(),
-            //             selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
-            //             selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
-            //             id_regis: $('#idregis4').val()
-            //         },
-            //         success: function (response) {
-            //             //$('#pelaksana1_audit1').empty();   
-            //              $('#pelaksana1_tinjauan').empty();  
-
-            //             $("#pelaksana1_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-            //                 $("#pelaksana1_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
-            //             })
-
-                       
-
-            //              //$('#pelaksana2_audit1').empty();                         
-                        
-            //         }
-            //     })
-            // });
-
-            $('#pelaksana1_tinjauan').on('change', function () {
-                $.ajax({
-
-                    url: '{{ route('komite_dropdown.datakomite') }}',
-                    method: 'POST',
-                    data: {
-                         _token: "{{ csrf_token() }}",
-                        //mulai: $('#mulai_tinjauan').val(),
-                        //selesai: $('#selesai_tinjauan').val(),
-                        selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
-                        selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
-                        id_regis: $('#idregis4').val()
-                    },
-                    success: function (response) {
-                        //$('#pelaksana1_audit1').empty();                         
-                        $('#pelaksana2_tinjauan').empty();  
-
-                        $("#pelaksana2_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
-                        $.each(response, function (name, id) {                                                                    
-                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-
-                            $("#pelaksana2_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
-                        })
-
-                        $('#pelaksana2_tinjauan').selectpicker('refresh'); 
-                    }
-                })
-            });
-
-            // $('#pelaksana2_tinjauan').on('change', function () {
-            //     $.ajax({
-
-            //         url: '{{ route('komite_dropdown.datakomite') }}',
-            //         method: 'POST',
-            //         data: {
-            //              _token: "{{ csrf_token() }}",
-            //             //mulai: $('#mulai_tinjauan').val(),
-            //             //selesai: $('#selesai_tinjauan').val(),
-            //             selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
-            //             selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
-            //             id_regis: $('#idregis4').val()
-            //         },
-            //         success: function (response) {
-            //             //$('#pelaksana1_audit1').empty();                         
-            //             $('#pelaksana3_tinjauan').empty();  
-
-            //             $("#pelaksana3_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
-            //             $.each(response, function (name, id) {                                                                    
-            //                 // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
-
-            //                 $("#pelaksana3_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
-            //             })
-
-            //             $('#pelaksana3_tinjauan').selectpicker('refresh'); 
-            //         }
-            //     })
-            // });
-
-            var xTable = $('#table').DataTable({
+        var xTable = $('#table').DataTable({
                 ajax:{
                     url:"{{route('dataregistrasipelangganaktif')}}",
                     data:function(d){
-                        d.no_registrasi = $('input[name=nomor_id]').val();
-                        d.mulai_audit1 = $('input[name=mulai_audit1]').val();
+                        d.nomor_id = $('#nomor_id').val();
+                        d.nama_perusahaan = $('#nama_perusahaan').val();
      
 
                     }
@@ -1909,7 +1450,7 @@
                                                         <tr>
                                                             <td class="text-center"  style="width:20%">Progres</td>
                                                             <td class="text-center"  style="width:10%">Status Berkas</td>
-                                                            <td class="text-center"  style="width:25%">Cabang Auditor</td>
+                                                            <td class="text-center"  style="width:25%">Cabang Pelaksana</td>
                                                             <td class="text-center"  style="width:10%">Aksi</td>
                                                         </tr>
                                                         
@@ -2118,6 +1659,167 @@
 
             });
 
+      
+        $(document).ready(function () {
+
+            $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+
+           
+           
+            $('#modaljadwal').on('hidden.bs.modal', function () {
+                $(this).removeData();
+            })
+
+            $('#mulai_audit1').on('change', function () {
+                $.ajax({
+
+                    url: '{{ route('dropdown1.dataauditor') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                        mulai: $('#mulai_audit1').val(),
+                        // selesai: $('#selesai_audit1').val(),
+                        //selected_pelaksana1: $('#pelaksana1_audit1').val(),
+                        id_regis: $('#idregis1').val()
+                    },
+                    success: function (response) {
+                    
+                        $('#pelaksana1_audit1').empty();  
+                        $("#pelaksana1_audit1").append(new Option('==Pilih Auditor==',''))                       
+                        $.each(response, function (name, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                            $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
+                        })
+                         $('#pelaksana1_audit1').selectpicker('refresh');
+                         //$('#pelaksana2_audit1').empty();                         
+                        
+                    }
+                })
+            });
+           
+            $('#mulai_audit2').on('change', function () {
+                $.ajax({
+
+                    url: '{{ route('dropdown2.dataauditor') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                        mulai: $('#mulai_audit2').val(),
+                        // selesai: $('#selesai_audit2').val(),
+                        selected_pelaksana1: $('#pelaksana1_audit2').val(),
+                        id_regis: $('#idregis2').val()
+                    },
+                    success: function (response) {
+                        //$('#pelaksana1_audit1').empty();   
+                         $('#pelaksana1_audit2').empty();  
+
+                        $("#pelaksana1_audit2").append(new Option('==Pilih Auditor==',''))                       
+                        $.each(response, function (name, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                            $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
+                        })
+                         $('#pelaksana1_audit2').selectpicker('refresh');
+                         //$('#pelaksana2_audit1').empty();                         
+                        
+                    }
+                })
+            });
+
+           
+
+            $('#pelaksana1_audit2').on('change', function () {
+                $.ajax({
+
+                    url: '{{ route('dropdown2.dataauditor') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                        mulai: $('#mulai_audit2').val(),
+                        //selesai: $('#selesai_audit2').val(),
+                        selected_pelaksana1: $('#pelaksana1_audit2').val(),
+                        id_regis: $('#idregis2').val()
+                    },
+                    success: function (response) {
+                        //$('#pelaksana1_audit1').empty();                         
+                        $('#pelaksana2_audit2').empty();  
+
+                        $("#pelaksana2_audit2").append(new Option('==Pilih Auditor==',''))                       
+                        $.each(response, function (name, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+
+                            $("#pelaksana2_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
+                        })
+                         $('#pelaksana2_audit2').selectpicker('refresh');
+                    }
+                })
+
+                
+            });
+
+           
+            $('#pelaksana1_tr').on('change', function () {
+                $.ajax({
+
+                    url: '{{ route('auditor_dropdown.dataddtehnicalreview') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                        //mulai: $('#mulai_rapat').val(),
+                        //selesai: $('#selesai_rapat').val(),
+                        selected_pelaksana1: $('#pelaksana1_tr').val(),
+                        selected_pelaksana2: $('#pelaksana2_tr').val(),
+                        id_regis: $('#idregis3').val()
+                    },
+                    success: function (response) {
+                        //$('#pelaksana1_audit1').empty();                         
+                        $('#pelaksana2_tr').empty();  
+
+                        $("#pelaksana2_tr").append(new Option('==Pilih Auditor==',''))                       
+                        $.each(response, function (name, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+
+                            $("#pelaksana2_tr").append(new Option(id +"_"+ name,id +"_"+ name+"_tr"))
+                        })
+                        $('#pelaksana2_tr').selectpicker('refresh'); 
+                    }
+                })
+            });
+
+            
+
+            $('#pelaksana1_tinjauan').on('change', function () {
+                $.ajax({
+
+                    url: '{{ route('komite_dropdown.datakomite') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                        //mulai: $('#mulai_tinjauan').val(),
+                        //selesai: $('#selesai_tinjauan').val(),
+                        selected_pelaksana1: $('#pelaksana1_tinjauan').val(),
+                        selected_pelaksana2: $('#pelaksana2_tinjauan').val(),
+                        id_regis: $('#idregis4').val()
+                    },
+                    success: function (response) {
+                        //$('#pelaksana1_audit1').empty();                         
+                        $('#pelaksana2_tinjauan').empty();  
+
+                        $("#pelaksana2_tinjauan").append(new Option('==Pilih Komite Ahli==',''))                       
+                        $.each(response, function (name, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+
+                            $("#pelaksana2_tinjauan").append(new Option(id +"_"+ name,id +"_"+ name+"_tinjauan"))
+                        })
+
+                        $('#pelaksana2_tinjauan').selectpicker('refresh'); 
+                    }
+                })
+            });
+
+           
+           
 
 
             $('#table tbody').on('click', 'td.details-control', function () {
@@ -2158,5 +1860,5 @@
             return confirm("Apakah anda yakin?");
         });
     </script>
-    <script src="{{asset('/assets/js/filterData.js')}}"></script>
+    
 @endpush
