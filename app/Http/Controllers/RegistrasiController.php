@@ -124,7 +124,7 @@ class RegistrasiController extends Controller
     public function listRegistrasiPelangganAktif(){
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
-        // $curl = curl_init();
+        $curl = curl_init();
 
         curl_setopt_array($curl, array(
           CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
@@ -162,49 +162,43 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
+
+        $xdata = DB::table('registrasi')
+        ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+        ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+        ->join('users','registrasi.id_user','=','users.id')
+        /*->leftJoin('pembayaran','registrasi.id','=', 'pembayaran.id_registrasi')*/
+        
+        ->leftJoin('laporan_audit2','registrasi.id', '=', 'laporan_audit2.id_registrasi')
+        ->leftJoin('laporan_tehnical_review','registrasi.id', '=', 'laporan_tehnical_review.id_registrasi')
+        ->leftJoin('laporan_tinjauan','registrasi.id', '=', 'laporan_tinjauan.id_registrasi')
+        ->leftJoin('laporan_persiapan_sidang','registrasi.id', '=', 'laporan_persiapan_sidang.id_registrasi')
+        ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
+        ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
+       //  ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
+       
+       
+        ->where('registrasi.status_cancel','=',0)
+        ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit', 'penjadwalan.catatan_penjadwalan_audit1','penjadwalan.catatan_penjadwalan_audit2','penjadwalan.catatan_penjadwalan_tr','penjadwalan.catatan_penjadwalan_tinjauan');
+
         if($kodewilayah == '119'){            
-            $xdata = DB::table('registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('users','registrasi.id_user','=','users.id')
-                 /*->leftJoin('pembayaran','registrasi.id','=', 'pembayaran.id_registrasi')*/
-                 
-                 ->leftJoin('laporan_audit2','registrasi.id', '=', 'laporan_audit2.id_registrasi')
-                 ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
-                 ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
-                //  ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
-                
-                
-                 ->where('registrasi.status_cancel','=',0)
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.laporan_audit1_pelaksana1','penjadwalan.laporan_audit1_pelaksana2','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','penjadwalan.laporan_audit2_pelaksana1','penjadwalan.laporan_audit2_pelaksana2','penjadwalan.sppd_audit2_pelaksana1','penjadwalan.sppd_audit2_pelaksana2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit');
-               
-               
+            $xdata = $xdata->where('registrasi.status_cancel','=',0);
+     
         }else{            
-            $xdata = DB::table('registrasi')
-                ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                ->join('users','registrasi.id_user','=','users.id')
-                // ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')      
-                ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
-                ->leftJoin('laporan_audit2','registrasi.id', '=', 'laporan_audit2.id_registrasi')
-                 ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
-                 ->leftJoin('akad','registrasi.id', '=', 'akad.id_registrasi')
-
-                ->where('registrasi.kode_wilayah','=',$kodewilayah)
-                ->where('registrasi.status_cancel','=',0)
-                ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana12_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.laporan_audit1_pelaksana1','penjadwalan.laporan_audit1_pelaksana2','penjadwalan.laporan_audit2_pelaksana1','penjadwalan.laporan_audit2_pelaksana2','penjadwalan.sppd_audit2_pelaksana1','penjadwalan.sppd_audit2_pelaksana2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2');
+            $xdata = $xdata->where('registrasi.status_cancel','=',0)
+                    ->where('reistrasi.kode_wilayah','=',$kodewilayah);
                
 
         }
 
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['mulai'])){
-            $xdata = $xdata->where('mulai_audit1','LIKE','%'.$gdata['mulai'].'%');
-            $xdata = $xdata->where('mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
+        if(isset($gdata['nomor_id'])){
+            $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['nomor_id'].'%');
         }
 
+        if(isset($gdata['nama_perusahaan'])){
+            $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
+        }
+        
         $xdata = $xdata
                  ->orderBy('registrasi.updated_at','desc');
        
@@ -2390,25 +2384,10 @@ class RegistrasiController extends Controller
         }else{ 
             $dataHas = null;
         }     
+
+        $laporanAudit1 = json_decode($checkLaporanAudit1,true);
         
-        if(isset($checkLaporanAudit1[0])){ 
-                
-            $laporanAudit1 = json_decode($checkLaporanAudit1,true);
-        }else{
-            $model = new LaporanAudit1();
-            DB::beginTransaction();
-            //dd("masuk");
-            $model->id_registrasi = $id_registrasi;
-            $model->id_dokumen_has = $dataHas[0]['id'];
-            $model->save();
-            $reg->id_laporan_audit1 = $model->id;
-            $reg->save();
-
-            $laporanAudit1= $model;
-            DB::commit();
-
-            
-        }
+      
       
         //dd($dataHas);
         return view('penjadwalan.auditTahap1', compact('dataHas','dataRegis','laporanAudit1'));

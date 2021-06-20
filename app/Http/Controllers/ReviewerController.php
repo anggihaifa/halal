@@ -15,6 +15,8 @@ use App\Models\Penjadwalan;
 use App\Models\Akad;
 use App\Models\System\User;
 use App\Models\KebutuhanWaktuAudit;
+use App\Models\LaporanAudit1;
+use App\Jobs\SendEmailAuditor;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 
@@ -488,6 +490,8 @@ class ReviewerController extends Controller
     {
 
         $data = $request->except('_token','_method');
+       
+
         //dd($data);
 
 
@@ -495,28 +499,110 @@ class ReviewerController extends Controller
         $model = new Registrasi;
         $model2 = new Penjadwalan;
         $model3 = new User;
+        $model4 = new LaporanAudit1;
 
-        $e = $model->find($data['idregis']);
+        $e = $model->find($data['id']);
         $j = $model2->find($e->id_penjadwalan);
+        $l = $model4->find($e->id_laporan_audit1);
 
 
         //dd($j);
+
+        $checkHas =  DB::table('dokumen_has')
+        ->where('id_registrasi',$e->id)
+        ->get();
+
+        $dataHas = json_decode($checkHas,true);
+
+        if($l){ 
+            
+        }else{
+            $model = new LaporanAudit1();
+            DB::beginTransaction();
+            //dd("masuk");
+            $model4->id_registrasi = $id_registrasi;
+            $model4->id_dokumen_has = $dataHas[0]['id'];
+            $model4->save();
+            $e->id_laporan_audit1 = $model->id;
+            //$e->save();
+
+            
+        }
        
             //dd($data['idregis1']);
         if($data['jenis']== 'audit1'){
             $j->status_penjadwalan_audit1 = 3;
             $e->status = 8;
+            $j->catatan_penjadwalan_audit1 = $data['catatan_penjadwalan'];
+
+            if($data['pelaksana1']){
+                $str =  explode("_",$data['pelaksana1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'audit1');
+
+            }
             //dd("masuk");
         }else if($data['jenis']== 'audit2'){
             $j->status_penjadwalan_audit2 = 3;
             $e->status = 10;
+            $j->catatan_penjadwalan_audit2 = $data['catatan_penjadwalan'];
+
+
+            if($data['pelaksana1']){
+                $str =  explode("_",$data['pelaksana1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'audit2');
+
+            }if($data['pelaksana2']){
+
+                $str2 =  explode("_",$data['pelaksana2']);
+                $u2 = $model3->find($str2[0]);
+                
+                SendEmailAuditor::dispatch($u2,$e,$j,'audit2');
+            }
         }else if($data['jenis']== 'tr'){
             $e->status = '12';
             $j->status_penjadwalan_tr = 3;
+            $j->catatan_penjadwalan_tr = $data['catatan_penjadwalan'];
+
+
+            if($data['pelaksana1']){
+                $str =  explode("_",$data['pelaksana1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'tr');
+
+            }if($data['pelaksana2']){
+
+                $str2 =  explode("_",$data['pelaksana2']);
+                $u2 = $model3->find($str2[0]);
+                
+                SendEmailAuditor::dispatch($u2,$e,$j,'tr');
+            }
         }else if($data['jenis']== 'tinjauan'){
             $e->status = '14';
             $j->status_penjadwalan_tinjauan = 3;
+            $j->catatan_penjadwalan_tinjauan = $data['catatan_penjadwalan'];
+
+
+            if($data['pelaksana1']){
+                $str =  explode("_",$data['pelaksana1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'tinjauan');
+
+            }if($data['pelaksana2']){
+
+                $str2 =  explode("_",$data['pelaksana2']);
+                $u2 = $model3->find($str2[0]);
+                
+                SendEmailAuditor::dispatch($u2,$e,$j,'tinjauan');
+            }
         }
+        
+
         $e->save();
         $j->save();
     
@@ -527,19 +613,7 @@ class ReviewerController extends Controller
         try{
             DB::Commit();
 
-            // if($data['pelaksana1_audit1']){
-            //     $str =  explode("_",$data['pelaksana1_audit1']);
-            //     $u = $model3->find($str[0]);
-               
-            //     SendEmailAuditor::dispatch($u,$e,$j,'audit1');
-
-            // }if($data['pelaksana2_audit1']){
-
-            //     $str2 =  explode("_",$data['pelaksana2_audit1']);
-            //     $u2 = $model3->find($str2[0]);
-                
-            //     SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
-            // }
+           
             Session::flash('success', "data berhasil disimpan!");            
             $redirect = redirect()->route('listpenjadwalanreviewer');
 
@@ -570,7 +644,7 @@ class ReviewerController extends Controller
         $model2 = new Penjadwalan;
         $model3 = new User;
 
-        $e = $model->find($data['idregis']);
+        $e = $model->find($data['id']);
         $j = $model2->find($e->id_penjadwalan);
 
 
@@ -580,16 +654,26 @@ class ReviewerController extends Controller
         if($data['jenis']== 'audit1'){
             $j->status_penjadwalan_audit1 = 2;
             $e->status = '7_2';
+            $j->catatan_penjadwalan_audit1 = $data['catatan_penjadwalan'];
+            //dd($j->catatan_penjadwalan_audit1);
+
         }else if($data['jenis']== 'audit2'){
             $j->status_penjadwalan_audit2 = 2;
             $e->status = '9_2';
+            $j->catatan_penjadwalan_audit2 = $data['catatan_penjadwalan'];
+
         }else if($data['jenis']== 'tr'){
             $j->status_penjadwalan_tr = 2;
             $e->status = '11_2';
+            $j->catatan_penjadwalan_tr = $data['catatan_penjadwalan'];
+
         }else if($data['jenis']== 'tinjauan'){
             $j->status_penjadwalan_tinjauan = 2;
             $e->status = '13_2';
+            $j->catatan_penjadwalan_tinjauan= $data['catatan_penjadwalan'];
+
         }
+        //$j->catatan_penjadwalan = $data['catatan_penjadwalan'];
 
         $j->save();
         $e->save();

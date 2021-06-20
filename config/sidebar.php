@@ -308,6 +308,11 @@ return [
             'url' => 'listpenjadwalanreviewer'
         ],
         [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Persiapan Sidang Penetapan Kehalalan Produk',
+            'url' => 'listpersiapansidang'
+        ],
+        [
             'icon' => 'ion-ios-cube',
             'title' => 'Master',
             'url' => '#',

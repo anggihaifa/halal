@@ -15,12 +15,12 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Penjadwalan Reviewe</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Penjadwalan Reviewe</a></li>
+        <li class="breadcrumb-item"><a href="#">Penjadwalan Reviewer</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Penjadwalan Reviewer</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Penjadwalan Reviewe<small></small></h1>
+    <h1 class="page-header">List Penjadwalan Reviewer<small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
@@ -143,17 +143,202 @@
         <!-- end panel-body -->
 
     </div>
+    <div id="modalapprove" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <form action="{{route('approvepenjadwalanreviewer')}}" method="post"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Approve Penjadwalan</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">
+                        
+
+                        <div>
+                            <table class="table  table-sm table-borderless border-none">
+                            
+                                <tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class="control-label font-weight-bold" for="id">ID</label>  
+                                            <div >
+                                                <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly>
+                                            
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class="control-label font-weight-bold" for="jenis">Jenis</label>  
+                                            <div >
+                                                <input id="jenis"  name="jenis" type="text" placeholder="" class="form-control " readonly>
+                                            
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class="control-label font-weight-bold" for="pelaksana1">Pelaksana1</label>  
+                                            <div >
+                                                <input id="pelaksana1"  name="pelaksana1" type="text" placeholder="" class="form-control " readonly>
+                                            
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class="control-label font-weight-bold" for="pelaksana2">Pelaksana2</label>  
+                                            <div >
+                                                <input id="pelaksana2"  name="pelaksana2" type="text" placeholder="" class="form-control " readonly>
+                                            
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class=" control-label font-weight-bold" for="id">Catatan Penjadwalan</label>  
+                                                <div >
+                                                    <input type="text" id="catatan_penjadwalan" class="form-control"  name="catatan_penjadwalan" placeholder="" >
+                                                
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                            
+                                
+                        </div>
+
+
+
+                      
+                    </div>
+                 
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Submit</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+           
+            
+        </div>
+    </div>   
+
+    <div id="modalreject" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <form action="{{route('rejectpenjadwalanreviewer')}}" method="post"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Reject Penjadwalan</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">
+                        
+
+                        <div>
+                            <table class="table  table-sm table-borderless border-none">
+                            
+                                <tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class="control-label font-weight-bold" for="id">ID</label>  
+                                            <div >
+                                                <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly>
+                                            
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                            <label class="control-label font-weight-bold" for="jenis">Jenis</label>  
+                                            <div >
+                                                <input id="jenis"  name="jenis" type="text" placeholder="" class="form-control " readonly>
+                                            
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                  
+                                  
+                                
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class=" control-label font-weight-bold" for="id">Catatan Penjadwalan</label>  
+                                                <div >
+                                                    <input type="text" id="catatan_penjadwalan" class="form-control"  name="catatan_penjadwalan" placeholder="" >
+                                                
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                            
+                                
+                        </div>
+
+
+
+                      
+                    </div>
+                 
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Submit</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+           
+            
+        </div>
+    </div>   
+
      <!-- end panel -->
 
-     <!--modal-->
-      <!--modal-->
-    
-
-    <!--- Modal Audit 2 -->
-
-
-
-    
     
     
 @endsection
@@ -165,7 +350,7 @@
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-    
+
     <style type="text/css">
         td.details-control {
             text-align:center;
@@ -177,9 +362,102 @@
             color:red;
         }
     </style>
-
-
+    
     <script>
+        window.addEventListener('load', (event) => {
+            $('#modalapprove').find('form').trigger('reset');
+            
+            $('#modalreject').find('form').trigger('reset');
+            
+        });
+
+        $('#modalreject').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+    
+        
+        })
+
+        $('#modalapprove').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+    
+        
+        })
+
+         $('#modalapprove').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var id = $this.data('id');
+            var jenis = $this.data('jenis');
+            var catatan_penjadwalan = $this.data('catatan-penjadwalan');
+            var pelaksana1 = $this.data('pelaksana1');
+            var pelaksana2 = $this.data('pelaksana2');
+            
+            var modal = $('#modalapprove');
+           
+          
+            if(modal.find('#id').val()){
+               
+            }else{
+
+               
+                modal.find('#id').val(id);
+
+                modal.find('#jenis').val(jenis).change();   
+                modal.find('#catatan_penjadwalan').val(catatan_penjadwalan);
+                modal.find('#pelaksana1').val(pelaksana1);  
+                modal.find('#pelaksana2').val(pelaksana2);        
+               
+               
+                  
+                modal.find('#modalapprove').attr('action', function (i,old) {
+                   return old + '/' +id;
+            });  
+            }
+           
+
+        });
+
+         $('#modalreject').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var id = $this.data('id');
+            var jenis = $this.data('jenis');
+            var catatan_penjadwalan = $this.data('catatan-penjadwalan');
+            
+            var modal = $('#modalreject');
+           
+          
+            if(modal.find('#id').val()){
+               
+            }else{
+
+               
+                modal.find('#id').val(id);
+
+                modal.find('#jenis').val(jenis).change();   
+                modal.find('#catatan_penjadwalan').val(catatan_penjadwalan);        
+               
+               
+                  
+                modal.find('#modalapprove').attr('action', function (i,old) {
+                   return old + '/' +id;
+            });  
+            }
+           
+
+        });
+
+    
+    
+
+
+    
 
 
         
@@ -320,133 +598,83 @@
            
         
 
-            return '<table  class="table" cellspacing="0" style="width:100% padding-left:50px;">'+
-                '<thead style="background-color:#dff3e3;">'+
-                    '<th class="valign-middle text-center">No</th>'+
-                    '<th class="valign-middle text-center">Jenis</th>'+
-                    '<th class="valign-middle text-center">Mulai Audit</th>'+
-                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                    '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                    '<th class="valign-middle text-center">Status</th>'+
-                    '<th class="valign-middle text-center">Aksi</th>'+
-                    
-                '</thead>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">1</td>'+
-                    '<td class="valign-middle text-center">Audit Tahap 1</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
-                    '<td class="valign-middle text-center">-</td>'+
-                    '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_audit1)+'</td>'+
-                    '<td class="valign-middle text-center">'+
-                        '<form action="{{route("approvepenjadwalanreviewer")}}" method="post">'+    
-                            '@csrf'+
-                            '@method("PUT")'+
+            return '<table  class="ml-5 col-lg-11 table" cellspacing="0" style="width:100% padding-left:50px;">'+
+                    '<thead style="background-color:#dff3e3;">'+
+                        '<th class="valign-middle text-center">No</th>'+
+                        '<th class="valign-middle text-center">Jenis</th>'+
+                        '<th class="valign-middle text-center">Mulai Audit</th>'+
+                        '<th class="valign-middle text-center">Auditor/Komite</th>'+
+                        '<th class="valign-middle text-center">Auditor/Komite</th>'+
+                        '<th class="valign-middle text-center">Status</th>'+
+                        '<th class="valign-middle text-center">Aksi</th>'+
+                        
+                    '</thead>'+
+                    '<tr>'+
+                        '<td class="valign-middle text-center">A</td>'+
+                        '<td class="valign-middle text-center">Audit Tahap 1</td>'+
+                        '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
+                        '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
+                        '<td class="valign-middle text-center">-</td>'+
+                        '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_audit1)+'</td>'+
+                        '<td class="valign-middle text-center">'+
+                        
+                            '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal" data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1"  data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalapprove" >Approve</button>'+
+                            '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1" data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalreject" >Reject</button>'+
+                         
+                         '</td>'+
+                         
+                     '</tr>'+
+                     '<tr>'+
+                         '<td class="valign-middle text-center">B</td>'+
+                         '<td class="valign-middle text-center">Audit Tahap 2</td>'+
+                         '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
+                         '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
+                         '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
+                         '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_audit2)+'</td>'+
+                         '<td class="valign-middle text-center">'+
+                                 '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"   data-target="#modalapprove" >Approve</button>'+
+ 
+                                 '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"    data-target="#modalreject" >Reject</button>'+
+                                 
                             
-                            '<input type="text" name="idregis" value="'+d.id_regis+'" hidden></input>'+
-                            '<input type="text" name="jenis" value="audit1" hidden></input>'+
-                            '<button type="submit" class="btn btn-xs btn-green" style"color:white;">Approve</button>'+
-                            
-                        '</form>'+
-                        '<form action="{{route("rejectpenjadwalanreviewer")}}" method="post">'+    
-                            '@csrf'+
-                            '@method("PUT")'+
-                            
-                            '<input type="text" name="idregis" value="'+d.id_regis+'" hidden></input>'+
-                            '<input type="text" name="jenis" value="audit1" hidden></input>'+
-                            '<button type="submit" class="btn btn-xs btn-red" style"color:white;">reject</button>'+
-                            
-                        '</form>'+
-                    '</td>'+
-                    
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">2</td>'+
-                    '<td class="valign-middle text-center">Audit Tahap 2</td>'+
-                    '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
-                    '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_audit2)+'</td>'+
-                    '<td class="valign-middle text-center">'+
-                        '<form action="{{route("approvepenjadwalanreviewer")}}" method="post">'+    
-                            '@csrf'+
-                            '@method("PUT")'+
-                            
-                            '<input type="text" name="idregis" value="'+d.id_regis+'" hidden></input>'+
-                            '<input type="text" name="jenis" value="audit2" hidden></input>'+
-                            '<button type="submit" class="btn btn-xs btn-green" style"color:white;">Approve</button>'+
-                            
-                        '</form>'+
-                        '<form action="{{route("rejectpenjadwalanreviewer")}}" method="post">'+    
-                            '@csrf'+
-                            '@method("PUT")'+
-                            
-                            '<input type="text" name="idregis" value="'+d.id_regis+'" hidden></input>'+
-                            '<input type="text" name="jenis" value="audit2" hidden></input>'+
-                            '<button type="submit" class="btn btn-xs btn-red" style"color:white;">reject</button>'+
-                            
-                        '</form>'+
-                    '</td>'+
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">3</td>'+
-                    '<td class="valign-middle text-center">Tehnical Review</td>'+
-                    '<td class="valign-middle text-center">-</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_tr+'</td>'+ 
-                    '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_tr)+'</td>'+
-                    '<td class="valign-middle text-center">'+
-                        '<form action="{{route("approvepenjadwalanreviewer")}}" method="post">'+    
-                            '@csrf'+
-                            '@method("PUT")'+
-                            
-                            '<input type="text" name="idregis" value="'+d.id_regis+'" hidden></input>'+
-                            '<input type="text" name="jenis" value="tr" hidden></input>'+
-                            '<button type="submit" class="btn btn-xs btn-green" style"color:white;">Approve</button>'+
-                            
-                        '</form>'+
-                        '<form action="{{route("rejectpenjadwalanreviewer")}}" method="post">'+    
-                            '@csrf'+
-                            '@method("PUT")'+
-                            
-                            '<input type="text" name="idregis" value="'+d.id_regis+'" hidden></input>'+
-                            '<input type="text" name="jenis" value="tr" hidden></input>'+
-                            '<button type="submit" class="btn btn-xs btn-red" style"color:white;">reject</button>'+
-                            
-                        '</form>'+
-                    '</td>'+   
-                '</tr>'+
-                '<tr>'+
-                    '<td class="valign-middle text-center">4</td>'+
-                    '<td class="valign-middle text-center">Tinjauan Komite</td>'+
-                    '<td class="valign-middle text-center">-</td>'+
-                    '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
-                    '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
-                    '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_tinjauan)+'</td>'+
-                    '<td class="valign-middle text-center">'+
-                        '<form action="{{route("approvepenjadwalanreviewer")}}" method="post">'+    
-                            '@csrf'+
-                            '@method("PUT")'+
-                            
-                            '<input type="text" name="idregis" value="'+d.id_regis+'" hidden></input>'+
-                            '<input type="text" name="jenis" value="tinjauan" hidden></input>'+
-                            '<button type="submit" class="btn btn-xs btn-green" style"color:white;">Approve</button>'+
-                            
-                        '</form>'+
-                        '<form action="{{route("rejectpenjadwalanreviewer")}}" method="post">'+    
-                            '@csrf'+
-                            '@method("PUT")'+
-                            
-                            '<input type="text" name="idregis" value="'+d.id_regis+'" hidden></input>'+
-                            '<input type="text" name="jenis" value="tinjauan" hidden></input>'+
-                            '<button type="submit" class="btn btn-xs btn-red" style"color:white;">reject</button>'+
-                            
-                        '</form>'+
-                    '</td>'+
-                '</tr>'+
-                    
-               
-            '</table>';
+                         '</td>'+
+                     '</tr>'+
+                     '<tr>'+
+                         '<td class="valign-middle text-center">C</td>'+
+                         '<td class="valign-middle text-center">Tehnical Review</td>'+
+                         '<td class="valign-middle text-center">-</td>'+
+                         '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'</td>'+    
+                         '<td class="valign-middle text-center" >'+d.pelaksana2_tr+'</td>'+ 
+                         '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_tr)+'</td>'+
+                         '<td class="valign-middle text-center">'+
+                          
+    
+                                 '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr"  data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"   data-target="#modalapprove" >Approve</button>'+
+                     
+                                 '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr"  data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"  data-target="#modalreject" >Reject</button>'+
+                                 
+                             
+                         '</td>'+   
+                     '</tr>'+
+                     '<tr>'+
+                         '<td class="valign-middle text-center">D</td>'+
+                         '<td class="valign-middle text-center">Tinjauan Komite</td>'+
+                         '<td class="valign-middle text-center">-</td>'+
+                         '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
+                         '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
+                         '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_tinjauan)+'</td>'+
+                         '<td class="valign-middle text-center">'+
+ 
+                                 '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan"  data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"   data-target="#modalapprove" >Approve</button>'+
+                                 
+                                 '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>'+
+                                 
+                             
+                         '</td>'+
+                     '</tr>'+
+                         
+                 
+                 '</table>';
         }
 
         $('#tgl_registrasi').datepicker({

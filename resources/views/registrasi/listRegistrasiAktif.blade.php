@@ -63,7 +63,7 @@
                                                                             
                                             <div class="col-lg-5"></div>
                                             <div class="col-lg-4">
-                                                <a type="button" class="btn btn-sm btn-success " style="color:white;float:right;">Search</a>
+                                                <button type="submit" class="btn btn-sm btn-success " style="color:white;float:right;">Search</button>
                                                
                                             </div>
                                             <div class="col-lg-2"></div>
@@ -148,6 +148,11 @@
                                     <option value="SMH">SMH SNI 99001:2016</option>                                                                        
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label>Catatan Penjadwalan</label>
+                                <input type="text" class="form-control"
+                                id="catatan_penjadwalan" name="catatan_penjadwalan" readonly />
+                            </div>
 
                            
                            
@@ -223,6 +228,11 @@
                                     <option value="Remote">Remote Audit</option>                                                                        
                                 </select>
        
+                            </div>
+                            <div class="form-group">
+                                <label>Catatan Penjadwalan</label>
+                                <input type="text" class="form-control"
+                                id="catatan_penjadwalan" name="catatan_penjadwalan" readonly />
                             </div>
 
                             <!-- <div class="form-group">
@@ -318,7 +328,11 @@
                                     <option value="">==Pilih Tehnical Reviewer==</option>                                                                        
                                 </select>
                             </div>
-
+                            <div class="form-group">
+                                <label>Catatan Penjadwalan</label>
+                                <input type="text" class="form-control"
+                                id="catatan_penjadwalan" name="catatan_penjadwalan" readonly />
+                            </div>
                             <!-- <div class="form-group">
                                 <label>Auditor 3</label>
                                 <select id="pelaksana3_tr" name="pelaksana3_tr" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
@@ -384,6 +398,13 @@
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Catatan Penjadwalan</label>
+                                <input type="text" class="form-control"
+                                id="catatan_penjadwalan" name="catatan_penjadwalan" readonly />
+                            </div>
+                           
 
                             <!-- <div class="form-group">
                                 <label>Komite Sertifikasi 3</label>
@@ -463,7 +484,7 @@
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-
+    <script src="{{asset('/assets/js/filterData.js')}}"></script>
     
     <script>
 
@@ -514,17 +535,19 @@
 
             var $this = $(e.relatedTarget);
             
-            var data_id = $this.data('id');
+            var id = $this.data('id');
+            var catatan_penjadwalan = $this.data('catatan-penjadwalan');
             var modal = $('#modalPenjadwalan1');
            
           
             if(modal.find('#idregis1').val()){
 
             }else{
-                modal.find('#idregis1').val(data_id);
+                modal.find('#idregis1').val(id);
+                modal.find('#catatan_penjadwalan').val(catatan_penjadwalan);
                   
                 modal.find('#formpenjadwalan1').attr('action', function (i,old) {
-                   return old + '/' + data_id;
+                   return old + '/' + id;
             });  
             }
            
@@ -540,6 +563,7 @@
             
             var data_id = $this.data('id');
             var data_saran1 = $this.data('pelaksana1');
+            var catatan_penjadwalan = $this.data('catatan-penjadwalan');
 
             if(data_saran1 != null){
                 if (data_saran1.indexOf('_') > -1)
@@ -556,15 +580,14 @@
             var modal = $('#modalPenjadwalan2');
 
            //alert($this.data('pelaksana1'));
-           var z = document.getElementById("idregis2"); 
-
-           var x = document.getElementById("saran1"); 
+          
            //var y = document.getElementById("saran2"); 
           
             if(modal.find('#idregis2').val()){
 
             }else{
 
+                modal.find('#catatan_penjadwalan').val(catatan_penjadwalan);
                 modal.find("#idregis2").val(data_id);
                 //x.innerHTML = '<b>'+data_saran1+'</b>' ;
                 modal.find("#saran1").text(data_saran1);
@@ -608,13 +631,13 @@
             
             var data_id = $this.data('id');
             var modal = $('#modalPenjadwalan3');
-           
+            var catatan_penjadwalan = $this.data('catatan-penjadwalan');
           
             if(modal.find('#idregis3').val()){
 
             }else{
                 modal.find('#idregis3').val(data_id);
-                  
+                modal.find('#catatan_penjadwalan').val(catatan_penjadwalan);  
                 modal.find('#formpenjadwalan3').attr('action', function (i,old) {
                    return old + '/' + data_id;
                 });  
@@ -662,7 +685,7 @@
             
             var data_id = $this.data('id');
             var modal = $('#modalPenjadwalan4');
-           
+            var catatan_penjadwalan = $this.data('catatan-penjadwalan');
 
           
             if(modal.find('#idregis4').val()){
@@ -671,7 +694,7 @@
 
             }else{
                 modal.find('#idregis4').val(data_id);
-                  
+                modal.find('#catatan_penjadwalan').val(catatan_penjadwalan);  
                 modal.find('#formpenjadwalan4').attr('action', function (i,old) {
                    return old + '/' + data_id;
                 });  
@@ -1132,6 +1155,531 @@
               currency: 'IDR'
             });
         }
+
+        var xTable = $('#table').DataTable({
+                ajax:{
+                    url:"{{route('dataregistrasipelangganaktif')}}",
+                    data:function(d){
+                        d.no_registrasi = $('input[name=nomor_id]').val();
+                        d.mulai_audit1 = $('input[name=mulai_audit1]').val();
+     
+
+                    }
+                },
+                
+                columns:[
+                   
+                   {
+                        "data":'no_registrasi',
+                        
+                        "render":function (data,type,full,meta) {
+
+                            
+                            // var key = 'base64:Vm437YM3oDMW9KbhaCp4eW+iMguVZQYhnjBixWAWI8U=';
+                            // var full.id = encodeURIComponent(CryptoJS.AES.encrypt(full.id.toString(), key).toString());
+                            // var full.id_user = encodeURIComponent(CryptoJS.AES.encrypt(full.id_user.toString(), key).toString());
+                            // var full.no_registrasi = encodeURIComponent(CryptoJS.AES.encrypt(full.no_registrasi.toString(), key).toString());
+                            
+                            //console.log(full.id);
+
+                            var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+
+                            var status1 = (full.status == 1) ? dButton('Pengajuan Baru'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data?')">Pengajuan Baru</a>`;
+                           
+                            var status2 = (full.status == 2) ? dButton('Verifikasi Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Verifikasi Berkas??')">Verifikasi Berkas</a>`;
+
+                            var status2_0 = (full.status == '2_0') ? dButton('Belum Upload Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Berkas??')">Belum Upload Berkas</a>`;
+
+                            var status2_1 = (full.status == '2_1') ? dButton('Menunggu Admin Memverifikasi Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Admin Memverifikasi Berkas??')">Menunggu Admin Memverifikasi Berkas</a>`;
+
+                            var status2_2 = (full.status == '2_2') ? dButton('Perbaikan Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Berkas??')">Perbaikan Berkas</a>`;
+
+                            var status2_3 = (full.status == '2_3') ? dButton('Berkas Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Berkas Terkonfirmasi??')">Berkas Terkonfirmasi</a>`;
+                            
+                            var status3 = (full.status == 3) ? dButton('Menentukan Kebutuhan Waktu Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menentukan Kebutuhan Waktu Audit??')">Menentukan Kebutuhan Waktu Audit</a>`;
+
+                            var status3_0 = (full.status == '3_0') ? dButton('Belum Ditentukan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Ditentukan??')">Belum Ditentukan</a>`;
+
+                            var status3_1 = (full.status == '3_1') ? dButton('Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit??')">Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit</a>`;
+
+                            var status3_2 = (full.status == '3_2') ? dButton('Perbaikan Kebutuhan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Kebutuhan Audit??')">Perbaikan Kebutuhan Audit</a>`;
+
+                            var status3_3 = (full.status == '3_3') ? dButton('Kebutuhan Waktu Audit Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Kebutuhan Waktu Audit Terkonfirmasi??')">Kebutuhan Waktu Audit Terkonfirmasi</a>`;
+
+                            var status4 = (full.status == 4) ? dButton('Penawaran Harga dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penawaran Harga dan Akad??')">Penawaran Harga dan Akad</a>`;
+
+                            var status4_0 = (full.status == '4_0') ? dButton('Belum Upload Bukti Penawaran dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Penawaran dan Akad??')">Belum Upload Bukti Penawaran dan Akad</a>`;
+
+                            var status4_1 = (full.status == '4_1') ? dButton('Sudah Upload Bukti Penawaran dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Sudah Upload Bukti Penawaran dan Akad??')">Sudah Upload Bukti Penawaran dan Akad</a>`;
+
+                            var status6 = (full.status == 6) ? dButton('Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran??')">Pembayaran</a>`;
+
+                            var status6_0 = (full.status == '6_0') ? dButton('Belum Upload Bukti Bayar'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Bayar??')">Belum Upload Bukti Bayar</a>`;
+
+                            var status6_1 = (full.status == '6_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pembayaran??')">Menunggu Sales Officer Mengkonfirmasi Pembayaran</a>`;
+
+                            var status6_2 = (full.status == '6_2') ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Gagal??')">Pembayaran Gagal</a>`;
+
+                            var status6_3 = (full.status == '6_3') ? dButton('Pembayaran Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Terkonfirmasi??')">Pembayaran Terkonfirmasi</a>`;
+                            
+                            var status5 = (full.status == 5) ? dButton('Penerbitan Order Confirmation'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan Order Confirmation??')">Penerbitan Order Confirmation (OC)</a>`;
+
+                            var status5_0 = (full.status == '5_0') ? dButton('Belum Upload OC'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload OC??')">Belum Upload OC</a>`;
+
+                            var status5_1 = (full.status == '5_1') ? dButton('Menunggu Pelanggan Upload Ulang OC'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelanggan Upload Ulang OC??')">Menunggu Pelanggan Upload Ulang OC</a>`;
+
+                            var status5_2 = (full.status == '5_2') ? dButton('Menunggu Konfirmasi Admin'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Konfirmasi Admin??')">Menunggu Konfirmasi Admin</a>`;
+
+                            var status5_3 = (full.status == '5_3') ? dButton('Penerbitan OC Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Gagal??')">Penerbitan OC Gagal</a>`;
+
+                            var status5_4 = (full.status == '5_4') ? dButton('Penerbitan OC Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Terkonfirmasi??')">Penerbitan OC Terkonfirmasi</a>`;
+
+                            var status7 = (full.status == 7) ? dButton('Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan??')">Penjadwalan</a>`;
+
+                            var status7_0 = (full.status == '7_0') ? dButton('Belum Dijadwalkan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Dijadwalkan??')">Belum Dijadwalkan</a>`;
+
+                            var status7_1 = (full.status == '7_1') ? dButton('Menunggu Reviewer Mengkonfirmasi Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Mengkonfirmasi Penjadwalan??')">Menunggu Reviewer Mengkonfirmasi Penjadwalan</a>`;
+
+                            var status7_2 = (full.status == '7_2') ? dButton('Perbaikan Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Penjadwalan??')">Menunggu Konfirmasi Admin</a>`;
+
+                            var status7_3 = (full.status == '7_3') ? dButton('Penjadwalan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan Terkonfirmasi??')">Penjadwalan Terkonfirmasi</a>`;
+
+                            var status8 = (full.status == 8) ? dButton('Proses Audit Tahap 1'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 1??')">Proses Audit Tahap 1</a>`;
+
+                            var status8_1 = (full.status == '8_1') ? dButton('Menunggu Auditor Memverifikasi berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Auditor Memverifikasi berkas??')">Menunggu Auditor Memverifikasi berkas</a>`;
+
+                            var status8_2 = (full.status == '8_2') ? dButton('Perbaikan Berkas Audit Tahap 1'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Berkas Audit Tahap 1??')">Perbaikan Berkas Audit Tahap 1</a>`;
+
+                            var status8_3 = (full.status == '8_3') ? dButton('Audit Tahap 1 Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Audit Tahap 1 Selesai??')">Audit Tahap 1 Selesai</a>`;
+
+                            var status9 = (full.status == 9) ? dButton('Pembayaran Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2??')">Pembayaran Tahap 2</a>`;
+
+                            var status9_0 = (full.status == '9_0') ? dButton('Belum Upload Bukti Bayar'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Bayar??')">Belum Upload Bukti Bayar</a>`;
+
+                            var status9_1 = (full.status == '9_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2??')">Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2</a>`;
+
+                            var status9_2 = (full.status == '9_2') ? dButton('Pembayaran Tahap 2 Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Gagal??')">Pembayaran Tahap 2 Gagal</a>`;
+
+                            var status9_3 = (full.status == '9_3') ? dButton('Pembayaran Tahap 2 Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Terkonfirmasi??')">Pembayaran Tahap 2 Terkonfirmasi</a>`;
+
+                            var status10 = (full.status == 10) ? dButton('Proses Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 2??')">Proses Audit Tahap 2</a>`;
+
+                            var status10_0 = (full.status == '10_0') ? dButton('Belum Upload Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Audit Plan??')">Belum Upload Audit Plan</a>`;
+
+                            var status10_1 = (full.status == '10_1') ? dButton('Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan??')">Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan</a>`;
+
+                            var status10_2 = (full.status == '10_2') ? dButton('Pelaku Usaha Menolak Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelaku Usaha Menolak Audit Plan??')">Pelaku Usaha Menolak Audit Plan</a>`;
+
+                            var status10_3 = (full.status == '10_3') ? dButton('Audit Plan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Audit Plan Terkonfirmasi??')">Audit Plan Terkonfirmasi</a>`;
+
+                            var status10_4 = (full.status == '10_4') ? dButton('Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Auditi??')">Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Audit</a>`;
+                            
+                            var status10_5 = (full.status == '10_5') ? dButton('Perbaikan Laporan Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_5" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Laporan Audit Tahap 2??')">Perbaikan Laporan Audit Tahap 2</a>`;
+
+                            var status10_6 = (full.status == '10_6') ? dButton('Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_6" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit??')">Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit</a>`;
+
+                            var status10_7 = (full.status == '10_7') ? dButton('Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit??')">Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit</a>`;
+
+                            var status10_8 = (full.status == '10_8') ? dButton('Laporan Audit Tahap 2 Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_8" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Laporan Audit Tahap 2 Terkonfirmasi??')">Laporan Audit Tahap 2 Terkonfirmasi</a>`;
+
+                            var status11 = (full.status == 11) ? dButton('Penyampaian Berita Acara'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 1??')">Proses Audit Tahap 1</a>`;
+
+                            var status11_1 = (full.status == '11_1') ? dButton('Menunggu Pelanggan Upload Ulang Berita Acara'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelanggan Upload Ulang Berita Acara??')">Menunggu Pelanggan Upload Ulang Berita Acara</a>`;
+
+                            var status11_2 = (full.status == '11_2') ? dButton('Berita Acara Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Berita Acara Terkonfirmasi??')">Berita Acara Terkonfirmasi</a>`;
+
+                            var status12 = (full.status == 12) ? dButton('Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan??')">Pelunasan</a>`;
+
+                            var status12_0 = (full.status == '12_0') ? dButton('Belum Upload Bukti Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Pelunasan??')">Belum Upload Bukti Pelunasan</a>`;
+
+                            var status12_1 = (full.status == '12_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pelunasan??')">Menunggu Sales Officer Mengkonfirmasi Pelunasan</a>`;
+
+                            var status12_2 = (full.status == '12_2') ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Gagal??')">Pelunasan Gagal</a>`;
+
+                            var status12_3 = (full.status == '12_3') ? dButton('Pelunasan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Terkonfirmasi??')">Pelunasan Terkonfirmasi</a>`;
+
+                            var status13 = (full.status == 13) ? dButton('Proses Sidang Fatwa'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/13" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data ke tahapan Proses Sidang Fatwa?')">Proses Sidang Fatwa</a>`;
+
+                            var upload = `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
+
+                            
+                            var konfirmAkad = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`/`+full.status_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
+                           
+                            var konfirmBayar3 = (full.status ==  '12_3') ? dButton('Konfirmasi dan Upload Invoice'):`<a href="{{url('upload_invoice')}}/`+full.id+`" class="dropdown-item" >Konfirmasi dan Upload Invoice</a>`;
+                           
+                            var konfirmBayar2 = (full.status == '9_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_tahap2')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
+                           
+                            var konfirmBayar1 = (full.status == '5_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
+
+                            var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
+
+                            var audit1 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-catatan-penjadwalan='`+full.catatan_penjadwalan_audit1+`' data-target='#modalPenjadwalan1' style="cursor:pointer">Audit Tahap 1</a>`;
+                            var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-target='#modalPenjadwalan2' data-catatan-penjadwalan='`+full.catatan_penjadwalan_audit2+`' style="cursor:pointer">Audit Tahap 2</a>`;
+                            var tehnicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-catatan-penjadwalan='`+full.catatan_penjadwalan_tr+`'  data-target='#modalPenjadwalan3' style="cursor:pointer">Tehnical Review</a>`;
+                            var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-catatan-penjadwalan='`+full.catatan_penjadwalan_tinjauan+`'  data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite</a>`;
+
+                            var ksb = `<a class="dropdown-item" style="cursor:pointer" href="{{url('upload_ksb')}}/`+full.id+`">Input Berkas Konfirmasi, Surat Tugas dan Berita Acara</a>`;
+                            
+                            if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
+                                var unduhAkad = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                             
+                            }else{
+
+                                var unduhAkad = `<a href="{{ url('').Storage::url('public/buktiakad/`+full.id_user+`/`+full.file_akad+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            }
+                            if(full.status_tahap1 == null || full.status_tahap1 == 0 ){
+                                var unduhBayar1 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                             
+                            }else{
+
+                                var unduhBayar1 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            }
+                            if(full.status_tahap2 == null || full.status_tahap2 == 0 ){
+                                var unduhBayar2 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                              
+                            }else{
+
+                                var unduhBayar2 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap2+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            }
+                            if(full.status_tahap3 == null || full.status_tahap3 == 0 ){
+                                var unduhBayar3 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                             
+                            }else{
+
+                                var unduhBayar3 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap3+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            }
+                            if(full.file_bap == null ){
+                                var unduhBAP = `<a style="background-color:red; color:white; border-radius:4px;">&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+                            }else{            
+                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}" style="background-color:green; color:white; border-radius:4px;"  download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+                            } 
+
+                            if(full.file_surat_tugas == null ){
+                                var unduhST = `<a  style="background-color:red; color:white; border-radius:4px;">&nbsp;&nbsp;ST&nbsp;&nbsp;</a>`;
+                            }else{              
+                                var unduhST = `<a href="{{ url('').Storage::url('public/laporan/upload/Surat Tugas/`+full.file_surat_tugas+`') }}" style="background-color:green; color:white; border-radius:4px;"   download>&nbsp;&nbsp;ST&nbsp;&nbsp;</a>`;
+                            } 
+                            if(full.file_konfirmasi_sk_audit == null ){
+                               
+                                var unduhKSA = `<a style="background-color:red ; color:white; border-radius:4px;">&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
+                            }else{              
+                                
+                                var unduhKSA = `<a style="background-color:green; color:white; border-radius:4px;" href="{{ url('').Storage::url('public/laporan/upload/Konfirmasi SK Audit/`+full.file_konfirmasi_sk_audit+`') }}" download>&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
+                            } 
+
+                            
+                            if(full.status == 7 || full.status == '7_1' || full.status == '7_2' || full.status == '7_3' ){
+                                  var penjadwalan = audit1  ;
+                            }else if(full.status == 9 || full.status == '9_1' || full.status == '9_2' || full.status == '9_3' ){
+                                var penjadwalan = audit2+ksb;
+                            }else if(full.status == 11 || full.status == '11_1' || full.status == '11_2' || full.status == '11_3' ){
+                                var penjadwalan = tehnicalReview;
+                            }else if(full.status == 13 || full.status == '13_1' || full.status == '13_2' || full.status == '13_3' ){
+                                var penjadwalan = tinjauan;
+                            }else{
+                                var penjadwalan = "Belum masuk tahapan";
+                            }
+                           
+                           
+
+                            //var kw = full.kode_wilayah;
+
+                            var ddCabang = `<form action="{{route('registrasi.updatecabang')}}" method="post">    
+                                                @csrf
+                                                @method('PUT')
+                                               
+                                                <input type="text" name="id" value="`+full.id+`" hidden></input>
+                                                <select id="kode_wilayah" name="kode_wilayah" class="form-control" onchange="this.form.submit()">
+
+                                                    <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
+                                                    
+                                                    @if($cabang != null)
+                                                        @foreach($cabang as $dataCabang =>$value)
+
+                                                            <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
+                                                            </option>
+                                                        
+                                                        @endforeach
+                                                    @endif
+
+                                                </select>
+                                            </form>`;
+                            
+                            return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
+                                    
+                                   
+                                    
+                                       
+                                        <div class="col-lg-5 row" >
+                                            <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-building text-primary" style="font-size:600%"></i>
+                                            </div>
+                                            <div class="col-lg-8 ">
+                                                <h4 class="text-grey" style=>`+full.nama_perusahaan+`</h4>
+                                                <a  href="{{url('detail_registrasi')}}/`+full.id+`"  style="color: white; " class="label label-success">NOMOR ID: `+full.no_registrasi+`</a><br> 
+                                                <i class="fa fa-info text-primary" ></i> 
+                                                `+full.kelompok+`<br>
+                                                <i class="fa fa-info text-primary" ></i>
+                                                `+full.jenis+`<br>
+                                                <i class="fa fa-info text-primary" ></i> Alamat: 
+                                                `+full.alamat_perusahaan+`<br>
+                                                <i class="fa fa-info text-primary" ></i> Status Registrasi: 
+                                                `+full.status_registrasi+`<br>
+                                                <i class="fa fa-info text-primary" ></i> Tanggal Update: 
+                                                `+full.updated_at+`<br>
+                                                
+                                            </div>     
+                                            
+                                           
+                                        </div>
+                                      
+
+                                        <div class="col-lg-7 row d-flex justify-content-center" >
+
+                                            <div class="card border-0 ">
+                                                <div class="card-header tab-overflow p-t-0 p-b-0 ">
+                                                    <ul class="nav nav-tabs card-header-tabs">
+                                                        
+                                                        <li class="nav-item text-center">
+                                                            
+                                                            
+                                                            <a class="nav-link active" data-toggle="tab" href="#card-tab-1-`+full.id+`">Detail</a>
+                                                        </li>
+                                                      
+                                                        <li class="nav-item text-center">
+                                                            
+                                                            <a class="nav-link" data-toggle="tab" href="#card-tab-2-`+full.id+`">Akad</a>
+                                                        </li>
+                                                        <li class="nav-item text-center">
+                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-4-`+full.id+`">Penjadwalan</a>
+                                                        </li>
+                                                        <li class="nav-item text-center">
+                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-3-`+full.id+`">Pembayaran</a>
+                                                        </li>
+                                                       
+                                                       
+                                                        
+                                                        
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-body p-0 m-0" >
+                                                <div class="tab-content p-0 m-0">
+                                                    <div class="tab-pane fade active show" id="card-tab-1-`+full.id+`">
+
+                                                        <table class="table table-sm"> 
+                                                        <tr>
+                                                            <td class="text-center"  style="width:20%">Progres</td>
+                                                            <td class="text-center"  style="width:10%">Status Berkas</td>
+                                                            <td class="text-center"  style="width:25%">Cabang Auditor</td>
+                                                            <td class="text-center"  style="width:10%">Aksi</td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                        <td class="text-center align-middle"  style="width:20%">
+                                                            `+checkProgress(full.status)+`
+                                                        </td>
+                                                        <td class="text-center align-middle"  style="width:20%">
+                                                            `+checkStatusBerkas(full.status_berkas)+`
+                                                        </td>
+
+                                                        <td class="text-center align-middle" style="width:25%">
+                                                            `+ddCabang+`
+                                                               
+                                                            
+                                                        
+                                                        </td>
+
+                                                        <td class="text-center align-middle">
+                                                            <div class="btn-group m-r-5 show">
+                                                            <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                                                <a href="{{url('verifikasi_dokumen_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit">
+
+                                                                    </i> Lihat Dokumen
+                                                                </a>
+                                                                <div class="dropdown-divider"></div>
+
+                                                                <div class="dropdown-button-title">Update Progress</div>`+status1+status2+status3+status4+status5+status6+status7+status8+status9+status10+status11+status12+status13+`
+                                                            </div> 
+                                                        </div>
+                                                        </td>
+                                                        </tr>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="tab-pane fade" id="card-tab-2-`+full.id+`">
+
+                                                        <table class="table table-sm"> 
+                                                        <tr>
+                                                            <td class="text-center">Tipe</td>
+                                                            <td class="text-center">Status</td>
+                                                            <td class="text-center">Total Biaya</td>
+                                                            <td class="text-center">Bukti Akad</td>
+                                                           
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                        <td class="text-center">
+                                                            Akad
+                                                        </td>
+                                                        <td class="text-center align-middle" style="max-width:20%;">
+                                                            `+checkStatusAkad(full.status_akad)+`
+                                                        </td>
+
+                                                        <td class="text-center align-middle">
+                                                            `+formatRupiah(full.total_biaya)+`
+                                                        </td>
+                                                        
+                                                        <td class="text-center align-middle">
+                                                            `+unduhAkad+`
+
+                                                        </td>
+
+                                                       
+                                                        </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="card-tab-3-`+full.id+`">
+
+                                                        <table class="table table-sm">
+                                                        <tr>
+                                                            <td class="text-center">Status Tahap 1</td>
+                                                            <td class="text-center">Status Tahap 2</td>
+                                                            <td class="text-center">Status Pelunasan</td>
+                                                            <td class="text-center">Nominal Total</td>
+                                                      
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                       
+                                                        <td class="text-center align-middle"  style="max-width:20%;">
+                                                            `+checkStatusPembayaran(full.status_tahap1)+`
+                                                        </td>
+                                                        <td class="text-center align-middle"  style="max-width:20%;">
+                                                            `+checkStatusPembayaran(full.status_tahap2)+`
+                                                        </td>
+                                                        <td class="text-center align-middle"  style="max-width:20%;">
+                                                            `+checkStatusPembayaran(full.status_tahap3)+`
+                                                        </td>
+
+                                                        <td class="text-center align-middle">
+                                                            `+formatRupiah(full.total_biaya)+`
+                                                        </td>
+                                                         
+                                                       
+                                                        </table>
+                                                    </div>  
+                                                    <div class="tab-pane fade" id="card-tab-4-`+full.id+`">
+
+                                                        <table class="table table-sm">
+                                                        <tr>
+                                                            <td class="text-center align-middle">Status Tahap 1</td>
+                                                            <td class="text-center align-middle">Status Tahap 2</td>
+                                                            <td class="text-center align-middle">Status TR</td>
+                                                            <td class="text-center align-middle">Status KS</td>
+                                                           
+                                                            <td class="text-center align-middle">File</td>
+                                                            <td class="text-center align-middle">Aksi</td>
+                                                        </tr>
+
+                                                       
+                                                        
+                                                        <tr>
+                                                           
+                                                            <td class="text-center align-middle"  style="max-width:20%;">
+                                                                `+checkPenjadwalan(full.status_penjadwalan_audit1)+`
+                                                            </td>
+                                                            
+                                                            <td class="text-center align-middle"  style="max-width:20%;">
+                                                                `+checkPenjadwalan(full.status_penjadwalan_audit2)+`
+                                                            </td>
+                                                            <td class="text-center align-middle"  style="max-width:20%;">
+                                                                `+checkPenjadwalan(full.status_penjadwalan_tr)+`
+                                                            </td>
+                                                            
+                                                            <td class="text-center align-middle"  style="max-width:20%;">
+                                                                `+checkPenjadwalan(full.status_penjadwalan_tinjauan)+`
+                                                            </td>
+                                                            <td>
+                                                                <table class="table table-borderless">
+                                                                    <tr>
+                                                                        <td class="text-center">
+                                                                        `+unduhBAP+`
+                                                                        </td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                        <td class="text-center">
+                                                                        `+unduhST+`
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center">
+                                                                        `+unduhKSA+`
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+
+                                                            
+                                                            <td class="text-center align-middle">
+                                                                <table class="table-borderless text-center align-middle">
+                                                                <tr>
+                                                                    <td class="text-center align-middle">
+                                                                        <i class="fa fa-eye" aria-hidden="true" data-toggle='modal' data-pelaksana1-audit1='`+full.pelaksana1_audit1+`' data-pelaksana1-audit2='`+full.pelaksana1_audit2+`' data-pelaksana2-audit2='`+full.pelaksana2_audit2+`' data-pelaksana1-tr='`+full.pelaksana1_tr+`' data-pelaksana2-tr='`+full.pelaksana2_tr+`' data-pelaksana1-tinjauan='`+full.pelaksana1_tinjauan+`' data-pelaksana2-tinjauan='`+full.pelaksana2_tinjauan+`' 
+                                                                        data-mulai-audit1='`+full.mulai_audit1+`' 
+                                                                        data-mulai-audit2='`+full.mulai_audit2+`'  data-target='#modaljadwal'></i>
+
+                                                                    </td>
+                                                                </tr>
+                                                                <tr >
+                                                                    <td class="text-center align-middle">
+
+                                                                    <div class="btn-group m-r-5 show">
+                                                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
+                                                                            <b class="ion-ios-arrow-down"></b>
+                                                                        </a>
+                                                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> `
+                                                                            +penjadwalan+
+                                                                        `</div>
+                                                                    </div>
+                                                                    </td>
+                                                                   
+
+                                                                </tr>
+                                                                </table>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                        </table>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`  
+                        }
+                    }
+                ],
+                
+              
+               
+               //tambahkan bkti bayar 1,2,3, bkti kontrak akad, berita acara,
+                
+                processing:true,
+                serverSide:true,
+                order:[[0,'asc']],
+                bFilter: false,
+                bSortable: false,
+                bInfo: false,
+                lengthChange: false,
+                ordering: false
+
+            });
       
         $(document).ready(function () {
 
@@ -1593,530 +2141,7 @@
             //     })
             // });
 
-            var xTable = $('#table').DataTable({
-                ajax:{
-                    url:"{{route('dataregistrasipelangganaktif')}}",
-                    data:function(d){
-                        d.no_registrasi = $('input[name=nomor_id]').val();
-                        d.mulai_audit1 = $('input[name=mulai_audit1]').val();
-     
-
-                    }
-                },
-                
-                columns:[
-                   
-                   {
-                        "data":'no_registrasi',
-                        
-                        "render":function (data,type,full,meta) {
-
-                            
-                            // var key = 'base64:Vm437YM3oDMW9KbhaCp4eW+iMguVZQYhnjBixWAWI8U=';
-                            // var full.id = encodeURIComponent(CryptoJS.AES.encrypt(full.id.toString(), key).toString());
-                            // var full.id_user = encodeURIComponent(CryptoJS.AES.encrypt(full.id_user.toString(), key).toString());
-                            // var full.no_registrasi = encodeURIComponent(CryptoJS.AES.encrypt(full.no_registrasi.toString(), key).toString());
-                            
-                            //console.log(full.id);
-
-                            var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
-
-                            var status1 = (full.status == 1) ? dButton('Pengajuan Baru'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data?')">Pengajuan Baru</a>`;
-                           
-                            var status2 = (full.status == 2) ? dButton('Verifikasi Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Verifikasi Berkas??')">Verifikasi Berkas</a>`;
-
-                            var status2_0 = (full.status == '2_0') ? dButton('Belum Upload Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Berkas??')">Belum Upload Berkas</a>`;
-
-                            var status2_1 = (full.status == '2_1') ? dButton('Menunggu Admin Memverifikasi Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Admin Memverifikasi Berkas??')">Menunggu Admin Memverifikasi Berkas</a>`;
-
-                            var status2_2 = (full.status == '2_2') ? dButton('Perbaikan Berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Berkas??')">Perbaikan Berkas</a>`;
-
-                            var status2_3 = (full.status == '2_3') ? dButton('Berkas Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/2_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Berkas Terkonfirmasi??')">Berkas Terkonfirmasi</a>`;
-                            
-                            var status3 = (full.status == 3) ? dButton('Menentukan Kebutuhan Waktu Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menentukan Kebutuhan Waktu Audit??')">Menentukan Kebutuhan Waktu Audit</a>`;
-
-                            var status3_0 = (full.status == '3_0') ? dButton('Belum Ditentukan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Ditentukan??')">Belum Ditentukan</a>`;
-
-                            var status3_1 = (full.status == '3_1') ? dButton('Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit??')">Menunggu Reviewer Mengkonfirmasi Kebutuhan Audit</a>`;
-
-                            var status3_2 = (full.status == '3_2') ? dButton('Perbaikan Kebutuhan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Kebutuhan Audit??')">Perbaikan Kebutuhan Audit</a>`;
-
-                            var status3_3 = (full.status == '3_3') ? dButton('Kebutuhan Waktu Audit Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/3_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Kebutuhan Waktu Audit Terkonfirmasi??')">Kebutuhan Waktu Audit Terkonfirmasi</a>`;
-
-                            var status4 = (full.status == 4) ? dButton('Penawaran Harga dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penawaran Harga dan Akad??')">Penawaran Harga dan Akad</a>`;
-
-                            var status4_0 = (full.status == '4_0') ? dButton('Belum Upload Bukti Penawaran dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Penawaran dan Akad??')">Belum Upload Bukti Penawaran dan Akad</a>`;
-
-                            var status4_1 = (full.status == '4_1') ? dButton('Sudah Upload Bukti Penawaran dan Akad'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/4_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Sudah Upload Bukti Penawaran dan Akad??')">Sudah Upload Bukti Penawaran dan Akad</a>`;
-
-                            var status6 = (full.status == 6) ? dButton('Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran??')">Pembayaran</a>`;
-
-                            var status6_0 = (full.status == '6_0') ? dButton('Belum Upload Bukti Bayar'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Bayar??')">Belum Upload Bukti Bayar</a>`;
-
-                            var status6_1 = (full.status == '6_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pembayaran'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pembayaran??')">Menunggu Sales Officer Mengkonfirmasi Pembayaran</a>`;
-
-                            var status6_2 = (full.status == '6_2') ? dButton('Pembayaran Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Gagal??')">Pembayaran Gagal</a>`;
-
-                            var status6_3 = (full.status == '6_3') ? dButton('Pembayaran Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/6_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Terkonfirmasi??')">Pembayaran Terkonfirmasi</a>`;
-                            
-                            var status5 = (full.status == 5) ? dButton('Penerbitan Order Confirmation'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan Order Confirmation??')">Penerbitan Order Confirmation (OC)</a>`;
-
-                            var status5_0 = (full.status == '5_0') ? dButton('Belum Upload OC'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload OC??')">Belum Upload OC</a>`;
-
-                            var status5_1 = (full.status == '5_1') ? dButton('Menunggu Pelanggan Upload Ulang OC'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelanggan Upload Ulang OC??')">Menunggu Pelanggan Upload Ulang OC</a>`;
-
-                            var status5_2 = (full.status == '5_2') ? dButton('Menunggu Konfirmasi Admin'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Konfirmasi Admin??')">Menunggu Konfirmasi Admin</a>`;
-
-                            var status5_3 = (full.status == '5_3') ? dButton('Penerbitan OC Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Gagal??')">Penerbitan OC Gagal</a>`;
-
-                            var status5_4 = (full.status == '5_4') ? dButton('Penerbitan OC Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/5_4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penerbitan OC Terkonfirmasi??')">Penerbitan OC Terkonfirmasi</a>`;
-
-                            var status7 = (full.status == 7) ? dButton('Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan??')">Penjadwalan</a>`;
-
-                            var status7_0 = (full.status == '7_0') ? dButton('Belum Dijadwalkan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Dijadwalkan??')">Belum Dijadwalkan</a>`;
-
-                            var status7_1 = (full.status == '7_1') ? dButton('Menunggu Reviewer Mengkonfirmasi Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Mengkonfirmasi Penjadwalan??')">Menunggu Reviewer Mengkonfirmasi Penjadwalan</a>`;
-
-                            var status7_2 = (full.status == '7_2') ? dButton('Perbaikan Penjadwalan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Penjadwalan??')">Menunggu Konfirmasi Admin</a>`;
-
-                            var status7_3 = (full.status == '7_3') ? dButton('Penjadwalan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/7_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan Terkonfirmasi??')">Penjadwalan Terkonfirmasi</a>`;
-
-                            var status8 = (full.status == 8) ? dButton('Proses Audit Tahap 1'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 1??')">Proses Audit Tahap 1</a>`;
-
-                            var status8_1 = (full.status == '8_1') ? dButton('Menunggu Auditor Memverifikasi berkas'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Auditor Memverifikasi berkas??')">Menunggu Auditor Memverifikasi berkas</a>`;
-
-                            var status8_2 = (full.status == '8_2') ? dButton('Perbaikan Berkas Audit Tahap 1'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Berkas Audit Tahap 1??')">Perbaikan Berkas Audit Tahap 1</a>`;
-
-                            var status8_3 = (full.status == '8_3') ? dButton('Audit Tahap 1 Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/8_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Audit Tahap 1 Selesai??')">Audit Tahap 1 Selesai</a>`;
-
-                            var status9 = (full.status == 9) ? dButton('Pembayaran Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2??')">Pembayaran Tahap 2</a>`;
-
-                            var status9_0 = (full.status == '9_0') ? dButton('Belum Upload Bukti Bayar'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Bayar??')">Belum Upload Bukti Bayar</a>`;
-
-                            var status9_1 = (full.status == '9_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2??')">Menunggu Sales Officer Mengkonfirmasi Pembayaran Tahap 2</a>`;
-
-                            var status9_2 = (full.status == '9_2') ? dButton('Pembayaran Tahap 2 Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Gagal??')">Pembayaran Tahap 2 Gagal</a>`;
-
-                            var status9_3 = (full.status == '9_3') ? dButton('Pembayaran Tahap 2 Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/9_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pembayaran Tahap 2 Terkonfirmasi??')">Pembayaran Tahap 2 Terkonfirmasi</a>`;
-
-                            var status10 = (full.status == 10) ? dButton('Proses Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 2??')">Proses Audit Tahap 2</a>`;
-
-                            var status10_0 = (full.status == '10_0') ? dButton('Belum Upload Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Audit Plan??')">Belum Upload Audit Plan</a>`;
-
-                            var status10_1 = (full.status == '10_1') ? dButton('Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan??')">Menunggu Pelaku Usaha Mwngkonfirmasi Audit Plan</a>`;
-
-                            var status10_2 = (full.status == '10_2') ? dButton('Pelaku Usaha Menolak Audit Plan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelaku Usaha Menolak Audit Plan??')">Pelaku Usaha Menolak Audit Plan</a>`;
-
-                            var status10_3 = (full.status == '10_3') ? dButton('Audit Plan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Audit Plan Terkonfirmasi??')">Audit Plan Terkonfirmasi</a>`;
-
-                            var status10_4 = (full.status == '10_4') ? dButton('Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_4" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Auditi??')">Menunggu Tehnical Reviewer Mengkonfirmasi Laporan Audit</a>`;
-                            
-                            var status10_5 = (full.status == '10_5') ? dButton('Perbaikan Laporan Audit Tahap 2'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_5" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Perbaikan Laporan Audit Tahap 2??')">Perbaikan Laporan Audit Tahap 2</a>`;
-
-                            var status10_6 = (full.status == '10_6') ? dButton('Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_6" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit??')">Menunggu Komite Sertifikasi Mengkonfirmasi Laporan Audit</a>`;
-
-                            var status10_7 = (full.status == '10_7') ? dButton('Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_7" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit??')">Menunggu Reviewer Operasi Mengkonfirmasi Laporan Audit</a>`;
-
-                            var status10_8 = (full.status == '10_8') ? dButton('Laporan Audit Tahap 2 Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_8" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Laporan Audit Tahap 2 Terkonfirmasi??')">Laporan Audit Tahap 2 Terkonfirmasi</a>`;
-
-                            var status11 = (full.status == 11) ? dButton('Penyampaian Berita Acara'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Audit Tahap 1??')">Proses Audit Tahap 1</a>`;
-
-                            var status11_1 = (full.status == '11_1') ? dButton('Menunggu Pelanggan Upload Ulang Berita Acara'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Pelanggan Upload Ulang Berita Acara??')">Menunggu Pelanggan Upload Ulang Berita Acara</a>`;
-
-                            var status11_2 = (full.status == '11_2') ? dButton('Berita Acara Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Berita Acara Terkonfirmasi??')">Berita Acara Terkonfirmasi</a>`;
-
-                            var status12 = (full.status == 12) ? dButton('Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan??')">Pelunasan</a>`;
-
-                            var status12_0 = (full.status == '12_0') ? dButton('Belum Upload Bukti Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Upload Bukti Pelunasan??')">Belum Upload Bukti Pelunasan</a>`;
-
-                            var status12_1 = (full.status == '12_1') ? dButton('Menunggu Sales Officer Mengkonfirmasi Pelunasan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Menunggu Sales Officer Mengkonfirmasi Pelunasan??')">Menunggu Sales Officer Mengkonfirmasi Pelunasan</a>`;
-
-                            var status12_2 = (full.status == '12_2') ? dButton('Pelunasan Gagal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Gagal??')">Pelunasan Gagal</a>`;
-
-                            var status12_3 = (full.status == '12_3') ? dButton('Pelunasan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Pelunasan Terkonfirmasi??')">Pelunasan Terkonfirmasi</a>`;
-
-                            var status13 = (full.status == 13) ? dButton('Proses Sidang Fatwa'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/13" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate data ke tahapan Proses Sidang Fatwa?')">Proses Sidang Fatwa</a>`;
-
-                            var upload = `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Kontrak Akad</a> `;
-
-                            
-                            var konfirmAkad = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`/`+full.status_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
-                           
-                            var konfirmBayar3 = (full.status ==  '12_3') ? dButton('Konfirmasi dan Upload Invoice'):`<a href="{{url('upload_invoice')}}/`+full.id+`" class="dropdown-item" >Konfirmasi dan Upload Invoice</a>`;
-                           
-                            var konfirmBayar2 = (full.status == '9_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_tahap2')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
-                           
-                            var konfirmBayar1 = (full.status == '5_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
-
-                            var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
-
-                            var audit1 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan1' style="cursor:pointer">Audit Tahap 1</a>`;
-                            var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
-                            var tehnicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan3' style="cursor:pointer">Tehnical Review</a>`;
-                            var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite</a>`;
-
-                            var ksb = `<a class="dropdown-item" style="cursor:pointer" href="{{url('upload_ksb')}}/`+full.id+`">Input Berkas Konfirmasi, Surat Tugas dan Berita Acara</a>`;
-                            
-                            if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
-                                var unduhAkad = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                             
-                            }else{
-
-                                var unduhAkad = `<a href="{{ url('').Storage::url('public/buktiakad/`+full.id_user+`/`+full.file_akad+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.status_tahap1 == null || full.status_tahap1 == 0 ){
-                                var unduhBayar1 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                             
-                            }else{
-
-                                var unduhBayar1 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.status_tahap2 == null || full.status_tahap2 == 0 ){
-                                var unduhBayar2 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                              
-                            }else{
-
-                                var unduhBayar2 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap2+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.status_tahap3 == null || full.status_tahap3 == 0 ){
-                                var unduhBayar3 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                             
-                            }else{
-
-                                var unduhBayar3 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap3+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.file_bap == null ){
-                                var unduhBAP = `<a style="background-color:red; color:white; border-radius:4px;">&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-                            }else{            
-                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}" style="background-color:green; color:white; border-radius:4px;"  download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-                            } 
-
-                            if(full.file_surat_tugas == null ){
-                                var unduhST = `<a  style="background-color:red; color:white; border-radius:4px;">&nbsp;&nbsp;ST&nbsp;&nbsp;</a>`;
-                            }else{              
-                                var unduhST = `<a href="{{ url('').Storage::url('public/laporan/upload/Surat Tugas/`+full.file_surat_tugas+`') }}" style="background-color:green; color:white; border-radius:4px;"   download>&nbsp;&nbsp;ST&nbsp;&nbsp;</a>`;
-                            } 
-                            if(full.file_konfirmasi_sk_audit == null ){
-                               
-                                var unduhKSA = `<a style="background-color:red ; color:white; border-radius:4px;">&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
-                            }else{              
-                                
-                                var unduhKSA = `<a style="background-color:green; color:white; border-radius:4px;" href="{{ url('').Storage::url('public/laporan/upload/Konfirmasi SK Audit/`+full.file_konfirmasi_sk_audit+`') }}" download>&nbsp;&nbsp;KSA&nbsp;&nbsp;</a>`;
-                            } 
-
-                            
-                            if(full.status == 7 || full.status == '7_1' || full.status == '7_2' || full.status == '7_3' ){
-                                  var penjadwalan = audit1  ;
-                            }else if(full.status == 9 || full.status == '9_1' || full.status == '9_2' || full.status == '9_3' ){
-                                var penjadwalan = audit2+ksb;
-                            }else if(full.status == 11 || full.status == '11_1' || full.status == '11_2' || full.status == '11_3' ){
-                                var penjadwalan = tehnicalReview;
-                            }else if(full.status == 13 || full.status == '13_1' || full.status == '13_2' || full.status == '13_3' ){
-                                var penjadwalan = tinjauan;
-                            }else{
-                                var penjadwalan = "Belum masuk tahapan";
-                            }
-                           
-                           
-
-                            //var kw = full.kode_wilayah;
-
-                            var ddCabang = `<form action="{{route('registrasi.updatecabang')}}" method="post">    
-                                                @csrf
-                                                @method('PUT')
-                                               
-                                                <input type="text" name="id" value="`+full.id+`" hidden></input>
-                                                <select id="kode_wilayah" name="kode_wilayah" class="form-control" onchange="this.form.submit()">
-
-                                                    <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
-                                                    
-                                                    @if($cabang != null)
-                                                        @foreach($cabang as $dataCabang =>$value)
-
-                                                            <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
-                                                            </option>
-                                                        
-                                                        @endforeach
-                                                    @endif
-
-                                                </select>
-                                            </form>`;
-                            
-                            return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
-                                    
-                                   
-                                    
-                                       
-                                        <div class="col-lg-5 row" >
-                                            <div class="col-lg-4 d-flex justify-content-center align-items-center">
-                                                <i class="fa fa-building text-primary" style="font-size:600%"></i>
-                                            </div>
-                                            <div class="col-lg-8 ">
-                                                <h4 class="text-grey" style=>`+full.nama_perusahaan+`</h4>
-                                                <a  href="{{url('detail_registrasi')}}/`+full.id+`"  style="color: white; " class="label label-success">NOMOR ID: `+full.no_registrasi+`</a><br> 
-                                                <i class="fa fa-info text-primary" ></i> 
-                                                `+full.kelompok+`<br>
-                                                <i class="fa fa-info text-primary" ></i>
-                                                `+full.jenis+`<br>
-                                                <i class="fa fa-info text-primary" ></i> Alamat: 
-                                                `+full.alamat_perusahaan+`<br>
-                                                <i class="fa fa-info text-primary" ></i> Status Registrasi: 
-                                                `+full.status_registrasi+`<br>
-                                                <i class="fa fa-info text-primary" ></i> Tanggal Update: 
-                                                `+full.updated_at+`<br>
-                                                
-                                            </div>     
-                                            
-                                           
-                                        </div>
-                                      
-
-                                        <div class="col-lg-7 row d-flex justify-content-center" >
-
-                                            <div class="card border-0 ">
-                                                <div class="card-header tab-overflow p-t-0 p-b-0 ">
-                                                    <ul class="nav nav-tabs card-header-tabs">
-                                                        
-                                                        <li class="nav-item text-center">
-                                                            
-                                                            
-                                                            <a class="nav-link active" data-toggle="tab" href="#card-tab-1-`+full.id+`">Detail</a>
-                                                        </li>
-                                                      
-                                                        <li class="nav-item text-center">
-                                                            
-                                                            <a class="nav-link" data-toggle="tab" href="#card-tab-2-`+full.id+`">Akad</a>
-                                                        </li>
-                                                        <li class="nav-item text-center">
-                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-4-`+full.id+`">Penjadwalan</a>
-                                                        </li>
-                                                        <li class="nav-item text-center">
-                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-3-`+full.id+`">Pembayaran</a>
-                                                        </li>
-                                                       
-                                                       
-                                                        
-                                                        
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="card-body p-0 m-0" >
-                                                <div class="tab-content p-0 m-0">
-                                                    <div class="tab-pane fade active show" id="card-tab-1-`+full.id+`">
-
-                                                        <table class="table table-sm"> 
-                                                        <tr>
-                                                            <td class="text-center"  style="width:20%">Progres</td>
-                                                            <td class="text-center"  style="width:10%">Status Berkas</td>
-                                                            <td class="text-center"  style="width:25%">Cabang Auditor</td>
-                                                            <td class="text-center"  style="width:10%">Aksi</td>
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                        <td class="text-center align-middle"  style="width:20%">
-                                                            `+checkProgress(full.status)+`
-                                                        </td>
-                                                        <td class="text-center align-middle"  style="width:20%">
-                                                            `+checkStatusBerkas(full.status_berkas)+`
-                                                        </td>
-
-                                                        <td class="text-center align-middle" style="width:25%">
-                                                            `+ddCabang+`
-                                                               
-                                                            
-                                                        
-                                                        </td>
-
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                            <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                <a href="{{url('verifikasi_dokumen_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit">
-
-                                                                    </i> Lihat Dokumen
-                                                                </a>
-                                                                <div class="dropdown-divider"></div>
-
-                                                                <div class="dropdown-button-title">Update Progress</div>`+status1+status2+status3+status4+status5+status6+status7+status8+status9+status10+status11+status12+status13+`
-                                                            </div> 
-                                                        </div>
-                                                        </td>
-                                                        </tr>
-                                                        </table>
-                                                    </div>
-
-                                                    <div class="tab-pane fade" id="card-tab-2-`+full.id+`">
-
-                                                        <table class="table table-sm"> 
-                                                        <tr>
-                                                            <td class="text-center">Tipe</td>
-                                                            <td class="text-center">Status</td>
-                                                            <td class="text-center">Total Biaya</td>
-                                                            <td class="text-center">Bukti Akad</td>
-                                                           
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                        <td class="text-center">
-                                                            Akad
-                                                        </td>
-                                                        <td class="text-center align-middle" style="max-width:20%;">
-                                                            `+checkStatusAkad(full.status_akad)+`
-                                                        </td>
-
-                                                        <td class="text-center align-middle">
-                                                            `+formatRupiah(full.total_biaya)+`
-                                                        </td>
-                                                        
-                                                        <td class="text-center align-middle">
-                                                            `+unduhAkad+`
-
-                                                        </td>
-
-                                                       
-                                                        </tr>
-                                                        </table>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="card-tab-3-`+full.id+`">
-
-                                                        <table class="table table-sm">
-                                                        <tr>
-                                                            <td class="text-center">Status Tahap 1</td>
-                                                            <td class="text-center">Status Tahap 2</td>
-                                                            <td class="text-center">Status Pelunasan</td>
-                                                            <td class="text-center">Nominal Total</td>
-                                                      
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                       
-                                                        <td class="text-center align-middle"  style="max-width:20%;">
-                                                            `+checkStatusPembayaran(full.status_tahap1)+`
-                                                        </td>
-                                                        <td class="text-center align-middle"  style="max-width:20%;">
-                                                            `+checkStatusPembayaran(full.status_tahap2)+`
-                                                        </td>
-                                                        <td class="text-center align-middle"  style="max-width:20%;">
-                                                            `+checkStatusPembayaran(full.status_tahap3)+`
-                                                        </td>
-
-                                                        <td class="text-center align-middle">
-                                                            `+formatRupiah(full.total_biaya)+`
-                                                        </td>
-                                                         
-                                                       
-                                                        </table>
-                                                    </div>  
-                                                    <div class="tab-pane fade" id="card-tab-4-`+full.id+`">
-
-                                                        <table class="table table-sm">
-                                                        <tr>
-                                                            <td class="text-center align-middle">Status Tahap 1</td>
-                                                            <td class="text-center align-middle">Status Tahap 2</td>
-                                                            <td class="text-center align-middle">Status TR</td>
-                                                            <td class="text-center align-middle">Status KS</td>
-                                                           
-                                                            <td class="text-center align-middle">File</td>
-                                                            <td class="text-center align-middle">Aksi</td>
-                                                        </tr>
-
-                                                       
-                                                        
-                                                        <tr>
-                                                           
-                                                            <td class="text-center align-middle"  style="max-width:20%;">
-                                                                `+checkPenjadwalan(full.status_penjadwalan_audit1)+`
-                                                            </td>
-                                                            
-                                                            <td class="text-center align-middle"  style="max-width:20%;">
-                                                                `+checkPenjadwalan(full.status_penjadwalan_audit2)+`
-                                                            </td>
-                                                            <td class="text-center align-middle"  style="max-width:20%;">
-                                                                `+checkPenjadwalan(full.status_penjadwalan_tr)+`
-                                                            </td>
-                                                            
-                                                            <td class="text-center align-middle"  style="max-width:20%;">
-                                                                `+checkPenjadwalan(full.status_penjadwalan_tinjauan)+`
-                                                            </td>
-                                                            <td>
-                                                                <table class="table table-borderless">
-                                                                    <tr>
-                                                                        <td class="text-center">
-                                                                        `+unduhBAP+`
-                                                                        </td>
-                                                                    </tr>
-                                                                    
-                                                                    <tr>
-                                                                        <td class="text-center">
-                                                                        `+unduhST+`
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-center">
-                                                                        `+unduhKSA+`
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-
-                                                            
-                                                            <td class="text-center align-middle">
-                                                                <table class="table-borderless text-center align-middle">
-                                                                <tr>
-                                                                    <td class="text-center align-middle">
-                                                                        <i class="fa fa-eye" aria-hidden="true" data-toggle='modal' data-pelaksana1-audit1='`+full.pelaksana1_audit1+`' data-pelaksana1-audit2='`+full.pelaksana1_audit2+`' data-pelaksana2-audit2='`+full.pelaksana2_audit2+`' data-pelaksana1-tr='`+full.pelaksana1_tr+`' data-pelaksana2-tr='`+full.pelaksana2_tr+`' data-pelaksana1-tinjauan='`+full.pelaksana1_tinjauan+`' data-pelaksana2-tinjauan='`+full.pelaksana2_tinjauan+`' 
-                                                                        data-mulai-audit1='`+full.mulai_audit1+`' 
-                                                                        data-mulai-audit2='`+full.mulai_audit2+`'  data-target='#modaljadwal'></i>
-
-                                                                    </td>
-                                                                </tr>
-                                                                <tr >
-                                                                    <td class="text-center align-middle">
-
-                                                                    <div class="btn-group m-r-5 show">
-                                                                        <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true">
-                                                                            <b class="ion-ios-arrow-down"></b>
-                                                                        </a>
-                                                                        <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> `
-                                                                            +penjadwalan+
-                                                                        `</div>
-                                                                    </div>
-                                                                    </td>
-                                                                   
-
-                                                                </tr>
-                                                                </table>
-                                                                
-                                                            </td>
-                                                        </tr>
-                                                        
-                                                        </table>
-                                                    </div>
-                                                   
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>`  
-                        }
-                    }
-                ],
-                
-              
-               
-               //tambahkan bkti bayar 1,2,3, bkti kontrak akad, berita acara,
-                
-                processing:true,
-                serverSide:true,
-                order:[[0,'asc']],
-                bFilter: false,
-                bSortable: false,
-                bInfo: false,
-                lengthChange: false,
-                ordering: false
-
-            });
+            
 
 
 
@@ -2158,5 +2183,5 @@
             return confirm("Apakah anda yakin?");
         });
     </script>
-    <script src="{{asset('/assets/js/filterData.js')}}"></script>
+   
 @endpush

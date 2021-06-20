@@ -40,6 +40,7 @@ use App\Models\UnggahData\MenuRestoran;
 use App\Models\UnggahData\Jagal;
 use App\Models\LaporanTehnicalReview;
 use App\Models\LaporanTinjauan;
+use App\Models\LaporanPersiapanSidang;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -1268,6 +1269,11 @@ class PenjadwalanController extends Controller
         return view('penjadwalan.listTinjauan');
     }
 
+    public function listPersiapanSidang(){
+        
+        return view('penjadwalan.listpersiapansidang');
+    }
+
    
 
 
@@ -1343,6 +1349,11 @@ class PenjadwalanController extends Controller
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
+             ->leftJoin('laporan_audit2','registrasi.id', '=', 'laporan_audit2.id_registrasi')
+            ->leftJoin('laporan_audit1','registrasi.id', '=', 'laporan_audit1.id_registrasi')
+            ->leftJoin('laporan_tehnical_review','registrasi.id', '=', 'laporan_tehnical_review.id_registrasi')
+            ->leftJoin('laporan_tinjauan','registrasi.id', '=', 'laporan_tinjauan.id_registrasi')
+            ->leftJoin('laporan_persiapan_sidang','registrasi.id', '=', 'laporan_persiapan_sidang.id_registrasi')
             //  ->join('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0);
@@ -1355,8 +1366,20 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.status_penjadwalan_audit2','=',3);  
                 $query->where('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
   
+            })       
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('penjadwalan.status_penjadwalan_audit2','=',3);
+                $query->where('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
+  
+            })    
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;
+                $query->where('penjadwalan.status_penjadwalan_audit2','=',3);  
+                $query->where('penjadwalan.pelaksana1_audit2','LIKE','%'.$id_user.'%');
+  
             })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2','laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.file_laporan_tinjauan','laporan_tehnical_review.catatan_tr','laporan_tinjauan.catatan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang');
             //  ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','laporan_audit1.file_laporan_audit1');
        
 
@@ -1433,6 +1456,37 @@ class PenjadwalanController extends Controller
                 $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
   
             })  
+
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=',12)  ;  
+                $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
+  
+            })    
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_12_0')  ;
+                $query->where('penjadwalan.pelaksana1_tr','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_12_1')  ;
+                $query->where('penjadwalan.pelaksana1_tr','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_12_2')  ;
+                $query->where('penjadwalan.pelaksana2_tr','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_12_3')  ;
+                $query->where('penjadwalan.pelaksana1_tr','LIKE','%'.$id_user.'%');
+  
+            })  
                      
              ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.catatan_tr', 'laporan_tehnical_review.status_laporan_tr', 'laporan_tehnical_review.status_lanjut_ks');
        
@@ -1484,34 +1538,145 @@ class PenjadwalanController extends Controller
                 $query->where('registrasi.status_cancel','=',0)  ;  
                 $query->where('registrasi.status','=',14)  ;  
                 $query->where('penjadwalan.pelaksana1_tinjauan','LIKE','%'.$id_user.'%');
+                
+  
+            })   
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=',14)  ;  
+                $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
+                
   
             })    
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('registrasi.status','=','_14_0')  ;
+                $query->where('registrasi.status','=','14_0')  ;
                 $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
   
             })  
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('registrasi.status','=','_14_1')  ;
+                $query->where('registrasi.status','=','14_0')  ;
+                $query->where('penjadwalan.pelaksana1_tinjauan','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','14_1')  ;
                 $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
   
             })  
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('registrasi.status','=','_14_2')  ;
+                $query->where('registrasi.status','=','14_1')  ;
+                $query->where('penjadwalan.pelaksana1_tinjauan','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','14_2')  ;
                 $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
   
             })  
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('registrasi.status','=','_14_3')  ;
+                $query->where('registrasi.status','=','14_2')  ;
+                $query->where('penjadwalan.pelaksana1_tinjauan','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','14_3')  ;
                 $query->where('penjadwalan.pelaksana2_tinjauan','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','14_3')  ;
+                $query->where('penjadwalan.pelaksana1_tinjauan','LIKE','%'.$id_user.'%');
   
             })  
                      
              ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan');
+       
+
+        //filter condition
+        if(isset($gdata['no_registrasi'])){
+            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['perusahaan'])){
+            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+        }
+        if(isset($gdata['kelompok_produk'])){
+            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
+        }
+        if(isset($gdata['tgl_registrasi'])){
+            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
+        }
+        if(isset($gdata['ruang_lingkup'])){
+            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
+        }
+        if(isset($gdata['status_registrasi'])){
+            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
+        }
+        if(isset($gdata['status'])){
+            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+        }
+
+        //end
+        $xdata = $xdata
+                 ->orderBy('registrasi.id','desc');
+
+        return Datatables::of($xdata)->make();
+    }    
+
+    public function dataPersiapanSidang(Request $request){
+        $gdata = $request->except('_token','_method');
+        $id_user = Auth::user()->id;
+        //start
+       
+        $xdata = DB::table('registrasi')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+             ->join('users','registrasi.id_user','=','users.id')
+             ->leftjoin('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
+             ->leftjoin('laporan_audit2','registrasi.id_laporan_audit2','=','laporan_audit2.id')
+             ->leftjoin('laporan_tehnical_review','registrasi.id_tehnical_review','=','laporan_tehnical_review.id')
+             ->leftjoin('laporan_tinjauan','registrasi.id_tinjauan_komite','=','laporan_tinjauan.id')
+             ->leftjoin('laporan_persiapan_sidang','registrasi.id_persiapan_sidang','=','laporan_persiapan_sidang.id')
+             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')             
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=',15)  ;  
+                
+  
+            })    
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_15_0')  ;
+                
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_15_1')  ;
+               
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_15_2')  ;
+               
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0)  ;  
+                $query->where('registrasi.status','=','_15_3')  ;
+                
+  
+            })  
+                     
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang', 'laporan_persiapan_sidang.status_persiapan_sidang');
        
 
         //filter condition
@@ -1965,6 +2130,86 @@ class PenjadwalanController extends Controller
 
             Session::flash('error', $e->getMessage());
             $redirectPass = redirect()->route('listtinjauan');
+            return $redirectPass;
+        }
+
+    }
+
+    public function storePersiapanSidang(Request $request)
+    {
+
+        $data = $request->except('_token','_method');
+        //dd($data);
+
+
+        DB::beginTransaction();
+        $model = new Registrasi;
+        $model2 = new Penjadwalan;
+        $model4 = new LaporanPersiapanSidang;
+        $model3 = new User;
+
+        $e = $model->find($data['id']);
+        $j = $model4->find($e->id_persiapan_sidang);
+        $u = $model3->find($e->id_user);
+
+        if($j){
+
+            if($data['status_persiapan_sidang']== '1'){
+                $j->status_persiapan_sidang = 1;
+                $e->status = 16;
+                
+            
+                //dd("masuk");
+            }else if($data['status_persiapan_sidang']== '0'){
+                $j->status_persiapan_sidang = 0 ;
+                $e->status = '10_2';
+            }
+    
+            
+            $j->id_registrasi = $e->id;
+            $j->catatan_persiapan_sidang = $data['catatan_persiapan_sidang'];
+            $e->save();
+            $j->save();
+
+        }else{
+
+            if($data['status_persiapan_sidang']== '1'){
+                $model4->status_persiapan_sidang = 1;
+                $e->status = 16;
+                
+            
+                //dd("masuk");
+            }else if($data['status_persiapan_sidang']== '0'){
+                $model4->status_persiapan_sidang = 0 ;
+                $e->status = '10_2';
+            }
+    
+           
+            $model4->id_registrasi = $e->id;
+            $model4->catatan_persiapan_sidang = $data['catatan_persiapan_sidang'];
+            $model4->save();
+            $e->id_persiapan_sidang = $model4->id; 
+            $e->save();
+            
+            
+
+        }
+            
+        try{
+            DB::Commit();
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('listpersiapansidang');
+
+
+        return $redirect;
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            //$this->debugs($e->getMessage());
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('listpersiapansidang');
             return $redirectPass;
         }
 
