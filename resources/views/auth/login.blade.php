@@ -25,6 +25,9 @@
         <!-- end news-feed -->
         <!-- begin right-content -->
         <div class="right-content right-content-custom">
+            @php
+                $maintenance = 1;
+            @endphp
             <!-- begin login-header -->            
             <div class="login-header">
                 <div class="brand" style="font-family:textmeone">                
@@ -33,82 +36,81 @@
             </div>
             <!-- end login-header -->
             <!-- begin login-content -->
-            <div class="login-content">
-                <form action="{{route('authenticate')}}" method="post" class="margin-bottom-0">
-                    @csrf
-                    <div class="input-login form-group m-b-15">
-                        <div class="label"><i class="fa fa-user"></i></div>
-                        <input type="text" name="username" placeholder="username / email" autocomplete="off" required />
-                    </div>
-                    <div class="input-login form-group m-b-15">
-                        <div class="label"><i class="fa fa-lock"></i></div>
-                        <input type="password" name="password" placeholder="password" autocomplete="off" required />
-                    </div>
-
-                    <div class="login-buttons">
-                        <button type="submit" class="btn btn-success btn-block btn-lg btn-login">Login</button>
-                    </div>
-
-                  
-                </form>
-                    <p class="text-center text-grey-darker mb-5" style="color: #d6dee2!important;margin-top: 10px;margin-bottom: -5px !important;">
-                        Belum punya akun? Klik <a href="{{route('registeruser')}}" style="color:#daf1a4">disini</a> untuk mendaftar.
-                    </p>
-                    <p class="text-center text-grey-darker mb-5" style="color: #d6dee2!important;margin-top: 10px;margin-bottom: -5px !important;">
-                        Lupa password? Klik <a href="{{route('forgotpassword')}}" style="color:#ffabab">disini</a>
-                    </p>
-                    <hr />
-                    <p class="text-center text-grey-darker mb-0" style="color: #b3bfc5!important;">
-                        &copy; PT SUCOFINDO (Persero) All Right Reserved 2020
-                    </p>
-
-                    <div style="margin-top:15px;" class="animated pulse infinite" >
-                        <a href="#confirm-signout" data-toggle="modal" class="btn btn-inverse btn-block btn-lg forFaq">
-                            <h5 style="margin-bottom: 0px;">
-                                <img src="{{asset('/assets/img/user/faq-icon.png')}}" alt="" style="height: 30px;margin-left: -10px;">    
-                                <span style="color: #89d0d4">Informasi</span>
-                            </h5>
-                        </a>
-                    </div>
-
-                     <div style="margin-top:15px;" class="animated pulse infinite" >
-                        <a  href="{{asset('/assets/doc/manual/MANUAL GUIDELINE HALAL LPH SUCOFINDO.pdf')}}"  class="btn btn-inverse btn-block btn-lg forFaq"  download>
-                            <h5 style="margin-bottom: 0px;">
-                               
-                                <span style="color: #89d0d4">Download Manual Guide</span>
-                                
-                            </h5> 
-                        </a>
-                    </div>
-
-                    {{-- <div style="margin-top:15px;" >
-                        <a  href="{{route('landingpage.index')}}"  class="btn btn-inverse btn-block btn-lg forFaq">
-                            <h5 style="margin-bottom: 0px;">
-                               
-                                <span style="color: #89d0d4">Halaman Utama</span>
-                                
-                            </h5> 
-                        </a>
-                    </div>--}}
-                    
-                    @if(isset($notes))
-                        <div class="login-info-red"><span>{{$notes}}</span></div>
-                    @endif
-                    @if(isset($regnotes))
-                        <div class="login-info-blue"><span>{{$regnotes}}</span></div>
-                    @endif
-                    @if (session('statusreg'))
-                        <div class="login-info-blue">
-                            <span>{{ session('statusreg') }}</span>
+            @if ($maintenance == 1)
+                <div class="login-content">                
+                    <h2 class="text-center text-grey-darker mb-5" style="color: #d6dee2!important;margin-top: 10px;margin-bottom: -5px !important;">
+                        UNDER MAINTENANCE
+                    </h2>                                                                                                                                             
+                </div>
+            @else
+                <div class="login-content">
+                    <form action="{{route('authenticate')}}" method="post" class="margin-bottom-0">
+                        @csrf
+                        <div class="input-login form-group m-b-15">
+                            <div class="label"><i class="fa fa-user"></i></div>
+                            <input type="text" name="username" placeholder="username / email" autocomplete="off" required />
                         </div>
-                    @endif
-                    @if(session('errstatus'))
-                        <div class="login-info-red"><span>{{session('errstatus')}}</span></div>
-                    @endif
-                    @if(session('status'))
-                        <div class="login-info-red"><span>{{session('status')}}</span></div>
-                    @endif
-            </div>
+                        <div class="input-login form-group m-b-15">
+                            <div class="label"><i class="fa fa-lock"></i></div>
+                            <input type="password" name="password" placeholder="password" autocomplete="off" required />
+                        </div>
+
+                        <div class="login-buttons">
+                            <button type="submit" class="btn btn-success btn-block btn-lg btn-login">Login</button>
+                        </div>
+
+                    
+                    </form>
+                        <p class="text-center text-grey-darker mb-5" style="color: #d6dee2!important;margin-top: 10px;margin-bottom: -5px !important;">
+                            Belum punya akun? Klik <a href="{{route('registeruser')}}" style="color:#daf1a4">disini</a> untuk mendaftar.
+                        </p>
+                        <p class="text-center text-grey-darker mb-5" style="color: #d6dee2!important;margin-top: 10px;margin-bottom: -5px !important;">
+                            Lupa password? Klik <a href="{{route('forgotpassword')}}" style="color:#ffabab">disini</a>
+                        </p>
+                        <hr />
+                        <p class="text-center text-grey-darker mb-0" style="color: #b3bfc5!important;">
+                            &copy; PT SUCOFINDO (Persero) All Right Reserved 2020
+                        </p>
+
+                        <div style="margin-top:15px;" class="animated pulse infinite" >
+                            <a href="#confirm-signout" data-toggle="modal" class="btn btn-inverse btn-block btn-lg forFaq">
+                                <h5 style="margin-bottom: 0px;">
+                                    <img src="{{asset('/assets/img/user/faq-icon.png')}}" alt="" style="height: 30px;margin-left: -10px;">    
+                                    <span style="color: #89d0d4">Informasi</span>
+                                </h5>
+                            </a>
+                        </div>
+
+                        <div style="margin-top:15px;" class="animated pulse infinite" >
+                            <a  href="{{asset('/assets/doc/manual/MANUAL GUIDELINE HALAL LPH SUCOFINDO.pdf')}}"  class="btn btn-inverse btn-block btn-lg forFaq"  download>
+                                <h5 style="margin-bottom: 0px;">
+                                
+                                    <span style="color: #89d0d4">Download Manual Guide</span>
+                                    
+                                </h5> 
+                            </a>
+                        </div>
+                        
+                        
+                        @if(isset($notes))
+                            <div class="login-info-red"><span>{{$notes}}</span></div>
+                        @endif
+                        @if(isset($regnotes))
+                            <div class="login-info-blue"><span>{{$regnotes}}</span></div>
+                        @endif
+                        @if (session('statusreg'))
+                            <div class="login-info-blue">
+                                <span>{{ session('statusreg') }}</span>
+                            </div>
+                        @endif
+                        @if(session('errstatus'))
+                            <div class="login-info-red"><span>{{session('errstatus')}}</span></div>
+                        @endif
+                        @if(session('status'))
+                            <div class="login-info-red"><span>{{session('status')}}</span></div>
+                        @endif
+                </div>            
+            @endif            
             <!-- end login-content -->
         </div>
         <!-- end right-container -->
@@ -146,5 +148,55 @@
             </div>
         </div>
     </div>
+
+    <div id="modalMaintenance" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <h4 class="modal-title">List Perubahan LPH SUCOFINDO 2.0</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>                
+                    <div class="modal-body">                        
+                       <table>
+                           <tr>
+                               <td>1. Perubahan blablabla</td>
+                            </tr>
+                            <tr>
+                                <td>2. Perubahan blablabla</td>
+                             </tr>
+                             <tr>
+                                <td>3. Perubahan blablabla</td>
+                             </tr>
+                             <tr>
+                                <td>4. Perubahan blablabla</td>
+                             </tr>
+                             <tr>
+                                <td>5. Perubahan blablabla</td>
+                             </tr>
+                       </table>
+                    </div>
+                    <div class="modal-footer">
+                       <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan berkas?')">Submit</button>
+                    </div>                
+            </div>            
+        </div>
+    </div>
     <!-- end login -->
 @endsection
+
+@push('scripts')
+<script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
+<script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
+<script src="{{asset('/assets/js/demo/form-plugins.demo.js')}}"></script>
+<script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
+<script>
+    
+    $(document).ready(function(){
+        $("#modalMaintenance").modal('show');
+    });
+
+</script>
+@endpush
