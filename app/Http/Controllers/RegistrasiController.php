@@ -63,6 +63,7 @@ use DateTime;
 use Carbon\Carbon;
 use App\Jobs\SendEmail;
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Element\TextRun;
 
 class RegistrasiController extends Controller
 {
@@ -162,36 +163,43 @@ class RegistrasiController extends Controller
         $gdata = $request->except('_token','_method');
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
+
         $xdata = DB::table('registrasi')
-                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                 ->join('users','registrasi.id_user','=','users.id')
-                 /*->leftJoin('pembayaran','registrasi.id','=', 'pembayaran.id_registrasi')*/
-                 
-                 ->leftJoin('laporan_audit2','registrasi.id', '=', 'laporan_audit2.id_registrasi')
-                 ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
-                 ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
-                //  ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
-                
-                 ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.laporan_audit1_pelaksana1','penjadwalan.laporan_audit1_pelaksana2','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','penjadwalan.laporan_audit2_pelaksana1','penjadwalan.laporan_audit2_pelaksana2','penjadwalan.sppd_audit2_pelaksana1','penjadwalan.sppd_audit2_pelaksana2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit');
+        ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+        ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+        ->join('users','registrasi.id_user','=','users.id')
+        /*->leftJoin('pembayaran','registrasi.id','=', 'pembayaran.id_registrasi')*/
+        
+        ->leftJoin('laporan_audit2','registrasi.id', '=', 'laporan_audit2.id_registrasi')
+        ->leftJoin('laporan_tehnical_review','registrasi.id', '=', 'laporan_tehnical_review.id_registrasi')
+        ->leftJoin('laporan_tinjauan','registrasi.id', '=', 'laporan_tinjauan.id_registrasi')
+        ->leftJoin('laporan_persiapan_sidang','registrasi.id', '=', 'laporan_persiapan_sidang.id_registrasi')
+        ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
+        ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
+       //  ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
+       
+       
+        ->where('registrasi.status_cancel','=',0)
+        ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit', 'penjadwalan.catatan_penjadwalan_audit1','penjadwalan.catatan_penjadwalan_audit2','penjadwalan.catatan_penjadwalan_tr','penjadwalan.catatan_penjadwalan_tinjauan');
 
         if($kodewilayah == '119'){            
             $xdata = $xdata->where('registrasi.status_cancel','=',0);
-                     
+     
         }else{            
-            $xdata = $xdata->where('registrasi.kode_wilayah','=',$kodewilayah)
-                    ->where('registrasi.status_cancel','=',0);
+            $xdata = $xdata->where('registrasi.status_cancel','=',0)
+                    ->where('reistrasi.kode_wilayah','=',$kodewilayah);
+               
 
         }
 
         if(isset($gdata['nomor_id'])){
             $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['nomor_id'].'%');
         }
+
         if(isset($gdata['nama_perusahaan'])){
             $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
-           
         }
-
+        
         $xdata = $xdata
                  ->orderBy('registrasi.updated_at','desc');
        
@@ -1969,7 +1977,7 @@ class RegistrasiController extends Controller
                     DB::commit();
 
                     //$this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
-                    $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Admin telah memeriksa berkas, dan semua berkas telah sesuai.", Auth::user()->usergroup_id);                    
+                    $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Admin telah memeriksa berkas, dan semua berkas telah sesuai.", Auth::user()->usergroup_id);
                     
                     //$model4->updated_by = Auth::user()->id;
                     //$model4->status_penjadwalan_audit1 = '0';
@@ -2026,7 +2034,7 @@ class RegistrasiController extends Controller
     }
     //auditor
     public function auditTahap1($id_registrasi){
-        //dd("masuk");
+        // dd("masuk");
         //get data registrasi
        //$dataRegistrasi = $this->getDataRegistrasi($id_registrasi);
 
@@ -2066,31 +2074,10 @@ class RegistrasiController extends Controller
         }else{ 
             $dataHas = null;
         }     
+
+        $laporanAudit1 = json_decode($checkLaporanAudit1,true);
         
-        if(isset($checkLaporanAudit1[0])){ 
-                
-            $laporanAudit1 = json_decode($checkLaporanAudit1,true);
-
-            //return view('penjadwalan.auditTahap1', compact('dataHas','dataRegis','laporanAudit1'));
-        }else{
-            $model = new LaporanAudit1();
-            DB::beginTransaction();
-            //dd("masuk");
-            $model->id_registrasi = $id_registrasi;
-            $model->id_dokumen_has = $dataHas[0]['id'];
-            $model->save();
-            $reg->id_laporan_audit1 = $model->id;
-            $reg->save();
-
-            $laporanAudit1= $model;
-            DB::commit();
-
-            //return view('penjadwalan.auditTahap1', compact('dataHas','dataRegis','laporanAudit1'));
-            return redirect()->back();
-
-        }
-
-        return view('penjadwalan.auditTahap1', compact('dataHas','dataRegis','laporanAudit1'));
+        return view('penjadwalan.auditTahap1',compact('dataHas','dataRegis','laporanAudit1'));
       
         //dd($dataHas);
        
@@ -2107,6 +2094,7 @@ class RegistrasiController extends Controller
         $model2 = new Registrasi();
         $model3 = new User();
         $model4 = new Pembayaran();
+        $model5 = new Penjadwalan();
         $id_user = Auth::user()->id;
 
         // echo "<pre>";
@@ -2120,6 +2108,7 @@ class RegistrasiController extends Controller
             $f = $model2->find($e->id_registrasi);
             $u = $model3->find($f->id_user);
            // $p = $model4->find($f->id_pembayaran);
+           $pe = $model5->find($f->id_penjadwalan);
 
             $e->fill($data);
             
@@ -2136,6 +2125,8 @@ class RegistrasiController extends Controller
                 $f->save();
                 DB::commit();
                 Session::flash('success', "Status berhasil diupdate");
+
+                $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Beberapa dokumen telah diperiksa",Auth::user()->usergroup_id);
 
               
             }else{
@@ -2156,28 +2147,29 @@ class RegistrasiController extends Controller
                         $e->save();
                         $f->save();
                         //SendEmailP::dispatch($u,$f,$p,$f->status);
+                        $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berhasil membuat berkas audit tahap 1 dengan syarat",Auth::user()->usergroup_id);
                         DB::commit();
 
                         $phpWord = new \PhpOffice\PhpWord\PhpWord();
             
                         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-05 Laporan Audit Tahap I Isian.docx');
 
-                        if($data['skema_audit'] == 'sjh'){            
-                            $templateProcessor->setValue('sjh', 'SJH');
-                
-                            $inline = new TextRun();
-                            $inline->addText('SJPH', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('sjph', $inline);
-                                    
-                        }else if($data['skema_audit'] == 'sjph'){
+                        if($pe->skema == 'SJPH'){            
                             $templateProcessor->setValue('sjph', 'SJPH');
                 
                             $inline = new TextRun();
-                            $inline->addText('SJH', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('sjh', $inline);            
+                            $inline->addText('SMH', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('smh', $inline);
+                                    
+                        }else if($pe->skema == 'SMH'){
+                            $templateProcessor->setValue('smh', 'SMH');
+                
+                            $inline = new TextRun();
+                            $inline->addText('SJPH', array('strikethrough' => true));
+                            $templateProcessor->setComplexValue('sjph', $inline);            
                         }
 
-                        if($data['status_sertifikasi'] == 'baru'){
+                        if($f->status_registrasi == 'baru'){
                             $templateProcessor->setValue('baru', 'Baru');
                 
                             $inline = new TextRun();
@@ -2187,7 +2179,7 @@ class RegistrasiController extends Controller
                             $inline2 = new TextRun();
                             $inline2->addText('Perubahan', array('strikethrough' => true));
                             $templateProcessor->setComplexValue('perubahan', $inline2);            
-                        }else if($data['status_sertifikasi'] == 'perpanjangan'){            
+                        }else if($f->status_registrasi == 'perpanjangan'){            
                             $templateProcessor->setValue('perpanjangan', 'Perpanjangan');            
                 
                             $inline = new TextRun();
@@ -2197,7 +2189,7 @@ class RegistrasiController extends Controller
                             $inline2 = new TextRun();
                             $inline2->addText('Perubahan', array('strikethrough' => true));
                             $templateProcessor->setComplexValue('perubahan', $inline2);                
-                        }else if($data['status_sertifikasi'] == 'perubahan'){            
+                        }else if($f->status_registrasi == 'perubahan'){            
                             $templateProcessor->setValue('perubahan', 'Perubahan');
                 
                             $inline = new TextRun();
@@ -2210,9 +2202,10 @@ class RegistrasiController extends Controller
                         }
     
                         $templateProcessor->setValue('nama_organisasi', $f->nama_perusahaan);
-                        $templateProcessor->setValue('no_id_bpjph', $f->nomor_registrasi_bpjph);
+                        $templateProcessor->setValue('no_id_bpjph', $f->no_registrasi_bpjph);
+                        $templateProcessor->setValue('alamat', $f->alamat_perusahaan);
                         $templateProcessor->setValue('no_audit', $f->no_registrasi);
-                        $templateProcessor->setValue('jenis_produk', $f->jenis_produk);
+                        $templateProcessor->setValue('jenis_produk', $f->rincian_jenis_produk);
                         $templateProcessor->setValue('status_registrasi', $f->status_sertifikasi);
                         $templateProcessor->setValue('lokasi_audit1', $dataTemp['lokasi_audit']);
                         $templateProcessor->setValue('lingkup_audit', $dataTemp['lingkup_audit']);
@@ -2295,7 +2288,7 @@ class RegistrasiController extends Controller
                                
                         // dd($newDateTime);
     
-                        $fileName = $e->id_registrasi.'_'.$f->id_penjadwalan.'_Laporan Audit 1_'.$f->nama_perusahaan.'.docx';
+                        $fileName = 'FOR-HALAL-OPS-05 Laporan Audit Tahap I ('.$e->id_registrasi.').docx';
                         $e->file_laporan_audit1= $fileName ;
                         $templateProcessor->saveAs("storage/laporan/download/Laporan Audit1/".$fileName);
                         
@@ -2317,7 +2310,8 @@ class RegistrasiController extends Controller
                         $f->status = '8_2';
                         $e->save();
                         $f->save();
-                        DB::commit();
+                        DB::commit();                        
+                        $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Pembuatan berkas audit tahap 1 gagal, terdapat berkas yang tidak memenuhi.",Auth::user()->usergroup_id);
                         //SendEmailP::dispatch($u,$f,$p,$f->status);
                         Session::flash('success', "Status berhasil diupdate");
                     }
@@ -2337,7 +2331,7 @@ class RegistrasiController extends Controller
                     $f->save();
                     //SendEmailP::dispatch($u,$f,$p,$f->status);
                     DB::commit();
-
+                    $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berhasil membuat berkas audit tahap 1",Auth::user()->usergroup_id);
                     //$this->updateStatusRegistrasi($f->id, $f->no_registrasi, $f->id_user, 6);
 
                     $phpWord = new \PhpOffice\PhpWord\PhpWord();                            
@@ -2345,36 +2339,83 @@ class RegistrasiController extends Controller
                   
                     $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-05 Laporan Audit Tahap I Isian.docx');
                    // 
-                    $templateProcessor->setValue('nama_organisasi', $f->nama_perusahaan);
-                    $templateProcessor->setValue('no_id_bpjph', $f->nomor_registrasi_bpjph);
-                    $templateProcessor->setValue('no_audit', $f->no_registrasi);
-                    $templateProcessor->setValue('jenis_produk', $f->jenis_produk);
-                    $templateProcessor->setValue('status_registrasi', $f->status_sertifikasi);
-                    $templateProcessor->setValue('lokasi_audit1', $dataTemp['lokasi_audit']);
-                    $templateProcessor->setValue('lingkup_audit', $dataTemp['lingkup_audit']);
-                    $templateProcessor->setValue('tujuan_audit', $dataTemp['tujuan_audit']);
-                    $templateProcessor->setValue('tgl_audit', $dataTemp['mulai_audit1']);
-                    $templateProcessor->setValue('tim_audit1', $dataTemp['pelaksana1_audit1']);
-                    $templateProcessor->setValue('tim_audit2', $dataTemp['pelaksana2_audit1']);
+                   if($pe->skema == 'SJPH'){            
+                    $templateProcessor->setValue('sjph', 'SJPH');
+        
+                    $inline = new TextRun();
+                    $inline->addText('SMH', array('strikethrough' => true));
+                    $templateProcessor->setComplexValue('smh', $inline);
+                            
+                }else if($pe->skema == 'SMH'){
+                    $templateProcessor->setValue('smh', 'SMH');
+        
+                    $inline = new TextRun();
+                    $inline->addText('SJPH', array('strikethrough' => true));
+                    $templateProcessor->setComplexValue('sjph', $inline);            
+                }
 
-                    $templateProcessor->setValue('tgl_penyerahan1', $data['tgl_penyerahan_1']);
-                    $templateProcessor->setValue('tgl_penyerahan2', $data['tgl_penyerahan_2']);
-                    $templateProcessor->setValue('tgl_penyerahan3', $data['tgl_penyerahan_3']);
-                    $templateProcessor->setValue('tgl_penyerahan4', $data['tgl_penyerahan_4']);
-                    $templateProcessor->setValue('tgl_penyerahan5', $data['tgl_penyerahan_5']);                
-                    $templateProcessor->setValue('tgl_penyerahan6', $data['tgl_penyerahan_6']);
-                    $templateProcessor->setValue('tgl_penyerahan7', $data['tgl_penyerahan_7']);
-                    $templateProcessor->setValue('tgl_penyerahan8', $data['tgl_penyerahan_8']);
-                    $templateProcessor->setValue('tgl_penyerahan9', $data['tgl_penyerahan_9']);
-                    $templateProcessor->setValue('tgl_penyerahan10', $data['tgl_penyerahan_10']);
-                    $templateProcessor->setValue('tgl_penyerahan11', $data['tgl_penyerahan_11']);
-                    $templateProcessor->setValue('tgl_penyerahan12', $data['tgl_penyerahan_12']);
-                    $templateProcessor->setValue('tgl_penyerahan13', $data['tgl_penyerahan_13']);
-                    $templateProcessor->setValue('tgl_penyerahan14', $data['tgl_penyerahan_14']);
-                    $templateProcessor->setValue('tgl_penyerahan15', $data['tgl_penyerahan_15']);
-                    $templateProcessor->setValue('tgl_penyerahan16', $data['tgl_penyerahan_16']);
-                    $templateProcessor->setValue('tgl_penyerahan17', $data['tgl_penyerahan_17']);
-                    $templateProcessor->setValue('tgl_penyerahan18', $data['tgl_penyerahan_18']);
+                if($f->status_registrasi == 'baru'){
+                    $templateProcessor->setValue('baru', 'Baru');
+        
+                    $inline = new TextRun();
+                    $inline->addText('Perpanjangan', array('strikethrough' => true));
+                    $templateProcessor->setComplexValue('perpanjangan', $inline);
+        
+                    $inline2 = new TextRun();
+                    $inline2->addText('Perubahan', array('strikethrough' => true));
+                    $templateProcessor->setComplexValue('perubahan', $inline2);            
+                }else if($f->status_registrasi == 'perpanjangan'){            
+                    $templateProcessor->setValue('perpanjangan', 'Perpanjangan');            
+        
+                    $inline = new TextRun();
+                    $inline->addText('Baru', array('strikethrough' => true));
+                    $templateProcessor->setComplexValue('baru', $inline);
+        
+                    $inline2 = new TextRun();
+                    $inline2->addText('Perubahan', array('strikethrough' => true));
+                    $templateProcessor->setComplexValue('perubahan', $inline2);                
+                }else if($f->status_registrasi == 'perubahan'){            
+                    $templateProcessor->setValue('perubahan', 'Perubahan');
+        
+                    $inline = new TextRun();
+                    $inline->addText('Baru', array('strikethrough' => true));
+                    $templateProcessor->setComplexValue('baru', $inline);
+        
+                    $inline2 = new TextRun();
+                    $inline2->addText('Perpanjangan', array('strikethrough' => true));
+                    $templateProcessor->setComplexValue('perpanjangan', $inline2);            
+                }
+
+                $templateProcessor->setValue('nama_organisasi', $f->nama_perusahaan);
+                $templateProcessor->setValue('no_id_bpjph', $f->no_registrasi_bpjph);
+                $templateProcessor->setValue('alamat', $f->alamat_perusahaan);
+                $templateProcessor->setValue('no_audit', $f->no_registrasi);
+                $templateProcessor->setValue('jenis_produk', $f->rincian_jenis_produk);
+                $templateProcessor->setValue('status_registrasi', $f->status_sertifikasi);
+                $templateProcessor->setValue('lokasi_audit1', $dataTemp['lokasi_audit']);
+                $templateProcessor->setValue('lingkup_audit', $dataTemp['lingkup_audit']);
+                $templateProcessor->setValue('tujuan_audit', $dataTemp['tujuan_audit']);
+                $templateProcessor->setValue('tgl_audit', $dataTemp['mulai_audit1']);
+                $templateProcessor->setValue('tim_audit1', $dataTemp['pelaksana1_audit1']);
+                $templateProcessor->setValue('tim_audit2', $dataTemp['pelaksana2_audit1']);
+                $templateProcessor->setValue('tgl_penyerahan1', $data['tgl_penyerahan_1']);
+                $templateProcessor->setValue('tgl_penyerahan2', $data['tgl_penyerahan_2']);
+                $templateProcessor->setValue('tgl_penyerahan3', $data['tgl_penyerahan_3']);
+                $templateProcessor->setValue('tgl_penyerahan4', $data['tgl_penyerahan_4']);
+                $templateProcessor->setValue('tgl_penyerahan5', $data['tgl_penyerahan_5']);                
+                $templateProcessor->setValue('tgl_penyerahan6', $data['tgl_penyerahan_6']);
+                $templateProcessor->setValue('tgl_penyerahan7', $data['tgl_penyerahan_7']);
+                $templateProcessor->setValue('tgl_penyerahan8', $data['tgl_penyerahan_8']);
+                $templateProcessor->setValue('tgl_penyerahan9', $data['tgl_penyerahan_9']);
+                $templateProcessor->setValue('tgl_penyerahan10', $data['tgl_penyerahan_10']);
+                $templateProcessor->setValue('tgl_penyerahan11', $data['tgl_penyerahan_11']);
+                $templateProcessor->setValue('tgl_penyerahan12', $data['tgl_penyerahan_12']);
+                $templateProcessor->setValue('tgl_penyerahan13', $data['tgl_penyerahan_13']);
+                $templateProcessor->setValue('tgl_penyerahan14', $data['tgl_penyerahan_14']);
+                $templateProcessor->setValue('tgl_penyerahan15', $data['tgl_penyerahan_15']);
+                $templateProcessor->setValue('tgl_penyerahan16', $data['tgl_penyerahan_16']);
+                $templateProcessor->setValue('tgl_penyerahan17', $data['tgl_penyerahan_17']);
+                $templateProcessor->setValue('tgl_penyerahan18', $data['tgl_penyerahan_18']);
 
                     $templateProcessor->setValue('temuan1', $data['keterangan_has_1']);
                     $templateProcessor->setValue('temuan2', $data['keterangan_has_2']);
@@ -2441,11 +2482,7 @@ class RegistrasiController extends Controller
                     //dd("masuk");
                     $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
                                                
-                    return response()->download('storage/laporan/download/Laporan Audit1/'.$fileName);
-
-                    
-                    
-                    
+                    return response()->download('storage/laporan/download/Laporan Audit1/'.$fileName);                                                            
                 }
 
                   
@@ -2835,8 +2872,7 @@ class RegistrasiController extends Controller
                 //SendEmailP::dispatch($e,$u,$p, '4_1');
             }
             // dd($e->id);
-            $this->LogKegiatan($e->id, Auth::user()->id, Auth::user()->name, 4, "Sales Account Officer Upload Berkas Penawaran & Kontrak Akad");
-            
+            $this->LogKegiatan($id, Auth::user()->id, Auth::user()->name, 4, "Upload Berkas Penawaran Harga & Kontrak Akad",Auth::user()->usergroup_id);
            
             $e->save();
             DB::commit();
@@ -2871,8 +2907,8 @@ class RegistrasiController extends Controller
             $date = date("Y-m-d h:i:sa");
 
             $e->tanggal_oc = $date;            
-            $e->status_oc = 2;
-            // $e->status = '5_1'; 
+            $e->status_oc = 4;
+            // $e->status = '5_4'; 
 
             if($request->has("file")){
                 $file = $request->file("file");
@@ -2884,8 +2920,8 @@ class RegistrasiController extends Controller
 
             $e->save();            
             DB::commit();
-
-            $this->LogKegiatan($e->id, Auth::user()->id, Auth::user()->name, 5, "Sales Account Officer Upload Berkas Order Confirmation (OC)");
+            
+            $this->LogKegiatan($id, Auth::user()->id, Auth::user()->name, 5, "Upload Berkas Order Confirmation (OC)",Auth::user()->usergroup_id);
             // SendEmailP::dispatch($e,$u,$p, $e->status);
             Session::flash('success', "Upload OC Berhasil");
 
@@ -3699,7 +3735,7 @@ class RegistrasiController extends Controller
     public function konfirmasiPembayaranUser(Request $request){
         
         $data = $request->except('_token','_method');
-        //dd($data);
+        // dd($data);
         //dd($data);
         $model = new Registrasi();
         $model2 = new User();
@@ -3735,6 +3771,8 @@ class RegistrasiController extends Controller
                 //$u->save();
                 $p->save();
                 DB::commit();
+
+                $this->LogKegiatan($data['id1'], Auth::user()->id, Auth::user()->name, 6, "Upload Bukti Transfer Pembayaran Tahap 1",Auth::user()->usergroup_id);
     
                 Session::flash('success', "Upload Bukti Pembayaran Berhasil");
                 
@@ -4353,6 +4391,8 @@ class RegistrasiController extends Controller
             $p->save();
 
             DB::commit();  
+
+            $this->LogKegiatan($id, Auth::user()->id, Auth::user()->name, 6, "Upload Bukti Transfer Pembayaran Tahap 2",Auth::user()->usergroup_id);
             //SendEmailP::dispatch($e,$u,$p, $e->status);
             //dd("masuk");
 
@@ -4604,6 +4644,8 @@ class RegistrasiController extends Controller
                 $u->save();
                 $p->save();
                 DB::commit();
+
+                $this->LogKegiatan($id, Auth::user()->id, Auth::user()->name, 6, "Upload Bukti Transfer Pelunasan",Auth::user()->usergroup_id);
     
                 Session::flash('success', "Upload Bukti Pembayaran Berhasil");
             

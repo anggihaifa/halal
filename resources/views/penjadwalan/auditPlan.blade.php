@@ -95,7 +95,7 @@
                                                             @endif
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)
+                                                            @if (Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11)
                                                                 <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalAuditPlan' style="cursor:pointer">Upload Disini</a>
                                                             @else
                                                                 -
@@ -335,19 +335,19 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <div class="detail_kegiatan" id="detail_kegiatan" style="width: 100%; background: #fff;"></div>
+                                            <div class="detail_kegiatan" id="detail_kegiatan{{$value->id}}" style="width: 100%; background: #fff;"></div>
                                             <div class="col-md-12">
-                                                <a id="tam_detail_kegiatan" class="tam_detail_kegiatan btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah Kegiatan</a>
+                                                <a onClick="addDataKegiatan({{$value->id}})" class="tam_detail_kegiatan btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah Kegiatan</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                                 <div class="panel-body panel-form">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <div class="detail_hari" id="detail_hari" style="width: 100%; background: #fff;"></div>                                
+                                            <div class="detail_hari" id="detail_hari{{$value->id}}" style="width: 100%; background: #fff;"></div>                                
                                             <div class="col-md-12">                                    
-                                                <a id="tam_detail_hari" class="tam_detail_hari btn btn-sm btn-info m-r-5 float-right" style="color:white; min-width: 125px;">Tambah Hari</a>
+                                                <a onClick="addDataKegiatan({{$value->id}})" class="tam_detail_hari btn btn-sm btn-info m-r-5 float-right" style="color:white; min-width: 125px;">Tambah Hari</a>
                                             </div>
                                         </div>
                                     </div>

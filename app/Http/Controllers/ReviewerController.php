@@ -12,9 +12,12 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Models\Registrasi;
 use App\Models\Pembayaran;
 use App\Models\Penjadwalan;
+use App\LogKegiatan;
 use App\Models\Akad;
 use App\Models\System\User;
 use App\Models\KebutuhanWaktuAudit;
+use App\Models\LaporanAudit1;
+use App\Jobs\SendEmailAuditor;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 
@@ -488,38 +491,126 @@ class ReviewerController extends Controller
     {
 
         $data = $request->except('_token','_method');
-        //dd($data);
+       
+
+        // dd($data);
 
 
         DB::beginTransaction();
         $model = new Registrasi;
         $model2 = new Penjadwalan;
         $model3 = new User;
+        $model4 = new LaporanAudit1;
 
-        $e = $model->find($data['idregis']);
+        $e = $model->find($data['id']);
         $j = $model2->find($e->id_penjadwalan);
+        $l = $model4->find($e->id_laporan_audit1);
 
 
         //dd($j);
+
+        $checkHas =  DB::table('dokumen_has')
+        ->where('id_registrasi',$e->id)
+        ->get();
+
+        $dataHas = json_decode($checkHas,true);
+
+        if($l){ 
+            
+        }else{
+            $model = new LaporanAudit1();
+            DB::beginTransaction();
+            // dd("masuk");
+            $model4->id_registrasi = $e->id;
+            $model4->id_dokumen_has = $dataHas[0]['id'];
+            $model4->save();
+            $e->id_laporan_audit1 = $model->id;
+            $e->save();            
+        }
        
             //dd($data['idregis1']);
-        if($data['jenis']== 'audit1'){
+        if($data['jenis']== 'audit1'){            
             $j->status_penjadwalan_audit1 = 3;
             $e->status = 8;
+            $j->catatan_penjadwalan_audit1 = $data['catatan_penjadwalan'];
+
+            if($data['pelaksana1']){
+                $str =  explode("_",$data['pelaksana1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'audit1');
+
+            }            
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 7, "Menyetujui penjadwalan audit tahap 1", Auth::user()->usergroup_id);
             //dd("masuk");
         }else if($data['jenis']== 'audit2'){
             $j->status_penjadwalan_audit2 = 3;
             $e->status = 10;
+            $j->catatan_penjadwalan_audit2 = $data['catatan_penjadwalan'];
+
+
+            if($data['pelaksana1']){
+                $str =  explode("_",$data['pelaksana1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'audit2');
+
+            }if($data['pelaksana2']){
+
+                $str2 =  explode("_",$data['pelaksana2']);
+                $u2 = $model3->find($str2[0]);
+                
+                SendEmailAuditor::dispatch($u2,$e,$j,'audit2');
+            }
+
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 9, "Menyetujui penjadwalan audit tahap 2", Auth::user()->usergroup_id);
         }else if($data['jenis']== 'tr'){
             $e->status = '12';
             $j->status_penjadwalan_tr = 3;
+            $j->catatan_penjadwalan_tr = $data['catatan_penjadwalan'];
+
+
+            if($data['pelaksana1']){
+                $str =  explode("_",$data['pelaksana1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'tr');
+
+            }if($data['pelaksana2']){
+
+                $str2 =  explode("_",$data['pelaksana2']);
+                $u2 = $model3->find($str2[0]);
+                
+                SendEmailAuditor::dispatch($u2,$e,$j,'tr');
+            }
+
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 11, "Menyetujui penjadwalan technical review", Auth::user()->usergroup_id);
         }else if($data['jenis']== 'tinjauan'){
             $e->status = '14';
             $j->status_penjadwalan_tinjauan = 3;
+            $j->catatan_penjadwalan_tinjauan = $data['catatan_penjadwalan'];
+
+
+            if($data['pelaksana1']){
+                $str =  explode("_",$data['pelaksana1']);
+                $u = $model3->find($str[0]);
+               
+                SendEmailAuditor::dispatch($u,$e,$j,'tinjauan');
+
+            }if($data['pelaksana2']){
+
+                $str2 =  explode("_",$data['pelaksana2']);
+                $u2 = $model3->find($str2[0]);
+                
+                SendEmailAuditor::dispatch($u2,$e,$j,'tinjauan');
+            }
+
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 13, "Menyetujui penjadwalan komite sertifikasi", Auth::user()->usergroup_id);
         }
+                
         $e->save();
         $j->save();
-    
+        DB::Commit();
         
 
         
@@ -527,19 +618,7 @@ class ReviewerController extends Controller
         try{
             DB::Commit();
 
-            // if($data['pelaksana1_audit1']){
-            //     $str =  explode("_",$data['pelaksana1_audit1']);
-            //     $u = $model3->find($str[0]);
-               
-            //     SendEmailAuditor::dispatch($u,$e,$j,'audit1');
-
-            // }if($data['pelaksana2_audit1']){
-
-            //     $str2 =  explode("_",$data['pelaksana2_audit1']);
-            //     $u2 = $model3->find($str2[0]);
-                
-            //     SendEmailAuditor::dispatch($u2,$e,$j,'audit1');
-            // }
+           
             Session::flash('success', "data berhasil disimpan!");            
             $redirect = redirect()->route('listpenjadwalanreviewer');
 
@@ -570,7 +649,7 @@ class ReviewerController extends Controller
         $model2 = new Penjadwalan;
         $model3 = new User;
 
-        $e = $model->find($data['idregis']);
+        $e = $model->find($data['id']);
         $j = $model2->find($e->id_penjadwalan);
 
 
@@ -580,16 +659,33 @@ class ReviewerController extends Controller
         if($data['jenis']== 'audit1'){
             $j->status_penjadwalan_audit1 = 2;
             $e->status = '7_2';
+            $j->catatan_penjadwalan_audit1 = $data['catatan_penjadwalan'];
+            //dd($j->catatan_penjadwalan_audit1);
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 7, "Menolak penjadwalan audit tahap 1", Auth::user()->usergroup_id);
+
         }else if($data['jenis']== 'audit2'){
             $j->status_penjadwalan_audit2 = 2;
             $e->status = '9_2';
+            $j->catatan_penjadwalan_audit2 = $data['catatan_penjadwalan'];
+
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 9, "Menolak penjadwalan audit tahap 2", Auth::user()->usergroup_id);
+
         }else if($data['jenis']== 'tr'){
             $j->status_penjadwalan_tr = 2;
             $e->status = '11_2';
+            $j->catatan_penjadwalan_tr = $data['catatan_penjadwalan'];
+
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 11, "Menolak penjadwalan technical review", Auth::user()->usergroup_id);
+
         }else if($data['jenis']== 'tinjauan'){
             $j->status_penjadwalan_tinjauan = 2;
             $e->status = '13_2';
+            $j->catatan_penjadwalan_tinjauan= $data['catatan_penjadwalan'];
+
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 13, "Menolak penjadwalan komite sertifikasi", Auth::user()->usergroup_id);
+
         }
+        //$j->catatan_penjadwalan = $data['catatan_penjadwalan'];
 
         $j->save();
         $e->save();
@@ -665,6 +761,8 @@ class ReviewerController extends Controller
         try{
             DB::Commit();
 
+            $this->LogKegiatan($data['idregis1'], Auth::user()->id, Auth::user()->name, 3, "Menentukan Waktu Audit.", Auth::user()->usergroup_id);
+
             Session::flash('success', "data berhasil disimpan!");            
             $redirect = redirect()->route('listkebutuhanwaktuaudit');
 
@@ -707,11 +805,14 @@ class ReviewerController extends Controller
         if($data['hasil_review']== 'perbaikan'){
             $k->status_kebutuhan_audit= '2';
             $e->status = '3_2';
+
+            $this->LogKegiatan($data['idregis1'], Auth::user()->id, Auth::user()->name, 3, "Review kebutuhan waktu audit terdapat perbaikan.", Auth::user()->usergroup_id);
         }else{
             
             $k->status_kebutuhan_audit= '3';
             $e->status = 4;
            
+            $this->LogKegiatan($data['idregis1'], Auth::user()->id, Auth::user()->name, 3, "Review kebutuhan waktu audit selesai (sesuai).", Auth::user()->usergroup_id);
         }
 
         $k->hasil_review = $data['hasil_review'];
@@ -771,6 +872,8 @@ class ReviewerController extends Controller
 
         try{
             DB::Commit();
+
+            $this->LogKegiatan($data['idregis1'], Auth::user()->id, Auth::user()->name, 3, "Upload perbaikan kebutuhan waktu audit.", Auth::user()->usergroup_id);
 
             Session::flash('success', "data berhasil disimpan!");            
             $redirect = redirect()->route('reviewkebutuhanwaktuaudit');
@@ -883,6 +986,19 @@ class ReviewerController extends Controller
                  ->orderBy('registrasi.id','desc');
 
         return Datatables::of($xdata)->make();
+    }
+
+    public function LogKegiatan($id_registrasi, $id_user, $nama, $id_kegiatan, $judul_kegiatan, $usergroup_id){
+        $model3 = new LogKegiatan();
+        DB::beginTransaction();
+            $model3->id_registrasi = $id_registrasi;
+            $model3->id_user = $id_user;
+            $model3->nama_user = $nama;
+            $model3->id_kegiatan = $id_kegiatan;
+            $model3->usergroup_id = $usergroup_id;
+            $model3->judul_kegiatan = $judul_kegiatan;            
+            $model3->save();
+        DB::commit();
     }
 
 

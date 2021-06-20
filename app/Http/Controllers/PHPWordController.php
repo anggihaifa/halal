@@ -23,6 +23,7 @@ use App\DetailLaporanAuditTahap2;
 use App\PerencanaanAudit;
 use App\DetailPerencanaanAudit;
 use App\LaporanSJPH;
+use App\LogKegiatan;
 use App\DetailLaporanSJPH;
 use App\LaporanBahan;
 use App\DetailLaporanBahan;
@@ -683,7 +684,7 @@ class PHPWordController extends Controller
             if(count($dataLaporan) == 0){
                 $model = new LaporanAudit2;
                     $model->rencana_audit_isian = $fileName;                    
-                    $model->id_registrasi = $data['idregis'];                    
+                    $model->id_registrasi = $data['id_registrasi'];                    
                     $model->save();
                 DB::Commit();
             }else{
@@ -692,7 +693,9 @@ class PHPWordController extends Controller
                 $f->rencana_audit_isian = $fileName;                
                 $f->save();                
             }
-            DB::Commit();        
+            DB::Commit();  
+            
+            $this->LogKegiatan($data['id_registrasi'], Auth::user()->id, Auth::user()->name, 10, "Membuat berkas rencana audit.", Auth::user()->usergroup_id);
 
         return response()->download('storage/laporan/upload/AP/Isian/'.$fileName);
         
@@ -1435,6 +1438,8 @@ class PHPWordController extends Controller
                 $f->save();                
             }
             DB::Commit();
+
+            $this->LogKegiatan($data['id_registrasi'], Auth::user()->id, Auth::user()->name, 10, "Membuat Berkas Laporan Audit Tahap 2.", Auth::user()->usergroup_id);
 
         return response()->download('storage/laporan/upload/Laporan Audit Tahap 2/Isian/'.$fileName);
     }
@@ -7694,6 +7699,7 @@ class PHPWordController extends Controller
             DB::Commit();
         
         $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');                
+        $this->LogKegiatan($data['id_registrasi'], Auth::user()->id, Auth::user()->name, 10, "Membuat Berkas Form Checklist Laporan Audit Tahap 2.", Auth::user()->usergroup_id);
 
         return response()->download('storage/laporan/upload/Checklist Audit/Isian/'.$fileName);
     }
@@ -10838,15 +10844,16 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $modelRe = new Registrasi;
                 $x = $modelRe->find($data['idregis']);
                 $x->id_laporan_audit2 = $dataLaporanBaru[0]->id;
-                $x->save();
+                $x->save();                
             }else{
                 $model2 = new LaporanAudit2;
                 $ldate = date('Y-m-d H:i:s');
                 $f = $model2->find($dataLaporan[0]->id);
                 $f->file_konfirmasi_sk_audit = $fileName;
                 $f->tgl_penyerahan_konfirmasi_sk_audit = $ldate;
-                $f->save();                 
+                $f->save();                                  
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 9, "Upload Berkas Konfirmasi Syarat dan Ketentuan Audit.", Auth::user()->usergroup_id);
             DB::Commit();
         }else if($request->has("berkas_bap")){
             $file = $request->file("berkas_bap");            
@@ -10882,6 +10889,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $f->tgl_penyerahan_bap = $ldate;
                 $f->save();                
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 9, "Upload Berkas Berita Acara Pemeriksaan.", Auth::user()->usergroup_id);
             DB::Commit();
         }else if($request->has("berkas_surattugas")){
             $file = $request->file("berkas_surattugas");            
@@ -10917,6 +10925,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $f->tgl_penyerahan_surat_tugas = $ldate;
                 $f->save();                
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 9, "Upload Berkas Surat Tugas.", Auth::user()->usergroup_id);
             DB::Commit();
         }else if($request->has("berkas_ap")){
             $file = $request->file("berkas_ap");            
@@ -10952,6 +10961,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $f->tgl_penyerahan_rencana_audit = $ldate;
                 $f->save();                
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Berkas Rencana Audit.", Auth::user()->usergroup_id);
             DB::Commit();
         }else if($request->has("berkas_laporan2")){
             $file = $request->file("berkas_laporan2");            
@@ -10987,6 +10997,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $f->tgl_penyerahan_laporan_audit_tahap_2 = $ldate;
                 $f->save();                
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Berkas Laporan Audit Tahap 2.", Auth::user()->usergroup_id);
             DB::Commit();
         }else if($request->has("berkas_laporan2_ulang")){
             $file = $request->file("berkas_laporan2_ulang");            
@@ -11013,6 +11024,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $f->tgl_penyerahan_laporan_audit_tahap_2_ulang = $ldate;
                 $f->save();                
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Ulang Berkas Laporan Audit Tahap 2.", Auth::user()->usergroup_id);
             DB::Commit();
         }else if($request->has("berkas_checklist")){
             $file = $request->file("berkas_checklist");            
@@ -11048,6 +11060,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $f->tgl_penyerahan_form_ceklis = $ldate;
                 $f->save();                
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Berkas Form Checklist Audit Tahap 2.", Auth::user()->usergroup_id);
             DB::Commit();
         }else if($request->has("berkas_ketidaksesuaian")){
             $file = $request->file("berkas_ketidaksesuaian");            
@@ -11135,6 +11148,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $kt->save();
                 DB::Commit();
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Berkas Laporan Ketidaksesuaian.", Auth::user()->usergroup_id);
             DB::Commit();
         }else if($request->has("berkas_ketidaksesuaian2")){
             $file = $request->file("berkas_ketidaksesuaian2");            
@@ -11189,6 +11203,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $modelkt->save();
                 DB::Commit();
             }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Berkas Laporan Ketidaksesuaian.", Auth::user()->usergroup_id);
             DB::Commit();
         }
 
@@ -11419,8 +11434,23 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $f->save();                
             }
             DB::Commit(); 
+
+        $this->LogKegiatan($data['id_registrasi'], Auth::user()->id, Auth::user()->name, 10, "Membuat Berkas Laporan Ketidaksesuaian.", Auth::user()->usergroup_id);
                                 
         return response()->download('storage/laporan/download/Laporan Ketidaksesuaian/Isian/'.$fileName);
+    }
+
+    public function LogKegiatan($id_registrasi, $id_user, $nama, $id_kegiatan, $judul_kegiatan, $usergroup_id){
+        $model3 = new LogKegiatan();
+        DB::beginTransaction();
+            $model3->id_registrasi = $id_registrasi;
+            $model3->id_user = $id_user;
+            $model3->nama_user = $nama;
+            $model3->id_kegiatan = $id_kegiatan;
+            $model3->usergroup_id = $usergroup_id;
+            $model3->judul_kegiatan = $judul_kegiatan;            
+            $model3->save();
+        DB::commit();
     }
     
 }

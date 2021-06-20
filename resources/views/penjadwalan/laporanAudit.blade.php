@@ -102,7 +102,7 @@
                                                             @endif
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)
+                                                            @if (Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11)
                                                                 <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalLaporanAudit' style="cursor:pointer">Upload Disini</a>
                                                             @else
                                                                 -
@@ -127,7 +127,7 @@
                                                             @endforeach
                                                         </td>
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)                                                            
+                                                            @if (Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11)
                                                                 @if (isset($kt))
                                                                     @foreach ($kt as $val2)
                                                                         <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalLaporanAuditUlang' style="cursor:pointer">Upload Ulang</a>
@@ -183,7 +183,7 @@
                                                             @else                                                            
                                                                 @foreach ($laporan2 as $val)
                                                                     @if ($val['form_checlist_isian'])
-                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/upload/Checklist Audit/Isian/'.$val['form_checlist_isian']) }}" download>Ketidak Isian</a>
+                                                                        <a class="btn btn-sm btn-info" href="{{url('') .Storage::url('public/laporan/upload/Checklist Audit/Isian/'.$val['form_checlist_isian']) }}" download>Form Checklist Isian</a>
                                                                     @else		
                                                                     -																
                                                                     @endif																			
@@ -191,7 +191,7 @@
                                                             @endif
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)
+                                                            @if (Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11)
                                                                 <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalChecklistAudit' style="cursor:pointer">Upload Disini</a>
                                                             @else
                                                                 -
@@ -258,7 +258,7 @@
                                                             @endif
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)                                                                
+                                                            @if (Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11)                                                               
                                                                 @if (isset($kt))
                                                                     @if (count($kt) == 0)
                                                                         <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalKetidaksesuaian2' style="cursor:pointer">Upload Disini</a>                                                                        
@@ -284,7 +284,7 @@
                                                             @endif
                                                         </td>
                                                         <td class="text-center" style="font-size: 9px;">
-                                                            @foreach ($laporan2 as $val)										
+                                                            @foreach ($laporan2 as $val)
                                                                 {{$val['tgl_penyerahan_laporan_ketidaksesuaian'] == null? "-" : $val['tgl_penyerahan_laporan_ketidaksesuaian']}}
                                                             @endforeach
                                                         </td>
@@ -299,9 +299,9 @@
                                                         </td>                                                        
                                                         <td class="text-center">
                                                             @if (isset($kt))
-                                                                @foreach ($kt as $val2)
-                                                                    <p style="font-size: 9px;">Ketidaksesuaian : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>                                                                    
+                                                                @foreach ($kt as $val2)                                                                    
                                                                     @if($val2['status'] == 'open')
+                                                                        <p style="font-size: 9px;">Ketidaksesuaian : {{$val2['jumlah_tidak_sesuai']}}<br>Status : {{$val2['status']}}</p>                                                                    
                                                                         <a href="{{url('update_status_audit_tahap2')}}/{{$value->id}}/11/{{Auth::user()->name }}/{{$val2['id']}}" class="btn btn-sm btn-info" style="font-size: 9px;">Lanjut ke tahapan Technical Review</a>
                                                                     @endif
                                                                 @endforeach
@@ -320,7 +320,7 @@
                                                             -
                                                         </td>                                                        
                                                         <td class="text-center">
-                                                            @if (Auth::user()->usergroup_id == 10)
+                                                            @if (Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11)
                                                                 <a class="btn btn-sm btn-primary text-white" data-toggle='modal' data-id=`{{$value->id}}` data-target='#modalBAP' style="cursor:pointer">Upload Disini</a>
                                                             @else
                                                                 -
@@ -4997,7 +4997,7 @@
                                         <div class="row">
                                             <label class="col-lg-4 col-form-label">Foto Produk</label>
                                             <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="foto_data_produk[]">
+                                                <input type="file" class="form-control" name="foto_data_produk[]" required>
                                             </div>
                                         </div>
                                     </div>                                    
@@ -5360,7 +5360,7 @@
                                                 <td class="valign-middle">Tampak Luar Lokasi Produksi</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">                                                    
-                                                    <input id="file" name="foto1" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto1" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5369,7 +5369,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
-                                                        <input id="video3" name="video1" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video3" name="video1" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5378,7 +5378,7 @@
                                                 <td class="valign-middle"><i>Opening Meeting</i></td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">                                                    
-                                                    <input id="file" name="foto2" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto2" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5387,7 +5387,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
-                                                        <input id="video2" name="video2" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video2" name="video2" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5396,7 +5396,7 @@
                                                 <td class="valign-middle">Kebijakan Halal</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">                                                    
-                                                    <input id="file" name="foto3" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto3" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5405,7 +5405,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
-                                                        <input id="video3" name="video3" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video3" name="video3" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5414,7 +5414,7 @@
                                                 <td class="valign-middle">Bahan (aktivitas verifikasi bahan)</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">                                                    
-                                                    <input id="file" name="foto4" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>
+                                                    <input id="file" name="foto4" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5423,7 +5423,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
-                                                        <input id="video4" name="video4" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video4" name="video4" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" />
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5438,7 +5438,7 @@
                                                 <td class="valign-middle">a. Penerimaan/penyimpanan bahan</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5a" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5a" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5447,7 +5447,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5a" name="video5a" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5a" name="video5a" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5456,7 +5456,7 @@
                                                 <td class="valign-middle">b. Tempat proses produksi (proses dari bahan baku sampai produk yang telah dikemas)</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5b" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5b" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5465,7 +5465,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5b" name="video5b" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5b" name="video5b" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5474,7 +5474,7 @@
                                                 <td class="valign-middle">c. Peralatan produksi (kuas, mesin, kompor, dll)</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5c" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5c" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5483,7 +5483,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5c" name="video5c" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5c" name="video5c" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5492,7 +5492,7 @@
                                                 <td class="valign-middle">d. Area fasilitas produksi</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5d" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5d" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5501,7 +5501,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5d" name="video5d" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5d" name="video5d" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5510,7 +5510,7 @@
                                                 <td class="valign-middle">e. Tempat pencucian bahan & alat produksi</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5e" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5e" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5519,7 +5519,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5e" name="video5e" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5e" name="video5e" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5528,7 +5528,7 @@
                                                 <td class="valign-middle">f. Penyimpanan produk</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5f" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5f" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5537,7 +5537,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5f" name="video5f" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5f" name="video5f" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5546,7 +5546,7 @@
                                                 <td class="valign-middle">g. Label/ tanda fasilitas hanya diperuntukkan untuk produksi produk halal (sharing facility)</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5g" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5g" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5555,7 +5555,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5g" name="video5g" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5g" name="video5g" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5564,7 +5564,7 @@
                                                 <td class="valign-middle">h. Tempat penyajian</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5h" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5h" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5573,7 +5573,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5h" name="video5h" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5h" name="video5h" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5582,7 +5582,7 @@
                                                 <td class="valign-middle">i. Media Transportasi/Distribusi</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto5i" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>                                                    
+                                                    <input id="file" name="foto5i" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>                                                    
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5591,7 +5591,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video5i" name="video5i" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video5i" name="video5i" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>                                                
                                             </tr>
@@ -5600,7 +5600,7 @@
                                                 <td class="valign-middle">Video Proses Produksi (ada/tidak ada)*</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto6" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>
+                                                    <input id="file" name="foto6" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5609,7 +5609,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video6" name="video6" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video6" name="video6" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -5618,7 +5618,7 @@
                                                 <td class="valign-middle">Mampu Telusur (bon pembelian, bon penjualan)</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto7" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>
+                                                    <input id="file" name="foto7" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5627,7 +5627,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video7" name="video7" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video7" name="video7" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -5636,7 +5636,7 @@
                                                 <td class="valign-middle">Closing Meeting</td>
                                                 <td class="valign-middle text-center">Foto</td>
                                                 <td class="valign-middle text-center">
-                                                    <input id="file" name="foto8" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" required/>
+                                                    <input id="file" name="foto8" class="form-control" type="file" class="form-control" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*"/>
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -5645,7 +5645,7 @@
                                                 <td class="valign-middle text-center">Video</td>
                                                 <td class="valign-middle text-center">                                                    
                                                     <div class="radio">
-                                                        <input id="video8" name="video8" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......" required/>
+                                                        <input id="video8" name="video8" class="form-control" type="text" class="form-control" placeholder="Link Google Drive Contoh: drive.google.com/......"/>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -147,10 +147,7 @@
                                     <option value="SJPH">Sistem Jaminan Produk Halal</option>
                                     <option value="SMH">SMH SNI 99001:2016</option>                                                                        
                                 </select>
-                            </div>
-
-                           
-                           
+                            </div>                                           
                         </div>
                         <div class="modal-footer">
                            <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan penjadwalan?')">Submit</button>

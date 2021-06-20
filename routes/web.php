@@ -87,6 +87,7 @@ Route::get('list_audit1','PenjadwalanController@listAudit1')->name('listaudit1')
 Route::get('list_audit2','PenjadwalanController@listAudit2')->name('listaudit2')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('list_tehnical_review','PenjadwalanController@listTehnicalReview')->name('listtehnicalreview')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('list_tinjauan','PenjadwalanController@listTinjauan')->name('listtinjauan')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('list_persiapan_sidang','PenjadwalanController@listPersiapanSidang')->name('listpersiapansidang')->middleware('role:1,3,6,9');
 
 Route::get('list_log','PenjadwalanController@listLog')->name('listlog')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('data_log','PenjadwalanController@dataLog')->name('datalog');
@@ -98,6 +99,7 @@ Route::get('data_audit1','PenjadwalanController@dataAudit1')->name('dataaudit1')
 Route::get('data_audit2','PenjadwalanController@dataAudit2')->name('dataaudit2');
 Route::get('data_tehnical_review','PenjadwalanController@dataTehnicalReview')->name('datatehicalreview');
 Route::get('data_tinjauan','PenjadwalanController@dataTinjauan')->name('datatinjauan');
+Route::get('data_persiapan_sidang','PenjadwalanController@dataPersiapanSidang')->name('datapersiapansidang');
 
 
 Route::get('audit_plan/{id}','PenjadwalanController@auditPlan')->name('auditplan')->middleware('role:1,3,6,9,10,11,12,13');
@@ -287,9 +289,10 @@ Route::put('update_status_audit_tahap1/{id}','RegistrasiController@updateStatusA
 //auditor
 Route::put('store_laporan_tr','PenjadwalanController@storeLaporanTR')->name('storelaporantr');
 Route::put('store_laporan_ks','PenjadwalanController@storeLaporanKS')->name('storelaporanks');
+Route::put('store_persiapan_sidang','PenjadwalanController@storePersiapanSidang')->name('storepersiapansidang');
 
 // Route::get('data_fasilitas/{id_registrasi}','RegistrasiController@dataFasilitas');
-// Route::get('data_produk/{id_registrasi}','RegistrasiController@dataProduk');
+// Route::get('data_produk/{id_registrasi}','RegistrasiController@dataProduk');s
 // Route::get('data_kantor_pusat/{id_registrasi}','RegistrasiController@dataKantorPusat');
 // Route::get('data_menu_restoran/{id_registrasi}','RegistrasiController@dataMenuRestoran');
 // Route::get('data_jagal/{id_registrasi}','RegistrasiController@dataJagal');

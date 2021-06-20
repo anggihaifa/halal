@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Tinjauan Komite Sertifikasi')
+@section('title', 'Persiapan Sidang Penetapan Kehalalan Produk')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -15,18 +15,18 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Tinjauan Komite Sertifikasi</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Tinjauan Komite Sertifikasi</a></li>
+        <li class="breadcrumb-item"><a href="#">Persiapan Sidang Penetapan Kehalalan Produk</a></li>
+        <li class="breadcrumb-item active"><a href="#">List Persiapan Sidang Penetapan Kehalalan Produk</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Tinjauan Komite Sertifikasi <small></small></h1>
+    <h1 class="page-header">List Persiapan Sidang Penetapan Kehalalan Produk <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Tinjauan Komite Sertifikasi</h4>
+            <h4 class="panel-title">List Persiapan Sidang Penetapan Kehalalan Produk</h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -136,11 +136,9 @@
                         <th class="valign-middle text-center">No. Registrasi</th>
                         <th class="valign-middle text-center">Perusahaan</th>
                         <th class="valign-middle text-center">Jenis Produk</th>
-                        <th class="valign-middle text-center" style="max-width:20%">Komite Sertifikasi 1</th>
-                        <th class="valign-middle text-center" style="max-width:20%">Komite Sertifikasi 2</th>
                         <th class="valign-middle text-center" >Unduh</th>
                         
-                        <th class="valign-middle text-center" style="max-width:20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th class="valign-middle text-center" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                 </thead>
             </table>
@@ -149,16 +147,16 @@
 
     </div>
 
-    <div id="modalks" class="modal fade" role="dialog">
+    <div id="modalpersiapansidang" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
-            <form action="{{route('storelaporanks')}}" method="post"  enctype="multipart/form-data">
+            <form action="{{route('storepersiapansidang')}}" method="post"  enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                        <h4 class="modal-title">Upload File Tinjauan Komite Sertifikasi</h4>
+                        <h4 class="modal-title">Hasil Review Persiapan Sidang Penetapan Kehalalan Produk</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                     </div>
@@ -166,15 +164,15 @@
                     <div class = "modal-body">
                         
 
+                       
+
                         <div>
                             <table class="table  table-sm table-borderless border-none">
                             
-                                <thead class="table-success">   
-                                <th >Upload File</th>
-
-                                </thead>
+                                
                                 <tbody>
                                     <tr>
+                                    
                                         <td>
                                             <div class="form-group">
                                             <label class="control-label font-weight-bold" for="id">ID</label>  
@@ -188,34 +186,9 @@
                                     <tr>
                                         <td>
                                             <div class="form-group">
-                                            <label class=" control-label font-weight-bold" for="id">File Tinjauan Komite Sertifikasi</label>  
-                                            <div >
-                                                <input id="file_laporan_tinjauan"  name="file_laporan_tinjauan" type="file" placeholder="" >
-                                            
-                                            </div>
-                                            </div
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            
-                                
-                        </div>
-
-                        <div>
-                            <table class="table  table-sm table-borderless border-none">
-                            
-                                <thead class="table-success">   
-                                <th >Hasil Tinjauan Komite Sertifikasi</th>
-
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-group">
-                                                <label class=" control-label font-weight-bold" for="id">Catatan Tinjauan Komite Sertifikasi</label>  
+                                                <label class=" control-label font-weight-bold" for="catatan_persiapan_sidang">Catatan Persiapan Sidang Penetapan Kehalalan Produk</label>  
                                                 <div >
-                                                    <input type="text" id="catatan_tinjauan" class="form-control"  name="catatan_tinjauan" placeholder="" >
+                                                    <input type="text" id="catatan_persiapan_sidang" class="form-control"  name="catatan_persiapan_sidang" placeholder="" >
                                                 
                                                 </div>
                                             </div>
@@ -225,9 +198,9 @@
                                         <td>
                                             <div class="form-group">
                                             <label class=" control-label font-weight-bold" for="id">Hasil</label>  
-                                            <select id="status_laporan_tinjauan" name="status_laporan_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
+                                            <select id="status_persiapan_sidang" name="status_persiapan_sidang" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                                 <option value="">==Pilih==</option>
-                                                <option value="1">Laporan Audit Dapat Dilanjutkan Ke Tahapan Bertikutnya</option>
+                                                <option value="1">Laporan Audit Dapat Dilanjutkan Ke Tahapan Sidang Penetapan Kehalalan Produk</option>
                                                 <option value="0">Laporan Audit Harus Diperbaiki Sesuai Catatan</option>                                                               
                                             </select>
                                             </div
@@ -272,31 +245,30 @@
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script src="{{asset('/assets/js/filterData.js')}}"></script>
-
     
     <script>
         window.addEventListener('load', (event) => {
-            $('#modalks').find('form').trigger('reset');
+            $('#modalpersiapansidang').find('form').trigger('reset');
             
         });
 
-        $('#modalks').on('hidden.bs.modal', function () {
+        $('#modalpersiapansidang').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');
     
         
         })
 
-         $('#modalks').on('show.bs.modal', function(e) {
+         $('#modalpersiapansidang').on('show.bs.modal', function(e) {
 
 
 
             var $this = $(e.relatedTarget);
             
             var id = $this.data('id');
-            var status_laporan_tinjauan = $this.data('status-laporan-tinjauan');
-            var catatan_tinjauan = $this.data('catatan-tinjauan');
+            var status_persiapan_sidang = $this.data('status-persiapan-sidang');
+            var catatan_persiapan_sidang = $this.data('catatan_persiapan_sidang');
             
-            var modal = $('#modalks');
+            var modal = $('#modalpersiapansidang');
            
           
             if(modal.find('#id').val()){
@@ -306,12 +278,12 @@
                
                 modal.find('#id').val(id);
 
-                modal.find('#status_laporan_tinjauan').val(status_laporan_tinjauan).change();   
-                modal.find('#catatan_tinjauan').val(catatan_tinjauan);        
+                modal.find('#status_persiapan_sidang').val(status_persiapan_sidang).change();   
+                modal.find('#catatan_persiapan_sidang').val(catatan_persiapan_sidang);        
                
                
                   
-                modal.find('#modalks').attr('action', function (i,old) {
+                modal.find('#modalpersiapansidang').attr('action', function (i,old) {
                    return old + '/' +id;
             });  
             }
@@ -326,214 +298,196 @@
             todayHighlight: true,
         });
 
-        
+
         var xTable = $('#table').DataTable({
-                ajax:{
-                    url:"{{route('datatinjauan')}}",
-                    data:function(d){
-                        d.no_registrasi = $('input[name=no_registrasi]').val();
-                        d.perusahaan = $('input[name=perusahaan]').val();
-                        d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
-                        d.kelompok_produk = $('#kelompok_produk').val();
-                        d.jenis_registrasi = $('#jenis_registrasi').val();
-                        d.status_registrasi = $('#status_registrasi').val();
-                        d.status = $('#status').val();
+            ajax:{
+                url:"{{route('datapersiapansidang')}}",
+                data:function(d){
+                    d.no_registrasi = $('input[name=no_registrasi]').val();
+                    d.perusahaan = $('input[name=perusahaan]').val();
+                    d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
+                    d.kelompok_produk = $('#kelompok_produk').val();
+                    d.jenis_registrasi = $('#jenis_registrasi').val();
+                    d.status_registrasi = $('#status_registrasi').val();
+                    d.status = $('#status').val();
 
-                        //d.id_user = $('#id_user').val();
+                    //d.id_user = $('#id_user').val();
 
+                }
+            },
+            
+            columns:[
+                
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+                        return meta.row + 1;
                     }
                 },
+
+                {"data":"no_registrasi"},
+                {"data":"nama_perusahaan"},
+                {"data":"kelompok"},
                 
-                columns:[
-                   
-                    {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
-                            return meta.row + 1;
-                        }
-                    },
- 
-                    {"data":"no_registrasi"},
-                    {"data":"nama_perusahaan"},
-                    {"data":"kelompok"},
-                   
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana1_tinjauan){
-                                var str = full.pelaksana1_tinjauan.split("_");
-                                return str[1]
-                            }else{
-                                return ''
-                            }
-                        }
-                    },
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana2_tinjauan){
-                                var str = full.pelaksana2_tinjauan.split("_");
-                                return str[1]
-                            }else{
-                                return ''
-                            }
-                            
-                        }
-                    },
+               
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
 
-                    {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
+                        //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
 
-                            //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+                        //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
 
-                            //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
-
-                            if(full.file_laporan_audit1 ){
+                        if(full.file_laporan_audit1 ){
 
                             var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
 
-                                                                        
-                            }else{
+                                                                    
+                        }else{
                             var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLap. Audit1&nbsp;&nbsp;</a>`;
 
-                            }
-                            if(full.file_laporan_audit1 ){
+                        }
+                        if(full.file_laporan_tr ){
 
                             var unduhLaporanTR = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan TR&nbsp;&nbsp;</a>`;
 
-                                                                        
-                            }else{
+                                                                    
+                        }else{
                             var unduhLaporanTR = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan TR&nbsp;&nbsp;</a>`;
 
-                            }
-
-                            if(full.file_laporan_audit_tahap_2 ){
-
-                                var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
-                               
-                                                                             
-                            }else{
-                                var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
-                               
-                            }
-
-                            if(full.file_bap ){
-
-                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/download/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                                                                            
-                            }else{
-                                var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                            }
-                            if(full.file_laporan_ketidaksesuaian ){
-
-                                var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                                                                            
-                                }else{
-                                var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                            }
-
-                            var unduhDPR = `<a href="{{ url('').Storage::url('public/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi.docx') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Daftar Periksa&nbsp;&nbsp;</a>`;
-
-                            // if(full.status_dpra == '0'){
-
-                            //     var dpra = ` <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                                                                            
-                            // }else{
-                            //     var dpra = `<button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                            // }
-
-                            return `<table class="table-xs table-borderless p-0 m-0">
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                               `+unduhLaporan1+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhLaporan2+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhBAP+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhTS+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhLaporanTR+`
-                                            </td>
-                                        </tr>
-                                      
-                                    </table>`
-                                       
-                           
                         }
-                    },
-                    {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
+                            if(full.file_laporan_tinjauan ){
 
-                            //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+                            var unduhLaporanKS = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Komite Sertifikasi/`+full.file_laporan_tinjauan+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan TR&nbsp;&nbsp;</a>`;
 
-                            //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
+                                                                    
+                        }else{
+                            var unduhLaporanKS = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan KS&nbsp;&nbsp;</a>`;
 
-                           
-
-                            return `<table class="table-xs table-borderless text-center">
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center">
-                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan-tinjauan='`+full.catatan_tinjauan+`' data-status-laporan-tinjauan='`+full.status_laporan_tinjauan+`'  data-target='#modalks' > Upload File Tinjauan Komite Sertifikasi</button>
-                                            </td>
-                                        </tr>
-                                    </table>`
-                                       
-                           
                         }
+                        
+
+                        if(full.file_laporan_audit_tahap_2 ){
+
+                            var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
+                            
+                                                                            
+                        }else{
+                            var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
+                            
+                        }
+
+                        if(full.file_bap ){
+
+                            var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/download/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+
+                                                                        
+                        }else{
+                            var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+
+                        }
+                        if(full.file_laporan_ketidaksesuaian ){
+
+                            var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+
+                                                                        
+                            }else{
+                            var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+
+                        }
+
+                        var unduhDPR = `<a href="{{ url('').Storage::url('public/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi.docx') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Daftar Periksa&nbsp;&nbsp;</a>`;
+
+                        // if(full.status_dpra == '0'){
+
+                        //     var dpra = ` <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
+
+                                                                        
+                        // }else{
+                        //     var dpra = `<button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
+
+                        // }
+
+                        return `<table class="table-xs table-borderless p-0 m-0">
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhLaporan1+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhLaporan2+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhBAP+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhTS+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhLaporanTR+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhLaporanKS+`
+                                        </td>
+                                    </tr>
+                                    
+                                </table>`
+                                    
+                        
                     }
-                ],
-                'columnDefs': [
+                },
                 {
-                      "targets": [0,1,2,3,4,5,6,7],
-                      "className": "text-center",
-                     
-                }],
-                
-                processing:true,
-                serverSide:true,
-                order:[[0,'asc']],
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
 
-            });
+                        //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+
+                        //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
+
+                        
+
+                        return `<table class="table-xs table-borderless text-center">
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center">
+                                            <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan_persiapan_sidang='`+full.catatan_persiapan_sidang+`' data-status-laporan_persiapan_sidang='`+full.status_persiapan_sidang+`'  data-target='#modalpersiapansidang' >Hasil Review</button>
+                                        </td>
+                                    </tr>
+                                </table>`
+                                    
+                        
+                    }
+                }
+            ],
+            'columnDefs': [
+            {
+                    "targets": [0,1,2,3,4,5],
+                    "className": "text-center",
+                    
+            }],
+            
+            processing:true,
+            serverSide:true,
+            order:[[0,'asc']],
+
+        });
 
 
         $(document).ready(function () {
-
-           
-
-
-           
-        
     
         });
          
@@ -548,5 +502,5 @@
             return confirm("Apakah anda yakin?");
         });
     </script>
-    
+
 @endpush
