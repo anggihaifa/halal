@@ -914,16 +914,17 @@ class PenjadwalanController extends Controller
             //dd($data['idregis1']);
             $j->mulai_audit1 = $data['mulai_audit1'];
             $j->status_penjadwalan_audit1 = 1;
+            $e->status = '7_1';
             $j->pelaksana1_audit1 = $data['pelaksana1_audit1'];
             $j->skema = $data['skema_audit'];
 
-
+            $e->save();
             $j->save();
         }else{
            //dd($data['mulai_audit1']);
             $model2->mulai_audit1 = $data['mulai_audit1'];
             $model2->status_penjadwalan_audit1 = 1;
-
+            $e->status = '7_1';
             $model2->pelaksana1_audit1 = $data['pelaksana1_audit1'];
             $model2->id_registrasi = $data['idregis1'];
             $model2->skema = $data['skema_audit'];

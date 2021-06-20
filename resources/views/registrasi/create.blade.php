@@ -240,7 +240,7 @@
                                             <label for="kelompok" class="col-lg-4 col-form-label">Rincian Jenis Produk*</label>
     
                                             <div class="col-lg-8">
-                                                <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" class="form-control selectpicker multiple-select" data-size="30" data-live-search="true" data-style="btn-white" style="height:100%">
+                                                <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" class="form-control selectpicker" data-size="30" data-live-search="true" data-style="btn-white">
                                                 {{-- <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" data-size="30"> --}}
                                                     <option value="">--Pilih Jenis Produk--</option>
                                                 </select>

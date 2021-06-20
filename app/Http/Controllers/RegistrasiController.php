@@ -2387,10 +2387,10 @@ class RegistrasiController extends Controller
 
         $laporanAudit1 = json_decode($checkLaporanAudit1,true);
         
-      
+        return view('penjadwalan.auditTahap1',compact('dataHas','dataRegis','laporanAudit1'));
       
         //dd($dataHas);
-        return view('penjadwalan.auditTahap1', compact('dataHas','dataRegis','laporanAudit1'));
+       
 
     }
 
