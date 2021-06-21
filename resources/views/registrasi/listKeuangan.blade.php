@@ -444,7 +444,7 @@
                                             </select>
                                         </form>`;
                         
-                        return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
+                        return `<div class="col-lg-12 row rounded-sm shadow-sm border pt-3 pb-3 m-0">
                                 
                                 
                                 

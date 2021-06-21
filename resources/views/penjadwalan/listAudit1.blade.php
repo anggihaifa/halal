@@ -195,7 +195,7 @@
                         }
                         
                         
-                    return `<div class="col-lg-12 row border-left rounded-lg border-primary" >    
+                    return `<div class="col-lg-12 row rounded-sm shadow-sm border pt-3 pb-3 m-0">
                             <div class="col-lg-7" style="padding-left:10%; padding-top:2%">
                                 <label class="inline text-center">
 

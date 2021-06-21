@@ -188,8 +188,7 @@ class RegistrasiController extends Controller
      
         }else{            
             $xdata = $xdata->where('registrasi.status_cancel','=',0)
-                    ->where('reistrasi.kode_wilayah','=',$kodewilayah);
-               
+                    ->where('reistrasi.kode_wilayah','=',$kodewilayah);               
 
         }
 

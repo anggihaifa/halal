@@ -99,11 +99,11 @@
                             if(full.id == aktif_reg ){
                                 var aktif =`<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-yellow btn-xs" >Non Aktifkan</a>`;
                                 var uploadBerkas = `<a href="{{url('unggah_dokumen_sertifikasi')}}"  class="dropdown-item" ><i class="fa fa-edit"></i>Berkas Sertifikasi</a>`;
-                                var div_aktif = `<div class="col-lg-12 row border-left border-primary" style="background-color:#fafbfc" >`;
+                                var div_aktif = `<div class="col-lg-12 row rounded-sm shadow border pt-3 pb-3 m-0">`;
                             }else{
                                 var aktif = `<a href="{{url('activate_registrasi')}}/`+full.id+`" class="btn btn-green btn-xs" >Aktifkan</a>`;
                                 var uploadBerkas = `<a href="#"  class="dropdown-item" >Aktifkan Untuk edit berkas</a>`;
-                                 var div_aktif = `<div class="col-lg-12 row border-left border-primary" >`;
+                                 var div_aktif = `<div class="col-lg-12 row rounded-sm shadow-sm border pt-3 pb-3 m-0">`;
                             }
                             
                             return ``+div_aktif+`
