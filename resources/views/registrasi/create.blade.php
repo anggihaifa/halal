@@ -240,11 +240,20 @@
                                             <label for="kelompok" class="col-lg-4 col-form-label">Rincian Jenis Produk*</label>
     
                                             <div class="col-lg-8">
-                                                <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" class="form-control selectpicker" data-size="30" data-live-search="true" data-style="btn-white">
+                                                <select id="id_rincian_kelompok_produk1" name="id_rincian_kelompok_produk[]" class="form-control selectpicker" data-size="30" data-live-search="true" data-style="btn-white">
                                                 {{-- <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" data-size="30"> --}}
                                                     <option value="">--Pilih Jenis Produk--</option>
                                                 </select>
                                             </div>   
+                                        </div>
+                                    </div>
+
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">                                                
+                                            <div class="detail_datarincian" id="detail_datarincian" style="width: 100%; margin-left:-3px"></div>
+                                            <div class="col-md-12">
+                                                <a id="tam_data_rincian" class="tam_data_rincian btn btn-sm btn-primary m-r-5" style="color:white">Tambah Data Rincian Jenis Produk</a>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -1532,6 +1541,11 @@
     <script src="{{asset('/assets/js/demo/form-plugins.demo.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>    
     <script>
+        var jumlah=0;
+        var jumlah2=0;
+        var jumlahdataproduk=0;                        
+        var jumlahdatarincian=1;
+
         var date = new Date();
         var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         var d = date.getDate();
@@ -1541,14 +1555,14 @@
         if(month < 10){ month = '0'+ month; }
         var todayFormat = y+"-"+month+"-"+d ;        
 
-        $('#tgl_registrasi').val(todayFormat);        
-
-        var jumlah=0;
-        var jumlahdataproduk=0;                        
+        $('#tgl_registrasi').val(todayFormat);                
         
         var merk;
+        var rincian;
         var detaildataproduk = document.getElementById('detail_dataproduk');
+        var detaildatarincian = document.getElementById('detail_datarincian');
         detaildataproduk.style.display = 'block';
+        detaildatarincian.style.display = 'block';
 
         $('#tam_data_produk').on('click', function(){             
             merk = $('#merk').val();             
@@ -1558,12 +1572,62 @@
             adddataproduk();       
         });        
 
+        $('#tam_data_rincian').on('click', function(){
+            // alert("disini");
+            detaildatarincian.style.display = 'block';
+
+            adddatarincian();       
+        });        
+
         function adddataproduk(){
             var data_produk = '<div> <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Merk/Brand</label><div class="col-lg-7"><input class="form-control" id="merk" name="merk[]" type="text" label="Merk/Brand" placeholder="Merk/Brand" required></div> <div class="col-lg-1"><a id="hapus_dataproduk" class="btn btn-sm btn-danger m-r-5" style="color:white">X</a></div> </div> </div> </div>';
             // var data_produk = '<div>q</div>';
             $('.detail_dataproduk').append(data_produk);
             jumlahdataproduk+=1;            
         }
+
+        function adddatarincian(){                            
+            var data_rincian = '<div id="rincian'+(jumlahdatarincian+1)+'"><div class="wrapper col-lg-12"><div class="row"><label for="kelompok" class="col-lg-4 col-form-label">Rincian Jenis Produk*</label><div class="col-lg-7"><select id="id_rincian_kelompok_produk'+(jumlahdatarincian+1)+'" name="id_rincian_kelompok_produk[]" class="form-control selectpicker" data-size="30" data-live-search="true" data-style="btn-white"><option value="">--Pilih Jenis Produk--</option></select></div> <div class="col-lg-1"><a onClick="hapusRincian('+(jumlahdatarincian+1)+')" class="btn btn-sm btn-danger m-r-5" style="color:white">X</a></div>   </div></div> </div>';
+            $('#detail_datarincian').append(data_rincian);    
+            
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                });            
+
+                
+                    $.ajax({                    
+                        url: '{{ route('dependent_dropdown_rincian.store') }}',
+                        method: 'POST',
+                        data: {id: $id = document.getElementById("id_kelompok_produk").value},
+                        success: function (response) {                                                
+                            $('#id_rincian_kelompok_produk'+jumlahdatarincian).empty();                           
+                            $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
+                                $("#id_rincian_kelompok_produk"+jumlahdatarincian).append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'_'+rincian_kelompok_produk))
+                            })
+                            $('#id_rincian_kelompok_produk'+jumlahdatarincian).selectpicker('refresh');
+                        }                   
+                    });                
+                                    
+            jumlahdatarincian+=1;            
+        }
+
+        function hapusRincian($id){
+            // alert($id);            
+            // var select1 = document.getElementById('detail_datarincian');
+            var detaildatarincian = document.getElementById('detail_datarincian');
+            var select2 = document.getElementById('rincian'+$id);
+            detaildatarincian.removeChild(select2);
+            // $('.detail_datarincian').removeChild(select2);            
+        }
+
+        // $(document).on('click','#hapus_datarincian', function(){                        
+            // $(this).parent().parent().parent().remove();
+        //     jumlahdataproduk-=1;
+
+        //     if(jumlahdataproduk == 0){
+        //         detaildataproduk.style.display = 'none';
+        //     }            
+        // });
 
         $(document).on('click','#hapus_dataproduk', function(){                        
             $(this).parent().parent().parent().remove();
@@ -1585,11 +1649,11 @@
                     method: 'POST',
                     data: {id: $(this).val()},
                     success: function (response) {                                                
-                        $('#id_rincian_kelompok_produk').empty();                               
+                        $('#id_rincian_kelompok_produk1').empty();                           
                         $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
-                            $("#id_rincian_kelompok_produk").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'_'+rincian_kelompok_produk))
+                            $("#id_rincian_kelompok_produk1").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'_'+rincian_kelompok_produk))
                         })
-                        $('#id_rincian_kelompok_produk').selectpicker('refresh');
+                        $('#id_rincian_kelompok_produk1').selectpicker('refresh');
                     }                   
                 })
             });
