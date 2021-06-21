@@ -1380,7 +1380,7 @@
                                                 </select>
                                             </form>`;
                             
-                            return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
+                            return `<div class="col-lg-12 row shadow rounded-lg border-primary" >
                                     
                                    
                                     

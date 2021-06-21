@@ -13,11 +13,12 @@
 				<a href="javascript:;">
 				{{-- <a href="javascript:;" data-toggle="nav-profile"> --}}
 					@if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 6)
-						{{-- <div class="cover with-shadow adminbg"></div> --}}
+						<div class="cover adminbg"></div>
 					@else
-						{{-- <div class="cover with-shadow userbg"></div> --}}
+						<div class="cover userbg"></div>
 					@endif
-					{{--<div class="cover with-shadow sci"></div>--}}
+					{{-- <div class="cover sci"></div> --}}
+					<div class="cover sci"></div>
 					<div class="image">
 						@if(Auth::user()->usergroup_id == 1 )
 							<img src="{{asset('/assets/img/user/user-x.png')}}" alt="" />
@@ -27,7 +28,7 @@
 					</div>
 					<div class="info">
 						{{ucwords(strtolower(Auth::user()->name))}}
-						<small>{{ucwords(strtolower(Auth::user()->perusahaan))}}</small>
+						<small><b>{{ucwords(strtolower(Auth::user()->perusahaan))}}</b></small>
 					</div>
 				</a>
 			</li>

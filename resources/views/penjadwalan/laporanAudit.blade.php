@@ -55,6 +55,7 @@
                 <div class="card-body table-responsive-lg ">
 					<div class="tab-content p-0 m-0">                       
                         <div class="tab-pane fade active show" id="card-tab-5">
+                            <span class="text-danger">Silahkan refresh jika data form yang diinput belum ada</span>
                             @foreach($dataPenjadwalan as $index => $value2)                                
                                     <div class="panel-body panel-form">
                                         <div class="wrapper col-lg-12">
