@@ -6051,16 +6051,6 @@
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
     <script>        
-        var detailkegiatan8 = document.getElementById('detail_kegiatan8');
-        // var detailkegiatan8 = $('.detail_kegiatan8');
-        var detailkegiatan9 = document.getElementById('detail_kegiatan9');
-        // var detailkegiatan9 = $('.detail_kegiatan9');
-        var detailkegiatan10 = document.getElementById('detail_kegiatan10');
-        // var detailkegiatan10 = $('.detail_kegiatan10');
-        detailkegiatan8.style.display = 'none';
-        detailkegiatan9.style.display = 'none';
-        detailkegiatan10.style.display = 'none';
-        
         var jmlKegiatan8 = 0;
         var jmlKegiatan9 = 0;
         var jmlKegiatan10 = 0;        
@@ -6069,7 +6059,7 @@
         var noKegiatan10 = 1;
 
         var jmlKetidaksesuaian = 0;
-        var noKetidaksesuaian = 1;
+        var noKetidaksesuaian = 1;                
 
         $('#btn_reset').on('click', function () {
             // alert("dsn");
@@ -6517,70 +6507,57 @@
             document.getElementById("5eca").value = "";
         });       
 
-        function addDataKegiatan8($id){            
+        function addDataKegiatan8($id){                        
             noKegiatan8 += 1;
-            jmlKegiatan8+=1;   
-            // alert("disini");         
-            var data_kegiatan8 = '<div id="kegiatan'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;">                    <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Fasilitas</label><div class="col-lg-8"><div><input class="form-control" name="nama_fasilitas[]" type="text" label="Nama Fasilitas" placeholder="Nama Fasilitas"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Fungsi</label><div class="col-lg-8"><div><input class="form-control" name="fungsi[]" type="text" label="Fungsi" placeholder="Fungsi"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Alamat</label><div class="col-lg-8"><div><textarea class="form-control" name="alamat_fasilitas[]" label="Alamat Fasilitas" placeholder="Alamat Fasilitas"></textarea></div></div></div></div></div></div>                    <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div></div>';
+            jmlKegiatan8+=1;               
+            var data_kegiatan8 = '<div id="kegiatan'+jmlKegiatan8+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;">                    <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Fasilitas</label><div class="col-lg-8"><div><input class="form-control" name="nama_fasilitas[]" type="text" label="Nama Fasilitas" placeholder="Nama Fasilitas"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Fungsi</label><div class="col-lg-8"><div><input class="form-control" name="fungsi[]" type="text" label="Fungsi" placeholder="Fungsi"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Alamat</label><div class="col-lg-8"><div><textarea class="form-control" name="alamat_fasilitas[]" label="Alamat Fasilitas" placeholder="Alamat Fasilitas"></textarea></div></div></div></div></div></div>                    <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+','+jmlKegiatan8+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div></div>';
             $('#detail_kegiatan'+$id).append(data_kegiatan8);            
         }
 
         function addDataKegiatan9($id){            
             noKegiatan9 += 1;
             jmlKegiatan9 +=1;                        
-            var data_kegiatan9 = '<div id="kegiatan9'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Produk</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk/Menu - Merk" placeholder="Nama Produk/Menu - Merk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_data_produk[]"></div></div></div>                <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Rincian Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="rincian_jenis_produk[]" type="text" label="Rincian Jenis Produk" placeholder="Rincian Jenis Produk"></div></div></div></div></div></div>                <div class="col-lg-12"><div><a onClick="hapusKegiatan2('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> </div>';
+            var data_kegiatan9 = '<div id="kegiatan9'+jmlKegiatan9+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Produk</label><div class="col-lg-8"><div><input class="form-control" name="nama_produk[]" type="text" label="Nama Produk/Menu - Merk" placeholder="Nama Produk/Menu - Merk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label">Foto Produk</label><div class="col-lg-8"><input type="file" class="form-control" name="foto_data_produk[]"></div></div></div>                <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="jenis_produk[]" type="text" label="Jenis Produk" placeholder="Jenis Produk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Rincian Jenis Produk</label><div class="col-lg-8"><div><input class="form-control" name="rincian_jenis_produk[]" type="text" label="Rincian Jenis Produk" placeholder="Rincian Jenis Produk"></div></div></div></div></div></div>                <div class="col-lg-12"><div><a onClick="hapusKegiatan2('+$id+','+jmlKegiatan9+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> </div>';
             $('#detail_kegiatan9'+$id).append(data_kegiatan9);
         }
                 
         function addDataKegiatan10($id){            
             noKegiatan10 += 1;
             jmlKegiatan10 +=1;            
-            var data_kegiatan10 = '<div id="kegiatan10'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Bahan Bentuk/Warna/Rasa/Merk</label><div class="col-lg-8"><div><input class="form-control" name="nama_bahan[]" type="text" label="Nama Bahan" placeholder="Nama Bahan Bentuk/Warna/Rasa/Merk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Kategori</label><div class="col-lg-8"><div><input class="form-control" name="kategori[]" type="text" label="Kategori" placeholder="Kategori"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Produsen</label><div class="col-lg-8"><div><input class="form-control" name="produsen[]" type="text" label="Produsen" placeholder="Produsen"></div></div></div></div></div></div>           <div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Dokumen Pendukung</label><div class="col-lg-8"><div><input class="form-control" name="dokumen_pendukung[]" type="text" label="Dokumen Pendukung" placeholder="Dokumen Pendukung"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div></div></div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan3('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
+            var data_kegiatan10 = '<div id="kegiatan10'+jmlKegiatan10+'" style="margin-bottom:2px; background: rgb(242, 242, 242);"> <div class="panel-body panel-form" style="border-top: 1px solid #bbb;"><div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Nama Bahan Bentuk/Warna/Rasa/Merk</label><div class="col-lg-8"><div><input class="form-control" name="nama_bahan[]" type="text" label="Nama Bahan" placeholder="Nama Bahan Bentuk/Warna/Rasa/Merk"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Kategori</label><div class="col-lg-8"><div><input class="form-control" name="kategori[]" type="text" label="Kategori" placeholder="Kategori"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Produsen</label><div class="col-lg-8"><div><input class="form-control" name="produsen[]" type="text" label="Produsen" placeholder="Produsen"></div></div></div></div></div></div>           <div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Dokumen Pendukung</label><div class="col-lg-8"><div><input class="form-control" name="dokumen_pendukung[]" type="text" label="Dokumen Pendukung" placeholder="Dokumen Pendukung"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Catatan</label><div class="col-lg-8"><div><input class="form-control" name="catatan[]" type="text" label="Catatan" placeholder="Catatan"></div></div></div></div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan3('+$id+','+jmlKegiatan10+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
             $('#detail_kegiatan10'+$id).append(data_kegiatan10);
         }
 
         function addDataKetidaksesuaian($id){
             noKetidaksesuaian += 1;
             jmlKetidaksesuaian +=1;            
-            var data_kegiatan_ketidaksesuaian = '<div id="kegiatanketidaksesuaian'+$id+'" style="margin-bottom:2px; background: rgb(242, 242, 242);">  <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Klausul</label><div class="col-lg-8"><div><input class="form-control" name="klausul[]" type="text" label="Klausul" placeholder="Klausul"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Auditor</label><div class="col-lg-8"><div><textarea class="form-control" name="auditor[]" label="Auditor" placeholder="Auditor"></textarea></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Deskripsi</label><div class="col-lg-8"><div><input class="form-control" name="deskripsi[]" type="text" label="Deskripsi" placeholder="Kota"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Investigasi Akar Permasalahan</label><div class="col-lg-8"><div><input class="form-control" name="investigasi[]" type="text" label="Investasi Akar Permasalahan" placeholder="Investigasi Akar Permasalahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Tindakan Perbaikan dan Pencegahan</label><div class="col-lg-8"><div><input class="form-control" name="tindakan[]" type="text" label="Tindakan Perbaikan dan Pencegahan" placeholder="Tindakan Perbaikan dan Pencegahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Hasil Tinjauan Tim Audit</label><div class="col-lg-8"><div><select name="hasil[]" class="form-control"><option value="open">Open</option><option value="close">Close</option></select>                                                        </div></div></div></div></div></div><div class="col-lg-12"><div><a onClick="hapusKetidaksesuaian('+$id+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
+            var data_kegiatan_ketidaksesuaian = '<div id="kegiatanketidaksesuaian'+jmlKetidaksesuaian+'" style="margin-bottom:2px; background: rgb(242, 242, 242);">  <div class="wrapper col-lg-12"><div class="row"><div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Klausul</label><div class="col-lg-8"><div><input class="form-control" name="klausul[]" type="text" label="Klausul" placeholder="Klausul"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Auditor</label><div class="col-lg-8"><div><textarea class="form-control" name="auditor[]" label="Auditor" placeholder="Auditor"></textarea></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Deskripsi</label><div class="col-lg-8"><div><input class="form-control" name="deskripsi[]" type="text" label="Deskripsi" placeholder="Kota"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Investigasi Akar Permasalahan</label><div class="col-lg-8"><div><input class="form-control" name="investigasi[]" type="text" label="Investasi Akar Permasalahan" placeholder="Investigasi Akar Permasalahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Tindakan Perbaikan dan Pencegahan</label><div class="col-lg-8"><div><input class="form-control" name="tindakan[]" type="text" label="Tindakan Perbaikan dan Pencegahan" placeholder="Tindakan Perbaikan dan Pencegahan"></div></div></div></div></div></div><div class="wrapper col-lg-12"><div class="row">                                            <div class="col-lg-12"><div class="row"><label class="col-4 col-form-label">Hasil Tinjauan Tim Audit</label><div class="col-lg-8"><div><select name="hasil[]" class="form-control"><option value="open">Open</option><option value="close">Close</option></select>                                                        </div></div></div></div></div></div><div class="col-lg-12"><div><a onClick="hapusKetidaksesuaian('+$id+','+jmlKetidaksesuaian+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div> <br></div>';
             // var data_kegiatan_ketidaksesuaian = 'disini';
             $('#detail_kegiatan_ketidaksesuaian'+$id).append(data_kegiatan_ketidaksesuaian);
         }                
 
-        function hapusKegiatan($id){            
+        function hapusKegiatan($id,$jml){            
             var select1 = document.getElementById('detail_kegiatan'+$id);
-            var select2 = document.getElementById('kegiatan'+$id);
-            select1.removeChild(select2);
-            
-            jmlKegiatan8-=1;
-            noKegiatan8-=1;
+            var select2 = document.getElementById('kegiatan'+$jml);
+            select1.removeChild(select2);                        
         }
 
-        function hapusKegiatan2($id){            
+        function hapusKegiatan2($id,$jml){            
             var select1 = document.getElementById('detail_kegiatan9'+$id);
-            var select2 = document.getElementById('kegiatan9'+$id);
-            select1.removeChild(select2);
-            
-            jmlKegiatan9-=1;
-            noKegiatan9-=1;
+            var select2 = document.getElementById('kegiatan9'+$jml);
+            select1.removeChild(select2);            
         }
 
-        function hapusKegiatan3($id){            
+        function hapusKegiatan3($id,$jml){            
             var select1 = document.getElementById('detail_kegiatan10'+$id);
-            var select2 = document.getElementById('kegiatan10'+$id);
-            select1.removeChild(select2);
-            
-            jmlKegiatan10-=1;
-            noKegiatan10-=1;
+            var select2 = document.getElementById('kegiatan10'+$jml);
+            select1.removeChild(select2);            
         }
 
-        function hapusKetidaksesuaian($id){            
+        function hapusKetidaksesuaian($id,$jml){            
             var select1 = document.getElementById('detail_kegiatan_ketidaksesuaian'+$id);
-            var select2 = document.getElementById('kegiatanketidaksesuaian'+$id);
-            select1.removeChild(select2);
-            
-            jmlKegiatan8-=1;
-            noKegiatan8-=1;
+            var select2 = document.getElementById('kegiatanketidaksesuaian'+$jml);
+            select1.removeChild(select2);                        
         }         
 
         $('#tgl_audit').datepicker({
