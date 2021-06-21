@@ -1327,7 +1327,7 @@ class PenjadwalanController extends Controller
   
             })    
                      
-            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.kode_wilayah','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.kode_wilayah','registrasi.alamat_perusahaan' ,'registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
         //filter condition
@@ -1343,7 +1343,7 @@ class PenjadwalanController extends Controller
         
         //end
         $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+                 ->orderBy('id_regis','desc');
 
         return Datatables::of($xdata)->make();
     }

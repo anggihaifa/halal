@@ -51,12 +51,9 @@
 
                                             <label class="col-lg-2 col-form-label">Bulan Audit</label>
                                             <div class="col-lg-4">
-                                                <input id="f_mulai_audit1"  name="f_mulai_audit1" class="form-control" data-format="mm-yyyy" type="month" class="form-control">
+                                                <input id="f_mulai_audit1"  name="f_mulai_audit1" class="form-control"  class="form-control">
                                                 </input>
-                                                <span class="add-on">
-                                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                                                    </i>
-                                                </span>   
+                                               
                                                 
                                             </div>
                                             
@@ -98,7 +95,7 @@
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-
+    <script src="{{asset('/assets/js/filterData.js')}}"></script>
     
     <script>
 
@@ -106,12 +103,7 @@
 
        
        
-        $('#btncalendar').datepicker({
-            
-            format: "mm-yyyy",
-            todayHighlight: true,
-        });
-        
+       
         $('#f_mulai_audit1').datepicker({
           
             format: "mm-yyyy",
@@ -185,8 +177,7 @@
                 
                 {
                     "data":null,
-                    "searchable":false,
-                    "orderable":false,
+                   
                     "render":function (data,type,full,meta) {
                         
                         if(full.pelaksana1_audit1){
@@ -221,7 +212,7 @@
 
                                     <span class="lbl">
                                         <br><b>`+full.nama_perusahaan+`</b><br>
-                                        <i class="fa fa-map-marker fa-fw text-primary"></i>: `+full.alamat_kantor+`<br>
+                                        <i class="fa fa-map-marker fa-fw text-primary"></i>: `+full.alamat_perusahaan+`<br>
                                         
                                         
                                         
@@ -271,50 +262,13 @@
             
             
             
+            bSortable: false,
+            ordering: false,
             processing:true,
             serverSide:true,
-            order:[[0,'asc']],
-            bFilter: false,
-            bSortable: false,
-            bInfo: false,
-            lengthChange: false,
-            ordering: false
 
         });
 
-        $(document).ready(function () {
-
-           
-
-          
-
-
-
-            /*$('#table tbody').on('click', 'td.details-control', function () {
-                 var tr = $(this).closest('tr');
-                 var tdi = tr.find("i.fa");
-                 var row = xTable.row(tr);
-
-                 //console.log(row.data());
-
-                 if (row.child.isShown()) {
-                     // This row is already open - close it
-                     row.child.hide();
-                     tr.removeClass('shown');
-                     tdi.first().removeClass('fa-minus-square');
-                     tdi.first().addClass('fa-plus-square');
-                 }
-                 else {
-                     // Open this row
-                     row.child(format(row.data())).show();
-                     tr.addClass('shown');
-                     tdi.first().removeClass('fa-plus-square');
-                     tdi.first().addClass('fa-minus-square');
-                 }
-            });*/
-        
-    
-        });
 
   
      
@@ -328,5 +282,5 @@
             return confirm("Apakah anda yakin?");
         });
     </script>
-    <script src="{{asset('/assets/js/filterData.js')}}"></script>
+    
 @endpush

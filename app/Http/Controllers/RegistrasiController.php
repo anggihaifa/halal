@@ -2782,9 +2782,9 @@ class RegistrasiController extends Controller
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
 
-            $dataAdmin =  DB::table('user')
+            $dataAdmin =  DB::table('users')
             ->where('kode_wilayah',Auth::user()->kode_wilayah)
-            ->where('role','1')
+            ->where('usergroup_id','1')
             ->get();
 
             $dataAdmin = json_decode($dataAdmin,true);

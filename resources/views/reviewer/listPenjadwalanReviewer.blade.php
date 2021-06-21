@@ -53,7 +53,7 @@
                                             
 
                                     
-                                            
+                                            <div class="col-lg-10"></div>
                                             <div>
                                                 @component('components.buttonsearch')@endcomponent
                                             </div>
