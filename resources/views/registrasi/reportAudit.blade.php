@@ -41,12 +41,7 @@
 								<input type="text" class="form-control" name='no_registrasi' value="{{$data[0]['no_registrasi']}}" readonly/>
 							</div>
 
-							<label class="col-lg-4 col-form-label">File Laporan Audit Tahap 1</label>
-							<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/laporan/download/Laporan Audit1/'.$data[0]['file_laporan_audit1']) }}" download>{{$data[0]['file_laporan_audit1']}}</a>
-									</div>
-							</div>  
+							
 
 							<label class="col-lg-4 col-form-label">Konfirmasi S&K Audit</label>
 							<div id="sh" class="col-lg-8">
@@ -62,20 +57,6 @@
 									</div>
 							</div>  
 														
-							<label class="col-lg-4 col-form-label">File Laporan Audit Tahap 2</label>
-							<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/laporan/download/Laporan Audit2/'.$data[0]['file_laporan_audit_tahap_2']) }}" download>{{$data[0]['file_laporan_audit_tahap_2']}}</a>
-									</div>
-							</div>  
-
-							<label class="col-lg-4 col-form-label">File Surat Tugas</label>
-							<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/laporan/download/Surat Tugas/'.$data[0]['file_surat_tugas']) }}" download>{{$data[0]['file_surat_tugas']}}</a>
-									</div>
-							</div>  
-
 												
 														
 							<label class="col-lg-4 col-form-label">File Berita Acara Pemeriksaan</label>

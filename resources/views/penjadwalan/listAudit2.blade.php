@@ -35,38 +35,33 @@
                     <div id="accordionFilter" class="accordion">
                         <!-- begin card -->
                         <div class="card">
-                             <!-- <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseFilter" style="cursor: pointer; padding: 2px 5px">
+                            <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseFilter" style="cursor: pointer; padding: 2px 5px">
                                 <img class="animated bounceIn " src="{{asset('/assets/img/user/halal-search.png')}}" alt="" style="height: 30px;margin-right: 10px;"> 
                                 <span class="faq-ask">Filter</span>
-                            </div>  -->
-                            <div id="collapseFilter"  data-parent="#accordionFilter">
-                                <div class="card-body border-box" style="overflow: auto;">
+                            </div>
+                            <div id="collapseFilter" class="collapse" data-parent="#accordionFilter">
+                                <div class="card-body" style="overflow: auto;">
                                     <form id="search-form" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                         <div class="form-group row">
-                                            <div class="col-lg-4"></div>
-                                            <label class="col-lg-1 col-form-label">Nomor ID</label>
+                                            @component('components.inputfilter',['name'=> 'no_registrasi','label' => 'No Registrasi'])@endcomponent
+                                            
+                                            @component('components.inputfilter',['name'=> 'nama_perusahaan','label' => 'Perusahaan'])@endcomponent   
+                                            
+                                            <label class="col-lg-2 col-form-label">Bulan Audit</label>
                                             <div class="col-lg-4">
-                                                <div class="input-group date">
-                                                    <input type="text" id="nomor_id" name="nomor_id" class="form-control" placeholder="Nomor ID" value="" />
-                                                   
-                                                </div>
-                                            </div>    
-                                            <div class="col-lg-3"></div>                                        
-                                            <div class="col-lg-4"></div>
-                                            <label class="col-lg-1 col-form-label">Tanggal Mulai</label>
-                                            <div class="col-lg-4">
-                                                <div id="btncalendar" class="input-group date">
-                                                    <input type="text" id="mulai_audit2" name="mulai_audit2" class="form-control" placeholder="Tanggal Mulai" value="" />
-                                                    <span  class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div> 
-                                            <div class="col-lg-3"></div>                                           
-                                            <div class="col-lg-5"></div>
-                                            <div class="col-lg-4">
-                                                <a type="button" class="btn btn-sm btn-success " style="color:white;float:right;">Search</a>
-                                               
+                                                <input id="f_mulai_audit2"  name="f_mulai_audit2" class="form-control" class="form-control">
+                                                </input>
+                                                <span id="btncalendar" class="add-on">
+                                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                                    </i>
+                                                </span>   
+                                                
                                             </div>
-                                            <div class="col-lg-2"></div>
+                                    
+                                            
+                                            <div>
+                                                @component('components.buttonsearch')@endcomponent
+                                            </div>
                                         </div>
                                     </form>            
                                 </div>
@@ -109,7 +104,14 @@
 
        
         $('#btncalendar').datepicker({
-            format: "yyyy-mm-dd",
+            
+            format: "mm-yyyy",
+            todayHighlight: true,
+        });
+        
+        $('#f_mulai_audit2').datepicker({
+          
+            format: "mm-yyyy",
             todayHighlight: true,
         });
         
@@ -173,8 +175,9 @@
                 ajax:{
                     url:"{{route('dataaudit2')}}",
                     data:function(d){
-                        d.no_registrasi = $('input[name=nomor_id]').val();
-                        d.mulai_audit2 = $('input[name=mulai_audit2]').val();
+                        d.no_registrasi = $('#no_registrasi').val();
+                        d.nama_perusahaan = $('#nama_perusahaan').val();
+                        d.mulai_audit1 = $('#f_mulai_audit1').val();
      
 
                     }

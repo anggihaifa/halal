@@ -276,7 +276,10 @@ class ReviewerController extends Controller
 
         //filter condition
         if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+            $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['nama_perusahaan'])){
+            $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
         }
         //end
         $xdata = $xdata

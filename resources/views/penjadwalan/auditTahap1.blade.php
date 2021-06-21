@@ -312,8 +312,8 @@
 													</select>
 												</td>
 												<td >
-													<input class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value='{{$laporanAudit1[0]['keterangan_has_1']}}'>
-													</input>
+													<textarea class="form-control" id="keterangan_has_1" type="text" name="keterangan_has_1" value='{{$laporanAudit1[0]['keterangan_has_1']}}'>
+													</textarea>
 													
 
 												</td>
@@ -345,15 +345,15 @@
 													</select>
 												</td>
 												<td >
-													<input type="text" class="form-control" name="keterangan_has_2" value='{{$laporanAudit1[0]["keterangan_has_2"]}}' ></input>
+													<textarea type="text" class="form-control" name="keterangan_has_2" value='{{$laporanAudit1[0]["keterangan_has_2"]}}' ></textarea>
 												</td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_2" type="text" name="tgl_penyerahan_2" value='{{$laporanAudit1[0]['tgl_penyerahan_2']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_2" type="text" name="review_perbaikan_2" value='{{$laporanAudit1[0]['review_perbaikan_2']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_2" type="text" name="review_perbaikan_2" value='{{$laporanAudit1[0]['review_perbaikan_2']}}'>
+													</textarea>
 													
 
 												</td>
@@ -375,16 +375,16 @@
 													</select>
 												</td>
 												<td >
-													<input type="text" class="form-control" name="keterangan_has_3" value='{{$laporanAudit1[0]['keterangan_has_3']}}' >
-													</input>
+													<textarea type="text" class="form-control" name="keterangan_has_3" value='{{$laporanAudit1[0]['keterangan_has_3']}}' >
+													</textarea>
 												</td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_3" type="text" name="tgl_penyerahan_3" value='{{$laporanAudit1[0]['tgl_penyerahan_3']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_3" type="text" name="review_perbaikan_3" value='{{$laporanAudit1[0]['review_perbaikan_1']}}'>
-													</input>
+												<textarea type="text" name="review_perbaikan_3" value='{{$laporanAudit1[0]['review_perbaikan_1']}}'>
+													</textarea>
 													
 
 												</td>
@@ -405,14 +405,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_4"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_4" value='{{$laporanAudit1[0]['keterangan_has_4']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_4" value='{{$laporanAudit1[0]['keterangan_has_4']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_4" type="text" name="tgl_penyerahan_4" value='{{$laporanAudit1[0]['tgl_penyerahan_4']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_4" type="text" name="review_perbaikan_4" value='{{$laporanAudit1[0]['review_perbaikan_4']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_4" type="text" name="review_perbaikan_4" value='{{$laporanAudit1[0]['review_perbaikan_4']}}'>
+													</textarea>
 													
 
 												</td>
@@ -433,14 +433,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_5"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control"  name="keterangan_has_5" value='{{$laporanAudit1[0]['keterangan_has_5']}}'  ></input></td>
+												<td ><textarea type="text" class="form-control"  name="keterangan_has_5" value='{{$laporanAudit1[0]['keterangan_has_5']}}'  ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_5" type="text" name="tgl_penyerahan_5" value='{{$laporanAudit1[0]['tgl_penyerahan_5']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_5" type="text" name="review_perbaikan_5" value='{{$laporanAudit1[0]['review_perbaikan_5']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_5" type="text" name="review_perbaikan_5" value='{{$laporanAudit1[0]['review_perbaikan_5']}}'>
+													</textarea>
 													
 
 												</td>
@@ -460,14 +460,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_6"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control"  name="keterangan_has_6" value='{{$laporanAudit1[0]['keterangan_has_6']}}' ></input></td>
+												<td ><textarea type="text" class="form-control"  name="keterangan_has_6" value='{{$laporanAudit1[0]['keterangan_has_6']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_6" type="text" name="tgl_penyerahan_6" value='{{$laporanAudit1[0]['tgl_penyerahan_6']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_6" type="text" name="review_perbaikan_6" value='{{$laporanAudit1[0]['review_perbaikan_6']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_6" type="text" name="review_perbaikan_6" value='{{$laporanAudit1[0]['review_perbaikan_6']}}'>
+													</textarea>
 													
 
 												</td>
@@ -488,14 +488,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_7"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_7" value='{{$laporanAudit1[0]['keterangan_has_7']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_7" value='{{$laporanAudit1[0]['keterangan_has_7']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_7" type="text" name="tgl_penyerahan_7" value='{{$laporanAudit1[0]['tgl_penyerahan_7']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_7" type="text" name="review_perbaikan_7" value='{{$laporanAudit1[0]['review_perbaikan_7']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_7" type="text" name="review_perbaikan_7" value='{{$laporanAudit1[0]['review_perbaikan_7']}}'>
+													</textarea>
 													
 
 												</td>
@@ -515,14 +515,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_8"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_8" value='{{$laporanAudit1[0]['keterangan_has_8']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_8" value='{{$laporanAudit1[0]['keterangan_has_8']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_8" type="text" name="tgl_penyerahan_8" value='{{$laporanAudit1[0]['tgl_penyerahan_8']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_8" type="text" name="review_perbaikan_8" value='{{$laporanAudit1[0]['review_perbaikan_8']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_8" type="text" name="review_perbaikan_8" value='{{$laporanAudit1[0]['review_perbaikan_8']}}'>
+													</textarea>
 													
 
 												</td>
@@ -543,14 +543,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_9"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_9" value='{{$laporanAudit1[0]['keterangan_has_9']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_9" value='{{$laporanAudit1[0]['keterangan_has_9']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_9" type="text" name="tgl_penyerahan_9" value='{{$laporanAudit1[0]['tgl_penyerahan_9']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_9" type="text" name="review_perbaikan_9" value='{{$laporanAudit1[0]['review_perbaikan_9']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_9" type="text" name="review_perbaikan_9" value='{{$laporanAudit1[0]['review_perbaikan_9']}}'>
+													</textarea>
 													
 
 												</td>
@@ -571,15 +571,15 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_10"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_10" value='{{$laporanAudit1[0]['keterangan_has_10']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_10" value='{{$laporanAudit1[0]['keterangan_has_10']}}' ></textarea></td>
 
 												<td>
 													<input class="form-control" id="tgl_penyerahan_10" type="text" name="tgl_penyerahan_10" value='{{$laporanAudit1[0]['tgl_penyerahan_10']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_10" type="text" name="review_perbaikan_10" value='{{$laporanAudit1[0]['review_perbaikan_10']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_10" type="text" name="review_perbaikan_10" value='{{$laporanAudit1[0]['review_perbaikan_10']}}'>
+													</textarea>
 													
 
 												</td>
@@ -601,14 +601,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_11"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_11" value='{{$laporanAudit1[0]['keterangan_has_11']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_11" value='{{$laporanAudit1[0]['keterangan_has_11']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_11" type="text" name="tgl_penyerahan_11" value='{{$laporanAudit1[0]['tgl_penyerahan_11']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_11" type="text" name="review_perbaikan_11" value='{{$laporanAudit1[0]['review_perbaikan_11']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_11" type="text" name="review_perbaikan_11" value='{{$laporanAudit1[0]['review_perbaikan_11']}}'>
+													</textarea>
 													
 
 												</td>
@@ -630,14 +630,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_12"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_12" value='{{$laporanAudit1[0]['keterangan_has_12']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_12" value='{{$laporanAudit1[0]['keterangan_has_12']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_12" type="text" name="tgl_penyerahan_12" value='{{$laporanAudit1[0]['tgl_penyerahan_12']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_12" type="text" name="review_perbaikan_12" value='{{$laporanAudit1[0]['review_perbaikan_12']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_12" type="text" name="review_perbaikan_12" value='{{$laporanAudit1[0]['review_perbaikan_12']}}'>
+													</textarea>
 													
 
 												</td>
@@ -659,14 +659,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_13"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_13" value='{{$laporanAudit1[0]['keterangan_has_13']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_13" value='{{$laporanAudit1[0]['keterangan_has_13']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_13" type="text" name="tgl_penyerahan_13" value='{{$laporanAudit1[0]['tgl_penyerahan_13']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_13" type="text" name="review_perbaikan_13" value='{{$laporanAudit1[0]['review_perbaikan_13']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_13" type="text" name="review_perbaikan_13" value='{{$laporanAudit1[0]['review_perbaikan_13']}}'>
+													</textarea>
 													
 
 												</td>
@@ -688,14 +688,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_14"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_14" value='{{$laporanAudit1[0]['keterangan_has_14']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_14" value='{{$laporanAudit1[0]['keterangan_has_14']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_14" type="text" name="tgl_penyerahan_14" value='{{$laporanAudit1[0]['tgl_penyerahan_14']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_14" type="text" name="review_perbaikan_14" value='{{$laporanAudit1[0]['review_perbaikan_14']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_14" type="text" name="review_perbaikan_14" value='{{$laporanAudit1[0]['review_perbaikan_14']}}'>
+													</textarea>
 													
 
 												</td>
@@ -717,14 +717,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_15"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_15" value='{{$laporanAudit1[0]['keterangan_has_15']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_15" value='{{$laporanAudit1[0]['keterangan_has_15']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_15" type="text" name="tgl_penyerahan_15" value='{{$laporanAudit1[0]['tgl_penyerahan_15']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_15" type="text" name="review_perbaikan_15" value='{{$laporanAudit1[0]['review_perbaikan_15']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_15" type="text" name="review_perbaikan_15" value='{{$laporanAudit1[0]['review_perbaikan_15']}}'>
+													</textarea>
 													
 
 												</td>
@@ -745,14 +745,14 @@
 					                                    <option value="3" {{$laporanAudit1[0]["status_has_16"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_16" value='{{$laporanAudit1[0]['keterangan_has_16']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_16" value='{{$laporanAudit1[0]['keterangan_has_16']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_16" type="text" name="tgl_penyerahan_16" value='{{$laporanAudit1[0]['tgl_penyerahan_16']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_16" type="text" name="review_perbaikan_16" value='{{$laporanAudit1[0]['review_perbaikan_16']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_16" type="text" name="review_perbaikan_16" value='{{$laporanAudit1[0]['review_perbaikan_16']}}'>
+													</textarea>
 													
 
 												</td>
@@ -774,14 +774,14 @@
 														<option value="3" {{$laporanAudit1[0]["status_has_17"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_17" value='{{$laporanAudit1[0]['keterangan_has_17']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_17" value='{{$laporanAudit1[0]['keterangan_has_17']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_17" type="text" name="tgl_penyerahan_17" value='{{$laporanAudit1[0]['tgl_penyerahan_17']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_17" type="text" name="review_perbaikan_17" value='{{$laporanAudit1[0]['review_perbaikan_17']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_17" type="text" name="review_perbaikan_17" value='{{$laporanAudit1[0]['review_perbaikan_17']}}'>
+													</textarea>
 
 
 												</td>
@@ -803,14 +803,14 @@
 														<option value="3" {{$laporanAudit1[0]["status_has_18"] == 3 ? 'selected' : ''}}>Tidak Relevan</option>
 													</select>
 												</td>
-												<td ><input type="text" class="form-control" name="keterangan_has_18" value='{{$laporanAudit1[0]['keterangan_has_18']}}' ></input></td>
+												<td ><textarea type="text" class="form-control" name="keterangan_has_18" value='{{$laporanAudit1[0]['keterangan_has_18']}}' ></textarea></td>
 												<td>
 													<input class="form-control" id="tgl_penyerahan_18" type="text" name="tgl_penyerahan_18" value='{{$laporanAudit1[0]['tgl_penyerahan_18']}}' style="font-size:8px;width:100px" readonly>
 														</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_18" type="text" name="review_perbaikan_18" value='{{$laporanAudit1[0]['review_perbaikan_18']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_18" type="text" name="review_perbaikan_18" value='{{$laporanAudit1[0]['review_perbaikan_18']}}'>
+													</textarea>
 
 
 												</td>
@@ -835,6 +835,12 @@
                                     <div class="radio radio-css ">
                                         <input  type="radio" name="status_memenuhi" id="tidak_memenuhi" value="tidak memenuhi" />
                                         <label for="tidak_memenuhi"><b>Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan 5 hari setelah pemeriksaan audit tahap 1</b></label>
+
+                                    </div>
+
+									<div class="radio radio-css ">
+                                        <input  type="radio" name="status_memenuhi" id="memenuhi_bersayarat" value="memenuhi_bersayarat" />
+                                        <label for="memenuhi_bersyarat"><b>Audit Tahap II dapat dilaksanakan dengan catatan (Bersyarat)</b></label>
 
                                     </div>
 									<div>
