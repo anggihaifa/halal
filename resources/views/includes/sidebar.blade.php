@@ -110,8 +110,12 @@
 					return $subMenu;
 				}
 
-				if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3){
+				if(Auth::user()->usergroup_id == 1){
 					$configSidebar = config('sidebar.menu');
+
+
+				}elseif(Auth::user()->usergroup_id == 3){
+					$configSidebar = config('sidebar.menu3');
 				}elseif(Auth::user()->usergroup_id == 2){
 					if(Auth::user()->registrasi_id == null){
 						$configSidebar = config('sidebar.preregistrasi');

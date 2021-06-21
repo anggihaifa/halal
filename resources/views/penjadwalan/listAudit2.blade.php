@@ -35,38 +35,30 @@
                     <div id="accordionFilter" class="accordion">
                         <!-- begin card -->
                         <div class="card">
-                             <!-- <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseFilter" style="cursor: pointer; padding: 2px 5px">
+                            <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseFilter" style="cursor: pointer; padding: 2px 5px">
                                 <img class="animated bounceIn " src="{{asset('/assets/img/user/halal-search.png')}}" alt="" style="height: 30px;margin-right: 10px;"> 
                                 <span class="faq-ask">Filter</span>
-                            </div>  -->
-                            <div id="collapseFilter"  data-parent="#accordionFilter">
-                                <div class="card-body border-box" style="overflow: auto;">
+                            </div>
+                            <div id="collapseFilter" class="collapse" data-parent="#accordionFilter">
+                                <div class="card-body" style="overflow: auto;">
                                     <form id="search-form" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                         <div class="form-group row">
-                                            <div class="col-lg-4"></div>
-                                            <label class="col-lg-1 col-form-label">Nomor ID</label>
+                                            @component('components.inputfilter',['name'=> 'no_registrasi','label' => 'No Registrasi'])@endcomponent
+                                            
+                                            @component('components.inputfilter',['name'=> 'nama_perusahaan','label' => 'Perusahaan'])@endcomponent   
+                                            
+                                            <label class="col-lg-2 col-form-label">Bulan Audit</label>
                                             <div class="col-lg-4">
-                                                <div class="input-group date">
-                                                    <input type="text" id="nomor_id" name="nomor_id" class="form-control" placeholder="Nomor ID" value="" />
-                                                   
-                                                </div>
-                                            </div>    
-                                            <div class="col-lg-3"></div>                                        
-                                            <div class="col-lg-4"></div>
-                                            <label class="col-lg-1 col-form-label">Tanggal Mulai</label>
-                                            <div class="col-lg-4">
-                                                <div id="btncalendar" class="input-group date">
-                                                    <input type="text" id="mulai_audit2" name="mulai_audit2" class="form-control" placeholder="Tanggal Mulai" value="" />
-                                                    <span  class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div> 
-                                            <div class="col-lg-3"></div>                                           
-                                            <div class="col-lg-5"></div>
-                                            <div class="col-lg-4">
-                                                <a type="button" class="btn btn-sm btn-success " style="color:white;float:right;">Search</a>
-                                               
+                                                <input id="f_mulai_audit2"  name="f_mulai_audit2" class="form-control" class="form-control">
+                                                </input>
+                                                
+                                                
                                             </div>
-                                            <div class="col-lg-2"></div>
+                                    
+                                            
+                                            <div>
+                                                @component('components.buttonsearch')@endcomponent
+                                            </div>
                                         </div>
                                     </form>            
                                 </div>
@@ -101,7 +93,7 @@
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-
+    <script src="{{asset('/assets/js/filterData.js')}}"></script>
     
     <script>
 
@@ -109,7 +101,14 @@
 
        
         $('#btncalendar').datepicker({
-            format: "yyyy-mm-dd",
+            
+            format: "mm-yyyy",
+            todayHighlight: true,
+        });
+        
+        $('#f_mulai_audit2').datepicker({
+          
+            format: "mm-yyyy",
             todayHighlight: true,
         });
         
@@ -165,164 +164,118 @@
         }
 */
 
-        $(document).ready(function () {
+        var xTable = $('#table').DataTable({
+            ajax:{
+                url:"{{route('dataaudit2')}}",
+                data:function(d){
+                    d.no_registrasi = $('#no_registrasi').val();
+                    d.nama_perusahaan = $('#nama_perusahaan').val();
+                    d.mulai_audit2 = $('#f_mulai_audit2').val();
+    
 
+                }
+            },
+            
+            columns:[
+                
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+                        if(full.pelaksana1_audit2){
+                            var str = full.pelaksana1_audit2.split("_");
+                            p1_a2 = str[1];
+                        }else{
+                            p1_a2 = '';
+                        }
+
+                        if(full.pelaksana2_audit2){
+                            var str2 = full.pelaksana2_audit2.split("_");
+                            p2_a2 = str2[1];
+                        }else{
+                            p2_a2 = '';
+                        }
+                        
+                        
+                        return `<div class="col-lg-12 row border-left rounded-lg border-primary" >   
+                                    <div class="col-lg-7" style="padding-left:10%; padding-top:2%">
+                                        <label class="inline text-center">
+
+                                            <i class="fa fa-calendar text-primary" style="font-size:600%"></i>
+                                            <br>
+                                            <h2 class="text-grey" style=>`+full.mulai_audit2+`</h2>
+                                            <span class="label label-primary"><a style="color: white;">NOMOR ID: `+full.id_registrasi+`</a></span>
+                                            <span class="label label-success"><a style="color: white;">NOMOR REG : `+full.no_registrasi+`</a></span>
+   
+                                        </label>
+                                    </div>
+                                    
+
+                                    <div class="col-lg-4 >
+
+                                            <span class="lbl">
+                                                <br><b>`+full.nama_perusahaan+`</b><br>
+                                                <i class="fa fa-map-marker fa-fw text-primary"></i>: `+full.alamat_kantor+`<br>
+                                                  
+                                            </span>    
+                                            <span style=";">
+                                            <table class = "table table-borderless table-xs p-0 m-0">
+                                                <tr class="p-0 m-0" >
+                                                    <td class="p-0 m-0" style="font-weight:bold">
+                                                        Ketua Tim Auditor:
+                                                    </td>
+                                                        
+                                                    <td class="p-0 m-0" >
+                                                        `+p1_a2+`
+                                                    </td>
+
+                                                </tr>
+                                                <tr class="p-0 m-0" >
+                                                    <td  style="font-weight:bold" class="p-0 m-0" >
+                                                        Auditor:
+                                                    </td>
+
+                                                    <td class="p-0 m-0" >
+                                                        `+p2_a2+`
+                                                    </td>
+
+                                                </tr>
+                                            </table
+                                            <br>
+                                            
+                                            Lokasi Audit: `+full.ktg_audit2+`<br>
+
+                                            
+                                        
+                                        <a href="{{url('audit_plan')}}/`+full.id_registrasi+`"   class="label label-primary" style="color: white;">
+                                            <i class="ace-icon fa fa-eye" ></i style="color: white; margin-right: 5px; ">Audit Plan
+                                        </a>
+                                        <a href="{{url('laporan_audit')}}/`+full.id_registrasi+`" class="label label-info" style="color: white;">
+                                            <i class="ace-icon fa fa-edit bigger-130" ></i> Laporan Audit Tahap 2
+                                        </a>
+                                        <br><a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="label label-green" style="color: white;" download>
+                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Audit Tahap 1
+                                        </a>
+                                        
+                                        <br><br><span class="text-muted small">Pelaksana Pekerjaan:</span><br><i class="fa fa-send fa-fw"></i>`+checkWilayah(full.kode_wilayah)+`
+                                    </div>
+                                       
+                                </div>`  
+                    }
+                }
+            ],
+
+            
+            
+            bSortable: false,
+            ordering: false,
+            processing:true,
+            serverSide:true,
            
 
-            var xTable = $('#table').DataTable({
-                ajax:{
-                    url:"{{route('dataaudit2')}}",
-                    data:function(d){
-                        d.no_registrasi = $('input[name=nomor_id]').val();
-                        d.mulai_audit2 = $('input[name=mulai_audit2]').val();
-     
-
-                    }
-                },
-                
-                columns:[
-                   
-                   {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana1_audit2){
-                                var str = full.pelaksana1_audit2.split("_");
-                                p1_a2 = str[1];
-                            }else{
-                                p1_a2 = '';
-                            }
-
-                            if(full.pelaksana2_audit2){
-                                var str2 = full.pelaksana2_audit2.split("_");
-                                p2_a2 = str2[1];
-                            }else{
-                                p2_a2 = '';
-                            }
-                          
-                         
-                            return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
-                                       
-                                          
-                                                    <div class="col-lg-7" style="padding-left:10%; padding-top:2%">
-                                                        <label class="inline text-center">
-
-                                                            <i class="fa fa-calendar text-primary" style="font-size:600%"></i>
-                                                            <br>
-                                                            <h2 class="text-grey" style=>`+full.mulai_audit2+`</h2>
-                                                            <span class="label label-primary"><a style="color: white;">NOMOR ID: `+full.id_registrasi+`</a></span>
-                                                            <span class="label label-success"><a style="color: white;">NOMOR REG : `+full.no_registrasi+`</a></span>
-                                                           
-     
-                                                            
-                                                        </label>
-                                                    </div>
-                                                  
-
-                                                    <div class="col-lg-4 >
-
-                                                            <span class="lbl">
-                                                                <br><b>`+full.nama_perusahaan+`</b><br>
-                                                                <i class="fa fa-map-marker fa-fw text-primary"></i>: `+full.alamat_kantor+`<br>
-                                                             
-                                                                
-                                                               
-                                                            </span>    
-                                                            <span style=";">
-                                                            <table class = "table table-borderless table-xs p-0 m-0">
-                                                                <tr class="p-0 m-0" >
-                                                                    <td class="p-0 m-0" style="font-weight:bold">
-                                                                        Ketua Tim Auditor:
-                                                                    </td>
-                                                                       
-                                                                    <td class="p-0 m-0" >
-                                                                        `+p1_a2+`
-                                                                    </td>
-
-                                                                </tr>
-                                                                <tr class="p-0 m-0" >
-                                                                    <td  style="font-weight:bold" class="p-0 m-0" >
-                                                                        Auditor:
-                                                                    </td>
-
-                                                                    <td class="p-0 m-0" >
-                                                                        `+p2_a2+`
-                                                                    </td>
-
-                                                                </tr>
-                                                            </table
-                                                            <br>
-                                                          
-                                                            Lokasi Audit: `+full.ktg_audit2+`<br>
-
-                                                           
-                                                        
-                                                        <a href="{{url('audit_plan')}}/`+full.id_registrasi+`"   class="label label-primary" style="color: white;">
-                                                            <i class="ace-icon fa fa-eye" ></i style="color: white; margin-right: 5px; ">Audit Plan
-                                                        </a>
-                                                        <a href="{{url('laporan_audit')}}/`+full.id_registrasi+`" class="label label-info" style="color: white;">
-                                                            <i class="ace-icon fa fa-edit bigger-130" ></i> Laporan Audit Tahap 2
-                                                        </a>
-                                                        <br><a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="label label-green" style="color: white;" download>
-                                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Audit Tahap 1
-                                                        </a>
-                                                        
-                                                        <br><br><span class="text-muted small">Pelaksana Pekerjaan:</span><br><i class="fa fa-send fa-fw"></i>`+checkWilayah(full.kode_wilayah)+`
-                                                    </div>
-                                                    
-                                               
-                                            
-                                           
-                                       
-                                        
-                                    </div>`  
-                        }
-                    }
-                ],
-
-              
-               
-               
-                
-                processing:true,
-                serverSide:true,
-                order:[[0,'asc']],
-                bFilter: false,
-                bSortable: false,
-                bInfo: false,
-                lengthChange: false,
-                ordering: false
-
-            });
-
-
-
-            /*$('#table tbody').on('click', 'td.details-control', function () {
-                 var tr = $(this).closest('tr');
-                 var tdi = tr.find("i.fa");
-                 var row = xTable.row(tr);
-
-                 //console.log(row.data());
-
-                 if (row.child.isShown()) {
-                     // This row is already open - close it
-                     row.child.hide();
-                     tr.removeClass('shown');
-                     tdi.first().removeClass('fa-minus-square');
-                     tdi.first().addClass('fa-plus-square');
-                 }
-                 else {
-                     // Open this row
-                     row.child(format(row.data())).show();
-                     tr.addClass('shown');
-                     tdi.first().removeClass('fa-plus-square');
-                     tdi.first().addClass('fa-minus-square');
-                 }
-            });*/
-        
-    
         });
+
 
   
      
@@ -336,5 +289,5 @@
             return confirm("Apakah anda yakin?");
         });
     </script>
-    <script src="{{asset('/assets/js/filterData.js')}}"></script>
+    
 @endpush

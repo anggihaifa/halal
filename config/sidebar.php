@@ -31,60 +31,14 @@ return [
             'url' => 'listregistrasipelangganaktif',
           
         ],
-        [   'icon' => 'ion-md-information-circle-outline',
-            'title' => 'Berita',
-            'url' => 'berita.index'
-        ],
-        [   'icon' => 'ion-ios-clipboard',
-            'title' => 'Pelatihan',
-            'url' => 'pelatihan.index'
-        ],
         [
-            'icon' => 'ion-ios-cube',
-            'title' => 'Master',
-            'url' => '#',
-            'caret' => true,
-            'sub_menu' => [
-                [
-                    'url' => 'jenis_registrasi.index',
-                    'title' => 'Jenis Registrasi'
-                ],
-                [
-                    'url' => 'kelompok_produk.index',
-                    'title' => 'Kelompok Produk'
-                ],
-                [
-                    'url' => 'faq.index',
-                    'title' => 'F.A.Q'
-                ],
-                [
-                    'url' => 'akomodasi.index',
-                    'title' => 'Akomodasi'
-                ],    
-                [
-                    
-                    'url' => 'dokumen.index',
-                    'title' => 'Reporsitory Dokumen Halal'
-                ],   
-                [    
-                   
-                    'url' => 'guideline.index',
-                    'title' => 'Guideline'
-                ],    
-                [
-                    'url' => 'user.index',
-                    'title' => 'Pengguna'
-                ],
-                [
-                    'url' => 'usergroup.index',
-                    'title' => 'Grup Pengguna'
-                ],     
-                [
-                    'url' => 'detailpelaksana.index',
-                    'title' => 'Data Pelaksana'
-                ],        
-            ],
-        ],        
+            'icon' => 'ion-md-bookmark',
+            'title' => 'Monitoring Registrasi',
+            'url' => 'listmonitoringregistrasi', 
+        ],
+            
+        
+           
     ],
     'menu2' => [ //user
         [
@@ -98,23 +52,31 @@ return [
             'url' => 'registrasiHalal.index',
         ],
         [
-            'icon' => 'ion-md-book',
-            'title' => 'Unduh Form',
-            'url' => 'dokumen.indexpelanggan'
-        ],
-        [
-            'icon' => 'ion-ios-home',
-            'title' => 'F.A.Q',
-            'url' => 'faq.index'
-        ],
-        [    'icon' => 'ion-ios-person',
-            'title' => 'Guideline',
-            'url' => 'guideline.index'
-        ],
-        [
-            'icon' => 'ion-md-book',
-            'title' => 'Reporsitory Dokumen Halal',
-            'url' => 'dokumen.indexuser'
+            'icon' => 'ion-ios-cube',
+            'title' => 'Menu',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'icon' => 'ion-md-book',
+                    'title' => 'Unduh Form',
+                    'url' => 'dokumen.indexpelanggan'
+                ],
+                [
+                    'icon' => 'ion-ios-home',
+                    'title' => 'F.A.Q',
+                    'url' => 'faq.index'
+                ],
+                [    'icon' => 'ion-ios-person',
+                    'title' => 'Guideline',
+                    'url' => 'guideline.index'
+                ],
+                [
+                    'icon' => 'ion-md-book',
+                    'title' => 'Reporsitory Dokumen Halal',
+                    'url' => 'dokumen.indexuser'
+                ],
+            ],
         ],
     ],
     'menu3' => [
@@ -142,12 +104,17 @@ return [
             'title' => 'Pelatihan',
             'url' => 'pelatihan.index'
         ],
+        
         [
             'icon' => 'ion-ios-cube',
             'title' => 'Master',
             'url' => '#',
             'caret' => true,
             'sub_menu' => [
+                [
+                    'title' => 'Monitoring Registrasi',
+                    'url' => 'listmonitoringregistrasi', 
+                ],
                 [
                     'url' => 'jenis_registrasi.index',
                     'title' => 'Jenis Registrasi'
@@ -205,24 +172,31 @@ return [
             ],*/
         ],
         [
-            'icon' => 'ion-md-book',
-            'title' => 'Unduh Form',
-            'url' => 'dokumen.indexpelanggan'
-        ],
-         [
-            'icon' => 'ion-ios-help-circle',
-            'title' => 'F.A.Q',
-            'url' => 'faq.index'
-        ],
-        [
-            'icon' => 'ion-ios-person',
-            'title' => 'Guideline',
-            'url' => 'guideline.index'
-        ],
-        [
-            'icon' => 'ion-md-book',
-            'title' => 'Reporsitory Dokumen Halal',
-            'url' => 'dokumen.indexuser'
+            'icon' => 'ion-ios-cube',
+            'title' => 'Menu',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'icon' => 'ion-md-book',
+                    'title' => 'Unduh Form',
+                    'url' => 'dokumen.indexpelanggan'
+                ],
+                [
+                    'icon' => 'ion-ios-home',
+                    'title' => 'F.A.Q',
+                    'url' => 'faq.index'
+                ],
+                [    'icon' => 'ion-ios-person',
+                    'title' => 'Guideline',
+                    'url' => 'guideline.index'
+                ],
+                [
+                    'icon' => 'ion-md-book',
+                    'title' => 'Reporsitory Dokumen Halal',
+                    'url' => 'dokumen.indexuser'
+                ],
+            ],
         ],
     ],
    

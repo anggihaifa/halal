@@ -34,39 +34,72 @@
                     <div id="accordionFilter" class="accordion">
                         <!-- begin card -->
                         <div class="card">
-                             <!-- <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseFilter" style="cursor: pointer; padding: 2px 5px">
+                            <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseFilter" style="cursor: pointer; padding: 2px 5px">
                                 <img class="animated bounceIn " src="{{asset('/assets/img/user/halal-search.png')}}" alt="" style="height: 30px;margin-right: 10px;"> 
                                 <span class="faq-ask">Filter</span>
-                            </div>  -->
-                            <div id="collapseFilter"  data-parent="#accordionFilter">
-                                <div class="card-body border-box" style="overflow: auto;">
+                            </div>
+                            <div id="collapseFilter" class="collapse" data-parent="#accordionFilter">
+                                <div class="card-body" style="overflow: auto;">
                                     <form id="search-form" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                         <div class="form-group row">
-                                            <div class="col-lg-4"></div>
-                                            <label class="col-lg-1 col-form-label">Nomor ID</label>
+                                            @component('components.inputfilter',['name'=> 'no_registrasi','label' => 'No Registrasi'])@endcomponent
+                                            
+                                            @component('components.inputfilter',['name'=> 'nama_perusahaan','label' => 'Perusahaan'])@endcomponent   
+                                            
+                                            <label class="col-lg-2 col-form-label">Status Akad</label>
                                             <div class="col-lg-4">
-                                                <div class="input-group date">
-                                                    <input type="text" id="nomor_id" name="nomor_id" class="form-control" placeholder="Nomor ID" value="" />
-                                                   
-                                                </div>
-                                            </div>    
-                                            <div class="col-lg-3"></div>                                        
-                                            <div class="col-lg-4"></div>
-                                            <label class="col-lg-1 col-form-label">Nama Perusahaan</label>
-                                            <div class="col-lg-4">
-                                                <div class="input-group date">
-                                                    <input type="text" id="nama_perusahaan" name="nama_perusahaan" class="form-control" placeholder="Nama Perusahaan" value="" />
-                                                   
-                                                </div>
-                                            </div> 
-                                            <div class="col-lg-3"></div> 
-                                                                            
-                                            <div class="col-lg-5"></div>
-                                            <div class="col-lg-4">
-                                                <a type="button" class="btn btn-sm btn-success " style="color:white;float:right;">Search</a>
-                                               
+                                                <select id="status_akad" name="status_akad" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                    <option value="" selected>--Pilih Status Akad--</option>
+                                                    <option value="0">Belum Upload Dokumen Penawaran dan Akad</option>
+                                                    <option value="1">Sudah Upload Dokumen Penawaran dan Akad</option>
+                                                </select>
                                             </div>
-                                            <div class="col-lg-2"></div>
+
+                                            <label class="col-lg-2 col-form-label">Status OC</label>
+                                            <div class="col-lg-4">
+                                                <select id="status_oc" name="status_oc" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                    <option value="" selected>--Pilih Status OC--</option>
+                                                    <option value="0">Belum Upload Order Confirmation</option>
+                                                  
+                                                    <option value="3">Pelanggan Sudah Upload Ulang Menunggu Konfirmasi Admin</option>
+                                                </select>
+                                            </div>
+
+                                            <label class="col-lg-2 col-form-label">Status Pemabayaran Tahap 1</label>
+                                            <div class="col-lg-4">
+                                                <select id="status_bayar1" name="status_bayar1" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                    <option value="" selected>--Pilih Status Pembayaran Tahap 1--</option>
+                                                    <option value="0">Belum Upload Bukti Bayar</option>
+                                                    
+                                                    <option value="3">Pembayaran Terkonfirmasi</option>
+                                                </select>
+                                            </div>
+
+                                            <label class="col-lg-2 col-form-label">Status Pemabayaran Tahap 2</label>
+                                            <div class="col-lg-4">
+                                                <select id="status_bayar2" name="status_bayar2" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                    <option value="" selected>--Pilih Status Pembayaran Tahap 2--</option>
+                                                    <option value="0">Belum Upload Bukti Bayar</option>
+                                                    
+                                                    <option value="3">Pembayaran Terkonfirmasi</option>
+                                                </select>
+                                            </div>
+
+                                            <label class="col-lg-2 col-form-label">Status Pelunasan</label>
+                                            <div class="col-lg-4">
+                                                <select id="status_bayar3" name="status_bayar3" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
+                                                    <option value="" selected>--Pilih Status Pelunasan--</option>
+                                                    <option value="0">Belum Upload Bukti Bayar</option>
+                                                    
+                                                    <option value="3">Pembayaran Terkonfirmasi</option>
+                                                </select>
+                                            </div>
+
+                                    
+                                            
+                                            <div>
+                                                @component('components.buttonsearch')@endcomponent
+                                            </div>
                                         </div>
                                     </form>            
                                 </div>
@@ -233,6 +266,7 @@
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="{{asset('/assets/js/filterData.js')}}"></script>
 
     
     <script>
@@ -300,363 +334,355 @@
               currency: 'IDR'
             });
         }
+
+        var xTable = $('#table').DataTable({
+               
+            ajax:{
+                url:"{{route('datakeuangan')}}",
+                data:function(d){
+                    d.no_registrasi = $('#no_registrasi').val();
+                    d.nama_perusahaan = $('#nama_perusahaan').val();
+                    d.status_akad = $('#status_akad').val();
+                    d.status_oc = $('#status_oc').val();
+                    d.status_bayar1 = $('#status_bayar1').val();
+                    d.status_bayar2 = $('#status_bayar2').val();
+                    d.status_bayar3 = $('#status_bayar3').val();
+
+
+                }
+            },
+            
+            columns:[
+                
+                {
+                    "data":'no_registrasi',
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+                    
+                        var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+
+                        var uploadAkad =  `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Upload Kontrak Akad</a> `;
+
+                        
+                        var konfirmAkad = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`/`+full.status_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
+                        
+                        var konfirmBayar3 = (full.status ==  '12_3') ? dButton('Konfirmasi dan Upload Invoice'):`<a href="{{url('upload_invoice')}}/`+full.id+`" class="dropdown-item" >Konfirmasi dan Upload Invoice</a>`;
+                        
+                        var konfirmBayar2 = (full.status == '9_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_tahap2')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
+                        
+                        var konfirmBayar1 = (full.status == '6_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
+
+                        var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
+                        
+                        if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
+                            var unduhAkad = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                        
+                        }else{
+
+                            var unduhAkad = `<a href="{{ url('').Storage::url('public/buktiakad/`+full.id_user+`/`+full.berkas_akad+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                        }
+                        if(full.status_tahap1 == null || full.status_tahap1 == 0 ){
+                            var unduhBayar1 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                        
+                        }else{
+
+                            var unduhBayar1 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                        }
+                        if(full.status_oc == null || full.status_oc == 0 ){
+                            var unduhOC = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                        
+                        }else{
+
+                            var unduhOC = `<a href="{{ url('').Storage::url('public/buktiOC/`+full.id_user+`/`+full.file_oc+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                        }
+                        if(full.status_tahap2 == null || full.status_tahap2 == 0 ){
+                            var unduhBayar2 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                            
+                        }else{
+
+                            var unduhBayar2 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap2+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                        }
+                        if(full.status_tahap3 == null || full.status_tahap3 == 0 ){
+                            var unduhBayar3 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                                                                        
+                        }else{
+
+                            var unduhBayar3 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap3+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                        }
+                        if(full.status_berita_acara == null || full.status_berita_acara == 0 ){
+                            var unduhBeritaAcara = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+
+                            var unduhBeritaAcara = `<a href="{{ url('').Storage::url('public/beritaacara/`+full.id_user+`/`+full.file_berita_acara+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                        } 
+                        var upload_OC = `<a href="{{url('upload_oc_admin')}}/`+full.id+`"  class="dropdown-item" >Upload OC</a> `;
+
+                        
+                        var konfirm_OC = `<a href="{{url('konfirmasi_oc_admin')}}/`+full.id+`/5_4"  class="dropdown-item" >Konfirmasi OC</a>` ;
+                        
+
+                        //var kw = full.kode_wilayah;
+
+                        var ddCabang = `<form action="{{route('registrasi.updatecabang')}}" method="post">    
+                                            @csrf
+                                            @method('PUT')
+                                            
+                                            <input type="text" name="id" value="`+full.id+`" hidden></input>
+                                            <select id="kode_wilayah" name="kode_wilayah" class="form-control" onchange="this.form.submit()">
+
+                                                <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
+
+                                                @if($cabang != null)
+                                                @foreach($cabang as $dataCabang =>$value){
+
+                                                    <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
+                                                    </option>
+                                                    
+                                                @endforeach
+                                                @endif
+
+                                            </select>
+                                        </form>`;
+                        
+                        return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
+                                
+                                
+                                
+                                    
+                                    <div class="col-lg-5 row" >
+                                        <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                                            <i class="fa fa-building text-primary" style="font-size:600%"></i>
+                                        </div>
+                                        <div class="col-lg-8 ">
+                                            <h4 class="text-grey" style=>`+full.nama_perusahaan+`</h4>
+                                            <a  href="{{url('detail_registrasi')}}/`+full.id+`"  style="color: white; " class="label label-success">NOMOR ID: `+full.no_registrasi+`</a><br> 
+                                            <i class="fa fa-info text-primary" ></i> 
+                                            `+full.kelompok+`<br>
+                                            <i class="fa fa-info text-primary" ></i>
+                                            `+full.jenis+`<br>
+                                            <i class="fa fa-info text-primary" ></i> Alamat: 
+                                            `+full.alamat_perusahaan+`<br>
+                                            <i class="fa fa-info text-primary" ></i> Status Registrasi: 
+                                            `+full.status_registrasi+`<br>
+                                            <i class="fa fa-info text-primary" ></i> Tanggal Update: 
+                                            `+full.updated_at+`<br>
+                                            
+                                        </div>     
+                                        
+                                        
+                                    </div>
+                                    
+
+                                    <div class="col-lg-7 row d-flex justify-content-center " >
+
+                                        <div class="card border-0 col-lg-12 align-items-center">
+                                            <div class="card-header  tab-overflow   p-t-0 p-b-0 ">
+                                                <ul class="nav nav-tabs card-header-tabs">
+                                                    
+                                                    <li class="nav-item text-center">
+                                                        
+                                                        <a class="nav-link active" data-toggle="tab" href="#card-tab-2-`+full.id+`">Akad</a>
+                                                    </li>
+                                                    <li class="nav-item text-center">
+                                                        
+                                                        
+                                                        <a class="nav-link " data-toggle="tab" href="#card-tab-1-`+full.id+`">Penerbitan OC</a>
+                                                    </li>
+                                                    
+                                                    
+                                                    <li class="nav-item text-center">
+                                                        <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-3-`+full.id+`">Pembayaran</a>
+                                                    </li>
+                                                    
+                                                    
+                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content p-0 m-0">
+                                                
+                                                <div class="tab-pane active show  fade" id="card-tab-2-`+full.id+`">
+
+                                                    <table class="table table-sm"> 
+                                                    <tr>
+                                                        <td class="text-center">Tipe</td>
+                                                        <td class="text-center">Status</td>
+                                                        <td class="text-center">Total Biaya</td>
+                                                        <td class="text-center">Bukti Akad</td>
+                                                        <td class="text-center">Aksi</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                    <td class="text-center">
+                                                        Akad
+                                                    </td>
+                                                    <td class="text-center align-middle" style="width:20%">
+                                                        `+checkStatusAkad(full.status_akad)+`
+                                                    </td>
+
+                                                    <td class="text-center align-middle">
+                                                        `+formatRupiah(full.total_biaya_sertifikasi)+`
+                                                    </td>
+                                                    
+                                                    <td class="text-center align-middle">
+                                                        `+unduhAkad+`
+
+                                                    </td>
+
+                                                    <td class="text-center align-middle">
+                                                        <div class="btn-group m-r-5 show">
+                                                            <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
+
+                                                            <div class="dropdown-button-title">Update Progress</div>`+uploadAkad+`
+                                                            </div> 
+                                                        </div>
+                                                    </td>
+                                                    </tr>
+                                                    </table>
+                                                </div>
+
+                                                <div class="tab-pane fade " id="card-tab-1-`+full.id+`">
+                                                    <table class="table table-sm"> 
+                                                        <tr>
+                                                            <td class="text-center"  style="width:20%">Status OC</td>
+
+                                                            <td class="text-center"  style="width:20%">Berkas OC</td>
+                                                            
+                                                            <td class="text-center"  style="width:10%">Aksi</td>
+                                                        </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-center align-middle"  style="width:20%">
+                                                            `+checkStatusPenerbitanOrderConfirmation(full.status_oc)+`
+                                                        </td>
+
+                                                        <td class="text-center align-middle">
+                                                        `+unduhOC+`
+
+                                                    </td>
+
+                                                        
+
+                                                        <td class="text-center align-middle">
+                                                            <div class="btn-group m-r-5 show">
+                                                            <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> 
+                                                                <div class= "dropdown-button-title"> Update Progress </div>`+upload_OC+`
+                                                            </div> 
+                                                        </div>
+                                                    </td>
+                                                    </tr>
+                                                    </table>
+                                                </div>
+
+                                                <div class="tab-pane fade" id="card-tab-3-`+full.id+`">
+
+                                                    <table class="table table-sm">
+                                                    <tr>
+                                                        <td class="text-center">Tipe</td>
+                                                        <td class="text-center">Status</td>
+                                                        <td class="text-center">Nominal</td>
+                                                        <td class="text-center">Bukti Transfer</td>
+                                                        <td class="text-center">Aksi</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-center align-middle">
+                                                            Pembayaran 1
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            `+checkStatusPembayaran(full.status_tahap1)+`
+                                                        </td>
+
+                                                        <td class="text-center align-middle">
+                                                            `+formatRupiah(full.nominal_tahap1)+`
+                                                        </td>
+                                                        
+                                                        <td class="text-center align-middle">
+                                                            `+unduhBayar1+`
+
+                                                        </td>
+
+                                                        <td class="text-center align-middle">
+                                                            <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar1' >Unggah</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center align-middle">
+                                                            Pembayaran 2
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            `+checkStatusPembayaran(full.status_tahap2)+`
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            `+formatRupiah(full.nominal_tahap2)+`
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            `+unduhBayar2+`
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                        
+                                                            <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar2' >Unggah</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center align-middle">
+                                                            Pelunasan 
+                                                        </td>
+                                                        <td class="text-center align-middle"> 
+                                                            `+checkStatusPembayaran(full.status_tahap3)+`
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            `+formatRupiah(full.nominal_tahap3)+`
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            `+unduhBayar3+`
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                        
+                                                            <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar3' >Unggah</button>
+                                                        </td>
+
+                                                    </tr>
+                                                    </table>
+                                                </div>  
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`  
+                    }
+                }
+            ],
+
+            
+            
+            //tambahkan bkti bayar 1,2,3, bkti kontrak akad, berita acara,
+            // processing:true,
+            // serverSide:true,
+            // //bFilter: false,
+            // //bSortable: false,              
+            // ordering: false 
+            
+            bSortable: false,
+            ordering: false,
+            processing:true,
+            serverSide:true,
+            
+        });
       
         $(document).ready(function () {
 
            
 
-            var xTable = $('#table').DataTable({
-               
-                
-                columns:[
-                   
-                   {
-                        "data":'no_registrasi',
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
-                       
-                            var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
-
-                            var uploadAkad =  `<a href="{{url('upload_kontrak_akad_admin')}}/`+full.id+`"  class="dropdown-item" >Upload Kontrak Akad</a> `;
-
-                            
-                            var konfirmAkad = `<a href="{{url('konfirmasi_akad_admin')}}/`+full.id+`/`+full.status_akad+`"  class="dropdown-item" >Konfirmasi Akad</a>` ;
-                           
-                            var konfirmBayar3 = (full.status ==  '12_3') ? dButton('Konfirmasi dan Upload Invoice'):`<a href="{{url('upload_invoice')}}/`+full.id+`" class="dropdown-item" >Konfirmasi dan Upload Invoice</a>`;
-                           
-                            var konfirmBayar2 = (full.status == '9_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_tahap2')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
-                           
-                            var konfirmBayar1 = (full.status == '6_3') ? dButton('Konfirmasi Pembayaran'):`<a href="{{url('konfirmasi_pembayaran_registrasi')}}/`+full.id+`" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk Konfirmasi Pembayaran??')">Konfirmasi Pembayaran</a>`;
-
-                            var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
-                            
-                            if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
-                                var unduhAkad = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                             
-                            }else{
-
-                                var unduhAkad = `<a href="{{ url('').Storage::url('public/buktiakad/`+full.id_user+`/`+full.berkas_akad+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.status_tahap1 == null || full.status_tahap1 == 0 ){
-                                var unduhBayar1 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                             
-                            }else{
-
-                                var unduhBayar1 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap1+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.status_oc == null || full.status_oc == 0 ){
-                                var unduhOC = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                             
-                            }else{
-
-                                var unduhOC = `<a href="{{ url('').Storage::url('public/buktiOC/`+full.id_user+`/`+full.file_oc+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.status_tahap2 == null || full.status_tahap2 == 0 ){
-                                var unduhBayar2 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                              
-                            }else{
-
-                                var unduhBayar2 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap2+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.status_tahap3 == null || full.status_tahap3 == 0 ){
-                                var unduhBayar3 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                                                                             
-                            }else{
-
-                                var unduhBayar3 = `<a href="{{ url('').Storage::url('public/buktipembayaran/`+full.id_user+`/`+full.bb_tahap3+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            }
-                            if(full.status_berita_acara == null || full.status_berita_acara == 0 ){
-                                var unduhBeritaAcara = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-
-                                var unduhBeritaAcara = `<a href="{{ url('').Storage::url('public/beritaacara/`+full.id_user+`/`+full.file_berita_acara+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
-                            } 
-                            var upload_OC = `<a href="{{url('upload_oc_admin')}}/`+full.id+`"  class="dropdown-item" >Upload OC</a> `;
-
-                            
-                            var konfirm_OC = `<a href="{{url('konfirmasi_oc_admin')}}/`+full.id+`/5_4"  class="dropdown-item" >Konfirmasi OC</a>` ;
-                           
-
-                            //var kw = full.kode_wilayah;
-
-                            var ddCabang = `<form action="{{route('registrasi.updatecabang')}}" method="post">    
-                                                @csrf
-                                                @method('PUT')
-                                               
-                                                <input type="text" name="id" value="`+full.id+`" hidden></input>
-                                                <select id="kode_wilayah" name="kode_wilayah" class="form-control" onchange="this.form.submit()">
-
-                                                    <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
-
-                                                   @if($cabang != null)
-                                                    @foreach($cabang as $dataCabang =>$value){
-
-                                                        <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
-                                                        </option>
-                                                      
-                                                    @endforeach
-                                                    @endif
-
-                                                </select>
-                                            </form>`;
-                            
-                            return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
-                                    
-                                   
-                                    
-                                       
-                                        <div class="col-lg-5 row" >
-                                            <div class="col-lg-4 d-flex justify-content-center align-items-center">
-                                                <i class="fa fa-building text-primary" style="font-size:600%"></i>
-                                            </div>
-                                            <div class="col-lg-8 ">
-                                                <h4 class="text-grey" style=>`+full.nama_perusahaan+`</h4>
-                                                <a  href="{{url('detail_registrasi')}}/`+full.id+`"  style="color: white; " class="label label-success">NOMOR ID: `+full.no_registrasi+`</a><br> 
-                                                <i class="fa fa-info text-primary" ></i> 
-                                                `+full.kelompok+`<br>
-                                                <i class="fa fa-info text-primary" ></i>
-                                                `+full.jenis+`<br>
-                                                <i class="fa fa-info text-primary" ></i> Alamat: 
-                                                `+full.alamat_perusahaan+`<br>
-                                                <i class="fa fa-info text-primary" ></i> Status Registrasi: 
-                                                `+full.status_registrasi+`<br>
-                                                <i class="fa fa-info text-primary" ></i> Tanggal Update: 
-                                                `+full.updated_at+`<br>
-                                                
-                                            </div>     
-                                            
-                                           
-                                        </div>
-                                      
-
-                                        <div class="col-lg-7 row d-flex justify-content-center " >
-
-                                            <div class="card border-0 col-lg-12 align-items-center">
-                                                <div class="card-header  tab-overflow   p-t-0 p-b-0 ">
-                                                    <ul class="nav nav-tabs card-header-tabs">
-                                                        
-                                                        <li class="nav-item text-center">
-                                                            
-                                                            <a class="nav-link active" data-toggle="tab" href="#card-tab-2-`+full.id+`">Akad</a>
-                                                        </li>
-                                                        <li class="nav-item text-center">
-                                                            
-                                                            
-                                                            <a class="nav-link " data-toggle="tab" href="#card-tab-1-`+full.id+`">Penerbitan OC</a>
-                                                        </li>
-                                                       
-                                                       
-                                                        <li class="nav-item text-center">
-                                                            <a class="nav-link text-primary"  data-toggle="tab" href="#card-tab-3-`+full.id+`">Pembayaran</a>
-                                                        </li>
-                                                       
-                                                       
-                                      
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="tab-content p-0 m-0">
-                                                   
-                                                    <div class="tab-pane active show  fade" id="card-tab-2-`+full.id+`">
-
-                                                        <table class="table table-sm"> 
-                                                        <tr>
-                                                            <td class="text-center">Tipe</td>
-                                                            <td class="text-center">Status</td>
-                                                            <td class="text-center">Total Biaya</td>
-                                                            <td class="text-center">Bukti Akad</td>
-                                                            <td class="text-center">Aksi</td>
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                        <td class="text-center">
-                                                            Akad
-                                                        </td>
-                                                        <td class="text-center align-middle" style="width:20%">
-                                                            `+checkStatusAkad(full.status_akad)+`
-                                                        </td>
-
-                                                        <td class="text-center align-middle">
-                                                            `+formatRupiah(full.total_biaya_sertifikasi)+`
-                                                        </td>
-                                                        
-                                                        <td class="text-center align-middle">
-                                                            `+unduhAkad+`
-
-                                                        </td>
-
-                                                        <td class="text-center align-middle">
-                                                            <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
-                                                                <div class="dropdown-button-title">Update Progress</div>`+uploadAkad+`
-                                                                </div> 
-                                                            </div>
-                                                        </td>
-                                                        </tr>
-                                                        </table>
-                                                    </div>
-
-                                                    <div class="tab-pane fade " id="card-tab-1-`+full.id+`">
-                                                        <table class="table table-sm"> 
-                                                            <tr>
-                                                                <td class="text-center"  style="width:20%">Status OC</td>
-
-                                                                <td class="text-center"  style="width:20%">Berkas OC</td>
-                                                                
-                                                                <td class="text-center"  style="width:10%">Aksi</td>
-                                                            </tr>
-                                                        
-                                                        <tr>
-                                                            <td class="text-center align-middle"  style="width:20%">
-                                                                `+checkStatusPenerbitanOrderConfirmation(full.status_oc)+`
-                                                            </td>
-
-                                                            <td class="text-center align-middle">
-                                                            `+unduhOC+`
-
-                                                        </td>
-
-                                                            
-
-                                                            <td class="text-center align-middle">
-                                                                <div class="btn-group m-r-5 show">
-                                                                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> 
-                                                                    <div class= "dropdown-button-title"> Update Progress </div>`+upload_OC+`
-                                                                </div> 
-                                                            </div>
-                                                        </td>
-                                                        </tr>
-                                                        </table>
-                                                    </div>
-
-                                                    <div class="tab-pane fade" id="card-tab-3-`+full.id+`">
-
-                                                        <table class="table table-sm">
-                                                        <tr>
-                                                            <td class="text-center">Tipe</td>
-                                                            <td class="text-center">Status</td>
-                                                            <td class="text-center">Nominal</td>
-                                                            <td class="text-center">Bukti Transfer</td>
-                                                            <td class="text-center">Aksi</td>
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                            <td class="text-center align-middle">
-                                                                Pembayaran 1
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkStatusPembayaran(full.status_tahap1)+`
-                                                            </td>
-
-                                                            <td class="text-center align-middle">
-                                                                `+formatRupiah(full.nominal_tahap1)+`
-                                                            </td>
-                                                            
-                                                            <td class="text-center align-middle">
-                                                                `+unduhBayar1+`
-
-                                                            </td>
-
-                                                            <td class="text-center align-middle">
-                                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar1' >Unggah</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center align-middle">
-                                                                Pembayaran 2
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+checkStatusPembayaran(full.status_tahap2)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+formatRupiah(full.nominal_tahap2)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+unduhBayar2+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                            
-                                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar2' >Unggah</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center align-middle">
-                                                                Pelunasan 
-                                                            </td>
-                                                            <td class="text-center align-middle"> 
-                                                                `+checkStatusPembayaran(full.status_tahap3)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+formatRupiah(full.nominal_tahap3)+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                                `+unduhBayar3+`
-                                                            </td>
-                                                            <td class="text-center align-middle">
-                                                            
-                                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modalbayar3' >Unggah</button>
-                                                            </td>
-
-                                                        </tr>
-                                                        </table>
-                                                    </div>  
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>`  
-                        }
-                    }
-                ],
-
-              
-               
-               //tambahkan bkti bayar 1,2,3, bkti kontrak akad, berita acara,
-                // processing:true,
-                // serverSide:true,
-                // //bFilter: false,
-                // //bSortable: false,              
-                // ordering: false 
-               
-                bSortable: false,
-                ordering: false,
-                processing:true,
-                serverSide:true,
-                ajax:"{{route('datakeuangan')}}",
-               
-            });
+           
 
 
 
-            /*$('#table tbody').on('click', 'td.details-control', function () {
-                 var tr = $(this).closest('tr');
-                 var tdi = tr.find("i.fa");
-                 var row = xTable.row(tr);
-
-                 //console.log(row.data());
-
-                 if (row.child.isShown()) {
-                     // This row is already open - close it
-                     row.child.hide();
-                     tr.removeClass('shown');
-                     tdi.first().removeClass('fa-minus-square');
-                     tdi.first().addClass('fa-plus-square');
-                 }
-                 else {
-                     // Open this row
-                     row.child(format(row.data())).show();
-                     tr.addClass('shown');
-                     tdi.first().removeClass('fa-plus-square');
-                     tdi.first().addClass('fa-minus-square');
-                 }
-            });*/
-        
     
         });
 
@@ -672,5 +698,5 @@
             return confirm("Apakah anda yakin?");
         });
     </script>
-    <script src="{{asset('/assets/js/filterData.js')}}"></script>
+
 @endpush

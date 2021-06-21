@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Kontrak Akad Sertifikasi Halal')
+@section('title', 'Data Log')
 
 @push('css')
 	<link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css')}}" rel="stylesheet" />

@@ -144,7 +144,7 @@ function checkPenjadwalan(data){
 // }
 
 function checkStatusAkad(data){
-    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Dokumen Penawaran dan Akad</a>'
+    return  (data==0)? '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Akad</a>'
     :(data==1)? '<a  class="btn btn-xs" style="background-color:green  ; color:white;">Sudah Upload Bukti Penawaran dan Akad</a>'
     : '<a  class="btn btn-xs" style="background-color:black  ; color:white;">Belum Upload Dokumen Penawaran dan Akad</a>';
     
@@ -283,10 +283,10 @@ function checkProgress(data){
             :(data.trim()=='14_1')? 'Proses Komite Sertifkasi Selesai'
 
             :(data==15)? 'Proses Persiapan Sidang Penetapan Kehalalan Produk'
-            :(data.trim()=='15_0')? 'Reviwer Belum Mereview Laporan Hasil Akhir Audit'
+            :(data.trim()=='15_0')? 'Reviewer Belum Mereview Laporan Hasil Akhir Audit'
             :(data.trim()=='15_1')? 'Laporan Akhir Audit Terkonfirmasi'
             
-            :(data==16)? 'Proses Sidang Fatwa'
+            :(data==16)? 'Proses Sidang Penetapan Kehalalan Produk'
             :(data==17)? 'Ketetapan Halal'
             :'_';
 }
@@ -367,11 +367,11 @@ function notifProgress(data){
             :(data.trim()=='14_0')? 'Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit'
             :(data.trim()=='14_1')? 'Proses Komite Sertifkasi Selesai'
 
-            :(data==15)? 'Proses Persiapan Komisi Fatwa'
-            :(data.trim()=='15_0')? 'Reviwer Belum Mereview Laporan Hasil Akhir Audit'
+            :(data==15)? 'Proses Persiapan Sidang Penetapan Kehalalan Produk'
+            :(data.trim()=='15_0')? 'Reviewer Belum Mereview Laporan Hasil Akhir Audit'
             :(data.trim()=='15_1')? 'Laporan Akhir Audit Terkonfirmasi'
             
-            :(data==16)? 'Proses Sidang Fatwa'
+            :(data==16)? 'Proses Sidang Penetapan Kehalalan Produk'
             :(data==17)? 'Ketetapan Halal'
             :'_';
            

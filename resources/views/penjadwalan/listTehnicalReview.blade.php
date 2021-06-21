@@ -49,74 +49,10 @@
                                         <div class="form-group row">
                                             @component('components.inputfilter',['name'=> 'no_registrasi','label' => 'No Registrasi'])@endcomponent
                                             
-                                            <label for="kelompok" class="col-lg-2 col-form-label">Kelompok Produk</label>
-
-                                            <div class="col-lg-4">
-                                                <select id="kelompok_produk" name="kelompok_produk" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
-                                                    <option value="">--Pilih Kelompok Produk--</option>
-                                                    @if(isset($dataKelompok))
-                                                        @foreach($dataKelompok as $index => $value)
-                                                            <option value="{{$value['kelompok_produk']}}"> - {{$value['kelompok_produk']}}</i></option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                            </div>
+                                            @component('components.inputfilter',['name'=> 'nama_perusahaan','label' => 'Perusahaan'])@endcomponent   
                                             
 
-                                            <label for="kelompok" class="col-lg-2 col-form-label">Jenis Registrasi</label>
-
-                                            <div class="col-lg-4">
-                                                <select id="jenis_registrasi" name="jenis_registrasi" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
-                                                    <option value="">--Pilih Jenis Registrasi--</option>
-                                                    @if(isset($dataJenis))
-                                                        @foreach($dataJenis as $index => $value)
-                                                            <option value="{{$value['jenis_registrasi']}}"> - {{$value['jenis_registrasi']}}</i></option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                            </div>
-
-                                            @component('components.inputfilter',['name'=> 'perusahaan','label' => 'Perusahaan'])@endcomponent   
-
-                                            
-                                            <label class="col-lg-2 col-form-label">Status Registrasi</label>
-                                            <div class="col-lg-4">
-                                                <select id="status_registrasi" name="status_registrasi" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white">
-                                                    <option value="" selected>--Pilih Status Registrasi--</option>
-                                                    <option value="baru">Baru</option>
-                                                    <option value="perpanjangan">Perpanjangan</option>
-                                                    <option value="pengembangan">Pengembangan</option>
-                                                </select>
-                                            </div>
-                                            <label class="col-lg-2 col-form-label">Tanggal Registrasi</label>
-                                            <div class="col-lg-4">
-                                                <div class="input-group date">
-                                                    <input type="text" id="tgl_registrasi" name="tgl_registrasi" class="form-control" placeholder="Tanggal Registrasi" value="" />
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                            <label class="col-lg-2 col-form-label">Status Progress</label>
-                                            <div class="col-lg-4">
-                                                <select id="status" name="status" class="form-control selectpicker forSearch" data-size="10" data-live-search="true" data-style="btn-white">
-                                                    <option value="" selected>--Pilih Status Progress--</option>
-                                                    <option value="1">Pengajuan Baru</option>
-                                                    <option value="2">Melengkapi Berkas</option>
-                                                    <option value="3">Verifikasi Data</option>
-                                                    <option value="4">Perbaiki Data Berkas</option>
-                                                    <option value="5">Konfirmasi Data Berkas</option>
-                                                    <option value="6">Akad</option>
-                                                    <option value="7">Akad Gagal</option>
-                                                    <option value="8">Akad Terkonfirmasi</option>
-                                                    <option value="9">Pembayaran</option>
-                                                    <option value="10">Nominal Pembayaran Kurang</option>
-                                                    <option value="11">Nominal Pembayaran Lebih</option>
-                                                    <option value="12">Pembayaran Gagal</option>
-                                                    <option value="13">Pembayaran Terkonfirmasi</option>
-                                                    <option value="14">Proses Tehnical Review</option>
-                                                    <
-                                                    
-                                                </select>
-                                            </div>
+                                    
                                             
                                             <div>
                                                 @component('components.buttonsearch')@endcomponent
@@ -349,200 +285,197 @@
             todayHighlight: true,
         });
 
+        var xTable = $('#table').DataTable({
+            ajax:{
+                url:"{{route('datatehicalreview')}}",
+                data:function(d){
+                    d.no_registrasi = $('#no_registrasi').val();
+                    d.nama_perusahaan = $('#nama_perusahaan').val();
+
+                    //d.id_user = $('#id_user').val();
+
+                }
+            },
+            
+            columns:[
+                
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+                        return meta.row + 1;
+                    }
+                },
+
+                {"data":"no_registrasi"},
+                {"data":"nama_perusahaan"},
+                {"data":"kelompok"},
+                
+                {
+                    
+                    "data":null,
+                    "searchable":false,
+                    "render":function (data,type,full,meta) {
+                        if(full.pelaksana1_tr){
+                            var str = full.pelaksana1_tr.split("_");
+                            return str[1]
+                        }else{
+                            return ''
+                        }
+                    }
+                },
+                {
+                    
+                    "data":null,
+                    "searchable":false,
+                    "render":function (data,type,full,meta) {
+                        if(full.pelaksana2_tr){
+                            var str = full.pelaksana2_tr.split("_");
+                            return str[1]
+                        }else{
+                            return ''
+                        }
+                        
+                    }
+                },
+
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+
+                        //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+
+                        //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
+
+                        if(full.file_laporan_audit1 ){
+
+                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
+
+                                                                        
+                            }else{
+                            var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit1&nbsp;&nbsp;</a>`;
+
+                            }
+
+                        if(full.file_laporan_audit_tahap_2 ){
+
+                            var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
+                            
+                                                                            
+                        }else{
+                            var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
+                            
+                        }
+
+                        if(full.file_bap ){
+
+                            var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/download/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+
+                                                                        
+                        }else{
+                            var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+
+                        }
+                        if(full.file_laporan_ketidaksesuaian ){
+
+                            var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+
+                                                                        
+                            }else{
+                            var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+
+                        }
+
+                        var unduhDPR = `<a href="{{ url('').Storage::url('public/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi.docx') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Daftar Periksa&nbsp;&nbsp;</a>`;
+
+                        // if(full.status_dpra == '0'){
+
+                        //     var dpra = ` <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
+
+                                                                        
+                        // }else{
+                        //     var dpra = `<button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
+
+                        // }
+
+                        return `<table class="table-xs table-borderless p-0 m-0">
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhLaporan1+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhLaporan2+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhBAP+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhTS+`
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center align-midle">
+                                            `+unduhDPR+`
+                                        </td>
+                                    </tr>
+                                    
+                                </table>`
+                                    
+                        
+                    }
+                },
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+
+                        //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+
+                        //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
+
+                        
+
+                        return `<table class="table-xs table-borderless text-center">
+                                    <tr class="text-center align-midle">
+                                        <td class="text-center">
+                                            <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan-tr='`+full.catatan_tr+`' data-status-laporan-tr='`+full.status_laporan_tr+`' data-status-lanjut-ks='`+full.status_lanjut_ks+`' data-target='#modaltr' > Upload Review Laporan Audit</button>
+                                        </td>
+                                    </tr>
+                                </table>`
+                                    
+                        
+                    }
+                }
+            ],
+            'columnDefs': [
+            {
+                    "targets": [0,1,2,3,4,5,6,7],
+                    "className": "text-center",
+                    
+            }],
+            
+            processing:true,
+            serverSide:true,
+            order:[[0,'asc']],
+
+        });
+
 
         $(document).ready(function () {
 
            
 
-            var xTable = $('#table').DataTable({
-                ajax:{
-                    url:"{{route('datatehicalreview')}}",
-                    data:function(d){
-                        d.no_registrasi = $('input[name=no_registrasi]').val();
-                        d.perusahaan = $('input[name=perusahaan]').val();
-                        d.tgl_registrasi = $('input[name=tgl_registrasi]').val();
-                        d.kelompok_produk = $('#kelompok_produk').val();
-                        d.jenis_registrasi = $('#jenis_registrasi').val();
-                        d.status_registrasi = $('#status_registrasi').val();
-                        d.status = $('#status').val();
-
-                        //d.id_user = $('#id_user').val();
-
-                    }
-                },
-                
-                columns:[
-                   
-                    {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
-                            return meta.row + 1;
-                        }
-                    },
- 
-                    {"data":"no_registrasi"},
-                    {"data":"nama_perusahaan"},
-                    {"data":"kelompok"},
-                   
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana1_tr){
-                                var str = full.pelaksana1_tr.split("_");
-                                return str[1]
-                            }else{
-                                return ''
-                            }
-                        }
-                    },
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana2_tr){
-                                var str = full.pelaksana2_tr.split("_");
-                                return str[1]
-                            }else{
-                                return ''
-                            }
-                            
-                        }
-                    },
-
-                    {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
-
-                            //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
-
-                            //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
-
-                            if(full.file_laporan_audit1 ){
-
-                                var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
-
-                                                                            
-                                }else{
-                                var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit1&nbsp;&nbsp;</a>`;
-
-                                }
-
-                            if(full.file_laporan_audit_tahap_2 ){
-
-                                var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
-                               
-                                                                             
-                            }else{
-                                var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
-                               
-                            }
-
-                            if(full.file_bap ){
-
-                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/download/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                                                                            
-                            }else{
-                                var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                            }
-                            if(full.file_laporan_ketidaksesuaian ){
-
-                                var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                                                                            
-                                }else{
-                                var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                            }
-
-                            var unduhDPR = `<a href="{{ url('').Storage::url('public/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi.docx') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Daftar Periksa&nbsp;&nbsp;</a>`;
-
-                            // if(full.status_dpra == '0'){
-
-                            //     var dpra = ` <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                                                                            
-                            // }else{
-                            //     var dpra = `<button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                            // }
-
-                            return `<table class="table-xs table-borderless p-0 m-0">
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                               `+unduhLaporan1+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhLaporan2+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhBAP+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhTS+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhDPR+`
-                                            </td>
-                                        </tr>
-                                      
-                                    </table>`
-                                       
-                           
-                        }
-                    },
-                    {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
-
-                            //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
-
-                            //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
-
-                           
-
-                            return `<table class="table-xs table-borderless text-center">
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center">
-                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan-tr='`+full.catatan_tr+`' data-status-laporan-tr='`+full.status_laporan_tr+`' data-status-lanjut-ks='`+full.status_lanjut_ks+`' data-target='#modaltr' > Upload Review Laporan Audit</button>
-                                            </td>
-                                        </tr>
-                                    </table>`
-                                       
-                           
-                        }
-                    }
-                ],
-                'columnDefs': [
-                {
-                      "targets": [0,1,2,3,4,5,6,7],
-                      "className": "text-center",
-                     
-                }],
-                
-                processing:true,
-                serverSide:true,
-                order:[[0,'asc']],
-
-            });
+           
 
            
         

@@ -1327,20 +1327,23 @@ class PenjadwalanController extends Controller
   
             })    
                      
-            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.kode_wilayah','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
+            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.kode_wilayah','registrasi.alamat_perusahaan' ,'registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
 
         //filter condition
         if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+            $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['nama_perusahaan'])){
+            $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
         }
         if(isset($gdata['mulai_audit1'])){
-            $xdata = $xdata->where('mulai_audit1','LIKE','%'.$gdata['mulai_audit1'].'%');
+            $xdata = $xdata->where('penjadwalan.mulai_audit1','LIKE','%'.$gdata['mulai_audit1'].'%');
         }
         
         //end
         $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+                 ->orderBy('id_regis','desc');
 
         return Datatables::of($xdata)->make();
     }
@@ -1391,25 +1394,13 @@ class PenjadwalanController extends Controller
 
         //filter condition
         if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+            $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
         }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+        if(isset($gdata['nama_perusahaan'])){
+            $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
         }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
-        if(isset($gdata['ruang_lingkup'])){
-            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
-        }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+        if(isset($gdata['mulai_audit2'])){
+            $xdata = $xdata->where('penjadwalan.mulai_audit2','LIKE','%'.$gdata['mulai_audit2'].'%');
         }
 
         //end
@@ -1499,27 +1490,11 @@ class PenjadwalanController extends Controller
 
         //filter condition
         if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+            $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
         }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
+        if(isset($gdata['nama_perusahaan'])){
+            $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
         }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
-        if(isset($gdata['ruang_lingkup'])){
-            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
-        }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
-
         //end
         $xdata = $xdata
                  ->orderBy('registrasi.id','desc');
@@ -1606,28 +1581,12 @@ class PenjadwalanController extends Controller
              ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan');
        
 
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
-        if(isset($gdata['ruang_lingkup'])){
-            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
-        }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
+             if(isset($gdata['no_registrasi'])){
+                $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+            }
+            if(isset($gdata['nama_perusahaan'])){
+                $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
+            }
 
         //end
         $xdata = $xdata
@@ -1685,28 +1644,12 @@ class PenjadwalanController extends Controller
              ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang', 'laporan_persiapan_sidang.status_persiapan_sidang');
        
 
-        //filter condition
-        if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
-        if(isset($gdata['ruang_lingkup'])){
-            $xdata = $xdata->where('ruang_lingkup','=',$gdata['ruang_lingkup']);
-        }
-        if(isset($gdata['status_registrasi'])){
-            $xdata = $xdata->where('status_registrasi','=',$gdata['status_registrasi']);
-        }
-        if(isset($gdata['status'])){
-            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
-        }
+            if(isset($gdata['no_registrasi'])){
+                $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+            }
+            if(isset($gdata['nama_perusahaan'])){
+                $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
+            }
 
         //end
         $xdata = $xdata
