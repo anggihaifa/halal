@@ -4723,7 +4723,7 @@ class RegistrasiController extends Controller
         $e = $model->find($id);
         $u = $model2->find($e->id_user);
         $p = $model3->find($e->id_pembayaran);
-        $e->status = 12_3;
+        $e->status = '12_3';
         $e->updated_status_by = $updater;
         $e->save();
 

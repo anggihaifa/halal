@@ -28,8 +28,10 @@ class PelaksanaController extends Controller
         $xdata = DB::table('users')
                 ->join('usergroup','users.usergroup_id','=','usergroup.id')
                 ->select('users.*','usergroup.usergroup as role')
-                 ->where('usergroup_id','=','8')
-                ->orWhere('usergroup_id','=','9')
+                ->where('usergroup_id','=','10')
+                ->orWhere('usergroup_id','=','11')
+                ->orWhere('usergroup_id','=','12')
+                ->orWhere('usergroup_id','=','13')
                 ->orderBy('users.id','desc');
                 //->get();
         return Datatables::of($xdata)->make();

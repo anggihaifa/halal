@@ -322,8 +322,8 @@
 													</input></td>
 
 												<td >
-													<input class="form-control" id="review_perbaikan_1" type="text" name="review_perbaikan_1" value='{{$laporanAudit1[0]['review_perbaikan_1']}}'>
-													</input>
+													<textarea class="form-control" id="review_perbaikan_1" type="text" name="review_perbaikan_1" value='{{$laporanAudit1[0]['review_perbaikan_1']}}'>
+													</textarea>
 													
 
 												</td>
@@ -383,7 +383,7 @@
 														</input></td>
 
 												<td >
-												<textarea type="text" name="review_perbaikan_3" value='{{$laporanAudit1[0]['review_perbaikan_1']}}'>
+												<textarea class="form-control" type="text" name="review_perbaikan_3" value='{{$laporanAudit1[0]['review_perbaikan_1']}}'>
 													</textarea>
 													
 
