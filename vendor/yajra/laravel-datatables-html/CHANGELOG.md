@@ -8,6 +8,25 @@
 
 ## CHANGELOG
 
+### v4.38.0 - 06-20-2021
+
+- Fix fetching of editor table #158
+- Add method to get all editors instances.
+- Add method to get dataTable options array.
+- Set serverSide and processing option as true by default.
+
+### v4.37.0 - 05-17-2021
+
+- Implement authorizations on Editor builder.
+
+### v4.36.3 - 04-23-2021
+
+- Fix conflicts with createInline button. Use render instead of altering the data.
+
+### v4.36.2 - 03-19-2021
+
+- Fix exportable flag, should be false.
+
 ### v4.36.1 - 12-05-2020
 
 - Fix adding of class on Select plugin / extension. [#154]
