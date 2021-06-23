@@ -659,8 +659,8 @@ class RegistrasiController extends Controller
                 // $model->sistem_pemasaran = $data['sistem_pemasaran'];
                 $model->no_registrasi_bpjph = $data['no_registrasi_bpjph'];
                 $no_registrasi_bpjph = $data['no_registrasi_bpjph'];
-                $kd_wilayah = explode('-',$no_registrasi_bpjph);
-                $model->kode_wilayah = $kd_wilayah[0];
+                // $kd_wilayah = explode('-',$no_registrasi_bpjph);
+                // $model->kode_wilayah = $kd_wilayah[0];
                 $model->save();                                
             DB::commit();
 

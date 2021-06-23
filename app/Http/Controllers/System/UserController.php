@@ -201,14 +201,14 @@ class UserController extends Controller
     }
 
     //update
-    public function editProfile($id){
+    public function editProfile($id){        
 
         $model = new DetailUser();
         $model2 = new User();
 
         $id_real = Auth::user()->id;
         $data = User::find($id);
-
+        $dataDetail = $model->find($data->detail_id);
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -232,8 +232,9 @@ class UserController extends Controller
         //dd($id_real == $data['id']);
         if($data['id'] ==$id_real){
 
-            if(empty($data->detail_id)==0){
+            if($dataDetail){
                 //dd("isset");
+                //dd("masuk1");
                 $data2 = DetailUser::find($data->detail_id);
             }else{
                 try{
@@ -255,7 +256,7 @@ class UserController extends Controller
                     Session::flash('error', $e->getMessage());
                 }
                    
-                $data2 = DetailUser::where('id_user', '=', $id)->first();   
+                //$data2 = DetailUser::where('id_user', '=', $id)->first();   
                
             }
 

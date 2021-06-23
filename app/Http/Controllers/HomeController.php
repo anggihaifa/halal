@@ -37,10 +37,11 @@ class HomeController extends Controller
                                  ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                                  ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                                  //->join('users','registrasi.id_user','=','users.id')
-                                 //->join('users','registrasi.id','=','users.registrasi_id')
+                                 ->join('users','registrasi.id','=','users.registrasi_id')
                                  ->where('registrasi.kode_wilayah','=',$kodewilayah)
-                                 ->where('registrasi.status_cancel','=',0)
+                                //  ->where('registrasi.status_cancel','=',0)
                                  ->get();
+        // dd($checkRegistrasiActive);
 
         $getDetailDataUser =  DB::table('users')
                             ->where('id',Auth::user()->id)
@@ -59,15 +60,18 @@ class HomeController extends Controller
                             ->get();    
         $statistikregistrasi = DB::table('registrasi')                            
                             ->select(DB::raw('count(MONTH(created_at)) as jumlah'),DB::raw('MONTH(created_at) as bulan'),DB::raw('YEAR(created_at) as tahun'))
+                            ->where(DB::raw('YEAR(created_at)'), DB::raw('YEAR(now())'))
                             ->groupBy(DB::raw('MONTH(created_at)'))
                             ->orderBy(DB::raw('YEAR(created_at)'),'ASC')
                             ->get();
         $statistikpelanggan = DB::table('users')
                             ->select(DB::raw('count(MONTH(created_at)) as jumlah'),DB::raw('MONTH(created_at) as bulan'),DB::raw('YEAR(created_at) as tahun'))
                             ->where('usergroup_id','=','2')
+                            ->where(DB::raw('YEAR(created_at)'), DB::raw('YEAR(now())'))
                             ->groupBy(DB::raw('MONTH(created_at)'))
                             ->orderBy(DB::raw('YEAR(created_at)'),'ASC')
                             ->get();
+        // dd($statistikpelanggan);
 
         $logKegiatan = DB::table('users')
                             ->select('users.registrasi_id','log_kegiatan.*','users.name as nama',)                            
