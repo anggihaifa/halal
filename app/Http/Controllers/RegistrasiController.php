@@ -71,9 +71,21 @@ class RegistrasiController extends Controller
     //registrasi halal
     public function index(){
 
+        $currentRegistrasi = DB::table('users')
+                            ->select('users.registrasi_id','registrasi.*','ruang_lingkup.ruang_lingkup')
+                            ->join('registrasi','registrasi.id','=','users.registrasi_id')
+                            ->join('ruang_lingkup','ruang_lingkup.id','=','registrasi.id_ruang_lingkup')
+                            ->where('users.id',Auth::user()->id)
+                            ->get();
+        if(isset($currentRegistrasi)){
+            $dataCurrent = json_decode($currentRegistrasi,true);    
+        }else{
+            $dataCurrent = null;    
+        }
+
         if(Auth::user()->registrasi_id !== null){
             $data = Registrasi::find(Auth::user()->registrasi_id);            
-            return view('registrasi.index',compact('data'));
+            return view('registrasi.index',compact('data','dataCurrent'));
         }else{
             return view('registrasi.index');
         }
@@ -659,8 +671,8 @@ class RegistrasiController extends Controller
                 // $model->sistem_pemasaran = $data['sistem_pemasaran'];
                 $model->no_registrasi_bpjph = $data['no_registrasi_bpjph'];
                 $no_registrasi_bpjph = $data['no_registrasi_bpjph'];
-                $kd_wilayah = explode('-',$no_registrasi_bpjph);
-                $model->kode_wilayah = $kd_wilayah[0];
+                // $kd_wilayah = explode('-',$no_registrasi_bpjph);
+                // $model->kode_wilayah = $kd_wilayah[0];
                 $model->save();                                
             DB::commit();
 

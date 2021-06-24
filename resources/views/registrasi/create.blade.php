@@ -109,7 +109,7 @@
                                 </div>                                
                                                                 
                             </div>
-                            <div class="text-center"><input type="button" name="next" class="next action-button" value="Lanjut" /></div>
+                            <div class="text-center"><input type="button" name="next" class="next action-button" value="Lanjut"/></div>
                             </fieldset>
                             <fieldset>
                                 <div class="form-card row">
@@ -188,7 +188,7 @@
                                         <div class="row">
                                             <label class="col-4 col-form-label">KTP Pelaku Usaha*</label>
                                             <div class="col-lg-8"><div>                                            
-                                                <input type="file" name="ktp" accept="application/pdf,image/*" onChange="getValue('ktp')" id="ktp" required>
+                                                <input type="file" name="ktp" accept="image/*" onChange="getValue('ktp')" id="ktp" required>
                                             </div></div>
                                         </div>
                                     </div>
@@ -197,7 +197,7 @@
                                         <div class="row">
                                             <label class="col-4 col-form-label">NPWP Pelaku Usaha*</label>
                                             <div class="col-lg-8"><div>                                            
-                                                <input type="file" name="npwp" accept="application/pdf,image/*" onChange="getValue('npwp')" id="npwp" required>
+                                                <input type="file" name="npwp" accept="image/*" onChange="getValue('npwp')" id="npwp" required>
                                             </div></div>
                                         </div>
                                     </div>                                                                    
@@ -223,7 +223,7 @@
                                             <label for="kelompok" class="col-lg-4 col-form-label">Jenis Produk*</label>
     
                                             <div class="col-lg-8">
-                                                <select id="id_kelompok_produk" name="id_kelompok_produk" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white">
+                                                <select id="id_kelompok_produk" name="id_kelompok_produk" class="form-control selectpicker forKelompok" data-size="10" data-live-search="true" data-style="btn-white" required>
                                                     <option value="">--Pilih Jenis Produk--</option>
                                                         @if(isset($kelompokProduk))
                                                             @foreach($kelompokProduk as $index => $value)
@@ -240,7 +240,7 @@
                                             <label for="kelompok" class="col-lg-4 col-form-label">Rincian Jenis Produk*</label>
     
                                             <div class="col-lg-8">
-                                                <select id="id_rincian_kelompok_produk1" name="id_rincian_kelompok_produk[]" class="form-control selectpicker" data-size="30" data-live-search="true" data-style="btn-white">
+                                                <select id="id_rincian_kelompok_produk1" name="id_rincian_kelompok_produk[]" class="form-control selectpicker" data-size="30" data-live-search="true" data-style="btn-white" required>
                                                 {{-- <select multiple="multiple" id="id_rincian_kelompok_produk" name="id_rincian_kelompok_produk[]" data-size="30"> --}}
                                                     <option value="">--Pilih Jenis Produk--</option>
                                                 </select>
@@ -261,7 +261,7 @@
                                         {{-- <div class="wrapper row"> --}}
                                             <div class="wrapper col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Merk/Brand*</label><div class="col-lg-8"><div><input class="form-control" id="merk" name="merk[]" type="text" label="Merk/Brand" placeholder="Merk/Brand"></div></div>
+                                                    <label class="col-4 col-form-label">Merk/Brand*</label><div class="col-lg-8"><div><input class="form-control" id="merk" name="merk[]" type="text" label="Merk/Brand" placeholder="Merk/Brand" required></div></div>
                                                 </div>
                                             </div>
                                             <div class="wrapper col-lg-12">
@@ -1602,7 +1602,7 @@
                         success: function (response) {                                                
                             $('#id_rincian_kelompok_produk'+jumlahdatarincian).empty();                           
                             $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
-                                $("#id_rincian_kelompok_produk"+jumlahdatarincian).append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'_'+rincian_kelompok_produk))
+                                $("#id_rincian_kelompok_produk"+jumlahdatarincian).append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'. '+rincian_kelompok_produk))
                             })
                             $('#id_rincian_kelompok_produk'+jumlahdatarincian).selectpicker('refresh');
                         }                   
@@ -1651,7 +1651,7 @@
                     success: function (response) {                                                
                         $('#id_rincian_kelompok_produk1').empty();                           
                         $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
-                            $("#id_rincian_kelompok_produk1").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'_'+rincian_kelompok_produk))
+                            $("#id_rincian_kelompok_produk1").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'. '+rincian_kelompok_produk))
                         })
                         $('#id_rincian_kelompok_produk1').selectpicker('refresh');
                     }                   
@@ -1665,37 +1665,129 @@
     $(document).ready(function(){
 
         var current_fs, next_fs, previous_fs; //fieldsets
-        var opacity;
+        var opacity;                        
 
-        $(".next").click(function(){            
-        
-        // current_fs = $(this).parent().;
-        // next_fs = $(this).parent().next();
-        current_fs = $(this).parent().parent();
-        next_fs = $(this).parent().parent().next();
+        var jml = 1;
 
-        //Add Class Active
-        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        $(".next").click(function(){              
 
-        //show the next fieldset
-        next_fs.show();
-        //hide the current fieldset with style
-        current_fs.animate({opacity: 0}, {
-        step: function(now) {
-        // for making fielset appear animation
-        opacity = 1 - now;
+            if(jml == 1){
+                if(document.getElementById('no_registrasi_bpjph').value == null || document.getElementById('no_registrasi_bpjph').value == ""){
+                    alert("Dimohon harap data diisi dengan benar.");
+                }else{
+                    jml++;
+                    current_fs = $(this).parent().parent();
+                    next_fs = $(this).parent().parent().next();        
 
-        current_fs.css({
-        'display': 'none',
-        'position': 'relative'
-        });
-        next_fs.css({'opacity': opacity});
-        },
-        duration: 600
-        });
+                    //Add Class Active
+                    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                    //show the next fieldset
+                    next_fs.show();
+                    //hide the current fieldset with style
+                    current_fs.animate({opacity: 0}, {
+                    step: function(now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                    });
+                    next_fs.css({'opacity': opacity});
+                    },
+                    duration: 600
+                    });
+                }
+            }else if(jml == 2){
+                if(document.getElementById('nama_perusahaan').value == "" || document.getElementById('alamat_perusahaan').value == "" || document.getElementById('telepon_perusahaan').value == "" || document.getElementById('alamat_pabrik').value == "" || document.getElementById('telepon_pabrik').value == "" || document.getElementById('nama_contact_person').value == "" || document.getElementById('contact_person').value == "" || document.getElementById('email').value == ""){
+                    alert("Dimohon harap data diisi dengan benar.");
+                }else{
+                    jml++;
+                    current_fs = $(this).parent().parent();
+                    next_fs = $(this).parent().parent().next();        
+
+                    //Add Class Active
+                    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                    //show the next fieldset
+                    next_fs.show();
+                    //hide the current fieldset with style
+                    current_fs.animate({opacity: 0}, {
+                    step: function(now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                    });
+                    next_fs.css({'opacity': opacity});
+                    },
+                    duration: 600
+                    });
+                }
+            }else if(jml == 3){
+                if(document.getElementById('ktp').value == "" || document.getElementById('npwp').value == ""){
+                    alert("Dimohon harap data diisi dengan benar.");
+                }else{
+                    jml++;
+                    current_fs = $(this).parent().parent();
+                    next_fs = $(this).parent().parent().next();        
+
+                    //Add Class Active
+                    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                    //show the next fieldset
+                    next_fs.show();
+                    //hide the current fieldset with style
+                    current_fs.animate({opacity: 0}, {
+                    step: function(now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                    });
+                    next_fs.css({'opacity': opacity});
+                    },
+                    duration: 600
+                    });
+                }
+            }else if(jml == 4){
+                if(document.getElementById('merk').value == ""){
+                    alert("Dimohon harap data diisi dengan benar.");
+                }else{
+                    jml++;
+                    current_fs = $(this).parent().parent();
+                    next_fs = $(this).parent().parent().next();        
+
+                    //Add Class Active
+                    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                    //show the next fieldset
+                    next_fs.show();
+                    //hide the current fieldset with style
+                    current_fs.animate({opacity: 0}, {
+                    step: function(now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                    });
+                    next_fs.css({'opacity': opacity});
+                    },
+                    duration: 600
+                    });
+                }
+            }
         });
 
         $(".previous").click(function(){
+        jml--;
 
         current_fs = $(this).parent().parent();
         previous_fs = $(this).parent().parent().prev();

@@ -3,6 +3,13 @@
 @section('title', 'Unggah Data Sertifikasi')
 
 @push('css')
+    <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/css/animate.css')}}" rel="stylesheet" />
+	<link href="{{asset('/assets/css/multistep.css')}}" rel="stylesheet" />
+@endpush
+
+@push('css')
 	<link href="{{asset('/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
 @endpush
 
@@ -35,6 +42,67 @@
 				<div class="card-body table-responsive-lg ">
 					<div class="tab-content p-0 m-0">
 						<div class="tab-pane fade active show" id="card-tab-1">
+
+							@if($dataHas !== null)								
+								<div class="col-md-12 mx-0 step widget widget-stats animated zoomIn">
+									<form id="msform">	
+										<ul id="progressbar_verifikasi">												
+											@foreach($dataHas as $has => $value)
+													@php
+														$status_temp = $value['status_berkas'];
+														$status = 'a'.'_'.$status_temp;
+													@endphp
+													@if ($status == 'a_0')
+														<li id="account" class="confirming"><strong>Dokumen Belum Lengkap</strong></li>
+													@else
+														<li id="account" class="confirming"><strong>Sudah Upload Berkas</strong></li>
+													@endif													
+
+													@if ($status == 'a_1')
+														<li id="account" class="waiting"><strong>Menunggu Admin Verifikasi Berkas</strong></li>
+													@elseif ($status == 'a_0')
+														<li id="account"><strong>Menunggu Admin Verifikasi Berkas</strong></li>
+													@else
+														<li id="account" class="confirming"><strong>Admin Verifikasi Berkas</strong></li>
+													@endif
+
+													@if ($status == 'a_2')
+														<li id="account" class="fixing"><strong>Perbaikan Berkas</strong></li>
+													@elseif ($status == 'a_0')
+														<li id="account"><strong>Perbaikan Berkas</strong></li>
+													@elseif ($status == 'a_1')
+														<li id="account"><strong>Perbaikan Berkas</strong></li>
+													@else
+														<li id="account" class="confirming"><strong>Berkas Telah Diperbaiki</strong></li>
+													@endif
+
+													@if ($status == 'a_3')
+														<li id="account" class="confirming"><strong>Berkas Terverifikasi</strong></li>
+													@elseif ($status == 'a_0')
+														<li id="account"><strong>Berkas Terverifikasi</strong></li>
+													@elseif ($status == 'a_1')
+														<li id="account"><strong>Berkas Terverifikasi</strong></li>
+													@elseif ($status == 'a_2')
+														<li id="account"><strong>Berkas Terverifikasi</strong></li>
+													@else
+														<li id="account" class="confirming"><strong>Berkas Terverifikasi</strong></li>
+													@endif
+											@endforeach												
+										</ul>
+									</form>
+								</div>
+							@else
+								<div class="col-md-12 mx-0 step widget widget-stats animated zoomIn">
+									<form id="msform">	
+										<ul id="progressbar_verifikasi">
+											<li id="account" class="notyet"><strong>Belum Upload Berkas</strong></li>
+											<li id="account"><strong>Menunggu Admin Verifikasi Berkas</strong></li>
+											<li id="account"><strong>Perbaikan Berkas</strong></li>
+											<li id="account"><strong>Berkas Terverifikasi</strong></li>
+										</ul>
+									</form>
+								</div>
+							@endif							
 
 							@php
 

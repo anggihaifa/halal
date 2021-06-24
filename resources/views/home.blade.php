@@ -106,7 +106,7 @@
                 <div class="card mb-4 animated zoomIn delay-5s">
                     <div class="card-header">
                         <i class="fas fa-chart-area mr-1"></i>
-                            PELANGGAN
+                            PELANGGAN BARU
                     </div>
                 	<div class="card-body"><canvas id="myAreaChart2" width="100%" height="40"></canvas></div>
                 </div>
@@ -254,7 +254,7 @@ var myLineChart = new Chart(ctx, {
 var myLineChart = new Chart(ctx2, {
   type: 'bar',
   data: {
-    // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September","Oktober", "November", "Desember"],		
+    // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September","Oktober", "November", "Desember"],
 	labels: bulan2,
     datasets: [{
       label: "Pelanggan",

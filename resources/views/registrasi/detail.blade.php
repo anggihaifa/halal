@@ -49,32 +49,58 @@
 											<td colspan="3"><h4 style="color: #2980b9"><b> {{$value['name']}}</b> ({{$value['nama_perusahaan']}})</h4></td>
 										</tr>
 										<tr>
+											<span id="stat_val" style="display:none">{{$value['statusnya']}}</span>
+											<td colspan="2"><h6><p id="notif_user"></p></h6></td>
+										</tr>
+										<tr>
 											<td><p><b>No. Registrasi : </b> {{$value['no_registrasi']}}</p></td>
 											<td><p><b>No. Surat Permohonan Sertifikasi : </b> {{$value['no_registrasi_bpjph']}}</p></td>
 											<td><p><b>Tanggal Registrasi : </b> {{$value['tgl_registrasi']}}</p></td>
 											<td><p><b>Jenis Registrasi : </b> {{$value['jenis']}}</p></td>
-										</tr>
+										</tr>										
 										<tr>											
-											<td><p><b>Status Registrasi : </b>{{$value['status_registrasi']}}</p></td>											
-										</tr>										
-										<tr>																						
-											<td><p><b>Jenis Produk : </b>{{$value['kelompok']}}</p></td>
-										</tr>										
-										<tr>
-											<span id="stat_val" style="display:none">{{$value['statusnya']}}</span>
-											<td><p id="notif_user"></p></td>											
+											<td><p><b>Alamat Perusahaan : </b>{{$value['alamat_perusahaan']}}</p></td>
+											<td><p><b>Telepon Perusahaan : </b>{{$value['telepon_perusahaan']}}</p></td>
+											<td><p><b>Alamat Pabrik : </b>{{$value['alamat_pabrik']}}</p></td>
+											<td><p><b>Telepon Pabrik : </b>{{$value['telepon_pabrik']}}</p></td>
 										</tr>
-																													
+										<tr>
+											<td><p><b>Contact Person : </b>{{$value['contact_person']}}</p></td>
+											<td><p><b>Email : </b>{{$value['email']}}</p></td>
+											<td><p><b>Nama Merk : </b>{{$value['nama_merk_produk']}}</p></td>
+											<td><p><b>Rincian Jenis Produk : </b>{{$value['rincian_jenis_produk']}}</p></td>
+										</tr>
+										<tr>
+											<td><p><b>Daerah Pemasaran : </b>{{$value['daerah_pemasaran']}}</p></td>
+											<td><p><b>Contact Person : </b>{{$value['contact_person']}}</p></td>
+											<td><p><b>Status Registrasi : </b>{{$value['status_registrasi']}}</p></td>
+											<td><p><b>Jenis Produk : </b>{{$value['kelompok']}}</p></td>																		
+										</tr>
+										<tr>
+											<td colspan="2"><p><b>KTP</b></p></td>
+											<td colspan="2"><p><b>NPWP</b></p></td>
+										</tr>
+										<tr>										
+											<td colspan="2">
+												<img src="{{url('') .Storage::url('ktp/'.$value['id'].'/'.$value['ktp']) }}" style="width: 30%">
+												<br><a href="{{url('') .Storage::url('ktp/'.$value['id'].'/'.$value['ktp']) }}" download>Download KTP</a>
+											</td>
+											<td colspan="2">
+												<img src="{{url('') .Storage::url('npwp/'.$value['id'].'/'.$value['npwp']) }}" style="width: 30%">
+												<br><a href="{{url('') .Storage::url('npwp/'.$value['id'].'/'.$value['npwp']) }}" download>Download NPWP</a>
+											</td>
+										</tr>										
 									</table>
 								</div>																								                                                                								
-							{{-- <div class="col-md-12 offset-md-5">
-								@if(Auth::user()->usergroup_id == 1 ||  Auth::user()->usergroup_id == 3)
+							<div class="col-md-12 offset-md-5">
+								{{-- @if(Auth::user()->usergroup_id == 1 ||  Auth::user()->usergroup_id == 3)
 									<button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
 									<a href="{{route('exportdata')}}" class="btn bnt-sm btn-primary">Download Data</a>
 								@else
 									@component('components.buttonback',['href' => route("registrasiHalal.index")])@endcomponent
-								@endif	
-							</div> --}}
+								@endif	 --}}
+								<button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
+							</div>
 						</div>
 					</form>
 				</div>
