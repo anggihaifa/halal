@@ -202,7 +202,7 @@
                                     <i class="fa fa-calendar text-primary" style="font-size:600%"></i>
                                     <br>
                                     <h2 class="text-grey" style=>`+full.mulai_audit1+`</h2>
-                                    <span class="label label-primary"><a style="color: white;">NOMOR ID: `+full.id_registrasi+`</a></span>
+                                   
                                     <span class="label label-success"><a style="color: white;">NOMOR REG : `+full.no_registrasi+`</a></span>
                                 </label>
                             </div>
@@ -245,11 +245,11 @@
 
                                     
                                 
-                                <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`"   class="label label-primary" style="color: white;">
-                                    <i class="ace-icon fa fa-eye" ></i style="color: white; margin-right: 5px; ">Detail Data
+                                <a href="{{url('detail_registrasi')}}/`+full.id_registrasi+`"   class="btn btn-primary btn-xs" style="color: white;">
+                                    <i class="ace-icon fa fa-eye" ></i style="color: white; margin-right: 5px; "> Detail Data
                                 </a>
-                                <a href="{{url('audit_tahap1')}}/`+full.id_registrasi+`" class="label label-info" style="color: white;">
-                                    <i class="ace-icon fa fa-edit bigger-130" ></i> Report Audit Tahap 1
+                                <a href="{{url('audit_tahap1')}}/`+full.id_registrasi+`" class="btn btn-info btn-xs" style="color: white;">
+                                    <i class="ace-icon fa fa-edit bigger-130" ></i> Laporan Audit Tahap 1
                                 </a>
                                 <br><br><span class="text-muted small">Pelaksana Pekerjaan:</span><br><i class="fa fa-send fa-fw"></i>`+checkWilayah(full.kode_wilayah)+`
                             </div>

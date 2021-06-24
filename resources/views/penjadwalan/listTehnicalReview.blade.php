@@ -72,8 +72,7 @@
                         <th class="valign-middle text-center">No. Registrasi</th>
                         <th class="valign-middle text-center">Perusahaan</th>
                         <th class="valign-middle text-center">Jenis Produk</th>
-                        <th class="valign-middle text-center" style="max-width:20%">Auditor 1</th>
-                        <th class="valign-middle text-center" style="max-width:20%">Auditor 2</th>
+                        <th class="valign-middle text-center" style="max-width:20%">Technical Reviewer</th>
                         <th class="valign-middle text-center" >Unduh</th>
                         
                         <th class="valign-middle text-center" style="max-width:20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -110,7 +109,7 @@
 
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr style="display:none">
                                         <td>
                                             <div class="form-group">
                                             <label class="control-label font-weight-bold" for="id">ID</label>  
@@ -188,7 +187,7 @@
                                         <select id="status_lanjut_ks" name="status_lanjut_ks" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" requied>
                                             <option value="">==Pilih==</option>
                                             <option value="1">Ya</option>
-                                            <option value="0">Tidak, Lanjutkan Ke Tahapan Persiapan Sidang Komisi Fatwa</option>                                                               
+                                            <option value="0">Tidak, Lanjutkan Ke Tahapan Persiapan Sidang Fatwa Halal</option>                                                               
                                         </select>
                                     </td>
                                 </tr>
@@ -317,28 +316,24 @@
                     "data":null,
                     "searchable":false,
                     "render":function (data,type,full,meta) {
+                        var str2;
                         if(full.pelaksana1_tr){
                             var str = full.pelaksana1_tr.split("_");
-                            return str[1]
+                            
+                            if(full.pelaksana2_tr){
+                                var str2 = full.pelaksana2_tr.split("_");
+                                return str[1]+'<br>'+str2[2]
+                            }else{
+                                return str[1]+'<br>-'
+                            }
                         }else{
-                            return ''
+                            return '-'
                         }
+                            
+                      
                     }
                 },
-                {
-                    
-                    "data":null,
-                    "searchable":false,
-                    "render":function (data,type,full,meta) {
-                        if(full.pelaksana2_tr){
-                            var str = full.pelaksana2_tr.split("_");
-                            return str[1]
-                        }else{
-                            return ''
-                        }
-                        
-                    }
-                },
+               
 
                 {
                     "data":null,
@@ -352,27 +347,27 @@
 
                         if(full.file_laporan_audit1 ){
 
-                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
+                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit 1&nbsp;&nbsp;</a>`;
 
                                                                         
-                            }else{
-                            var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit1&nbsp;&nbsp;</a>`;
+                        }else{
+                        var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit 1&nbsp;&nbsp;</a>`;
 
-                            }
+                        }
 
                         if(full.file_laporan_audit_tahap_2 ){
 
-                            var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
+                            var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit 2&nbsp;&nbsp;</a>`;
                             
                                                                             
                         }else{
-                            var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
+                            var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Audit 2&nbsp;&nbsp;</a>`;
                             
                         }
 
                         if(full.file_bap ){
 
-                            var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/download/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+                            var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
 
                                                                         
                         }else{
@@ -381,11 +376,11 @@
                         }
                         if(full.file_laporan_ketidaksesuaian ){
 
-                            var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+                            var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
 
                                                                         
                             }else{
-                            var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+                            var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
 
                         }
 
@@ -459,7 +454,7 @@
             ],
             'columnDefs': [
             {
-                    "targets": [0,1,2,3,4,5,6,7],
+                    "targets": [0,1,2,3,4,5,6],
                     "className": "text-center",
                     
             }],

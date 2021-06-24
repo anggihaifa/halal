@@ -72,8 +72,8 @@
                         <th class="valign-middle text-center">No. Registrasi</th>
                         <th class="valign-middle text-center">Perusahaan</th>
                         <th class="valign-middle text-center">Jenis Produk</th>
-                        <th class="valign-middle text-center" style="max-width:20%">Komite Sertifikasi 1</th>
-                        <th class="valign-middle text-center" style="max-width:20%">Komite Sertifikasi 2</th>
+                        <th class="valign-middle text-center" style="max-width:20%">Komite Sertifikasi</th>
+                      
                         <th class="valign-middle text-center" >Unduh</th>
                         
                         <th class="valign-middle text-center" style="max-width:20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -110,7 +110,7 @@
 
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr style="display:none">
                                         <td>
                                             <div class="form-group">
                                             <label class="control-label font-weight-bold" for="id">ID</label>  
@@ -289,90 +289,80 @@
                     {"data":"no_registrasi"},
                     {"data":"nama_perusahaan"},
                     {"data":"kelompok"},
-                   
                     {
-                        
                         "data":null,
                         "searchable":false,
+                        "orderable":false,
                         "render":function (data,type,full,meta) {
+                   
                             if(full.pelaksana1_tinjauan){
                                 var str = full.pelaksana1_tinjauan.split("_");
-                                return str[1]
+                                    
+                                if(full.pelaksana2_tinjauan){
+                                    var str2 = full.pelaksana2_tinjauan.split("_");
+                                    return str[1]+'<br>'+str2[2]
+                                }else{
+                                    return str[1]+'<br>-'
+                                }
                             }else{
-                                return ''
+                                return '-'
                             }
                         }
                     },
-                    {
-                        
-                        "data":null,
-                        "searchable":false,
-                        "render":function (data,type,full,meta) {
-                            if(full.pelaksana2_tinjauan){
-                                var str = full.pelaksana2_tinjauan.split("_");
-                                return str[1]
-                            }else{
-                                return ''
-                            }
-                            
-                        }
-                    },
-
+                    
                     {
                         "data":null,
                         "searchable":false,
                         "orderable":false,
                         "render":function (data,type,full,meta) {
 
-                            //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
-
-                            //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
+                           
 
                             if(full.file_laporan_audit1 ){
 
-                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
+                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
 
                                                                         
                             }else{
-                            var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLap. Audit1&nbsp;&nbsp;</a>`;
+                            var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit1&nbsp;&nbsp;</a>`;
 
                             }
-                            if(full.file_laporan_audit1 ){
+                            if(full.file_laporan_tr ){
 
-                            var unduhLaporanTR = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan TR&nbsp;&nbsp;</a>`;
+                                var unduhLaporanTR = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan TR&nbsp;&nbsp;</a>`;
 
                                                                         
                             }else{
-                            var unduhLaporanTR = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan TR&nbsp;&nbsp;</a>`;
+                                var unduhLaporanTR = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan TR&nbsp;&nbsp;</a>`;
 
                             }
 
                             if(full.file_laporan_audit_tahap_2 ){
 
-                                var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
+                                var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit2&nbsp;&nbsp;</a>`;
                                
                                                                              
                             }else{
-                                var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Audit2&nbsp;&nbsp;</a>`;
+                                var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Audit2&nbsp;&nbsp;</a>`;
                                
                             }
 
                             if(full.file_bap ){
 
-                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/download/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
+                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
 
                                                                             
                             }else{
                                 var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
 
                             }
-                            if(full.file_laporan_ketidaksesuaian ){
+                            if(full.file_laporan_ketidaksesuaian){
 
-                                var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+                                var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
 
                                                                             
                                 }else{
-                                var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Lap. Ketidaksesuaian&nbsp;&nbsp;</a>`;
+                                var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
 
                             }
 
@@ -446,7 +436,7 @@
                 ],
                 'columnDefs': [
                 {
-                      "targets": [0,1,2,3,4,5,6,7],
+                      "targets": [0,1,2,3,4,5,6],
                       "className": "text-center",
                      
                 }],

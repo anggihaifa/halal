@@ -1322,10 +1322,29 @@ class PenjadwalanController extends Controller
             })    
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0);  
-                $query->where('registrasi.status','=','8_0');  
+                $query->where('registrasi.status','=','9_0');  
                 $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
   
             })    
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);  
+                $query->where('registrasi.status','=',9);  
+                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);  
+                $query->where('registrasi.status','=','9_1');  
+                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+  
+            })  
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);  
+                $query->where('registrasi.status','=','9_2');  
+                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+  
+            })  
+            
                      
             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.kode_wilayah','registrasi.alamat_perusahaan' ,'registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*');
        
@@ -1364,8 +1383,9 @@ class PenjadwalanController extends Controller
             ->leftJoin('laporan_tehnical_review','registrasi.id', '=', 'laporan_tehnical_review.id_registrasi')
             ->leftJoin('laporan_tinjauan','registrasi.id', '=', 'laporan_tinjauan.id_registrasi')
             ->leftJoin('laporan_persiapan_sidang','registrasi.id', '=', 'laporan_persiapan_sidang.id_registrasi')
-            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2','laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.file_laporan_tinjauan','laporan_tehnical_review.catatan_tr','laporan_tinjauan.catatan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang')
+            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','registrasi.kode_wilayah','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2','laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.file_laporan_tinjauan','laporan_tehnical_review.catatan_tr','laporan_tinjauan.catatan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang','registrasi.alamat_perusahaan')
             //  ->join('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
+            
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0);
                 $query->where('penjadwalan.status_penjadwalan_audit2','=',3);
@@ -1488,7 +1508,7 @@ class PenjadwalanController extends Controller
   
             })  
                      
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.catatan_tr', 'laporan_tehnical_review.status_laporan_tr', 'laporan_tehnical_review.status_lanjut_ks');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.catatan_tr', 'laporan_tehnical_review.status_laporan_tr', 'laporan_tehnical_review.status_lanjut_ks','laporan_audit2.file_laporan_ketidaksesuaian','laporan_audit2.file_bap' );
        
 
         //filter condition
@@ -1582,7 +1602,7 @@ class PenjadwalanController extends Controller
   
             })  
                      
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan','laporan_audit2.file_laporan_ketidaksesuaian','laporan_audit2.file_bap' );
        
 
              if(isset($gdata['no_registrasi'])){
@@ -1645,7 +1665,7 @@ class PenjadwalanController extends Controller
   
             })  
                      
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang', 'laporan_persiapan_sidang.status_persiapan_sidang');
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.file_laporan_tinjauan','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang', 'laporan_persiapan_sidang.status_persiapan_sidang','laporan_audit2.file_laporan_ketidaksesuaian','laporan_audit2.file_bap' );
        
 
             if(isset($gdata['no_registrasi'])){
@@ -1900,7 +1920,7 @@ class PenjadwalanController extends Controller
                 $file = $data["file_laporan_tr"];
                
                 $filename = "TR-".$data['id'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/laporan/upload/Laporan Tehnical Review/".$u->id."/", $filename);
+                $file->storeAs("public/laporan/upload/Laporan Tehnical Review/", $filename);
                 $j->file_laporan_tr = $filename;
                    
             }
@@ -1936,7 +1956,7 @@ class PenjadwalanController extends Controller
                 $file = $data["file_laporan_tr"];
                
                 $filename = "TR-".$data['id'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/laporan/upload/Laporan Tehnical Review/".$u->id."/", $filename);
+                $file->storeAs("public/laporan/upload/Laporan Tehnical Review/", $filename);
                 $model4->file_laporan_tr = $filename;
                    
             }
@@ -2020,7 +2040,7 @@ class PenjadwalanController extends Controller
                 $file = $data["file_laporan_tinjauan"];
             
                 $filename = "KS-".$data['id'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/laporan/upload/Laporan Tinjauan Komite/".$u->id."/", $filename);
+                $file->storeAs("public/laporan/upload/Laporan Tinjauan Komite/", $filename);
                 $j->file_laporan_tinjauan = $filename;
                 
             }
@@ -2049,7 +2069,7 @@ class PenjadwalanController extends Controller
                 $file = $data["file_laporan_tinjauan"];
             
                 $filename = "KS-".$data['id'].".".$file->getClientOriginalExtension();
-                $file->storeAs("public/laporan/upload/Laporan Tinjauan Komite/".$u->id."/", $filename);
+                $file->storeAs("public/laporan/upload/Laporan Tinjauan Komite/", $filename);
                 $model4->file_laporan_tinjauan = $filename;
                 
             }

@@ -73,12 +73,12 @@
 							<form action="{{route('storedokumensertifikasi')}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 								@csrf
 								<input type="text" id="has_selected" name="has_selected" hidden value="tes">
-								<table id="hasTable"  class="table  table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%; ">
+								<table id="hasTable"  class="table  table-bordered table-td-valign-middle table-sm" cellspacing="0" >
 									<thead>
 										<tr>
 											<th width="1%" class="  valign-middle text-center">No</th>
 											<th width="70%" class=" valign-middle text-center">Nama Dokumen</th>
-											<th width="1%" class="  valign-middle text-center">File</th>
+											<th style="width:200px!important;  text-overflow: ellipsis; white-space: nowrap;  overflow: hidden;"  class="  valign-middle text-center">File</th>
 											@if($dataHas !== null)
 											<th width="1%" class="  valign-middle text-center">Status</th>
 											@endif
@@ -86,7 +86,7 @@
 											<th width="30%" class="  valign-middle text-center">Temuan</th>
 											<th width="30%" class="  valign-middle text-center">Review Tambahan/ Perbaikan  Dokumen</th>
 
-											<th width="1%" class="  valign-middle text-center">Unduh</th>
+											
 											
 										</tr>
 									</thead>
@@ -101,14 +101,19 @@
 												<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
 													<tr style="border:none">
 														<td style="border:none">
-														<input type="file" id="has_1" name="has_1" onchange="getValue('has_1')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															<input type="file" id="has_1" name="has_1" onchange="getValue('has_1')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_1')" ><i class="fa fa-upload"></i><br>Upload</button>
+														
 														
 														</td>
+														
+														
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
-														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_1')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+														{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -133,11 +138,14 @@
 														<input type="file" id="has_2" name="has_2" onchange="getValue('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_2')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_2')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -147,8 +155,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 
 										</tr>
 										<tr class="odd">
@@ -163,11 +169,14 @@
 														<input type="file" id="has_3" name="has_3" onchange="getValue('has_3')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_3')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_3')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -177,8 +186,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">4</td>
@@ -191,12 +198,15 @@
 														<td style="border:none">
 														<input type="file" id="has_4" name="has_4" onchange="getValue('has_4')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
+														</td >
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_4')" ><i class="fa fa-upload"></i><br>Upload</button>
 														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_4')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -206,8 +216,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="odd">
 											<td class="  valign-middle text-center">5</td>
@@ -221,11 +229,14 @@
 														<input type="file" id="has_5" name="has_5" onchange="getValue('has_5')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_5')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_5')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -235,8 +246,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										<tr class="even">
 											<td class="  valign-middle text-center">6</td>
 											<td class=" valign-middle">Sertifikat Halal Sebelumnya (Jika Ada)</td>
@@ -249,11 +258,14 @@
 														<input type="file" id="has_6" name="has_6" onchange="getValue('has_6')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_6')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_6')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -263,8 +275,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="odd">
 											<td class="  valign-middle text-center">7</td>
@@ -278,11 +288,14 @@
 														<input type="file" id="has_7" name="has_7" onchange="getValue('has_7')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_7')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_7')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -292,8 +305,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										<tr class="even">
 											<td class="  valign-middle text-center">8</td>
 											<td class=" valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
@@ -306,11 +317,14 @@
 														<input type="file" id="has_8" name="has_8" onchange="getValue('has_8')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_8')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_8')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -320,8 +334,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="odd">
 											<td class="  valign-middle text-center">9</td>
@@ -335,11 +347,14 @@
 														<input type="file" id="has_9" name="has_9" onchange="getValue('has_9')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_9')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_9')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -349,8 +364,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">10</td>
@@ -364,11 +377,14 @@
 														<input type="file" id="has_10" name="has_10" onchange="getValue('has_10')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_10')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_10')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -378,8 +394,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="odd">
 											<td class="  valign-middle text-center">11</td>
@@ -394,11 +408,14 @@
 														<input type="file" id="has_11" name="has_11" onchange="getValue('has_11')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_11')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_11')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -408,8 +425,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">12</td>
@@ -423,11 +438,14 @@
 														<input type="file" id="has_12" name="has_12" onchange="getValue('has_12')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_12')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_12')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -437,8 +455,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">13</td>
@@ -450,11 +466,14 @@
 														<input type="file" id="has_13" name="has_13" onchange="getValue('has_13')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_13')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_13')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -464,8 +483,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">14</td>
@@ -479,11 +496,14 @@
 														<input type="file" id="has_14" name="has_14" onchange="getValue('has_14')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_14')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_14')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+														{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -493,8 +513,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">15</td>
@@ -508,11 +526,14 @@
 														<input type="file" id="has_15" name="has_15" onchange="getValue('has_15')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_15')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_15')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -522,8 +543,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">16</td>
@@ -537,11 +556,14 @@
 														<input type="file" id="has_16" name="has_16" onchange="getValue('has_16')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_16')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_16')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -551,8 +573,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">17</td>
@@ -566,11 +586,14 @@
 														<input type="file" id="has_17" name="has_17" onchange="getValue('has_17')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_17')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_17')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -580,8 +603,6 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">18</td>
@@ -595,11 +616,14 @@
 														<input type="file" id="has_18" name="has_18" onchange="getValue('has_18')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
 														
 														</td>
+														<td style="border:none">
+															<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_18')" ><i class="fa fa-upload"></i><br>Upload</button>
+														</td>
 													</tr>
 													<tr style="border:none">
 														<td style="border:none">
 														
-														<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_18')" ><i class="fa fa-upload"></i></button>{!! $fieldBelum !!}
+															{!! $fieldBelum !!}
 														
 														</td>
 														
@@ -609,907 +633,1031 @@
 											</td>
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
-
-											<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
 										</tr>
 										
 									@else
-											@foreach($dataHas as $has => $value)
-												<input type="text" name="status" value="1" readonly hidden>
-												<input type="text" name="id" value="{{$value['id']}}" readonly hidden>
-												<tr class="odd">
-													<td id="no_has1" class="valign-middle text-center">1</td>
-													<td class=" valign-middle">Manual Sistem Jaminan Produk Halal (SJPH)</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_1" name="has_1" onchange="getValue('has_1')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+										@foreach($dataHas as $has => $value)
+											<input type="text" name="status" value="1" readonly hidden>
+											<input type="text" name="id" value="{{$value['id']}}" readonly hidden>
+											<tr class="odd">
+												<td id="no_has1" class="valign-middle text-center">1</td>
+												<td class=" valign-middle">Manual Sistem Jaminan Produk Halal (SJPH)</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_1" name="has_1" onchange="getValue('has_1')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_1')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_1'] !== null)
+															
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_1')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
 																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_1')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_1'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
-													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_1']])@endcomponent
+																{!! $fieldSudah !!}
+															@else
+															
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_1']])@endcomponent
 
-													@if($value['has_1'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_1']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_1']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_1']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_1']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_1']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
+												@if($value['has_1'] !== null)
 												
-												</tr>
-												<tr class="even">
-													<td id="no_has2" class="valign-middle text-center">2</td>
-													<td class=" valign-middle">Matriks Bahan</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_2" name="has_2" onchange="getValue('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_2')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_2'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['keterangan_has_1']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_2']])@endcomponent
-
-													@if($value['has_2'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_2']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_2']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_2']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_2']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_2']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												</tr>
-												<tr class="odd">
-													<td id="no_has3" class="  valign-middle text-center">3</td>
-													<td class="valign-middle">Data Produk Yang Dihasilkan</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_3" name="has_3" onchange="getValue('has_3')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_3')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_3'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_1']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_3']])@endcomponent
-
-													@if($value['has_3'] !== null)
 													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_3']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_3']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_3']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_3']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_3']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												</tr>
-												<tr class="even">
-													<td id="no_has4" class="  valign-middle text-center">4</td>
-													<td class="  valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_4" name="has_4" onchange="getValue('has_4')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_4')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_4'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_1']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_4']])@endcomponent
-
-													@if($value['has_4'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_4']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_4']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_4']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_4']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_4']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												</tr>
-												<tr class="odd">
-													<td id="no_has5" class="  valign-middle text-center">5</td>
-													<td class=" valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_5" name="has_5" onchange="getValue('has_5')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_5')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_5'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_1']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_5']])@endcomponent
+												@endif
+											
+											</tr>
+											
+											<tr class="even">
+												<td id="no_has2" class="valign-middle text-center">2</td>
+												<td class=" valign-middle">Matriks Bahan</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_2" name="has_2" onchange="getValue('has_2')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_2')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_2'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_2')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_2']])@endcomponent
 
-													@if($value['has_5'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_5']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_5']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_5']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_5']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_5']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												<tr class="even">
-													<td id="no_has6" class="  valign-middle text-center">6</td>
-													<td class=" valign-middle">Sertifikat Halal Sebelumnya</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_6" name="has_6" onchange="getValue('has_6')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_6')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_6'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+												@if($value['has_2'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_2']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_6']])@endcomponent
-
-													@if($value['has_6'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_6']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_6']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_6']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_6']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_6']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												</tr>
-												<tr class="odd">
-													<td id="no_has7" class="  valign-middle text-center">7</td>
-													<td class=" valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_7" name="has_7" onchange="getValue('has_7')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_7')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_7'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_2']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_7']])@endcomponent
-
-													@if($value['has_7'] !== null)
 													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_7']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_7']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_7']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_7']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_7']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												<tr class="even">
-													<td id="no_has8" class="  valign-middle text-center">8</td>
-													<td class=" valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_8" name="has_8" onchange="getValue('has_8')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_8')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_8'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_2']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_8']])@endcomponent
-
-													@if($value['has_8'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_8']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_8']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_8']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_8']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_8']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												</tr>
-												<tr class="odd">
-													<td id="no_has9" class="  valign-middle text-center">9</td>
-													<td class=" valign-middle">Diagram Alir Proses Untuk Produk Yang Disertifikasi</td>
-													<<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_9" name="has_9" onchange="getValue('has_9')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_9')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_9'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_2']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_9']])@endcomponent
+												@endif
+											</tr>
+											
+											<tr class="odd">
+												<td id="no_has3" class="  valign-middle text-center">3</td>
+												<td class="valign-middle">Data Produk Yang Dihasilkan</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_3" name="has_3" onchange="getValue('has_3')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_3')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_3'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_3')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_3']])@endcomponent
 
-													@if($value['has_9'] !== null)
+												@if($value['has_3'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_3']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_3']}}
+													</td>
+												
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_3']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_3']}}
+													</td>
+												@endif
+											</tr>
+											<tr class="even">
+												<td id="no_has4" class="  valign-middle text-center">4</td>
+												<td class="  valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_4" name="has_4" onchange="getValue('has_4')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_4')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_4'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_4')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
 													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_9']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_9']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_9']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_4']])@endcomponent
+
+												@if($value['has_4'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_4']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_4']}}
+													</td>
+												
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_4']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_4']}}
+													</td>
+												@endif
+											</tr>
+											
+											<tr class="odd">
+												<td id="no_has5" class="  valign-middle text-center">5</td>
+												<td class=" valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_5" name="has_5" onchange="getValue('has_5')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_5')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_5'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_5')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
 													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_9']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_9']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												</tr>
-												<tr class="even">
-													<td id="no_has10" class="  valign-middle text-center">10</td>
-													<td class=" valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya.</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_5']])@endcomponent
+
+												@if($value['has_5'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_5']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_5']}}
+													</td>
+												
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_5']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_5']}}
+													</td>
+												@endif
+											</tr>
+											
+											<tr class="even">
+												<td id="no_has6" class="  valign-middle text-center">6</td>
+												<td class=" valign-middle">Sertifikat Halal Sebelumnya</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_6" name="has_6" onchange="getValue('has_6')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_6')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_6'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_6')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_6']])@endcomponent
+
+												@if($value['has_6'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_6']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_6']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_6']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_6']}}
+													</td>
+												@endif
+											</tr>
+											
+											<tr class="odd">
+												<td id="no_has7" class="  valign-middle text-center">7</td>
+												<td class=" valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_7" name="has_7" onchange="getValue('has_7')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_7')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_7'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_7')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_7']])@endcomponent
+
+												@if($value['has_7'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_7']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_7']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_7']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_7']}}
+													</td>
+												@endif
+											</tr>
+											
+											<tr class="even">
+												<td id="no_has8" class="  valign-middle text-center">8</td>
+												<td class=" valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_8" name="has_8" onchange="getValue('has_8')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_8')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_8'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_8')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_8']])@endcomponent
+
+												@if($value['has_8'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_8']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_8']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_8']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_8']}}
+													</td>
+												@endif
+											</tr>
+											
+											<tr class="odd">
+												<td id="no_has9" class="  valign-middle text-center">9</td>
+												<td class=" valign-middle">Diagram Alir Proses Untuk Produk Yang Disertifikasi</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_9" name="has_9" onchange="getValue('has_9')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_9')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_9'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_9')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_9']])@endcomponent
+
+												@if($value['has_9'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_9']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_9']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_9']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_9']}}
+													</td>
+												@endif
+											</tr>
+											
+											<tr class="even">
+												<td id="no_has10" class="  valign-middle text-center">10</td>
+												<td class=" valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya.</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
 																<input type="file" id="has_10" name="has_10" onchange="getValue('has_10')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_10')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_10'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_10')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
 																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
 																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_10')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_10'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
-													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_10']])@endcomponent
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_10']])@endcomponent
 
-													@if($value['has_10'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_10']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_10']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_10']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_10']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_10']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												</tr>
-												<tr class="odd">
-													<td id="no_has11" class="  valign-middle text-center">11</td>
-													<td class=" valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)*Dilampirkan Aspek Legal Perusahaan
-													</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_11" name="has_11" onchange="getValue('has_11')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_11')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_11'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
-													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_11']])@endcomponent
-
-													@if($value['has_11'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_11']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_11']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_11']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_11']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_11']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												</tr>
-												<tr class="even">
-													<td id="no_has12" class="  valign-middle text-center">12</td>
-													<td class=" valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_12" name="has_12" onchange="getValue('has_12')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_12')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_12'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
-													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_12']])@endcomponent
-
-													@if($value['has_12'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_12']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_12']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_12']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_12']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_12']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
+												@if($value['has_10'] !== null)
 												
-												</tr>
-
-												<tr class="even">
-													<td id="no_has13" class="  valign-middle text-center">13</td>
-													<td class=" valign-middle">Bukti Sertifikat Penyelia Halal</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_13" name="has_13" onchange="getValue('has_13')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_13')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_13'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['keterangan_has_10']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_13']])@endcomponent
-
-													@if($value['has_13'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_13']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_13']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_13']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_13']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_13']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												
-												</tr>
-
-												<tr class="even">
-													<td id="no_has14" class="  valign-middle text-center">14</td>
-													<td class=" valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_14" name="has_14" onchange="getValue('has_14')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_14')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_14'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_10']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_14']])@endcomponent
-
-													@if($value['has_14'] !== null)
 													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_14']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_14']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_14']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_14']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_14']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
+												@else
 												
-												</tr>
-
-												<tr class="even">
-													<td id="no_has15" class="  valign-middle text-center">15</td>
-													<td class=" valign-middle">Bukti Pelaksanaan Audit Internal</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_15" name="has_15" onchange="getValue('has_15')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_15')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_15'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="  valign-middle">
+														{{$value['keterangan_has_10']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_15']])@endcomponent
-
-													@if($value['has_15'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_15']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_15']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_15']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_15']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_15']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												
-												</tr>
-
-												<tr class="even">
-													<td id="no_has16" class="  valign-middle text-center">16</td>
-													<td class=" valign-middle">Bukti Kaji Ulang Manajemen</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_16" name="has_16" onchange="getValue('has_16')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_16')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_16'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_10']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_16']])@endcomponent
+												@endif
+											</tr>
+											
+											<tr class="odd">
+												<td id="no_has11" class="  valign-middle text-center">11</td>
+												<td class=" valign-middle">Daftar Alamat  Seluruh Fasilitas Produksi Yang Terlibat Dalam Proses Produk Halal, Termasuk Pabrik Sendiri/Makloon, Gudang Bahan/Produk Intermediet, Fasilitas Praproduksi (Penimbangan, Pencampuran, Pengeringan, Dll), Kantor Pusat (Jika Ada Aktivitas Kritis Seperti Pembelian, R&D)*Dilampirkan Aspek Legal Perusahaan
+												</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_11" name="has_11" onchange="getValue('has_11')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_11')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_11'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_11')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_11']])@endcomponent
 
-													@if($value['has_16'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_16']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_16']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_16']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_16']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_16']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
+												@if($value['has_11'] !== null)
 												
-												</tr>
-
-												<tr class="odd">
-													<td id="no_has17" class="  valign-middle text-center">17</td>
-													<td class=" valign-middle">Informasi Layout Fasilitas Produksi</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_17" name="has_17" onchange="getValue('has_17')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_17')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_17'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['keterangan_has_11']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_17']])@endcomponent
-
-													@if($value['has_17'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_17']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_17']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_17']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_17']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_17']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
-												
-												</tr>
-
-												<tr class="even">
-													<td id="no_has18" class="  valign-middle text-center">18</td>
-													<td class=" valign-middle">Bukti Registrasi BPJPH</td>
-													<td class="valign-middle text-center">
-														<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
-															<tr style="border:none">
-																<td style="border:none">
-																<input type="file" id="has_18" name="has_18" onchange="getValue('has_18')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
-																
-																</td>
-															</tr>
-															<tr style="border:none">
-																<td style="border:none">
-																
-																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_18')" ><i class="fa fa-upload"></i></button>
-																@if($value['has_18'] !== null)
-																	{!! $fieldSudah !!}
-																@else
-																	{!! $fieldBelum !!}
-																@endif
-																</td>
-																
-															</tr>
-														</table>
-														
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_11']}}
 													</td>
-													@component('components.forstatusdokumen',['value'=>$value['status_has_18']])@endcomponent
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_11']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_11']}}
+													</td>
+												@endif
+											</tr>
+											
+											<tr class="even">
+												<td id="no_has12" class="  valign-middle text-center">12</td>
+												<td class=" valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_12" name="has_12" onchange="getValue('has_12')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_12')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_12'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_12')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_12']])@endcomponent
 
-													@if($value['has_18'] !== null)
-													
-														<td class="   valign-middle">
-															{{$value['keterangan_has_18']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_18']}}
-														</td>
-														<td class="  valign-middle text-center"> <a href="{{url('') .Storage::url('public/uploadDokumen/'.$value['id_user'].'/'.$value['id_registrasi'].'/HPAS/'.$value['has_18']) }}" class="btn btn-primary btn-xs" download>unduh</a></td>
-													@else
-													
-														<td class="  valign-middle">
-															{{$value['keterangan_has_18']}}
-														</td>
-														<td class="   valign-middle">
-															{{$value['review_perbaikan_18']}}
-														</td>
-														<td class="valign-middle text-center"><a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
-													@endif
+												@if($value['has_12'] !== null)
 												
-												</tr>
+													<td class="   valign-middle">
+														{{$value['keterangan_has_12']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_12']}}
+													</td>
 												
-											@endforeach()
-										@endif
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_12']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_12']}}
+													</td>
+												@endif
+											
+											</tr>
+											
+											<tr class="even">
+												<td id="no_has13" class="  valign-middle text-center">13</td>
+												<td class=" valign-middle">Bukti Sertifikat Penyelia Halal</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_13" name="has_13" onchange="getValue('has_13')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_13')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_13'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_13')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_13']])@endcomponent
+
+												@if($value['has_13'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_13']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_13']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_13']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_13']}}
+													</td>
+												@endif
+											
+											</tr>
+
+											<tr class="even">
+												<td id="no_has14" class="  valign-middle text-center">14</td>
+												<td class=" valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_14" name="has_14" onchange="getValue('has_14')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_14')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_14'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_14')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_14']])@endcomponent
+
+												@if($value['has_14'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_14']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_14']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_14']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_14']}}
+													</td>
+												@endif
+											
+											</tr>
+
+											<tr class="even">
+												<td id="no_has15" class="  valign-middle text-center">15</td>
+												<td class=" valign-middle">Bukti Pelaksanaan Audit Internal</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_15" name="has_15" onchange="getValue('has_15')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_15')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_15'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_15')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_15']])@endcomponent
+
+												@if($value['has_15'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_15']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_15']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_15']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_15']}}
+													</td>
+												@endif
+											
+											</tr>
+
+											<tr class="even">
+												<td id="no_has16" class="  valign-middle text-center">16</td>
+												<td class=" valign-middle">Bukti Kaji Ulang Manajemen</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_16" name="has_16" onchange="getValue('has_16')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_16')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_16'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_16')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_16']])@endcomponent
+
+												@if($value['has_16'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_16']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_16']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_16']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_16']}}
+													</td>
+												@endif
+											
+											</tr>
+
+											<tr class="odd">
+												<td id="no_has17" class="  valign-middle text-center">17</td>
+												<td class=" valign-middle">Informasi Layout Fasilitas Produksi</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_17" name="has_17" onchange="getValue('has_17')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_17')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_17'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_17')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_17']])@endcomponent
+
+												@if($value['has_17'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_17']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_17']}}
+													</td>
+													
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_17']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_17']}}
+													</td>
+												@endif
+											
+											</tr>
+
+											<tr class="even">
+												<td id="no_has18" class="  valign-middle text-center">18</td>
+												<td class=" valign-middle">Bukti Registrasi BPJPH</td>
+												<td class="valign-middle text-center">
+													<table class="table-xs table borderless p-0 m-0" style="border:none border-collapse: collapse;">
+														<tr style="border:none">
+															<td style="border:none">
+															<input type="file" id="has_18" name="has_18" onchange="getValue('has_18')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" >
+															
+															</td>
+															<td style="border:none">
+																<button type="submit"  style="background:none !important; border-radius:0; border:none !important; " onclick="setHas('has_18')" ><i class="fa fa-upload"></i><br>Upload</button>
+															
+															
+															</td>
+														</tr>
+														<tr style="border:none">
+															<td style="border:none;">
+															
+															
+															@if($value['has_18'] !== null)
+																<a href="{{url('penjadwalan_viewer/'.$value['id_registrasi'].'/has_18')}}" target="blank" ><i class="fa fa-eye"> View</i></a>
+																{!! $fieldSudah !!}
+															@else
+																<a href="#" class="btn btn-grey btn-xs disabled"><i class="fa fa-eye"> View</i></a>
+																{!! $fieldBelum !!}
+															@endif
+															</td>
+															
+														</tr>
+													</table>
+													
+												</td>
+												@component('components.forstatusdokumen',['value'=>$value['status_has_18']])@endcomponent
+
+												@if($value['has_18'] !== null)
+												
+													<td class="   valign-middle">
+														{{$value['keterangan_has_18']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_18']}}
+													</td>
+												
+												@else
+												
+													<td class="  valign-middle">
+														{{$value['keterangan_has_18']}}
+													</td>
+													<td class="   valign-middle">
+														{{$value['review_perbaikan_18']}}
+													</td>
+												@endif
+											
+											</tr>
+											
+										@endforeach()
+									@endif
 									</tbody>
 								</table>
 								<div class="col-md-12 offset-md-5">
 									@if($dataHas == null)
 										<button type="submit" class="btn btn-sm btn-primary m-r-5" hidden>Unggah</button>
 										<a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
-										<button type="button"  class="btn btn-sm btn-default btn-warning" disabled=>Reset</button>
+										<!-- <button type="button"  class="btn btn-sm btn-default btn-warning" disabled=>Reset</button> -->
 									@else
 										<button type="submit" class="btn btn-sm btn-success m-r-5" hidden>Unggah</button>
 										@foreach($dataHas as $has => $value)
 											<a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
 											
-											<a href="{{url('delete_dokumen_sertifikasi')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default btn-warning" onclick= "return confirm('Apakah anda yakin untuk menghapus semua data dokumen SJPH atau SJH??')">Reset</button></a>
+											<!-- <a href="{{url('delete_dokumen_sertifikasi')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default btn-warning" onclick= "return confirm('Apakah anda yakin untuk menghapus semua data dokumen SJPH atau SJH??')">Reset</button></a> -->
 										@endforeach
 									@endif
 								</div>

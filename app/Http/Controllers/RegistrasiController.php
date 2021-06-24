@@ -95,24 +95,24 @@ class RegistrasiController extends Controller
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
 
-        $curl = curl_init();
+        // $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-        ));
+        // curl_setopt_array($curl, array(
+        //   CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+        //   CURLOPT_RETURNTRANSFER => true,
+        //   CURLOPT_ENCODING => '',
+        //   CURLOPT_MAXREDIRS => 10,
+        //   CURLOPT_TIMEOUT => 0,
+        //   CURLOPT_FOLLOWLOCATION => true,
+        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //   CURLOPT_CUSTOMREQUEST => 'POST',
+        // ));
 
-        $response = curl_exec($curl);   
-        curl_close($curl);
+        // $response = curl_exec($curl);   
+        // curl_close($curl);
 
-        $response = json_decode($response);
-        $cabang = $response->data;
+        // $response = json_decode($response);
+        // $cabang = $response->data;
         //$cabang = new object;
 
         $regis = DB::table('registrasi')                
@@ -121,31 +121,31 @@ class RegistrasiController extends Controller
                  ->orderBy('registrasi.updated_at','desc')
                  ->get();
 
-        return view('registrasi.listMonitoringRegistrasi',compact('dataKelompok','dataJenis','regis','cabang'));
+        return view('registrasi.listMonitoringRegistrasi',compact('dataKelompok','dataJenis','regis'));
     }
     public function listRegistrasiPelangganAktif(){
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
-        $curl = curl_init();
+        //$curl = curl_init();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-        ));
+        // curl_setopt_array($curl, array(
+        //   CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+        //   CURLOPT_RETURNTRANSFER => true,
+        //   CURLOPT_ENCODING => '',
+        //   CURLOPT_MAXREDIRS => 10,
+        //   CURLOPT_TIMEOUT => 0,
+        //   CURLOPT_FOLLOWLOCATION => true,
+        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //   CURLOPT_CUSTOMREQUEST => 'POST',
+        // ));
 
-        $response = curl_exec($curl);   
-        curl_close($curl);
+        // $response = curl_exec($curl);   
+        // curl_close($curl);
 
-        $response = json_decode($response);
-        $cabang = $response->data;
+        // $response = json_decode($response);
+        // $cabang = $response->data;
 
-        //$cabang = null;
+        $cabang = null;
 
 
         $kw = DB::table('registrasi')
@@ -1597,13 +1597,15 @@ class RegistrasiController extends Controller
                             if($key == 'has_1'){
                                 if($e->keterangan_has_1 != null){
                                     // dd("ulang");
-                                    $e->tgl_penyerahan_1 = $currentDateTime;                                    
+                                    $e->tgl_penyerahan_1 = $currentDateTime;   
+                                                                  
 
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Memperbaiki Dokumen Manual SJPH.", Auth::user()->usergroup_id);
                                 }else{
                                     // dd(Auth::user()->usergroup_id);
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Manual SJPH.", Auth::user()->usergroup_id);
-                                }                                                                
+                                } 
+                                $e->status_has_1='0';                                                                  
                             }else if($key == 'has_2'){                                                              
                                 if($e->keterangan_has_2 != null){                                    
                                     $e->tgl_penyerahan_2 = $currentDateTime;
@@ -1612,7 +1614,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Matriks Bahan.", Auth::user()->usergroup_id);                                    
                                 }                                
-                               
+                                $e->status_has_2='0';   
                             }else if($key == 'has_3'){
                                 if($e->keterangan_has_3 != null){
                                     $e->tgl_penyerahan_3 = $currentDateTime;
@@ -1621,7 +1623,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Data Produk Yang Dihasilkan.", Auth::user()->usergroup_id);                                    
                                 }                                
-                                
+                                $e->status_has_3='0';
                             }else if($key == 'has_4'){
                                 if($e->keterangan_has_4 != null){
                                     $e->tgl_penyerahan_4 = $currentDateTime;
@@ -1630,7 +1632,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering).", Auth::user()->usergroup_id);
                                 }                                
-                              
+                                $e->status_has_4='0';
                             }else if($key == 'has_5'){
                                 if($e->keterangan_has_5 != null){
                                     $e->tgl_penyerahan_5 = $currentDateTime;
@@ -1639,7 +1641,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Data Bahan Baku, Bahan Tambahan dan Bahan Penolong.", Auth::user()->usergroup_id);                                    
                                 }                                
-                                
+                                $e->status_has_5='0';
                             }else if($key == 'has_6'){
                                 
                                 if($e->keterangan_has_6 != null){
@@ -1649,7 +1651,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Sertifikat Halal Sebelumnya.", Auth::user()->usergroup_id);
                                 }                                
-                                
+                                $e->status_has_6='0';
                             }else if($key == 'has_7'){
                                 if($e->keterangan_has_7 != null){
                                     $e->tgl_penyerahan_7 = $currentDateTime;
@@ -1658,7 +1660,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering).", Auth::user()->usergroup_id);                                    
                                 }
-                                
+                                $e->status_has_7='0';
                             }else if($key == 'has_8'){
                                 if($e->keterangan_has_8 != null){
                                     $e->tgl_penyerahan_8 = $currentDateTime;
@@ -1667,7 +1669,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang.", Auth::user()->usergroup_id);
                                 }                                
-                               
+                                $e->status_has_8='0';
                             }else if($key == 'has_9'){
                                 if($e->keterangan_has_9 != null){
                                     $e->tgl_penyerahan_9 = $currentDateTime;
@@ -1676,7 +1678,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Diagram Alir Proses Untuk Produk Yang Disertifikasi.", Auth::user()->usergroup_id);
                                 }                                
-                               
+                                $e->status_has_9='0';
                             }else if($key == 'has_10'){
                                 if($e->keterangan_has_10 != null){
                                     $e->tgl_penyerahan_10 = $currentDateTime;
@@ -1685,7 +1687,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Pernyataan Dari Pemilik Fasilitas Produksi.", Auth::user()->usergroup_id);
                                 }                                
-                               
+                                $e->status_has_10='0';
                             }else if($key == 'has_11'){
                                 if($e->keterangan_has_11 != null){
                                     $e->tgl_penyerahan_11 = $currentDateTime;
@@ -1694,7 +1696,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Daftar Alamat Seluruh Fasilitas Produksi.", Auth::user()->usergroup_id);
                                 }                                
-                                
+                                $e->status_has_11='0';
                             }else if($key == 'has_12'){
                                 if($e->keterangan_has_12 != null){
                                     $e->tgl_penyerahan_12 = $currentDateTime;
@@ -1703,7 +1705,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait.", Auth::user()->usergroup_id);                                    
                                 }                                
-                                
+                                $e->status_has_12='0';
                             }else if($key == 'has_13'){
                                 if($e->keterangan_has_13 != null){
                                     $e->tgl_penyerahan_13 = $currentDateTime;
@@ -1712,7 +1714,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Bukti Sertifikat Penyelia Halal.", Auth::user()->usergroup_id);                                    
                                 }                                
-                               
+                                $e->status_has_13='0';
                             }else if($key == 'has_14'){
                                 if($e->keterangan_has_14 != null){
                                     $e->tgl_penyerahan_14 = $currentDateTime;
@@ -1721,7 +1723,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Bukti Pelaksanaan Pelatihan Internal.", Auth::user()->usergroup_id);                                    
                                 }                                
-                               
+                                $e->status_has_14='0';
                             }else if($key == 'has_15'){
                                 if($e->keterangan_has_15 != null){
                                     $e->tgl_penyerahan_15 = $currentDateTime;
@@ -1730,7 +1732,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Bukti Pelaksanaan Audit Internal.", Auth::user()->usergroup_id);                                    
                                 }                                
-                               
+                                $e->status_has_15='0';
                             }else if($key == 'has_16'){
                                 if($e->keterangan_has_16 != null){
                                     $e->tgl_penyerahan_16 = $currentDateTime;
@@ -1739,7 +1741,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Bukti Kaji Ulang Manajemen.", Auth::user()->usergroup_id);                                    
                                 }                                
-                              
+                                $e->status_has_16='0';
                             }else if($key == 'has_17'){
                                 if($e->keterangan_has_17 != null){
                                     $e->tgl_penyerahan_17 = $currentDateTime;
@@ -1748,7 +1750,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Informasi Layout Fasilitas Produksi.", Auth::user()->usergroup_id);
                                 }                                
-                               
+                                $e->status_has_17='0';
                             }else if($key == 'has_18'){
                                 if($e->keterangan_has_18 != null){
                                     $e->tgl_penyerahan_18 = $currentDateTime;
@@ -1757,7 +1759,7 @@ class RegistrasiController extends Controller
                                 }else{
                                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Upload Dokumen Bukti Registrasi BPJPH.", Auth::user()->usergroup_id);
                                 }                                
-                              
+                                $e->status_has_18='0';
                             }                                                        
                             $e->$key =  FileUploadServices::getFileNameHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);                            
                             FileUploadServices::getUploadFileHPAS($value,$id_user,$id_registrasi,$status,$key,$no_registrasi);
@@ -1938,7 +1940,11 @@ class RegistrasiController extends Controller
                     $f->status_berkas = 2;
                     $e->updated_at =  $currentDateTime;
                     $f->updated_at =  $currentDateTime;
-                    $f->status = '2_2';
+
+                    if($f->status == '2' ||$f->status == '2_0' ||$f->status == '2_1'|| $f->status == '2_2'||$f->status == '2_3'||$f->status == '2_4'){
+                        $f->status = '2_2';
+                    }
+                   
                     $e->save();
                     $f->save();
                     DB::commit();                    
@@ -1956,8 +1962,12 @@ class RegistrasiController extends Controller
                     $f->status_berkas = 3;
                     $e->updated_at =  $currentDateTime;
                     $f->updated_at =  $currentDateTime;
+
+                    if($f->status == '2' ||$f->status == '2_0' ||$f->status == '2_1'|| $f->status == '2_2'||$f->status == '2_3'||$f->status == '2_4'){
+                        $f->status = '2_3';
+                    }
                     
-                    $f->status = '2_3';
+                    
 
                    
                     if($k){
@@ -1971,11 +1981,14 @@ class RegistrasiController extends Controller
                         //dd($e->id_kebutuhan_waktu_audit);
                     }
                     
-                    $f->save();
-                    $e->save();
+                   
+                  
                     //SendEmailP::dispatch($u,$f,$p,$f->status);
-                    
-                    $f->status = 3;
+                    $e->save();
+                    if($f->status == '2' ||$f->status == '2_0' ||$f->status == '2_1'|| $f->status == '2_2'||$f->status == '2_3'||$f->status == '2_4'){
+                        $f->status = '3';
+                    }
+                   
                     $f->save();
                     //SendEmailP::dispatch($u,$f,$p,$f->status);
                     DB::commit();
@@ -2140,7 +2153,7 @@ class RegistrasiController extends Controller
 
                     
                    
-                    if($data['status_memenuhi'] == 'memenuhi_bersyarat'){
+                    if($data['catatan_akhir_audit1']){
                         //$e->status_memenuhi = $data['status_memenuhi'];
                         $e->status_laporan_audit1 = 3;
                         //$e->catatan_akhir_audit = $data['catatan_akhir_audit'];
@@ -2151,159 +2164,8 @@ class RegistrasiController extends Controller
                         $e->save();
                         $f->save();
                         //SendEmailP::dispatch($u,$f,$p,$f->status);
-                        $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berhasil membuat berkas audit tahap 1 dengan syarat",Auth::user()->usergroup_id);
-                        DB::commit();
-
-                        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-            
-                        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-05 Laporan Audit Tahap I Isian.docx');
-
-                        if($pe->skema == 'SJPH'){            
-                            $templateProcessor->setValue('sjph', 'SJPH');
-                
-                            $inline = new TextRun();
-                            $inline->addText('SMH', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('smh', $inline);
-                                    
-                        }else if($pe->skema == 'SMH'){
-                            $templateProcessor->setValue('smh', 'SMH');
-                
-                            $inline = new TextRun();
-                            $inline->addText('SJPH', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('sjph', $inline);            
-                        }
-
-                        if($f->status_registrasi == 'baru'){
-                            $templateProcessor->setValue('baru', 'Baru');
-                
-                            $inline = new TextRun();
-                            $inline->addText('Perpanjangan', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('perpanjangan', $inline);
-                
-                            $inline2 = new TextRun();
-                            $inline2->addText('Perubahan', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('perubahan', $inline2);            
-                        }else if($f->status_registrasi == 'perpanjangan'){            
-                            $templateProcessor->setValue('perpanjangan', 'Perpanjangan');            
-                
-                            $inline = new TextRun();
-                            $inline->addText('Baru', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('baru', $inline);
-                
-                            $inline2 = new TextRun();
-                            $inline2->addText('Perubahan', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('perubahan', $inline2);                
-                        }else if($f->status_registrasi == 'perubahan'){            
-                            $templateProcessor->setValue('perubahan', 'Perubahan');
-                
-                            $inline = new TextRun();
-                            $inline->addText('Baru', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('baru', $inline);
-                
-                            $inline2 = new TextRun();
-                            $inline2->addText('Perpanjangan', array('strikethrough' => true));
-                            $templateProcessor->setComplexValue('perpanjangan', $inline2);            
-                        }
-    
-                        $templateProcessor->setValue('nama_organisasi', $f->nama_perusahaan);
-                        $templateProcessor->setValue('no_id_bpjph', $f->no_registrasi_bpjph);
-                        $templateProcessor->setValue('alamat', $f->alamat_perusahaan);
-                        $templateProcessor->setValue('no_audit', $f->no_registrasi);
-                        $templateProcessor->setValue('jenis_produk', $f->rincian_jenis_produk);
-                        $templateProcessor->setValue('status_registrasi', $f->status_sertifikasi);
-                        $templateProcessor->setValue('lokasi_audit1', $dataTemp['lokasi_audit']);
-                        $templateProcessor->setValue('lingkup_audit', $dataTemp['lingkup_audit']);
-                        $templateProcessor->setValue('tujuan_audit', $dataTemp['tujuan_audit']);
-                        $templateProcessor->setValue('tgl_audit', $dataTemp['mulai_audit1']);
-                        $templateProcessor->setValue('tim_audit1', $dataTemp['pelaksana1_audit1']);
-                        $templateProcessor->setValue('tim_audit2', $dataTemp['pelaksana2_audit1']);
-                        $templateProcessor->setValue('tgl_penyerahan1', $data['tgl_penyerahan_1']);
-                        $templateProcessor->setValue('tgl_penyerahan2', $data['tgl_penyerahan_2']);
-                        $templateProcessor->setValue('tgl_penyerahan3', $data['tgl_penyerahan_3']);
-                        $templateProcessor->setValue('tgl_penyerahan4', $data['tgl_penyerahan_4']);
-                        $templateProcessor->setValue('tgl_penyerahan5', $data['tgl_penyerahan_5']);                
-                        $templateProcessor->setValue('tgl_penyerahan6', $data['tgl_penyerahan_6']);
-                        $templateProcessor->setValue('tgl_penyerahan7', $data['tgl_penyerahan_7']);
-                        $templateProcessor->setValue('tgl_penyerahan8', $data['tgl_penyerahan_8']);
-                        $templateProcessor->setValue('tgl_penyerahan9', $data['tgl_penyerahan_9']);
-                        $templateProcessor->setValue('tgl_penyerahan10', $data['tgl_penyerahan_10']);
-                        $templateProcessor->setValue('tgl_penyerahan11', $data['tgl_penyerahan_11']);
-                        $templateProcessor->setValue('tgl_penyerahan12', $data['tgl_penyerahan_12']);
-                        $templateProcessor->setValue('tgl_penyerahan13', $data['tgl_penyerahan_13']);
-                        $templateProcessor->setValue('tgl_penyerahan14', $data['tgl_penyerahan_14']);
-                        $templateProcessor->setValue('tgl_penyerahan15', $data['tgl_penyerahan_15']);
-                        $templateProcessor->setValue('tgl_penyerahan16', $data['tgl_penyerahan_16']);
-                        $templateProcessor->setValue('tgl_penyerahan17', $data['tgl_penyerahan_17']);
-                        $templateProcessor->setValue('tgl_penyerahan18', $data['tgl_penyerahan_18']);
-    
-                        $templateProcessor->setValue('temuan1', $data['keterangan_has_1']);
-                        $templateProcessor->setValue('temuan2', $data['keterangan_has_2']);
-                        $templateProcessor->setValue('temuan3', $data['keterangan_has_3']);
-                        $templateProcessor->setValue('temuan4', $data['keterangan_has_4']);
-                        $templateProcessor->setValue('temuan5', $data['keterangan_has_5']);
-                        $templateProcessor->setValue('temuan6', $data['keterangan_has_6']);
-                        $templateProcessor->setValue('temuan7', $data['keterangan_has_7']);
-                        $templateProcessor->setValue('temuan8', $data['keterangan_has_8']);
-                        $templateProcessor->setValue('temuan9', $data['keterangan_has_9']);
-                        $templateProcessor->setValue('temuan10', $data['keterangan_has_10']);
-                        $templateProcessor->setValue('temuan11', $data['keterangan_has_11']);
-                        $templateProcessor->setValue('temuan12', $data['keterangan_has_12']);
-                        $templateProcessor->setValue('temuan13', $data['keterangan_has_13']);
-                        $templateProcessor->setValue('temuan14', $data['keterangan_has_14']);
-                        $templateProcessor->setValue('temuan15', $data['keterangan_has_15']);
-                        $templateProcessor->setValue('temuan16', $data['keterangan_has_16']);
-                        $templateProcessor->setValue('temuan17', $data['keterangan_has_17']);
-                        $templateProcessor->setValue('temuan18', $data['keterangan_has_18']);
-    
-                        $templateProcessor->setValue('review_perbaikan1', $data['review_perbaikan_1']);
-                        $templateProcessor->setValue('review_perbaikan2', $data['review_perbaikan_2']);
-                        $templateProcessor->setValue('review_perbaikan3', $data['review_perbaikan_3']);
-                        $templateProcessor->setValue('review_perbaikan4', $data['review_perbaikan_4']);
-                        $templateProcessor->setValue('review_perbaikan5', $data['review_perbaikan_5']);
-                        $templateProcessor->setValue('review_perbaikan6', $data['review_perbaikan_6']);
-                        $templateProcessor->setValue('review_perbaikan7', $data['review_perbaikan_7']);
-                        $templateProcessor->setValue('review_perbaikan8', $data['review_perbaikan_8']);
-                        $templateProcessor->setValue('review_perbaikan9', $data['review_perbaikan_9']);
-                        $templateProcessor->setValue('review_perbaikan10', $data['review_perbaikan_10']);
-                        $templateProcessor->setValue('review_perbaikan11', $data['review_perbaikan_11']);
-                        $templateProcessor->setValue('review_perbaikan12', $data['review_perbaikan_12']);
-                        $templateProcessor->setValue('review_perbaikan13', $data['review_perbaikan_13']);
-                        $templateProcessor->setValue('review_perbaikan14', $data['review_perbaikan_14']);
-                        $templateProcessor->setValue('review_perbaikan15', $data['review_perbaikan_15']);
-                        $templateProcessor->setValue('review_perbaikan16', $data['review_perbaikan_16']);
-                        $templateProcessor->setValue('review_perbaikan17', $data['review_perbaikan_17']);
-                        $templateProcessor->setValue('review_perbaikan18', $data['review_perbaikan_18']);
-    
-                        if($data['status_memenuhi'] == 'memenuhi'){
-                            $templateProcessor->setValue('pilihan1', '');
-                            $templateProcessor->setValue('pilihan2', 'x');
-                        }else if($data['status_memenuhi'] == 'memenuhi_bersyarat'){
-                            $templateProcessor->setValue('pilihan1', '');
-                            $templateProcessor->setValue('pilihan2', 'x');
-                        }else{
-                            $templateProcessor->setValue('pilihan1', 'x');
-                            $templateProcessor->setValue('pilihan2', '');
-                        }
-    
-                        $currentDateTime = Carbon::now();                
-    
-                        $newDateTime = Carbon::now()->addDays(5);
-                        $templateProcessor->setValue('deadline', $newDateTime);
-                        //$e->dl_berkas = $newDateTime;
-                        $f->dl_berkas = $newDateTime;
-    
-                               
-                        // dd($newDateTime);
-    
-                        $fileName = 'FOR-HALAL-OPS-05 Laporan Audit Tahap I ('.$e->id_registrasi.').docx';
-                        $e->file_laporan_audit1= $fileName ;
-                        $templateProcessor->saveAs("storage/laporan/download/Laporan Audit1/".$fileName);
-                        
-                        $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
-
-                        $e->save();
-                        $f->save();                        
-                        return response()->download('storage/laporan/download/Laporan Audit1/'.$fileName);
+                        Session::flash('success', "Status berhasil diupdate");
+                       
     
                     }else{
                          //$f->status_berkas = 2;
@@ -2318,10 +2180,163 @@ class RegistrasiController extends Controller
                         $e->save();
                         $f->save();
                         DB::commit();                        
-                        $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Pembuatan berkas audit tahap 1 gagal, terdapat berkas yang tidak memenuhi.",Auth::user()->usergroup_id);
+                        $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berkas laporan audit tahap 1 berhasil didownload",Auth::user()->usergroup_id);
                         //SendEmailP::dispatch($u,$f,$p,$f->status);
                         Session::flash('success', "Status berhasil diupdate");
                     }
+
+                    $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berhasil membuat berkas audit tahap 1 dengan syarat",Auth::user()->usergroup_id);
+                    DB::commit();
+
+                    $phpWord = new \PhpOffice\PhpWord\PhpWord();
+        
+                    $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-05 Laporan Audit Tahap I Isian.docx');
+
+                    if($pe->skema == 'SJPH'){            
+                        $templateProcessor->setValue('sjph', 'SJPH');
+            
+                        $inline = new TextRun();
+                        $inline->addText('SMH', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('smh', $inline);
+                                
+                    }else if($pe->skema == 'SMH'){
+                        $templateProcessor->setValue('smh', 'SMH');
+            
+                        $inline = new TextRun();
+                        $inline->addText('SJPH', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('sjph', $inline);            
+                    }
+
+                    if($f->status_registrasi == 'baru'){
+                        $templateProcessor->setValue('baru', 'Baru');
+            
+                        $inline = new TextRun();
+                        $inline->addText('Perpanjangan', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('perpanjangan', $inline);
+            
+                        $inline2 = new TextRun();
+                        $inline2->addText('Perubahan', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('perubahan', $inline2);            
+                    }else if($f->status_registrasi == 'perpanjangan'){            
+                        $templateProcessor->setValue('perpanjangan', 'Perpanjangan');            
+            
+                        $inline = new TextRun();
+                        $inline->addText('Baru', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('baru', $inline);
+            
+                        $inline2 = new TextRun();
+                        $inline2->addText('Perubahan', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('perubahan', $inline2);                
+                    }else if($f->status_registrasi == 'perubahan'){            
+                        $templateProcessor->setValue('perubahan', 'Perubahan');
+            
+                        $inline = new TextRun();
+                        $inline->addText('Baru', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('baru', $inline);
+            
+                        $inline2 = new TextRun();
+                        $inline2->addText('Perpanjangan', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('perpanjangan', $inline2);            
+                    }
+
+                    $templateProcessor->setValue('nama_organisasi', $f->nama_perusahaan);
+                    $templateProcessor->setValue('no_id_bpjph', $f->no_registrasi_bpjph);
+                    $templateProcessor->setValue('alamat', $f->alamat_perusahaan);
+                    $templateProcessor->setValue('no_audit', $f->no_registrasi);
+                    $templateProcessor->setValue('jenis_produk', $f->rincian_jenis_produk);
+                    $templateProcessor->setValue('status_registrasi', $f->status_sertifikasi);
+                    $templateProcessor->setValue('lokasi_audit1', $dataTemp['lokasi_audit']);
+                    $templateProcessor->setValue('lingkup_audit', $dataTemp['lingkup_audit']);
+                    $templateProcessor->setValue('tujuan_audit', $dataTemp['tujuan_audit']);
+                    $templateProcessor->setValue('tgl_audit', $dataTemp['mulai_audit1']);
+                    $templateProcessor->setValue('tim_audit1', $dataTemp['pelaksana1_audit1']);
+                    $templateProcessor->setValue('tim_audit2', $dataTemp['pelaksana2_audit1']);
+                    $templateProcessor->setValue('tgl_penyerahan1', $data['tgl_penyerahan_1']);
+                    $templateProcessor->setValue('tgl_penyerahan2', $data['tgl_penyerahan_2']);
+                    $templateProcessor->setValue('tgl_penyerahan3', $data['tgl_penyerahan_3']);
+                    $templateProcessor->setValue('tgl_penyerahan4', $data['tgl_penyerahan_4']);
+                    $templateProcessor->setValue('tgl_penyerahan5', $data['tgl_penyerahan_5']);                
+                    $templateProcessor->setValue('tgl_penyerahan6', $data['tgl_penyerahan_6']);
+                    $templateProcessor->setValue('tgl_penyerahan7', $data['tgl_penyerahan_7']);
+                    $templateProcessor->setValue('tgl_penyerahan8', $data['tgl_penyerahan_8']);
+                    $templateProcessor->setValue('tgl_penyerahan9', $data['tgl_penyerahan_9']);
+                    $templateProcessor->setValue('tgl_penyerahan10', $data['tgl_penyerahan_10']);
+                    $templateProcessor->setValue('tgl_penyerahan11', $data['tgl_penyerahan_11']);
+                    $templateProcessor->setValue('tgl_penyerahan12', $data['tgl_penyerahan_12']);
+                    $templateProcessor->setValue('tgl_penyerahan13', $data['tgl_penyerahan_13']);
+                    $templateProcessor->setValue('tgl_penyerahan14', $data['tgl_penyerahan_14']);
+                    $templateProcessor->setValue('tgl_penyerahan15', $data['tgl_penyerahan_15']);
+                    $templateProcessor->setValue('tgl_penyerahan16', $data['tgl_penyerahan_16']);
+                    $templateProcessor->setValue('tgl_penyerahan17', $data['tgl_penyerahan_17']);
+                    $templateProcessor->setValue('tgl_penyerahan18', $data['tgl_penyerahan_18']);
+
+                    $templateProcessor->setValue('temuan1', $data['keterangan_has_1']);
+                    $templateProcessor->setValue('temuan2', $data['keterangan_has_2']);
+                    $templateProcessor->setValue('temuan3', $data['keterangan_has_3']);
+                    $templateProcessor->setValue('temuan4', $data['keterangan_has_4']);
+                    $templateProcessor->setValue('temuan5', $data['keterangan_has_5']);
+                    $templateProcessor->setValue('temuan6', $data['keterangan_has_6']);
+                    $templateProcessor->setValue('temuan7', $data['keterangan_has_7']);
+                    $templateProcessor->setValue('temuan8', $data['keterangan_has_8']);
+                    $templateProcessor->setValue('temuan9', $data['keterangan_has_9']);
+                    $templateProcessor->setValue('temuan10', $data['keterangan_has_10']);
+                    $templateProcessor->setValue('temuan11', $data['keterangan_has_11']);
+                    $templateProcessor->setValue('temuan12', $data['keterangan_has_12']);
+                    $templateProcessor->setValue('temuan13', $data['keterangan_has_13']);
+                    $templateProcessor->setValue('temuan14', $data['keterangan_has_14']);
+                    $templateProcessor->setValue('temuan15', $data['keterangan_has_15']);
+                    $templateProcessor->setValue('temuan16', $data['keterangan_has_16']);
+                    $templateProcessor->setValue('temuan17', $data['keterangan_has_17']);
+                    $templateProcessor->setValue('temuan18', $data['keterangan_has_18']);
+
+                    $templateProcessor->setValue('review_perbaikan1', $data['review_perbaikan_1']);
+                    $templateProcessor->setValue('review_perbaikan2', $data['review_perbaikan_2']);
+                    $templateProcessor->setValue('review_perbaikan3', $data['review_perbaikan_3']);
+                    $templateProcessor->setValue('review_perbaikan4', $data['review_perbaikan_4']);
+                    $templateProcessor->setValue('review_perbaikan5', $data['review_perbaikan_5']);
+                    $templateProcessor->setValue('review_perbaikan6', $data['review_perbaikan_6']);
+                    $templateProcessor->setValue('review_perbaikan7', $data['review_perbaikan_7']);
+                    $templateProcessor->setValue('review_perbaikan8', $data['review_perbaikan_8']);
+                    $templateProcessor->setValue('review_perbaikan9', $data['review_perbaikan_9']);
+                    $templateProcessor->setValue('review_perbaikan10', $data['review_perbaikan_10']);
+                    $templateProcessor->setValue('review_perbaikan11', $data['review_perbaikan_11']);
+                    $templateProcessor->setValue('review_perbaikan12', $data['review_perbaikan_12']);
+                    $templateProcessor->setValue('review_perbaikan13', $data['review_perbaikan_13']);
+                    $templateProcessor->setValue('review_perbaikan14', $data['review_perbaikan_14']);
+                    $templateProcessor->setValue('review_perbaikan15', $data['review_perbaikan_15']);
+                    $templateProcessor->setValue('review_perbaikan16', $data['review_perbaikan_16']);
+                    $templateProcessor->setValue('review_perbaikan17', $data['review_perbaikan_17']);
+                    $templateProcessor->setValue('review_perbaikan18', $data['review_perbaikan_18']);
+
+                   
+
+                    if($data['status_memenuhi'] == 'memenuhi'){
+                        $templateProcessor->setValue('pilihan1', '');
+                        $templateProcessor->setValue('pilihan2', 'x');
+                    }else{
+                        $templateProcessor->setValue('pilihan1', 'x');
+                        $templateProcessor->setValue('pilihan2', '');
+                    }
+
+                    $currentDateTime = Carbon::now();                
+
+                    $newDateTime = Carbon::now()->addDays(5);
+                    $templateProcessor->setValue('deadline', $newDateTime);
+                    //$e->dl_berkas = $newDateTime;
+                    $f->dl_berkas = $newDateTime;
+
+                           
+                    // dd($newDateTime);
+
+                    $fileName = 'FOR-HALAL-OPS-05 Laporan Audit Tahap I ('.$e->id_registrasi.').docx';
+                    $e->file_laporan_audit1= $fileName ;
+                    $templateProcessor->saveAs("storage/laporan/download/Laporan Audit1/".$fileName);
+                    
+                    $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+
+                    $e->save();
+                    $f->save();                        
+                    return response()->download('storage/laporan/download/Laporan Audit1/'.$fileName);
                    
 
                 }else{
@@ -2463,9 +2478,6 @@ class RegistrasiController extends Controller
                     $templateProcessor->setValue('review_perbaikan18', $data['review_perbaikan_18']);
 
                     if($data['status_memenuhi'] == 'memenuhi'){
-                        $templateProcessor->setValue('pilihan1', '');
-                        $templateProcessor->setValue('pilihan2', 'x');
-                    }else if($data['status_memenuhi'] == 'memenuhi_bersyarat'){
                         $templateProcessor->setValue('pilihan1', '');
                         $templateProcessor->setValue('pilihan2', 'x');
                     }else{
@@ -2809,11 +2821,29 @@ class RegistrasiController extends Controller
                 //$model4->berkas_akad = $filename;
                
             }
-
-            $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
-            $bp2 = str_replace('.', '', $bp1);            
-            $e->total_biaya = $bp2;
-           
+            if($data['mata_uang']== 'RP'){
+                $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
+                $bp2 = str_replace('.', '', $bp1);            
+                $e->total_biaya = $bp2;
+            }elseif($data['mata_uang']== 'USD'){
+                $bp1 = str_replace('USD', '', $data['biaya_pemeriksaan']);
+                $bp2 = str_replace('.', '', $bp1);            
+                $e->total_biaya = $bp2;
+            }elseif($data['mata_uang']== 'EUR'){
+                $bp1 = str_replace('EUR', '', $data['biaya_pemeriksaan']);
+                $bp2 = str_replace('.', '', $bp1);            
+                $e->total_biaya = $bp2;
+            }elseif($data['mata_uang']== 'GBP'){
+                $bp1 = str_replace('GBP', '', $data['biaya_pemeriksaan']);
+                $bp2 = str_replace('.', '', $bp1);            
+                $e->total_biaya = $bp2;
+            }elseif($data['mata_uang']== 'SAR'){
+                $bp1 = str_replace('SAR', '', $data['biaya_pemeriksaan']);
+                $bp2 = str_replace('.', '', $bp1);            
+                $e->total_biaya = $bp2;
+            }
+          
+            
             if($p == null){
                // dd("masuk_null");
                 if($e->total_biaya >10000000 && $e->total_biaya <= 50000000){
@@ -2854,7 +2884,7 @@ class RegistrasiController extends Controller
                 $e->save();
                 //SendEmailP::dispatch($e,$u,$model3, '4_1');
             }else{
-                //dd("masuk");
+                //dd($e->total_biaya);
                 if($e->total_biaya >10000000 && $e->total_biaya <= 50000000){
                // dd($e->total_biaya);
 
@@ -4180,24 +4210,7 @@ class RegistrasiController extends Controller
     public function listKeuangan(){
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-        ));
-
-        $response = curl_exec($curl);   
-        curl_close($curl);
-
-        $response = json_decode($response);
-        $cabang = $response->data;
+       
 
         //$cabang = null;
 
@@ -4211,7 +4224,7 @@ class RegistrasiController extends Controller
 
         //dd($cabang);
 
-        return view('registrasi.listKeuangan',compact('dataKelompok','dataJenis','cabang','kw'));
+        return view('registrasi.listKeuangan',compact('dataKelompok','dataJenis','kw'));
     }
 
     public function dataKeuangan(Request $request){

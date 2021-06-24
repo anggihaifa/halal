@@ -130,8 +130,8 @@
                 
         </table>
 
-    @elseif($status== 'rapat')
-        <h4 style="text-align: center">Berikut ini adalah jadwal Rapat Auditor yang sudah dijadwalkan</h4>
+    @elseif($status== 'tr')
+        <h4 style="text-align: center">Berikut ini adalah jadwal Tehnical Review yang sudah dijadwalkan</h4>
         <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >                  
             <tr>
                 <th  >Nama Perusahaan</th>

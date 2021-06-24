@@ -303,7 +303,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_1" name="status_has_1" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_1" name="status_has_1" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_1"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_1"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_1"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_1"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_1"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_1"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -337,7 +337,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_2" name="status_has_2" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_2" name="status_has_2" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_2"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_2"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_2"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_2"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_2"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_2"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -367,7 +367,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_3" name="status_has_3" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_3" name="status_has_3" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_3"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_3"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_3"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_3"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_3"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_3"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -398,7 +398,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_4" name="status_has_4" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_4" name="status_has_4" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_4"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_4"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_4"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_4"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_4"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_4"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -426,7 +426,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_5" name="status_has_5" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_5" name="status_has_5" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_5"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_5"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_5"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_5"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_5"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_5"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -453,7 +453,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_6" name="status_has_6" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_6" name="status_has_6" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_6"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_6"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_6"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_6"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_6"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_6"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -481,7 +481,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_7" name="status_has_7" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_7" name="status_has_7" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_1"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_1"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_1"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_7"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_7"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_7"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -508,7 +508,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_8" name="status_has_8" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_8" name="status_has_8" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_8"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_8"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_8"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_8"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_8"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_8"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -536,7 +536,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_9" name="status_has_9" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_9" name="status_has_9" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_9"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_9"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_9"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_9"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_9"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_9"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -564,7 +564,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_10" name="status_has_10" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_10" name="status_has_10" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_10"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_10"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_10"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_10"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_10"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_10"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -594,7 +594,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_11" name="status_has_11" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_11" name="status_has_11" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_11"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_11"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_11"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_11"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_11"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_11"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -623,7 +623,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_12" name="status_has_12" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_12" name="status_has_12" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_12"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_12"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_12"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_12"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_12"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_12"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -652,7 +652,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_13" name="status_has_13" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_13" name="status_has_13" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_13"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_13"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_13"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_13"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_13"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_13"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -681,7 +681,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_14" name="status_has_14" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_14" name="status_has_14" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_14"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_14"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_14"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_14"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_14"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_14"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -710,7 +710,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_15" name="status_has_15" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_15" name="status_has_15" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_15"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_15"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_15"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_15"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_15"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_15"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -738,7 +738,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_16" name="status_has_16" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_16" name="status_has_16" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_16"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_16"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_16"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_16"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_16"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_16"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -767,7 +767,7 @@
 												{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_17" name="status_has_17" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_17" name="status_has_17" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_17"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_17"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_17"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_17"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_17"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 														<option value="2" {{$laporanAudit1[0]["status_has_17"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -796,7 +796,7 @@
 												{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_18" name="status_has_18" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white btn-sm">
+													<select id="status_has_18" name="status_has_18" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_18"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_18"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_18"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_18"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_18"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 														<option value="2" {{$laporanAudit1[0]["status_has_18"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -838,13 +838,9 @@
 
                                     </div>
 
-									<div class="radio radio-css ">
-                                        <input  type="radio" name="status_memenuhi" id="memenuhi_bersayarat" value="memenuhi_bersayarat" />
-                                        <label for="memenuhi_bersyarat"><b>Audit Tahap II dapat dilaksanakan dengan catatan (Bersyarat)</b></label>
-
-                                    </div>
+									
 									<div>
-										<label><b>Catatan Akhir Audit:</b></label>
+										<label><b>Syarat Untuk Lanjut Ke Audit Tahap 2</b></label>
 									</div>
 
 									<div class="col-lg-12">
@@ -857,7 +853,9 @@
 								<div class=" offset-md-5">
 					               <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
 					                @if($dataHas !== null)
-										<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;">Submit</button>
+										<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;" onclick="return confirm('Note: Catatan hanya boleh diisi apabila terdapat berkas yang tidak memenuhi namun akan dilanjutkan ke tahapan audit tahap 2')">Submit</button>
+
+										
 									@endif
 									
 					            </div>		

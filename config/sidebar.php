@@ -266,7 +266,7 @@ return [
         ],
         [
             'icon' => 'ion-ios-calendar',
-            'title' => 'Persiapan Sidang Penetapan Kehalalan Produk',
+            'title' => 'Persiapan Sidang Fatwa Halal',
             'url' => 'listpersiapansidang'
         ],
         [

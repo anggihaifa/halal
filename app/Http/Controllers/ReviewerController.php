@@ -20,6 +20,7 @@ use App\Models\LaporanAudit1;
 use App\Jobs\SendEmailAuditor;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 
 class ReviewerController extends Controller
@@ -497,7 +498,7 @@ class ReviewerController extends Controller
        
 
         // dd($data);
-
+        $now=  Carbon::now()->toDateString();
 
         DB::beginTransaction();
         $model = new Registrasi;
@@ -521,13 +522,13 @@ class ReviewerController extends Controller
         if($l){ 
             
         }else{
-            $model = new LaporanAudit1();
+           
             DB::beginTransaction();
             // dd("masuk");
             $model4->id_registrasi = $e->id;
             $model4->id_dokumen_has = $dataHas[0]['id'];
             $model4->save();
-            $e->id_laporan_audit1 = $model->id;
+            $e->id_laporan_audit1 = $model4->id;
             $e->save();            
         }
        
@@ -537,8 +538,8 @@ class ReviewerController extends Controller
             $e->status = 8;
             $j->catatan_penjadwalan_audit1 = $data['catatan_penjadwalan'];
 
-            if($data['pelaksana1']){
-                $str =  explode("_",$data['pelaksana1']);
+            if($j->pelaksana1_audit1){
+                $str =  explode("_",$j->pelaksana1_audit1);
                 $u = $model3->find($str[0]);
                
                 SendEmailAuditor::dispatch($u,$e,$j,'audit1');
@@ -552,15 +553,17 @@ class ReviewerController extends Controller
             $j->catatan_penjadwalan_audit2 = $data['catatan_penjadwalan'];
 
 
-            if($data['pelaksana1']){
-                $str =  explode("_",$data['pelaksana1']);
+            if($j->pelaksana1_audit2){
+                $str =  explode("_",$j->pelaksana1_audit2);
                 $u = $model3->find($str[0]);
+
+               // dd($u);
                
                 SendEmailAuditor::dispatch($u,$e,$j,'audit2');
 
-            }if($data['pelaksana2']){
+            }if($j->pelaksana2_audit2){
 
-                $str2 =  explode("_",$data['pelaksana2']);
+                $str2 =  explode("_",$j->pelaksana2_audit2);
                 $u2 = $model3->find($str2[0]);
                 
                 SendEmailAuditor::dispatch($u2,$e,$j,'audit2');
@@ -571,17 +574,19 @@ class ReviewerController extends Controller
             $e->status = '12';
             $j->status_penjadwalan_tr = 3;
             $j->catatan_penjadwalan_tr = $data['catatan_penjadwalan'];
+           
+                    
+            $j->mulai_tr = $now;
 
-
-            if($data['pelaksana1']){
-                $str =  explode("_",$data['pelaksana1']);
+            if($j->pelaksana1_tr){
+                $str =  explode("_",$j->pelaksana1_tr);
                 $u = $model3->find($str[0]);
                
                 SendEmailAuditor::dispatch($u,$e,$j,'tr');
 
-            }if($data['pelaksana2']){
+            }if($j->pelaksana2_tr){
 
-                $str2 =  explode("_",$data['pelaksana2']);
+                $str2 =  explode("_",$j->pelaksana2_tr);
                 $u2 = $model3->find($str2[0]);
                 
                 SendEmailAuditor::dispatch($u2,$e,$j,'tr');
@@ -592,17 +597,18 @@ class ReviewerController extends Controller
             $e->status = '14';
             $j->status_penjadwalan_tinjauan = 3;
             $j->catatan_penjadwalan_tinjauan = $data['catatan_penjadwalan'];
+            $j->mulai_tinjauan = $now;
+            //dd($now);
 
-
-            if($data['pelaksana1']){
-                $str =  explode("_",$data['pelaksana1']);
+            if($j->pelaksana1_tinjauan){
+                $str =  explode("_",$j->pelaksana1_tinjauan);
                 $u = $model3->find($str[0]);
                
                 SendEmailAuditor::dispatch($u,$e,$j,'tinjauan');
 
-            }if($data['pelaksana2']){
+            }if($j->pelaksana2_tinjauan){
 
-                $str2 =  explode("_",$data['pelaksana2']);
+                $str2 =  explode("_",$j->pelaksana2_tinjauan);
                 $u2 = $model3->find($str2[0]);
                 
                 SendEmailAuditor::dispatch($u2,$e,$j,'tinjauan');

@@ -117,7 +117,7 @@ Route::put('audit2', 'PenjadwalanController@audit2')->name('audit2')->middleware
 Route::put('tehnical_review', 'PenjadwalanController@tehnicalReview')->name('tehnicalreview')->middleware('role:1,3,6,9,11');
 Route::put('tinjauan', 'PenjadwalanController@tinjauan')->name('tinjauan')->middleware('role:1,3,6,9,11');
 
-Route::get('penjadwalan_viewer/{id_regis}/{hpas}','PenjadwalanController@dokumenView')->name('penjadwalan.viewer')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('penjadwalan_viewer/{id_regis}/{hpas}','PenjadwalanController@dokumenView')->name('penjadwalan.viewer')->middleware('role:1,3,6,9,10,11,12,13,2');
 
 Route::get('penjadwalan_viewer_doc/{id_user}/{id_regis}/{hpas}','PenjadwalanController@view')->name('penjadwalan.view')->middleware('role:1,3,6,9,10,11,12,13');
 

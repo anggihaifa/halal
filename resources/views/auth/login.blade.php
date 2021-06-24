@@ -161,19 +161,34 @@
                     <div class="modal-body">                        
                        <table>
                            <tr>
-                               <td>1. Perubahan blablabla</td>
+                               <td>1. Update Tampilan Registrasi</td>
                             </tr>
                             <tr>
-                                <td>2. Perubahan blablabla</td>
+                                <td>2.	Update Tampilan Pengaturan Profile</td>
                              </tr>
                              <tr>
-                                <td>3. Perubahan blablabla</td>
+                                <td>3. Update Tampilan List Registrasi</td>
                              </tr>
                              <tr>
-                                <td>4. Perubahan blablabla</td>
+                                <td>4. Update Tampilan Dashboard</td>
                              </tr>
                              <tr>
-                                <td>5. Perubahan blablabla</td>
+                                <td>5. Update Tampilan Progres Status dan Log Kegiatan</td>
+                             </tr>
+                             <tr>
+                                <td>6. Update Tampilan Submenu Pembayaran</td>
+                             </tr>
+                             <tr>
+                                <td>7. Update Tampilan Subbmenu Akad</td>
+                             </tr>
+                             <tr>
+                                <td>8. Update Tampilan Submenu Order Confitmation</td>
+                             </tr>
+                             <tr>
+                                <td>9. Update Tampilan Submenu Laporan Audit Dan Berita Acara</td>
+                             </tr>
+                             <tr>
+                                <td>10. Penambahan Menu Unduh Form</td>
                              </tr>
                        </table>
                     </div>
