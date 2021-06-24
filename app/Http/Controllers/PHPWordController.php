@@ -483,8 +483,17 @@ class PHPWordController extends Controller
 
         $templateProcessor->setValue('no_id_bpjph', $data['no_id_bpjph']);        
 
-        $model = new PerencanaanAudit();
+        $model = new PerencanaanAudit();        
+
+        $dataAP = DB::table('perencanaan_audit')
+                    ->where('id_registrasi',$data['id_registrasi'])
+                    ->get();
+        // dd(count($dataAP));
+
         DB::beginTransaction();
+
+        if(count($dataAP) == 0){
+            // dd("disini");
             $model->id_user = Auth::user()->id;
             $model->id_registrasi = $data['id_registrasi'];
             $model->no_id_bpjph = $data['no_id_bpjph'];
@@ -502,6 +511,35 @@ class PHPWordController extends Controller
             $model->tim_audit1 = $data['tim_audit1'];
             $model->tim_audit2 = $data['tim_audit2'];
             $model->tim_audit3 = implode(',',$data['tim_audit3']);
+        }else{
+            // dd("ada");
+            $ap = json_decode($dataAP,true);
+            // dd($ap);
+
+            foreach ($ap as $key) {
+                $id = $key['id'];
+                $e = $model->find($id);                
+
+                $e->id_user = Auth::user()->id;
+                $e->id_registrasi = $data['id_registrasi'];
+                $e->no_id_bpjph = $data['no_id_bpjph'];
+                $e->skema_audit = $data['skema_audit'];
+                $e->status_sertifikasi = $data['status_sertifikasi'];
+                $e->no_audit = $data['no_audit'];
+                $e->nama_organisasi = $data['nama_perusahaan'];
+                $e->alamat = $data['alamat'];
+                $e->tanggal_audit = $data['tanggal_audit'].' s/d '.$data['tanggal_audit_'];
+                $e->tujuan_audit = $data['tujuan_audit'];
+                $e->lingkup_audit = $data['lingkup_audit'];
+                $e->jenis_produk = $data['jenis_produk'];
+                $e->lokasi_audit1 = $data['lokasi_audit1'];
+                $e->lokasi_audit2 = $data['lokasi_audit2'];
+                $e->tim_audit1 = $data['tim_audit1'];
+                $e->tim_audit2 = $data['tim_audit2'];
+                $e->tim_audit3 = implode(',',$data['tim_audit3']);
+            }
+        }
+        
 
         $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
         if($data['skema_audit'] == 'sjh'){            
@@ -510,16 +548,24 @@ class PHPWordController extends Controller
             $inline = new TextRun();
             $inline->addText('SJPH', array('strikethrough' => true));
             $templateProcessor->setComplexValue('sjph', $inline);
-            
-            $model->skema_audit = 'sjh';
+
+            if(count($dataAP) == 0){
+                $model->skema_audit = 'sjh';
+            }else{
+                $e->skema_audit = 'sjh';
+            }
         }else if($data['skema_audit'] == 'sjph'){
             $templateProcessor->setValue('sjph', 'SJPH');
 
             $inline = new TextRun();
             $inline->addText('SJH', array('strikethrough' => true));
             $templateProcessor->setComplexValue('sjh', $inline);
-
-            $model->skema_audit = 'sjph';
+            
+            if(count($dataAP) == 0){
+                $model->skema_audit = 'sjph';
+            }else{
+                $e->skema_audit = 'sjph';
+            }
         }
 
         if($data['status_sertifikasi'] == 'baru'){
@@ -532,8 +578,12 @@ class PHPWordController extends Controller
             $inline2 = new TextRun();
             $inline2->addText('Perubahan', array('strikethrough' => true));
             $templateProcessor->setComplexValue('perubahan', $inline2);
-
-            $model->status_sertifikasi = 'baru';
+            
+            if(count($dataAP) == 0){
+                $model->status_sertifikasi = 'baru';
+            }else{
+                $e->status_sertifikasi = 'baru';
+            }
         }else if($data['status_sertifikasi'] == 'perpanjangan'){            
             $templateProcessor->setValue('perpanjangan', 'Perpanjangan');            
 
@@ -543,9 +593,13 @@ class PHPWordController extends Controller
 
             $inline2 = new TextRun();
             $inline2->addText('Perubahan', array('strikethrough' => true));
-            $templateProcessor->setComplexValue('perubahan', $inline2);            
+            $templateProcessor->setComplexValue('perubahan', $inline2);                        
 
-            $model->status_sertifikasi = 'perpanjangan';
+            if(count($dataAP) == 0){
+                $model->status_sertifikasi = 'perpanjangan';
+            }else{
+                $e->status_sertifikasi = 'perpanjangan';
+            }
         }else if($data['status_sertifikasi'] == 'perubahan'){            
             $templateProcessor->setValue('perubahan', 'Perubahan');
 
@@ -556,8 +610,12 @@ class PHPWordController extends Controller
             $inline2 = new TextRun();
             $inline2->addText('Perpanjangan', array('strikethrough' => true));
             $templateProcessor->setComplexValue('perpanjangan', $inline2);
-
-            $model->status_sertifikasi = 'perubahan';
+            
+            if(count($dataAP) == 0){
+                $model->status_sertifikasi = 'perubahan';
+            }else{
+                $e->status_sertifikasi = 'perubahan';
+            }
         }
 
         $templateProcessor->setValue('no_audit', $data['no_audit']);
@@ -649,8 +707,11 @@ class PHPWordController extends Controller
             $values0 = $arrAnggota;
             $templateProcessor->cloneRowAndSetValues('noo', $values0);
                
-        
-        $model->save();
+            if(count($dataAP) == 0){
+                $model->save();
+            }else{
+                $e->save();
+            }        
         DB::commit();
         
         $jml=0;
@@ -11527,83 +11588,167 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
         $jmlTidakSesuai = 0;
         $jmlSesuai = 0;
 
-        $model = new Ketidaksesuaian;
-        DB::beginTransaction();
-            $model->id_registrasi = $data['id_registrasi'];                
-            $model->id_penjadwalan = $data['id_penjadwalan'];
-            $model->save();
-        DB::Commit();
-        
-        $id_ketidaksesuaian_fix = DB::table('ketidaksesuaian')           
-            ->select('id')
-            ->orderBy('id','desc')
-            ->limit(1)
-            ->get();
-        
-            foreach($id_ketidaksesuaian_fix as $id2){
-                foreach($id2 as $id_asli){
-                    $idkt = $id_asli;
+        $getKT =   DB::table('ketidaksesuaian')
+                    ->select('id')
+                    ->where('id_registrasi', $data['id_registrasi'])
+                    ->get();
+        $dataKet = json_decode($getKT,true);
+
+        // dd(count($dataKet));
+
+        if(count($dataKet) == 0){
+            $model = new Ketidaksesuaian;
+            DB::beginTransaction();
+                $model->id_registrasi = $data['id_registrasi'];                
+                $model->id_penjadwalan = $data['id_penjadwalan'];
+                $model->save();
+            DB::Commit();
+            
+            $id_ketidaksesuaian_fix = DB::table('ketidaksesuaian')           
+                ->select('id')
+                ->orderBy('id','desc')
+                ->limit(1)
+                ->get();
+            
+                foreach($id_ketidaksesuaian_fix as $id2){
+                    foreach($id2 as $id_asli){
+                        $idkt = $id_asli;
+                    }                
+                }
+                // dd($idkt);
+            
+            $temp=0;
+            $temp2=0;
+            for ($i=0; $i < sizeof($data['klausul']); $i++) { 
+                $no = $jml;
+                $id_ketidaksesuaian = $idkt;
+                $klausul = $data['klausul'][$i];
+                $auditor = $data['auditor'][$i];
+                $deskripsi = $data['deskripsi'][$i];
+                $investigasi = $data['investigasi'][$i];
+                $tindakan = $data['tindakan'][$i];
+                $hasil = $data['hasil'][$i];
+
+                date_default_timezone_set('Asia/Jakarta');
+                $date = date("d-m-Y H:i:s");
+                $tgl = $date;
+
+                $model2 = new TemuanKetidaksesuaian;
+                DB::beginTransaction();                
+                    $model2->id_ketidaksesuaian = $id_ketidaksesuaian;
+                    $model2->klausul = $klausul;
+                    $model2->auditor = $auditor;
+                    $model2->deskripsi = $deskripsi;
+                    $model2->investigasi_akar_permasalahan = $investigasi;
+                    $model2->tindakan_perbaikan = $tindakan;                
+
+                    if($hasil == 'open'){
+                        $jmlTidakSesuai++;
+                        $model2->hasil_tinjauan = $hasil;
+                    }else{
+                        $jmlSesuai++;
+                        $model2->hasil_tinjauan = $hasil;
+                    }
+                    $model2->save();
+                DB::Commit();
+
+                $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $deskripsi, 'investigasi' => $investigasi, 'tindakan_koreksi' => $tindakan, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
+                $jml++;            
+            }
+            
+            if($jmlTidakSesuai > 0){
+                $model3 = new Ketidaksesuaian;                
+                $f = $model3->find($idkt);
+                $f->status = "open";
+                $f->jumlah_tidak_sesuai = $jmlTidakSesuai;
+                $f->jumlah_sesuai = $jmlSesuai;
+                $f->save();
+            }else{
+                $model3 = new Ketidaksesuaian;                
+                $f = $model3->find($idkt);
+                $f->status = "close";
+                $f->jumlah_tidak_sesuai = $jmlTidakSesuai;
+                $f->jumlah_sesuai = $jmlSesuai;
+                $f->save();
+            }         
+
+            $values = $arrData;
+            $templateProcessor->cloneRowAndSetValues('no', $values);
+        }else{
+            // dd("disiniii");
+            foreach($dataKet as $id_){
+                foreach($id_ as $id_asli){
+                    $idket2 = $id_asli;
                 }                
             }
-            // dd($idkt);
-        
-        $temp=0;
-        $temp2=0;
-        for ($i=0; $i < sizeof($data['klausul']); $i++) { 
-            $no = $jml;
-            $id_ketidaksesuaian = $idkt;
-            $klausul = $data['klausul'][$i];
-            $auditor = $data['auditor'][$i];
-            $deskripsi = $data['deskripsi'][$i];
-            $investigasi = $data['investigasi'][$i];
-            $tindakan = $data['tindakan'][$i];
-            $hasil = $data['hasil'][$i];
+            // dd($idket2);
 
-            date_default_timezone_set('Asia/Jakarta');
-            $date = date("d-m-Y H:i:s");
-            $tgl = $date;
+            $model = new Ketidaksesuaian;
+            $e = $model->find($idket2);
+            DB::beginTransaction();
+                $e->id_registrasi = $data['id_registrasi'];                
+                $e->id_penjadwalan = $data['id_penjadwalan'];
+                $e->save();
+            DB::Commit();                        
+            
+            $temp=0;
+            $temp2=0;
+            for ($i=0; $i < sizeof($data['klausul']); $i++) { 
+                $no = $jml;
+                $id_ketidaksesuaian = $idket2;
+                $klausul = $data['klausul'][$i];
+                $auditor = $data['auditor'][$i];
+                $deskripsi = $data['deskripsi'][$i];
+                $investigasi = $data['investigasi'][$i];
+                $tindakan = $data['tindakan'][$i];
+                $hasil = $data['hasil'][$i];
 
-            $model2 = new TemuanKetidaksesuaian;
-            DB::beginTransaction();                
-                $model2->id_ketidaksesuaian = $id_ketidaksesuaian;
-                $model2->klausul = $klausul;
-                $model2->auditor = $auditor;
-                $model2->deskripsi = $deskripsi;
-                $model2->investigasi_akar_permasalahan = $investigasi;
-                $model2->tindakan_perbaikan = $tindakan;                
+                date_default_timezone_set('Asia/Jakarta');
+                $date = date("d-m-Y H:i:s");
+                $tgl = $date;
 
-                if($hasil == 'open'){
-                    $jmlTidakSesuai++;
-                    $model2->hasil_tinjauan = $hasil;
-                }else{
-                    $jmlSesuai++;
-                    $model2->hasil_tinjauan = $hasil;
-                }
-                $model2->save();
-            DB::Commit();
+                $model2 = new TemuanKetidaksesuaian;
+                DB::beginTransaction();                
+                    $model2->id_ketidaksesuaian = $id_ketidaksesuaian;
+                    $model2->klausul = $klausul;
+                    $model2->auditor = $auditor;
+                    $model2->deskripsi = $deskripsi;
+                    $model2->investigasi_akar_permasalahan = $investigasi;
+                    $model2->tindakan_perbaikan = $tindakan;                
 
-            $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $deskripsi, 'investigasi' => $investigasi, 'tindakan_koreksi' => $tindakan, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
-            $jml++;            
+                    if($hasil == 'open'){
+                        $jmlTidakSesuai++;
+                        $model2->hasil_tinjauan = $hasil;
+                    }else{
+                        $jmlSesuai++;
+                        $model2->hasil_tinjauan = $hasil;
+                    }
+                    $model2->save();
+                DB::Commit();
+
+                $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $deskripsi, 'investigasi' => $investigasi, 'tindakan_koreksi' => $tindakan, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
+                $jml++;            
+            }
+            
+            if($jmlTidakSesuai > 0){
+                $model3 = new Ketidaksesuaian;                
+                $f = $model3->find($idket2);
+                $f->status = "open";
+                $f->jumlah_tidak_sesuai = $jmlTidakSesuai;
+                $f->jumlah_sesuai = $jmlSesuai;
+                $f->save();
+            }else{
+                $model3 = new Ketidaksesuaian;                
+                $f = $model3->find($idket2);
+                $f->status = "close";
+                $f->jumlah_tidak_sesuai = $jmlTidakSesuai;
+                $f->jumlah_sesuai = $jmlSesuai;
+                $f->save();
+            }         
+
+            $values = $arrData;
+            $templateProcessor->cloneRowAndSetValues('no', $values);
         }
-        
-        if($jmlTidakSesuai > 0){
-            $model3 = new Ketidaksesuaian;                
-            $f = $model3->find($idkt);
-            $f->status = "open";
-            $f->jumlah_tidak_sesuai = $jmlTidakSesuai;
-            $f->jumlah_sesuai = $jmlSesuai;
-            $f->save();
-        }else{
-            $model3 = new Ketidaksesuaian;                
-            $f = $model3->find($idkt);
-            $f->status = "close";
-            $f->jumlah_tidak_sesuai = $jmlTidakSesuai;
-            $f->jumlah_sesuai = $jmlSesuai;
-            $f->save();
-        }         
-
-        $values = $arrData;
-        $templateProcessor->cloneRowAndSetValues('no', $values);
 
         $fileName = 'FOR-HALAL-OPS-08 Laporan Temuan Ketidaksesuaian ('.$data['id_registrasi'].').docx';
         $templateProcessor->saveAs("storage/laporan/download/Laporan Ketidaksesuaian/Isian/".$fileName);
