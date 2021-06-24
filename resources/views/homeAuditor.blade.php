@@ -137,7 +137,7 @@
         <!-- begin col-3 -->
 		<div class="col-xl-3 col-md-6 " >
 			<div class="widget widget-stats bg-blue animated zoomIn delay-2s">
-				<div class="stats-icon"><i class="fa fa-desktop text-white"></i></div>
+				<div class="stats-icon"><i class="fa fa-book text-white"></i></div>
 				<div class="stats-info">
 					<h4>JUMLAH AUDIT</h4>
 					<a href="{{route('listregistrasipelangganaktif')}}" class="text-white"><p>{{$dataAudit}}</p></a>
@@ -151,7 +151,7 @@
 		<!-- begin col-3 -->
 		<div class="col-xl-4 col-md-6 ">
 			<div class="widget widget-stats bg-info animated zoomIn delay-3s">
-				<div class="stats-icon"><i class="fa fa-link text-white"></i></div>
+				<div class="stats-icon"><i class="fa fa-certificate text-white"></i></div>
 				<div class="stats-info">
 					<h4>JUMLAH PELATIHAN YANG TELAH DIIKUTI</h4>
 					{{-- <a href="{{route('user.listpelanggan')}}" class="text-white"><p>{{$dataPelanggan}}</p></a> --}}
@@ -166,7 +166,7 @@
 		<!-- begin col-3 -->
 		<div class="col-xl-4 col-md-6 ">
 			<div class="widget widget-stats bg-orange animated zoomIn delay-4s">
-				<div class="stats-icon"><i class="fa fa-users text-white"></i></div>
+				<div class="stats-icon"><i class="fa fa-signal text-white"></i></div>
 				<div class="stats-info">
 					<h4>PENILAIAN KERJA AUDITOR</h4>
 					<a href="{{route('user.listpelanggan')}}" class="text-white"><p>{{$dataUser}}</p></a>

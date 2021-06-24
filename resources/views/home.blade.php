@@ -50,7 +50,7 @@
 		<!-- begin col-3 -->
 		<div class="col-xl-3 col-md-6 ">
 			<div class="widget widget-stats bg-info animated zoomIn delay-3s">
-				<div class="stats-icon"><i class="fa fa-link text-white"></i></div>
+				<div class="stats-icon"><i class="fa fa-users text-white"></i></div>
 				<div class="stats-info">
 					<h4>PELANGGAN TERDAFTAR</h4>
 					<a href="{{route('user.listpelanggan')}}" class="text-white"><p>{{$dataPelanggan}}</p></a>
@@ -64,7 +64,7 @@
 		<!-- begin col-3 -->
 		<div class="col-xl-3 col-md-6 ">
 			<div class="widget widget-stats bg-orange animated zoomIn delay-4s">
-				<div class="stats-icon"><i class="fa fa-users text-white"></i></div>
+				<div class="stats-icon"><i class="fa fa-user text-white"></i></div>
 				<div class="stats-info">
 					<h4>PELANGGAN AKTIF</h4>
 					<a href="{{route('user.listpelanggan')}}" class="text-white"><p>{{$dataUser}}</p></a>
@@ -78,7 +78,7 @@
 		<!-- begin col-3 -->
 		<div class="col-xl-3 col-md-6">
 			<div class="widget widget-stats bg-green animated zoomIn delay-5s">
-				<div class="stats-icon"><i class="fa fa-clock text-white"></i></div>
+				<div class="stats-icon"><i class="fa fa-book text-white"></i></div>
 				<div class="stats-info">
 					<h4>TOTAL REGISTRASI</h4>
 					<a href="{{route('listregistrasipelangganaktif')}}" class="text-white"><p>{{$dataRegistrasi}}</p></a>
