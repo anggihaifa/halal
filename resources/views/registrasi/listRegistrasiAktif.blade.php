@@ -64,8 +64,8 @@
                                                     <option value="12">Tehnical Review</option>
                                                     <option value="13">Persiapan Tinjauan Komite Sertifikasi</option>
                                                     <option value="14">Tinjauan Komite Sertifikasi</option>
-                                                    <option value="15">Persiapan Sidang Penetapan Kehalalan Produk</option>
-                                                    <option value="16">Sidang Penetapan Kehalalan Produk</option>
+                                                    <option value="15">Persiapan Sidang Fatwa Halal</option>
+                                                    <option value="16">Sidang Fatwa Halal</option>
                                                     <option value="17">Ketetapan Halal</option>
                                                 </select>
                                             </div>
@@ -118,7 +118,7 @@
 
                     <form id="formpenjadwalan1">
                         <div class="modal-body">
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label>ID Registrasi</label>
                                 <input type="text" class="form-control"
                                 id="idregis1" name="idregis1" readonly />
@@ -152,12 +152,18 @@
 
                             <div class="form-group">
                                 <label>Skema audit</label>
-                                <select id="skema_audit" name="skema_audit" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white">
+                                <select id="skema_audit" name="skema_audit" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                     <option value="">==Pilih Skema Audit==</option>
                                     <option value="SJPH">Sistem Jaminan Produk Halal</option>
                                     <option value="SMH">SMH SNI 99001:2016</option>                                                                        
                                 </select>
-                            </div>                                           
+                            </div>    
+
+                             <div class="form-group">
+                                <label>Catatan Perbaikan</label>
+                                <input type="text" class="form-control"
+                                id="catatan_penjadwalan_audit1" readonly />
+                            </div>                                       
                         </div>
                         <div class="modal-footer">
                            <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan penjadwalan?')">Submit</button>
@@ -186,7 +192,7 @@
 
                     <form id="formpenjadwalan2">
                         <div class="modal-body">
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label>ID Registrasi</label>
                                 <input type="text" class="form-control"
                                 id="idregis2" name="idregis2" readonly />
@@ -198,7 +204,7 @@
                              
                                 <input id="mulai_audit2"  name="mulai_audit2" class="form-control" data-format="dd-mm-yyyy" type="date" class="form-control" required></input>
                                 <span class="add-on">
-                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar" required>
                                   </i>
                                 </span>       
                             </div>
@@ -208,7 +214,7 @@
                             <div class="form-group">
                                 <label>Saran Ketua Tim Auditor:  </label> <a id="saran1"></a><br>
                                 <label>Ketua Tim Auditor</label>
-                                <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white"required>
+                                <select id="pelaksana1_audit2" name="pelaksana1_audit2" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
@@ -231,6 +237,12 @@
                                 </select>
        
                             </div>
+
+                            <div class="form-group">
+                                <label>Catatan Perbaikan</label>
+                                <input type="text" class="form-control"
+                                id="catatan_penjadwalan_audit2" readonly />
+                            </div>        
 
                             <!-- <div class="form-group">
 
@@ -295,7 +307,7 @@
 
                     <form id="formpenjadwalan3">
                         <div class="modal-body">
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label>ID Registrasi</label>
                                 <input type="text" class="form-control"
                                 id="idregis3" name="idregis3" readonly />
@@ -325,6 +337,12 @@
                                     <option value="">==Pilih Tehnical Reviewer==</option>                                                                        
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Catatan Perbaikan</label>
+                                <input type="text" class="form-control"
+                                id="catatan_penjadwalan_tr" readonly />
+                            </div>    
 
                             <!-- <div class="form-group">
                                 <label>Auditor 3</label>
@@ -360,7 +378,7 @@
 
                     <form id="formpenjadwalan4">
                         <div class="modal-body">
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label>ID Registrasi</label>
                                 <input type="text" class="form-control"
                                 id="idregis4" name="idregis4" readonly />
@@ -391,6 +409,12 @@
                                     <option value="">==Pilih Auditor==</option>                                                                        
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Catatan Perbaikan</label>
+                                <input type="text" class="form-control"
+                                id="catatan_penjadwalan_tinjauan" readonly />
+                            </div>    
 
                             <!-- <div class="form-group">
                                 <label>Komite Sertifikasi 3</label>
@@ -426,7 +450,7 @@
                         <td class="valign-middle text-center">1</td>
                         <td class="valign-middle text-center">Audit Tahap 1</td>
                         <td class="valign-middle text-center" id="t_mulai1">-</td>
-                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center">Remote Audit</td>
                         <td class="valign-middle text-center" id="t_p1_a1">d.pelaksana1_audit1</td>    
                         <td class="valign-middle text-center">-</td>
                     </tr>
@@ -434,23 +458,23 @@
                         <td class="valign-middle text-center">2</td>
                         <td class="valign-middle text-center">Audit Tahap 2</td>
                         <td class="valign-middle text-center" id="t_mulai2"></td>
-                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center">d.ktg_audit2</td>
                         <td class="valign-middle text-center" id="t_p1_a2"></td>    
                         <td class="valign-middle text-center" id="t_p2_a2"></td>     
                     </tr>
                     <tr>
                         <td class="valign-middle text-center">3</td>
                         <td class="valign-middle text-center">Tehnical Review</td>
-                        <td class="valign-middle text-center">-</td>
-                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center">d.mulai_tr</td>
+                        <td class="valign-middle text-center">Remote</td>
                         <td class="valign-middle text-center" id="t_p1_tr"></td>    
                         <td class="valign-middle text-center" id="t_p2_tr"></td>    
                     </tr>
                     <tr>
                         <td class="valign-middle text-center">4</td>
                         <td class="valign-middle text-center">Tinjauan Komite</td>
-                        <td class="valign-middle text-center">-</td>
-                        <td class="valign-middle text-center">-</td>
+                        <td class="valign-middle text-center">d.mulai_tinjauan</td>
+                        <td class="valign-middle text-center">Remote</td>
                         <td class="valign-middle text-center" id="t_p1_tk" ></td>    
                         <td class="valign-middle text-center" id="t_p2_tk"></td>   
                     </tr>
@@ -523,6 +547,7 @@
             var $this = $(e.relatedTarget);
             
             var data_id = $this.data('id');
+            var catatan_penjadwalan_audit1 = $this.data('catatan-penjadwalan-audit1');
             var modal = $('#modalPenjadwalan1');
            
           
@@ -530,6 +555,7 @@
 
             }else{
                 modal.find('#idregis1').val(data_id);
+                modal.find('#catatan_penjadwalan_audit1').val(catatan_penjadwalan_audit1);
                   
                 modal.find('#formpenjadwalan1').attr('action', function (i,old) {
                    return old + '/' + data_id;
@@ -547,6 +573,7 @@
             var $this = $(e.relatedTarget);
             
             var data_id = $this.data('id');
+            var catatan_penjadwalan_audit2 = $this.data('catatan-penjadwalan-audit2');
             var data_saran1 = $this.data('pelaksana1');
 
             if(data_saran1 != null){
@@ -559,7 +586,7 @@
             }else{
                 data_saran1 ="-";
             }
-            console.log(data_saran1);
+            //console.log(data_saran1);
             //var data_saran2 = $this.data('pelaksana2');
             var modal = $('#modalPenjadwalan2');
 
@@ -572,10 +599,10 @@
             if(modal.find('#idregis2').val()){
 
             }else{
-
+                modal.find('#catatan_penjadwalan_audit2').val(catatan_penjadwalan_audit2);
                 modal.find("#idregis2").val(data_id);
-                //x.innerHTML = '<b>'+data_saran1+'</b>' ;
-                modal.find("#saran1").text(data_saran1);
+                x.innerHTML = '<b>'+data_saran1+'</b>' ;
+                //modal.find("#saran1").text(data_saran1);
                 //y.innerHTML = '<b>'+data_saran2+'</b>' ;
                 // $.ajax({
 
@@ -613,7 +640,7 @@
 
 
             var $this = $(e.relatedTarget);
-            
+            var catatan_penjadwalan_tr = $this.data('catatan-penjadwalan-tr');
             var data_id = $this.data('id');
             var modal = $('#modalPenjadwalan3');
            
@@ -622,7 +649,7 @@
 
             }else{
                 modal.find('#idregis3').val(data_id);
-                  
+                modal.find('#catatan_penjadwalan_tr').val(catatan_penjadwalan_tr);
                 modal.find('#formpenjadwalan3').attr('action', function (i,old) {
                    return old + '/' + data_id;
                 });  
@@ -667,7 +694,7 @@
 
 
             var $this = $(e.relatedTarget);
-            
+            var catatan_penjadwalan_tinjauan = $this.data('catatan-penjadwalan-tinjauan');
             var data_id = $this.data('id');
             var modal = $('#modalPenjadwalan4');
            
@@ -679,7 +706,7 @@
 
             }else{
                 modal.find('#idregis4').val(data_id);
-                  
+                modal.find('#catatan_penjadwalan_tinjauan').val(catatan_penjadwalan_tinjauan);
                 modal.find('#formpenjadwalan4').attr('action', function (i,old) {
                    return old + '/' + data_id;
                 });  
@@ -730,17 +757,51 @@
             var p2_tk = $this.data('pelaksana2-tinjauan');
             var mulai_audit1 = $this.data('mulai-audit1');
             var mulai_audit2 = $this.data('mulai-audit2');
+            var mulai_tr = $this.data('mulai-tr');
+            var mulai_tinjauan = $this.data('mulai-tinjauan');
             var modal = $('#modaljadwal');
             
            
             if(mulai_audit1  == null){
 
                 mulai_audit1 ="-";
+            }else{
+                if (mulai_audit1.indexOf('-') > -1){
+                    $str_mulai1 =  mulai_audit1.split("-");
+                    mulai_audit1 = $str_mulai1[2]+"-"+$str_mulai1[1]+"-"+$str_mulai1[0];
+                }
+
             }
            
             if(mulai_audit2  == null){
 
                 mulai_audit2 ="-";
+            }else{
+                if (mulai_audit2.indexOf('-') > -1){
+                    $str_mulai2 =  mulai_audit2.split("-");
+                    mulai_audit2 = $str_mulai2[2]+"-"+$str_mulai2[1]+"-"+$str_mulai2[0];
+                }
+
+            }
+
+            if(mulai_tr  == null){
+
+                mulai_tr ="-";
+            }else{
+                if (mulai_tr.indexOf('-') > -1){
+                    $str_tr =  mulai_tr.split("-");
+                    mulai_tr = $str_tr[2]+"-"+$str_tr[1]+"-"+$str_tr[0];
+                }
+
+            }
+
+            if(mulai_tinjauan  == null){
+                 mulai_tinjauan ="-";
+            }else{
+                if (mulai_tinjauan.indexOf('-') > -1){
+                    $str_tinjauan =  mulai_tinjauan.split("-");
+                    mulai_tinjauan = $str_tinjauan[2]+"-"+$str_tinjauan[1]+"-"+$str_tinjauan[0];
+                }
             }
            
             
@@ -1291,13 +1352,13 @@
 
                             var status14_1 = (full.status == '14_1') ? dButton('Proses Tinjauan Komite Sertifikasi Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/14_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Tinjauan Komite Sertifikasi Selesai??')">Proses Tinjauan Komite Sertifikasi Selesai</a>`;
 
-                            var status15 = (full.status == 15) ? dButton('Persiapan Sidang Penetapan Kehalalan Produk'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/15" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Persiapan Sidang Penetapan Kehalalan Produk??')">Persiapan Sidang Penetapan Kehalalan Produk</a>`;
+                            var status15 = (full.status == 15) ? dButton('Persiapan Sidang Fatwa Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/15" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Persiapan Sidang Fatwa Halal??')">Persiapan Sidang Fatwa Halal</a>`;
 
                             var status15_0 = (full.status == '15_0') ? dButton('Reviewer Belum Mereview Laporan Hasil Akhir Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/15_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Reviewer Belum Mereview Laporan Hasil Akhir Audit??')">Reviewer Belum Mereview Laporan Hasil Akhir Audit</a>`;
 
                             var status15_1 = (full.status == '15_1') ? dButton('Laporan Akhir Audit Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/15_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Laporan Akhir Audit Terkonfirmasi??')">Laporan Akhir Audit Terkonfirmasi</a>`;
 
-                            var status16 = (full.status == 16) ? dButton('Proses Sidang Penetapan Kehalalan Produk'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/16" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Sidang Penetapan Kehalalan Produk??')">Proses Sidang Penetapan Kehalalan Produk</a>`;
+                            var status16 = (full.status == 16) ? dButton('Proses Sidang Fatwa Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/16" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Sidang Fatwa Halal??')">Proses Sidang Fatwa Halal</a>`;
 
                             var status17 = (full.status == 17) ? dButton('Ketetapan Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/17" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Ketetapan Halal??')">Ketetapan Halal</a>`;
 
@@ -1317,10 +1378,10 @@
 
                             var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
 
-                            var audit1 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan1' style="cursor:pointer">Audit Tahap 1</a>`;
-                            var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
-                            var tehnicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan3' style="cursor:pointer">Tehnical Review</a>`;
-                            var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite</a>`;
+                            var audit1 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-catatan-penjadwalan-audit1="`+full.catatan_penjadwalan_audit1+`" data-target='#modalPenjadwalan1' style="cursor:pointer">Audit Tahap 1</a>`;
+                            var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-catatan-penjadwalan-audit2="`+full.catatan_penjadwalan_audit2+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
+                            var tehnicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-catatan-penjadwalan-tr="`+full.catatan_penjadwalan_tr+`" data-target='#modalPenjadwalan3' style="cursor:pointer">Tehnical Review</a>`;
+                            var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-catatan-penjadwalan-tinjauan="`+full.catatan_penjadwalan_tinjauan+`" data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite</a>`;
 
                             var ksb = `<a class="dropdown-item" style="cursor:pointer" href="{{url('upload_ksb')}}/`+full.id+`">Input Berkas Konfirmasi, Surat Tugas dan Berita Acara</a>`;
                             
@@ -1376,7 +1437,7 @@
                                   var penjadwalan = audit1  ;
                             }else if(full.status == 9 || full.status == '9_1' || full.status == '9_2' || full.status == '9_3' ){
                                 var penjadwalan = audit2+ksb;
-                            }else if(full.status == 11 || full.status == '11_1' || full.status == '11_2' || full.status == '11_3' ){
+                            }else if(full.status == 11 || full.status == '11_1' || full.status == '11_2' || full.status == '11_3'||full.status == 12 || full.status == '12_1' || full.status == '12_2' || full.status == '12_3' ){
                                 var penjadwalan = tehnicalReview;
                             }else if(full.status == 13 || full.status == '13_1' || full.status == '13_2' || full.status == '13_3' ){
                                 var penjadwalan = tinjauan;
@@ -1503,7 +1564,7 @@
 
                                                                 <a href="{{url('verifikasi_dokumen_sertifikasi')}}/`+full.id+`" class="dropdown-item" ><i class="fa fa-edit">
 
-                                                                    </i> Lihat Dokumen
+                                                                    </i> Verifikasi Dokumen
                                                                 </a>
                                                                 <div class="dropdown-divider"></div>
 
@@ -1633,9 +1694,11 @@
                                                                 <table class="table-borderless text-center align-middle">
                                                                 <tr>
                                                                     <td class="text-center align-middle">
-                                                                        <i class="fa fa-eye" aria-hidden="true" data-toggle='modal' data-pelaksana1-audit1='`+full.pelaksana1_audit1+`' data-pelaksana1-audit2='`+full.pelaksana1_audit2+`' data-pelaksana2-audit2='`+full.pelaksana2_audit2+`' data-pelaksana1-tr='`+full.pelaksana1_tr+`' data-pelaksana2-tr='`+full.pelaksana2_tr+`' data-pelaksana1-tinjauan='`+full.pelaksana1_tinjauan+`' data-pelaksana2-tinjauan='`+full.pelaksana2_tinjauan+`' 
+                                                                        <i class="fa fa-eye" style="cursor:pointer" aria-hidden="true" data-toggle='modal' data-pelaksana1-audit1='`+full.pelaksana1_audit1+`' data-pelaksana1-audit2='`+full.pelaksana1_audit2+`' data-pelaksana2-audit2='`+full.pelaksana2_audit2+`' data-pelaksana1-tr='`+full.pelaksana1_tr+`' data-pelaksana2-tr='`+full.pelaksana2_tr+`' data-pelaksana1-tinjauan='`+full.pelaksana1_tinjauan+`' data-pelaksana2-tinjauan='`+full.pelaksana2_tinjauan+`' 
                                                                         data-mulai-audit1='`+full.mulai_audit1+`' 
-                                                                        data-mulai-audit2='`+full.mulai_audit2+`'  data-target='#modaljadwal'></i>
+                                                                        data-mulai-audit2='`+full.mulai_audit2+`' data-mulai-audit1='`+full.mulai_audit1+`' 
+                                                                        data-mulai-audit2='`+full.mulai_audit2+`' data-mulai-tr='`+full.mulai_tr+`' 
+                                                                        data-mulai-tinjauan='`+full.mulai_tinjauan+`'  data-target='#modaljadwal'></i>
 
                                                                     </td>
                                                                 </tr>

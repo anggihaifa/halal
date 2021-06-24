@@ -71,12 +71,12 @@
             <table id="table" class="table table-bordered table-td-valign-middle table-sm" cellspacing="0" style="width:100%">
                 <thead class="thead-light">
                     <tr>
-                        <th class="text-nowrap valign-middle text-center">No</th>                      
-                        <th class="text-nowrap valign-middle text-center">No. Registrasi</th>
-                        <th class="text-nowrap valign-middle text-center">Perusahaan</th>
-                        <th class="text-nowrap valign-middle text-center">Kelompok Produk</th>
+                        <th class="valign-middle text-center">No</th>                      
+                        <th class="valign-middle text-center">No. Registrasi</th>
+                        <th class="valign-middle text-center">Perusahaan</th>
+                        <th class="valign-middle text-center">Kelompok Produk</th>
                         <th class="valign-middle text-center" style="max-width:20%">Status</th>
-                        <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th class="valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                 </thead>
             </table>
@@ -87,7 +87,8 @@
      <!-- end panel -->
 
      <!--modal-->
-    <div id="modalKebutuhan" class="modal fade" role="dialog">
+    <div id="modalKebutuhan" class="modal fade" role="dialog" style="max-height: calc(100vh - 50px);
+    overflow-y: auto;">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -113,7 +114,7 @@
                                     </thead>
                                 </table>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label>ID Registrasi</label>
                                 <input type="text" class="form-control"
                                 id="idregis1" name="idregis1" readonly/>
@@ -479,7 +480,7 @@
                                             <td>
                                                 <select id="hasil_review" name="hasil_review" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                                     <option value="">==Pilih Hasil Review==</option>
-                                                    <option value="konfirmasi">Konfirmasi Penghitungan Waktu Audit</option>
+                                                    <option value="konfirmasi">Setuju</option>
                                                     <option value="perbaikan">Perbaikan</option>                                                               
                                                 </select>
                                             </td>
@@ -772,7 +773,7 @@
                             // var kebutuhanAudit = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id_registrasi+` data-target='modalKebutuhan'>Penentuan Waktu Audit</a>`;
                 
                             // data-no-registrasi-bpjph=`+full.no_registrasi_bpjph+` data-status-registrasi=`+full.status_registrasi+` data-name=`+full.name+` data-alamat-perusahaan=`+full.alamat_perusahaan+`
-                            return `<button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id=`+full.id_regis+` data-status-registrasi='`+full.status_registrasi+`' data-no-registrasi-bpjph=`+full.no_registrasi_bpjph+` data-name='`+full.name+`' data-alamat-perusahaan='`+full.alamat_perusahaan+`' data-ruang-lingkup='`+full.ruang_lingkup+`' data-ktgprod='`+full.ktgprod+`' data-w-dasar='`+full.w_dasar+`' data-h-keamanan-pangan='`+full.h_keamanan_pangan+`' data-h-variasi-produk='`+full.h_variasi_produk+`' data-h-jumlah-bahan='`+full.h_jumlah_bahan+`' data-ft-equivalent='`+full.ft_equivalent+`' data-t-lokasi-dikunjungi='`+full.t_lokasi_dikunjungi+`' data-w-p-audit='`+full.w_p_audit+`' data-w-pengujian='`+full.w_pengujian+`' data-w-pelaporan-audit='`+full.w_pelaporan_audit+`' data-w_verifikasi='`+full.w_verifikasi+`' data-w-tehnical-review='`+full.w_tehnical_review+`' data-w-rapat-komite='`+full.w_rapat_komite+`' data-faktor1='`+full.faktor1+`'data-faktor2='`+full.faktor2+`' data-faktor3='`+full.faktor3+`' data-faktor4='`+full.faktor4+`' data-faktor5='`+full.faktor5+`' data-faktor6='`+full.faktor6+`' data-faktor7='`+full.faktor7+`' data-faktor8='`+full.faktor8+`' data-faktor9='`+full.faktor9+`' data-faktor10='`+full.faktor10+`' data-faktor11='`+full.faktor11+`' data-faktor12='`+full.faktor12+`' data-faktor13='`+full.faktor13+`' data-faktor14='`+full.faktor14+`'  data-total-waktu-kebutuhan-audit='`+full.total_waktu_kebutuhan_audit+`' data-catatan-review-kebutuhan-audit = '`+full.catatan_review_kebutuhan_audit+`' data-hasil-review = '`+full.hasil_review+`'  data-target='#modalKebutuhan' >Penentuan Waktu Audit</button>`
+                            return `<button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id=`+full.id_regis+` data-status-registrasi='`+full.status_registrasi+`' data-no-registrasi-bpjph=`+full.no_registrasi_bpjph+` data-name='`+full.name+`' data-alamat-perusahaan='`+full.alamat_perusahaan+`' data-ruang-lingkup='`+full.ruang_lingkup+`' data-ktgprod='`+full.ktgprod+`' data-w-dasar='`+full.w_dasar+`' data-h-keamanan-pangan='`+full.h_keamanan_pangan+`' data-h-variasi-produk='`+full.h_variasi_produk+`' data-h-jumlah-bahan='`+full.h_jumlah_bahan+`' data-ft-equivalent='`+full.ft_equivalent+`' data-t-lokasi-dikunjungi='`+full.t_lokasi_dikunjungi+`' data-w-p-audit='`+full.w_p_audit+`' data-w-pengujian='`+full.w_pengujian+`' data-w-pelaporan-audit='`+full.w_pelaporan_audit+`' data-w_verifikasi='`+full.w_verifikasi+`' data-w-tehnical-review='`+full.w_tehnical_review+`' data-w-rapat-komite='`+full.w_rapat_komite+`' data-faktor1='`+full.faktor1+`'data-faktor2='`+full.faktor2+`' data-faktor3='`+full.faktor3+`' data-faktor4='`+full.faktor4+`' data-faktor5='`+full.faktor5+`' data-faktor6='`+full.faktor6+`' data-faktor7='`+full.faktor7+`' data-faktor8='`+full.faktor8+`' data-faktor9='`+full.faktor9+`' data-faktor10='`+full.faktor10+`' data-faktor11='`+full.faktor11+`' data-faktor12='`+full.faktor12+`' data-faktor13='`+full.faktor13+`' data-faktor14='`+full.faktor14+`'  data-total-waktu-kebutuhan-audit='`+full.total_waktu_kebutuhan_audit+`' data-catatan-review-kebutuhan-audit = '`+full.catatan_review_kebutuhan_audit+`' data-hasil-review = '`+full.hasil_review+`'  data-target='#modalKebutuhan' >Penentuan Waktu Audit</button><br> <a href="{{url('verifikasi_dokumen_sertifikasi')}}/`+full.id_regis+`" class="btn btn-sm" ><i class="fa fa-eye"></i> View Dokumen</a>`
                         
                         
                         

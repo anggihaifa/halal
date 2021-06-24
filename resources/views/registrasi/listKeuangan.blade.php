@@ -288,6 +288,39 @@
 
         });
 
+        window.addEventListener('load', (event) => {
+            $('#modalbayar1').find('form').trigger('reset');
+            
+        });
+
+        $('#modalbayar1').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        
+        
+        });
+
+        window.addEventListener('load', (event) => {
+            $('#modalbayar2').find('form').trigger('reset');
+            
+        });
+
+        $('#modalbayar2').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        
+        
+        });
+
+        window.addEventListener('load', (event) => {
+            $('#modalbayar3').find('form').trigger('reset');
+            
+        });
+
+        $('#modalbayar3').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        
+        
+        });
+
  
         $('#modalbayar2').on('show.bs.modal', function(e) {
 
@@ -327,11 +360,11 @@
             todayHighlight: true,
         });
         
-        function formatRupiah(d) {
+        function formatRupiah(d, mata_uang) {
             return Number(d).toLocaleString('id', {
               maximumFractionDigits: 2,
               style: 'currency',
-              currency: 'IDR'
+              currency: mata_uang
             });
         }
 
@@ -423,26 +456,7 @@
 
                         //var kw = full.kode_wilayah;
 
-                        var ddCabang = `<form action="{{route('registrasi.updatecabang')}}" method="post">    
-                                            @csrf
-                                            @method('PUT')
-                                            
-                                            <input type="text" name="id" value="`+full.id+`" hidden></input>
-                                            <select id="kode_wilayah" name="kode_wilayah" class="form-control" onchange="this.form.submit()">
-
-                                                <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
-
-                                                @if($cabang != null)
-                                                @foreach($cabang as $dataCabang =>$value){
-
-                                                    <option value='{{$value->ATTRIBUTE2}}'>{{$value->NAME}}
-                                                    </option>
-                                                    
-                                                @endforeach
-                                                @endif
-
-                                            </select>
-                                        </form>`;
+                      
                         
                         return `<div class="col-lg-12 row rounded-sm shadow-sm border pt-3 pb-3 m-0">
                                 
@@ -522,7 +536,7 @@
                                                     </td>
 
                                                     <td class="text-center align-middle">
-                                                        `+formatRupiah(full.total_biaya_sertifikasi)+`
+                                                        `+formatRupiah(full.total_biaya_sertifikasi, full.mata_uang)+`
                                                     </td>
                                                     
                                                     <td class="text-center align-middle">
@@ -599,7 +613,7 @@
                                                         </td>
 
                                                         <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap1)+`
+                                                            `+formatRupiah(full.nominal_tahap1, full.mata_uang)+`
                                                         </td>
                                                         
                                                         <td class="text-center align-middle">
@@ -619,7 +633,7 @@
                                                             `+checkStatusPembayaran(full.status_tahap2)+`
                                                         </td>
                                                         <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap2)+`
+                                                            `+formatRupiah(full.nominal_tahap2, full.mata_uang)+`
                                                         </td>
                                                         <td class="text-center align-middle">
                                                             `+unduhBayar2+`
@@ -637,7 +651,7 @@
                                                             `+checkStatusPembayaran(full.status_tahap3)+`
                                                         </td>
                                                         <td class="text-center align-middle">
-                                                            `+formatRupiah(full.nominal_tahap3)+`
+                                                            `+formatRupiah(full.nominal_tahap3, full.mata_uang)+`
                                                         </td>
                                                         <td class="text-center align-middle">
                                                             `+unduhBayar3+`

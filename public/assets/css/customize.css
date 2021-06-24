@@ -9,9 +9,8 @@ body{
     /* background: #218c74!important; */
     backdrop-filter: blur(10px);
 }
-.page-with-wide-sidebar .sidebar, .page-with-wide-sidebar .sidebar-bg{
-    /* width: 200px !important; */
-    width: 17%;
+.page-with-wide-sidebar .sidebar, .page-with-wide-sidebar .sidebar-bg {
+    width: 225px;
 }
 .page-with-wide-sidebar .content{
     margin-left: 220px;
@@ -351,9 +350,10 @@ body{
 }
 
 .slimScrollDiv{
-    /* background: #282828; */
-    background: #218c74;
-    /* background: linear-gradient(147deg,rgb(67, 67, 67) 0%, rgb(21, 21, 21) 100%) !important; */
+    /*background: #282828; */
+    background: #46957f;
+    background: linear-gradient(147deg,rgb(59 144 112) 0%, rgb(40 150 145) 100%) !important;
+}
 }
 
 /* .slimScrollDiv span{
@@ -647,10 +647,10 @@ body{
     
     }
 
-    .navbar-nav li{
-        width: 150px;
-        text-align: center;
-    }
+    .navbar-nav li {
+		width: 100%;
+		text-align: center;
+	}
 
     .nav-link:hover{
         color: #b6c2c9!important;
@@ -1065,4 +1065,17 @@ select.list-dt:focus {
     word-wrap: break-word!important;
     text-overflow: inherit!important;
     white-space: normal!important;
+}
+
+.sidebar .nav>li.nav-profile .info small {
+    display: block;
+    color: rgb(255 255 255);
+    font-size: 12px;
+    margin-bottom: -5px;
+    text-shadow: 0px 0px 10px black;
+}
+.sidebar .nav>li.nav-profile .info {
+    font-size: 14px;
+    position: relative;
+    text-shadow: 0px 0px 10px black;
 }

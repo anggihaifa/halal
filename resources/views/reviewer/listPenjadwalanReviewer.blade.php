@@ -104,7 +104,7 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                             <label class="control-label font-weight-bold" for="id">ID</label>  
                                             <div >
                                                 <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly>
@@ -116,7 +116,7 @@
 
                                     <tr>
                                         <td>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                             <label class="control-label font-weight-bold" for="jenis">Jenis</label>  
                                             <div >
                                                 <input id="jenis"  name="jenis" type="text" placeholder="" class="form-control " readonly>
@@ -128,7 +128,7 @@
 
                                     <tr>
                                         <td>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                             <label class="control-label font-weight-bold" for="pelaksana1">Pelaksana1</label>  
                                             <div >
                                                 <input id="pelaksana1"  name="pelaksana1" type="text" placeholder="" class="form-control " readonly>
@@ -140,7 +140,7 @@
 
                                     <tr>
                                         <td>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                             <label class="control-label font-weight-bold" for="pelaksana2">Pelaksana2</label>  
                                             <div >
                                                 <input id="pelaksana2"  name="pelaksana2" type="text" placeholder="" class="form-control " readonly>
@@ -212,7 +212,7 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                             <label class="control-label font-weight-bold" for="id">ID</label>  
                                             <div >
                                                 <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly>
@@ -224,7 +224,7 @@
                                     
                                     <tr>
                                         <td>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                             <label class="control-label font-weight-bold" for="jenis">Jenis</label>  
                                             <div >
                                                 <input id="jenis"  name="jenis" type="text" placeholder="" class="form-control " readonly>
@@ -439,15 +439,50 @@
          
        function format ( d ) {
 
+           
+
             if(d.mulai_audit1  == null){
 
                 d.mulai_audit1 ="-";
+            }else{
+                if (d.mulai_audit1.indexOf('-') > -1){
+                    $str_mulai1 =  d.mulai_audit1.split("-");
+                    d.mulai_audit1 = $str_mulai1[2]+"-"+$str_mulai1[1]+"-"+$str_mulai1[0];
+                }
+
             }
-            
+           
             if(d.mulai_audit2  == null){
 
                 d.mulai_audit2 ="-";
+            }else{
+                if (d.mulai_audit2.indexOf('-') > -1){
+                    $str_mulai2 =  d.mulai_audit2.split("-");
+                    d.mulai_audit2 = $str_mulai2[2]+"-"+$str_mulai2[1]+"-"+$str_mulai2[0];
+                }
+
             }
+
+            if(d.mulai_tr  == null){
+
+                d.mulai_tr ="-";
+            }else{
+                if (d.mulai_tr.indexOf('-') > -1){
+                    $str_tr =  d.mulai_tr.split("-");
+                    d.mulai_tr = $str_tr[2]+"-"+$str_tr[1]+"-"+$str_tr[0];
+                }
+
+            }
+
+            if(d.mulai_tinjauan  == null){
+                d.mulai_tinjauan ="-";
+            }else{
+                if (d.mulai_tinjauan.indexOf('-') > -1){
+                    $str_tinjauan =  d.mulai_tinjauan.split("-");
+                    d.mulai_tinjauan = $str_tinjauan[2]+"-"+$str_tinjauan[1]+"-"+$str_tinjauan[0];
+                }
+            }
+           
             
            
 
@@ -533,46 +568,73 @@
                 d.pelaksana2_tinjauan ="-";
             }
 
-           
+            if(d.status_penjadwalan_audit1 == 3){
+                btnApprove1 = '<button class="btn btn-xs btn-green m-r-5 text-white" disable>Approve</button>';
+                btnReject1 = '<button class="btn btn-xs btn-red m-r-5 text-white" disable>Reject</button>';
+            }else{
+                btnApprove1='<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal" data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1"  data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalapprove" >Approve</button>';
+
+                btnReject1 = '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1" data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalreject" >Reject</button>';
+            }
+
+            if(d.status_penjadwalan_audit2 == 3){
+                btnApprove2 = '<button class="btn btn-xs btn-green m-r-5 text-white" disable>Approve</button>';
+                btnReject2 = '<button class="btn btn-xs btn-red m-r-5 text-white" disable>Reject</button>';
+            }else{
+                btnApprove2=  '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"   data-target="#modalapprove" >Approve</button>';
+
+                btnReject2 =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"    data-target="#modalreject" >Reject</button>';
+            }
+
+            if(d.status_penjadwalan_tr == 3){
+                btnApproveTR = '<button class="btn btn-xs btn-green m-r-5 text-white" disable>Approve</button>';
+                btnRejectTR = '<button class="btn btn-xs btn-red m-r-5 text-white" disable>Reject</button>';
+            }else{
+                btnApproveTR='<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr"  data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"   data-target="#modalapprove" >Approve</button>';
+
+                btnRejectTR =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>';
+            }
+
+            if(d.status_penjadwalan_tinjauan == 3){
+                btnApproveTinjauan = '<button class="btn btn-xs btn-green m-r-5 text-white" disable>Approve</button>';
+                btnRejectTinjauan = '<button class="btn btn-xs btn-red m-r-5 text-white" disable>Reject</button>';
+            }else{
+                btnApproveTinjauan= '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan"  data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"   data-target="#modalapprove" >Approve</button>';
+
+                btnRejectTinjauan =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>';
+            }
+
         
 
             return '<table  class="ml-5 col-lg-11 table" cellspacing="0" style="width:100% padding-left:50px;">'+
                     '<thead style="background-color:#dff3e3;">'+
                         '<th class="valign-middle text-center">No</th>'+
                         '<th class="valign-middle text-center">Jenis</th>'+
-                        '<th class="valign-middle text-center">Mulai Audit</th>'+
-                        '<th class="valign-middle text-center">Auditor/Komite</th>'+
-                        '<th class="valign-middle text-center">Auditor/Komite</th>'+
+                        '<th class="valign-middle text-center">Tanggal Audit</th>'+
+                        '<th class="valign-middle text-center">KTA/TA</th>'+
+                        '<th class="valign-middle text-center">Technical Review/Komite</th>'+
                         '<th class="valign-middle text-center">Status</th>'+
                         '<th class="valign-middle text-center">Aksi</th>'+
                         
                     '</thead>'+
                     '<tr>'+
-                        '<td class="valign-middle text-center">A</td>'+
+                    '<td class="valign-middle text-center">A</td>'+
                         '<td class="valign-middle text-center">Audit Tahap 1</td>'+
                         '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
                         '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
                         '<td class="valign-middle text-center">-</td>'+
                         '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_audit1)+'</td>'+
-                        '<td class="valign-middle text-center">'+
-                        
-                            '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal" data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1"  data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalapprove" >Approve</button>'+
-                            '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1" data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalreject" >Reject</button>'+
-                         
-                         '</td>'+
+                        '<td class="valign-middle text-center">'+btnApprove1+btnReject1+'</td>'+
                          
                      '</tr>'+
                      '<tr>'+
-                         '<td class="valign-middle text-center">B</td>'+
+                     '<td class="valign-middle text-center">B</td>'+
                          '<td class="valign-middle text-center">Audit Tahap 2</td>'+
                          '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
-                         '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'</td>'+    
-                         '<td class="valign-middle text-center" >'+d.pelaksana2_audit2+'</td>'+ 
+                         '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'<br>'+d.pelaksana2_audit2+'</td>'+    
+                         '<td class="valign-middle text-center" >-</td>'+ 
                          '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_audit2)+'</td>'+
-                         '<td class="valign-middle text-center">'+
-                                 '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"   data-target="#modalapprove" >Approve</button>'+
- 
-                                 '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"    data-target="#modalreject" >Reject</button>'+
+                         '<td class="valign-middle text-center">'+btnApprove2+btnReject2+
                                  
                             
                          '</td>'+
@@ -581,15 +643,10 @@
                          '<td class="valign-middle text-center">C</td>'+
                          '<td class="valign-middle text-center">Tehnical Review</td>'+
                          '<td class="valign-middle text-center">-</td>'+
-                         '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'</td>'+    
-                         '<td class="valign-middle text-center" >'+d.pelaksana2_tr+'</td>'+ 
+                         '<td class="valign-middle text-center" >-</td>'+    
+                         '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'<br>'+d.pelaksana2_tr+'</td>'+ 
                          '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_tr)+'</td>'+
-                         '<td class="valign-middle text-center">'+
-                          
-    
-                                 '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr"  data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"   data-target="#modalapprove" >Approve</button>'+
-                     
-                                 '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr"  data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"  data-target="#modalreject" >Reject</button>'+
+                         '<td class="valign-middle text-center">'+btnApproveTR+btnRejectTR+
                                  
                              
                          '</td>'+   
@@ -598,14 +655,10 @@
                          '<td class="valign-middle text-center">D</td>'+
                          '<td class="valign-middle text-center">Tinjauan Komite</td>'+
                          '<td class="valign-middle text-center">-</td>'+
-                         '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'</td>'+    
-                         '<td class="valign-middle text-center" >'+d.pelaksana2_tinjauan+'</td>'+ 
+                         '<td class="valign-middle text-center" >-</td>'+    
+                         '<td class="valign-middle text-center" >'+d.pelaksana1_tinjauan+'<br>'+d.pelaksana2_tinjauan+'</td>'+ 
                          '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_tinjauan)+'</td>'+
-                         '<td class="valign-middle text-center">'+
- 
-                                 '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan"  data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"   data-target="#modalapprove" >Approve</button>'+
-                                 
-                                 '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>'+
+                         '<td class="valign-middle text-center">'+btnApproveTinjauan+btnRejectTinjauan+
                                  
                              
                          '</td>'+
