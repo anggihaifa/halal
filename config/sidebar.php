@@ -71,11 +71,6 @@ return [
                     'title' => 'Guideline',
                     'url' => 'guideline.index'
                 ],
-                [
-                    'icon' => 'ion-md-book',
-                    'title' => 'Reporsitory Dokumen Halal',
-                    'url' => 'dokumen.indexuser'
-                ],
             ],
         ],
     ],
@@ -95,14 +90,6 @@ return [
             'title' => 'Registrasi',
             'url' => 'listregistrasipelangganaktif',
             
-        ],
-        [    'icon' => 'ion-md-information-circle-outline',
-            'title' => 'Berita',
-            'url' => 'berita.index'
-        ],
-        [    'icon' => 'ion-ios-clipboard',
-            'title' => 'Pelatihan',
-            'url' => 'pelatihan.index'
         ],
         
         [
@@ -127,10 +114,6 @@ return [
                     'url' => 'faq.index',
                     'title' => 'F.A.Q'
                 ],
-                [
-                    'url' => 'akomodasi.index',
-                    'title' => 'Akomodasi'
-                ],    
                 [
                     
                     'url' => 'dokumen.index',

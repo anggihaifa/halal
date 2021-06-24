@@ -471,10 +471,10 @@ class PHPWordController extends Controller
         return response()->download('storage/laporan/download/'.$fileName);
     }
 
-    public function downloadAuditPlanFix(Request $request){
-        // dd("didieu");
+    public function downloadAuditPlanFix(Request $request){        
 
-        $data = $request->except('_token','_method');        
+        $data = $request->except('_token','_method');
+        // dd($data);
 
         $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
         
@@ -493,7 +493,7 @@ class PHPWordController extends Controller
             $model->no_audit = $data['no_audit'];
             $model->nama_organisasi = $data['nama_perusahaan'];
             $model->alamat = $data['alamat'];
-            $model->tanggal_audit = $data['tanggal_audit'];
+            $model->tanggal_audit = $data['tanggal_audit'].' s/d '.$data['tanggal_audit_'];
             $model->tujuan_audit = $data['tujuan_audit'];
             $model->lingkup_audit = $data['lingkup_audit'];
             $model->jenis_produk = $data['jenis_produk'];
@@ -501,7 +501,7 @@ class PHPWordController extends Controller
             $model->lokasi_audit2 = $data['lokasi_audit2'];
             $model->tim_audit1 = $data['tim_audit1'];
             $model->tim_audit2 = $data['tim_audit2'];
-            $model->tim_audit3 = $data['tim_audit3'];                    
+            $model->tim_audit3 = implode(',',$data['tim_audit3']);
 
         $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
         if($data['skema_audit'] == 'sjh'){            
@@ -563,16 +563,92 @@ class PHPWordController extends Controller
         $templateProcessor->setValue('no_audit', $data['no_audit']);
         $templateProcessor->setValue('nama_organisasi', $data['nama_organisasi']);
         $templateProcessor->setValue('alamat', $data['alamat']);
-        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);
+        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit'].' s/d '.$data['tanggal_audit_']);
         $templateProcessor->setValue('no_audit', $data['no_audit']);
         $templateProcessor->setValue('tujuan_audit', $data['tujuan_audit']);
         $templateProcessor->setValue('jenis_produk', $data['jenis_produk']);
         $templateProcessor->setValue('lingkup_audit', $data['lingkup_audit']);
         $templateProcessor->setValue('lokasi_audit1', $data['lokasi_audit1']);
         $templateProcessor->setValue('lokasi_audit2', $data['lokasi_audit2']);
-        $templateProcessor->setValue('tim_audit1', $data['tim_audit1']);
-        $templateProcessor->setValue('tim_audit2', $data['tim_audit2']);
-        $templateProcessor->setValue('tim_audit3', $data['tim_audit3']);        
+        
+                
+        $nameparts = explode(' ',trim($data['tim_audit1']));
+        $firstname = $nameparts[0];
+        $lastname = $nameparts[count($nameparts) - 1];
+        $initial = $firstname[0]."".$lastname[0];
+
+        $nameparts2 = explode(' ',trim($data['tim_audit2']));
+        $firstname2 = $nameparts2[0];
+        $lastname2 = $nameparts2[count($nameparts2) - 1];
+        $initial2 = $firstname2[0]."".$lastname2[0];
+        // dd($initial2);
+                    
+        $templateProcessor->setValue('tim_audit1', $data['tim_audit1'].' ('.$initial.')');
+        $templateProcessor->setValue('tim_audit2', $data['tim_audit2'].' ('.$initial2.')');
+        // $templateProcessor->setValue('tim_audit3', $data['tim_audit3']);        
+        // if($data['tim_audit3'][0] != 0){
+            $arrAnggota=array();
+            for ($i=0; $i < sizeof($data['tim_audit3']); $i++) { 
+                if($data['tim_audit3'][$i] == null){
+                    $arrAnggota[] = array('noo' => '3','anggota_tambahan' => '','obs' => "Observer",'kta' => "KTA",'auditor' => "Auditor",'ta' => "TA",'ppc' => "PPC",);
+                }else{
+                    $anggota = $data['tim_audit3'][$i];
+                    $nameparts3 = explode(' ',trim($data['tim_audit3'][$i]));
+                    $firstname3 = $nameparts3[0];
+                    $lastname3 = $nameparts3[count($nameparts3) - 1];
+                    $initial3 = $firstname3[0]."".$lastname3[0];
+
+                    $jenis = $data['anggota_tambahan'][$i];
+
+                    if($jenis == 'Observer'){
+                        $inline = new TextRun();
+                        $inline->addText('KTA', array('strikethrough' => true));
+
+                        $inline2 = new TextRun();
+                        $inline2->addText('Auditor', array('strikethrough' => true));
+
+                        $inline3 = new TextRun();
+                        $inline3->addText('TA', array('strikethrough' => true));
+
+                        $inline4 = new TextRun();
+                        $inline4->addText('PPC', array('strikethrough' => true));
+
+                        $arrAnggota[] = array('noo' => $i+3,'anggota_tambahan' => $anggota.' ('.$initial3.')','obs' => "Observer", $templateProcessor->setComplexValue('kta', $inline), $templateProcessor->setComplexValue('auditor', $inline2), $templateProcessor->setComplexValue('ta', $inline3), $templateProcessor->setComplexValue('ppc', $inline4));
+                    }else if($jenis == 'TA'){
+                        $inline5 = new TextRun();
+                        $inline5->addText('KTA', array('strikethrough' => true));
+
+                        $inline6 = new TextRun();
+                        $inline6->addText('Auditor', array('strikethrough' => true));
+
+                        $inline7 = new TextRun();
+                        $inline7->addText('Observer', array('strikethrough' => true));
+
+                        $inline8 = new TextRun();
+                        $inline8->addText('PPC', array('strikethrough' => true));
+
+                        $arrAnggota[] = array('noo' => $i+3,'anggota_tambahan' => $anggota.' ('.$initial3.')','ta' => $jenis, $templateProcessor->setComplexValue('kta', $inline5), $templateProcessor->setComplexValue('auditor', $inline6), $templateProcessor->setComplexValue('obs', $inline7), $templateProcessor->setComplexValue('ppc', $inline8));
+                    }else if($jenis == 'PPC'){
+                        $inline9 = new TextRun();
+                        $inline9->addText('KTA', array('strikethrough' => true));
+
+                        $inline10 = new TextRun();
+                        $inline10->addText('Auditor', array('strikethrough' => true));
+
+                        $inline11 = new TextRun();
+                        $inline11->addText('Observer', array('strikethrough' => true));
+
+                        $inline12 = new TextRun();
+                        $inline12->addText('TA', array('strikethrough' => true));
+
+                        $arrAnggota[] = array('noo' => $i+3,'anggota_tambahan' => $anggota.' ('.$initial3.')','ppc' => $jenis, $templateProcessor->setComplexValue('kta', $inline9), $templateProcessor->setComplexValue('auditor', $inline10), $templateProcessor->setComplexValue('obs', $inline11), $templateProcessor->setComplexValue('ta', $inline12));
+                    }
+                }                
+            }
+
+            $values0 = $arrAnggota;
+            $templateProcessor->cloneRowAndSetValues('noo', $values0);
+               
         
         $model->save();
         DB::commit();
@@ -837,15 +913,92 @@ class PHPWordController extends Controller
         $templateProcessor->setValue('nama_organisasi', $data['nama_organisasi']);
         $templateProcessor->setValue('nama_usaha', $data['nama_usaha']);
         $templateProcessor->setValue('alamat', $data['alamat']);
-        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);        
+        $templateProcessor->setValue('tgl_audit', $data['tanggal_audit'].' s/d '.$data['tanggal_audit_']);
         $templateProcessor->setValue('tujuan_audit', $data['tujuan_audit']);
         $templateProcessor->setValue('jenis_produk', $data['jenis_produk2']);
         $templateProcessor->setValue('lingkup_audit', $data['lingkup_audit']);
         $templateProcessor->setValue('lokasi_audit1', $data['lokasi_audit1']);
         $templateProcessor->setValue('lokasi_audit2', $data['lokasi_audit2']);
-        $templateProcessor->setValue('ketua_tim', $data['ketua_tim']);
-        $templateProcessor->setValue('tim_audit1', $data['tim_audit1']);
-        $templateProcessor->setValue('pimpinan_perusahaan', $data['tim_audit1']);
+        // $templateProcessor->setValue('ketua_tim', $data['ketua_tim']);
+        // $templateProcessor->setValue('tim_audit1', $data['tim_audit1']);
+        $templateProcessor->setValue('pimpinan_perusahaan', $data['pimpinan_perusahaan']);
+
+        $nameparts = explode(' ',trim($data['tim_audit1']));
+        $firstname = $nameparts[0];
+        $lastname = $nameparts[count($nameparts) - 1];
+        $initial = $firstname[0]."".$lastname[0];
+
+        $nameparts2 = explode(' ',trim($data['ketua_tim']));
+        $firstname2 = $nameparts2[0];
+        $lastname2 = $nameparts2[count($nameparts2) - 1];
+        $initial2 = $firstname2[0]."".$lastname2[0];
+        // dd($initial2);
+                    
+        $templateProcessor->setValue('tim_audit1', $data['tim_audit1'].' ('.$initial.')');
+        $templateProcessor->setValue('ketua_tim', $data['ketua_tim'].' ('.$initial2.')');
+        // $templateProcessor->setValue('tim_audit3', $data['tim_audit3']);        
+        // if($data['tim_audit3'][0] != 0){
+            $arrAnggota=array();
+            for ($i=0; $i < sizeof($data['tim_audit3']); $i++) { 
+                if($data['tim_audit3'][$i] == null){
+                    $arrAnggota[] = array('noo' => '3','anggota_tambahan' => '','obs' => "Observer",'kta' => "KTA",'auditor' => "Auditor",'ta' => "TA",'ppc' => "PPC",);
+                }else{
+                    $anggota = $data['tim_audit3'][$i];
+                    $nameparts3 = explode(' ',trim($data['tim_audit3'][$i]));
+                    $firstname3 = $nameparts3[0];
+                    $lastname3 = $nameparts3[count($nameparts3) - 1];
+                    $initial3 = $firstname3[0]."".$lastname3[0];
+
+                    $jenis = $data['anggota_tambahan'][$i];
+
+                    if($jenis == 'Observer'){
+                        $inline = new TextRun();
+                        $inline->addText('KTA', array('strikethrough' => true));
+
+                        $inline2 = new TextRun();
+                        $inline2->addText('Auditor', array('strikethrough' => true));
+
+                        $inline3 = new TextRun();
+                        $inline3->addText('TA', array('strikethrough' => true));
+
+                        $inline4 = new TextRun();
+                        $inline4->addText('PPC', array('strikethrough' => true));
+
+                        $arrAnggota[] = array('noo' => $i+3,'anggota_tambahan' => $anggota.' ('.$initial3.')','obs' => "Observer", $templateProcessor->setComplexValue('kta', $inline), $templateProcessor->setComplexValue('auditor', $inline2), $templateProcessor->setComplexValue('ta', $inline3), $templateProcessor->setComplexValue('ppc', $inline4));
+                    }else if($jenis == 'TA'){
+                        $inline5 = new TextRun();
+                        $inline5->addText('KTA', array('strikethrough' => true));
+
+                        $inline6 = new TextRun();
+                        $inline6->addText('Auditor', array('strikethrough' => true));
+
+                        $inline7 = new TextRun();
+                        $inline7->addText('Observer', array('strikethrough' => true));
+
+                        $inline8 = new TextRun();
+                        $inline8->addText('PPC', array('strikethrough' => true));
+
+                        $arrAnggota[] = array('noo' => $i+3,'anggota_tambahan' => $anggota.' ('.$initial3.')','ta' => $jenis, $templateProcessor->setComplexValue('kta', $inline5), $templateProcessor->setComplexValue('auditor', $inline6), $templateProcessor->setComplexValue('obs', $inline7), $templateProcessor->setComplexValue('ppc', $inline8));
+                    }else if($jenis == 'PPC'){
+                        $inline9 = new TextRun();
+                        $inline9->addText('KTA', array('strikethrough' => true));
+
+                        $inline10 = new TextRun();
+                        $inline10->addText('Auditor', array('strikethrough' => true));
+
+                        $inline11 = new TextRun();
+                        $inline11->addText('Observer', array('strikethrough' => true));
+
+                        $inline12 = new TextRun();
+                        $inline12->addText('TA', array('strikethrough' => true));
+
+                        $arrAnggota[] = array('noo' => $i+3,'anggota_tambahan' => $anggota.' ('.$initial3.')','ppc' => $jenis, $templateProcessor->setComplexValue('kta', $inline9), $templateProcessor->setComplexValue('auditor', $inline10), $templateProcessor->setComplexValue('obs', $inline11), $templateProcessor->setComplexValue('ta', $inline12));
+                    }
+                }                
+            }
+
+            $values0 = $arrAnggota;
+            $templateProcessor->cloneRowAndSetValues('noo', $values0);
 
         // $tglhari = strtotime($data['tanggal_audit']);
         // $hari = date('l', $tglhari);
@@ -866,8 +1019,10 @@ class PHPWordController extends Controller
             $file = $data["flowchart"];   
             $namanya = "Flowchart".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/flowchart/",$namanya);
-            $templateProcessor->setImageValue('flowchart', array('path' => 'storage/laporan/flowchart/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
-        }                                
+            $templateProcessor->setImageValue('flowchart', array('path' => 'storage/laporan/flowchart/'.$namanya, 'width' => 400, 'height' =>400, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('flowchart',"");
+        }
 
         $jml=1;
         $arrData=array();
@@ -1293,7 +1448,9 @@ class PHPWordController extends Controller
             $namanya = "Foto1".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto1', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
-        }  
+        }else{
+            $templateProcessor->setValue('foto1', "");
+        }
 
         if($request->has("foto2")){
             $file = $request->file("foto2");
@@ -1301,6 +1458,8 @@ class PHPWordController extends Controller
             $namanya = "Foto2".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto2', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto2', "");
         }
 
         if($request->has("foto3")){
@@ -1309,6 +1468,8 @@ class PHPWordController extends Controller
             $namanya = "Foto3".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto3', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto3', "");
         }
 
         if($request->has("foto4")){
@@ -1317,6 +1478,8 @@ class PHPWordController extends Controller
             $namanya = "Foto4".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto4', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto4', "");
         }
 
         if($request->has("foto5a")){
@@ -1325,6 +1488,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5a".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5a', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5a', "");
         }
 
         if($request->has("foto5b")){
@@ -1333,6 +1498,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5b".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5b', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5b', "");
         }
 
         if($request->has("foto5c")){
@@ -1341,6 +1508,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5c".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5c', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5c', "");
         }
 
         if($request->has("foto5d")){
@@ -1349,6 +1518,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5d".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5d', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5d', "");
         }
 
         if($request->has("foto5e")){
@@ -1357,6 +1528,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5e".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5e', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5e', "");
         }
 
         if($request->has("foto5f")){
@@ -1365,6 +1538,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5f".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5f', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5f', "");
         }
 
         if($request->has("foto5g")){
@@ -1373,6 +1548,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5g".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5g', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5g', "");
         }
 
         if($request->has("foto5h")){
@@ -1381,6 +1558,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5h".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5h', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5h', "");
         }
 
         if($request->has("foto5i")){
@@ -1389,6 +1568,8 @@ class PHPWordController extends Controller
             $namanya = "Foto5i".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto5i', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto5i', "");
         }
 
         if($request->has("foto6")){
@@ -1397,6 +1578,8 @@ class PHPWordController extends Controller
             $namanya = "Foto6".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto6', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto6', "");
         }
 
         if($request->has("foto7")){
@@ -1405,6 +1588,8 @@ class PHPWordController extends Controller
             $namanya = "Foto7".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto7', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto7', "");
         }
 
         if($request->has("foto8")){
@@ -1413,6 +1598,8 @@ class PHPWordController extends Controller
             $namanya = "Foto8".$data['id_registrasi']."_".$data['id_penjadwalan']."_".date('YmdHis') . "." . $file->getClientOriginalExtension();
             $file->storeAs("public/laporan/fotolampiran/",$namanya);
             $templateProcessor->setImageValue('foto8', array('path' => 'storage/laporan/fotolampiran/'.$namanya, 'width' => 70, 'height' =>70, 'ratio' => true));
+        }else{
+            $templateProcessor->setValue('foto8', "");
         }
 
         $fileName = 'FOR-HALAL-OPS-06 Laporan Audit Tahap II ('.$data['id_registrasi'].').docx';
@@ -10823,10 +11010,10 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_sk");            
             $file = $data["berkas_sk"];                        
 
-            $fileName = 'FOR-HALAL-OPS-03 Konfirmasi Jadwal,Syarat & Ketentuan Audit ('.$data['idregis'].').pdf';
+            $fileName = 'FOR-HALAL-OPS-03 Konfirmasi Jadwal,Syarat & Ketentuan Audit ('.$data['idregis'].').'.$file->getClientOriginalExtension();
             // dd($fileName);
 
-            $file->storeAs("public/laporan/upload/Konfirmasi SK Audit/", $fileName);                        
+            $file->storeAs("public/laporan/upload/Konfirmasi SK Audit/", $fileName);
 
             if(count($dataLaporan) == 0){
                 $model = new LaporanAudit2;
@@ -10859,7 +11046,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_bap");            
             $file = $data["berkas_bap"];
 
-            $fileName = 'FOR-HALAL-OPS-07 Berita Acara Pemeriksaaan ('.$data['idregis'].').pdf';
+            $fileName = 'FOR-HALAL-OPS-07 Berita Acara Pemeriksaaan ('.$data['idregis'].').'.$file->getClientOriginalExtension();
             // dd($fileName);
 
             $file->storeAs("public/laporan/upload/BAP/", $fileName);
@@ -10895,7 +11082,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_surattugas");            
             $file = $data["berkas_surattugas"];
 
-            $fileName = 'Surat Tugas ('.$data['idregis'].').pdf';
+            $fileName = 'Surat Tugas ('.$data['idregis'].').'.$file->getClientOriginalExtension();
             // dd($fileName);
 
             $file->storeAs("public/laporan/upload/Surat Tugas/", $fileName);
@@ -10931,7 +11118,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_ap");            
             $file = $data["berkas_ap"];
 
-            $fileName = 'FOR-HALAL-OPS-04 Rencana Audit ('.$data['idregis'].').pdf';
+            $fileName = 'FOR-HALAL-OPS-04 Rencana Audit ('.$data['idregis'].').'.$file->getClientOriginalExtension();
             // dd($fileName);
 
             $file->storeAs("public/laporan/upload/AP/", $fileName);
@@ -10967,7 +11154,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_laporan2");            
             $file = $data["berkas_laporan2"];
 
-            $fileName = 'FOR-HALAL-OPS-06 Laporan Audit Tahap II ('.$data['idregis'].').pdf';
+            $fileName = 'FOR-HALAL-OPS-06 Laporan Audit Tahap II ('.$data['idregis'].').'.$file->getClientOriginalExtension();
             // dd($fileName);
 
             $file->storeAs("public/laporan/upload/Laporan Audit Tahap 2/", $fileName);
@@ -11003,7 +11190,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_laporan2_ulang");            
             $file = $data["berkas_laporan2_ulang"];
 
-            $fileName = 'FOR-HALAL-OPS-06 Laporan Audit Tahap II ('.$data['idregis'].') Revisi.pdf';
+            $fileName = 'FOR-HALAL-OPS-06 Laporan Audit Tahap II ('.$data['idregis'].') Revisi.'.$file->getClientOriginalExtension();
             // dd($fileName);
 
             $file->storeAs("public/laporan/upload/Laporan Audit Tahap 2/", $fileName);
@@ -11030,7 +11217,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_checklist");            
             $file = $data["berkas_checklist"];
 
-            $fileName = 'FOR-HALAL-OPS-09 Formulir Ceklist Audit ('.$data['idregis'].').pdf';
+            $fileName = 'FOR-HALAL-OPS-09 Formulir Ceklist Audit ('.$data['idregis'].').'.$file->getClientOriginalExtension();
             // dd($fileName);
 
             $file->storeAs("public/laporan/upload/Checklist Audit/", $fileName);
@@ -11066,7 +11253,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_ketidaksesuaian");            
             $file = $data["berkas_ketidaksesuaian"];
 
-            $fileName = 'FOR-HALAL-OPS-08 Laporan Temuan Ketidaksesuaian ('.$data['idregis'].').pdf';
+            $fileName = 'FOR-HALAL-OPS-08 Laporan Temuan Ketidaksesuaian ('.$data['idregis'].').'.$file->getClientOriginalExtension();
             // dd($fileName);
 
             $file->storeAs("public/laporan/upload/Laporan Ketidaksesuaian/", $fileName);
@@ -11154,7 +11341,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $file = $request->file("berkas_ketidaksesuaian2");            
             $file = $data["berkas_ketidaksesuaian2"];
 
-            $fileName = 'FOR-HALAL-OPS-08 Laporan Temuan Ketidaksesuaian ('.$data['idregis'].').pdf';
+            $fileName = 'FOR-HALAL-OPS-08 Laporan Temuan Ketidaksesuaian ('.$data['idregis'].').'.$file->getClientOriginalExtension();
             // dd($fileName);
 
             $file->storeAs("public/laporan/upload/Laporan Ketidaksesuaian/", $fileName);
@@ -11322,7 +11509,8 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
 
     public function downloadKetidaksesuaianFix(Request $request){
         $data = $request->except('_token','_method');
-        // dd($data);
+        // dd($data);        
+        // dd($tgl);
         $phpWord = new \PhpOffice\PhpWord\PhpWord();                
         
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-08 Laporan Temuan Ketidaksesuaian Isian.docx');
@@ -11332,6 +11520,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
         $templateProcessor->setValue('standar_acuan', $data['standar_acuan']);
         $templateProcessor->setValue('nama_auditor', $data['nama_auditor']);
         $templateProcessor->setValue('tgl_audit', $data['tanggal_audit']);
+        $templateProcessor->setValue('ketua_tim', $data['ketua_tim']);
 
         $jml=1;
         $arrData=array();
@@ -11370,6 +11559,10 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $tindakan = $data['tindakan'][$i];
             $hasil = $data['hasil'][$i];
 
+            date_default_timezone_set('Asia/Jakarta');
+            $date = date("d-m-Y H:i:s");
+            $tgl = $date;
+
             $model2 = new TemuanKetidaksesuaian;
             DB::beginTransaction();                
                 $model2->id_ketidaksesuaian = $id_ketidaksesuaian;
@@ -11377,7 +11570,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $model2->auditor = $auditor;
                 $model2->deskripsi = $deskripsi;
                 $model2->investigasi_akar_permasalahan = $investigasi;
-                $model2->tindakan_perbaikan = $tindakan;
+                $model2->tindakan_perbaikan = $tindakan;                
 
                 if($hasil == 'open'){
                     $jmlTidakSesuai++;
@@ -11389,7 +11582,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $model2->save();
             DB::Commit();
 
-            $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $deskripsi, 'investigasi' => $investigasi, 'tindakan_koreksi' => $tindakan, 'hasil_tinjauan' => $hasil);
+            $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $deskripsi, 'investigasi' => $investigasi, 'tindakan_koreksi' => $tindakan, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
             $jml++;            
         }
         

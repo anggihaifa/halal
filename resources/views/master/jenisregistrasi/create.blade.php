@@ -37,7 +37,7 @@
                     <form action="{{route('jenis_registrasi.store')}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
                         <div class="form-group row">
                             @csrf
-                            @component('components.inputtext',['name'=> 'jenis_registrasi','label' => 'Jenis Registrasi'])@endcomponent
+                            @component('components.inputtext',['name'=> 'ruang_lingkup','label' => 'Jenis Registrasi'])@endcomponent
                             <div class="col-md-12 offset-md-5">
                                 @component('components.buttonback',['href' => route("jenis_registrasi.index")])@endcomponent
                                 @component('components.buttonsubmit')@endcomponent

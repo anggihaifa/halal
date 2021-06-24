@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "data":"jenis_registrasi"
+                    "data":"ruang_lingkup"
                 },
                 {
                     "data":null,

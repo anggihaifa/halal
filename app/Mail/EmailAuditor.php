@@ -46,8 +46,8 @@ class EmailAuditor extends Mailable
         }elseif($this->status == 'audit2'){
             $this->subject('Jadwal Audit Tahap 2 Untuk Pendaftaran Dengan No registrasi ');
 
-        }elseif($this->status == 'rapat'){
-            $this->subject('Jadwal Rapat Audit Untuk Pendaftaran Dengan No registrasi ');
+        }elseif($this->status == 'tr'){
+            $this->subject('Jadwal Technical Review Untuk Pendaftaran Dengan No registrasi ');
 
         }elseif($this->status == 'tinjauan'){
             $this->subject('Jadwal Tinajaun Komite Untuk Pendaftaran Dengan No registrasi ');

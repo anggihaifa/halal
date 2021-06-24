@@ -82,12 +82,14 @@
 										</tr>
 										<tr>										
 											<td colspan="2">
-												<img src="{{url('') .Storage::url('ktp/'.Auth::user()->id.'/'.$value['ktp']) }}" style="width: 30%">
+												<img src="{{url('') .Storage::url('ktp/'.$value['id'].'/'.$value['ktp']) }}" style="width: 30%">
+												<br><a href="{{url('') .Storage::url('ktp/'.$value['id'].'/'.$value['ktp']) }}" download>Download KTP</a>
 											</td>
 											<td colspan="2">
-												<img src="{{url('') .Storage::url('npwp/'.Auth::user()->id.'/'.$value['npwp']) }}" style="width: 30%">
+												<img src="{{url('') .Storage::url('npwp/'.$value['id'].'/'.$value['npwp']) }}" style="width: 30%">
+												<br><a href="{{url('') .Storage::url('npwp/'.$value['id'].'/'.$value['npwp']) }}" download>Download NPWP</a>
 											</td>
-										</tr>																													
+										</tr>										
 									</table>
 								</div>																								                                                                								
 							<div class="col-md-12 offset-md-5">

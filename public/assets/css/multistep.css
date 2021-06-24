@@ -144,25 +144,31 @@ select.list-dt:focus {
     color: lightgrey
 }
 
+#progressbar_verifikasi {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
 #progressbar2 {
     margin-top: -20px;
     overflow: hidden;
     color: #2C3E50
 }
 
-#progressbar .notyet {
+#progressbar .notyet, #progressbar_verifikasi .notyet {
     color: #2d353c
 }
 
-#progressbar .confirming {
+#progressbar .confirming, #progressbar_verifikasi .confirming {
     color: #32a932
 }
 
-#progressbar .fixing {
+#progressbar .fixing, #progressbar_verifikasi .fixing {
     color: #ff5b57;
 }
 
-#progressbar .waiting {
+#progressbar .waiting, #progressbar_verifikasi .waiting{
     color: #ffd900;
 }
 
@@ -170,6 +176,14 @@ select.list-dt:focus {
     list-style-type: none;
     font-size: 10px;
     width: 10%;
+    float: left;
+    position: relative
+}
+
+#progressbar_verifikasi li {
+    list-style-type: none;
+    font-size: 10px;
+    width: 25%;
     float: left;
     position: relative
 }
@@ -183,22 +197,22 @@ select.list-dt:focus {
     margin-left: 20px;    
 }
 
-#progressbar #account:before, #progressbar2 #logKegiatan:before {
+#progressbar #account:before, #progressbar2 #logKegiatan:before, #progressbar_verifikasi #account:before {
     font-family: FontAwesome;
     content: ""
 }
 
-#progressbar #personal:before, #progressbar2 #logKegiatan:before {
+#progressbar #personal:before, #progressbar2 #logKegiatan:before, #progressbar_verifikasi #logKegiatan:before {
     font-family: FontAwesome;
     content: ""
 }
 
-#progressbar #payment:before, #progressbar2 #logKegiatan:before {
+#progressbar #payment:before, #progressbar2 #logKegiatan:before, #progressbar_verifikasi #logKegiatan:before {
     font-family: FontAwesome;
     content: ""
 }
 
-#progressbar #confirm:before, #progressbar2 #logKegiatan:before {
+#progressbar #confirm:before, #progressbar2 #logKegiatan:before, #progressbar_verifikasi #logKegiatan:before {
     font-family: FontAwesome;
     content: ""
 }
@@ -206,6 +220,19 @@ select.list-dt:focus {
 #progressbar li:before {
     width: 30px;
     height: 30px;
+    line-height: 45px;
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar_verifikasi li:before {
+    width: 20px;
+    height: 20px;
     line-height: 45px;
     display: block;
     font-size: 18px;
@@ -238,6 +265,17 @@ select.list-dt:focus {
     z-index: -1
 }
 
+#progressbar_verifikasi li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    z-index: -1
+}
+
 #progressbar2 li:after {
     content: '';
     width: 2px;
@@ -250,22 +288,30 @@ select.list-dt:focus {
 }
 
 #progressbar li.notyet:before,
-#progressbar li.notyet:after {
+#progressbar li.notyet:after,
+#progressbar_verifikasi li.notyet:before,
+#progressbar_verifikasi li.notyet:after {
     background: #2d353c;
 }
 
 #progressbar li.confirming:before,
-#progressbar li.confirming:after {
+#progressbar li.confirming:after,
+#progressbar_verifikasi li.confirming:before,
+#progressbar_verifikasi li.confirming:after {
     background: #32a932;
 }
 
 #progressbar li.fixing:before,
-#progressbar li.fixing:after {
+#progressbar li.fixing:after,
+#progressbar_verifikasi li.fixing:before,
+#progressbar_verifikasi li.fixing:after {
     background: #ff5b57;
 }
 
 #progressbar li.waiting:before,
-#progressbar li.waiting:after {
+#progressbar li.waiting:after,
+#progressbar_verifikasi li.waiting:before,
+#progressbar_verifikasi li.waiting:after {
     background: #ffd900;
 }
 

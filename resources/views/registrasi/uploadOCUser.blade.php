@@ -50,7 +50,7 @@
 								<input type="text" class="form-control" name='no_registrasi' value="{{$data->no_registrasi}}" readonly/>
 							</div>																						
 							
-							@if($data->status_oc == 1 || $data->status_oc == 2 || $data->status_oc == 3)
+							
 								<!--Auto Download-->
 								<label class="col-lg-4 col-form-label">OC</label>
 								<div id="sh" class="col-lg-8">
@@ -62,21 +62,9 @@
 								<div class="col-lg-8">
 									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" required   onchange="getValue('file')"/>
 								</div> --}}
-							@elseif($data->status_oc == 0)
-								{{-- <label class="col-lg-4 col-form-label">Upload OC yang sudah di tandatangani</label>
-								<div class="col-lg-8">
-									<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File kontrak akad masih kosong')" oninput="setCustomValidity('')" accept="application/pdf" onchange="getValue('file')" required />
-								</div> --}}								
-							@else
-								
-
-								{{-- <label class="col-lg-4 col-form-label">Kontrak Akad</label>
-								<div id="sh" class="col-lg-8">
-									<div class="form-control" readonly>
-										<a href="{{url('') .Storage::url('public/bukti_akad/'.$data->id_user.'/'.$data->file_akad) }}" download>{{$data->file_akad}}</a>
-									</div>
-								</div> --}}
-							@endif						
+														
+							
+											
 
 								
 							

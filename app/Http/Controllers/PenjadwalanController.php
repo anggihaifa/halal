@@ -1277,7 +1277,7 @@ class PenjadwalanController extends Controller
 
     public function listPersiapanSidang(){
         
-        return view('penjadwalan.listpersiapansidang');
+        return view('penjadwalan.listPersiapanSidang');
     }
 
    

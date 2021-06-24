@@ -185,7 +185,7 @@
                                             <div class="row">
                                                 @foreach($dataPenjadwalan as $index => $value2)
                                                     @component('components.inputtext',['name'=> 'id_penjadwalan','label' => 'ID Penjadwalan','required'=>true,'placeholder'=>'ID Penjadwalan','readonly'=>true,'value'=>$value2->id])@endcomponent
-                                                    @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit1." s/d ".$value2->selesai_audit2])@endcomponent
+                                                    {{-- @component('components.inputtext',['name'=> 'tanggal_audit','label' => 'Tangal Audit','required'=>true,'placeholder'=>'Tanggal Audit','readonly'=>true,'value'=>$value2->mulai_audit1." s/d ".$value2->selesai_audit2])@endcomponent --}}
                                                 @endforeach
                                             </div>
                                         </div>                            
@@ -198,6 +198,32 @@
                                             @component('components.inputtext',['name'=> 'no_id_bpjph','label' => 'No ID BPJPH','required'=>true,'placeholder'=>'No ID BPJPH','readonly'=>true,'value'=>$value->no_registrasi_bpjph])@endcomponent
                                         </div>
                                     </div>
+                                    <div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @foreach($dataPenjadwalan as $index => $valueP)
+                                            @php
+                                                $mulai = explode("-",$valueP->mulai_audit2);                                                
+                                                $tahun = $mulai[0];
+                                                $bulan = $mulai[1];
+                                                $tanggal = $mulai[2];
+                                                $tgl = $tanggal.'-'.$bulan.'-'.$tahun;
+                                            @endphp
+                                            <label class="col-lg-4 col-form-label">Tanggal Audit</label>
+                                            <div id="shb" class="col-lg-4">
+                                                <div class="input-group date">
+                                                    <input type="text" name="tanggal_audit" class="form-control" placeholder="Tanggal Mulai" data-date-start-date="Date.default" value='{{$tgl}}' readonly/>
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            <div id="shb" class="col-lg-4">
+                                                <div class="input-group date">
+                                                    <input type="text" id="tanggal_audit_" name="tanggal_audit_" class="form-control" placeholder="Tanggal Akhir" value="" data-date-start-date="Date.default" />
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="wrapper col-lg-12">                               
                                         <div class="row">
                                             <label class="col-lg-4 col-form-label">Skema Audit</label>
@@ -208,7 +234,7 @@
                                                         <label for="sjh">SJH</label>
                                                     </div>
                                                     <div class="radio radio-css radio-inline">                                         
-                                                        <input type="radio" name="skema_audit" value="sjph" id="sjph"/>
+                                                        <input type="radio" name="skema_audit" value="sjph" id="sjph" checked/>
                                                         <label for="sjph">SJPH</label>
                                                     </div>
                                                 </div>
@@ -237,7 +263,14 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tujuan_audit','label' => 'Tujuan Audit','required'=>true,'placeholder'=>'Tujuan Audit'])@endcomponent
+                                            <label class="col-lg-4 col-form-label">Tujuan Audit</label>
+                                            <div class="col-lg-8">
+                                                <select id="tujuan_audit" name="tujuan_audit" class="form-control" data-size="10" data-live-search="true" data-style="btn-white">
+                                                    <option value="Memastikan Bahwa SJPH Sudah Diterapkan Dengan Baik Oleh Pelaku Usaha">
+                                                        Memastikan Bahwa SJPH Sudah Diterapkan Dengan Baik Oleh Pelaku Usaha
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>                                    
                                     <div class="wrapper col-lg-12">
@@ -247,7 +280,7 @@
                                     </div>
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'jenis_produk','label' => 'Jenis Produk & Kode Klasifikasi','required'=>true,'placeholder'=>'Jenis Produk & Kode Klasifikasi','readonly'=>true,'value'=>$value->rincian_jenis_produk])@endcomponent
+                                            @component('components.inputtextarea',['name'=> 'jenis_produk','label' => 'Jenis Produk & Kode Klasifikasi','required'=>true,'placeholder'=>'Jenis Produk & Kode Klasifikasi','readonly'=>true,'value'=>$value->rincian_jenis_produk])@endcomponent
                                             <p><b>&nbsp;&nbsp;&nbsp;*) Khusus skema audit SJPH</b></p>
                                         </div>
                                     </div>
@@ -261,21 +294,46 @@
                                             @component('components.inputtext',['name'=> 'lokasi_audit2','label' => '','required'=>false,'placeholder'=>'Lokasi Audit 2'])@endcomponent
                                         </div>
                                     </div>
+                                    @foreach($dataPenjadwalan as $index => $value2)
+                                        @php
+                                            $ketua_arr = explode("_",$value2->pelaksana1_audit2);
+                                            $anggota_arr = explode("_",$value2->pelaksana2_audit2);
+                                            $ketua = $ketua_arr[1];
+                                            $anggota = $anggota_arr[1];
+                                        @endphp
+                                        <div class="wrapper col-lg-12">
+                                            <div class="row">
+                                                @component('components.inputtext',['name'=> 'tim_audit1','label' => 'Ketua Tim','required'=>true,'placeholder'=>'Tim Audit 1 (XX)','readonly'=>true,'value'=>$ketua])@endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="wrapper col-lg-12">
+                                            <div class="row">
+                                                @component('components.inputtext',['name'=> 'tim_audit2','label' => 'TIm Audit','required'=>true,'placeholder'=>'Tim Audit 2 (YY)','readonly'=>true,'value'=>$anggota])@endcomponent
+                                            </div>
+                                        </div>
+                                    @endforeach
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit1','label' => 'Tim Audit','required'=>true,'placeholder'=>'Tim Audit 1 (XX)'])@endcomponent
+                                            <label class="col-4 col-form-label">Anggota Tambahan</label><div class="col-lg-6"><div><input class="form-control" id="tim_audit3" name="tim_audit3[]" type="text" label="Anggota Tambahan" placeholder="Anggota Tambahan"></div></div>
+                                            <div class="col-lg-2">
+                                                <div>
+                                                    <select id="anggota_tambahan1" name="anggota_tambahan[]" class="form-control" data-size="10" data-live-search="true" data-style="btn-white">                                                        
+                                                        <option value="Observer">Observer</option>
+                                                        <option value="TA">TA</option>
+                                                        <option value="PPC">PPC</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="wrapper col-lg-12">
+                                                <div class="row">                                                
+                                                    <div class="detail_anggota_tambahan" id="detail_anggota_tambahan{{$value->id}}" style="width: 100%;"></div>
+                                                    <div class="col-md-12">
+                                                        <a onClick="addAnggotaTambahan({{$value->id}})" class="tam_anggota_tambahan btn btn-sm btn-primary float-right" style="color:white">Tambah Anggota</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit2','label' => '','required'=>true,'placeholder'=>'Tim Audit 2 (YY)'])@endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="wrapper col-lg-12">
-                                        <div class="row">
-                                            @component('components.inputtext',['name'=> 'tim_audit3','label' => '','required'=>true,'placeholder'=>'Tim Audit 3 (ZZ)'])@endcomponent
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     @endforeach                                            
                                 </div>
                                 <div class="panel-body panel-form" style="background: rgb(230, 235, 236);">
@@ -320,7 +378,7 @@
                                                 <textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea>
                                             </div></div>                                
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
                                             <label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)"></div></div>                                
@@ -328,7 +386,7 @@
                                     </div>                        
                                 </div>
                                 <div class="panel-body panel-form">
-                                    <div class="wrapper col-lg-12">
+                                    <div class="wrapper col-lg-12" style="display: none">
                                         <div class="row">
                                             <label class="col-4 col-form-label">Jumlah Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="jumlah_kegiatan[]" type="text" label="Jumlah Kegiatan" placeholder="Jumlah Kegiatan" value="1" id="jml_kegiatan1"></div></div>
                                         </div>
@@ -420,10 +478,13 @@
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
     <script>             
-        document.getElementById('jml_kegiatan1').value = "1";   
+        document.getElementById('jml_kegiatan1').value = "1";           
 
         var jmlKegiatan = 0;        
         var noKegiatan = 1;
+
+        var jmlAnggota = 1;
+        var noAnggota = 1;
 
         var jmlHari = 0;        
         var noHari = 1;
@@ -432,7 +493,7 @@
         var jmlJam = 0;
         var jmlTgl = 0;                              
 
-        function addDataKegiatan($id){                                                            
+        function addDataKegiatan($id){
             jmlKegiatan+=1;
             jmlJam+=1;
 
@@ -520,7 +581,7 @@
             // alert("disini");
             var select1 = document.getElementById('detail_hari'+$id);
             var select2 = document.getElementById('datahari'+$jml);
-            select1.removeChild(select2);                        
+            select1.removeChild(select2);
         }
 
         $(document).on('click','#hapus_dataharilain', function(){
@@ -532,74 +593,115 @@
             }
         });
 
-        $('#tgl_audit1').datepicker({
-            format: "yyyy-mm-dd",
-            todayHighlight: true,
-        });
-        
-        $('#jam_audit1').datetimepicker({
-            format: 'hh:ii',
-            language:  'id',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 0,            
-        });    
+        $(document).ready(
+            function() {
 
-        $('#jam_audit21').datetimepicker({            
-            format: 'hh:ii',
-            language:  'id',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 0,            
-        });    
+                $('#tanggal_audit').datepicker({
+                    format: "yyyy-mm-dd",
+                    todayHighlight: true,
+                });
+
+                $('#tanggal_audit_').datepicker({                    
+                    format: "dd-mm-yyyy",
+                    todayHighlight: true,
+                });
+
+                $('#tgl_audit1').datepicker({
+                    format: "dd-mm-yyyy",
+                    todayHighlight: true,
+                });
+
+                $('#jam_audit1').datetimepicker({
+                    format: 'hh:ii',
+                    language:  'id',
+                    weekStart: 1,
+                    todayBtn:  1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 1,
+                    minView: 0,
+                    maxView: 1,
+                    forceParse: 0,            
+                });    
+
+                $('#jam_audit21').datetimepicker({            
+                    format: 'hh:ii',
+                    language:  'id',
+                    weekStart: 1,
+                    todayBtn:  1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 1,
+                    minView: 0,
+                    maxView: 1,
+                    forceParse: 0,            
+                }); 
+            }
+        );                           
 
         function jam(isi) {
             // alert(isi);
-            $('#jam_audit'+(isi+1)+'').datetimepicker({
-                format: 'hh:ii',
-                language:  'id',
-                weekStart: 1,
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 1,
-                minView: 0,
-                maxView: 1,
-                forceParse: 0,            
-            }); 
+            $(document).ready(
+                function() {
+                    $('#jam_audit'+(isi+1)+'').datetimepicker({
+                        format: 'hh:ii',
+                        language:  'id',
+                        weekStart: 1,
+                        todayBtn:  1,
+                        autoclose: 1,
+                        todayHighlight: 1,
+                        startView: 1,
+                        minView: 0,
+                        maxView: 1,
+                        forceParse: 0,            
+                    }); 
+                }
+            );
         }
 
         function jam2(isi) {
-            // alert(isi);
-            $('#jam_audit2'+(isi+1)+'').datetimepicker({
-                format: 'hh:ii',
-                language:  'id',
-                weekStart: 1,
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 1,
-                minView: 0,
-                maxView: 1,
-                forceParse: 0,            
-            }); 
+            $(document).ready(
+                function() {            
+                    $('#jam_audit2'+(isi+1)+'').datetimepicker({
+                        format: 'hh:ii',
+                        language:  'id',
+                        weekStart: 1,
+                        todayBtn:  1,
+                        autoclose: 1,
+                        todayHighlight: 1,
+                        startView: 1,
+                        minView: 0,
+                        maxView: 1,
+                        forceParse: 0,            
+                    }); 
+                }
+            );
         }
 
         function tanggal(isi) {
-            $('#tgl_audit'+(isi+1)+'').datepicker({
-                format: "yyyy-mm-dd",
-                todayHighlight: true,
-            });
+            $(document).ready(
+                function() {
+                    $('#tgl_audit'+(isi+1)+'').datepicker({
+                        format: "dd-mm-yyyy",
+                        todayHighlight: true,
+                    });
+                }
+            );
+        }        
+
+        function addAnggotaTambahan($id){
+            jmlAnggota++;
+            // alert($id);
+            // var data_anggota = '<div id="datakegiatan'+jmlKegiatan+'" style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)"></div></div>                                </div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+','+jmlKegiatan+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
+            var data_anggota = '<div id="anggota_tambahan'+jmlAnggota+'"> <div class="wrapper col-lg-12"><div class="row"> <label class="col-4 col-form-label"></label><div class="col-lg-5"><div><input class="form-control" id="tim_audit3" name="tim_audit3[]" type="text" label="Anggota Tambahan" placeholder="Anggota Tambahan" required></div></div><div class="col-lg-2"><div><select id="anggota_tambahan'+(jmlAnggota)+'" name="anggota_tambahan[]" class="form-control" data-size="10" data-live-search="true" data-style="btn-white"><option value="Auditor">Auditor</option><option value="Observer">Observer</option><option value="TA">TA</option><option value="PPC">PPC</option></select></div></div> <div class="col-lg-1"><a onClick="hapusAnggota('+$id+','+jmlAnggota+')" class="btn btn-sm btn-danger m-r-5" style="color:white">X</a></div></div> </div></div>';
+            $('#detail_anggota_tambahan'+$id).append(data_anggota);
+            $('#anggota_tambahan'+jmlAnggota).selectpicker('refresh');            
+        }
+
+        function hapusAnggota($id,$jml){
+            var select1 = document.getElementById('detail_anggota_tambahan'+$id);
+            var select2 = document.getElementById('anggota_tambahan'+$jml);
+            select1.removeChild(select2);
         }
     </script>
 @endpush

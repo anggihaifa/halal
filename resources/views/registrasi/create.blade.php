@@ -1602,7 +1602,7 @@
                         success: function (response) {                                                
                             $('#id_rincian_kelompok_produk'+jumlahdatarincian).empty();                           
                             $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
-                                $("#id_rincian_kelompok_produk"+jumlahdatarincian).append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'_'+rincian_kelompok_produk))
+                                $("#id_rincian_kelompok_produk"+jumlahdatarincian).append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'. '+rincian_kelompok_produk))
                             })
                             $('#id_rincian_kelompok_produk'+jumlahdatarincian).selectpicker('refresh');
                         }                   
@@ -1651,7 +1651,7 @@
                     success: function (response) {                                                
                         $('#id_rincian_kelompok_produk1').empty();                           
                         $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
-                            $("#id_rincian_kelompok_produk1").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'_'+rincian_kelompok_produk))
+                            $("#id_rincian_kelompok_produk1").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'. '+rincian_kelompok_produk))
                         })
                         $('#id_rincian_kelompok_produk1').selectpicker('refresh');
                     }                   

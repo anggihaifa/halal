@@ -146,11 +146,11 @@
             
             <tr>
                 <td  >{{$registrasi['nama_perusahaan']}}</td>
-                <td  >{{$penjadwalan['mulai_rapat']}}</td>
-                <td  >{{$penjadwalan['selesai_rapat']}}</td>
-                <td  >{{$penjadwalan['pelaksana1_rapat']}}</td>
-                <td  >{{$penjadwalan['pelaksan2_rapat']}}</td>
-                <td  >{{$penjadwalan['pelaksan3_rapat']}}</td>
+                <td  >{{$penjadwalan['mulai_tr']}}</td>
+                <td  >{{$penjadwalan['selesai_tr']}}</td>
+                <td  >{{$penjadwalan['pelaksana1_tr']}}</td>
+                <td  >{{$penjadwalan['pelaksan2_tr']}}</td>
+                <td  >{{$penjadwalan['pelaksan3_tr']}}</td>
                 <td  >Remote Audit</td>
                
             </tr>       

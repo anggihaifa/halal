@@ -71,9 +71,21 @@ class RegistrasiController extends Controller
     //registrasi halal
     public function index(){
 
+        $currentRegistrasi = DB::table('users')
+                            ->select('users.registrasi_id','registrasi.*','ruang_lingkup.ruang_lingkup')
+                            ->join('registrasi','registrasi.id','=','users.registrasi_id')
+                            ->join('ruang_lingkup','ruang_lingkup.id','=','registrasi.id_ruang_lingkup')
+                            ->where('users.id',Auth::user()->id)
+                            ->get();
+        if(isset($currentRegistrasi)){
+            $dataCurrent = json_decode($currentRegistrasi,true);    
+        }else{
+            $dataCurrent = null;    
+        }
+
         if(Auth::user()->registrasi_id !== null){
             $data = Registrasi::find(Auth::user()->registrasi_id);            
-            return view('registrasi.index',compact('data'));
+            return view('registrasi.index',compact('data','dataCurrent'));
         }else{
             return view('registrasi.index');
         }
@@ -4723,7 +4735,7 @@ class RegistrasiController extends Controller
         $e = $model->find($id);
         $u = $model2->find($e->id_user);
         $p = $model3->find($e->id_pembayaran);
-        $e->status = 12_3;
+        $e->status = '12_3';
         $e->updated_status_by = $updater;
         $e->save();
 

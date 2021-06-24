@@ -38,7 +38,7 @@
                         <div class="form-group row">
                             @csrf
                             @method('PUT')
-                            @component('components.inputtext',['name'=> 'jenis_registrasi','label' => 'Jenis Registrasi','value'=>$data->jenis_registrasi])@endcomponent
+                            @component('components.inputtext',['name'=> 'ruang_lingkup','label' => 'Jenis Registrasi','value'=>$data->ruang_lingkup])@endcomponent
                             <div class="col-md-12 offset-md-5">
                                 @component('components.buttonback',['href' => route("jenis_registrasi.index")])@endcomponent
                                 @component('components.buttonupdate')@endcomponent
