@@ -106,7 +106,7 @@
        
         $('#f_mulai_audit1').datepicker({
           
-            format: "mm-yyyy",
+            format: "yyyy-mm",
             todayHighlight: true,
         });
         

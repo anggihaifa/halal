@@ -180,13 +180,13 @@
        
         $('#btncalendar').datepicker({
             
-            format: "mm-yyyy",
+            format: "yyyy-mm",
             todayHighlight: true,
         });
         
         $('#f_mulai_audit2').datepicker({
           
-            format: "mm-yyyy",
+            format: "yyyy-mm",
             todayHighlight: true,
         });
         

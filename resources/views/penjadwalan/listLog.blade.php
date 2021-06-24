@@ -48,7 +48,7 @@
                                             
                                             <label class="col-lg-2 col-form-label">Bulan Audit</label>
                                             <div class="col-lg-4">
-                                                <input id="f_mulai_audit2"  name="f_mulai_audit2" class="form-control" class="form-control">
+                                                <input id="f_mulai"  name="f_mulai" class="form-control" class="form-control">
                                                 </input>
                                                 <span id="btncalendar" class="add-on">
                                                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -104,13 +104,13 @@
        
         $('#btncalendar').datepicker({
             
-            format: "mm-yyyy",
+            format: "yyyy-mm",
             todayHighlight: true,
         });
         
-        $('#f_mulai_audit2').datepicker({
+        $('#f_mulai').datepicker({
           
-            format: "mm-yyyy",
+            format: "yyyy-mm",
             todayHighlight: true,
         });
         
@@ -165,142 +165,144 @@
             '</table>';
         }
 */
+        var id_user = {!! json_encode($id_user) !!};
+        var xTable = $('#table').DataTable({
+            ajax:{
+                url:"{{route('datalog')}}",
+                data:function(d){
+                    d.no_registrasi = $('#no_registrasi').val();
+                    d.mulai = $('#f_mulai').val();
+                    d.nama_perusahaan = $('#nama_perusahaan').val();
+    
+
+                }
+            },
+            
+            columns:[
+                
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+
+                    if(!full.pelaksana2){
+                        var jumlah = 1;
+                    }else{
+                        var jumlah = 2;
+                    }
+
+                    /* var mulai = full.mulai.split(" ");
+                    var selesai = full.selesai.split(" ");*/
+
+                    var date1 = new Date(full.mulai); 
+                    var date2 = new Date(full.selesai); 
+                        
+                    // To calculate the time difference of two dates 
+                    
+
+                    var p1 = full.pelaksana1.split("_");
+                    if(full.pelaksana2){
+                        var p2 = full.pelaksana2.split("_");
+                    }
+                    
+
+                    if(id_user == p1[0]){
+                        var peran = 'Ketua';
+                    }else{
+                        var peran = 'Anggota';
+                    }
+
+                    if(p1[2] == 'tahap1'){
+                        var jenis = "Tahap1 - Remote";
+
+                    }else if(p1[2] == 'tahap2'){
+                            var jenis = "Tahap2 - " +full.ktg;
+
+                    }else if(p1[2] == 'tr'){
+                            var jenis = "Tehnical Review - Remote";
+
+                    }else if(p1[2] == 'tinjauan'){
+                            var jenis = "Tijauan Komite Sertifikasi - Remote";
+
+                    }
+
+                    
+                        
+                        return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
+                                    
+                                        
+                                    <div class="col-lg-7" style="padding-left:10%; padding-top:2%">
+                                        <label class="inline text-center">
+
+                                            <i class="fa fa-calendar text-primary" style="font-size:600%"></i>
+                                            <br>
+                                            <h3 class="text-grey" style=>`+full.mulai+`</h3>
+                                            
+                                           
+                                            <span class="label label-success"><a style="color: white;">NOMOR AUDIT:`+full.no_registrasi+`</a></span>
+                                            
+
+                                            
+                                        </label>
+                                    </div>
+                                    
+
+                                    <div class="col-lg-4 >
+
+                                            <span class="lbl">
+                                                <br><i class="fa fa-building text-primary" ></i> 
+                                                `+full.nama_perusahaan+`<br>
+                                                
+                                            
+                                            </span>    
+
+                                        
+                                            <span>
+                                                <i class="fa fa-bars text-primary" >
+                                                </i> Detail Audit<br>
+
+                                                <li>
+                                                    Jumlah Auditor: `+jumlah+`
+                                                </li>
+                                                <li>
+                                                    Peran: `+peran+`
+                                                </li>
+                                                <li>
+                                                    Skema: `+full.skema+`
+                                                </li>
+                                                    <li>
+                                                    Jenis: `+jenis+`
+                                                </li>
+                                                
+                                            </span> 
+                                    </div>
+
+                                </div>`  
+                    }
+                }
+            ],
+
+            
+            
+            
+            
+            processing:true,
+            serverSide:true,
+            order:[[0,'asc']],
+            bFilter: false,
+            bSortable: false,
+            bInfo: false,
+            lengthChange: false,
+            ordering: false
+
+        });
 
         $(document).ready(function () {
 
-            var id_user = {!! json_encode($id_user) !!};
+           
 
-            var xTable = $('#table').DataTable({
-                ajax:{
-                    url:"{{route('datalog')}}",
-                    data:function(d){
-                        d.no_registrasi = $('#no_registrasi').val();
-                        d.mulai = $('#mulai').val();
-                        d.nama_perusahaan = $('#nama_perusahaan').val();
-     
-
-                    }
-                },
-                
-                columns:[
-                   
-                   {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
-
-                        if(!full.pelaksana2){
-                            var jumlah = 1;
-                        }else{
-                            var jumlah = 2;
-                        }
-
-                       /* var mulai = full.mulai.split(" ");
-                        var selesai = full.selesai.split(" ");*/
-
-                        var date1 = new Date(full.mulai); 
-                        var date2 = new Date(full.selesai); 
-                          
-                        // To calculate the time difference of two dates 
-                        
-
-                        var p1 = full.pelaksana1.split("_");
-                        if(full.pelaksana2){
-                            var p2 = full.pelaksana2.split("_");
-                        }
-                        
-
-                        if(id_user == p1[0]){
-                            var peran = 'Ketua';
-                        }else{
-                            var peran = 'Anggota';
-                        }
-
-                        if(p1[2] == 'tahap1'){
-                            var jenis = "Tahap1 - Remote";
-
-                        }else if(p1[2] == 'tahap2'){
-                             var jenis = "Tahap2 - " +full.ktg;
-
-                        }else if(p1[2] == 'tr'){
-                             var jenis = "Tehnical Review - Remote";
-
-                        }else if(p1[2] == 'tinjauan'){
-                             var jenis = "Tijauan Komite Sertifikasi - Remote";
-
-                        }
-
-                       
-                         
-                            return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
-                                       
-                                          
-                                        <div class="col-lg-7" style="padding-left:10%; padding-top:2%">
-                                            <label class="inline text-center">
-
-                                                <i class="fa fa-calendar text-primary" style="zoom:7.0"></i>
-                                                <br>
-                                                <h3 class="text-grey" style=>`+full.mulai+`</h3>
-                                                
-                                                <span class="label label-primary"><a style="color: white;">NOMOR ID: `+full.id_regis+`</a></span>
-                                                <span class="label label-success"><a style="color: white;">NOMOR AUDIT</a></span>
-                                                <span class="label label-info"><a style="color: white;">NOMOR AKAD</a></span>
-
-                                                
-                                            </label>
-                                        </div>
-                                      
-
-                                        <div class="col-lg-4 >
-
-                                                <span class="lbl">
-                                                    <br><i class="fa fa-building text-primary" ></i> 
-                                                    `+full.nama_perusahaan+`<br>
-                                                  
-                                                
-                                                </span>    
-
-                                            
-                                                <span>
-                                                    <i class="fa fa-bars text-primary" >
-                                                    </i> Detail Audit<br>
-
-                                                    <li>
-                                                        Jumlah Auditor: `+jumlah+`
-                                                    </li>
-                                                    <li>
-                                                        Peran: `+peran+`
-                                                    </li>
-                                                    <li>
-                                                        Skema: `+full.skema+`
-                                                    </li>
-                                                     <li>
-                                                        Jenis: `+jenis+`
-                                                    </li>
-                                                   
-                                                </span> 
-                                        </div>
-
-                                    </div>`  
-                        }
-                    }
-                ],
-
-              
-               
-               
-                
-                processing:true,
-                serverSide:true,
-                order:[[0,'asc']],
-                bFilter: false,
-                bSortable: false,
-                bInfo: false,
-                lengthChange: false,
-                ordering: false
-
-            });
+           
 
 
 
