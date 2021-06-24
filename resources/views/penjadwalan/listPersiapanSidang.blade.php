@@ -343,34 +343,34 @@
 
                         // }
 
-                        return `<table class="table-xs table-borderless clear">
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
+                        return `<table class="table-xs table-borderless" style="width: 100%">
+                                    <tr>
+                                        <td class="text-center">
                                             `+unduhLaporan1+`
                                         </td>
                                     </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
+                                    <tr>
+                                        <td class="text-center ">
                                             `+unduhLaporan2+`
                                         </td>
                                     </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
+                                    <tr>
+                                        <td class="text-center">
                                             `+unduhBAP+`
                                         </td>
                                     </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
+                                    <tr>
+                                        <td class="text-center">
                                             `+unduhTS+`
                                         </td>
                                     </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
+                                    <tr>
+                                        <td class="text-center">
                                             `+unduhLaporanTR+`
                                         </td>
                                     </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
+                                    <tr>
+                                        <td class="text-center">
                                             `+unduhLaporanKS+`
                                         </td>
                                     </tr>
@@ -392,7 +392,7 @@
 
                         
 
-                        return `<table class="table-xs table-borderless text-center">
+                        return `<table class="table-xs table-borderless text-center" style="width:100%">
                                     <tr class="text-center align-midle">
                                         <td class="text-center">
                                             <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan_persiapan_sidang='`+full.catatan_persiapan_sidang+`' data-status-laporan_persiapan_sidang='`+full.status_persiapan_sidang+`'  data-target='#modalpersiapansidang' >Hasil Review</button>
