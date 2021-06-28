@@ -143,11 +143,14 @@
 									@endforeach									
 								</td>
 							</tr>
-							</table>								
+							</table>
+						<div class="col-md-12 offset-md-5">				
+							<button type="button"  onclick="window.history.go(-1);" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</button>
+						</div>
 				</div>
-				<!-- end panel-body -->
+				<!-- end panel-body -->				
 			</div>
-			<!-- end panel -->
+			<!-- end panel -->			
 		</div>
 		<!-- end col-12 -->
 	</div>

@@ -29,7 +29,7 @@
         <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body">
-            <div class="forFilter panel-inverse" >
+            <div class="forFilter panel-inverse">
                 <div id="dtransfer">
                     <div id="accordionFilter" class="accordion">
                         <!-- begin card -->
@@ -38,8 +38,9 @@
                                 <img class="animated bounceIn " src="{{asset('/assets/img/user/halal-search.png')}}" alt="" style="height: 30px;margin-right: 10px;"> 
                                 <span class="faq-ask">Filter</span>
                             </div>
+                                    <form id="search-form" class="form-horizontal form-bordered" enctype="multipart/form-data">
                             <div id="collapseFilter" class="collapse" data-parent="#accordionFilter">
-                                <div class="card-body" style="overflow: auto;">
+                                <div class="card-body" style="overflow-y: auto;">
                                     <form id="search-form" class="form-horizontal form-bordered" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             @component('components.inputfilter',['name'=> 'no_registrasi','label' => 'No Registrasi'])@endcomponent
@@ -48,7 +49,7 @@
                                             
                                             <label class="col-lg-2 col-form-label">Progres Status</label>
                                             <div class="col-lg-4">
-                                                <select id="status" name="status" class="form-control selectpicker"  data-live-search="true" data-style="btn-white">
+                                                <select id="status" name="status" class="form-control" data-live-search="true" data-style="btn-white">
                                                     <option value="" selected>--Pilih Progres Status--</option>
                                                     <option value="1">Pengajuan Baru</option>
                                                     <option value="2">Menentukan Kebutuhan Audit</option>
@@ -68,12 +69,7 @@
                                                     <option value="16">Sidang Fatwa Halal</option>
                                                     <option value="17">Ketetapan Halal</option>
                                                 </select>
-                                            </div>
-
-                                            
-
-                                    
-                                            
+                                            </div>                                                                                                                    
                                             <div>
                                                 @component('components.buttonsearch')@endcomponent
                                             </div>
@@ -85,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            <table id="table" class="table " cellspacing="0" style="width:100%">
+            <table id="table" class="table" cellspacing="0" style="width:100%">
                 <thead style="display: none;">
                     <tr>
                         <th ></th>                         
@@ -1468,7 +1464,7 @@
                                                     @endif
 
                                                 </select>
-                                            </form>`;
+                                            </form>`;                                            
                             
                             return `<div class="col-lg-12 row rounded-sm shadow-sm border pt-3 pb-3 m-0">
                                     
@@ -1486,8 +1482,8 @@
                                                 `+full.kelompok+`<br>
                                                 <i class="fa fa-info text-primary" ></i>
                                                 `+full.jenis+`<br>
-                                                <i class="fa fa-info text-primary" ></i> Alamat: 
-                                                `+full.alamat_perusahaan+`<br>
+                                                <div style="overflow:hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><i class="fa fa-info text-primary"></i> Alamat: 
+                                                `+full.alamat_perusahaan+`</div>
                                                 <i class="fa fa-info text-primary" ></i> Status Registrasi: 
                                                 `+full.status_registrasi+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Tanggal Update: 
