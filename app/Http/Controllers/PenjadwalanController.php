@@ -1302,6 +1302,9 @@ class PenjadwalanController extends Controller
             ->where(function($query) use ($id_user){
                
                     $query->where('registrasi.status','=',8) 
+                    ->orwhere('registrasi.status','=','8_0') 
+                    ->orwhere('registrasi.status','=','8_1') 
+                    ->orwhere('registrasi.status','=','8_2')
                     ->orwhere('registrasi.status','=',9) 
                     ->orwhere('registrasi.status','=','9_0') 
                     ->orwhere('registrasi.status','=','9_1') 
@@ -1687,6 +1690,7 @@ class PenjadwalanController extends Controller
 
         $data = $request->except('_token','_method');
         //dd($data);
+        $now=  Carbon::now()->toDateString();
 
 
         DB::beginTransaction();
@@ -1698,6 +1702,7 @@ class PenjadwalanController extends Controller
         $e = $model->find($data['id']);
         $j = $model4->find($e->id_tehnical_review);
         $u = $model3->find($e->id_user);
+        $p = $model2->find($e->id_penjadwalan);
 
         if($j){
 
@@ -1711,6 +1716,7 @@ class PenjadwalanController extends Controller
                     $e->status = 13;
                     $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 12, "Upload Berkas Hasil Technical Review dan lanjut ke tahapan komite sertifikasi.", Auth::user()->usergroup_id);
                 }
+               
                
                 //dd("masuk");
             }else if($data['status_laporan_tr']== '0'){
@@ -1732,6 +1738,8 @@ class PenjadwalanController extends Controller
             $j->id_registrasi = $e->id;
             $j->catatan_tr = $data['catatan_tr'];
             $j->status_lanjut_ks = $data['status_lanjut_ks'];
+            $p->selesai_tr = $now;
+            $p->save();
             $e->save();
             $j->save();
 
@@ -1769,7 +1777,9 @@ class PenjadwalanController extends Controller
             $model4->status_lanjut_ks = $data['status_lanjut_ks'];
             $model4->id_registrasi = $e->id;
             $model4->save();
-            $e->id_tehnical_review = $model4->id;      
+            $e->id_tehnical_review = $model4->id; 
+            $p->selesai_tr = $now;
+            $p->save();     
             $e->save();
             
 
@@ -1795,7 +1805,7 @@ class PenjadwalanController extends Controller
             $redirect = redirect()->route('listtehnicalreview');
 
 
-        return $redirect;
+            return $redirect;
 
         }catch (\Exception $e){
             DB::rollBack();
@@ -1813,6 +1823,7 @@ class PenjadwalanController extends Controller
     {
 
         $data = $request->except('_token','_method');
+        $now=  Carbon::now()->toDateString();
         //dd($data);
 
 
@@ -1825,6 +1836,7 @@ class PenjadwalanController extends Controller
         $e = $model->find($data['id']);
         $j = $model4->find($e->id_tinjauan_komite);
         $u = $model3->find($e->id_user);
+        $p = $model2->find($e->id_penjadwalan);
 
         if($j){
 
@@ -1851,6 +1863,8 @@ class PenjadwalanController extends Controller
             }
             $j->id_registrasi = $e->id;
             $j->catatan_tinjauan = $data['catatan_tinjauan'];
+            $p->selesai_tinjauan = $now;
+            $p->save();
             $e->save();
             $j->save();
 
@@ -1883,7 +1897,8 @@ class PenjadwalanController extends Controller
             $model4->save();
             $e->id_tinjauan_komite = $model4->id; 
             $e->save();
-            
+            $p->selesai_tinjauan = $now;
+            $p->save();
             
 
         }

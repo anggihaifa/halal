@@ -37,18 +37,18 @@
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
-
+		@if (isset($dataCurrent))
         <div class="col-md-12 mx-0 step widget widget-stats animated zoomIn">
-            <form id="msform">	
-                @foreach($dataCurrent as $key => $value)		
-				@php
-					$status_temp = $value['status'];
-					$status = 'a'.'_'.$status_temp;
-					// dd($status);                    
-				@endphp
-                @endforeach
+            <form id="msform">				
+					@foreach($dataCurrent as $key => $value)		
+					@php
+						$status_temp = $value['status'];
+						$status = 'a'.'_'.$status_temp;
+						// dd($status);                    
+					@endphp
+					@endforeach				
                 <!-- progressbar -->
-                <ul id="progressbar">
+                <ul id="progressbar">								
 					@if(count($dataCurrent) == null)
 						<p class="text-dark mt-4"><b>Belum ada kegiatan</b></p>
 					@else										
@@ -431,11 +431,11 @@
 							@endif							
 													
 						@endforeach
-					@endif	                     
-                                                            																														
+					@endif	                                                                																														
 				</ul> <!-- fieldsets -->
 			</form>
 		</div>
+		@endif
         
         <div class="panel-body" style="min-height: 230px">
             <h5 style="color: #ff6961;">NOTE: Silahkan Aktifkan Registrasi Anda Untuk Melanjutkan Ke Tahapan Berikutnya</h5>

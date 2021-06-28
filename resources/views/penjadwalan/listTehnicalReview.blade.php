@@ -347,7 +347,7 @@
 
                         if(full.file_laporan_audit1 ){
 
-                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit 1&nbsp;&nbsp;</a>`;
+                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit 1&nbsp;&nbsp;</a>`;
 
                                                                         
                         }else{

@@ -293,7 +293,7 @@
                         }
                         if(full.file_laporan_tinjauan ){
 
-                            var unduhLaporanKS = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Komite Sertifikasi/`+full.file_laporan_tinjauan+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan TR&nbsp;&nbsp;</a>`;
+                            var unduhLaporanKS = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tinjauan Komite/`+full.file_laporan_tinjauan+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan KS&nbsp;&nbsp;</a>`;
 
                                                                     
                         }else{

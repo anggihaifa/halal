@@ -41,16 +41,16 @@ class EmailAuditor extends Mailable
     {
         //dd( $this);
         if($this->status == 'audit1'){
-            $this->subject('Jadwal Audit Tahap 1 Untuk Pendaftaran Dengan No registrasi ');
+            $this->subject('Jadwal Audit Tahap 1 Untuk Pendaftaran Dengan No registrasi '.$this->registrasi['no_registrasi']);
 
         }elseif($this->status == 'audit2'){
-            $this->subject('Jadwal Audit Tahap 2 Untuk Pendaftaran Dengan No registrasi ');
+            $this->subject('Jadwal Audit Tahap 2 Untuk Pendaftaran Dengan No registrasi '.$this->registrasi['no_registrasi']);
 
         }elseif($this->status == 'tr'){
-            $this->subject('Jadwal Technical Review Untuk Pendaftaran Dengan No registrasi ');
+            $this->subject('Jadwal Technical Review Untuk Pendaftaran Dengan No registrasi '.$this->registrasi['no_registrasi']);
 
         }elseif($this->status == 'tinjauan'){
-            $this->subject('Jadwal Tinajaun Komite Untuk Pendaftaran Dengan No registrasi ');
+            $this->subject('Jadwal Tinajaun Komite Untuk Pendaftaran Dengan No registrasi '.$this->registrasi['no_registrasi']);
 
         }else{
 

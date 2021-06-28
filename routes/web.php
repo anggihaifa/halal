@@ -397,7 +397,7 @@ Route::prefix('master')->group(function (){
 
     
 
-    Route::resource('faq','Master\FaqController')->middleware('role:1,3,6,9');
+    Route::resource('faq','Master\FaqController');
     Route::get('master/faq/faq_datatable','Master\FaqController@datatable')->name('master.faq.datatable');
 
 

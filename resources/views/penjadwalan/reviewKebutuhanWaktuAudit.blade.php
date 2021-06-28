@@ -751,7 +751,7 @@
                   
 
                     {"data":"no_registrasi"},
-                    {"data":"perusahaan"},
+                    {"data":"nama_perusahaan"},
                     {"data":"kelompok"},
                     {
                         

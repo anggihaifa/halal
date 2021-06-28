@@ -249,13 +249,9 @@ return [
             'title' => 'Dashboard',
             'url' => 'home.index'
         ],
+      
         [
-            'icon' => 'ion-md-book',
-            'title' => 'Monitoring Registrasi',
-            'url' => 'listmonitoringregistrasi',          
-        ],  
-        [
-            'icon' => 'ion-ios-calendar',
+            'icon' => 'ion-ios-albums',
             'title' => 'Penentuan Kebutuhan Waktu Audit',
             'url' => 'reviewkebutuhanwaktuaudit'
         ],
@@ -265,17 +261,21 @@ return [
             'url' => 'listpenjadwalanreviewer'
         ],
         [
-            'icon' => 'ion-ios-calendar',
+            'icon' => 'ion-ios-bookmark',
             'title' => 'Persiapan Sidang Fatwa Halal',
             'url' => 'listpersiapansidang'
         ],
+
         [
             'icon' => 'ion-ios-cube',
             'title' => 'Master',
             'url' => '#',
             'caret' => true,
             'sub_menu' => [
-               
+                [
+                    'title' => 'Monitoring Registrasi',
+                    'url' => 'listmonitoringregistrasi',          
+                ],  
                 [
                     
                     'url' => 'dokumen.index',
@@ -400,7 +400,7 @@ return [
             'url' => 'listkebutuhanwaktuaudit'
         ],
         [
-            'icon' => 'ion-ios-calendar',
+            'icon' => 'ion-ios-bookmark',
             'title' => 'Jadwal Audit',
             'url' => '#',
             'caret' => true,

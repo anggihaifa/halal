@@ -281,7 +281,7 @@
                             buttonUnduh =  `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
                                             <i class="fa fa-download" aria-hidden="true"></i>Laporan Tehnical Review
                                         </a>
-                                        <a href="{{ url('').Storage::url('public/laporan/upload/Laporan Komite Sertifikasi/`+full.file_laporan_tinjauan+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
+                                        <a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tinjauan Komite/`+full.file_laporan_tinjauan+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
                                             <i class="fa fa-download" aria-hidden="true"></i>Laporan Komite Sertifikasi
                                         </a>
                                         <a  class="btn-xs btn btn-green" style="color: white;" data-toggle='modal' data-catatan-tr='`+full.catatan_tr+`' data-catatan-tinjauan='`+full.catatan_tinjauan+`' data-catatan-persiapan-sidang='`+full.catatan_persiapan_sidang+`' data-target='#modalCatatan' >
@@ -361,7 +361,7 @@
                                         <a href="{{url('laporan_audit')}}/`+full.id_registrasi+`" class="btn-xs btn btn-info" style="color: white;">
                                             <i class="ace-icon fa fa-edit bigger-130" ></i> Laporan Audit Tahap 2
                                         </a>
-                                        <a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
+                                        <a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
                                             <i class="fa fa-download" aria-hidden="true"></i>Laporan Audit Tahap 1
                                         </a>
                                         <br>`+buttonUnduh+`
