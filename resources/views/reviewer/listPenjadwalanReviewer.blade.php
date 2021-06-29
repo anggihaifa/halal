@@ -568,40 +568,40 @@
                 d.pelaksana2_tinjauan ="-";
             }
 
-            if(d.status_penjadwalan_audit1 == 3){
-                btnApprove1 = '<button class="btn btn-xs btn-green m-r-5 text-white" disable>Approve</button>';
-                btnReject1 = '<button class="btn btn-xs btn-red m-r-5 text-white" disable>Reject</button>';
+            if(d.status_penjadwalan_audit1 == '3'){
+                btnApprove1 = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Approve</button>';
+                btnReject1 = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Reject</button>';
             }else{
-                btnApprove1='<button class="btn btn-xs btn-grey m-r-5 text-white" data-toggle="modal" data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1"  data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalapprove" >Approve</button>';
+                btnApprove1='<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal" data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1"  data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalapprove" >Approve</button>';
 
-                btnReject1 = '<button class="btn btn-xs btn-grey m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1" data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalreject" >Reject</button>';
+                btnReject1 = '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1" data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalreject" >Reject</button>';
             }
 
-            if(d.status_penjadwalan_audit2 == 3){
-                btnApprove2 = '<button class="btn btn-xs btn-green m-r-5 text-white" disable>Approve</button>';
-                btnReject2 = '<button class="btn btn-xs btn-red m-r-5 text-white" disable>Reject</button>';
+            if(d.status_penjadwalan_audit2 == '3'){
+                btnApprove2 = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Approve</button>';
+                btnReject2 = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Reject</button>';
             }else{
-                btnApprove2=  '<button class="btn btn-xs btn-grey m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"   data-target="#modalapprove" >Approve</button>';
+                btnApprove2=  '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"   data-target="#modalapprove" >Approve</button>';
 
-                btnReject2 =  '<button class="btn btn-xs btn-grey m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"    data-target="#modalreject" >Reject</button>';
+                btnReject2 =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"    data-target="#modalreject" >Reject</button>';
             }
 
-            if(d.status_penjadwalan_tr == 3){
-                btnApproveTR = '<button class="btn btn-xs btn-green m-r-5 text-white" disable>Approve</button>';
-                btnRejectTR = '<button class="btn btn-xs btn-red m-r-5 text-white" disable>Reject</button>';
+            if(d.status_penjadwalan_tr == '3'){
+                btnApproveTR = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Approve</button>';
+                btnRejectTR = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Reject</button>';
             }else{
-                btnApproveTR='<button class="btn btn-xs btn-grey m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr"  data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"   data-target="#modalapprove" >Approve</button>';
+                btnApproveTR='<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr"  data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"   data-target="#modalapprove" >Approve</button>';
 
-                btnRejectTR =  '<button class="btn btn-xs btn-grey m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>';
+                btnRejectTR =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>';
             }
 
-            if(d.status_penjadwalan_tinjauan == 3){
-                btnApproveTinjauan = '<button class="btn btn-xs btn-green m-r-5 text-white" disable>Approve</button>';
-                btnRejectTinjauan = '<button class="btn btn-xs btn-red m-r-5 text-white" disable>Reject</button>';
+            if(d.status_penjadwalan_tinjauan == '3'){
+                btnApproveTinjauan = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Approve</button>';
+                btnRejectTinjauan = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Reject</button>';
             }else{
-                btnApproveTinjauan= '<button class="btn btn-xs btn-grey m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan"  data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"   data-target="#modalapprove" >Approve</button>';
+                btnApproveTinjauan= '<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan"  data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"   data-target="#modalapprove" >Approve</button>';
 
-                btnRejectTinjauan =  '<button class="btn btn-xs btn-grey m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>';
+                btnRejectTinjauan =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>';
             }
 
         
