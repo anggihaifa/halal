@@ -2841,7 +2841,7 @@ class RegistrasiController extends Controller
                 //$model4->berkas_akad = $filename;
                
             }
-            if($data['mata_uang']== 'RP'){
+            if($data['mata_uang']== 'IDR'){
                 $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
                 $bp2 = str_replace('.', '', $bp1);            
                 $e->total_biaya = $bp2;
@@ -2862,6 +2862,7 @@ class RegistrasiController extends Controller
                 $bp2 = str_replace('.', '', $bp1);            
                 $e->total_biaya = $bp2;
             }
+            //dd($e->total_biaya);
           
             
             if($p == null){
@@ -2909,6 +2910,7 @@ class RegistrasiController extends Controller
                // dd($e->total_biaya);
 
                     $p->nominal_tahap1 = ((int)$e->total_biaya)/2;
+                    $p->nominal_tahap2 = 0;
                     $p->nominal_tahap3 = ((int)$e->total_biaya)/2;
                     $p->nominal_total =((int)$e->total_biaya);
                     $p->id_registrasi = $e->id;
@@ -2931,6 +2933,8 @@ class RegistrasiController extends Controller
                 }else{
                      //dd($e->total_biaya);
                     $p->nominal_tahap1 = ((int)$e->total_biaya);
+                    $p->nominal_tahap2 = 0;
+                    $p->nominal_tahap3 =  0;
                     $p->nominal_total = ((int)$e->total_biaya);
                     $p->id_registrasi = $e->id;
                     $p->updated_by=$updater;
