@@ -1199,12 +1199,20 @@
         // }
 
         
-        function formatRupiah(d) {
-            return Number(d).toLocaleString('id', {
-              maximumFractionDigits: 2,
-              style: 'currency',
-              currency: 'IDR'
-            });
+        function formatRupiah(d, mata_uang) {
+            if(mata_uang){
+                return Number(d).toLocaleString('id', {
+                maximumFractionDigits: 2,
+                style: 'currency',
+                currency: mata_uang
+                });
+            }else{
+                return Number(d).toLocaleString('id', {
+                maximumFractionDigits: 2,
+                style: 'currency',
+                currency: 'IDR'
+                });
+            }      
         }
 
         var xTable = $('#table').DataTable({
@@ -1601,7 +1609,7 @@
                                                         </td>
 
                                                         <td class="text-center align-middle">
-                                                            `+formatRupiah(full.total_biaya)+`
+                                                            `+formatRupiah(full.total_biaya,  full.mata_uang)+`
                                                         </td>
                                                         
                                                         <td class="text-center align-middle">
@@ -1637,7 +1645,7 @@
                                                         </td>
 
                                                         <td class="text-center align-middle">
-                                                            `+formatRupiah(full.total_biaya)+`
+                                                            `+formatRupiah(full.total_biaya,  full.mata_uang)+`
                                                         </td>
                                                          
                                                        

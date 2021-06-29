@@ -26,7 +26,7 @@
         <!-- begin right-content -->
         <div class="right-content right-content-custom">
             @php
-                $maintenance = 1;
+                $maintenance = 0;
             @endphp
             <!-- begin login-header -->            
             <div class="login-header">
