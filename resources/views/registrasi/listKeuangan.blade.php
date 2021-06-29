@@ -416,7 +416,7 @@
 
                         var uploadBeritaAcara = `<a href="{{url('upload_berita_acara_admin')}}/`+full.id+`"   class="dropdown-item">Upload Berita Acara</a> `;
                         
-                        if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
+                        if(full.status_akad == null || full.status_akad == 0 ){
                             var unduhAkad = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                                                                         
                         }else{
@@ -435,7 +435,7 @@
                                                                         
                         }else{
 
-                            var unduhOC = `<a href="{{ url('').Storage::url('public/buktiOC/`+full.id_user+`/`+full.file_oc+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
+                            var unduhOC = `<a href="{{ url('').Storage::url('public/buktioc/`+full.id_user+`/`+full.file_oc+`') }}" class="btn btn-indigo btn-xs" download>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                         }
                         if(full.status_tahap2 == null || full.status_tahap2 == 0 ){
                             var unduhBayar2 = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;

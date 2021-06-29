@@ -490,7 +490,7 @@
                                   
                             </div>
                         <div class="modal-footer">
-                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan penjadwalan?')">Submit</button>
+                           <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin menambahkan Kebutuhan Waktu Audit?')">Submit</button>
                         </div>
                     </form>
                 </div>  

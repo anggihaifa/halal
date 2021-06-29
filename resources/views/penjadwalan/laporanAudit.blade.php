@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Tambah Registrasi Halal')
+@section('title', 'Laporan Audit  Tahap 2')
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -16,7 +16,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>        
+        <li class="breadcrumb-item"><a href="#">Audit Tahap 2</a></li>        
         <li class="breadcrumb-item active">Laporan Audit Tahap 2</li>
     </ol>
     <!-- end breadcrumb -->
@@ -840,13 +840,7 @@
                                                                 <input name="ca1c4" type="text" class="form-control" placeholder="Catatan" id="1c4ca"/>
                                                             </td>                                                                                                
                                                         </tr>
-                                                        <tr>
-                                                            <td class="valign-middle text-center"></td>
-                                                            <td class="valign-middle font-weight-bold">Reset</td>                                                            
-                                                            <td class="valign-middle" colspan="4">
-                                                                <input type="button" value="Reset Semua Data" class="btn btn-sm btn-danger float-right" id="btn_reset">
-                                                            </td>                                                                                                
-                                                        </tr>
+                                                       
                                                 </tbody>
                                             </table>
                                         </div>
@@ -964,13 +958,13 @@
                                                             <input name="ca24" type="text" class="form-control" placeholder="Catatan" id="24ca"/>
                                                         </td>                                                                                                
                                                     </tr> --}}
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <td class="valign-middle text-center"></td>
                                                         <td class="valign-middle font-weight-bold">Reset</td>                                                            
                                                         <td class="valign-middle" colspan="4">
                                                             <input type="button" value="Reset Semua Data" class="btn btn-sm btn-danger float-right" id="btn_reset2">
                                                         </td>                                                                                                
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -3748,13 +3742,13 @@
                                                                 <input name="ca3c10" type="text" class="form-control" placeholder="Catatan" id="3c10ca"/>
                                                             </td>                                                                                                
                                                         </tr>
-                                                        <tr>
+                                                        <!-- <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle font-weight-bold">Reset</td>                                                            
                                                             <td class="valign-middle" colspan="4">
                                                                 <input type="button" value="Reset Semua Data" class="btn btn-sm btn-danger float-right" id="btn_reset3">
                                                             </td>                                                                                                
-                                                        </tr>
+                                                        </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -4548,13 +4542,13 @@
                                                                 <input name="ca4d5" type="text" class="form-control" placeholder="Catatan" id="4d5ca"/>
                                                             </td>                                                                                                
                                                         </tr>
-                                                        <tr>
+                                                        <!-- <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle font-weight-bold">Reset</td>                                                            
                                                             <td class="valign-middle" colspan="4">
                                                                 <input type="button" value="Reset Semua Data" class="btn btn-sm btn-danger float-right" id="btn_reset4">
                                                             </td>                                                                                                
-                                                        </tr>                                                                                                               
+                                                        </tr>                                                                                                                -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -4695,12 +4689,12 @@
                                                                 <input name="ca5e" type="text" class="form-control" placeholder="Catatan" id="5eca"/>
                                                             </td>                                                                                 
                                                         </tr>
-                                                        <tr>
+                                                        <!-- <tr>
                                                             <td class="valign-middle text-center"></td>
                                                             <td class="valign-middle font-weight-bold">Reset</td>                                                            
                                                             <td class="valign-middle" colspan="4">
                                                                 <input type="button" value="Reset Semua Data" class="btn btn-sm btn-danger float-right" id="btn_reset5">
-                                                            </td>                                                                                                
+                                                            </td>                                                                                                 -->
                                                         </tr>                                                                                                               
                                                 </tbody>
                                             </table>

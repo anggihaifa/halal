@@ -82,7 +82,7 @@
                         </div>
 
                         <div style="margin-top:15px;" class="animated pulse infinite" >
-                            <a  href="{{asset('/assets/doc/manual/MANUAL GUIDELINE HALAL LPH SUCOFINDO.pdf')}}"  class="btn btn-inverse btn-block btn-lg forFaq"  download>
+                            <a  href="{{asset('/assets/doc/manual/MANUAL GUIDELINE HALAL LPH SUCOFINDO v.2.0.pdf')}}"  class="btn btn-inverse btn-block btn-lg forFaq"  download>
                                 <h5 style="margin-bottom: 0px;">
                                 
                                     <span style="color: #89d0d4">Download Manual Guide</span>
@@ -179,7 +179,7 @@
                                 <td>6. Update Tampilan Submenu Pembayaran</td>
                              </tr>
                              <tr>
-                                <td>7. Update Tampilan Subbmenu Akad</td>
+                                <td>7. Update Tampilan Submenu Akad</td>
                              </tr>
                              <tr>
                                 <td>8. Update Tampilan Submenu Order Confitmation</td>

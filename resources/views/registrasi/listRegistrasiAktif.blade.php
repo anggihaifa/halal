@@ -49,7 +49,7 @@
                                             
                                             <label class="col-lg-2 col-form-label">Progres Status</label>
                                             <div class="col-lg-4">
-                                                <select id="status" name="status" class="form-control" data-live-search="true" data-style="btn-white">
+                                                <select id="status" name="status" class="form-control"  data-live-search="true" data-style="btn-white">
                                                     <option value="" selected>--Pilih Progres Status--</option>
                                                     <option value="1">Pengajuan Baru</option>
                                                     <option value="2">Menentukan Kebutuhan Audit</option>
@@ -454,14 +454,14 @@
                         <td class="valign-middle text-center">2</td>
                         <td class="valign-middle text-center">Audit Tahap 2</td>
                         <td class="valign-middle text-center" id="t_mulai2"></td>
-                        <td class="valign-middle text-center">d.ktg_audit2</td>
+                        <td class="valign-middle text-center"id="ktg_audit2"></td>
                         <td class="valign-middle text-center" id="t_p1_a2"></td>    
                         <td class="valign-middle text-center" id="t_p2_a2"></td>     
                     </tr>
                     <tr>
                         <td class="valign-middle text-center">3</td>
                         <td class="valign-middle text-center">Tehnical Review</td>
-                        <td class="valign-middle text-center">d.mulai_tr</td>
+                        <td class="valign-middle text-center" id="mulai_tr"></td>
                         <td class="valign-middle text-center">Remote</td>
                         <td class="valign-middle text-center" id="t_p1_tr"></td>    
                         <td class="valign-middle text-center" id="t_p2_tr"></td>    
@@ -469,7 +469,7 @@
                     <tr>
                         <td class="valign-middle text-center">4</td>
                         <td class="valign-middle text-center">Tinjauan Komite</td>
-                        <td class="valign-middle text-center">d.mulai_tinjauan</td>
+                        <td class="valign-middle text-center" id="mulai_tinjauan"></td>
                         <td class="valign-middle text-center">Remote</td>
                         <td class="valign-middle text-center" id="t_p1_tk" ></td>    
                         <td class="valign-middle text-center" id="t_p2_tk"></td>   
@@ -753,6 +753,7 @@
             var p2_tk = $this.data('pelaksana2-tinjauan');
             var mulai_audit1 = $this.data('mulai-audit1');
             var mulai_audit2 = $this.data('mulai-audit2');
+            var ktg_audit2 = $this.data('ktg-audit2');
             var mulai_tr = $this.data('mulai-tr');
             var mulai_tinjauan = $this.data('mulai-tinjauan');
             var modal = $('#modaljadwal');
@@ -799,6 +800,7 @@
                     mulai_tinjauan = $str_tinjauan[2]+"-"+$str_tinjauan[1]+"-"+$str_tinjauan[0];
                 }
             }
+           
            
             
 
@@ -892,6 +894,9 @@
             modal.find('#t_p2_tk').html(p2_tk);
             modal.find('#t_mulai1').html(mulai_audit1);
             modal.find('#t_mulai2').html(mulai_audit2);
+            modal.find('#ktg_audit2').html(ktg_audit2);
+            modal.find('#mulai_tr').html(mulai_tr);
+            modal.find('#mulai_tinjauan').html(mulai_tinjauan);
                 
             modal.find('#modaljadwal').attr('action', function (i,old) {
                 return old + '/' + data_id;
@@ -1381,7 +1386,7 @@
 
                             var ksb = `<a class="dropdown-item" style="cursor:pointer" href="{{url('upload_ksb')}}/`+full.id+`">Input Berkas Konfirmasi, Surat Tugas dan Berita Acara</a>`;
                             
-                            if(full.status_akad == null || full.status_akad == 0 || full.status_akad == 1 ){
+                            if(full.status_akad == null || full.status_akad == 0){
                                 var unduhAkad = `<a class="btn btn-grey btn-xs" disableButton>&nbsp;&nbsp;Unduh&nbsp;&nbsp;</a>`;
                                                                              
                             }else{
@@ -1450,7 +1455,7 @@
                                                 @method('PUT')
                                                
                                                 <input type="text" name="id" value="`+full.id+`" hidden></input>
-                                                <select id="kode_wilayah" name="kode_wilayah" class="form-control" onchange="this.form.submit()">
+                                                <select id="kode_wilayah" name="kode_wilayah" class="form-control" onchange="this.form.submit()" @if(Auth::user()->kode_wilayah != 119) disabled @endif>
 
                                                     <option value="`+full.kode_wilayah+`">`+checkWilayah(full.kode_wilayah)+`</option>
                                                     
@@ -1483,7 +1488,7 @@
                                                 <i class="fa fa-info text-primary" ></i>
                                                 `+full.jenis+`<br>
                                                 <div style="overflow:hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><i class="fa fa-info text-primary"></i> Alamat: 
-                                                `+full.alamat_perusahaan+`</div>
+                                                `+full.alamat_perusahaan+`</div><br>
                                                 <i class="fa fa-info text-primary" ></i> Status Registrasi: 
                                                 `+full.status_registrasi+`<br>
                                                 <i class="fa fa-info text-primary" ></i> Tanggal Update: 
@@ -1692,7 +1697,7 @@
                                                                     <td class="text-center align-middle">
                                                                         <i class="fa fa-eye" style="cursor:pointer" aria-hidden="true" data-toggle='modal' data-pelaksana1-audit1='`+full.pelaksana1_audit1+`' data-pelaksana1-audit2='`+full.pelaksana1_audit2+`' data-pelaksana2-audit2='`+full.pelaksana2_audit2+`' data-pelaksana1-tr='`+full.pelaksana1_tr+`' data-pelaksana2-tr='`+full.pelaksana2_tr+`' data-pelaksana1-tinjauan='`+full.pelaksana1_tinjauan+`' data-pelaksana2-tinjauan='`+full.pelaksana2_tinjauan+`' 
                                                                         data-mulai-audit1='`+full.mulai_audit1+`' 
-                                                                        data-mulai-audit2='`+full.mulai_audit2+`' data-mulai-audit1='`+full.mulai_audit1+`' 
+                                                                        data-mulai-audit2='`+full.mulai_audit2+`' data-ktg-audit2='`+full.ktg_audit2+`' data-mulai-audit1='`+full.mulai_audit1+`' 
                                                                         data-mulai-audit2='`+full.mulai_audit2+`' data-mulai-tr='`+full.mulai_tr+`' 
                                                                         data-mulai-tinjauan='`+full.mulai_tinjauan+`'  data-target='#modaljadwal'></i>
 

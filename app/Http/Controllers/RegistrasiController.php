@@ -141,26 +141,26 @@ class RegistrasiController extends Controller
     public function listRegistrasiPelangganAktif(){
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
-        //$curl = curl_init();
+        $curl = curl_init();
 
-        // curl_setopt_array($curl, array(
-        //   CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-        //   CURLOPT_RETURNTRANSFER => true,
-        //   CURLOPT_ENCODING => '',
-        //   CURLOPT_MAXREDIRS => 10,
-        //   CURLOPT_TIMEOUT => 0,
-        //   CURLOPT_FOLLOWLOCATION => true,
-        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //   CURLOPT_CUSTOMREQUEST => 'POST',
-        // ));
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
 
-        // $response = curl_exec($curl);   
-        // curl_close($curl);
+        $response = curl_exec($curl);   
+        curl_close($curl);
 
-        // $response = json_decode($response);
-        // $cabang = $response->data;
+        $response = json_decode($response);
+        $cabang = $response->data;
 
-        $cabang = null;
+        //$cabang = null;
 
 
         $kw = DB::table('registrasi')
@@ -196,7 +196,7 @@ class RegistrasiController extends Controller
        
        
         ->where('registrasi.status_cancel','=',0)
-        ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit', 'penjadwalan.catatan_penjadwalan_audit1','penjadwalan.catatan_penjadwalan_audit2','penjadwalan.catatan_penjadwalan_tr','penjadwalan.catatan_penjadwalan_tinjauan');
+        ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','penjadwalan.mulai_tr','penjadwalan.mulai_tinjauan','penjadwalan.ktg_audit2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit', 'penjadwalan.catatan_penjadwalan_audit1','penjadwalan.catatan_penjadwalan_audit2','penjadwalan.catatan_penjadwalan_tr','penjadwalan.catatan_penjadwalan_tinjauan');
 
         if($kodewilayah == '119'){            
             $xdata = $xdata->where('registrasi.status_cancel','=',0);
@@ -236,7 +236,7 @@ class RegistrasiController extends Controller
 
         
         $xdata = $xdata
-                 ->orderBy('registrasi.id','desc');
+                 ->orderBy('registrasi.updated_at','desc');
 
         return Datatables::of($xdata)->make();
     }
@@ -2128,7 +2128,7 @@ class RegistrasiController extends Controller
         $model4 = new Pembayaran();
         $model5 = new Penjadwalan();
         $id_user = Auth::user()->id;
-
+        $now=  Carbon::now()->toDateString();
         // echo "<pre>";
         // print_r($data);
         // echo "</pre>";
@@ -2176,8 +2176,10 @@ class RegistrasiController extends Controller
                         $f->updated_at =  $currentDateTime;                 
                         //$f->status = '8_3'; 
                         $f->status = '9'; 
+                        
                         $e->save();
                         $f->save();
+                        
                         //SendEmailP::dispatch($u,$f,$p,$f->status);
                         Session::flash('success', "Status berhasil diupdate");
                        
@@ -2348,7 +2350,8 @@ class RegistrasiController extends Controller
                     $templateProcessor->saveAs("storage/laporan/download/Laporan Audit1/".$fileName);
                     
                     $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
-
+                    $pe->selesai_audit1 = $now;
+                    $pe->save();
                     $e->save();
                     $f->save();                        
                     return response()->download('storage/laporan/download/Laporan Audit1/'.$fileName);
@@ -2509,6 +2512,8 @@ class RegistrasiController extends Controller
 
                     $fileName = $e->id_registrasi.'_'.$f->id_penjadwalan.'_Laporan Audit 1_'.$f->nama_perusahaan.'.docx';
                     $e->file_laporan_audit1= $fileName ;
+                    $pe->selesai_audit1 = $now;
+                    $pe->save();
                     $e->save();
                     $f->save();    
                     $templateProcessor->saveAs("storage/laporan/download/Laporan Audit1/".$fileName);

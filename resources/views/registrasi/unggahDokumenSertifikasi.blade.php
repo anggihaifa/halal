@@ -179,13 +179,7 @@
 														
 														
 													</tr>
-													<tr style="border:none">
-														<td style="border:none">
-														{!! $fieldBelum !!}
-														
-														</td>
-														
-													</tr>
+													
 												</table>
 												
 											</td>
