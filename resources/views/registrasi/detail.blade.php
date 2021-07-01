@@ -51,30 +51,32 @@
 										<tr>
 											<span id="stat_val" style="display:none">{{$value['statusnya']}}</span>
 											<td colspan="2"><h6><p id="notif_user"></p></h6></td>
+											{{-- <td><p><b>No. Registrasi : </b> {{$value['no_registrasi']}}</p></td> --}}
 										</tr>
-										<tr>
-											<td><p><b>No. Registrasi : </b> {{$value['no_registrasi']}}</p></td>
-											<td><p><b>No. Surat Permohonan Sertifikasi : </b> {{$value['no_registrasi_bpjph']}}</p></td>
-											<td><p><b>Tanggal Registrasi : </b> {{$value['tgl_registrasi']}}</p></td>
-											<td><p><b>Jenis Registrasi : </b> {{$value['jenis']}}</p></td>
-										</tr>										
 										<tr>											
-											<td><p><b>Alamat Perusahaan : </b>{{$value['alamat_perusahaan']}}</p></td>
-											<td><p><b>Telepon Perusahaan : </b>{{$value['telepon_perusahaan']}}</p></td>
-											<td><p><b>Alamat Pabrik : </b>{{$value['alamat_pabrik']}}</p></td>
-											<td><p><b>Telepon Pabrik : </b>{{$value['telepon_pabrik']}}</p></td>
+											<td colspan="2"><h5>Data Registrasi</h5></td>
+										</tr>
+										<tr>
+											<td><p><b>Tanggal Registrasi : </b> <br>{{$value['tgl_registrasi']}}</p></td>
+											<td><p><b>No. Pendaftaran BPJPH : </b> <br>{{$value['no_registrasi_bpjph']}}</p></td>
+											<td><p><b>Status Registrasi : </b><br>{{$value['status_registrasi']}}</p></td>
+											<td><p><b>Jenis Layanan : </b> <br>{{$value['jenis']}}</p></td>											
+										</tr>
+										<tr>											
+											<td colspan="2"><h5>Data Perusahaan</h5></td>
+										</tr>
+										<tr>											
+											<td><p><b>Alamat Perusahaan : </b><br>{{$value['alamat_perusahaan']}}</p></td>
+											<td><p><b>Telepon Perusahaan : </b><br>{{$value['telepon_perusahaan']}}</p></td>
+											<td><p><b>Alamat Pabrik : </b><br>{{$value['alamat_pabrik']}}</p></td>
+											<td><p><b>Telepon Pabrik : </b><br>{{$value['telepon_pabrik']}}</p></td>
 										</tr>
 										<tr>
 											<td><p><b>Contact Person : </b>{{$value['contact_person']}}</p></td>
-											<td><p><b>Email : </b>{{$value['email']}}</p></td>
-											<td><p><b>Nama Merk : </b>{{$value['nama_merk_produk']}}</p></td>
-											<td><p><b>Rincian Jenis Produk : </b>{{$value['rincian_jenis_produk']}}</p></td>
+											<td><p><b>Email : </b>{{$value['email']}}</p></td>											
 										</tr>
-										<tr>
-											<td><p><b>Daerah Pemasaran : </b>{{$value['daerah_pemasaran']}}</p></td>
-											<td><p><b>Contact Person : </b>{{$value['contact_person']}}</p></td>
-											<td><p><b>Status Registrasi : </b>{{$value['status_registrasi']}}</p></td>
-											<td><p><b>Jenis Produk : </b>{{$value['kelompok']}}</p></td>																		
+										<tr>											
+											<td colspan="2"><h5>Data KTP & NPWP</h5></td>
 										</tr>
 										<tr>
 											<td colspan="2"><p><b>KTP</b></p></td>
@@ -89,6 +91,17 @@
 												<img src="{{url('') .Storage::url('npwp/'.$value['id'].'/'.$value['npwp']) }}" style="width: 30%">
 												<br><a href="{{url('') .Storage::url('npwp/'.$value['id'].'/'.$value['npwp']) }}" download>Download NPWP</a>
 											</td>
+										</tr>
+										<tr>											
+											<td colspan="2"><h5>Data Produk</h5></td>
+										</tr>
+										<tr>																						
+											<td><p><b>Jenis Produk : </b><br>{{$value['kelompok']}}</p></td>
+											<td><p><b>Rincian Jenis Produk : </b><br>{{$value['rincian_jenis_produk']}}</p></td>
+											<td><p><b>Nama Merk : </b><br>{{$value['nama_merk_produk']}}</p></td>
+											<td><p><b>Daerah Pemasaran : </b><br>{{$value['daerah_pemasaran']}}</p></td>
+										</tr>
+										<tr>											
 										</tr>										
 									</table>
 								</div>																								                                                                								

@@ -81,9 +81,7 @@ class RegistrasiController extends Controller
             $dataCurrent = json_decode($currentRegistrasi,true);    
         }else{
             $dataCurrent = null;    
-        }
-
-        // dd($dataCurrent);
+        }        
 
         if(Auth::user()->registrasi_id !== null){
             $data = Registrasi::find(Auth::user()->registrasi_id);            

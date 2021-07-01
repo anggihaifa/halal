@@ -139,8 +139,9 @@
 			<div class="widget widget-stats bg-blue animated zoomIn delay-2s">
 				<div class="stats-icon"><i class="fa fa-book text-white"></i></div>
 				<div class="stats-info">
-					<h4>JUMLAH AUDIT</h4>
-					<a href="{{route('listregistrasipelangganaktif')}}" class="text-white"><p>{{$dataAudit}}</p></a>
+					<h4>JUMLAH AUDIT 1 / 2</h4>
+					<a href="{{route('listaudit1')}}" class="text-white"><span style="font-size: 23px">{{$dataAudit}}</span></a> / 
+                    <a href="{{route('listaudit2')}}" class="text-white"><span style="font-size: 23px"> {{$dataAudit2}}</span></a>
 				</div>
 				<div class="stats-link">
 					<a href="javascript:;" target="_top"><!--Lihat Detail <i class="fa fa-arrow-alt-circle-right"></i>--></a>
@@ -155,7 +156,7 @@
 				<div class="stats-info">
 					<h4>JUMLAH PELATIHAN YANG TELAH DIIKUTI</h4>
 					{{-- <a href="{{route('user.listpelanggan')}}" class="text-white"><p>{{$dataPelanggan}}</p></a> --}}
-                    <a href="{{route('user.listpelanggan')}}" class="text-white"><p>-</p></a>
+                    <a href="#" class="text-white"><p>-</p></a>
 				</div>
 				<div class="stats-link">
 					<a href="javascript:;" target="_top"></a>
@@ -169,7 +170,7 @@
 				<div class="stats-icon"><i class="fa fa-signal text-white"></i></div>
 				<div class="stats-info">
 					<h4>PENILAIAN KERJA AUDITOR</h4>
-					<a href="{{route('user.listpelanggan')}}" class="text-white"><p>{{$dataUser}}</p></a>
+					<a href="#" class="text-white"><p>-</p></a>
 				</div>
 				<div class="stats-link">
 					<a href="javascript:;" target="_top"></a>
