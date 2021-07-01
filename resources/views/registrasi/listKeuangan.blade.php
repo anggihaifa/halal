@@ -267,6 +267,13 @@
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script src="{{asset('/assets/js/filterData.js')}}"></script>
+    <script src="{{asset('/assets/js/jszip.min.js')}}"></script>
+    <script src="{{asset('/assets/js/pdfmake.min.js')}}"></script>
+    <script src="{{asset('/assets/js/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/assets/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/assets/js/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('/assets/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/assets/js/buttons.print.min.js')}}"></script>
 
     
     <script>
@@ -379,6 +386,7 @@
         var xTable = $('#table').DataTable({
                
             ajax:{
+                
                 url:"{{route('datakeuangan')}}",
                 data:function(d){
                     d.no_registrasi = $('#no_registrasi').val();
@@ -392,7 +400,7 @@
 
                 }
             },
-            
+          
             columns:[
                 
                 {
@@ -694,6 +702,7 @@
             ordering: false,
             processing:true,
             serverSide:true,
+           
             
         });
       

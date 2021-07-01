@@ -239,7 +239,7 @@ class RegistrasiController extends Controller
     }
    
     public function updateStatusRegistrasi($id,$no_registrasi,$id_user,$status){
-        
+        //dd($id);
     
         
         $updater = Auth::user()->name;
@@ -253,6 +253,11 @@ class RegistrasiController extends Controller
             $e = $model->find($id);
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
+            if($status == 17){
+                $e->status_cancel = 1;
+            }else{
+                $e->status_cancel = 0;
+            }
             $e->status = $status;       
             $e->save();   
             //$e->updated_status_by = $updater;
@@ -2552,12 +2557,20 @@ class RegistrasiController extends Controller
                     ->where('status','tunai')
                     ->get();        
         $dataTunai = json_decode($getTunai,true);        
-        $dataAkad = DB::table('akad')->select('*')->where('id_registrasi',$id)->get();        
-        if($dataAkad != null){
-            return view('registrasi.uploadKontrakAkad',compact('data','dataTransfer','dataTunai','dataAkad'));
+        $dataAkad = DB::table('akad')->select('*')->where('id_registrasi',$id)->get();    
+        if($data->status == 4 ||$data->status == '4_0' || $data->status == '4_1'){
+            if($dataAkad != null){
+                return view('registrasi.uploadKontrakAkad',compact('data','dataTransfer','dataTunai','dataAkad'));
+            }else{
+                return view('registrasi.uploadKontrakAkad',compact('data','dataTransfer','dataTunai'));
+            }
         }else{
-            return view('registrasi.uploadKontrakAkad',compact('data','dataTransfer','dataTunai'));
-        }
+            Session::flash('error', "Belum masuk ketahapan Akad. Silahkan hubungi admin untuk info lebih lanjut");
+            $redirect = redirect()->route('listkeuangan');
+            return $redirect;
+
+        } 
+       
     }
     public function uploadAkadUser($id){
         //dd($id);
@@ -3530,12 +3543,10 @@ class RegistrasiController extends Controller
                      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')                     
                      ->join('users','registrasi.id_user','=','users.id')
                      ->join('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
-                     ->select('registrasi.no_registrasi','registrasi.nama_perusahaan','registrasi.tgl_registrasi','registrasi.status','registrasi.id as id_regis','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log')
+                     ->select('registrasi.no_registrasi','registrasi.nama_perusahaan','registrasi.tgl_registrasi','registrasi.status','registrasi.id as id_regis','ruang_lingkup.ruang_lingkup as jenis','users.name as name','registrasi.id_user','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log')
                      ->orderBy('registrasi.updated_at','desc')
-                     ->groupBy('registrasi.id')
-                    ->where(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);                                               
-                    });
+                     ->groupBy('registrasi.id');
+                    
         }else{
 
             $xdata = DB::table('registrasi')
@@ -3543,33 +3554,23 @@ class RegistrasiController extends Controller
                      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
                      ->join('users','registrasi.id_user','=','users.id')
                      ->join('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                     
-                     ->select('registrasi.no_registrasi','registrasi.nama_perusahaan','registrasi.tgl_registrasi','registrasi.status','registrasi.id as id_regis','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log')
+                     ->select('registrasi.no_registrasi','registrasi.nama_perusahaan','registrasi.tgl_registrasi','registrasi.status','registrasi.id as id_regis','ruang_lingkup.ruang_lingkup as jenis','registrasi.id_user' ,'users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log')
                      ->orderBy('registrasi.updated_at','desc')
-                    ->where(function($query) use ($kodewilayah){
-                        $query->where('registrasi.status_cancel','=',0);
-                        $query->where('registrasi.kode_wilayah','=',$kodewilayah);                        
-                    });
+                    ->where('registrasi.kode_wilayah','=',$kodewilayah);                   
+                    
         }
                           
         //filter condition
         if(isset($gdata['no_registrasi'])){
-            $xdata = $xdata->where('no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+            $xdata = $xdata->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
         }
-        if(isset($gdata['name'])){
-            $xdata = $xdata->where('name','LIKE','%'.$gdata['name'].'%');
+        
+        if(isset($gdata['nama_perusahaan'])){
+            $xdata = $xdata->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
         }
-        if(isset($gdata['perusahaan'])){
-            $xdata = $xdata->where('nama_perusahaan','LIKE','%'.$gdata['perusahaan'].'%');
-        }
-        if(isset($gdata['kelompok_produk'])){
-            $xdata = $xdata->where('kelompok_produk','=',$gdata['kelompok_produk']);
-        }
-        if(isset($gdata['tgl_registrasi'])){
-            $xdata = $xdata->where('tgl_registrasi','=',$gdata['tgl_registrasi']);
-        }
-       
-        if(isset($gdata['status_akad'])){
-            $xdata = $xdata->where('status_akad','=',$gdata['status_akad']);
+        
+        if(isset($gdata['status'])){
+            $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
         }
         //end
         $xdata = $xdata
