@@ -81,10 +81,11 @@ class RegistrasiController extends Controller
             $dataCurrent = json_decode($currentRegistrasi,true);    
         }else{
             $dataCurrent = null;    
-        }
+        }        
 
         if(Auth::user()->registrasi_id !== null){
             $data = Registrasi::find(Auth::user()->registrasi_id);            
+            // return view('registrasi.index');
             return view('registrasi.index',compact('data','dataCurrent'));
         }else{
             return view('registrasi.index');
