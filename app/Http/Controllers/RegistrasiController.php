@@ -201,7 +201,7 @@ class RegistrasiController extends Controller
      
         }else{            
             $xdata = $xdata->where('registrasi.status_cancel','=',0)
-                    ->where('reistrasi.kode_wilayah','=',$kodewilayah);               
+                    ->where('registrasi.kode_wilayah','=',$kodewilayah);               
 
         }
 
@@ -3543,20 +3543,22 @@ class RegistrasiController extends Controller
              $xdata = DB::table('registrasi')
                      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')                     
                      ->join('users','registrasi.id_user','=','users.id')
-                     ->join('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
-                     ->select('registrasi.no_registrasi','registrasi.nama_perusahaan','registrasi.tgl_registrasi','registrasi.status','registrasi.id as id_regis','ruang_lingkup.ruang_lingkup as jenis','users.name as name','registrasi.id_user','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log')
+                     ->leftjoin('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
+                     ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi')                                 
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota')
                      ->orderBy('registrasi.updated_at','desc')
                      ->groupBy('registrasi.id');
                     
         }else{
 
             $xdata = DB::table('registrasi')
-                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-                     ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')                     
                      ->join('users','registrasi.id_user','=','users.id')
-                     ->join('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                     
-                     ->select('registrasi.no_registrasi','registrasi.nama_perusahaan','registrasi.tgl_registrasi','registrasi.status','registrasi.id as id_regis','ruang_lingkup.ruang_lingkup as jenis','registrasi.id_user' ,'users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log')
+                     ->leftjoin('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
+                     ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi')                                 
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota')
                      ->orderBy('registrasi.updated_at','desc')
+                     ->groupBy('registrasi.id')
                     ->where('registrasi.kode_wilayah','=',$kodewilayah);                   
                     
         }

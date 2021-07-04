@@ -10,17 +10,17 @@
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Pelaksana  <small></small></h1>
+    <h1 class="page-header">Pelaksana<small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">Pelaskana</h4>
-            <div class="panel-heading-btn">
+            <h4 class="panel-title">Pelaksana</h4>
+            <!-- <div class="panel-heading-btn">
                 <a href="{{route('detailpelaksana.create')}}" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-            </div>
+            </div> -->
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
@@ -29,17 +29,17 @@
                 <thead>
                 <tr>
                     <th class="valign-middle text-center">No</th>
-                    <th class="valign-middle text-center">Foto</th>
+                   
                     <th class="valign-middle text-center">Nama</th>
+                    <th class="valign-middle text-center">Jabatan</th>
                     <th class="valign-middle text-center">L/P</th>
                     <th class="valign-middle text-center">Status Karyawan</th>
                     <th class="valign-middle text-center">Wilayah</th>
                     <th class="valign-middle text-center">No telp & Email</th>
                     <th class="valign-middle text-center">No Registrasi BPJPH</th>
-                    <th class="valign-middle text-center">No Registrasi BPJPH</th>
+                  
                     <th class="valign-middle text-center">Alamat</th>
-                    <th class="valign-middle text-center">Status</th>
-                    <th class="valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                   
                 </tr>
                 </thead>
             </table>
@@ -50,9 +50,42 @@
 @endsection
 @push('scripts')
     <script src="{{asset('/assets/js/checkData.js')}}"></script>
+    <script src="{{asset('/assets/js/jszip.min.js')}}"></script>
+    <script src="{{asset('/assets/js/pdfmake.min.js')}}"></script>
+    <script src="{{asset('/assets/js/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/assets/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/assets/js/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('/assets/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/assets/js/buttons.print.min.js')}}"></script>
+   
     <script>
         console.log("SHOW");
         $('#table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Export to Excel',
+                    className: 'btn-green btn',
+                    exportOptions: {
+                        modifier: {
+                            page: 'all'
+                        }
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Export to PDF',
+                    className: 'btn-red btn m-l-1',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        modifier: {
+                            page: 'all'
+                        }
+                    }
+                }
+                
+            ],       
             columns:[
                 {
                     "data":null,
@@ -63,34 +96,37 @@
                         console.log(data);
                     }
                 },
-                {"data":"email"},
-                {"data":"username"},
                 {"data":"name"},
                 {"data":"role"},
-                {"data":"perusahaan"},
-                {"data":"negara"},
-                {"data":"kota"},
-                {"data":"alamat"},
+                {"data":"jenis_kelamin"},
+                {"data":"status_karyawan"},
                 {
-                    "data":"status",
-                    "render":function (data) {return checkStatus(data);}
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+                        return checkWilayah(full.kode_wilayah);
+                    }
                 },
                 {
                     "data":null,
                     "searchable":false,
                     "orderable":false,
                     "render":function (data,type,full,meta) {
-                      return `<div class="btn-group m-r-5 show">
-                                <a href="{{url('master/detailpelaksana')}}/`+full.id+`/edit"  class="btn btn-info btn-xs"></i> Lengkapi data</a>
-                                
-                            </div>` 
+                        return full.email +'<br>'+full.telp;
+                        
                     }
-                }
+                },
+                {"data":"noreg_bpjph"},
+                {"data":"alamat"},
+               
+               
             ],
             processing:true,
             serverSide:true,
             ajax:"{{route('master.detailpelaksana.datatable')}}",
-            order:[[0,'asc']]
+            order:[[0,'asc']],
+           
         });
         $(".fordelete").on("submit",function () {
             return confirm("Apakah anda yakin?");

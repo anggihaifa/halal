@@ -27,7 +27,8 @@ class PelaksanaController extends Controller
         //$xdata = $data->orderBy('id','desc')->leftJoin('usergroup','usergroup_id','=','usergroup.id')->get();
         $xdata = DB::table('users')
                 ->join('usergroup','users.usergroup_id','=','usergroup.id')
-                ->select('users.*','usergroup.usergroup as role')
+                ->leftjoin('detail_users','users.id','=','detail_users.id_user')
+                ->select('users.*','usergroup.usergroup as role', 'detail_users.jenis_kelamin','detail_users.status_karyawan','detail_users.telp','detail_users.noreg_bpjph')
                 ->where('usergroup_id','=','10')
                 ->orWhere('usergroup_id','=','11')
                 ->orWhere('usergroup_id','=','12')

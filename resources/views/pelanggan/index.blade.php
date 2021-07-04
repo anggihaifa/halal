@@ -27,14 +27,14 @@
         <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body ">
-            <table id="table" class="table table-bordered table-td-valign-middle table-sm wrap" cellspacing="0" style="width:100%">
+            <table id="table" class="table table-responsive table-bordered table-td-valign-middle table-sm wrap" cellspacing="0" style="width:100%;">
                 <thead>
                 <tr>
                     <th class=" valign-middle text-center">No</th>
-                    <th class="valign-middle text-center">Email</th>
-                    <th class="valign-middle text-center">Username</th>
-                    <th class="valign-middle text-center">Name</th>
-                    <th class="valign-middle text-center">Perusahaan</th>
+                    <th class="valign-middle text-center" style="width:10%;word-break:break-all;">Email</th>
+                    <th class="valign-middle text-center" style="width:10%;word-break:break-all;">Username</th>
+                    <th class="valign-middle text-center" style="width:10%;word-break:break-all;">Name</th>
+                    <th class="valign-middle text-center" style="width:10%;word-break:break-all;">Perusahaan</th>
                     <th class="valign-middle text-center">Negara</th>
                     <th class="valign-middle text-center">Kota</th>
                     <th class="valign-middle text-center">Alamat</th>
