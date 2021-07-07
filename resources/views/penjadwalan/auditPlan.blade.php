@@ -295,11 +295,13 @@
                                         </div>
                                     </div>
                                     @foreach($dataPenjadwalan as $index => $value2)
-                                        @php
+                                        @php                                        
                                             $ketua_arr = explode("_",$value2->pelaksana1_audit2);
-                                            $anggota_arr = explode("_",$value2->pelaksana2_audit2);
                                             $ketua = $ketua_arr[1];
-                                            $anggota = $anggota_arr[1];
+                                            if(isset($value2->pelaksana2_audit2)){
+                                                $anggota_arr = explode("_",$value2->pelaksana2_audit2);
+                                                $anggota = $anggota_arr[1];
+                                            }                                                                                        
                                         @endphp
                                         <div class="wrapper col-lg-12">
                                             <div class="row">
@@ -308,7 +310,11 @@
                                         </div>
                                         <div class="wrapper col-lg-12">
                                             <div class="row">
-                                                @component('components.inputtext',['name'=> 'tim_audit2','label' => 'TIm Audit','required'=>true,'placeholder'=>'Tim Audit 2 (YY)','readonly'=>true,'value'=>$anggota])@endcomponent
+                                                @if(isset($value2->pelaksana2_audit2))
+                                                    @component('components.inputtext',['name'=> 'tim_audit2','label' => 'TIm Audit','required'=>true,'placeholder'=>'Tim Audit 2 (YY)','readonly'=>true,'value'=>$anggota])@endcomponent
+                                                @else
+                                                    @component('components.inputtext',['name'=> 'tim_audit2','label' => 'TIm Audit','required'=>true,'placeholder'=>'Tim Audit 2 (YY)','readonly'=>true])@endcomponent
+                                                @endif
                                             </div>
                                         </div>
                                     @endforeach
@@ -317,7 +323,7 @@
                                             <label class="col-4 col-form-label">Anggota Tambahan</label><div class="col-lg-6"><div><input class="form-control" id="tim_audit3" name="tim_audit3[]" type="text" label="Anggota Tambahan" placeholder="Anggota Tambahan"></div></div>
                                             <div class="col-lg-2">
                                                 <div>
-                                                    <select id="anggota_tambahan1" name="anggota_tambahan[]" class="form-control" data-size="10" data-live-search="true" data-style="btn-white">                                                        
+                                                    <select id="anggota_tambahan1" name="anggota_tambahan[]" class="form-control" data-size="10" data-live-search="true" data-style="btn-white">
                                                         <option value="Observer">Observer</option>
                                                         <option value="TA">TA</option>
                                                         <option value="PPC">PPC</option>
@@ -342,7 +348,7 @@
                                             <label class="col-lg-4 col-form-label"><b>Tanggal Audit</b></label>
                                             <div id="shb" class="col-lg-8">
                                                 <div class="input-group date">
-                                                    <input type="text" id="tgl_audit1" name="tgl_audit[]" class="form-control" placeholder="Tanggal Audit" value="" data-date-start-date="Date.default" />
+                                                    <input type="text" id="tgl_audit1" name="tgl_audit[]" class="form-control" placeholder="Tanggal Audit" value="" data-date-start-date="Date.default" required/>
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                 </div>
                                             </div>
@@ -353,20 +359,20 @@
                                             <label class="col-lg-2 col-form-label">Jam</label>
                                             <div class="col-lg-2">
                                                 <div class="input-group date">
-                                                    <input id="jam_audit1" name="jam_audit[]" type='text' class="form-control" placeholder="Jam Audit"/>
+                                                    <input id="jam_audit1" name="jam_audit[]" type='text' class="form-control" placeholder="Jam Audit" required/>
                                                     <span class="input-group-addon"><i class="fa fa-clock"></i></span>
                                                 </div>
                                             </div>
                                             <label class="col-form-label">-</label>
                                             <div class="col-lg-2">
                                                 <div class="input-group date">
-                                                    <input id="jam_audit21" name="jam_audit2[]" type='text' class="form-control" placeholder="Jam Audit"/>
+                                                    <input id="jam_audit21" name="jam_audit2[]" type='text' class="form-control" placeholder="Jam Audit" required/>
                                                     <span class="input-group-addon"><i class="fa fa-clock"></i></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-5">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        
+                                                    <label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan" required></div></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -375,13 +381,13 @@
                                         <div class="row">
                                             <label class="col-4 col-form-label">Detail Kegiatan</label>
                                             <div class="col-lg-8"><div>
-                                                <textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea>
+                                                <textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan" required></textarea>
                                             </div></div>                                
                                         </div>
                                     </div>                                    
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)"></div></div>                                
+                                            <label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)" required></div></div>
                                         </div>
                                     </div>                        
                                 </div>
@@ -480,7 +486,7 @@
     <script>             
         document.getElementById('jml_kegiatan1').value = "1";           
 
-        var jmlKegiatan = 0;        
+        var jmlKegiatan = 1;
         var noKegiatan = 1;
 
         var jmlAnggota = 1;
@@ -498,18 +504,23 @@
             jmlJam+=1;
 
             // alert(jmlKegiatan);
-            var data_kegiatan = '<div id="datakegiatan'+jmlKegiatan+'" style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)"></div></div>                                </div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+','+jmlKegiatan+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
+            var data_kegiatan = '<div id="datakegiatan'+jmlKegiatan+'" style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan" required></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan" required></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)" required></div></div>                                </div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+','+jmlKegiatan+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
             $('#detail_kegiatan'+$id).append(data_kegiatan);
             jam(jmlJam);
             jam2(jmlJam);
-            document.getElementById('jml_kegiatan1').value = jmlKegiatan + 1;
+            document.getElementById('jml_kegiatan1').value = jmlKegiatan;
             // alert(jmlKeg);
         }
 
-        function hapusKegiatan($id, $jml){                 
+        function hapusKegiatan($id, $jml){  
+            jmlKegiatan-=1;  
+            jmlJam-=1;
+
             var select1 = document.getElementById('detail_kegiatan'+$id);
             var select2 = document.getElementById('datakegiatan'+$jml);
-            select1.removeChild(select2);                        
+            select1.removeChild(select2);  
+            
+            document.getElementById('jml_kegiatan1').value = jmlKegiatan;
         }
 
         // $(document).on('click','#hapus_datakegiatanlain', function(){
@@ -536,7 +547,7 @@
             jmlDetail+=1;
             jmlJam+=1;
             jmlTgl+=1;
-            var data_hari = '<div id="datahari'+jmlDetail+'">  <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label"><b>Tanggal Audit</b></label><div id="shb" class="col-lg-8"><div class="input-group date"><input type="text" id="tgl_audit'+(jmlTgl+1)+'" name="tgl_audit[]" class="form-control" placeholder="Tanggal Audit" value="" data-date-start-date="Date.default" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)"></div></div>                                </div></div</div><div class="panel-body panel-form"><div class="wrapper col-lg-12" style="display:none"><div class="row"><label class="col-4 col-form-label">Jumlah Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="jumlah_kegiatan[]" type="text" label="Jumlah Kegiatan" placeholder="Jumlah Kegiatan" value="1" id="jml_kegiatan'+jmlDetail+'"></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="detail_kegiatan'+jmlDetail+'" id="detail_kegiatan'+jmlDetail+'" style="width: 100%; background: #fff;"></div><div id="isi'+jmlDetail+'" style="display:none">'+jmlDetail+'</div><div class="col-md-12"><a id="tam_detail_kegiatan'+jmlDetail+'" class="tam_detail_kegiatan'+jmlDetail+' btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah Kegiatan</a></div></div></div></div>            <div class="col-lg-12"><div><a onClick="hapusHari('+$id+','+jmlDetail+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Hari</a></div></div><br></div>';
+            var data_hari = '<div id="datahari'+jmlDetail+'">  <div class="panel-body panel-form" style="background: rgb(230, 235, 236);"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-4 col-form-label"><b>Tanggal Audit</b></label><div id="shb" class="col-lg-8"><div class="input-group date"><input type="text" id="tgl_audit'+(jmlTgl+1)+'" name="tgl_audit[]" class="form-control" placeholder="Tanggal Audit" value="" data-date-start-date="Date.default" required/><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan" required></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan" required></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)" required></div></div>                                </div></div</div><div class="panel-body panel-form"><div class="wrapper col-lg-12" style="display:none"><div class="row"><label class="col-4 col-form-label">Jumlah Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="jumlah_kegiatan[]" type="text" label="Jumlah Kegiatan" placeholder="Jumlah Kegiatan" value="1" id="jml_kegiatan'+jmlDetail+'"></div></div></div></div><div class="wrapper col-lg-12"><div class="row"><div class="detail_kegiatan'+jmlDetail+'" id="detail_kegiatan'+jmlDetail+'" style="width: 100%; background: #fff;"></div><div id="isi'+jmlDetail+'" style="display:none">'+jmlDetail+'</div><div class="col-md-12"><a id="tam_detail_kegiatan'+jmlDetail+'" class="tam_detail_kegiatan'+jmlDetail+' btn btn-sm btn-primary m-r-5 float-right" style="color:white">Tambah Kegiatan</a></div></div></div></div>            <div class="col-lg-12"><div><a onClick="hapusHari('+$id+','+jmlDetail+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Hari</a></div></div><br></div>';
             $('#detail_hari'+$id).append(data_hari);
             jam(jmlJam);
             jam2(jmlJam);
@@ -557,7 +568,7 @@
             document.getElementById('jml_kegiatan'+isi+'').value = 1;
             function addDataKegiatan2(){                
                 jmlJam+=1;
-                var data_kegiatan2 = '<div id="datakegiatan'+jmlKegiatan2+'" style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit"/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan"></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan"></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Personil"></div></div>                                </div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain'+isi+'" class="btn btn-sm btn-warning m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
+                var data_kegiatan2 = '<div id="datakegiatan'+jmlKegiatan2+'" style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan" required></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan" required></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Personil" required></div></div>                                </div></div></div> <div class="col-lg-12"><div><a id="hapus_datakegiatanlain'+isi+'" class="btn btn-sm btn-warning m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
                 $('.detail_kegiatan'+isi+'').append(data_kegiatan2);
                 jmlKegiatan2+=1;
                 document.getElementById('jml_kegiatan'+isi+'').value = jmlKegiatan2 + 1;
