@@ -65,7 +65,11 @@
                 {"data":"email"},
                 {"data":"username"},
                 {"data":"name"},
-                {"data":"role"},
+                {
+                    "data":"role",
+                    "searchable":false
+                    
+                },
                 {"data":"perusahaan"},
                 {"data":"negara"},
                 {"data":"kota"},

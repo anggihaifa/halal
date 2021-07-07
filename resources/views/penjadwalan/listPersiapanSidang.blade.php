@@ -414,6 +414,8 @@
             processing:true,
             serverSide:true,
             order:[[0,'asc']],
+            bFilter: false,
+			lengthChange: false
 
         });
 

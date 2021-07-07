@@ -179,6 +179,14 @@
 														
 														
 													</tr>
+													<tr style="border:none">
+														<td style="border:none">
+														
+															{!! $fieldBelum !!}
+														
+														</td>
+														
+													</tr>
 													
 												</table>
 												
@@ -187,7 +195,7 @@
 											<td class=" valign-middle"></td>
 											<td class=" valign-middle"></td>
 											
-											<td class="valign-middle text-center"> <a href="#" class="btn btn-grey btn-xs disabled">unduh</a> </td>
+											
 
 										</tr>
 										<tr class="even">

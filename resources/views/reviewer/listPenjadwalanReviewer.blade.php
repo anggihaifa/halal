@@ -558,7 +558,7 @@
                 d.pelaksana1_tinjauan ="-";
             }
 
-            if(d.pelaksana12_tinjauan != null){
+            if(d.pelaksana2_tinjauan != null){
                 if (d.pelaksana2_tinjauan.indexOf('_') > -1){
                     $str9 =  d.pelaksana2_tinjauan.split("_");
                     d.pelaksana2_tinjauan = $str9[1];
@@ -592,7 +592,7 @@
             }else{
                 btnApproveTR='<button class="btn btn-xs btn-green m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr"  data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"   data-target="#modalapprove" >Approve</button>';
 
-                btnRejectTR =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tinjauan+'" data-jenis= "tinjauan" data-pelaksana1= "'+d.pelaksana1_tinjauan+'" data-pelaksana2= "'+d.pelaksana2_tinjauan+'"  data-target="#modalreject" >Reject</button>';
+                btnRejectTR =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr" data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"  data-target="#modalreject" >Reject</button>';
             }
 
             if(d.status_penjadwalan_tinjauan == '3'){

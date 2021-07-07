@@ -276,9 +276,9 @@
                         }
 
                        
-                        if(full.status == '10_2' ){
-
-                            buttonUnduh =  `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
+                        if(full.status == '10_1' ){
+                            if(full.file_laporan_tinjauan){
+                                buttonUnduh =  `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
                                             <i class="fa fa-download" aria-hidden="true"></i>Laporan Tehnical Review
                                         </a>
                                         <a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tinjauan Komite/`+full.file_laporan_tinjauan+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
@@ -287,6 +287,20 @@
                                         <a  class="btn-xs btn btn-green" style="color: white;" data-toggle='modal' data-catatan-tr='`+full.catatan_tr+`' data-catatan-tinjauan='`+full.catatan_tinjauan+`' data-catatan-persiapan-sidang='`+full.catatan_persiapan_sidang+`' data-target='#modalCatatan' >
                                             <i class="fa fa-eye" aria-hidden="true"></i>View Catatan
                                         </a>`;
+                            }else{
+                                buttonUnduh =  `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
+                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Tehnical Review
+                                        </a>
+                                        <a class="btn-xs btn btn-grey" style="color: white;" disabled>
+                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Komite Sertifikasi
+                                        </a>
+                                        <a  class="btn-xs btn btn-green" style="color: white;" data-toggle='modal' data-catatan-tr='`+full.catatan_tr+`' data-catatan-tinjauan='`+full.catatan_tinjauan+`' data-catatan-persiapan-sidang='`+full.catatan_persiapan_sidang+`' data-target='#modalCatatan' >
+                                            <i class="fa fa-eye" aria-hidden="true"></i>View Catatan
+                                        </a>`;
+
+                            }
+
+                           
                                        
 
                                                                     
@@ -380,6 +394,8 @@
             ordering: false,
             processing:true,
             serverSide:true,
+            bFilter: false,
+			lengthChange: false
            
 
         });

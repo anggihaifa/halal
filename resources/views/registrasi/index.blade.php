@@ -596,6 +596,8 @@
                 ordering: false,
                 processing:true,
                 serverSide:true,
+				bFilter: false,
+				lengthChange: false,
                 ajax:"{{route('registrasi.datatable')}}",
               
 

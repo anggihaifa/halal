@@ -266,6 +266,8 @@
             ordering: false,
             processing:true,
             serverSide:true,
+            bFilter: false,
+			lengthChange: false
 
         });
 

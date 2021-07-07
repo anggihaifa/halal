@@ -93,20 +93,23 @@
                     <th class=" valign-middle text-center">No</th>   
                     <th class=" valign-middle text-center" >ID</th>
                     <th class=" valign-middle text-center" style="display:none">No. Registrasi BPJPH</th>
-                    <th class=" valign-middle text-center">status</th> 
-                    <th class=" valign-middle text-center">Pelanggan</th>
+                    <th class=" valign-middle text-center">Status Sertifikasi</th> 
+                    <th class=" valign-middle text-center">PIC Pelaku Usaha</th>
                     <th class=" valign-middle text-center">Perusahaan</th>
                     <th class=" valign-middle text-center">Alamat</th>
-                    <th class=" valign-middle text-center" style="display:none">Provinsi</th>
+                    <th class=" valign-middle text-center" style="display:none">Kota/Kab</th>
                     <th class=" valign-middle text-center">Jenis Registrasi</th>
                     <th class=" valign-middle text-center">Rincian Jenis Produk</th>
                     <th class=" valign-middle text-center" style="display:none">Pelaksana</th>
                     <th class=" valign-middle text-center" style="display:none">Tanggal Pendaftaran</th>
                     <th class=" valign-middle text-center" style="display:none">Jenis Skema Audit</th>
-                    <th class=" valign-middle text-center" style="display:none">Tanggal Audit1/Audit2/TR/KS</th>
-                    <th class=" valign-middle text-center">Nomor Sertfikat</th>
-                    <th class=" valign-middle text-center" style="display:none">Tanggal Terbit Sertifikat</th>
-                    <th class=" valign-middle text-center"style="display:none">Tanggal Berakhir Sertifikat</th>
+                    <th class=" valign-middle text-center" style="display:none">Tanggal Audit1</th>
+                    <th class=" valign-middle text-center" style="display:none">Tanggal Audit2</th>
+                    <th class=" valign-middle text-center" style="display:none">Tanggal TR</th>
+                    <th class=" valign-middle text-center" style="display:none">Tanggal KS</th>
+                    <th class=" valign-middle text-center">Nomor Sertfikat Halal</th>
+                    <th class=" valign-middle text-center" style="display:none">Tanggal Terbit Sertifikat Halal</th>
+                    <th class=" valign-middle text-center"style="display:none">Tanggal Berakhir Sertifikat Halal</th>
                     <th class=" valign-middle text-center"style="display:none">Mata Uang</th>
                     <th class=" valign-middle text-center"style="display:none">Total Biaya</th>
                                        
@@ -131,6 +134,8 @@
     <script src="{{asset('/assets/js/buttons.flash.min.js')}}"></script>
     <script src="{{asset('/assets/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('/assets/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('/assets/js/dataTables.select.min.js')}}"></script>
+    <script src="{{asset('/assets/css/select.dataTables.min.css')}}"></script>
    
 
     <script>    
@@ -159,9 +164,8 @@
                     exportOptions: {
                         columns: 'th:not(:last-child)',
                         modifier: {
-                            order: 'current',
                             page: 'all',
-                            selected: null,
+                            selected: null
                         }
                     }
                 }                
@@ -194,12 +198,10 @@
                 },
                 {"data":"tgl_registrasi"},
                 {"data":"skema"},
-                {
-                    "data":null,
-                    "render":function (data,type,full,meta) {
-                        return full.mulai_audit1+`<br>`+full.mulai_audit2+`<br>`+full.mulai_tr+`<br>`+full.mulai_tinjauan
-                    }
-                },
+                {"data":"mulai_audit1"},
+                {"data":"mulai_audit2"},
+                {"data":"mulai_tr"},
+                {"data":"mulai_tinjauan"},
                 {"data":"nomor_sh"},
                 {"data":"tgl_terbit_sh"},
                 {"data":"tgl_akhir_sh"},
@@ -378,9 +380,9 @@
                     
                 },
                 {
-                "targets": [ 2,7,10,11,12,13,15,16,17,18 ],
+                "targets": [ 2,7,10,11,12,13,14,15,16,18,19,20,21],
                 "visible": false,
-                "searchable": false
+                "searchable": false,
                 }
             ],
 
@@ -388,6 +390,8 @@
             serverSide:true,
             order:[[0,'asc']],
             "searching": false,
+            paging: false,
+            
 
         });
        /* $(".fordelete").on("submit",function () {

@@ -83,13 +83,7 @@
 @endsection
 @push('scripts')
     <script src="{{asset('/assets/js/checkData.js')}}"></script>
-    <script src="{{asset('/assets/js/jszip.min.js')}}"></script>
-    <script src="{{asset('/assets/js/pdfmake.min.js')}}"></script>
-    <script src="{{asset('/assets/js/vfs_fonts.js')}}"></script>
-    <script src="{{asset('/assets/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('/assets/js/buttons.flash.min.js')}}"></script>
-    <script src="{{asset('/assets/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('/assets/js/buttons.print.min.js')}}"></script>
+   
     <script>
 
         var role = {!! json_encode((array)auth()->user()->usergroup_id) !!};
@@ -147,35 +141,7 @@
         //console.log("SHOW");
         if(role == 1){
             $('#table').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'excel',
-                        text: 'Export to Excel',
-                        className: 'btn-green btn',
-                        exportOptions: {
-                            orientation: 'landscape',
-                            columns: [0,1,2,3,4,5,6,7,9],
-                            modifier: {
-                                page: 'all'
-                            }
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        text: 'Export to PDF',
-                        className: 'btn-red btn m-l-1',
-                        orientation: 'landscape',
-                        exportOptions: {
-                          
-                            columns: [0,1,2,3,4,5,6,7,9],
-                            modifier: {
-                                page: 'all'
-                            }
-                        }
-                    }
-                    
-                ],       
+               
                 columns:[
                     {
                         "data":null,
@@ -222,35 +188,7 @@
 
         }else if(role==3){
             $('#table').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'excel',
-                        text: 'Export to Excel',
-                        className: 'btn-green btn',
-                        exportOptions: {
-                           
-                            columns: [0,1,2,3,4,5,6,7,9],
-                            modifier: {
-                                page: 'all'
-                            }
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        text: 'Export to PDF',
-                        className: 'btn-red btn m-l-1',
-                        orientation: 'landscape',
-                        exportOptions: {
-                           
-                            columns: [0,1,2,3,4,5,6,7,9],
-                            modifier: {
-                                page: 'all'
-                            }
-                        }
-                    }
-                    
-                ],       
+                   
                 columns:[
                     {
                         "data":null,

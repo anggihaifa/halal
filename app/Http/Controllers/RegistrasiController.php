@@ -2815,7 +2815,7 @@ class RegistrasiController extends Controller
         //$model4 = new Akad();             
         //dd($id);  
         
-      
+        
 
         try{            
             DB::beginTransaction();
@@ -2853,7 +2853,7 @@ class RegistrasiController extends Controller
                
             }
             if($data['mata_uang']== 'IDR'){
-                $bp1 = str_replace('Rp', '', $data['biaya_pemeriksaan']);
+                $bp1 = str_replace('IDR', '', $data['biaya_pemeriksaan']);
                 $bp2 = str_replace('.', '', $bp1);            
                 $e->total_biaya = $bp2;
             }elseif($data['mata_uang']== 'USD'){

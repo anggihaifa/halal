@@ -1721,7 +1721,8 @@ class PenjadwalanController extends Controller
                 //dd("masuk");
             }else if($data['status_laporan_tr']== '0'){
                 $j->status_laporan_tr = 2;
-                $e->status = '10_2';
+                $e->status = '10_1';
+                $p->status_penjadwalan_tr = 0;
 
                 $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 12, "Laporan technical review ditolak, harap perbaiki.", Auth::user()->usergroup_id);
             }
@@ -1760,7 +1761,8 @@ class PenjadwalanController extends Controller
                 //dd("masuk");
             }else if($data['status_laporan_tr']== '0'){
                 $model4->status_laporan_tr = 2;
-                $e->status = '10_2';
+                $e->status = '10_1';
+                $p->status_penjadwalan_tr = 0;
                 $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 12, "Laporan technical review ditolak, harap perbaiki.", Auth::user()->usergroup_id);
             }
     
@@ -1847,7 +1849,9 @@ class PenjadwalanController extends Controller
                 //dd("masuk");
             }else if($data['status_laporan_tinjauan']== '0'){
                 $j->status_laporan_tinjauan = 0 ;
-                $e->status = '10_2';
+                $e->status = '10_1';
+                $p->status_penjadwalan_tinjauan = 0;
+                $p->status_penjadwalan_tr = 0;
 
                 $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 14, "Laporan hasil Komite Sertifikasi ditolak, harap perbaiki.", Auth::user()->usergroup_id);
             }
@@ -1878,7 +1882,9 @@ class PenjadwalanController extends Controller
                 //dd("masuk");
             }else if($data['status_laporan_tinjauan']== '0'){
                 $model4->status_laporan_tinjauan = 0 ;
-                $e->status = '10_2';
+                $e->status = '10_1';
+                $p->status_penjadwalan_tr = 0;
+                $p->status_penjadwalan_tinjauan = 0;
 
                 $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 14, "Laporan hasil Komite Sertifikasi ditolak, harap perbaiki.", Auth::user()->usergroup_id);
             }
@@ -1953,6 +1959,7 @@ class PenjadwalanController extends Controller
         $e = $model->find($data['id']);
         $j = $model4->find($e->id_persiapan_sidang);
         $u = $model3->find($e->id_user);
+        $p = $model2->find($e->id_penjadwalan);
 
         if($j){
 
@@ -1964,12 +1971,15 @@ class PenjadwalanController extends Controller
                 //dd("masuk");
             }else if($data['status_persiapan_sidang']== '0'){
                 $j->status_persiapan_sidang = 0 ;
-                $e->status = '10_2';
+                $e->status = '10_1';
+                $p->status_penjadwalan_tr = 0;
+                $p->status_penjadwalan_tinjauan = 0;
             }
     
             
             $j->id_registrasi = $e->id;
             $j->catatan_persiapan_sidang = $data['catatan_persiapan_sidang'];
+            $p->save();
             $e->save();
             $j->save();
 
@@ -1983,12 +1993,15 @@ class PenjadwalanController extends Controller
                 //dd("masuk");
             }else if($data['status_persiapan_sidang']== '0'){
                 $model4->status_persiapan_sidang = 0 ;
-                $e->status = '10_2';
+                $e->status = '10_1';
+                $p->status_penjadwalan_tr = 0;
+                $p->status_penjadwalan_tinjauan = 0;
             }
     
            
             $model4->id_registrasi = $e->id;
             $model4->catatan_persiapan_sidang = $data['catatan_persiapan_sidang'];
+            $p->save();
             $model4->save();
             $e->id_persiapan_sidang = $model4->id; 
             $e->save();

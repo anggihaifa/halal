@@ -72,18 +72,8 @@
                             page: 'all'
                         }
                     }
-                },
-                {
-                    extend: 'pdf',
-                    text: 'Export to PDF',
-                    className: 'btn-red btn m-l-1',
-                    orientation: 'landscape',
-                    exportOptions: {
-                        modifier: {
-                            page: 'all'
-                        }
-                    }
                 }
+               
                 
             ],       
             columns:[
@@ -126,6 +116,7 @@
             serverSide:true,
             ajax:"{{route('master.detailpelaksana.datatable')}}",
             order:[[0,'asc']],
+            paging:false,
            
         });
         $(".fordelete").on("submit",function () {

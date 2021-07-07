@@ -376,7 +376,7 @@ Route::put('store_persiapan_sidang','PenjadwalanController@storePersiapanSidang'
 //Route::get('penjadualanAudit','RegistrasiController@penjadualanAudit')->name('registrasi.penjadualanAudit');
 //Route::get('dokumenTravel','RegistrasiController@dokumenTravel')->name('registrasi.dokumenTravel');
 
-Route::resource('dokumen','DokumenController')->middleware('role:1,3,6');
+Route::resource('dokumen','DokumenController');
 Route::get('dokumen_user','DokumenController@indexUser')->name('dokumen.indexuser')->middleware('role:1,3,4,5,6,7,8,9,10,11,12,13,14');
 Route::get('dokumen_pelanggan','DokumenController@indexpelanggan')->name('dokumen.indexpelanggan')->middleware('role:1,2,3');
 Route::get('dokumen_view/{id}','DokumenController@dokumenView')->name('dokumen.view');

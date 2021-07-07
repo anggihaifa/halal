@@ -910,7 +910,9 @@
 								<div class=" offset-md-5">
 					               <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
 					                @if($dataHas !== null)
-										<button type="submit" class="btn btn-md btn-success " style="">Submit</button>
+										@if(auth()->user()->usergroup_id == 3 || auth()->user()->usergroup_id == 1)
+											<button type="submit" class="btn btn-md btn-success " style="">Submit</button>
+										@endif
 									@endif
 									
 					            </div>
