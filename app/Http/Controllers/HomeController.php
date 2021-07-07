@@ -227,12 +227,97 @@ class HomeController extends Controller
              ->get();
         $dataKetetapanHalal = count($ketetapanhalal);
 
+        $penjadwalan1 = DB::table('registrasi')
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',7);  
+            })             
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','7_0');
+            })   
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','7_1');
+            })   
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','7_2');
+            })   
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','7_3');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',9);
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','9_0');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','9_1');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','9_2');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','9_3');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',11);
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','11_0');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','11_1');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','11_2');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','11_3');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',13);
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','13_0');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','13_1');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','13_2');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','13_3');
+            })
+             ->select('registrasi.*')
+             ->get();
+        $dataPenjadwalan1 = count($penjadwalan1);
+
         if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 4 || Auth::user()->usergroup_id == 5 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7 || Auth::user()->usergroup_id == 8 ||  Auth::user()->usergroup_id == 13 || Auth::user()->usergroup_id == 14){
             return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan'));
         }else if(Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12){
             return view('homeAuditor',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan','dataAudit','dataAudit2'));
         }else if(Auth::user()->usergroup_id == 9){            
-            return view('homeApprover',compact('dataVerifikasi','dataAudit1','dataAudit2','dataSidangFatwa','dataKetetapanHalal','statistikregistrasi','statistikpelanggan'));
+            return view('homeApprover',compact('dataVerifikasi','dataAudit1','dataAudit2','dataSidangFatwa','dataKetetapanHalal','statistikregistrasi','statistikpelanggan','dataPenjadwalan1'));
         }else if(Auth::user()->usergroup_id == 2){
             return view('homeUser',compact('dataDetailUser','totalRegistrasiUser','dataCurrent','logKegiatan'));
         }

@@ -195,6 +195,18 @@
 				</div>
 			</div>
 		</div>
+        <div class="col-xl-3 col-md-6 ">
+			<div class="widget widget-stats bg-blue animated zoomIn delay-2s">
+				<div class="stats-icon"><i class="fa fa-book text-white"></i></div>
+				<div class="stats-info">
+					<h4>SEDANG DIJADWALKAN</h4>
+                    <a href="#" class="text-white"><span style="font-size: 23px"> {{$dataPenjadwalan1}}</span></a>
+				</div>
+				<div class="stats-link">
+					<a href="javascript:;" target="_top"><!--Lihat Detail <i class="fa fa-arrow-alt-circle-right"></i>--></a>
+				</div>
+			</div>
+		</div>
         <div class="col-xl-9 col-md-6 " >
         </div>
         <div class="row col-xl-6">
