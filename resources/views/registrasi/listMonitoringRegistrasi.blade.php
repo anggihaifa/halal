@@ -112,6 +112,7 @@
                     <th class=" valign-middle text-center"style="display:none">Tanggal Berakhir Sertifikat Halal</th>
                     <th class=" valign-middle text-center"style="display:none">Mata Uang</th>
                     <th class=" valign-middle text-center"style="display:none">Total Biaya</th>
+                    <th class=" valign-middle text-center">Status Pembayaran</th>
                                        
                     <th class=" valign-middle text-center">Monitoring</th>
                 </tr>
@@ -193,7 +194,7 @@
                 {"data":"jenis"},
                 {"data":"rincian_jenis_produk"},
                 {
-                    "data":"kode_dilayah",
+                    "data":"kode_wilayah",
                     "render":function (data) {return checkWilayah(data);}
                 },
                 {"data":"tgl_registrasi"},
@@ -207,6 +208,37 @@
                 {"data":"tgl_akhir_sh"},
                 {"data":"mata_uang"},
                 {"data":"total_biaya"},
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type, full, meta) {
+                        if(full.nominal_tahap2){
+                            if(full.status_tahap2 != '0' && full.status_tahap1 != '0' && full.status_tahap3 != '0'){
+                                return `<a style="color:green">Lunas</a>`
+                            }else{
+                                return `<a style="color:red">Belum Lunas</a>`
+                            }
+                        }else if(full.nominal_tahap3){
+                            if(full.status_tahap1 != '0' && full.status_tahap3 != '0'){
+                                return`<a style="color:green">Lunas</a>`
+                            }else{
+                                return `<a style="color:red">Belum Lunas</a>`
+                            }
+                        }else if(full.status_tahap1){
+                           
+                            if(full.status_tahap1 != '0'){
+                                return `<a style="color:green">Lunas</a>`
+                            }else{
+                                return `<a style="color:red">Belum Lunas</a>`
+                            }
+
+                        }else{
+                            return `<a style="color:red">Belum Akad</a>`
+                        }
+                    }
+                }, 
+               
                
                              
                 {

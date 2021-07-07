@@ -163,8 +163,8 @@
                                             <label class=" control-label font-weight-bold" for="id">Hasil</label>  
                                             <select id="status_laporan_tinjauan" name="status_laporan_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                                 <option value="">==Pilih==</option>
-                                                <option value="1">Laporan Audit Dapat Dilanjutkan Ke Tahapan Bertikutnya</option>
-                                                <option value="0">Laporan Audit Harus Diperbaiki Sesuai Catatan</option>                                                               
+                                                <option value="1">Lanjut Ke Tahapan Bertikutnya</option>
+                                                <option value="0">Perbaikan</option>                                                               
                                             </select>
                                             </div
                                         </td>

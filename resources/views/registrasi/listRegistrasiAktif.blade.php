@@ -657,7 +657,7 @@
                 method: 'POST',
                 data: {
                     _token: "{{ csrf_token() }}",
-                    //mulai: $('#mulai_rapat').val(),
+                   
                     //selesai: $('#selesai_rapat').val(),
                     //selected_pelaksana1: $('#pelaksana1_tr').val(),
                     //selected_pelaksana2: $('#pelaksana2_tr').val(),

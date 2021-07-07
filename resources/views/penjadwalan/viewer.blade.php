@@ -30,14 +30,14 @@
                 </div>
                 <!-- end panel-heading -->
                 <!-- begin panel-body -->
-                <div id ="cover" class="panel-body panel-form" style="position:absolute; z-index: 2; opacity: 0; background-color: red;">
-                </div>
+                <!-- <div id ="cover" class="panel-body panel-form" style="position:absolute; z-index: 2; opacity: 0; background-color: red;">
+                </div> -->
 
                 <div id="pdf" class="panel-body panel-form embed-responsive embed-responsive-1by1" style="position: relative; z-index: 1;">
                     
                  
 
-                    <object type="application/pdf;base64" data="{{url('') .Storage::url('public/uploadDokumen/'.$datkey->id_user.'/'.$datkey->id_registrasi.'/HPAS/'.$datkey->$hpas) }}#toolbar=0&navpanes=0" class ="embed-responsive-item">
+                    <object type="application/pdf;base64" data="{{url('') .Storage::url('public/uploadDokumen/'.$datkey->id_user.'/'.$datkey->id_registrasi.'/HPAS/'.$datkey->$hpas) }}" class ="embed-responsive-item">
                         <p>Pdf/DOCX  File Tidak Dapat Ditampilkan Silahkan Gunakan FItur Unduh</p>
                     </object>
 
@@ -61,57 +61,57 @@
     <script src="{{asset('/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
     <script src="{{asset('/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        // $(document).ready(function() {
 
-            var x = document.getElementById("pdf").offsetWidth;
-            var z = document.getElementById("pdf").offsetHeight;
+        //     var x = document.getElementById("pdf").offsetWidth;
+        //     var z = document.getElementById("pdf").offsetHeight;
 
-            document.getElementById("cover").style.width = (x-15)+'px';
-            document.getElementById("cover").style.height = (z-15)+'px';
+        //     document.getElementById("cover").style.width = (x-15)+'px';
+        //     document.getElementById("cover").style.height = (z-15)+'px';
                 
-            //console.log(document.getElementById("pdf").offsetWidth);
+        //     //console.log(document.getElementById("pdf").offsetWidth);
 
-            if (window.addEventListener) {  // all browsers except IE before version 9
-                window.addEventListener ("resize", onResizeEvent, true);
-            } else {
-                if (window.attachEvent) {   // IE before version 9
-                window.attachEvent("onresize", onResizeEvent);
-                }
-            }
+        //     if (window.addEventListener) {  // all browsers except IE before version 9
+        //         window.addEventListener ("resize", onResizeEvent, true);
+        //     } else {
+        //         if (window.attachEvent) {   // IE before version 9
+        //         window.attachEvent("onresize", onResizeEvent);
+        //         }
+        //     }
             
-            function onResizeEvent() {
-                var y = document.getElementById("pdf").offsetWidth;
-                var w = document.getElementById("pdf").offsetHeight;
+        //     function onResizeEvent() {
+        //         var y = document.getElementById("pdf").offsetWidth;
+        //         var w = document.getElementById("pdf").offsetHeight;
 
-                //bodyElement = document.getElementsByTagName("BODY")[0];
-                //newWidth = bodyElement.offsetWidth;
-                if(y != x || w != z){
-                    document.getElementById("cover").style.width = (y-15)+'px';
-                    document.getElementById("cover").style.height = (w-15)+'px';
-                    //width = newWidth;
-                    //console.log(x);
-                    //console.log(y);
-                }
-            }
+        //         //bodyElement = document.getElementsByTagName("BODY")[0];
+        //         //newWidth = bodyElement.offsetWidth;
+        //         if(y != x || w != z){
+        //             document.getElementById("cover").style.width = (y-15)+'px';
+        //             document.getElementById("cover").style.height = (w-15)+'px';
+        //             //width = newWidth;
+        //             //console.log(x);
+        //             //console.log(y);
+        //         }
+        //     }
 
             
             
-        });
+        // });
 
-        const cover = document.getElementById("cover");
-        const pdf = document.getElementById("pdf");
+        // const cover = document.getElementById("cover");
+        // const pdf = document.getElementById("pdf");
 
-        const myObserver = new ResizeObserver(entries => {
-          entries.forEach(entry => {
-            //console.log('width', entry.contentRect.width);
-            cover.style.width = entry.contentRect.width-15 +'px';
-            cover.style.height = entry.contentRect.height-15 +'px';
-            //console.log('height', entry.contentRect.height);
-          });
-        });
+        // const myObserver = new ResizeObserver(entries => {
+        //   entries.forEach(entry => {
+        //     //console.log('width', entry.contentRect.width);
+        //     cover.style.width = entry.contentRect.width-15 +'px';
+        //     cover.style.height = entry.contentRect.height-15 +'px';
+        //     //console.log('height', entry.contentRect.height);
+        //   });
+        // });
 
-        myObserver.observe(pdf);
-        //myObserver.observe(cover);
+        // myObserver.observe(pdf);
+        // //myObserver.observe(cover);
 
     </script>
 @endpush

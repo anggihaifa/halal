@@ -162,8 +162,8 @@
                                             <label class=" control-label font-weight-bold" for="id">Hasil</label>  
                                             <select id="status_laporan_tr" name="status_laporan_tr" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" requied>
                                                 <option value="">==Pilih==</option>
-                                                <option value="1">Laporan Audit Dapat Dilanjutkan Ke Tahapan Bertikutnya</option>
-                                                <option value="0">Laporan Audit Harus Diperbaiki Sesuai Catatan</option>                                                               
+                                                <option value="1">Lanjut Ke Tahapan Berikutnya</option>
+                                                <option value="0">Perbaikan</option>                                                               
                                             </select>
                                             </div
                                         </td>
@@ -187,7 +187,7 @@
                                         <select id="status_lanjut_ks" name="status_lanjut_ks" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" requied>
                                             <option value="">==Pilih==</option>
                                             <option value="1">Ya</option>
-                                            <option value="0">Tidak, Lanjutkan Ke Tahapan Persiapan Sidang Fatwa Halal</option>                                                               
+                                            <option value="0">Tidak, Lanjutkan Persiapan Sidang Fatwa Halal</option>                                                               
                                         </select>
                                     </td>
                                 </tr>

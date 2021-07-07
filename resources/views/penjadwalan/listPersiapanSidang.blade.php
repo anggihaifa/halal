@@ -73,6 +73,7 @@
                         <th class="valign-middle text-center">Perusahaan</th>
                         <th class="valign-middle text-center">Jenis Produk</th>
                         <th class="valign-middle text-center" >Unduh</th>
+                        <th class="valign-middle text-center" >Status Pembayaran</th>
                         
                         <th class="valign-middle text-center" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
@@ -136,8 +137,8 @@
                                             <label class=" control-label font-weight-bold" for="id">Hasil</label>  
                                             <select id="status_persiapan_sidang" name="status_persiapan_sidang" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
                                                 <option value="">==Pilih==</option>
-                                                <option value="1">Laporan Audit Dapat Dilanjutkan Ke Tahapan Sidang Penetapan Kehalalan Produk</option>
-                                                <option value="0">Laporan Audit Harus Diperbaiki Sesuai Catatan</option>                                                               
+                                                <option value="1">Lanjut Ke Tahapan Sidang Fatwa Halal</option>
+                                                <option value="0">Perbaikan</option>                                                               
                                             </select>
                                             </div
                                         </td>
@@ -380,6 +381,36 @@
                         
                     }
                 },
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type, full, meta) {
+                        if(full.nominal_tahap2){
+                            if(full.status_tahap2 != '0' && full.status_tahap1 != '0' && full.status_tahap3 != '0'){
+                                return `<a style="color:green">Lunas</a>`
+                            }else{
+                                return `<a style="color:red">Belum Lunas</a>`
+                            }
+                        }else if(full.nominal_tahap3){
+                            if(full.status_tahap1 != '0' && full.status_tahap3 != '0'){
+                                return`<a style="color:green">Lunas</a>`
+                            }else{
+                                return `<a style="color:red">Belum Lunas</a>`
+                            }
+                        }else if(full.status_tahap1){
+                           
+                            if(full.status_tahap1 != '0'){
+                                return `<a style="color:green">Lunas</a>`
+                            }else{
+                                return `<a style="color:red">Belum Lunas</a>`
+                            }
+
+                        }else{
+                            return `<a style="color:red">Belum Akad</a>`
+                        }
+                    }
+                }, 
                 {
                     "data":null,
                     "searchable":false,

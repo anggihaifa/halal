@@ -3544,8 +3544,9 @@ class RegistrasiController extends Controller
                      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')                     
                      ->join('users','registrasi.id_user','=','users.id')
                      ->leftjoin('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
-                     ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi')                                 
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota')
+                     ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi') 
+                     ->leftjoin('pembayaran','registrasi.id','=','pembayaran.id_registrasi')                                 
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3')
                      ->orderBy('registrasi.updated_at','desc')
                      ->groupBy('registrasi.id');
                     
@@ -3555,8 +3556,9 @@ class RegistrasiController extends Controller
                      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')                     
                      ->join('users','registrasi.id_user','=','users.id')
                      ->leftjoin('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
-                     ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi')                                 
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota')
+                     ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi')  
+                     ->leftjoin('pembayaran','registrasi.id','=','pembayaran.id_registrasi')                                     
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3')
                      ->orderBy('registrasi.updated_at','desc')
                      ->groupBy('registrasi.id')
                     ->where('registrasi.kode_wilayah','=',$kodewilayah);                   

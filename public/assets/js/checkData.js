@@ -6,22 +6,22 @@ function checkStatus(data){
 
 function checkStatusPembayaran(data){
 
-     return  (data==0)? '<a    style=" color:black "><strong>Belum Bayar</strong></a>'
+     return  (data==0)? '<a    style=" color:red "><strong>Belum Bayar</strong></a>'
         :(data==1)? '<a    style="   color:#fcba03"><strong>Menunggu Konfirmasi Admin</strong></a>'
         :(data==2)? '<a    style="   color:red"><strong>Pembayaran Gagal</strong></a>'
         :(data==3)? '<a      style="   color:green"><strong>Pembayaran Berhasil</strong></a>'
-        : '<a     style=" color:black"><strong>Belum Bayar</strong></a>';
+        : '<a     style=" color:red"><strong>Belum Bayar</strong></a>';
             
 }
 
 function checkStatusPenerbitanOrderConfirmation(data){
 
-    return  (data==0)? '<a   style=" color:black"><strong>Belum Upload OC</strong></a>'
+    return  (data==0)? '<a   style=" color:red"><strong>Belum Upload OC</strong></a>'
     :(data==1)? '<a   style="  color:#fcba03"><strong>Menunggu Konfirmasi Pelaku Usaha</strong></a>'
     :(data==2)? '<a   style="  color:#fcba03"><strong>Menunggu Konfirmasi Admin</strong></a>'
     :(data==3)? '<a   style="  color:red"><strong>Penerbitan OC Gagal</strong></a>'
     :(data==4)? '<a   style="color:green"><strong>Penerbitan OC Terkonfirmasi</strong></a>'
-    : '<a   style=" color:black"><strong>Belum Upload OC</strong></a>';
+    : '<a   style=" color:red"><strong>Belum Upload OC</strong></a>';
 
   
            
@@ -29,11 +29,11 @@ function checkStatusPenerbitanOrderConfirmation(data){
 
 function checkStatusPelunasan(data){
 
-    return  (data==0)? '<a   style=" color:black"><strong>Belum Bayar</strong></a>'
+    return  (data==0)? '<a   style=" color:red"><strong>Belum Bayar</strong></a>'
         :(data==1)? '<a   style="   color:#fcba03"><strong>Menunggu Konfirmasi Admin</strong></a>'
         :(data==2)? '<a   style="   color:red"><strong>Pembayaran Gagal</strong></a>'
         :(data==3)? '<a   style="   color:green"><strong>Pembayaran Berhasil</strong></a>'
-        : '<a   style=" color:black"><strong>Belum Bayar</strong></a>';
+        : '<a   style=" color:red"><strong>Belum Bayar</strong></a>';
            
 }
 
@@ -144,9 +144,9 @@ function checkPenjadwalan(data){
 // }
 
 function checkStatusAkad(data){
-    return  (data==0)? '<a   style=" color:black"><strong>Belum Upload Akad</strong></a>'
+    return  (data==0)? '<a   style=" color:red"><strong>Belum Upload Akad</strong></a>'
     :(data==1)? '<a   style="   color:green"><strong>Sudah Upload Bukti  Akad</strong></a>'
-    : '<a   style=" color:black"><strong>Belum Upload Akad</strong></a>';
+    : '<a   style=" color:red"><strong>Belum Upload Akad</strong></a>';
     
             
 }
