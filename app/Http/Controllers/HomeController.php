@@ -215,17 +215,7 @@ class HomeController extends Controller
             })                
              ->select('registrasi.*')
              ->get();
-        $dataSidangFatwa = count($sidangfatwa);
-
-        $sidangfatwa = DB::table('registrasi')
-            ->where(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0);
-                $query->where('registrasi.status','=',16);
-  
-            })                
-             ->select('registrasi.*')
-             ->get();
-        $dataSidangFatwa = count($sidangfatwa);
+        $dataSidangFatwa = count($sidangfatwa);        
 
         $ketetapanhalal = DB::table('registrasi')
             ->where(function($query) use ($id_user){
