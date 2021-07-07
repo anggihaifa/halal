@@ -13,7 +13,6 @@ use App\Models\Berita;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\Auth;
-// use Maatwebsite\Excel\ExcelServiceProvider::class;
 
 class HomeController extends Controller
 {
@@ -96,10 +95,6 @@ class HomeController extends Controller
         }else{
             $dataCurrent = null;    
         }
-
-        // dd("disini");
-        // $excel = App::make('excel');
-        // Excel::create('Filename');
 
         $id_user = Auth::user()->id;
         $cekAudit = DB::table('registrasi')

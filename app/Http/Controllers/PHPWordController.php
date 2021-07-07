@@ -509,7 +509,11 @@ class PHPWordController extends Controller
             $model->lokasi_audit1 = $data['lokasi_audit1'];
             $model->lokasi_audit2 = $data['lokasi_audit2'];
             $model->tim_audit1 = $data['tim_audit1'];
-            $model->tim_audit2 = $data['tim_audit2'];
+            if($data['tim_audit2'] == null){
+                $model->tim_audit2 = "-";
+            }else{
+                $model->tim_audit2 = $data['tim_audit2'];
+            }            
             $model->tim_audit3 = implode(',',$data['tim_audit3']);
         }else{
             // dd("ada");
@@ -535,7 +539,11 @@ class PHPWordController extends Controller
                 $e->lokasi_audit1 = $data['lokasi_audit1'];
                 $e->lokasi_audit2 = $data['lokasi_audit2'];
                 $e->tim_audit1 = $data['tim_audit1'];
-                $e->tim_audit2 = $data['tim_audit2'];
+                if($data['tim_audit2'] == null){
+                    $e->tim_audit2 = "-";
+                }else{
+                    $e->tim_audit2 = $data['tim_audit2'];
+                }                            
                 $e->tim_audit3 = implode(',',$data['tim_audit3']);
             }
         }
@@ -635,14 +643,17 @@ class PHPWordController extends Controller
         $lastname = $nameparts[count($nameparts) - 1];
         $initial = $firstname[0]."".$lastname[0];
 
-        $nameparts2 = explode(' ',trim($data['tim_audit2']));
-        $firstname2 = $nameparts2[0];
-        $lastname2 = $nameparts2[count($nameparts2) - 1];
-        $initial2 = $firstname2[0]."".$lastname2[0];
-        // dd($initial2);
-                    
         $templateProcessor->setValue('tim_audit1', $data['tim_audit1'].' ('.$initial.')');
-        $templateProcessor->setValue('tim_audit2', $data['tim_audit2'].' ('.$initial2.')');
+
+        // dd($data['tim_audit2']);
+        if($data['tim_audit2'] != null){
+            $nameparts2 = explode(' ',trim($data['tim_audit2']));
+            $firstname2 = $nameparts2[0];
+            $lastname2 = $nameparts2[count($nameparts2) - 1];
+            $initial2 = $firstname2[0]."".$lastname2[0];
+
+            $templateProcessor->setValue('tim_audit2', $data['tim_audit2'].' ('.$initial2.')');
+        }                                            
         // $templateProcessor->setValue('tim_audit3', $data['tim_audit3']);        
         // if($data['tim_audit3'][0] != 0){
             $arrAnggota=array();
@@ -767,9 +778,10 @@ class PHPWordController extends Controller
             
             $jml = $data['jumlah_kegiatan'][$i];
 
-            $temp2 = $temp;            
-            for ($j=$temp; $j < $temp2+$jml; $j++) {                 
-                if($j == $temp2){
+            $temp2 = $temp;   
+            // dd($jml);
+            for ($j=$temp2; $j < $temp2+$jml; $j++) {                 
+                if($j == $temp){
                     $harike++;
                     $arrData[] = array('hari_ke' => 'Hari '.$harike.'','tgl_waktu' => $hari.', '.$tgl.'','detail_waktu' => $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j], 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $data['detail_kegiatan'][$j], 'personil' => $data['personil'][$j]);
 
@@ -799,7 +811,7 @@ class PHPWordController extends Controller
                     $model2->save();
                     DB::commit();
                 }
-                $temp = $j+1;
+                // $temp = $j+1;
             }            
         }    
         // dd($arrData);                      
@@ -984,18 +996,20 @@ class PHPWordController extends Controller
         // $templateProcessor->setValue('tim_audit1', $data['tim_audit1']);
         $templateProcessor->setValue('pimpinan_perusahaan', $data['pimpinan_perusahaan']);
 
-        $nameparts = explode(' ',trim($data['tim_audit1']));
-        $firstname = $nameparts[0];
-        $lastname = $nameparts[count($nameparts) - 1];
-        $initial = $firstname[0]."".$lastname[0];
+        if($data['tim_audit1'] != null){
+            $nameparts = explode(' ',trim($data['tim_audit1']));
+            $firstname = $nameparts[0];
+            $lastname = $nameparts[count($nameparts) - 1];
+            $initial = $firstname[0]."".$lastname[0];
+            $templateProcessor->setValue('tim_audit1', $data['tim_audit1'].' ('.$initial.')');
+        }        
 
         $nameparts2 = explode(' ',trim($data['ketua_tim']));
         $firstname2 = $nameparts2[0];
         $lastname2 = $nameparts2[count($nameparts2) - 1];
         $initial2 = $firstname2[0]."".$lastname2[0];
         // dd($initial2);
-                    
-        $templateProcessor->setValue('tim_audit1', $data['tim_audit1'].' ('.$initial.')');
+                            
         $templateProcessor->setValue('ketua_tim', $data['ketua_tim'].' ('.$initial2.')');
         // $templateProcessor->setValue('tim_audit3', $data['tim_audit3']);        
         // if($data['tim_audit3'][0] != 0){
