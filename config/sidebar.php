@@ -340,16 +340,11 @@ return [
             'title' => 'Dashboard',
             'url' => 'home.index'
         ],
-       
-        [    'icon' => 'ion-ios-clipboard',
-            'title' => 'Pelatihan',
-            'url' => 'pelatihan.index'
-        ],
         [
-            'icon' => 'ion-md-book',
-            'title' => 'Reporsitory Dokumen Halal',
-            'url' => 'dokumen.indexuser'
-        ],  
+            'icon' => 'ion-md-bookmark',
+            'title' => 'Monitoring Registrasi',
+            'url' => 'listmonitoringregistrasi', 
+        ],            
                                       
     ],
   

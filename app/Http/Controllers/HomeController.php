@@ -141,10 +141,108 @@ class HomeController extends Controller
         $dataAudit2 = count($cekAudit2);
         // dd($dataAudit);
 
-        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 4 || Auth::user()->usergroup_id == 5 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7 || Auth::user()->usergroup_id == 8 || Auth::user()->usergroup_id == 9 || Auth::user()->usergroup_id == 13 || Auth::user()->usergroup_id == 14){
+        $verifikasi = DB::table('registrasi')
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',2);
+  
+            })    
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','2_0');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','2_1');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','2_2');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','2_3');
+            })
+             ->select('registrasi.*')
+             ->get();
+        $dataVerifikasi = count($verifikasi);
+
+        $audit1 = DB::table('registrasi')
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',8);
+  
+            })    
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','8_1');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','8_2');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','8_3');
+            })            
+             ->select('registrasi.*')
+             ->get();
+        $dataAudit1 = count($audit1);
+
+        $audit2 = DB::table('registrasi')
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',10);
+  
+            })    
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','10_1');
+            })
+            ->orWhere(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=','10_2');
+            })            
+             ->select('registrasi.*')
+             ->get();
+        $dataAudit2 = count($audit2);
+
+        $sidangfatwa = DB::table('registrasi')
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',16);
+  
+            })                
+             ->select('registrasi.*')
+             ->get();
+        $dataSidangFatwa = count($sidangfatwa);
+
+        $sidangfatwa = DB::table('registrasi')
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',16);
+  
+            })                
+             ->select('registrasi.*')
+             ->get();
+        $dataSidangFatwa = count($sidangfatwa);
+
+        $ketetapanhalal = DB::table('registrasi')
+            ->where(function($query) use ($id_user){
+                $query->where('registrasi.status_cancel','=',0);
+                $query->where('registrasi.status','=',17);
+  
+            })                
+             ->select('registrasi.*')
+             ->get();
+        $dataKetetapanHalal = count($ketetapanhalal);
+
+        if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 4 || Auth::user()->usergroup_id == 5 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7 || Auth::user()->usergroup_id == 8 ||  Auth::user()->usergroup_id == 13 || Auth::user()->usergroup_id == 14){
             return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan'));
         }else if(Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12){
             return view('homeAuditor',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan','dataAudit','dataAudit2'));
+        }else if(Auth::user()->usergroup_id == 9){            
+            return view('homeApprover',compact('dataVerifikasi','dataAudit1','dataAudit2','dataSidangFatwa','dataKetetapanHalal','statistikregistrasi','statistikpelanggan'));
         }else if(Auth::user()->usergroup_id == 2){
             return view('homeUser',compact('dataDetailUser','totalRegistrasiUser','dataCurrent','logKegiatan'));
         }
