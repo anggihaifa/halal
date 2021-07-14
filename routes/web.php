@@ -453,6 +453,9 @@ Route::get('cari_berita','Master\BeritaController@cariBerita')->name('master.ber
 Route::get('informasi_panduan','InformasiController@panduan')->name('informasipanduan');
 Route::get('informasi_alur','InformasiController@alur')->name('informasialur');
 
+Route::get('edit_registrasi/{id}','RegistrasiController@editRegistrasi')->name('editregistrasi');
+Route::post('update_registrasi','RegistrasiController@updateRegistrasi')->name('updateregistrasi');
+
 //user management
 Route::prefix('system')->group(function(){
 
@@ -463,7 +466,7 @@ Route::prefix('system')->group(function(){
     //Route::get('pelanggan_datatable','System\UserController@dataPelanggan')->name('system.pelanggan.datatable');
 
 
-    Route::get('edit_profile/{id}','System\UserController@editProfile')->name('system.user.editprofile');
+    Route::get('edit_profile/{id}','System\UserController@editProfile')->name('system.user.editprofile');    
 
     //Route::get('edit_profile/{id}','System\UserController@editProfile')->name('system.user.editprofile');
     Route::post('update_profile','System\UserController@updateProfile')->name('system.user.updateprofile');

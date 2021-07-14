@@ -420,7 +420,7 @@ class RegistrasiController extends Controller
                 ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
                 ->join('users','registrasi.id_user','=','users.id')
                 ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-                ->select('registrasi.*','registrasi.status as statusnya','ruang_lingkup.ruang_lingkup as jenis','users.*','kelompok_produk.kelompok_produk as kelompok')
+                ->select('registrasi.*','registrasi.status as statusnya','ruang_lingkup.ruang_lingkup as jenis','users.*','kelompok_produk.kelompok_produk as kelompok','registrasi.id as id_regis')
                 ->where('registrasi.id','=',$id)
                 ->get();
             $data = json_decode($data,true);  
@@ -621,8 +621,9 @@ class RegistrasiController extends Controller
     }
 
    public function store(Request $request){
-        $data = $request->except('_token','_method');        
+        $data = $request->except('_token','_method');
         // dd($data);
+        // dd($data['contact_person'].'-'.$data['nama_contact_person']);
 
         $model = new Registrasi();        
 
@@ -646,6 +647,7 @@ class RegistrasiController extends Controller
                 $model->alamat_pabrik = $data['alamat_pabrik'];
                 $model->telepon_pabrik = $data['telepon_pabrik'];
                 $model->contact_person = $data['contact_person'];
+                $model->sistem_pemasaran = $data['nama_contact_person'];
                 $model->email = $data['email'];                
                 $model->status_registrasi = $data['status_registrasi'];
                 $model->id_ruang_lingkup = $data['id_ruang_lingkup'];
@@ -1091,6 +1093,485 @@ class RegistrasiController extends Controller
         //     $redirectPass = redirect()->route('registrasiHalal.create');
         //     return $redirectPass;
         // }
+    }
+
+    public function updateRegistrasi(Request $request){
+        $data = $request->except('_token','_method');
+        // dd('disini');
+        // dd($data['contact_person'].'-'.$data['nama_contact_person']);
+
+        $model = new Registrasi();        
+
+        try{            
+            $updater = Auth::user()->name;
+            $id_updater = Auth::user()->id;
+
+            DB::beginTransaction();
+                $a = $model->find($data['id_registrasi']);
+                // dd($a);                                
+                $a->tgl_registrasi = $data['tgl_registrasi'];                
+                $a->nama_perusahaan = $data['nama_perusahaan'];
+                $a->alamat_perusahaan = $data['alamat_perusahaan'];
+                $a->telepon_perusahaan = $data['telepon_perusahaan'];
+                $a->alamat_pabrik = $data['alamat_pabrik'];
+                $a->telepon_pabrik = $data['telepon_pabrik'];
+                $a->contact_person = $data['contact_person'];
+                $a->sistem_pemasaran = $data['nama_contact_person'];
+                $a->email = $data['email'];                
+                $a->status_registrasi = $data['status_registrasi'];
+                $a->id_ruang_lingkup = $data['id_ruang_lingkup'];
+                $a->updated_status_by = $updater;                
+
+                if($request->has("ktp")){
+                    $file = $request->file("ktp");
+                    $file = $data["ktp"];
+                    $filename = "KTP-".Auth::user()->id."-".$data['no_registrasi'].".".$file->getClientOriginalExtension();
+                    $file->storeAs("public/ktp/".Auth::user()->id."/", $filename);
+                    $a->ktp = $filename;                    
+                }
+
+                if($request->has("npwp")){
+                    $file2 = $request->file("npwp");
+                    $file2 = $data["npwp"];
+                    $filename2 = "NPWP-".Auth::user()->id."-".$data['no_registrasi'].".".$file2->getClientOriginalExtension();
+                    $file2->storeAs("public/npwp/".Auth::user()->id."/", $filename2);
+                    $a->npwp = $filename2;
+                }
+                                                
+                $a->nama_merk_produk = implode(',',$data['merk']);
+
+                $a->jenis_produk = $data['id_kelompok_produk'];
+                $a->rincian_jenis_produk = implode(',',$data['id_rincian_kelompok_produk']);
+                $a->daerah_pemasaran = $data['daerah_pemasaran'];                
+                $a->no_registrasi_bpjph = $data['no_registrasi_bpjph'];                
+                $a->save();                                
+            DB::commit();
+
+            $model2 = new LogKegiatan();            
+                $model2->id_registrasi = $data['id_registrasi'];
+                $model2->id_user = Auth::user()->id;
+                $model2->nama_user = Auth::user()->name;
+                $model2->usergroup_id = Auth::user()->usergroup_id;
+                $model2->id_kegiatan = 1;
+                $model2->judul_kegiatan = "Mengupdate Data Registrasi";
+                $model2->save();
+            DB::commit();
+                
+
+            Session::flash('success', "data berhasil disimpan!");            
+            $redirect = redirect()->route('registrasiHalal.index');
+
+            return $redirect;
+            
+        }catch (\Exception $e){
+            DB::rollBack();            
+
+            Session::flash('error', $e->getMessage());
+            $redirectPass = redirect()->route('registrasiHalal.create');
+            return $redirectPass;
+        }
+
+        // try{            
+        //     $length = 8;
+        //     $token = "";
+        //     $codeAlphabet= "0123456789";
+        //     for($i=0;$i<$length;$i++){
+        //         $token .= $codeAlphabet[$this->crypto_Rand_secure(0,strlen($codeAlphabet))];
+        //     }
+        //     $randomid =$token;
+        //     $nosurat = $data['no_surat'];
+        //     $expd = explode('-',$nosurat);            
+
+        //     $no_order = date('YmdHis').".".Auth::user()->id . "." .$data['id_ruang_lingkup'];
+        //     // dd($no_order);
+        //     // dd($data);
+        //     // //Create PDF
+        //     // $nama = Auth::user()->name;
+        //     // $perusahaan = Auth::user()->perusahaan;
+        //     // $kota = Auth::user()->kota;
+        //     // $newdata = ['nama'=>$nama,'perusahaan'=>$perusahaan,'no_registrasi'=>$randomid,'kota'=>$kota,'data'=>$data];
+        //     // $pdf = PDF::loadView('pdf/pdf_download',$newdata);
+        //     // $fileName = 'REG_'.$randomid.'_INV.pdf';
+
+        //     //input data
+        //     DB::beginTransaction();
+        //     // $model->fill($data);
+        //     // $model->id_user = Auth::user()->id;
+        //     // $model->no_registrasi = $randomid;
+        //     // $model->inv_registrasi = $fileName;
+
+        //     $model->id_user = Auth::user()->id;
+        //     $model->nama_perusahaan = $data['nama_perusahaan'];
+
+        //     $kodewilayah = $expd[0];                      
+
+        //     $model->kode_wilayah = $kodewilayah;
+        //     $model->no_surat = $data['no_surat'];
+        //     $model->no_registrasi = $randomid;
+        //     $model->tgl_registrasi = $data['tgl_registrasi'];
+        //     $model->id_ruang_lingkup = $data['id_ruang_lingkup'];
+        //     $model->status_registrasi = $data['status_registrasi'];
+        //     $model->status_halal = $data['status_halal'];
+        //     $model->sh_berlaku = $data['sh_berlaku'];
+        //     $model->no_sertifikat = $data['no_sertifikat'];
+        //     $model->tgl_sjph = $data['tgl_sjph'];
+        //     $model->jenis_produk = $data['jenis_produk'];
+        //     $model->jenis_badan_usaha = $data['jenis_badan_usaha'];
+        //     $model->nama_jenis_badan_usaha = $data['nama_jenis_badan_usaha'];
+        //     $model->kepemilikan = $data['kepemilikan'];
+        //     $model->nama_kepemilikan = $data['nama_kepemilikan'];
+        //     $model->skala_usaha = $data['skala_usaha'];
+        //    // $model->tipe = $data['tipe'];
+        //     $model->no_tipe = $data['no_tipe'];
+        //     $model->no_tipe2 = $data['no_tipe2'];
+        //     $model->sni = $data['sni'];
+        //     $model->jenis_izin = $data['jenis_izin'];
+        //     $model->jumlah_karyawan = $data['jumlah_karyawan'];
+        //     $model->kapasitas_produksi = $data['kapasitas_produksi'];
+        //     $model->jenis_produk = $data['jenis_produk'];
+        //     $model->id_rincian_kelompok_produk = implode(',',$data['id_rincian_kelompok_produk']);
+
+        //     $model->progress = 1;
+
+        //     if($data['id_ruang_lingkup'] == 3){
+        //         $model->jenis_usaha = $data['jenis_usaha'];
+        //         $model->nama_jenis_usaha = $data['nama_jenis_usaha'];
+        //         $model->nkv = $data['nkv'];
+        //     }            
+
+        //     $model->sertifikat_perusahaan = $data['sertifikat_perusahaan'];
+        //     $model->nib = $data['nib'];
+        //     $model->jenis_surat = $data['jenis_surat'];
+        //     $model->nomor_surat = $data['nomor_surat'];
+        //     $model->penerbit_sertifikat_perusahaan = $data['penerbit_sertifikat_perusahaan'];
+        //     $model->no_sertifikat_perusahaan = $data['no_sertifikat_perusahaan'];
+
+        //     $model->status = 1 ;            
+        //     $model->save();
+        //     DB::commit();                     
+            
+        //     $model_regisalamat = new RegistrasiAlamatKantor();
+             
+        //     DB::beginTransaction();
+
+        //     $id_registrasi = DB::table('registrasi')            
+        //     ->select('id')
+        //     ->orderBy('id','desc')
+        //     ->limit(1)
+        //     ->get();
+                        
+        //     foreach($id_registrasi as $id){
+        //         foreach($id as $id_asli){
+        //             $idregis = $id_asli;
+        //         }                
+        //     }
+            
+        //     $model_regisalamat->id_registrasi = $idregis;
+        //     $model_regisalamat->alamat = $data['alamat_kantor'];            
+        //     $model_regisalamat->negara = $data['negara_kantor'];
+        //     if($model_regisalamat->negara == 'Indonesia'){
+        //         $kota = Kabupaten::find($data['kota_kantor_domestik']);
+        //         $provinsi = Provinsi::find($data['provinsi_kantor_domestik']);
+        //         $model_regisalamat->kota_domestik = $kota->nama_kabupaten;                
+        //         $model_regisalamat->provinsi_domestik = $provinsi->nama_provinsi;                
+        //     }else{
+        //         $model_regisalamat->kota = $data['kota_pabrik'];
+        //         $model_regisalamat->provinsi = $data['provinsi_pabrik'];
+        //     }
+        //     $model_regisalamat->telepon = $data['telepon_kantor'];
+        //     $model_regisalamat->kodepos = $data['kodepos_kantor'];
+        //     $model_regisalamat->email = $data['email_kantor'];
+                    
+        //     $model_regisalamat->save();
+        //     DB::commit();
+
+        //     $model_regispabrik = new RegistrasiAlamatPabrik();
+        //     DB::beginTransaction();
+
+        //     $model_regispabrik->id_registrasi = $idregis;
+        //     $model_regispabrik->alamat = $data['alamat_pabrik'];            
+        //     $model_regispabrik->negara = $data['negara_pabrik'];
+        //     if($model_regispabrik->negara == 'Indonesia'){
+        //         $kota2 = Kabupaten::find($data['kota_kantor_domestik']);
+        //         $provinsi2 = Provinsi::find($data['provinsi_kantor_domestik']);
+        //         $model_regispabrik->kota_domestik = $kota2->nama_kabupaten;
+        //         $model_regispabrik->provinsi_domestik = $provinsi2->nama_provinsi;
+        //     }else{
+        //         $model_regispabrik->kota = $data['kota_pabrik'];
+        //         $model_regispabrik->provinsi = $data['provinsi_pabrik'];
+        //     }
+        //     $model_regispabrik->telepon = $data['telepon_pabrik'];
+        //     $model_regispabrik->kodepos = $data['kodepos_pabrik'];
+        //     $model_regispabrik->email = $data['email_pabrik'];
+        //     $model_regispabrik->status_pabrik = $data['status_pabrik'];
+        //     $model_regispabrik->nama_status_pabrik = $data['nama_status_pabrik'];
+        //     $model_regispabrik->jenis_fasilitas_produksi = $data['jenis_fasilitas_produksi'];
+
+        //     $model_regispabrik->save();
+        //     DB::commit();
+
+        //     $model_regispemilik = new RegistrasiPemilikPerusahaan();
+        //     DB::beginTransaction();
+
+        //     $model_regispemilik->id_registrasi = $idregis;
+        //     $model_regispemilik->nama_pemilik = $data['nama_pemilik'];
+        //     $model_regispemilik->nama_pj = $data['nama_pj'];
+        //     $model_regispemilik->jabatan_pemilik = $data['jabatan_pemilik'];
+        //     $model_regispemilik->jabatan_pj = $data['jabatan_pj'];
+        //     $model_regispemilik->telepon_pemilik = $data['telepon_pemilik'];
+        //     $model_regispemilik->telepon_pj = $data['telepon_pj'];
+        //     $model_regispemilik->fax_pemilik = $data['fax_pemilik'];
+        //     $model_regispemilik->fax_pj = $data['fax_pj'];
+        //     $model_regispemilik->email_pemilik = $data['email_pemilik'];
+        //     $model_regispemilik->email_pj = $data['email_pj'];
+
+        //     $model_regispemilik->save();
+        //     DB::commit();            
+
+        //     if($data['id_ruang_lingkup'] == 1 || $data['id_ruang_lingkup'] == 5){
+        //         $model_regisdataproduk = new RegistrasiDataProduk();
+        //         DB::beginTransaction();
+
+        //         $model_regisdataproduk->id_registrasi = $idregis;
+        //         $model_regisdataproduk->klasifikasi_jenis_produk = $data['klasifikasi_jenis_produk'];
+        //         $model_regisdataproduk->area_pemasaran = $data['area_pemasaran'];
+        //         $model_regisdataproduk->izin_edar = $data['izin_edar'];
+        //         $model_regisdataproduk->produk_lain = $data['produk_lain'];
+
+        //         $model_regisdataproduk->save();
+        //         DB::commit();
+
+        //         $id_registrasi_produk = DB::table('registrasi_data_produk')            
+        //         ->select('id')
+        //         ->orderBy('id','desc')
+        //         ->limit(1)
+        //         ->get();
+                            
+        //         foreach($id_registrasi_produk as $id){
+        //             foreach($id as $id_asli){
+        //                 $idregis_produk = $id_asli;
+        //             }                
+        //         }
+
+        //         // dd($data);
+        //         if(count($data['merk']) > 0){
+        //             foreach($data['merk'] as $item => $value){
+        //                 $data2 = array(
+        //                     'id_registrasi_data_produk' => $idregis_produk,
+        //                     'merk' => $data['merk'][$item]                        
+        //                 );                    
+        //                 DetailDataProduk::create($data2);
+        //             }
+        //         }
+        //     }else if($data['id_ruang_lingkup'] == 2){
+        //         $model_regiskelompokusaha = new RegistrasiKU();
+        //         DB::beginTransaction();
+
+        //         $model_regiskelompokusaha->id_registrasi = $idregis;
+        //         $model_regiskelompokusaha->kelompok_usaha = $data['kelompok_usaha'];
+        //         $model_regiskelompokusaha->kategori_usaha = $data['kategori_usaha'];
+        //         $model_regiskelompokusaha->jumlah_cabang_usaha = $data['jumlah_cabang_usaha'];
+        //         $model_regiskelompokusaha->alamat_cabang_usaha = $data['alamat_cabang_usaha'];
+        //         $model_regiskelompokusaha->area_pemasaran_usaha = $data['area_pemasaran_usaha'];
+        //         $model_regiskelompokusaha->izin_edar_usaha = $data['izin_edar_usaha'];
+        //         $model_regiskelompokusaha->izin_edar_usaha = $data['produk_lain_usaha'];
+
+        //         $model_regiskelompokusaha->save();
+        //         DB::commit();
+
+        //         $id_registrasi_kelompok_usaha = DB::table('registrasi_kelompok_usaha')            
+        //         ->select('id')
+        //         ->orderBy('id','desc')
+        //         ->limit(1)
+        //         ->get();
+                            
+        //         foreach($id_registrasi_kelompok_usaha as $id){
+        //             foreach($id as $id_asli){
+        //                 $idregis_kelompokusaha = $id_asli;
+        //             }                
+        //         }
+
+        //         // dd($data);
+        //         if(count($data['sertifikat_lainnya']) > 0){
+        //             foreach($data['sertifikat_lainnya'] as $item => $value){
+        //                 $data2 = array(
+        //                     'id_registrasi_kelompok_usaha' => $idregis_kelompokusaha,
+        //                     'sertifikat_lainnya' => $data['sertifikat_lainnya'][$item]
+        //                 );                    
+        //                 DetailKU::create($data2);
+        //             }
+        //         }
+        //     }else if($data['id_ruang_lingkup'] == 4){
+        //         $model_regisjasa = new RegistrasiJasa();
+        //         DB::beginTransaction();
+
+        //         $model_regisjasa->id_registrasi = $idregis;
+        //         $model_regisjasa->klasifikasi_jenis_jasa = $data['klasifikasi_jenis_jasa'];                
+        //         $model_regisjasa->area_pemasaran_jasa = $data['area_pemasaran_jasa'];                
+        //         $model_regisjasa->produk_lain_jasa = $data['produk_lain_jasa'];
+
+        //         $model_regisjasa->save();
+        //         DB::commit();
+        //     }else if($data['id_ruang_lingkup'] == 3){
+        //         // dd($data);
+        //         if(count($data['jenis_sdm']) > 0){
+        //             foreach($data['jenis_sdm'] as $item => $value){
+        //                 $data2 = array(
+        //                     'id_registrasi' => $idregis,
+        //                     'jenis_sdm' => $data['jenis_sdm'][$item],
+        //                     'nama_sdm' => $data['nama_sdm'][$item],
+        //                     'ktp_sdm' => $data['ktp_sdm'][$item],
+        //                     'sertif_sdm' => $data['sertif_sdm'][$item],
+        //                     'no_tglsk_sdm' => $data['no_tglsk_sdm'][$item],
+        //                     'no_kontrak_sdm' => $data['no_kontrak_sdm'][$item]
+        //                 );                    
+        //                 RegistrasiDataSDM::create($data2);
+        //             }
+        //         }
+
+        //         if(count($data['jenis_hewan']) > 0){
+        //             foreach($data['jenis_hewan'] as $item => $value){
+        //                 $data3 = array(
+        //                     'id_registrasi' => $idregis,
+        //                     'jenis_hewan' => $data['jenis_hewan'][$item],
+        //                     'jumlah_produksi_perhari' => $data['jumlah_produksi_perhari'][$item],
+        //                     'jumlah_produksi_perbulan' => $data['jumlah_produksi_perbulan'][$item]
+        //                 );                    
+        //                 RegistrasiJumlahProduksi::create($data3);
+        //             }
+        //         }
+        //     }
+
+        //     // dd($data);
+        //     if(count($data['nama_dph']) > 0){
+        //         foreach($data['nama_dph'] as $item => $value){
+        //             $data2 = array(
+        //                 'id_registrasi' => $idregis,
+        //                 'nama_dph' => $data['nama_dph'][$item],
+        //                 'ktp_dph' => $data['ktp_dph'][$item],
+        //                 'sertif_dph' => $data['sertif_dph'][$item],
+        //                 'no_tglsk_dph' => $data['no_tglsk_dph'][$item],
+        //                 'no_kontrak_dph' => $data['no_kontrak_dph'][$item],
+        //             );                    
+        //             RegistrasiDPH::create($data2);
+        //         }
+        //     } 
+            
+        //     $model_regisdsm = new RegistrasiDSM();
+        //     DB::beginTransaction();
+
+        //     $model_regisdsm->id_registrasi = $idregis;
+        //     $model_regisdsm->outsourcing = $data['outsourcing'];            
+        //     $model_regisdsm->konsultan = $data['konsultan'];
+        //     $model_regisdsm->jumlah_karyawan_organisasi = $data['jumlah_karyawan_organisasi'];
+        //     $model_regisdsm->shift_1 = $data['shift_1'];
+        //     $model_regisdsm->shift_2 = $data['shift_2'];
+        //     $model_regisdsm->shift_3 = $data['shift_3'];
+        //     $model_regisdsm->save();
+        //     DB::commit();
+
+        //     $id_registrasi_dsm = DB::table('registrasi_data_sistem_manajemen')
+        //     ->select('id')
+        //     ->orderBy('id','desc')
+        //     ->limit(1)
+        //     ->get();
+                        
+        //     foreach($id_registrasi_dsm as $id){
+        //         foreach($id as $id_asli){
+        //             $idregis_dsm = $id_asli;
+        //         }                
+        //     }
+
+        //     // dd($data);
+        //     if(count($data['sistem_manajemen']) > 0){
+        //         foreach($data['sistem_manajemen'] as $item => $value){
+        //             $data2 = array(
+        //                 'id_data_sistem_manajemen' => $idregis_dsm,
+        //                 'sistem_manajemen' => $data['sistem_manajemen'][$item],
+        //                 'sertifikasi_manajemen' => $data['sertifikasi_manajemen'][$item]
+        //             );                    
+        //             DetailDSM::create($data2);
+        //         }
+        //     } 
+             
+        //     // $model_regislokasilain = new RegistrasiLokasiLain();
+        //     // DB::beginTransaction();
+
+        //     if(count($data['nama_lokasi_lainnya']) > 0){
+        //         foreach($data['nama_lokasi_lainnya'] as $item => $value){
+        //             $data2 = array(
+        //                 'id_registrasi' => $idregis,
+        //                 'nama_lokasi_lainnya' => $data['nama_lokasi_lainnya'][$item],
+        //                 'alamat_lainnya' => $data['alamat_lainnya'][$item],
+        //                 'kota_lainnya' => $data['kota_lainnya'][$item],
+        //                 'telepon_lainnya' => $data['telepon_lainnya'][$item],
+        //                 'kodepos_lainnya' => $data['kodepos_lainnya'][$item],
+        //                 'fax_lainnya' => $data['fax_lainnya'][$item],
+        //                 'narahubung_lainnya' => $data['narahubung_lainnya'][$item]
+        //             );                    
+        //             RegistrasiLokasiLain::create($data2);
+        //         }
+        //     }               
+
+            
+        //     // dd($data);
+        //     // $model_regislokasilain->save();
+        //     // DB::commit();
+
+        //     // //for edit pdf ui
+        //     // return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf/pdf_download',$newdata)->stream();
+
+        //     // //Save PDF File
+        //     // $path = public_path('public/registrasi/'.$fileName);
+        //     // Storage::put('public/registrasi/'.$fileName, $pdf->output());
+        //     // //$pdf->download($fileName);
+
+
+        //     //Session::flash('success', "data berhasil disimpan!, Silahkan unduh file invoice di list registrasi");
+
+        //     Session::flash('success', "data berhasil disimpan!");            
+        //     $redirect = redirect()->route('registrasiHalal.index');
+
+        //     return $redirect;
+
+        // }catch (\Exception $e){
+        //     DB::rollBack();
+
+        //     //$this->debugs($e->getMessage());
+
+        //     Session::flash('error', $e->getMessage());
+        //     $redirectPass = redirect()->route('registrasiHalal.create');
+        //     return $redirectPass;
+        // }
+    }
+
+    public function editRegistrasi($id){        
+        $model = new Registrasi();
+        $model2 = new User();
+
+        $data = $model->find($id);
+
+        $jenisRegistrasi = JenisRegistrasi::all();        
+        $kelompokProduk = KelompokProduk::all();
+        $detailkelompokProduk = DetailKelompokProduk::all();
+
+        $dataNegara = Negara::all();
+        $dataProvinsi = Provinsi::all();
+        $dataKebupaten = Kabupaten::all();
+
+        $getTransfer =   DB::table('faq')
+                    ->where('status','transfer')
+                    ->get();
+        $dataTransfer = json_decode($getTransfer,true);
+        //get Data from FAQ Tunai
+        $getTunai =   DB::table('faq')
+                    ->where('status','tunai')
+                    ->get();
+        $dataTunai = json_decode($getTunai,true);
+        //get Data from FAQ Transfer        
+        $dataTunai = json_decode($getTunai,true);
+        // dd($data);
+        return view('registrasi.editRegistrasi',compact('data','jenisRegistrasi','kelompokProduk','detailkelompokProduk','dataNegara','dataProvinsi','dataKebupaten','dataTransfer','dataTunai'));
     }
 
     public function listPenerbitanOC(){

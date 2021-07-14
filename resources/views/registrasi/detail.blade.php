@@ -46,7 +46,7 @@
 								<div class="container col-lg-12">
 									<table cellpadding="10" border="0">
 										<tr>
-											<td colspan="3"><h4 style="color: #2980b9"><b> {{$value['name']}}</b> ({{$value['nama_perusahaan']}})</h4></td>
+											<td colspan="3"><h4 style="color: #2980b9"><b> {{$value['name']}}</b> ({{$value['nama_perusahaan']}})</h4><a class="btn btn-sm btn-primary" href="{{route('editregistrasi',$value['id_regis'])}}">Edit Data</a></td>
 										</tr>
 										<tr>
 											<span id="stat_val" style="display:none">{{$value['statusnya']}}</span>
