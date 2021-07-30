@@ -139,26 +139,33 @@ class RegistrasiController extends Controller
     public function listRegistrasiPelangganAktif(){
         $dataKelompok = KelompokProduk::all();
         $dataJenis = JenisRegistrasi::all();
-        $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-        ));
+        try{
+            $curl = curl_init();
 
-        $response = curl_exec($curl);   
-        curl_close($curl);
+        
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => 'https://apps.sucofindo.co.id/sciapi/index.php/invoice/listunitkerja',
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => '',
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 0,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => 'POST',
+            ));
+    
+            $response = curl_exec($curl);   
+            curl_close($curl);
+    
+            $response = json_decode($response);
+            $cabang = $response->data;
+        }catch(Exception $error){
+            $cabang = null;
+        }
+       
 
-        $response = json_decode($response);
-        $cabang = $response->data;
-
-        //$cabang = null;
+        //
 
 
         $kw = DB::table('registrasi')
@@ -191,10 +198,9 @@ class RegistrasiController extends Controller
         ->leftJoin('pembayaran','registrasi.id', '=', 'pembayaran.id_registrasi')
         ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
        //  ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
-       
-       
-        ->where('registrasi.status_cancel','=',0)
-        ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','penjadwalan.mulai_tr','penjadwalan.mulai_tinjauan','penjadwalan.ktg_audit2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit', 'penjadwalan.catatan_penjadwalan_audit1','penjadwalan.catatan_penjadwalan_audit2','penjadwalan.catatan_penjadwalan_tr','penjadwalan.catatan_penjadwalan_tinjauan');
+
+        ->where('registrasi.status','!=',17)
+        ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','penjadwalan.selesai_audit1','penjadwalan.selesai_audit2','penjadwalan.mulai_tr','penjadwalan.mulai_tinjauan','penjadwalan.ktg_audit2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit', 'penjadwalan.catatan_penjadwalan_audit1','penjadwalan.catatan_penjadwalan_audit2','penjadwalan.catatan_penjadwalan_tr','penjadwalan.catatan_penjadwalan_tinjauan');
 
         if($kodewilayah == '119'){            
             $xdata = $xdata->where('registrasi.status_cancel','=',0);
@@ -254,7 +260,7 @@ class RegistrasiController extends Controller
             $e = $model->find($id);
             $u = $model2->find($e->id_user);
             $p = $model3->find($e->id_pembayaran);
-            if($status == 17){
+            if($status == 20){
                 $e->status_cancel = 1;
             }else{
                 $e->status_cancel = 0;
@@ -1564,7 +1570,12 @@ class RegistrasiController extends Controller
                     //print_r(count($data)) ;
                     
                     $model->status_has = 0;
-                    $r->status_berkas = 1;
+                    if($data['submit'] == 'true'){
+                        $model->status_berkas = 1;
+                        $r->status_berkas = 1;
+                        $r->status = '2_1';
+                    }
+                   
                     $r->save();
 
                     $model->save();
@@ -1830,7 +1841,11 @@ class RegistrasiController extends Controller
                     $now=  $mytime->toDateTimeString();
 
                     $r->updated_at= $now;
-                    $r->status_berkas = 1;
+                    if($data['submit']=='true'){
+                        $e->status_berkas = 1;
+                        $r->status_berkas = 1;
+                        $r->status = '2_1';
+                    }
                     //dd($r);
                     $r->save();                    
                     $e->save();                    
@@ -1966,7 +1981,7 @@ class RegistrasiController extends Controller
                     $e->save();
                     $f->save();
                     DB::commit();                    
-                    //SendEmailP::dispatch($u,$f,$p,$f->status);
+                    SendEmailP::dispatch($u,$f,null,$f->status);
                     Session::flash('success', "Status berhasil diupdate");
 
                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Admin telah memeriksa berkas, namun ada berkas yang belum memenuhi. Silahkan untuk diperbaiki.", Auth::user()->usergroup_id);
@@ -2001,7 +2016,7 @@ class RegistrasiController extends Controller
                     
                    
                   
-                    //SendEmailP::dispatch($u,$f,$p,$f->status);
+                    SendEmailP::dispatch($u,$f,null,$f->status);
                     $e->save();
                     if($f->status == '2' ||$f->status == '2_0' ||$f->status == '2_1'|| $f->status == '2_2'||$f->status == '2_3'||$f->status == '2_4'){
                         $f->status = '3';
@@ -2156,6 +2171,7 @@ class RegistrasiController extends Controller
                 $f->updated_at =  $currentDateTime;
                 //$f->status_laporan_audit1 = 1;
                 $f->status = '8_1';
+                dd("masuk 1");
                 $e->save();
                 $f->save();
                 DB::commit();
@@ -2204,6 +2220,8 @@ class RegistrasiController extends Controller
                         //SendEmailP::dispatch($u,$f,$p,$f->status);
                         Session::flash('success', "Status berhasil diupdate");
                     }
+
+                    //dd("masuk 2");
 
                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berhasil membuat berkas audit tahap 1 dengan syarat",Auth::user()->usergroup_id);
                     DB::commit();
@@ -2348,7 +2366,7 @@ class RegistrasiController extends Controller
                            
                     // dd($newDateTime);
 
-                    $fileName = 'FOR-HALAL-OPS-05 Laporan Audit Tahap I ('.$e->id_registrasi.').docx';
+                    $fileName = $e->id_registrasi.'_'.$f->id_penjadwalan.'_Laporan Audit 1_'.$f->nama_perusahaan.'.docx';
                     $e->file_laporan_audit1= $fileName ;
                     $templateProcessor->saveAs("storage/laporan/download/Laporan Audit1/".$fileName);
                     
@@ -2370,8 +2388,10 @@ class RegistrasiController extends Controller
                     $f->updated_at =  $currentDateTime;                 
                     //$f->status = '8_3'; 
                     $f->status = '9'; 
+                    dd("masuk 3");
                     $e->save();
                     $f->save();
+
                     //SendEmailP::dispatch($u,$f,$p,$f->status);
                     DB::commit();
                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berhasil membuat berkas audit tahap 1",Auth::user()->usergroup_id);
@@ -2534,6 +2554,106 @@ class RegistrasiController extends Controller
             }
             
            
+        }catch (\Exception $e){
+            DB::rollBack();
+            Session::flash('error', $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+
+    public function uploadFileLaporanAudit1(Request $request, $id){
+        
+        $data = $request->except('_token','_method');
+       
+        date_default_timezone_set("Asia/Bangkok");
+        $currentDateTime = Carbon::now(date_default_timezone_get());
+        $model = new LaporanAudit1();
+        $model2 = new Registrasi();
+        $model3 = new User();
+        $model4 = new Pembayaran();
+        $model5 = new Penjadwalan();
+        $id_user = Auth::user()->id;
+        $now=  Carbon::now()->toDateString();
+      
+        try{
+            DB::beginTransaction();
+            $e = $model->find($id);  
+            
+                    
+            $f = $model2->find($e->id_registrasi);
+            $u = $model3->find($f->id_user);
+           // $p = $model4->find($f->id_pembayaran);
+            $pe = $model5->find($f->id_penjadwalan);
+            //dd($data);
+            $e->status_memenuhi = $data['status_memenuhi'];
+            if($data['catatan_akhir_audit1']){
+                $e->catatan_akhir_audit = $data['catatan_akhir_audit1'];
+            }
+            
+           
+            $e->check_by = Auth::user()->id;
+           
+            if($data['status_memenuhi']== 'memenuhi'){
+                
+                $e->status_laporan_audit1 = 3;
+                //$e->catatan_akhir_audit = $data['catatan_akhir_audit'];
+                $e->updated_at =  $currentDateTime;                 
+                $f->updated_at =  $currentDateTime;                             
+                //$f->status = '8_3'; 
+                $f->status = '9';
+                //SendEmailP::dispatch($u,$f,$p,$f->status);
+                Session::flash('success', "Status berhasil diupdate");
+                $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Audit tahap 1 sudah selesai",Auth::user()->usergroup_id);
+                
+            }else{
+                if($data['catatan_akhir_audit1']){
+                    //$e->status_memenuhi = $data['status_memenuhi'];
+                    $e->status_laporan_audit1 = 3;
+                    //$e->catatan_akhir_audit = $data['catatan_akhir_audit'];
+                    $e->updated_at =  $currentDateTime;                 
+                    $f->updated_at =  $currentDateTime;                 
+                    //$f->status = '8_3'; 
+                    $f->status = '9'; 
+
+                    //SendEmailP::dispatch($u,$f,$p,$f->status);
+                    Session::flash('success', "Status berhasil diupdate");
+                    $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berhasil membuat berkas audit tahap 1 dengan syarat",Auth::user()->usergroup_id);
+    
+                }else{
+                        //$f->status_berkas = 2;
+                    //$e->updated_at =  $currentDateTime;
+                    $e->status_laporan_audit1 = 2;
+                    //$f->updated_at =  $currentDateTime;
+                    //$f->status = 4;
+                    $f->status = '8_2';                       
+                    $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 8, "Berkas laporan audit tahap 1 berhasil didownload",Auth::user()->usergroup_id);
+                    //SendEmailP::dispatch($u,$f,$p,$f->status);
+                    Session::flash('success', "Status berhasil diupdate");
+                }
+    
+            }
+            if($request->has("file")){
+                //dd("masuk sini");
+                $file = $request->file("file");
+                $file = $data["file"];
+                $filename = $e->id_registrasi.'_'.$f->id_penjadwalan.'_Laporan Audit 1_'.$f->nama_perusahaan.'.'.$file->getClientOriginalExtension();
+                $file->storeAs("public/laporan/download/Laporan Audit1/", $filename);
+                $e->file_laporan_audit1 = $filename;
+                //$model4->berkas_akad = $filename;
+               
+            }   
+            DB::commit();
+
+            $newDateTime = $currentDateTime->addDays(5);
+            $f->dl_berkas = $newDateTime;
+            //dd($f->dl_berkas);
+            $e->save();
+            $f->save();                        
+                
+               
+                  
         }catch (\Exception $e){
             DB::rollBack();
             Session::flash('error', $e->getMessage());
@@ -2835,7 +2955,12 @@ class RegistrasiController extends Controller
             $date = date("Y-m-d h:i:sa");
 
             $e->tanggal_akad = $date;
-            $e->mata_uang = $data['mata_uang'];            
+            $e->mata_uang = $data['mata_uang'];
+            $e->jenis_pendanaan = $data['jenis_pendanaan'];
+            if($data['nama_fasilitator']){
+                $e->nama_fasilitator = $data['nama_fasilitator'];  
+            }
+                     
             $e->status_akad = 1;
             $e->status = 7; 
 
@@ -2991,7 +3116,8 @@ class RegistrasiController extends Controller
             date_default_timezone_set('Asia/Jakarta');
             $date = date("Y-m-d h:i:sa");
 
-            $e->tanggal_oc = $date;            
+            $e->tanggal_oc = $date;    
+            $e->nomor_oc = $data['nomor_oc'];            
             $e->status_oc = 4;
             // $e->status = '5_4'; 
 
@@ -3539,29 +3665,25 @@ class RegistrasiController extends Controller
         $kodewilayah = Auth::user()->kode_wilayah;
         //start
 
-        if($kodewilayah == '119'){
+        
              $xdata = DB::table('registrasi')
                      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')                     
                      ->join('users','registrasi.id_user','=','users.id')
                      ->leftjoin('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
                      ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi') 
                      ->leftjoin('pembayaran','registrasi.id','=','pembayaran.id_registrasi')                                 
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3')
-                     ->orderBy('registrasi.updated_at','desc')
-                     ->groupBy('registrasi.id');
-                    
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3','penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2');
+                     
+        if($kodewilayah == '119'){ 
+            $xdata= $xdata->orderBy('registrasi.updated_at','desc')
+            ->groupBy('registrasi.id');
+            
         }else{
 
-            $xdata = DB::table('registrasi')
-                     ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')                     
-                     ->join('users','registrasi.id_user','=','users.id')
-                     ->leftjoin('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
-                     ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi')  
-                     ->leftjoin('pembayaran','registrasi.id','=','pembayaran.id_registrasi')                                     
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3')
-                     ->orderBy('registrasi.updated_at','desc')
-                     ->groupBy('registrasi.id')
-                    ->where('registrasi.kode_wilayah','=',$kodewilayah);                   
+    
+            $xdata= $xdata->orderBy('registrasi.updated_at','desc')
+            ->groupBy('registrasi.id')
+            ->where('registrasi.kode_wilayah','=',$kodewilayah);                   
                     
         }
                           
@@ -3576,6 +3698,11 @@ class RegistrasiController extends Controller
         
         if(isset($gdata['status'])){
             $xdata = $xdata->where('registrasi.status','=',$gdata['status']);
+        }
+        if(isset($gdata['status_cancel'])){
+            $xdata = $xdata->where('registrasi.status_cancel','=',$gdata['status_cancel']);
+        }else{
+            $xdata = $xdata->where('registrasi.status_cancel','=',0);
         }
         //end
         $xdata = $xdata
@@ -3869,6 +3996,130 @@ class RegistrasiController extends Controller
             
        
             $redirect = redirect()->route('listkeuangan');
+            return $redirect;
+    }
+
+    public function ketetapanHalal(Request $request){
+        //dd("asup");
+        
+        $data = $request->except('_token','_method');
+        
+        //dd($data);
+        $model = new Registrasi();
+        $model2 = new User();
+        $model3 = new Pembayaran();
+
+        try{
+            DB::beginTransaction();
+            $e = $model->find($data['id']);
+            //dd($data);
+            $u = $model2->find($e->id_user);
+            $p = $model3->find($e->id_pembayaran);
+
+
+            date_default_timezone_set('Asia/Jakarta');
+            $today = Carbon::now()->toDateTimeString();
+            
+            $e->updated_at = $today;
+            $e->status = 17;
+            $e->nomor_sh = $data['nomor_sh'];
+            $e->tgl_terbit_sh = $data['tgl_terbit_sh'];
+            $e->tgl_akhir_sh = $data['tgl_akhir_sh'];
+            $e->nomor_kh = $data['nomor_kh'];
+            $e->tgl_kh = $data['tgl_kh'];
+
+
+            
+            if($request->has("file_sh")){
+                $file = $request->file("file_sh");
+                
+                $filename = "SH-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/Berkas Sidang Fatwa Halal/".$u->id."/", $filename);
+                $e->file_sh = $filename;
+                
+            }
+
+            if($request->has("file_kh")){
+                $file = $request->file("file_kh");
+                
+                $filename = "KH-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/Berkas Sidang Fatwa Halal/".$u->id."/", $filename);
+                $e->file_kh = $filename;
+               
+            }
+
+            if($request->has("file_surat_permohonan_sidang")){
+                $file = $request->file("file_surat_permohonan_sidang");
+                
+                $filename = "surat sidang-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/Berkas Sidang Fatwa Halal/".$u->id."/", $filename);
+                $e->file_surat_permohonan_sidang = $filename;
+           
+                    
+            }
+
+            if($request->has("file_daftar_hadir_sidang")){
+                $file = $request->file("file_daftar_hadir_sidang");
+                
+                $filename = "daftar hadir sidang-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/Berkas Sidang Fatwa Halal/".$u->id."/", $filename);
+                $e->file_daftar_hadir_sidang = $filename;
+              
+                    
+            }
+
+            if($request->has("file_berita_acara_sidang")){
+                $file = $request->file("file_berita_acara_sidang");
+                
+                $filename = "berita acara sidang-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/Berkas Sidang Fatwa Halal/".$u->id."/", $filename);
+                $e->file_berita_acara_sidang = $filename;
+               
+            }
+
+            if($request->has("file_tanda_terima_sidang")){
+                $file = $request->file("file_tanda_terima_sidang");
+                
+                $filename = "tanda terima sidang-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/Berkas Sidang Fatwa Halal/".$u->id."/", $filename);
+                $e->file_tanda_terima_sidang = $filename;
+                  
+            }
+
+            if($request->has("file_keputusan_sidang")){
+                $file = $request->file("file_keputusan_sidang");
+                
+                $filename = "keputusan sidang-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/Berkas Sidang Fatwa Halal/".$u->id."/", $filename);
+                $e->file_keputusan_sidang = $filename;
+                  
+            }
+
+            if($request->has("file_dokumentasi_sidang")){
+                $file = $request->file("file_dokumentasi_sidang");
+                
+                $filename = "dokumentasi sidang-".$data['id'].".".$file->getClientOriginalExtension();
+                $file->storeAs("public/Berkas Sidang Fatwa Halal/".$u->id."/", $filename);
+                $e->file_dokumentasi_sidang = $filename;
+                   
+            }
+            
+            $e->save();
+            DB::commit();
+
+            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 17, "Upload Berkas Kelengkapan Ketetapan Halal",Auth::user()->usergroup_id);
+
+            Session::flash('success', "Berkas Kelengkapan Ketetapan Halal");
+                
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            Session::flash('error', $e->getMessage());
+        }
+          
+            
+       
+            $redirect = redirect()->route('listregistrasipelangganaktif');
             return $redirect;
     }
 

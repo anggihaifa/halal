@@ -165,7 +165,15 @@ class ProgresStatus extends Mailable
 
         // }
 
-        if($this->status == 7){
+        if($this->status == '2_2'){
+
+            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Perbaikan Berkas');  
+
+        }if($this->status == '2_3'){
+
+            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Berkas Sertifikasi Selesai Diverifikasi');  
+
+        }if($this->status == 7){
 
             $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Persiapan Audit Tahap 1');  
 
@@ -174,10 +182,14 @@ class ProgresStatus extends Mailable
             $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Persiapan Audit Tahap 2');  
 
         }elseif($this->status == 11){
-            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Persiapan Tehnical Review');  
+            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Persiapan Technical Review');  
 
         }elseif($this->status == 13){
             $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Persiapan Tinjauan Komite Sertifikasi');  
+
+        }
+        elseif($this->status == 17){
+            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Sudah Selesai Proses Sertifikasi');  
 
         }
 

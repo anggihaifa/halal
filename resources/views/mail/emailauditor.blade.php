@@ -123,7 +123,7 @@
                 <td  >{{$penjadwalan['mulai_audit2']}}</td>
                 <td  >{{$penjadwalan['selesai_audit2']}}</td>
                 <td  >{{$penjadwalan['pelaksana1_audit2']}}</td>
-                <td  >{{$penjadwalan['pelaksan2_audit2']}}</td>
+                <td  >{{$penjadwalan['pelaksana2_audit2']}}</td>
                 <td  >{{$penjadwalan['ktg_audit2']}}</td>
                 <td  >{{$penjadwalan['akomodasi_audit2']}}</td>
             </tr>       
@@ -131,7 +131,7 @@
         </table>
 
     @elseif($status== 'tr')
-        <h4 style="text-align: center">Berikut ini adalah jadwal Tehnical Review yang sudah dijadwalkan</h4>
+        <h4 style="text-align: center">Berikut ini adalah jadwal Technical Review yang sudah dijadwalkan</h4>
         <table style="width:100%; border: 1px solid black;  border-collapse: collapse;" >                  
             <tr>
                 <th  >Nama Perusahaan</th>
@@ -149,7 +149,7 @@
                 <td  >{{$penjadwalan['mulai_tr']}}</td>
                 <td  >{{$penjadwalan['selesai_tr']}}</td>
                 <td  >{{$penjadwalan['pelaksana1_tr']}}</td>
-                <td  >{{$penjadwalan['pelaksan2_tr']}}</td>
+                <td  >{{$penjadwalan['pelaksana2_tr']}}</td>
                 <td  >{{$penjadwalan['pelaksan3_tr']}}</td>
                 <td  >Remote Audit</td>
                
@@ -175,7 +175,7 @@
                 <td  >{{$penjadwalan['mulai_tinjauan']}}</td>
                 <td  >{{$penjadwalan['selesai_tinjauan']}}</td>
                 <td  >{{$penjadwalan['pelaksana1_tinjauan']}}</td>
-                <td  >{{$penjadwalan['pelaksan2_tinjauan']}}</td>
+                <td  >{{$penjadwalan['pelaksana2_tinjauan']}}</td>
                 <td  >{{$penjadwalan['pelaksan3_tinjauan']}}</td>
                 <td  >Remote</td>
                

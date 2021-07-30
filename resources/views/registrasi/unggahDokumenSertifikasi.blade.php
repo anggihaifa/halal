@@ -141,6 +141,7 @@
 							<form action="{{route('storedokumensertifikasi')}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
 								@csrf
 								<input type="text" id="has_selected" name="has_selected" hidden value="tes">
+								<input type="text" id="submit" name="submit" hidden value="tes">
 								<table id="hasTable"  class="table  table-bordered table-td-valign-middle table-sm" cellspacing="0" >
 									<thead>
 										<tr>
@@ -151,8 +152,8 @@
 											<th width="1%" class="  valign-middle text-center">Status</th>
 											@endif
 										
-											<th width="30%" class="  valign-middle text-center">Temuan</th>
-											<th width="30%" class="  valign-middle text-center">Review Tambahan/ Perbaikan  Dokumen</th>
+											<th width="30%" class="  valign-middle text-center">Deskripsi Temuan dan Tanggal Pemeriksaan Awal</th>
+											<th width="30%" class="  valign-middle text-center">Pemeriksaan Tambahan/ Perbaikan Dokumen dan Tanggal </th>
 
 											
 											
@@ -676,7 +677,7 @@
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">18</td>
-											<td class="valign-middle">BBukti Registrasi Dari BPJPH</td>
+											<td class="valign-middle">Bukti Registrasi Dari BPJPH</td>
 											
 											
 											<td class="valign-middle text-center">
@@ -1725,7 +1726,13 @@
 									@else
 										<button type="submit" class="btn btn-sm btn-success m-r-5" hidden>Unggah</button>
 										@foreach($dataHas as $has => $value)
+											
+											
+														
 											<a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
+
+											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="setSubmit('true')">Kirim</button>
+											
 											
 											<!-- <a href="{{url('delete_dokumen_sertifikasi')}}/{{$value['id']}}"><button type="button"  class="btn btn-sm btn-default btn-warning" onclick= "return confirm('Apakah anda yakin untuk menghapus semua data dokumen SJPH atau SJH??')">Reset</button></a> -->
 										@endforeach
@@ -1789,6 +1796,14 @@
         	//console.log(x.value);
 
         }
+		function setSubmit(d){
+
+			var x = document.getElementById("submit");
+			x.value = d;
+
+		//console.log(x.value);
+
+		}
         function getValueSJPH(y){
         	const x  = document.getElementById(y);
 

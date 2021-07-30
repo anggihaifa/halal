@@ -1,22 +1,22 @@
 @extends('layouts.default', ['boxedLayout' => true], ['sidebarLight' => true], ['sidebarWide' => true])
 
-@section('title', 'Pelaksana')
+@section('title', 'Data Auditor dan Komite')
 
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="#">Master</a></li>
-        <li class="breadcrumb-item active"><a href="#">Data Pelaksana</a></li>
+        <li class="breadcrumb-item active"><a href="#">Data Auditor dan Komite</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Pelaksana<small></small></h1>
+    <h1 class="page-header">Data Auditor dan Komite<small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">Pelaksana</h4>
+            <h4 class="panel-title">Data Auditor dan Komite</h4>
             <!-- <div class="panel-heading-btn">
                 <a href="{{route('detailpelaksana.create')}}" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
@@ -37,9 +37,9 @@
                     <th class="valign-middle text-center">Wilayah</th>
                     <th class="valign-middle text-center">No telp & Email</th>
                     <th class="valign-middle text-center">No Registrasi BPJPH</th>
-                  
                     <th class="valign-middle text-center">Alamat</th>
-                   
+                    <th class="valign-middle text-center">Log Audit</th>
+                    
                 </tr>
                 </thead>
             </table>
@@ -109,6 +109,32 @@
                 },
                 {"data":"noreg_bpjph"},
                 {"data":"alamat"},
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+
+                        var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
+                        // var kebutuhanAudit = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id_registrasi+` data-target='modalKebutuhan'>Penentuan Waktu Audit</a>`;
+            
+                        // data-no-registrasi-bpjph=`+full.no_registrasi_bpjph+` data-status-registrasi=`+full.status_registrasi+` data-name=`+full.name+` data-alamat-perusahaan=`+full.alamat_perusahaan+`
+                        return `<a href="{{url('list_monitoring_log')}}/`+full.id+`" class="btn btn-sm" ><i class="fa fa-eye"></i> <br>View</a>`
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    }
+                },
                
                
             ],

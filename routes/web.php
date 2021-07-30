@@ -91,6 +91,8 @@ Route::get('list_persiapan_sidang','PenjadwalanController@listPersiapanSidang')-
 
 Route::get('list_log','PenjadwalanController@listLog')->name('listlog')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('data_log','PenjadwalanController@dataLog')->name('datalog');
+Route::get('list_monitoring_log/{id}','PenjadwalanController@listMonitoringLog')->name('listmonitoringlog')->middleware('role:1,3,6,9,10,11,12,13');
+Route::get('data_monitoring_log/{id}','PenjadwalanController@dataMonitoringLog')->name('datamonitoringlog');
 
 Route::get('data_penjadwalan_reviewer','ReviewerController@dataPenjadwalanReviewer')->name('datapenjadwalanreviewer');
 Route::put('approve_penjadwalan_reviewer','ReviewerController@approvePenjadwalanReviewer')->name('approvepenjadwalanreviewer');
@@ -165,6 +167,7 @@ Route::get('list_pembayaran_registrasi','RegistrasiController@listPembayaranRegi
 Route::get('data_pembayaran_registrasi','RegistrasiController@dataPembayaranRegistrasi')->name('datapembayaranregistrasi');
 Route::get('konfirmasi_pembayaran_registrasi','RegistrasiController@konfirmasiPembayaranRegistrasi');
 
+
 //pembayaran registrasi
 Route::get('pembayaran_registrasi/{id}','RegistrasiController@pembayaranRegistrasi')->name('registrasi.pembayaranRegistrasi');
 Route::put('konfirmasi_pembayaran','RegistrasiController@konfirmasiPembayaranUser')->name('registrasi.konfirmasipembayaran');
@@ -197,7 +200,7 @@ Route::get('upload_invoice/{id}','RegistrasiController@uploadInvoice')->name('re
 
 //Route::get('lebih/{id}/{tahap}','RegistrasiController@lebih')->name('registrasi.lebih')->middleware('role:1,3,5,7,9');
 //Route::get('kurang/{id}/{tahap}','RegistrasiController@kurang')->name('registrasi.kurang')->middleware('role:1,3,5,7,9');
-
+Route::put('ketetapan_halal','RegistrasiController@ketetapanHalal')->name('ketetapanhalal');
 
 Route::put('upload_file_invoice/{id}','RegistrasiController@uploadFileInvoice')->name('registrasi.uploadfileinvoice')->middleware('role:1,3,5,7,9');
 //Route::get('download','RegistrasiController@download');
@@ -219,6 +222,7 @@ Route::get('list_akad_admin','RegistrasiController@listAkadAdmin')->name('listak
 Route::get('data_akad_admin','RegistrasiController@dataAkadAdmin')->name('dataakadadmin');
 Route::get('upload_kontrak_akad_admin/{id}','RegistrasiController@uploadAkadAdmin')->name('registrasi.uploadakadadmin')->middleware('role:1,3,5,7,9');
 Route::put('upload_file_akad_admin/{id}','RegistrasiController@uploadFileAkadAdmin')->name('registrasi.uploadfileakadadmin')->middleware('role:1,3,5,7,9');
+Route::put('upload_file_laporan_audit1/{id}','RegistrasiController@uploadFileLaporanAudit1')->name('uploadfilelaporanaudit1');
 Route::get('konfirmasi_akad_admin/{id}/{status}','RegistrasiController@konfirmasiAkadAdmin')->middleware('role:1,3,5,7,9');
 
 //sales account officer

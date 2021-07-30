@@ -284,7 +284,7 @@
                                             <tr>
                                             
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_dasar" id="w_dasar" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" name="w_dasar" id="w_dasar" placeholder="hari" onchange="jml()" required></input>
                                                 </td>
                                                 <td>
                                                     <input type="text"  class="form-control input-sm" name="h_keamanan_pangan" id="h_keamanan_pangan" placeholder="hari" onchange="jml()" ></input>
@@ -321,29 +321,29 @@
                                                 <td>Pengujian</td>
                                                 <td>Pelaporan Audit</td>
                                                 <td>Verifikasi</td>
-                                                <td>Tehnical Review</td>
+                                                <td>Technical Review</td>
                                                 <td>Rapat Komite Sertifikasi</td>
                                             </tr>
                                             <tr>
                                             
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_p_audit" id="w_p_audit" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" name="w_p_audit" id="w_p_audit" placeholder="hari" onchange="jml()" required></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_pengujian" id="w_pengujian" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" name="w_pengujian" id="w_pengujian" placeholder="hari" onchange="jml()" required></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_pelaporan_audit" id="w_pelaporan_audit" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" name="w_pelaporan_audit" id="w_pelaporan_audit" placeholder="hari" onchange="jml()" required></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_verifikasi" id="w_verifikasi" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" name="w_verifikasi" id="w_verifikasi" placeholder="hari" onchange="jml()" required></input>
                                                 </td>
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_tehnical_review" id="w_tehnical_review" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" name="w_tehnical_review" id="w_tehnical_review" placeholder="hari" onchange="jml()" required ></input>
                                                 </td>
                                                 
                                                 <td>
-                                                    <input type="text"  class="form-control input-sm" name="w_rapat_komite" id="w_rapat_komite" placeholder="hari" onchange="jml()" ></input>
+                                                    <input type="text"  class="form-control input-sm" name="w_rapat_komite" id="w_rapat_komite" placeholder="hari" onchange="jml()" required></input>
                                                 </td>
                                             </tr>
                                             
@@ -442,7 +442,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input type="text"  class="form-control input-sm" name="total_waktu_kebutuhan_audit" id="total_waktu_kebutuhan_audit" placeholder="hari"></input>
+                                                <input type="text"  class="form-control input-sm" name="total_waktu_kebutuhan_audit" id="total_waktu_kebutuhan_audit" placeholder="hari" required></input>
                                             </td>
                                         </tr>
                                     </tbody>

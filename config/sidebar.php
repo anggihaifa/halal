@@ -131,7 +131,11 @@ return [
                 [
                     'url' => 'usergroup.index',
                     'title' => 'Grup Pengguna'
-                ],        
+                ],    
+                [
+                    'title' => 'Data Auditor',
+                    'url' => 'detailpelaksana.index', 
+                ],     
             ],
         ],        
 
@@ -341,9 +345,32 @@ return [
             'url' => 'home.index'
         ],
         [
+            'icon' => 'ion-ios-calendar',
+            'title' => 'Jadwal Audit',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                         
+                [
+                    'url' => 'listaudit1',
+                    'title' => 'Audit Tahap 1'
+                ],
+                [
+                    'url' => 'listaudit2',
+                    'title' => 'Audit Tahap 2'
+                ],
+            ],
+
+        ],  
+        [
             'icon' => 'ion-md-bookmark',
             'title' => 'Monitoring Registrasi',
             'url' => 'listmonitoringregistrasi', 
+        ],    
+        [
+            'icon' => 'ion-ios-people',
+            'title' => 'Data Auditor',
+            'url' => 'detailpelaksana.index', 
         ],            
                                       
     ],
@@ -390,12 +417,12 @@ return [
             'url' => 'home.index'
         ],
         [
-            'icon' => 'ion-ios-calendar',
+            'icon' => 'ion-ios-bookmark',
             'title' => 'Penentuan Kebutuhan Waktu Audit',
             'url' => 'listkebutuhanwaktuaudit'
         ],
         [
-            'icon' => 'ion-ios-bookmark',
+            'icon' => 'ion-ios-calendar',
             'title' => 'Jadwal Audit',
             'url' => '#',
             'caret' => true,
@@ -411,7 +438,7 @@ return [
                 ],  
                 [
                     'url' => 'listtehnicalreview',
-                    'title' => 'List Tehnical Review'
+                    'title' => 'List Technical Review'
                 ],  
             ],
 
@@ -434,6 +461,11 @@ return [
             'url' => 'home.index'
         ],
         [
+            'icon' => 'ion-ios-bookmark',
+            'title' => 'Penentuan Kebutuhan Waktu Audit',
+            'url' => 'listkebutuhanwaktuaudit'
+        ],
+        [
             'icon' => 'ion-ios-calendar',
             'title' => 'Jadwal Audit',
             'url' => '#',
@@ -450,7 +482,7 @@ return [
                 ],
                 [
                     'url' => 'listtehnicalreview',
-                    'title' => 'List Tehnical Review'
+                    'title' => 'List Technical Review'
                 ],  
             ],
 

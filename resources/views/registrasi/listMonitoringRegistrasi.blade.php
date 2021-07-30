@@ -62,13 +62,21 @@
                                                     <option value="8">Audit Tahap 1</option>
                                                     <option value="9">Persiapan Audit Tahap 2</option>
                                                     <option value="10">Audit Tahap 2</option>
-                                                    <option value="11">Persiapan Tehnical Review</option>
-                                                    <option value="12">Tehnical Review</option>
+                                                    <option value="11">Persiapan Technical Review</option>
+                                                    <option value="12">Technical Review</option>
                                                     <option value="13">Persiapan Tinjauan Komite Sertifikasi</option>
                                                     <option value="14">Tinjauan Komite Sertifikasi</option>
                                                     <option value="15">Persiapan Sidang Fatwa Halal</option>
                                                     <option value="16">Sidang Fatwa Halal</option>
                                                     <option value="17">Ketetapan Halal</option>
+                                                </select>
+                                            </div>
+                                            <label class="col-lg-2 col-form-label">Status Aktif</label>
+                                            <div class="col-lg-4">
+                                                <select id="status_cancel" name="status_cancel" class="form-control"  data-live-search="true" data-style="btn-white">
+                                                    <option value="" selected>--Pilih Status--</option>
+                                                    <option value="0">Aktif</option>
+                                                    <option value="1">Cancel</option>
                                                 </select>
                                             </div>
 
@@ -94,7 +102,7 @@
                     <th class=" valign-middle text-center" >ID</th>
                     <th class=" valign-middle text-center" style="display:none">No. Registrasi BPJPH</th>
                     <th class=" valign-middle text-center">Status Sertifikasi</th> 
-                    <th class=" valign-middle text-center">PIC Pelaku Usaha</th>
+                    <th class=" valign-middle text-center" style="display:none">PIC Pelaku Usaha</th>
                     <th class=" valign-middle text-center">Perusahaan</th>
                     <th class=" valign-middle text-center">Alamat</th>
                     <th class=" valign-middle text-center" style="display:none">Kota/Kab</th>
@@ -107,13 +115,17 @@
                     <th class=" valign-middle text-center" style="display:none">Tanggal Audit2</th>
                     <th class=" valign-middle text-center" style="display:none">Tanggal TR</th>
                     <th class=" valign-middle text-center" style="display:none">Tanggal KS</th>
-                    <th class=" valign-middle text-center">Nomor Sertfikat Halal</th>
+                    <th class=" valign-middle text-center" style="display:none">Nomor Sertfikat Halal</th>
                     <th class=" valign-middle text-center" style="display:none">Tanggal Terbit Sertifikat Halal</th>
-                    <th class=" valign-middle text-center"style="display:none">Tanggal Berakhir Sertifikat Halal</th>
-                    <th class=" valign-middle text-center"style="display:none">Mata Uang</th>
-                    <th class=" valign-middle text-center"style="display:none">Total Biaya</th>
+                    <th class=" valign-middle text-center" style="display:none">Tanggal Berakhir Sertifikat Halal</th>
+                    <th class=" valign-middle text-center" style="display:none">Mata Uang</th>
+                    <th class=" valign-middle text-center" style="display:none">Total Biaya</th>
+                    <th class=" valign-middle text-center" style="display:none">Nomor OC</th>
                     <th class=" valign-middle text-center">Status Pembayaran</th>
-                                       
+                    <th class=" valign-middle text-center" style="display:none">Jenis Pendanaan</th>
+                    <th class=" valign-middle text-center" style="display:none">Nama Fasilitator</th>
+                    <th class=" valign-middle text-center" style="display:none">Provinsi</th>
+                    <th class=" valign-middle text-center" style="width:10%">Audior</th>             
                     <th class=" valign-middle text-center">Monitoring</th>
                 </tr>
                 </thead>
@@ -154,6 +166,7 @@
                     d.no_registrasi = $('#no_registrasi').val();
                     d.nama_perusahaan = $('#nama_perusahaan').val();
                     d.status = $('#status').val();
+                    d.status_cancel = $('#status_cancel').val();
                 }   
             },
             dom: 'Bfrtip',
@@ -208,6 +221,7 @@
                 {"data":"tgl_akhir_sh"},
                 {"data":"mata_uang"},
                 {"data":"total_biaya"},
+                {"data":"nomor_oc"},
                 {
                     "data":null,
                     "searchable":false,
@@ -236,6 +250,56 @@
                         }else{
                             return `<a style="color:red">Belum Akad</a>`
                         }
+                    }
+                }, 
+                {"data":"jenis_pendanaan"},
+                {"data":"nama_fasilitator"},
+                {"data":"provinsi"},
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type, full, meta) {
+                        if(full.pelaksana1_audit1 != null){
+                            if (full.pelaksana1_audit1.indexOf('_') > -1)
+                            {
+                                $str1 =  full.pelaksana1_audit1.split("_");
+                                full.pelaksana1_audit1 = $str1[1];
+                            }
+                        
+                        }else{
+                            full.pelaksana1_audit1 ="-";
+                        }
+
+
+                    
+
+
+                        if(full.pelaksana1_audit2 != null){
+                            
+                            if (full.pelaksana1_audit2.indexOf('_') > -1){
+                                $str3 = full.pelaksana1_audit2.split("_");
+                                full.pelaksana1_audit2 = $str3[1];
+                            }
+                            
+                        
+                        }
+                        else{
+                        
+                            full.pelaksana1_audit2 ="-";
+                        }
+
+
+                        if(full.pelaksana2_audit2 != null){
+                            if (full.pelaksana2_audit2.indexOf('_') > -1){
+                                $str4 =  full.pelaksana2_audit2.split("_");
+                                full.pelaksana2_audit2 = $str4[1];
+                            }
+                            
+                        }else{
+                            full.pelaksana2_audit2 ="-";
+                        }
+                       return`<strong>Tahap 1 </strong><br>`+full.mulai_audit1+`<br><strong> KTA: </strong>`+` <br>`+full.pelaksana1_audit1+`<br>`+`<strong>Tahap 2 </strong><br>`+full.mulai_audit2+`<br><strong> KTA: </strong>`+full.pelaksana1_audit2+`<br> <strong>Tim Audit: <strong>`+full.pelaksana2_audit2
                     }
                 }, 
                
@@ -336,7 +400,7 @@
                             var status10_2 = (full.status == '10_2') ? dButton('Audit Tahap 2 Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Audit Tahap 2 Selesai??')">Audit Tahap 2 Selesai</a>`;
 
                             
-                            var status11 = (full.status == 11) ? dButton('Persiapan Audit Tehnical Review'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Persiapan Tehnical Review??')"> Persiapan Tehnical Review</a>`;
+                            var status11 = (full.status == 11) ? dButton('Persiapan Audit Technical Review'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Persiapan Technical Review??')"> Persiapan Technical Review</a>`;
 
                             var status11_0 = (full.status == '11_0') ? dButton('Belum Dijadwalkan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Dijadwalkan??')">Belum Dijadwalkan</a>`;
 
@@ -346,11 +410,11 @@
 
                             var status11_3 = (full.status == '11_3') ? dButton('Penjadwalan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan Terkonfirmasi??')">Penjadwalan Terkonfirmasi</a>`;
 
-                            var status12 = (full.status == 12) ? dButton('Proses Tehnical Review'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Tehnical Review??')">Proses Tehnical Review</a>`;
+                            var status12 = (full.status == 12) ? dButton('Proses Technical Review'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Technical Review??')">Proses Technical Review</a>`;
 
                             var status12_0 = (full.status == '12_0') ? dButton('Reviewer Belum Upload Review Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Reviewer Belum Upload Review Laporan Audit??')">Reviewer Belum Upload Review Laporan Audit</a>`;
 
-                            var status12_1 = (full.status == '12_1') ? dButton('Proses Tehnical Review Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Tehnical Review Selesai??')">Proses Tehnical Review Selesai</a>`;
+                            var status12_1 = (full.status == '12_1') ? dButton('Proses Technical Review Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Technical Review Selesai??')">Proses Technical Review Selesai</a>`;
 
                            
 
@@ -379,11 +443,11 @@
                             var status16 = (full.status == 16) ? dButton('Proses Sidang Fatwa Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/16" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Sidang Fatwa Halal??')">Proses Sidang Fatwa Halal</a>`;
 
                             var status17 = (full.status == 17) ? dButton('Ketetapan Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/17" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Ketetapan Halal??')">Ketetapan Halal</a>`;
+                            var status20 = (full.status == 20) ? dButton('Cancel'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/20" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengcance registrasi ini??')">Cancel Registrasi</a>`;
                             
                             if(role == 3){
-                                var backProgres = `<div class="dropdown-divider"></div>
-                                        <div class="dropdown-button-title">Update Progress</div>`
-                                            +status1+status2+status3+status4+status5+status6+status7+status8+status9+status10+status11+status12+status13+status14+status15+status16+status17+`
+                                var backProgres = `<div class="dropdown-button-title">Update Progress</div>`
+                                            +status1+status2+status3+status4+status5+status6+status7+status8+status9+status10+status11+status12+status13+status14+status15+status16+status17+status20+`
                                         </div>`;
                             }else{
                                 var backProgres = ``;
@@ -396,6 +460,10 @@
                                     <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
                                         <a href="{{url('monitoring_log_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Monitoring</a>
+                                        <a href="{{url('verifikasi_dokumen_sertifikasi')}}/`+full.id+`" class="dropdown-item" >Lihat Dokumen Pelaku Usaha
+                                        </a>
+                                        <a href="{{url('daftar_periksa_rekomendasi')}}/`+full.id+`" class="dropdown-item" >Kelengkapan Dokumen Sidang
+                                        </a><div class="dropdown-divider"></div>
                                         `+backProgres+`
                                         
                                 </div>`
@@ -412,7 +480,7 @@
                     
                 },
                 {
-                "targets": [ 2,7,10,11,12,13,14,15,16,18,19,20,21],
+                "targets": [ 2,4,7,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
                 "visible": false,
                 "searchable": false,
                 }

@@ -183,7 +183,7 @@ class UserController extends Controller
             date_default_timezone_set('Asia/Jakarta');
             $date = date('Y-m-d'); 
             $time = date('H:i:s'); 
-            LogServices::createLog($name,$bumn_code,$activity,$date,$time);
+            
 
             Session::flash('success',"Data berhasil dihapus!");
         }catch (\Exception $e){

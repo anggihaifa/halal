@@ -536,17 +536,20 @@
 
                                                     <table class="table table-sm"> 
                                                     <tr>
-                                                        <td class="text-center">Tipe</td>
-                                                        <td class="text-center">Status</td>
+                                                        <td class="text-center">Progres</td>
+                                                        <td class="text-center">Status Akad</td>
                                                         <td class="text-center">Total Biaya</td>
                                                         <td class="text-center">Bukti Akad</td>
+                                                        <td class="text-center">Pendanaan</td>
+                                                        <td class="text-center">Fasilitator</td>
                                                         <td class="text-center">Aksi</td>
                                                     </tr>
                                                     
                                                     <tr>
-                                                    <td class="text-center">
-                                                        Akad
+                                                    <td class="text-center align-middle"  style="width:20%">
+                                                            `+checkProgress(full.status)+`
                                                     </td>
+                                                   
                                                     <td class="text-center align-middle" style="width:20%">
                                                         `+checkStatusAkad(full.status_akad)+`
                                                     </td>
@@ -558,6 +561,12 @@
                                                     <td class="text-center align-middle">
                                                         `+unduhAkad+`
 
+                                                    </td>
+                                                    <td class="text-center align-middle"  style="width:20%">
+                                                            `+full.jenis_pendanaan+`
+                                                    </td>
+                                                    <td class="text-center align-middle"  style="width:20%">
+                                                            `+full.nama_fasilitator+`
                                                     </td>
 
                                                     <td class="text-center align-middle">
@@ -580,6 +589,7 @@
                                                             <td class="text-center"  style="width:20%">Status OC</td>
 
                                                             <td class="text-center"  style="width:20%">Berkas OC</td>
+                                                            <td class="text-center"  style="width:20%">Nomor OC</td>
                                                             
                                                             <td class="text-center"  style="width:10%">Aksi</td>
                                                         </tr>
@@ -592,7 +602,11 @@
                                                         <td class="text-center align-middle">
                                                         `+unduhOC+`
 
-                                                    </td>
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                        `+full.nomor_oc+`
+
+                                                        </td>
 
                                                         
 

@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Tehnical Review')
+@section('title', 'Technical Review)
 
 @push('css')
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
@@ -15,18 +15,18 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Tehnical Review</a></li>
-        <li class="breadcrumb-item active"><a href="#">List Tehnical Review</a></li>
+        <li class="breadcrumb-item"><a href="#">Technical Review/a></li>
+        <li class="breadcrumb-item active"><a href="#">List Technical Review/a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List Tehnical Review  <small></small></h1>
+    <h1 class="page-header">List Technical Review  <small></small></h1>
     <!-- end page-header -->
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">List Tehnical Review</h4>
+            <h4 class="panel-title">List Technical Review/h4>
             <div class="panel-heading-btn">
                 <a href="#" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             </div>
@@ -141,14 +141,14 @@
                             <table class="table  table-sm table-borderless border-none">
                             
                                 <thead class="table-success">   
-                                <th >Hasil Tehnical Review Review</th>
+                                <th >Hasil Technical Review Review</th>
 
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
                                             <div class="form-group">
-                                                <label class=" control-label font-weight-bold" for="id">Catatan Tehnical Review</label>  
+                                                <label class=" control-label font-weight-bold" for="id">Catatan Technical Review/label>  
                                                 <div >
                                                     <input type="text" id="catatan_tr" class="form-control"  name="catatan_tr" placeholder="" >
                                                 

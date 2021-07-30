@@ -337,7 +337,7 @@
 							@endif --}}
 
 							@if ($status == 'a_11')
-								<li id="personal" class="notyet"><strong>Persiapan Tehnical Review</strong></li>
+								<li id="personal" class="notyet"><strong>Persiapan Technical Review</strong></li>
 							@elseif ($status == 'a_11_0')
 								<li id="personal" class="notyet"><strong>Belum Dijadwalkan</strong></li>
 							@elseif ($status == 'a_11_1')
@@ -351,7 +351,7 @@
 							@elseif ($status == 'a_12_0')
 								<li id="personal" class="notyet"><strong>Reviewer Belum Upload Review Laporan Audit</strong></li>
 							@elseif ($status == 'a_12_1')
-								<li id="personal" class="confirming"><strong>Proses Tehnical Review Selesai</strong></li>							
+								<li id="personal" class="confirming"><strong>Proses Technical Review Selesai</strong></li>							
 							@elseif ($status == 'a_13')
 								<li id="personal" class="notyet"><strong>Persiapan Komite Sertifikasi</strong></li>
 							@elseif ($status == 'a_13_0')

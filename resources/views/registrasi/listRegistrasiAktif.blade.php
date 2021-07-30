@@ -61,8 +61,8 @@
                                                     <option value="8">Audit Tahap 1</option>
                                                     <option value="9">Persiapan Audit Tahap 2</option>
                                                     <option value="10">Audit Tahap 2</option>
-                                                    <option value="11">Persiapan Tehnical Review</option>
-                                                    <option value="12">Tehnical Review</option>
+                                                    <option value="11">Persiapan Technical Review/option>
+                                                    <option value="12">Technical Review/option>
                                                     <option value="13">Persiapan Tinjauan Komite Sertifikasi</option>
                                                     <option value="14">Tinjauan Komite Sertifikasi</option>
                                                     <option value="15">Persiapan Sidang Fatwa Halal</option>
@@ -122,9 +122,19 @@
                            
                            
                             <div class="form-group">
-                              <label>Tanggal Mulai</label>
+                              <label>Tanggal Mulai Audit</label>
                              
                                 <input id="mulai_audit1"  name="mulai_audit1" class="form-control" data-format="dd-mm-yyyy" type="date" class="form-control" required></input>
+                                <span class="add-on">
+                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                  </i>
+                                </span>       
+                            </div>
+
+                            <div class="form-group">
+                              <label>Tanggal Selesai Audit</label>
+                             
+                                <input id="selesai_audit1"  name="selesai_audit1" class="form-control" data-format="dd-mm-yyyy" type="date" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                   </i>
@@ -196,9 +206,19 @@
                            
                            
                             <div class="form-group">
-                              <label>Tanggal Mulai</label>
+                              <label>Tanggal Mulai Audit</label>
                              
                                 <input id="mulai_audit2"  name="mulai_audit2" class="form-control" data-format="dd-mm-yyyy" type="date" class="form-control" required></input>
+                                <span class="add-on">
+                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar" required>
+                                  </i>
+                                </span>       
+                            </div>
+
+                            <div class="form-group">
+                              <label>Tanggal Selesai Audit</label>
+                             
+                                <input id="selesai_audit2"  name="selesai_audit2" class="form-control" data-format="dd-mm-yyyy" type="date" class="form-control" required></input>
                                 <span class="add-on">
                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar" required>
                                   </i>
@@ -296,7 +316,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                        <h4 class="modal-title">Penjadwalan Tehnical Review</h4>
+                        <h4 class="modal-title">Penjadwalan Technical Review/h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                     </div>
@@ -437,6 +457,7 @@
                         <th class="valign-middle text-center">No</th>
                         <th class="valign-middle text-center">Jenis</th>
                         <th class="valign-middle text-center">Mulai Audit</th>
+                        <th class="valign-middle text-center">Selesai Audit</th>
                         <th class="valign-middle text-center">Kategori</th>
                         <th class="valign-middle text-center">Ketua Tim Auditor</th>
                         <th class="valign-middle text-center">Auditor</th>
@@ -446,6 +467,7 @@
                         <td class="valign-middle text-center">1</td>
                         <td class="valign-middle text-center">Audit Tahap 1</td>
                         <td class="valign-middle text-center" id="t_mulai1">-</td>
+                        <td class="valign-middle text-center" id="t_selesai1">-</td>
                         <td class="valign-middle text-center">Remote Audit</td>
                         <td class="valign-middle text-center" id="t_p1_a1">d.pelaksana1_audit1</td>    
                         <td class="valign-middle text-center">-</td>
@@ -454,14 +476,16 @@
                         <td class="valign-middle text-center">2</td>
                         <td class="valign-middle text-center">Audit Tahap 2</td>
                         <td class="valign-middle text-center" id="t_mulai2"></td>
+                        <td class="valign-middle text-center" id="t_selesai2">-</td>
                         <td class="valign-middle text-center"id="ktg_audit2"></td>
                         <td class="valign-middle text-center" id="t_p1_a2"></td>    
                         <td class="valign-middle text-center" id="t_p2_a2"></td>     
                     </tr>
                     <tr>
                         <td class="valign-middle text-center">3</td>
-                        <td class="valign-middle text-center">Tehnical Review</td>
+                        <td class="valign-middle text-center">Technical Review/td>
                         <td class="valign-middle text-center" id="mulai_tr"></td>
+                        <td class="valign-middle text-center" id="selesai_tr"></td>
                         <td class="valign-middle text-center">Remote</td>
                         <td class="valign-middle text-center" id="t_p1_tr"></td>    
                         <td class="valign-middle text-center" id="t_p2_tr"></td>    
@@ -470,6 +494,7 @@
                         <td class="valign-middle text-center">4</td>
                         <td class="valign-middle text-center">Tinjauan Komite</td>
                         <td class="valign-middle text-center" id="mulai_tinjauan"></td>
+                        <td class="valign-middle text-center" id="selesai_tinjauan"></td>
                         <td class="valign-middle text-center">Remote</td>
                         <td class="valign-middle text-center" id="t_p1_tk" ></td>    
                         <td class="valign-middle text-center" id="t_p2_tk"></td>   
@@ -478,6 +503,142 @@
                     
                 </table>
             </div>
+        </div>
+    </div>
+
+    <div id="modalKH" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            
+            <form  action="{{route('ketetapanhalal')}}" method="post"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <form id="formKH">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Ketetapan Halal</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">
+                        <div class="form-group" style="display:none" hidden>
+                            <label class="control-label" for="id">ID</label>  
+                            <div >
+                                <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="nomor_kh">Nomor Ketetapan Halal *</label>  
+                            <div >
+                                <input id="nomor_kh"  name="nomor_kh" type="text" placeholder="" class="form-control " required >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="tgl_kh">Tanggal Ketetapan Halal *</label>  
+                            <div >
+                                <input id="tgl_kh"  name="tgl_kh" type="date" placeholder="" class="form-control " required >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class=" control-label" for="file_sh">File Ketetapan Halal <b>*pdf</b></label>  
+                            <div >
+                                <input id="file_sh"  name="file_sh" type="file" placeholder=""  required >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="nomor_sh">Nomor Sertifikat Halal *</label>  
+                            <div >
+                                <input id="nomor_sh"  name="nomor_sh" type="text" placeholder="" class="form-control " required >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="tgl_terbit_sh">Tanggal Terbit Sertifikat Halal *</label>  
+                            <div >
+                                <input id="tgl_terbit_sh"  name="tgl_terbit_sh" type="date" placeholder="" class="form-control " required >
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="tgl_akhir_sh">Tanggal Akhir Masa Berlaku Sertifikat Halal *</label>  
+                            <div >
+                                <input id="tgl_akhir_sh"  name="tgl_akhir_sh" type="date" placeholder="" class="form-control " required >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class=" control-label" for="file_sh">File Sertifikat Halal <b>*pdf</b></label>  
+                            <div >
+                                <input id="file_sh"  name="file_sh" type="file" placeholder="" required >
+                            
+                            </div>
+                        </div>
+                  
+                        <div class="form-group">
+                            <label class=" control-label" for="file_surat_permohonan_sidang">File Surat Permohonan Sidang Fatwa Halal</label>  
+                            <div >
+                                <input id="file_surat_permohonan_sidang"  name="file_surat_permohonan_sidang" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label" for="file_daftar_hadir_sidang">Daftar Hadir Sidang Fatwa Halal</label>  
+                            <div >
+                                <input id="file_daftar_hadir_sidang"  name="file_daftar_hadir_sidang" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label" for="file_berita_acara_sidang">Berita Acara Sidang Fatwa Halal</label>  
+                            <div >
+                                <input id="file_berita_acara_sidang"  name="file_berita_acara_sidang" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label" for="file_tanda_terima_sidang">Tanda Terima Dokumen & Sampel</label>  
+                            <div >
+                                <input id="file_tanda_terima_sidang"  name="file_tanda_terima_sidang" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label" for="file_keputusan_sidang">Keputusan Fatwa MUI</label>  
+                            <div >
+                                <input id="file_keputusan_sidang"  name="file_keputusan_sidang" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label" for="file_dokumentasi_sidang">Dokumentasi Sidang Fatwa Halal </label>  
+                            <div >
+                                <input id="file_dokumentasi_sidang"  name="file_dokumentasi_sidang" type="file" placeholder="" >
+                            
+                            </div>
+                        </div>
+                    </form>
+                    
+
+                    </div>
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Unggah</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     
@@ -501,7 +662,10 @@
             $('#modalPenjadwalan3').find('form').trigger('reset');
             $('#modalPenjadwalan4').find('form').trigger('reset');
             $('#modaljadwal').removeData();
+            $('#modalKH').removeData();
+
         });
+
 
         $('#modalPenjadwalan1').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');
@@ -522,6 +686,10 @@
             $(this).find('form').trigger('reset');
         })
 
+        $('#modalKH').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+
 
         // $('#mulai_audit1').datepicker({ 
         //     dateFormat: 'dd-mm-yy'
@@ -535,6 +703,22 @@
       
         // $('#mulai_tinjauan').datepicker();
         
+         $('#modalKH').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var id = $this.data('id');
+           
+            var modal = $('#modalKH');
+
+            modal.find('#id').val(id);
+            modal.find('#formKH').attr('action', function (i,old) {
+                   return old + '/' + id;
+            });
+
+        });
 
         $('#modalPenjadwalan1').on('show.bs.modal', function(e) {
 
@@ -753,9 +937,13 @@
             var p2_tk = $this.data('pelaksana2-tinjauan');
             var mulai_audit1 = $this.data('mulai-audit1');
             var mulai_audit2 = $this.data('mulai-audit2');
+            var selesai_audit1 = $this.data('selesai-audit1');
+            var selesai_audit2 = $this.data('selesai-audit2');
             var ktg_audit2 = $this.data('ktg-audit2');
             var mulai_tr = $this.data('mulai-tr');
             var mulai_tinjauan = $this.data('mulai-tinjauan');
+            var selesai_tr = $this.data('selesai-tr');
+            var selesai_tinjauan = $this.data('selesai-tinjauan');
             var modal = $('#modaljadwal');
             
            
@@ -800,7 +988,49 @@
                     mulai_tinjauan = $str_tinjauan[2]+"-"+$str_tinjauan[1]+"-"+$str_tinjauan[0];
                 }
             }
-           
+
+            if(selesai_audit1  == null){
+
+                selesai_audit1 ="-";
+            }else{
+                if (selesai_audit1.indexOf('-') > -1){
+                    $str_selesai1 =  selesai_audit1.split("-");
+                    selesai_audit1 = $str_selesai1[2]+"-"+$str_selesai1[1]+"-"+$str_selesai1[0];
+                }
+
+            }
+
+            if(selesai_audit2  == null){
+
+                selesai_audit2 ="-";
+            }else{
+                if (selesai_audit2.indexOf('-') > -1){
+                    $str_selesai2 =  selesai_audit2.split("-");
+                    selesai_audit2 = $str_selesai2[2]+"-"+$str_selesai2[1]+"-"+$str_selesai2[0];
+                }
+
+            }
+
+            if(selesai_tr  == null){
+
+                selesai_tr ="-";
+            }else{
+                if (selesai_tr.indexOf('-') > -1){
+                    $str_tr =  selesai_tr.split("-");
+                    selesai_tr = $str_tr[2]+"-"+$str_tr[1]+"-"+$str_tr[0];
+                }
+
+            }
+
+            if(selesai_tinjauan  == null){
+                selesai_tinjauan ="-";
+            }else{
+                if (selesai_tinjauan.indexOf('-') > -1){
+                    $str_tinjauan =  selesai_tinjauan.split("-");
+                    selesai_tinjauan = $str_tinjauan[2]+"-"+$str_tinjauan[1]+"-"+$str_tinjauan[0];
+                }
+            }
+                    
            
             
 
@@ -897,6 +1127,10 @@
             modal.find('#ktg_audit2').html(ktg_audit2);
             modal.find('#mulai_tr').html(mulai_tr);
             modal.find('#mulai_tinjauan').html(mulai_tinjauan);
+            modal.find('#t_selesai1').html(selesai_audit1);
+            modal.find('#t_selesai2').html(selesai_audit2);
+            modal.find('#selesai_tr').html(selesai_tr);
+            modal.find('#selesai_tinjauan').html(selesai_tinjauan);
                 
             modal.find('#modaljadwal').attr('action', function (i,old) {
                 return old + '/' + data_id;
@@ -1171,7 +1405,7 @@
         //         '</tr>'+
         //         '<tr>'+
         //             '<td class="valign-middle text-center">3</td>'+
-        //             '<td class="valign-middle text-center">Tehnical Review</td>'+
+        //             '<td class="valign-middle text-center">Technical Review/td>'+
         //             '<td class="valign-middle text-center">'+d.mulai_tr+'</td>'+
         //             '<td class="valign-middle text-center">'+d.selesai_tr+'</td>'+
         //             '<td class="valign-middle text-center">Remote</td>'+
@@ -1327,7 +1561,7 @@
                             var status10_2 = (full.status == '10_2') ? dButton('Audit Tahap 2 Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/10_2" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Audit Tahap 2 Selesai??')">Audit Tahap 2 Selesai</a>`;
 
                             
-                            var status11 = (full.status == 11) ? dButton('Persiapan Audit Tehnical Review'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Persiapan Tehnical Review??')"> Persiapan Tehnical Review</a>`;
+                            var status11 = (full.status == 11) ? dButton('Persiapan Audit Technical Review'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Persiapan Tehnical Review??')"> Persiapan Technical Review/a>`;
 
                             var status11_0 = (full.status == '11_0') ? dButton('Belum Dijadwalkan'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Belum Dijadwalkan??')">Belum Dijadwalkan</a>`;
 
@@ -1337,11 +1571,11 @@
 
                             var status11_3 = (full.status == '11_3') ? dButton('Penjadwalan Terkonfirmasi'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/11_3" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Penjadwalan Terkonfirmasi??')">Penjadwalan Terkonfirmasi</a>`;
 
-                            var status12 = (full.status == 12) ? dButton('Proses Tehnical Review'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Tehnical Review??')">Proses Tehnical Review</a>`;
+                            var status12 = (full.status == 12) ? dButton('Proses Technical Review'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Tehnical Review??')">Proses Technical Review/a>`;
 
                             var status12_0 = (full.status == '12_0') ? dButton('Reviewer Belum Upload Review Laporan Audit'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_0" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Reviewer Belum Upload Review Laporan Audit??')">Reviewer Belum Upload Review Laporan Audit</a>`;
 
-                            var status12_1 = (full.status == '12_1') ? dButton('Proses Tehnical Review Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Tehnical Review Selesai??')">Proses Tehnical Review Selesai</a>`;
+                            var status12_1 = (full.status == '12_1') ? dButton('Proses Technical Review Selesai'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/12_1" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Technical Review Selesai??')">Proses Technical Review Selesai</a>`;
 
                            
 
@@ -1369,7 +1603,7 @@
 
                             var status16 = (full.status == 16) ? dButton('Proses Sidang Fatwa Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/16" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Sidang Fatwa Halal??')">Proses Sidang Fatwa Halal</a>`;
 
-                            var status17 = (full.status == 17) ? dButton('Ketetapan Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/17" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Ketetapan Halal??')">Ketetapan Halal</a>`;
+                            var status17 = (full.status == 17) ? dButton('Ketetapan Halal'):`<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalKH' style="cursor:pointer">Ketetapan Halal</a>`;
 
                           
 
@@ -1389,7 +1623,7 @@
 
                             var audit1 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-catatan-penjadwalan-audit1="`+full.catatan_penjadwalan_audit1+`" data-target='#modalPenjadwalan1' style="cursor:pointer">Audit Tahap 1</a>`;
                             var audit2 = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-pelaksana1="`+full.pelaksana1_audit1+`" data-catatan-penjadwalan-audit2="`+full.catatan_penjadwalan_audit2+`" data-target='#modalPenjadwalan2' style="cursor:pointer">Audit Tahap 2</a>`;
-                            var tehnicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-catatan-penjadwalan-tr="`+full.catatan_penjadwalan_tr+`" data-target='#modalPenjadwalan3' style="cursor:pointer">Tehnical Review</a>`;
+                            var technicalReview = `<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-catatan-penjadwalan-tr="`+full.catatan_penjadwalan_tr+`" data-target='#modalPenjadwalan3' style="cursor:pointer">Technical Review</a>`;
                             var tinjauan = `<a class="dropdown-item"  data-toggle='modal' data-catatan-penjadwalan-tinjauan="`+full.catatan_penjadwalan_tinjauan+`" data-id=`+full.id+` data-target='#modalPenjadwalan4' style="cursor:pointer">Tinjauan Komite</a>`;
 
                             var ksb = `<a class="dropdown-item" style="cursor:pointer" href="{{url('upload_ksb')}}/`+full.id+`">Input Berkas Konfirmasi, Surat Tugas dan Berita Acara</a>`;
@@ -1447,7 +1681,7 @@
                             }else if(full.status == 9 || full.status == '9_1' || full.status == '9_2' || full.status == '9_3' ){
                                 var penjadwalan = audit2+ksb;
                             }else if(full.status == 11 || full.status == '11_1' || full.status == '11_2' || full.status == '11_3'||full.status == 12 || full.status == '12_1' || full.status == '12_2' || full.status == '12_3' ){
-                                var penjadwalan = tehnicalReview;
+                                var penjadwalan = technicalReview;
                             }else if(full.status == 13 || full.status == '13_1' || full.status == '13_2' || full.status == '13_3' ){
                                 var penjadwalan = tinjauan;
                             }else{
@@ -1546,7 +1780,7 @@
                                                         <tr>
                                                             <td class="text-center"  style="width:20%">Progres</td>
                                                             <td class="text-center"  style="width:10%">Status Berkas</td>
-                                                            <td class="text-center"  style="width:25%">Cabang Pelaksana</td>
+                                                            <td class="text-center"  style="width:25%">Pelaksana</td>
                                                             <td class="text-center"  style="width:10%">Aksi</td>
                                                         </tr>
                                                         
@@ -1593,6 +1827,8 @@
                                                             <td class="text-center">Status</td>
                                                             <td class="text-center">Total Biaya</td>
                                                             <td class="text-center">Bukti Akad</td>
+                                                            <td class="text-center">Pendanaan</td>
+                                                            <td class="text-center">Fasilitator</td>
                                                            
                                                         </tr>
                                                         
@@ -1610,6 +1846,14 @@
                                                         
                                                         <td class="text-center align-middle">
                                                             `+unduhAkad+`
+
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            `+full.jenis_pendanaan+`
+
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            `+full.nama_fasilitator+`
 
                                                         </td>
 
@@ -1705,7 +1949,8 @@
                                                                     <td class="text-center align-middle">
                                                                         <i class="fa fa-eye" style="cursor:pointer" aria-hidden="true" data-toggle='modal' data-pelaksana1-audit1='`+full.pelaksana1_audit1+`' data-pelaksana1-audit2='`+full.pelaksana1_audit2+`' data-pelaksana2-audit2='`+full.pelaksana2_audit2+`' data-pelaksana1-tr='`+full.pelaksana1_tr+`' data-pelaksana2-tr='`+full.pelaksana2_tr+`' data-pelaksana1-tinjauan='`+full.pelaksana1_tinjauan+`' data-pelaksana2-tinjauan='`+full.pelaksana2_tinjauan+`' 
                                                                         data-mulai-audit1='`+full.mulai_audit1+`' 
-                                                                        data-mulai-audit2='`+full.mulai_audit2+`' data-ktg-audit2='`+full.ktg_audit2+`' data-mulai-audit1='`+full.mulai_audit1+`' 
+                                                                        data-mulai-audit2='`+full.mulai_audit2+`'  data-selesai-audit1='`+full.selesai_audit1+`' 
+                                                                        data-selesai-audit2='`+full.selesai_audit2+`' data-ktg-audit2='`+full.ktg_audit2+`' data-mulai-audit1='`+full.mulai_audit1+`' 
                                                                         data-mulai-audit2='`+full.mulai_audit2+`' data-mulai-tr='`+full.mulai_tr+`' 
                                                                         data-mulai-tinjauan='`+full.mulai_tinjauan+`'  data-target='#modaljadwal'></i>
 
@@ -1778,7 +2023,33 @@
                     data: {
                          _token: "{{ csrf_token() }}",
                         mulai: $('#mulai_audit1').val(),
-                        // selesai: $('#selesai_audit1').val(),
+                        selesai: $('#selesai_audit1').val(),
+                        //selected_pelaksana1: $('#pelaksana1_audit1').val(),
+                        id_regis: $('#idregis1').val()
+                    },
+                    success: function (response) {
+                    
+                        $('#pelaksana1_audit1').empty();  
+                        $("#pelaksana1_audit1").append(new Option('==Pilih Auditor==',''))                       
+                        $.each(response, function (name, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                            $("#pelaksana1_audit1").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap1"))
+                        })
+                         $('#pelaksana1_audit1').selectpicker('refresh');
+                         //$('#pelaksana2_audit1').empty();                         
+                        
+                    }
+                })
+            });
+            $('#selesai_audit1').on('change', function () {
+                $.ajax({
+
+                    url: '{{ route('dropdown1.dataauditor') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                        mulai: $('#mulai_audit1').val(),
+                        selesai: $('#selesai_audit1').val(),
                         //selected_pelaksana1: $('#pelaksana1_audit1').val(),
                         id_regis: $('#idregis1').val()
                     },
@@ -1805,7 +2076,34 @@
                     data: {
                          _token: "{{ csrf_token() }}",
                         mulai: $('#mulai_audit2').val(),
-                        // selesai: $('#selesai_audit2').val(),
+                        selesai: $('#selesai_audit2').val(),
+                        selected_pelaksana1: $('#pelaksana1_audit2').val(),
+                        id_regis: $('#idregis2').val()
+                    },
+                    success: function (response) {
+                        //$('#pelaksana1_audit1').empty();   
+                         $('#pelaksana1_audit2').empty();  
+
+                        $("#pelaksana1_audit2").append(new Option('==Pilih Auditor==',''))                       
+                        $.each(response, function (name, id) {                                                                    
+                            // document.getElementById("kotkantor").append(new Option(nama_kabupaten, id));
+                            $("#pelaksana1_audit2").append(new Option(id +"_"+ name,id +"_"+ name+"_tahap2"))
+                        })
+                         $('#pelaksana1_audit2').selectpicker('refresh');
+                         //$('#pelaksana2_audit1').empty();                         
+                        
+                    }
+                })
+            });
+            $('#selesai_audit2').on('change', function () {
+                $.ajax({
+
+                    url: '{{ route('dropdown2.dataauditor') }}',
+                    method: 'POST',
+                    data: {
+                         _token: "{{ csrf_token() }}",
+                        mulai: $('#mulai_audit2').val(),
+                        selesai: $('#selesai_audit2').val(),
                         selected_pelaksana1: $('#pelaksana1_audit2').val(),
                         id_regis: $('#idregis2').val()
                     },
@@ -1835,7 +2133,7 @@
                     data: {
                          _token: "{{ csrf_token() }}",
                         mulai: $('#mulai_audit2').val(),
-                        //selesai: $('#selesai_audit2').val(),
+                        selesai: $('#selesai_audit2').val(),
                         selected_pelaksana1: $('#pelaksana1_audit2').val(),
                         id_regis: $('#idregis2').val()
                     },

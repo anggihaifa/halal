@@ -40,7 +40,13 @@
 							<div class="col-lg-8">
 								<input type="text" name="id" value="{{$data->id}}" hidden readonly>
 								<input type="text" class="form-control" name='no_registrasi' value="{{$data->no_registrasi}}" readonly/>
-							</div>																						
+							</div>
+							
+							<label class="col-lg-4 col-form-label">No Order Confirmation</label>
+							<div class="col-lg-8">
+							
+								<input type="text" class="form-control" name='nomor_oc' value="{{$data->nomor_oc}}" required/>
+							</div>
 							
 							@if($data->status_oc == 1 || $data->status_oc == 2)
 								<!--Auto Download-->
@@ -79,9 +85,9 @@
 										@if($data->status_oc == 1)
 											<button type="submit" class="btn btn-sm btn-success m-r-5" disabled>Menunggu Konfirmasi Pelaku Usaha</button>
 										@elseif($data->status_oc == 2)
-											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Kirim Ulang</button>
+											<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas OC???')">Kirim Ulang</button>
                                         @else
-                                            <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas Kontrak Akad???')">Konfirmasi</button>
+                                            <button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Berkas OC???')">Konfirmasi</button>
 										@endif								
 									
 								</div>

@@ -118,7 +118,7 @@
         <br/>
         
         <p>Anda menerima email ini dikarenakan berkas registrasi yang anda unggah memerlukan beberapa perbaikan setelah melalui tahapan verifikasi berkas oleh Admin <b>LPH </b>PT.SUCOFINDO. <br\>
-        <b>Periksa catatan pada halaman unggah data sertifikasi dan periksa kembali berkas sebelum anda mengunggah kembali. batas waktu pengunggahan kelengkapan dokumen adalah 1 x 24 jam yaitu sampai hari dan jam {{$registrasi['dl_berkas']}} WIB/GMT+7.<b>
+        <b>Periksa catatan pada halaman unggah data sertifikasi dan periksa kembali berkas sebelum anda mengunggah kembali. batas waktu pengunggahan kelengkapan dokumen adalah 1 x 24 jam.<b>
         </p>
 
     @elseif($status== '2_3')
@@ -127,7 +127,7 @@
         
         <br/>
         
-        <p>Anda menerima email ini dikarenakan berkas registrasi anda telah disetujui oleh kami <b>LPH </b>PT.SUCOFINDO. Silahkan lanjutkan pada tahapan berikutnya yaitu Akad pada menu registrasi halal. silahkan tunggu admin mengunggah kontrak akad, kemudian unggah kembali kontrak akad yang sudah anda tanda tangani.</p>
+        <p>Anda menerima email ini dikarenakan berkas registrasi anda telah terkonfirmasi.</p>
 
         
         <p>

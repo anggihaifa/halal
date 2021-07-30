@@ -462,6 +462,27 @@
                 }
 
             }
+            if(d.selesai_audit1  == null){
+
+                d.selesai_audit1 ="-";
+            }else{
+                if (d.selesai_audit1.indexOf('-') > -1){
+                    $str_selesai1 =  d.selesai_audit1.split("-");
+                    d.selesai_audit1 = $str_selesai1[2]+"-"+$str_selesai1[1]+"-"+$str_selesai1[0];
+                }
+
+            }
+
+            if(d.selesai_audit2  == null){
+
+                d.selesai_audit2 ="-";
+            }else{
+                if (d.selesai_audit2.indexOf('-') > -1){
+                    $str_selesai2 =  d.selesai_audit2.split("-");
+                    d.selesai_audit2 = $str_selesai2[2]+"-"+$str_selesai2[1]+"-"+$str_selesai2[0];
+                }
+
+            }
 
             if(d.mulai_tr  == null){
 
@@ -568,7 +589,7 @@
                 d.pelaksana2_tinjauan ="-";
             }
 
-            if(d.status_penjadwalan_audit1 == '3'){
+            if(d.status_penjadwalan_audit1 == '3' || d.status != '7_1'){
                 btnApprove1 = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Approve</button>';
                 btnReject1 = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Reject</button>';
             }else{
@@ -577,7 +598,7 @@
                 btnReject1 = '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit1+'" data-jenis= "audit1" data-pelaksana1= "'+d.pelaksana1_audit1+'"   data-target="#modalreject" >Reject</button>';
             }
 
-            if(d.status_penjadwalan_audit2 == '3'){
+            if(d.status_penjadwalan_audit2 == '3' || d.status != '9_1'){
                 btnApprove2 = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Approve</button>';
                 btnReject2 = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Reject</button>';
             }else{
@@ -586,7 +607,7 @@
                 btnReject2 =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_audit2+'" data-jenis= "audit2" data-pelaksana1= "'+d.pelaksana1_audit2+'" data-pelaksana2= "'+d.pelaksana2_audit2+'"    data-target="#modalreject" >Reject</button>';
             }
 
-            if(d.status_penjadwalan_tr == '3'){
+            if(d.status_penjadwalan_tr == '3' || d.status != '11_1'){
                 btnApproveTR = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Approve</button>';
                 btnRejectTR = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Reject</button>';
             }else{
@@ -595,7 +616,7 @@
                 btnRejectTR =  '<button class="btn btn-xs btn-red m-r-5 text-white" data-toggle="modal"  data-id="'+d.id_regis+'" data-catatan-penjadwalan="'+d.catatan_penjadwalan_tr+'" data-jenis= "tr" data-pelaksana1= "'+d.pelaksana1_tr+'" data-pelaksana2= "'+d.pelaksana2_tr+'"  data-target="#modalreject" >Reject</button>';
             }
 
-            if(d.status_penjadwalan_tinjauan == '3'){
+            if(d.status_penjadwalan_tinjauan == '3' || d.status != '13_1'){
                 btnApproveTinjauan = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Approve</button>';
                 btnRejectTinjauan = '<button class="btn btn-xs btn-grey m-r-5 text-white" disable>Reject</button>';
             }else{
@@ -620,7 +641,7 @@
                     '<tr>'+
                     '<td class="valign-middle text-center">A</td>'+
                         '<td class="valign-middle text-center">Audit Tahap 1</td>'+
-                        '<td class="valign-middle text-center">'+d.mulai_audit1+'</td>'+
+                        '<td class="valign-middle text-center">'+d.mulai_audit1+' s/d '+d.selesai_audit1+'</td>'+
                         '<td class="valign-middle text-center" >'+d.pelaksana1_audit1+'</td>'+    
                         '<td class="valign-middle text-center">-</td>'+
                         '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_audit1)+'</td>'+
@@ -630,7 +651,7 @@
                      '<tr>'+
                      '<td class="valign-middle text-center">B</td>'+
                          '<td class="valign-middle text-center">Audit Tahap 2</td>'+
-                         '<td class="valign-middle text-center">'+d.mulai_audit2+'</td>'+
+                         '<td class="valign-middle text-center">'+d.mulai_audit2+' s/d '+d.selesai_audit2+'</td>'+
                          '<td class="valign-middle text-center" >'+d.pelaksana1_audit2+'<br>'+d.pelaksana2_audit2+'</td>'+    
                          '<td class="valign-middle text-center" >-</td>'+ 
                          '<td class="valign-middle text-center">'+checkPenjadwalan(d.status_penjadwalan_audit2)+'</td>'+
@@ -641,7 +662,7 @@
                      '</tr>'+
                      '<tr>'+
                          '<td class="valign-middle text-center">C</td>'+
-                         '<td class="valign-middle text-center">Tehnical Review</td>'+
+                         '<td class="valign-middle text-center">Technical Review/td>'+
                          '<td class="valign-middle text-center">-</td>'+
                          '<td class="valign-middle text-center" >-</td>'+    
                          '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'<br>'+d.pelaksana2_tr+'</td>'+ 

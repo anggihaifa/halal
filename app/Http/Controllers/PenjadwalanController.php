@@ -77,16 +77,37 @@ class PenjadwalanController extends Controller
         $kodewilayah = Auth::user()->kode_wilayah;
 
         //Log::info($data['mulai']);
-        if($data['mulai']){
-                $dataAuditor1_TidakLuangRaw =  DB::table('penjadwalan')
-                                    ->where('mulai_audit1','=', $data['mulai'])
-                                    ->select('pelaksana1_audit1')
-                                    ->get();
+        if($data['mulai'] && $data['selesai']){
+            $dataAuditor1_TidakLuangRaw =  DB::table('penjadwalan')
+            ->where(function($query) use ($data){
+                $query->where('mulai_audit1','<=', $data['mulai']);
+                $query->where('selesai_audit1','>=', $data['mulai']);
+            })
+            ->orWhere(function($query) use ($data){
+                $query->where('mulai_audit1','>=', $data['mulai']);
+                $query->where('mulai_audit1','<=', $data['selesai']);
+                
+            })
+            ->select('pelaksana1_audit1')
+            ->get();
 
-                $dataAuditor2_TidakLuang =  DB::table('penjadwalan')
-                                            ->where('mulai_audit2','=', $data['mulai'])
-                                            ->select('pelaksana1_audit2','pelaksana2_audit2')
-                                            ->get();
+            $dataAuditor2_TidakLuang =  DB::table('penjadwalan')
+            ->where(function($query) use ($data){
+                $query->where('mulai_audit2','<=', $data['mulai']);
+                $query->where('selesai_audit2','>=', $data['mulai']);
+                //$query->where('id_registrasi','!=', $data['id_regis']);
+               
+            })
+            ->orWhere(function($query) use ($data){
+                $query->where('mulai_audit2','>=', $data['mulai']);
+                $query->where('mulai_audit2','<=', $data['selesai']);
+                //$query->where('id_registrasi','!=', $data['id_regis']);
+              
+            })
+            
+            /*->get();*/
+           ->select('pelaksana1_audit2','pelaksana2_audit2')
+            ->get();
 
             $dataAuditor1_TidakLuang = array();
             //                               
@@ -465,17 +486,40 @@ class PenjadwalanController extends Controller
         $kodewilayah = Auth::user()->kode_wilayah;
 
         Log::info($data['mulai']);
-        if($data['mulai']){
+        if($data['mulai'] && $data['selesai']){
             $dataAuditor1_TidakLuang =  DB::table('penjadwalan')
-                                        ->where('mulai_audit1','=', $data['mulai']) 
-                                        ->select('pelaksana1_audit1')
-                                        ->get();
+            ->where(function($query) use ($data){
+                $query->where('mulai_audit1','<=', $data['mulai']);
+                $query->where('selesai_audit1','>=', $data['mulai']);
+                
+               
+            })
+            ->orWhere(function($query) use ($data){
+                $query->where('mulai_audit1','>=', $data['mulai']);
+                $query->where('mulai_audit1','<=', $data['selesai']);
+               
+               
+               
+            })
+           
+            /*->get();*/
+           ->select('pelaksana1_audit1')
+            ->get();
 
             $dataAuditor2_TidakLuangRaw =  DB::table('penjadwalan')
-                                        ->where('mulai_audit2','=', $data['mulai'])
-                                        ->where('id_registrasi','!=', $data['id_regis'])
-                                        ->select('id','pelaksana1_audit2','pelaksana2_audit2')
-                                        ->get();   
+            ->where(function($query) use ($data){
+                $query->where('mulai_audit2','<=', $data['mulai']);
+                $query->where('selesai_audit2','>=', $data['mulai']);
+            })
+            ->orWhere(function($query) use ($data){
+                $query->where('mulai_audit2','>=', $data['mulai']);
+                $query->where('mulai_audit2','<=', $data['selesai']);
+              
+            })
+            
+            /*->get();*/
+           ->select('pelaksana1_audit2','pelaksana2_audit2')
+            ->get();
           
             $dataAuditor1_TidakLuang= json_decode($dataAuditor1_TidakLuang, true);
     
@@ -810,10 +854,11 @@ class PenjadwalanController extends Controller
                         }
                     }
                 }   
-            }    
+            }
+            return response()->json($dataAuditor1);    
         }    
         //Log::info('ini data auditor: '.$dataAuditor1);
-        return response()->json($dataAuditor1);
+       
     }
 
 
@@ -1192,6 +1237,7 @@ class PenjadwalanController extends Controller
         if($j){
             //dd($data['idregis1']);
             $j->mulai_audit1 = $data['mulai_audit1'];
+            $j->selesai_audit1 = $data['selesai_audit1'];
             $j->status_penjadwalan_audit1 = 1;
             $e->status = '7_1';
             $j->pelaksana1_audit1 = $data['pelaksana1_audit1'];
@@ -1202,6 +1248,7 @@ class PenjadwalanController extends Controller
         }else{
            //dd($data['mulai_audit1']);
             $model2->mulai_audit1 = $data['mulai_audit1'];
+            $model2->selesai_audit1 = $data['selesai_audit1'];
             $model2->status_penjadwalan_audit1 = 1;
             $e->status = '7_1';
             $model2->pelaksana1_audit1 = $data['pelaksana1_audit1'];
@@ -1276,6 +1323,7 @@ class PenjadwalanController extends Controller
         if($j){
             //dd($data['idregis1']);
             $j->mulai_audit2 = $data['mulai_audit2'];
+            $j->selesai_audit2 = $data['selesai_audit2'];
             $j->status_penjadwalan_audit2 = 1;
             $j->pelaksana1_audit2 = $data['pelaksana1_audit2'];
             $j->pelaksana2_audit2 = $data['pelaksana2_audit2'];
@@ -1286,6 +1334,7 @@ class PenjadwalanController extends Controller
         }else{
            //dd($data['mulai_audit1']);
             $model2->mulai_audit2 = $data['mulai_audit2'];
+            $model2->selesai_audit2 = $data['selesai_audit2'];
             $model2->status_penjadwalan_audit2 = 1;
 
             $model2->pelaksana1_audit2 = $data['pelaksana1_audit2'];
@@ -1626,6 +1675,7 @@ class PenjadwalanController extends Controller
             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','registrasi.kode_wilayah','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2','laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.file_laporan_tinjauan','laporan_tehnical_review.catatan_tr','laporan_tinjauan.catatan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang','registrasi.alamat_perusahaan')
             //  ->join('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
             ->where('registrasi.status_cancel','=',0)
+            ->where('registrasi.status','!=',17)
             ->where('penjadwalan.status_penjadwalan_audit2','=',3)
             ->where(function($query) use ($id_user){
                
@@ -1881,6 +1931,72 @@ class PenjadwalanController extends Controller
                 
     //     return view('penjadwalan.auditPlan',compact('dataRegistrasi','dataPenjadwalan'));
     // }
+
+    public function listMonitoringLog($id){
+        $id_user = $id;
+        return view('penjadwalan.listMonitoringLog', compact('id_user'));
+    }
+
+    public function dataMonitoringLog(Request $request, $id){
+        $gdata = $request->except('_token','_method');
+        $id_user = $id;
+        //start
+       
+        $dataAudit1 = DB::table('registrasi')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+             ->join('users','registrasi.id_user','=','users.id')
+             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
+            ->where('registrasi.status_cancel','=',0)  
+            ->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%')
+        
+            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit1 as mulai','penjadwalan.selesai_audit1 as selesai','penjadwalan.pelaksana1_audit1 as pelaksana1','penjadwalan.pelaksana2_audit1 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg');
+
+        
+
+        $dataAudit2 = DB::table('registrasi')
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+             ->join('users','registrasi.id_user','=','users.id')
+             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit2 as mulai','penjadwalan.selesai_audit2 as selesai','penjadwalan.pelaksana1_audit2 as pelaksana1','penjadwalan.pelaksana2_audit2 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg' )
+             ->where('registrasi.status_cancel','=',0)  
+            ->where(function($query) use ($id_user){
+              
+                $query->where('penjadwalan.pelaksana1_audit2','LIKE','%'.$id_user.'%')
+                ->orWhere('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
+                //$query->where('penjadwalan.status_penjadwalan_audit2','=', 4);
+  
+            }) ;
+        
+       
+               
+       
+        if(isset($gdata['no_registrasi'])){
+
+            $dataAudit1 = $dataAudit1->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+            $dataAudit2 = $dataAudit2->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        }
+        if(isset($gdata['nama_perusahaan'])){
+            $dataAudit1 = $dataAudit1->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
+            $dataAudit2 = $dataAudit2->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
+            
+        }
+        if(isset($gdata['mulai'])){
+            $dataAudit1 = $dataAudit1->where('penjadwalan.mulai_audit1','LIKE','%'.$gdata['mulai'].'%')
+            ->orWhere('penjadwalan.mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
+
+            $dataAudit2 = $dataAudit2->where('penjadwalan.mulai_audit1','LIKE','%'.$gdata['mulai'].'%')
+            ->orWhere('penjadwalan.mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
+
+        }
+
+        $xdata = $dataAudit1->union($dataAudit2)
+        ->get();
+
+      
+        return Datatables::of($xdata)->make();
+    }
 
     public function listLog(){
         $id_user = Auth::user()->id;

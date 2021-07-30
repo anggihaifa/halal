@@ -76,6 +76,13 @@
                     </tr>
                 </thead>
             </table>
+
+            <div class="col-md-12 offset-md-5">									
+								
+                @component('components.buttonback',['href' => route("detailpelaksana.index")])@endcomponent											
+                   						
+                
+            </div>
             
           
             
@@ -168,7 +175,7 @@
         var id_user = {!! json_encode($id_user) !!};
         var xTable = $('#table').DataTable({
             ajax:{
-                url:"{{route('datalog')}}",
+                url:"{{route('datamonitoringlog',$id_user)}}",
                 data:function(d){
                     d.no_registrasi = $('#no_registrasi').val();
                     d.mulai = $('#f_mulai').val();

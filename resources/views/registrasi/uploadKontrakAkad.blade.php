@@ -52,10 +52,6 @@
 							</div>
 
 							
-							
-							
-							<label class="col-lg-12 col-form-label">Biaya Sertifikasi</label>
-							
 							<label class="col-lg-4 col-form-label">Mata Uang</label>
 							
 							@if($data->status_akad == 0 || $data->status_akad == 1)
@@ -122,6 +118,30 @@
 									</div>
 								</div>
 							@endif
+
+							<label class="col-lg-4 col-form-label">Jenis Pendanaan</label>
+							<div class="col-lg-8">
+								<select id="jenis_pendanaan" name="jenis_pendanaan" class="form-control selectpicker forSearch" data-size="10" data-live-search="true" data-style="btn-white" required>
+									<option value="" selected="selected">--Pilih Jenis Pendanaan--</option>
+									<option value="Mandiri" >Mandiri</option>
+									<option value="Fasilitasi" >Fasilitasi</option>
+									
+									
+								</select>
+							</div>
+
+							<label class="col-lg-4 col-form-label">Nama Fasilitator</label>
+							<div class="col-lg-8">
+								@if ($data->status_akad == 0 || $data->status_akad == 1)
+									<input id="nama_fasilitator"  name="nama_fasilitator" type="text" value="" class="form-control"/>
+								@else
+								
+									<input id="nama_fasilitator"  name="nama_fasilitator" type="text" value="{{$dataAkad[0]->nama_fasilitator}}" onchange="jml()" class="form-control"/>
+									
+								@endif 
+
+								
+							</div>
 
 							
 								

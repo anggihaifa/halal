@@ -38,6 +38,7 @@
                     <th class="text-nowrap valign-middle text-center">Kota</th>
                     <th class="text-nowrap valign-middle text-center">Alamat</th>
                     <th class="text-nowrap valign-middle text-center">Status</th>
+                    <th class="valign-middle text-center">Password</th>
                     <th class="text-nowrap valign-middle text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 </tr>
                 </thead>
@@ -45,11 +46,88 @@
         </div>
         <!-- end panel-body -->
     </div>
+    
+    <div id="modalpassword" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+           
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <h4 class="modal-title">Encripted Password</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+
+                <div class = "modal-body">
+                    <div >
+                        <label id="password" name="password")">password</label>
+                     
+                    </div>
+                </div>
+                <div class = "modal-footer">
+                    <div >
+                        <button class="btn btn-sm btn-success" onclick="copy(password)" >Salin</button>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- end panel -->
 @endsection
 @push('scripts')
     <script src="{{asset('/assets/js/checkData.js')}}"></script>
     <script>
+         $('#modalpassword').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            var password = $this.data('password');
+            var modal = $('#modalpassword');
+            
+            modal.find('#password').text(password);
+            modal.find('#modalpassword').attr('action', function (i,old) {
+            return old + '/' + password;
+        
+            });
+
+        });
+
+        function copy(element){
+            // var modal = $('#modalpassword');    
+            // var copyText =  modal.find('#password');
+
+            // var copyText = document.querySelector('#password');
+            // copyText.select();
+            // document.execCommand("copy");
+            // /* Alert the copied text */
+            // alert("Copied the text: " + copyText.value);
+            var range, selection, worked;
+
+            if (document.body.createTextRange) {
+                range = document.body.createTextRange();
+                range.moveToElementText(element);
+                range.select();
+            } else if (window.getSelection) {
+                selection = window.getSelection();        
+                range = document.createRange();
+                range.selectNodeContents(element);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+            
+            try {
+                document.execCommand('copy');
+                alert('text copied');
+            }
+            catch (err) {
+                alert('unable to copy text');
+            }
+
+        }
         console.log("SHOW");
         $('#table').DataTable({
             columns:[
@@ -79,6 +157,18 @@
                     "render":function (data) {return checkStatus(data);}
                 },
                 {
+                        "data":null,
+                        "searchable":false,
+                        "orderable":false,
+                        "render":function (data,type,full,meta) {
+
+                        
+                            return `<button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-password='`+full.password+`' data-target='#modalpassword' >View</button>`
+
+                        
+                        }
+                    },
+                {
                     "data":null,
                     "searchable":false,
                     "orderable":false,
@@ -99,6 +189,15 @@
                             </div>` 
                     }
                 }
+            ],
+            'columnDefs': [
+                {
+                    //   "targets": [1,2,3,4,5,6,7,8,9],
+                    "targets": "_all",
+                    "className": "text-center",
+                    
+                }
+               
             ],
             processing:true,
             serverSide:true,

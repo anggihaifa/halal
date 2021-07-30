@@ -321,7 +321,7 @@
                                                 <td>Pengujian</td>
                                                 <td>Pelaporan Audit</td>
                                                 <td>Verifikasi</td>
-                                                <td>Tehnical Review</td>
+                                                <td>Technical Review/td>
                                                 <td>Rapat Komite Sertifikasi</td>
                                             </tr>
                                             <tr>

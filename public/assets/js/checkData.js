@@ -70,10 +70,10 @@ function checkStatusAuditTahap2(data){
 }
 
 function checkStatusTehnicalReview(data){
-    return  (data==0)? '<a   style=" color:green"><strong>Tehnical Reviewer Belum Upload Review Laporan Audit</strong></a>'
-    :(data==1)? '<a   style=" color:green"><strong>Proses Tehnical Review Selesai</strong></a>'
+    return  (data==0)? '<a   style=" color:green"><strong>Technical Reviewer Belum Upload Review Laporan Audit</strong></a>'
+    :(data==1)? '<a   style=" color:green"><strong>Proses Technical Review Selesai</strong></a>'
    
-    : '<a   style=" color:green"><strong>Tehnical Reviewer Belum Upload Review Laporan Audit</strong></a>';
+    : '<a   style=" color:green"><strong>Technical Reviewer Belum Upload Review Laporan Audit</strong></a>';
 
     
             
@@ -81,7 +81,7 @@ function checkStatusTehnicalReview(data){
 
 function checkStatusKomite(data){
     return  (data==0)? '<a   style=" color:green"><strong>Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit</strong></a>'
-    :(data==1)? '<a   style="   color:black"><strong>Proses Tehnical Review Selesai</strong></a>'
+    :(data==1)? '<a   style="   color:black"><strong>Proses Technical Review Selesai</strong></a>'
    
     : '<a   style=" color:green"><strong>Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit</strong></a>';
 
@@ -91,7 +91,7 @@ function checkStatusKomite(data){
 
 function checkStatusPersiapanKomisiFatwa(data){
     return  (data==0)? '<a   style=" color:green"><strong>Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit</strong></a>'
-    :(data==1)? '<a   style="   color:black"><strong>Proses Tehnical Review Selesai</strong></a>'
+    :(data==1)? '<a   style="   color:black"><strong>Proses Technical Review Selesai</strong></a>'
    
     : '<a   style=" color:green"><strong>Komite Sertifikasi Belum Upload Hasil Tinjauan Laporan Audit</strong></a>';
 
@@ -262,15 +262,15 @@ function checkProgress(data){
             :(data.trim()=='10_1')? 'Perbaikan Audit Tahap 2'
             :(data.trim()=='10_2')? 'Audit Tahap 2 Selesai'
 
-            :(data==11)? '<a   style="   color:red"><strong>Persiapan Tehnical Review</strong></a>'
+            :(data==11)? '<a   style="   color:red"><strong>Persiapan Technical Review</strong></a>'
             :(data.trim()=='11_0')? 'Belum Dijadwalkan'
             :(data.trim()=='11_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
             :(data.trim()=='11_2')? 'Perbaikan Penjadwalan'
             :(data.trim()=='11_3')? 'Penjadwalan Terkonfirmasi'
 
-            :(data==12)? 'Proses Tehnical Review'
+            :(data==12)? 'Proses Technical Review'
             :(data.trim()=='12_0')? 'Reviewer Belum Upload Review Laporan Audit'
-            :(data.trim()=='12_1')? 'Proses Tehnical Review Selesai'
+            :(data.trim()=='12_1')? 'Proses Technical Review Selesai'
 
             :(data==13)? '<a   style="   color:red"><strong>Persiapan Komite Sertifikasi</strong></a>'
             :(data.trim()=='13_0')? 'Belum Dijadwalkan'
@@ -347,15 +347,15 @@ function notifProgress(data){
             :(data.trim()=='10_1')? 'Perbaikan Audit Tahap 2'
             :(data.trim()=='10_2')? 'Audit Tahap 2 Selesai'
 
-            :(data==11)? 'Persiapan Tehnical Review'
+            :(data==11)? 'Persiapan Technical Review'
             :(data.trim()=='11_0')? 'Belum Dijadwalkan'
             :(data.trim()=='11_1')? 'Menunggu Reviewer Mengkonfirmasi Penjadwalan'
             :(data.trim()=='11_2')? 'Perbaikan Penjadwalan'
             :(data.trim()=='11_3')? 'Penjadwalan Terkonfirmasi'
 
-            :(data==12)? 'Proses Tehnical Review'
+            :(data==12)? 'Proses Technical Review'
             :(data.trim()=='12_0')? 'Reviewer Belum Upload Review Laporan Audit'
-            :(data.trim()=='12_1')? 'Proses Tehnical Review Selesai'
+            :(data.trim()=='12_1')? 'Proses Technical Review Selesai'
 
             :(data==13)? 'Persiapan Komite Sertifikasi'
             :(data.trim()=='13_0')? 'Belum Dijadwalkan'

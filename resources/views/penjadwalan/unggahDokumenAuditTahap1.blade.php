@@ -236,7 +236,7 @@
 										</tr>
 										<tr class="even">
 											<td class="  valign-middle text-center">16</td>
-											<td class="valign-middle">BBukti Registrasi Dari BPJPH</td>
+											<td class="valign-middle">Bukti Registrasi Dari BPJPH</td>
 											<td class="  valign-middle text-center"><input type="file" id="has_16" name="has_16" onchange="getValue('has_16')" accept="application/msword,application/pdf,application/vnd.ms-excel, image/*" ></td>
 											{!! $fieldBelum !!}
 											<td class=" valign-middle"></td>

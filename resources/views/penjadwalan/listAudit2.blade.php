@@ -289,7 +289,7 @@
                                         </a>`;
                             }else{
                                 buttonUnduh =  `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-xs btn btn-green" style="color: white;" download>
-                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Tehnical Review
+                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Technical Review
                                         </a>
                                         <a class="btn-xs btn btn-grey" style="color: white;" disabled>
                                             <i class="fa fa-download" aria-hidden="true"></i>Laporan Komite Sertifikasi
@@ -306,7 +306,7 @@
                                                                     
                         }else{
                             buttonUnduh =  `<a  class="btn-xs btn btn-grey" style="color: white; cursor: context-menu;" disabled>
-                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Tehnical Review
+                                            <i class="fa fa-download" aria-hidden="true"></i>Laporan Technical Review
                                         </a>
                                         <a class="btn-xs btn btn-grey" style="color: white; cursor: context-menu;" disabled>
                                             <i class="fa fa-download" aria-hidden="true"></i>Laporan Komite Sertifikasi
