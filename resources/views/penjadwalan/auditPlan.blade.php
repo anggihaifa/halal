@@ -6,8 +6,7 @@
     <link href="{{asset('/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css')}}" rel="stylesheet" />
-    <link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css')}}" rel="stylesheet" />
-    <link href="{{asset('/assets/plugins/summernote-0.8.18/dist/summernote.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css')}}" rel="stylesheet" />    
     <link href="{{asset('/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css')}}" rel="stylesheet" />
     <link href="{{asset('/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" />
 @endpush
@@ -381,7 +380,7 @@
                                         <div class="row">
                                             <label class="col-4 col-form-label">Detail Kegiatan</label>
                                             <div class="col-lg-8"><div>
-                                                <textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan" required></textarea>
+                                                <textarea id="detail_kegiatan" name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan" required></textarea>
                                             </div></div>                                
                                         </div>
                                     </div>                                    
@@ -483,7 +482,9 @@
     <script src="{{asset('/assets/js/demo/form-plugins.demo.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
-    <script>             
+    <link href="{{asset('/assets/plugins/summernote-0.8.18/dist/summernote.min.css')}}" rel="stylesheet" />
+    <script>                 
+
         document.getElementById('jml_kegiatan1').value = "1";           
 
         var jmlKegiatan = 1;
@@ -504,11 +505,17 @@
             jmlJam+=1;
 
             // alert(jmlKegiatan);
-            var data_kegiatan = '<div id="datakegiatan'+jmlKegiatan+'" style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan" required></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan" required></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)" required></div></div>                                </div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+','+jmlKegiatan+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
+            var data_kegiatan = '<div id="datakegiatan'+jmlKegiatan+'" style="background: rgb(242, 242, 242);"> <div class="panel-body panel-form"><div class="wrapper col-lg-12"><div class="row"><label class="col-lg-2 col-form-label">Jam</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit'+(jmlJam+1)+'" name="jam_audit[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><label class="col-form-label">-</label><div class="col-lg-2"><div class="input-group date"><input id="jam_audit2'+(jmlJam+1)+'" name="jam_audit2[]" type="text" class="form-control" placeholder="Jam Audit" required/><span class="input-group-addon"><i class="fa fa-clock"></i></span></div></div><div class="col-lg-5"><div class="row"><label class="col-4 col-form-label">Judul Kegiatan</label><div class="col-lg-8"><div><input class="form-control" name="judul_kegiatan[]" type="text" label="Judul Kegiatan" placeholder="Judul Kegiatan" required></div></div>                                        </div></div></div></div>                        <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Detail Kegiatan</label><div class="col-lg-8"><div><textarea id="d_kegiatan'+jmlKegiatan+'" name="detail_kegiatan[]" class="form-control" placeholder="Detail Kegiatan" required></textarea></div></div>                                </div></div><div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label">Personil</label><div class="col-lg-8"><div><input class="form-control" name="personil[]" type="text" label="Personil" placeholder="Ch. All / Auditor (XX) / Auditor (XX) dan Auditor (YY)" required></div></div>                                </div></div></div> <div class="col-lg-12"><div><a onClick="hapusKegiatan('+$id+','+jmlKegiatan+')" class="btn btn-sm btn-danger m-r-5" style="margin-top: 10px;color:white">Hapus Kegiatan</a></div></div><br></div>';
             $('#detail_kegiatan'+$id).append(data_kegiatan);
+            
+            // document.getElementById('d_kegiatan'+jmlKegiatan).summernote({
+            //     spellcheck: false,
+            //     height: 350,                
+            // });
+
             jam(jmlJam);
             jam2(jmlJam);
-            document.getElementById('jml_kegiatan1').value = jmlKegiatan;
+            document.getElementById('jml_kegiatan1').value = jmlKegiatan;            			
             // alert(jmlKeg);
         }
 

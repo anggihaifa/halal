@@ -74,7 +74,7 @@
                         <th class="valign-middle text-center">Jenis Produk</th>
                         <th class="valign-middle text-center" style="max-width:20%">Komite Sertifikasi</th>
                       
-                        <th class="valign-middle text-center" >Unduh</th>
+                        {{-- <th class="valign-middle text-center" >Unduh</th> --}}
                         
                         <th class="valign-middle text-center" style="max-width:20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
@@ -308,108 +308,7 @@
                                 return '-'
                             }
                         }
-                    },
-                    
-                    {
-                        "data":null,
-                        "searchable":false,
-                        "orderable":false,
-                        "render":function (data,type,full,meta) {
-
-                           
-
-                            if(full.file_laporan_audit1 ){
-
-                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
-
-                                                                        
-                            }else{
-                            var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit1&nbsp;&nbsp;</a>`;
-
-                            }
-                            if(full.file_laporan_tr ){
-
-                                var unduhLaporanTR = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan TR&nbsp;&nbsp;</a>`;
-
-                                                                        
-                            }else{
-                                var unduhLaporanTR = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan TR&nbsp;&nbsp;</a>`;
-
-                            }
-
-                            if(full.file_laporan_audit_tahap_2 ){
-
-                                var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit2&nbsp;&nbsp;</a>`;
-                               
-                                                                             
-                            }else{
-                                var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Audit2&nbsp;&nbsp;</a>`;
-                               
-                            }
-
-                            if(full.file_bap ){
-
-                                var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                                                                            
-                            }else{
-                                var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                            }
-                            if(full.file_laporan_ketidaksesuaian){
-
-                                var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                                                                            
-                                }else{
-                                var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                            }
-
-                            var unduhDPR = `<a href="{{ url('').Storage::url('public/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi.docx') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Daftar Periksa&nbsp;&nbsp;</a>`;
-
-                            // if(full.status_dpra == '0'){
-
-                            //     var dpra = ` <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                                                                            
-                            // }else{
-                            //     var dpra = `<button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                            // }
-
-                            return `<table class="table-xs table-borderless p-0 m-0">
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                               `+unduhLaporan1+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhLaporan2+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhBAP+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhTS+`
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center align-midle">
-                                            <td class="text-center align-midle">
-                                                `+unduhLaporanTR+`
-                                            </td>
-                                        </tr>
-                                      
-                                    </table>`
-                                       
-                           
-                        }
-                    },
+                    },                                        
                     {
                         "data":null,
                         "searchable":false,
@@ -426,6 +325,7 @@
                                         <tr class="text-center align-midle">
                                             <td class="text-center">
                                                 <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan-tinjauan='`+full.catatan_tinjauan+`' data-status-laporan-tinjauan='`+full.status_laporan_tinjauan+`'  data-target='#modalks' > Upload File Tinjauan Komite Sertifikasi</button>
+                                                <a class="btn btn-xs btn-primary m-r-5" href="{{url('daftar_periksa_rekomendasi')}}/`+full.id_regis+`">Isi Daftar Periksa dan Rekomendasi</a>
                                             </td>
                                         </tr>
                                     </table>`
@@ -436,7 +336,7 @@
                 ],
                 'columnDefs': [
                 {
-                      "targets": [0,1,2,3,4,5,6],
+                      "targets": [0,1,2,3,4,5],
                       "className": "text-center",
                      
                 }],

@@ -3,6 +3,7 @@
 @endphp
 
 <!-- begin #sidebar -->
+
 <div id="sidebar" class="sidebar  {{ $sidebarClass }} ">
 	<!-- begin sidebar scrollbar -->
 	<div data-scrollbar="true" data-height="100%">
@@ -28,7 +29,7 @@
 					</div>
 					<div class="info">
 						{{ucwords(strtolower(Auth::user()->name))}}
-						<small><b>{{ucwords(strtolower(Auth::user()->perusahaan))}}</b></small>
+						<small><b>{{ucwords(strtoupper(Auth::user()->perusahaan))}}</b></small>
 					</div>
 				</a>
 			</li>
@@ -205,5 +206,6 @@
 	</div>
 	<!-- end sidebar scrollbar -->
 </div>
+
 <div class="sidebar-bg"></div>
 

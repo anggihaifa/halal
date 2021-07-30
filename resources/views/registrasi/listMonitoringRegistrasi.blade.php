@@ -459,7 +459,7 @@
                                     <a href="#" class="btn btn-info btn-xs">Pilih Aksi</a>
                                     <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-                                        <a href="{{url('monitoring_log_registrasi')}}/`+full.id+`" class="dropdown-item" ><i class="ion-ios-eye"></i> Monitoring</a>
+                                        <a href="{{url('monitoring_log_registrasi')}}/`+full.id+`" class="dropdown-item" ></i>Log Kegiatan</a>
                                         <a href="{{url('verifikasi_dokumen_sertifikasi')}}/`+full.id+`" class="dropdown-item" >Lihat Dokumen Pelaku Usaha
                                         </a>
                                         <a href="{{url('daftar_periksa_rekomendasi')}}/`+full.id+`" class="dropdown-item" >Kelengkapan Dokumen Sidang
@@ -480,7 +480,7 @@
                     
                 },
                 {
-                "targets": [ 2,4,7,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+                "targets": [ 2,4,7,10,11,12,13,14,15,16,17,18,19,20,21,22,24,25,26],
                 "visible": false,
                 "searchable": false,
                 }

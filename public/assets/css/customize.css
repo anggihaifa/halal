@@ -69,7 +69,6 @@ body{
 .page-with-wide-sidebar .content{
     margin-left: 220px;
 }*/
-
 .sub-menu>li>a:hover{color:#fff}
 .sidebar .sub-menu>li>a:after{content:'';position:absolute;left:-11px;top:11px;width:11px;height:2px;background:#fff}
 .sidebar .sub-menu>li:before{content:'';position:absolute;left:-13px;top:0;bottom:0;width:2px;background:#fff}
@@ -354,7 +353,7 @@ body{
     background: #46957f;
     background: linear-gradient(147deg,rgb(59 144 112) 0%, rgb(40 150 145) 100%) !important;
 }
-}
+
 
 /* .slimScrollDiv span{
     color: #000;
@@ -637,12 +636,17 @@ body{
          .login.login-with-news-feed.forlogin .right-content {
              width: 100%;
              padding: 25px 45px;
-         }
+         }         
       }
     @media (max-width: 767.98px){
         
         .header.navbar-inverse .navbar-nav {
             border: none;
+            float: left;            
+        }
+        
+        .content{
+            margin-left: 0!important;
         }
     
     }

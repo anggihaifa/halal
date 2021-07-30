@@ -73,7 +73,7 @@
                         <th class="valign-middle text-center">Perusahaan</th>
                         <th class="valign-middle text-center">Jenis Produk</th>
                         <th class="valign-middle text-center" style="max-width:20%">Technical Reviewer</th>
-                        <th class="valign-middle text-center" >Unduh</th>
+                        {{-- <th class="valign-middle text-center" >Unduh</th> --}}
                         
                         <th class="valign-middle text-center" style="max-width:20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
@@ -212,7 +212,343 @@
            
             
         </div>
+    </div>
+
+    <div id="modaltr2" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <form action="{{route('storelaporantr')}}" method="post"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Daftar Periksa dan Rekomendasi</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">                        
+                        <div>
+                            <table class="table table-striped table-sm table-borderless border-none">
+                                                            
+                                <tbody>
+                                    <tr style="display:none">
+                                        <td>
+                                            <div class="form-group">
+                                            <label class="control-label font-weight-bold" for="id">ID</label>  
+                                            <div >
+                                                <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly>
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>                                    
+                                </tbody>
+                            </table>                                                            
+                        </div>
+
+                        <div>
+                            <table class="table table-striped table-sm table-borderless border-none">
+                            
+                                <thead class="table-success">                                   
+                                <th class="valign-middle">Materi</th>
+                                <th class="valign-middle text-center">Ada</th>
+                                <th class="valign-middle text-center">Tidak Ada</th>
+                                <th width="30%" class="valign-middle text-center">Catatan</th>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">1. Penawaran Harga</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbpenawaran" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbpenawaran" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="capenawaran" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">2. Konfirmasi Jadwal, Syarat & Ketentuan Audit</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbkonfirmasi" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbkonfirmasi" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="capenawaran" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">3. Surat Tugas</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbst" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbst" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="cast" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">4. Audit Plan</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbap" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbap" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="caap" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">5. Laporan Audit Tahap 1</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit1" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit1" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="caaudit1" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">6. Laporan Audit Tahap 2</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            {{-- <div class="radio">
+                                                <input type="radio" name="rbaudit2" value="ada" style="cursor: pointer;" required/>
+                                            </div> --}}
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            {{-- <div class="radio">
+                                                <input type="radio" name="rbaudit2" value="tidak ada" style="cursor: pointer;"/>
+                                            </div> --}}
+                                        </td>
+                                        <td class="valign-middle">
+                                            {{-- <textarea name="caaudit2" type="text" class="form-control" placeholder="Catatan"></textarea> --}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">&nbsp;&nbsp;&nbsp;&nbsp; a.	Laporan Bahan dan Kelengkapan Dokumen Pendukungya</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit2a" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit2a" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="caaudit2a" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">&nbsp;&nbsp;&nbsp;&nbsp; b.	Laporan Fasilitas Produksi</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit2b" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit2b" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="caaudit2b" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">&nbsp;&nbsp;&nbsp;&nbsp; c.	Laporan Ruang Lingkup Produk yang disertifikasi beserta Kelengkapannya</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit2c" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit2c" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="caaudit2c" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">&nbsp;&nbsp;&nbsp;&nbsp; d.	Laporan SJPH</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit2d" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbaudit2d" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="caaudit2d" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">7.	Berita Acara Pemeriksaan</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbbap" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbbap" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="cabap" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">8.	Berita Acara Pengambilan Sampel</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbbaps" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbbaps" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="cabaps" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">9.	Daftar Hadir Opening & Closing Meeting</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbdh" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbdh" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="cadh" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">10.	Pelaksanaan Sidang Komisi Fatwa</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            {{-- <div class="radio">
+                                                <input type="radio" name="rbdh" value="ada" style="cursor: pointer;" required/>
+                                            </div> --}}
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            {{-- <div class="radio">
+                                                <input type="radio" name="rbdh" value="tidak ada" style="cursor: pointer;"/>
+                                            </div> --}}
+                                        </td>
+                                        <td class="valign-middle">
+                                            {{-- <textarea name="cadh" type="text" class="form-control" placeholder="Catatan"></textarea> --}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="valign-middle">
+                                            <label class=" control-label font-weight-bold" for="id">&nbsp;&nbsp;&nbsp;&nbsp; a.	Surat Permohonan Sidang Fatwa Halal</label>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbdh" value="ada" style="cursor: pointer;" required/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <div class="radio">
+                                                <input type="radio" name="rbdh" value="tidak ada" style="cursor: pointer;"/>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle">
+                                            <textarea name="cadh" type="text" class="form-control" placeholder="Catatan"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>                                                            
+                        </div>                    
+                      
+                    </div>
+                 
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Submit</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+           
+            
+        </div>
     </div>   
+
+    
 
      <!-- end panel -->
 
@@ -333,101 +669,7 @@
                       
                     }
                 },
-               
-
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-
-                        //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
-
-                        //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
-
-                        if(full.file_laporan_audit1 ){
-
-                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit 1&nbsp;&nbsp;</a>`;
-
-                                                                        
-                        }else{
-                        var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit 1&nbsp;&nbsp;</a>`;
-
-                        }
-
-                        if(full.file_laporan_audit_tahap_2 ){
-
-                            var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit 2&nbsp;&nbsp;</a>`;
-                            
-                                                                            
-                        }else{
-                            var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Audit 2&nbsp;&nbsp;</a>`;
-                            
-                        }
-
-                        if(full.file_bap ){
-
-                            var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                                                                        
-                        }else{
-                            var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                        }
-                        if(full.file_laporan_ketidaksesuaian ){
-
-                            var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                                                                        
-                            }else{
-                            var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                        }
-
-                        var unduhDPR = `<a href="{{ url('').Storage::url('public/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi.docx') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Daftar Periksa&nbsp;&nbsp;</a>`;
-
-                        // if(full.status_dpra == '0'){
-
-                        //     var dpra = ` <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                                                                        
-                        // }else{
-                        //     var dpra = `<button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                        // }
-
-                        return `<table class="table-xs table-borderless p-0 m-0">
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
-                                            `+unduhLaporan1+`
-                                        </td>
-                                    </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
-                                            `+unduhLaporan2+`
-                                        </td>
-                                    </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
-                                            `+unduhBAP+`
-                                        </td>
-                                    </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
-                                            `+unduhTS+`
-                                        </td>
-                                    </tr>
-                                    <tr class="text-center align-midle">
-                                        <td class="text-center align-midle">
-                                            `+unduhDPR+`
-                                        </td>
-                                    </tr>
-                                    
-                                </table>`
-                                    
-                        
-                    }
-                },
+                               
                 {
                     "data":null,
                     "searchable":false,
@@ -444,6 +686,7 @@
                                     <tr class="text-center align-midle">
                                         <td class="text-center">
                                             <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan-tr='`+full.catatan_tr+`' data-status-laporan-tr='`+full.status_laporan_tr+`' data-status-lanjut-ks='`+full.status_lanjut_ks+`' data-target='#modaltr' > Upload Review Laporan Audit</button>
+                                            <a class="btn btn-xs btn-primary m-r-5" href="{{url('daftar_periksa_rekomendasi')}}/`+full.id_regis+`">Isi Daftar Periksa dan Rekomendasi</a>
                                         </td>
                                     </tr>
                                 </table>`
@@ -454,7 +697,7 @@
             ],
             'columnDefs': [
             {
-                    "targets": [0,1,2,3,4,5,6],
+                    "targets": [0,1,2,3,4,5],
                     "className": "text-center",
                     
             }],

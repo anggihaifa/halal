@@ -46,7 +46,7 @@
 								<div class="container col-lg-12">
 									<table cellpadding="10" border="0">
 										<tr>
-											<td colspan="3"><h4 style="color: #2980b9"><b> {{$value['name']}}</b> ({{$value['nama_perusahaan']}})</h4></td>
+											<td colspan="3"><h4 style="color: #2980b9"><b> {{$value['name']}}</b> ({{$value['nama_perusahaan']}})</h4><a class="btn btn-sm btn-primary" href="{{route('editregistrasi',$value['id_regis'])}}">Edit Data</a></td>
 										</tr>
 										<tr>
 											<span id="stat_val" style="display:none">{{$value['statusnya']}}</span>
@@ -72,8 +72,13 @@
 											<td><p><b>Telepon Pabrik : </b><br>{{$value['telepon_pabrik']}}</p></td>
 										</tr>
 										<tr>
-											<td><p><b>Contact Person : </b>{{$value['contact_person']}}</p></td>
-											<td><p><b>Email : </b>{{$value['email']}}</p></td>											
+											<td><p><b>Contact Person : </b><br>{{$value['contact_person']}}</p></td>
+											<td><p><b>Email : </b><br>{{$value['email']}}</p></td>
+											<td><p><b>Skala Usaha : </b><br>{{$value['skala_usaha']}}</p></td>
+											<td><p><b>Jumlah Karyawan : </b><br>{{$value['jumlah_karyawan']}}</p></td>
+										</tr>
+										<tr>
+											<td><p><b>Provinsi : </b><br>{{$value['provinsi']}}</p></td>
 										</tr>
 										<tr>											
 											<td colspan="2"><h5>Data KTP & NPWP</h5></td>
