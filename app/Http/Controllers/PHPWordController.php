@@ -35,6 +35,8 @@ use App\DetailLaporanProduk;
 use App\DetailLaporanProdukFoto;
 use App\Ketidaksesuaian;
 use App\TemuanKetidaksesuaian;
+use App\DaftarPeriksaRekomendasi;
+use App\DetailDaftarPeriksaRekomendasi;
 use PhpOffice\PhpWord\Element\TextRun;
 
 
@@ -624,7 +626,7 @@ class PHPWordController extends Controller
             }else{
                 $e->status_sertifikasi = 'perubahan';
             }
-        }
+        }        
 
         $templateProcessor->setValue('no_audit', $data['no_audit']);
         $templateProcessor->setValue('nama_organisasi', $data['nama_organisasi']);
@@ -783,7 +785,14 @@ class PHPWordController extends Controller
             for ($j=$temp2; $j < $temp2+$jml; $j++) {                 
                 if($j == $temp){
                     $harike++;
-                    $arrData[] = array('hari_ke' => 'Hari '.$harike.'','tgl_waktu' => $hari.', '.$tgl.'','detail_waktu' => $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j], 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $data['detail_kegiatan'][$j], 'personil' => $data['personil'][$j]);
+                    
+                    // $dKegiatan = htmlspecialchars(str_replace("\n","<w:br/>",$data['detail_kegiatan'][$j]));
+                    $dKegiatan = htmlspecialchars(str_replace("\n","<w:br/>",$data['detail_kegiatan'][$j]));
+                    $dKegiatan_ = str_replace("&lt;","<",$dKegiatan);
+                    $dKegiatan__ = str_replace("&gt;",">",$dKegiatan_);
+                    // dd($dKegiatan);
+                    $arrData[] = array('hari_ke' => 'Hari '.$harike.'','tgl_waktu' => $hari.', '.$tgl.'','detail_waktu' => $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j], 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $dKegiatan__, 'personil' => $data['personil'][$j]);
+                    // $arrData[] = array('hari_ke' => 'Hari '.$harike.'','tgl_waktu' => $hari.', '.$tgl.'','detail_waktu' => $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j], 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $dKegiatan, 'personil' => $data['personil'][$j]);
 
                     $model2 = new DetailPerencanaanAudit();
                     DB::beginTransaction();
@@ -797,7 +806,11 @@ class PHPWordController extends Controller
                     $model2->save();
                     DB::commit();
                 }else{
-                    $arrData[] = array('hari_ke' => '','tgl_waktu' => $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j],'detail_waktu' => '', 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $data['detail_kegiatan'][$j], 'personil' => $data['personil'][$j]);
+                    $dKegiatan = htmlspecialchars(str_replace("\n","<w:br/>",$data['detail_kegiatan'][$j]));
+                    $dKegiatan_ = str_replace("&lt;","<",$dKegiatan);
+                    $dKegiatan__ = str_replace("&gt;",">",$dKegiatan_);
+                    
+                    $arrData[] = array('hari_ke' => '','tgl_waktu' => $data['jam_audit'][$j].' - '.$data['jam_audit2'][$j],'detail_waktu' => '', 'judul_kegiatan' => $data['judul_kegiatan'][$j], 'detail_kegiatan' => $dKegiatan__, 'personil' => $data['personil'][$j]);
 
                     $model2 = new DetailPerencanaanAudit();
                     DB::beginTransaction();
@@ -1086,8 +1099,17 @@ class PHPWordController extends Controller
         // $templateProcessor->setValue('auditee', $data['auditee']);               
         // $templateProcessor->setValue('hari', $hari);
 
-        $templateProcessor->setValue('deskripsi_perusahaan', $data['deskripsi_perusahaan']);        
-        $templateProcessor->setValue('narasi', $data['narasi_halal']);        
+        $dDeskripsi = htmlspecialchars(str_replace("\n","<w:br/>",$data['deskripsi_perusahaan']));
+        $dDeskripsi_ = str_replace("&lt;","<",$dDeskripsi);
+        $dDeskripsi__ = str_replace("&gt;",">",$dDeskripsi_);
+
+        $templateProcessor->setValue('deskripsi_perusahaan', $dDeskripsi__);
+
+        $dNarasi = htmlspecialchars(str_replace("\n","<w:br/>",$data['narasi_halal']));
+        $dNarasi_ = str_replace("&lt;","<",$dNarasi);
+        $dNarasi__ = str_replace("&gt;",">",$dNarasi_);
+
+        $templateProcessor->setValue('narasi', $dNarasi__);
 
         if($request->has("flowchart")){
             $file = $request->file("flowchart");
@@ -1110,9 +1132,14 @@ class PHPWordController extends Controller
 
             $nama_fasilitas = $data['nama_fasilitas'][$i];
             $fungsi = $data['fungsi'][$i];
-            $alamat_fasilitas = $data['alamat_fasilitas'][$i];                                    
+            $alamat_fasilitas = $data['alamat_fasilitas'][$i];
 
-            $arrData[] = array('no' => $no, 'nama_fasilitas' => $nama_fasilitas, 'fungsi' => $fungsi, 'alamat' => $alamat_fasilitas);            
+            // dd($alamat_fasilitas);
+            $dAlamatF = htmlspecialchars(str_replace("\n","<w:br/>",$alamat_fasilitas));
+            $dAlamatF_ = str_replace("&lt;","<",$dAlamatF);
+            $dAlamatF__ = str_replace("&gt;",">",$dAlamatF_);            
+
+            $arrData[] = array('no' => $no, 'nama_fasilitas' => $nama_fasilitas, 'fungsi' => $fungsi, 'alamat_fasilitas' => $dAlamatF__);
             $jml++;
         }            
 
@@ -11467,6 +11494,78 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             }
             $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Berkas Laporan Ketidaksesuaian.", Auth::user()->usergroup_id);
             DB::Commit();
+        }else if($request->has("berkas_baps")){
+            $file = $request->file("berkas_baps");
+            $file = $data["berkas_baps"];
+
+            $fileName = 'FOR-HALAL-OPS-10 Berita Acara Pengambilan Sampel ('.$data['idregis'].').'.$file->getClientOriginalExtension();
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/BAPS/", $fileName);
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_bap_sampel = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_bap_sampel = $ldate;
+                    $model->save();
+                DB::Commit();
+
+                $dataLaporanBaru = DB::table('laporan_audit2')
+                    ->where('id_registrasi',$data['idregis'])                    
+                    ->get();
+
+                $modelRe = new Registrasi;
+                $x = $modelRe->find($data['idregis']);
+                $x->id_laporan_audit2 = $dataLaporanBaru[0]->id;
+                $x->save();
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_bap_sampel = $fileName;
+                $f->tgl_penyerahan_bap_sampel = $ldate;
+                $f->save();                
+            }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Berkas Berita Acara Pengambilan Sampel.", Auth::user()->usergroup_id);
+            DB::Commit();
+        }else if($request->has("berkas_daftarhadir")){
+            $file = $request->file("berkas_daftarhadir");
+            $file = $data["berkas_daftarhadir"];
+
+            $fileName = 'FOR-HALAL-OPS-12 Daftar Hadir ('.$data['idregis'].').'.$file->getClientOriginalExtension();
+            // dd($fileName);
+
+            $file->storeAs("public/laporan/upload/Daftar Hadir/", $fileName);
+
+            if(count($dataLaporan) == 0){
+                $model = new LaporanAudit2;
+                    $model->file_daftar_hadir = $fileName;
+                    $ldate = date('Y-m-d H:i:s');
+                    $model->id_registrasi = $data['idregis'];
+                    $model->tgl_penyerahan_daftar_hadir = $ldate;
+                    $model->save();
+                DB::Commit();
+
+                $dataLaporanBaru = DB::table('laporan_audit2')
+                    ->where('id_registrasi',$data['idregis'])                    
+                    ->get();
+
+                $modelRe = new Registrasi;
+                $x = $modelRe->find($data['idregis']);
+                $x->id_laporan_audit2 = $dataLaporanBaru[0]->id;
+                $x->save();
+            }else{
+                $model2 = new LaporanAudit2;
+                $ldate = date('Y-m-d H:i:s');
+                $f = $model2->find($dataLaporan[0]->id);
+                $f->file_daftar_hadir = $fileName;
+                $f->tgl_penyerahan_daftar_hadir = $ldate;
+                $f->save();                
+            }
+            $this->LogKegiatan($data['idregis'], Auth::user()->id, Auth::user()->name, 10, "Upload Berkas Daftar Hadir Opening dan Closing Meeting.", Auth::user()->usergroup_id);
+            DB::Commit();
         }
 
         Session::flash('success', "Upload Berkas Berhasil");
@@ -11639,9 +11738,27 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $klausul = $data['klausul'][$i];
                 $auditor = $data['auditor'][$i];
                 $deskripsi = $data['deskripsi'][$i];
+                $batas_akhir = $data['batas_akhir'][$i];
                 $investigasi = $data['investigasi'][$i];
-                $tindakan = $data['tindakan'][$i];
+                $tindakan_perbaikan = $data['tindakan_perbaikan'][$i];
+                $tindakan_pencegahan = $data['tindakan_pencegahan'][$i];
                 $hasil = $data['hasil'][$i];
+
+                $dDeskripsi = htmlspecialchars(str_replace("\n","<w:br/>",$deskripsi));
+                $dDeskripsi_ = str_replace("&lt;","<",$dDeskripsi);
+                $dDeskripsi__ = str_replace("&gt;",">",$dDeskripsi_);
+
+                $dInvestigasi = htmlspecialchars(str_replace("\n","<w:br/>",$investigasi));
+                $dInvestigasi_ = str_replace("&lt;","<",$dInvestigasi);
+                $dInvestigasi__ = str_replace("&gt;",">",$dInvestigasi_);
+
+                $dPerbaikan = htmlspecialchars(str_replace("\n","<w:br/>",$tindakan_perbaikan));
+                $dPerbaikan_ = str_replace("&lt;","<",$dPerbaikan);
+                $dPerbaikan__ = str_replace("&gt;",">",$dPerbaikan_);
+
+                $dPencegahan = htmlspecialchars(str_replace("\n","<w:br/>",$tindakan_pencegahan));
+                $dPencegahan_ = str_replace("&lt;","<",$dPencegahan);
+                $dPencegahan__ = str_replace("&gt;",">",$dPencegahan_);
 
                 date_default_timezone_set('Asia/Jakarta');
                 $date = date("d-m-Y H:i:s");
@@ -11653,8 +11770,10 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                     $model2->klausul = $klausul;
                     $model2->auditor = $auditor;
                     $model2->deskripsi = $deskripsi;
+                    $model2->batas_akhir = $batas_akhir;
                     $model2->investigasi_akar_permasalahan = $investigasi;
-                    $model2->tindakan_perbaikan = $tindakan;                
+                    $model2->tindakan_perbaikan = $tindakan_perbaikan;
+                    $model2->tindakan_pencegahan = $tindakan_pencegahan;
 
                     if($hasil == 'open'){
                         $jmlTidakSesuai++;
@@ -11666,7 +11785,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                     $model2->save();
                 DB::Commit();
 
-                $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $deskripsi, 'investigasi' => $investigasi, 'tindakan_koreksi' => $tindakan, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
+                $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $dDeskripsi__, 'batas_akhir' => $batas_akhir, 'investigasi' => $dInvestigasi__, 'tindakan_koreksi' => $dPerbaikan__, 'tindakan_pencegahan' => $dPencegahan__, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
                 $jml++;            
             }
             
@@ -11713,22 +11832,42 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                 $klausul = $data['klausul'][$i];
                 $auditor = $data['auditor'][$i];
                 $deskripsi = $data['deskripsi'][$i];
+                $batas_akhir = $data['batas_akhir'][$i];
                 $investigasi = $data['investigasi'][$i];
-                $tindakan = $data['tindakan'][$i];
+                $tindakan_perbaikan = $data['tindakan_perbaikan'][$i];
+                $tindakan_pencegahan = $data['tindakan_pencegahan'][$i];
                 $hasil = $data['hasil'][$i];
+
+                $dDeskripsi = htmlspecialchars(str_replace("\n","<w:br/>",$deskripsi));
+                $dDeskripsi_ = str_replace("&lt;","<",$dDeskripsi);
+                $dDeskripsi__ = str_replace("&gt;",">",$dDeskripsi_);
+
+                $dInvestigasi = htmlspecialchars(str_replace("\n","<w:br/>",$investigasi));
+                $dInvestigasi_ = str_replace("&lt;","<",$dInvestigasi);
+                $dInvestigasi__ = str_replace("&gt;",">",$dInvestigasi_);
+
+                $dPerbaikan = htmlspecialchars(str_replace("\n","<w:br/>",$tindakan_perbaikan));
+                $dPerbaikan_ = str_replace("&lt;","<",$dPerbaikan);
+                $dPerbaikan__ = str_replace("&gt;",">",$dPerbaikan_);
+
+                $dPencegahan = htmlspecialchars(str_replace("\n","<w:br/>",$tindakan_pencegahan));
+                $dPencegahan_ = str_replace("&lt;","<",$dPencegahan);
+                $dPencegahan__ = str_replace("&gt;",">",$dPencegahan_);
 
                 date_default_timezone_set('Asia/Jakarta');
                 $date = date("d-m-Y H:i:s");
                 $tgl = $date;
 
                 $model2 = new TemuanKetidaksesuaian;
-                DB::beginTransaction();                
+                DB::beginTransaction();                                   
                     $model2->id_ketidaksesuaian = $id_ketidaksesuaian;
                     $model2->klausul = $klausul;
                     $model2->auditor = $auditor;
                     $model2->deskripsi = $deskripsi;
+                    $model2->batas_akhir = $batas_akhir;
                     $model2->investigasi_akar_permasalahan = $investigasi;
-                    $model2->tindakan_perbaikan = $tindakan;                
+                    $model2->tindakan_perbaikan = $tindakan_perbaikan;
+                    $model2->tindakan_pencegahan = $tindakan_pencegahan;
 
                     if($hasil == 'open'){
                         $jmlTidakSesuai++;
@@ -11740,7 +11879,8 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
                     $model2->save();
                 DB::Commit();
 
-                $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $deskripsi, 'investigasi' => $investigasi, 'tindakan_koreksi' => $tindakan, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
+                // $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $dDeskripsi__, 'investigasi' => $investigasi, 'tindakan_koreksi' => $tindakan, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
+                $arrData[] = array('no' => $no, 'klausul' => $klausul, 'auditor' => $auditor, 'deskripsi' => $dDeskripsi__, 'batas_akhir' => $batas_akhir, 'investigasi' => $dInvestigasi__, 'tindakan_koreksi' => $dPerbaikan__, 'tindakan_pencegahan' => $dPencegahan__, 'hasil_tinjauan' => $hasil, 'tgl' => $date);
                 $jml++;            
             }
             
@@ -11803,6 +11943,1066 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
             $model3->judul_kegiatan = $judul_kegiatan;            
             $model3->save();
         DB::commit();
+    }
+
+    public function uploadDaftarPeriksaRekomendasi(Request $request){
+        $data = $request->except('_token','_method');
+
+        $model = new DaftarPeriksaRekomendasi();        
+
+        $dataRekomen = DB::table('daftar_periksa_rekomendasi')
+            ->where('id_registrasi',$data['id_registrasi'])
+            ->select('id')
+            ->get();
+
+        $phpWord = new \PhpOffice\PhpWord\PhpWord(); 
+        
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi Isian.docx');
+        
+        // dd($data);
+
+        $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
+        $templateProcessor->setValue('nomor_id_bpjph', $data['nomor_id_bpjph']);
+        $templateProcessor->setValue('jenis_produk', $data['jenis_produk']);
+
+        $tglAudit = htmlspecialchars(str_replace("\n","<w:br/>",$data['mulai_audit1']));
+        $tglAudit_ = str_replace("&lt;","<",$tglAudit);
+        $tglAudit__ = str_replace("&gt;",">",$tglAudit_);
+        $templateProcessor->setValue('tgl_audit', $tglAudit__);
+
+        $pelaksana = htmlspecialchars(str_replace("\n","<w:br/>",$data['pelaksana1_audit1']));
+        $pelaksana_ = str_replace("&lt;","<",$pelaksana);
+        $pelaksana__ = str_replace("&gt;",">",$pelaksana_);        
+        $templateProcessor->setValue('tim_audit', $pelaksana__);
+
+        if(sizeOf($dataRekomen) == 0){
+                if(Auth::user()->usergroup_id == '10' || Auth::user()->usergroup_id == '11' || Auth::user()->usergroup_id == '12'){
+                    
+                    DB::beginTransaction();
+                    $model->nama_rekomendasi_tr = $data['nama_tr'];
+                    $templateProcessor->setValue('nama_rekomendasi', $data['nama_tr']);
+                    $templateProcessor->setValue('nama_rekomendasi2', '');
+
+                    $model->tgl_rekomendasi_tr = $data['tanggal_rekomendasi_tr'];
+                    $templateProcessor->setValue('tgl_rekomendasi', $data['tanggal_rekomendasi_tr']);
+                    $templateProcessor->setValue('tgl_rekomendasi2', '');
+
+                    $model->status_rekomendasi_tr = $data['kesiapanrekomen_tr'];
+                    if($data['kesiapanrekomen_tr'] == 'siap'){                        
+                        $templateProcessor->setValue('siap', 'Siap');
+
+                        $inline = new TextRun();
+                        $inline->addText('Belum Siap', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('belum_siap', $inline);                        
+                    }else{                        
+                        $templateProcessor->setValue('belum_siap', 'Belum Siap');
+
+                        $inline = new TextRun();
+                        $inline->addText('Siap', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('siap', $inline);
+                    }     
+                    $templateProcessor->setValue('siap2', 'Siap');
+                    $templateProcessor->setValue('belum_siap2', 'Belum Siap');
+
+                    $model->id_registrasi = $data['id_registrasi'];
+
+                    $model->status1 = $data['rbpenawaran'];
+                    $caPenawaran = htmlspecialchars(str_replace("\n","<w:br/>",$data['capenawaran']));
+                    $caPenawaran_ = str_replace("&lt;","<",$caPenawaran);
+                    $caPenawaran__ = str_replace("&gt;",">",$caPenawaran_);
+                    $model->catatan1 = $data['capenawaran'];
+
+                    if($data['rbpenawaran'] == 'ada'){
+                        $templateProcessor->setValue('11', "&#8730;");
+                        $templateProcessor->setValue('10', "");
+                    }else{
+                        $templateProcessor->setValue('11', "");
+                        $templateProcessor->setValue('10', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan11', $caPenawaran__);
+
+                    $model->status2 = $data['rbkonfirmasi'];
+                    $caKonfirmasi = htmlspecialchars(str_replace("\n","<w:br/>",$data['cakonfirmasi']));
+                    $caKonfirmasi_ = str_replace("&lt;","<",$caKonfirmasi);
+                    $caKonfirmasi__ = str_replace("&gt;",">",$caKonfirmasi_);
+                    $model->catatan2 = $data['cakonfirmasi'];
+
+                    if($data['rbkonfirmasi'] == 'ada'){
+                        $templateProcessor->setValue('21', "&#8730;");
+                        $templateProcessor->setValue('20', "");
+                    }else{
+                        $templateProcessor->setValue('21', "");
+                        $templateProcessor->setValue('20', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan12', $caKonfirmasi__);
+
+                    $model->status3 = $data['rbst'];
+                    $caST = htmlspecialchars(str_replace("\n","<w:br/>",$data['cast']));
+                    $caST_ = str_replace("&lt;","<",$caST);
+                    $caST__ = str_replace("&gt;",">",$caST_);
+                    $model->catatan3 = $data['cast'];
+
+                    if($data['rbst'] == 'ada'){
+                        $templateProcessor->setValue('31', "&#8730;");
+                        $templateProcessor->setValue('30', "");
+                    }else{
+                        $templateProcessor->setValue('31', "");
+                        $templateProcessor->setValue('30', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan13', $caST__);
+
+                    $model->status4 = $data['rbap'];
+                    $caAP = htmlspecialchars(str_replace("\n","<w:br/>",$data['caap']));
+                    $caAP_ = str_replace("&lt;","<",$caAP);
+                    $caAP__ = str_replace("&gt;",">",$caAP_);
+                    $model->catatan4 = $data['caap'];
+
+                    if($data['rbap'] == 'ada'){
+                        $templateProcessor->setValue('41', "&#8730;");
+                        $templateProcessor->setValue('40', "");
+                    }else{
+                        $templateProcessor->setValue('41', "");
+                        $templateProcessor->setValue('40', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan14', $caAP__);
+
+                    $model->status5 = $data['rbaudit1'];
+                    $caAudit1 = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit1']));
+                    $caAudit1_ = str_replace("&lt;","<",$caAudit1);
+                    $caAudit1__ = str_replace("&gt;",">",$caAudit1_);
+                    $model->catatan5 = $data['caaudit1'];
+
+                    if($data['rbaudit1'] == 'ada'){
+                        $templateProcessor->setValue('51', "&#8730;");
+                        $templateProcessor->setValue('50', "");
+                    }else{
+                        $templateProcessor->setValue('51', "");
+                        $templateProcessor->setValue('50', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan15', $caAP__);
+                    $templateProcessor->setValue('catatan25', "");
+
+                    $model->status6a = $data['rbaudit2a'];
+                    $caAudit2a = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2a']));
+                    $caAudit2a_ = str_replace("&lt;","<",$caAudit2a);
+                    $caAudit2a__ = str_replace("&gt;",">",$caAudit2a_);
+                    $model->catatan6a = $data['caaudit2a'];
+
+                    if($data['rbaudit2a'] == 'ada'){
+                        $templateProcessor->setValue('6a1', "&#8730;");
+                        $templateProcessor->setValue('6a0', "");
+                    }else{
+                        $templateProcessor->setValue('6a1', "");
+                        $templateProcessor->setValue('6a0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16a', $caAudit2a__);
+                    $templateProcessor->setValue('catatan26a', "");
+
+                    $model->status6b = $data['rbaudit2b'];
+                    $caAudit2b = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2b']));
+                    $caAudit2b_ = str_replace("&lt;","<",$caAudit2b);
+                    $caAudit2b__ = str_replace("&gt;",">",$caAudit2b_);
+                    $model->catatan6b = $data['caaudit2b'];
+
+                    if($data['rbaudit2b'] == 'ada'){
+                        $templateProcessor->setValue('6b1', "&#8730;");
+                        $templateProcessor->setValue('6b0', "");
+                    }else{
+                        $templateProcessor->setValue('6b1', "");
+                        $templateProcessor->setValue('6b0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16b', $caAudit2a__);
+                    $templateProcessor->setValue('catatan26b', "");
+
+                    $model->status6c = $data['rbaudit2c'];
+                    $caAudit2c = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2c']));
+                    $caAudit2c_ = str_replace("&lt;","<",$caAudit2c);
+                    $caAudit2c__ = str_replace("&gt;",">",$caAudit2c_);
+                    $model->catatan6c = $data['caaudit2c'];
+
+                    if($data['rbaudit2c'] == 'ada'){
+                        $templateProcessor->setValue('6c1', "&#8730;");
+                        $templateProcessor->setValue('6c0', "");
+                    }else{
+                        $templateProcessor->setValue('6c1', "");
+                        $templateProcessor->setValue('6c0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16c', $caAudit2c__);
+                    $templateProcessor->setValue('catatan26c', "");
+
+                    $model->status6d = $data['rbaudit2d'];
+                    $caAudit2d = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2d']));
+                    $caAudit2d_ = str_replace("&lt;","<",$caAudit2d);
+                    $caAudit2d__ = str_replace("&gt;",">",$caAudit2d_);
+                    $model->catatan6d = $data['caaudit2d'];
+
+                    if($data['rbaudit2d'] == 'ada'){
+                        $templateProcessor->setValue('6d1', "&#8730;");
+                        $templateProcessor->setValue('6d0', "");
+                    }else{
+                        $templateProcessor->setValue('6d1', "");
+                        $templateProcessor->setValue('6d0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16d', $caAudit2d__);
+                    $templateProcessor->setValue('catatan26d', "");
+
+                    $model->status7 = $data['rbbap'];
+                    $caBAP = htmlspecialchars(str_replace("\n","<w:br/>",$data['cabap']));
+                    $caBAP_ = str_replace("&lt;","<",$caBAP);
+                    $caBAP__ = str_replace("&gt;",">",$caBAP_);
+                    $model->catatan7 = $data['cabap'];
+
+                    if($data['rbbap'] == 'ada'){
+                        $templateProcessor->setValue('71', "&#8730;");
+                        $templateProcessor->setValue('70', "");
+                    }else{
+                        $templateProcessor->setValue('71', "");
+                        $templateProcessor->setValue('70', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan17', $caBAP__);
+                    $templateProcessor->setValue('catatan27', "");
+
+                    $model->status8 = $data['rbbaps'];
+                    $caBAPS = htmlspecialchars(str_replace("\n","<w:br/>",$data['cabaps']));
+                    $caBAPS_ = str_replace("&lt;","<",$caBAPS);
+                    $caBAPS__ = str_replace("&gt;",">",$caBAPS_);
+                    $model->catatan8 = $data['cabaps'];
+
+                    if($data['rbbaps'] == 'ada'){
+                        $templateProcessor->setValue('81', "&#8730;");
+                        $templateProcessor->setValue('80', "");
+                    }else{
+                        $templateProcessor->setValue('81', "");
+                        $templateProcessor->setValue('80', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan18', $caBAPS__);
+                    $templateProcessor->setValue('catatan28', "");
+
+                    $model->status9 = $data['rbdh'];
+                    $caDH = htmlspecialchars(str_replace("\n","<w:br/>",$data['cadh']));
+                    $caDH_ = str_replace("&lt;","<",$caDH);
+                    $caDH__ = str_replace("&gt;",">",$caDH_);
+                    $model->catatan9 = $data['cadh'];
+
+                    if($data['rbdh'] == 'ada'){
+                        $templateProcessor->setValue('91', "&#8730;");
+                        $templateProcessor->setValue('90', "");
+                    }else{
+                        $templateProcessor->setValue('91', "");
+                        $templateProcessor->setValue('90', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan19', $caDH__);
+                    $templateProcessor->setValue('catatan29', "");
+
+                    $model->status10a = $data['rbskfa'];
+                    $caSKFA = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfa']));
+                    $caSKFA_ = str_replace("&lt;","<",$caSKFA);
+                    $caSKFA__ = str_replace("&gt;",">",$caSKFA_);
+                    $model->catatan10a = $data['caskfa'];
+
+                    if($data['rbskfa'] == 'ada'){
+                        $templateProcessor->setValue('10a1', "&#8730;");
+                        $templateProcessor->setValue('10a0', "");
+                    }else{
+                        $templateProcessor->setValue('10a1', "");
+                        $templateProcessor->setValue('10a0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110a', $caDH__);
+
+                    $model->status10b = $data['rbskfb'];
+                    $caSKFB = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfb']));
+                    $caSKFB_ = str_replace("&lt;","<",$caSKFB);
+                    $caSKFB__ = str_replace("&gt;",">",$caSKFB_);
+                    $model->catatan10b = $data['caskfb'];
+
+                    if($data['rbskfb'] == 'ada'){
+                        $templateProcessor->setValue('10b1', "&#8730;");
+                        $templateProcessor->setValue('10b0', "");
+                    }else{
+                        $templateProcessor->setValue('10b1', "");
+                        $templateProcessor->setValue('10b0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110b', $caSKFB__);
+
+                    $model->status10c = $data['rbskfc'];
+                    $caSKFC = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfc']));
+                    $caSKFC_ = str_replace("&lt;","<",$caSKFC);
+                    $caSKFC__ = str_replace("&gt;",">",$caSKFC_);
+                    $model->catatan10c = $data['caskfc'];
+
+                    if($data['rbskfc'] == 'ada'){
+                        $templateProcessor->setValue('10c1', "&#8730;");
+                        $templateProcessor->setValue('10c0', "");
+                    }else{
+                        $templateProcessor->setValue('10c1', "");
+                        $templateProcessor->setValue('10c0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110c', $caSKFC__);
+
+                    $model->status10d = $data['rbskfd'];
+                    $caSKFD = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfd']));
+                    $caSKFD_ = str_replace("&lt;","<",$caSKFD);
+                    $caSKFD__ = str_replace("&gt;",">",$caSKFD_);
+                    $model->catatan10d = $data['caskfd'];
+
+                    if($data['rbskfd'] == 'ada'){
+                        $templateProcessor->setValue('10d1', "&#8730;");
+                        $templateProcessor->setValue('10d0', "");
+                    }else{
+                        $templateProcessor->setValue('10d1', "");
+                        $templateProcessor->setValue('10d0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110d', $caSKFD__);
+
+                    $model->status10e = $data['rbskfe'];
+                    $caSKFE = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfe']));
+                    $caSKFE_ = str_replace("&lt;","<",$caSKFE);
+                    $caSKFE__ = str_replace("&gt;",">",$caSKFE_);
+                    $model->catatan10e = $data['caskfe'];
+
+                    if($data['rbskfe'] == 'ada'){
+                        $templateProcessor->setValue('10e1', "&#8730;");
+                        $templateProcessor->setValue('10e0', "");
+                    }else{
+                        $templateProcessor->setValue('10e1', "");
+                        $templateProcessor->setValue('10e0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110e', $caSKFE__);
+
+                    $model->status10f = $data['rbskff'];
+                    $caSKFF = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskff']));
+                    $caSKFF_ = str_replace("&lt;","<",$caSKFF);
+                    $caSKFF__ = str_replace("&gt;",">",$caSKFF_);
+                    $model->catatan10f = $data['caskff'];
+
+                    if($data['rbskff'] == 'ada'){
+                        $templateProcessor->setValue('10f1', "&#8730;");
+                        $templateProcessor->setValue('10f0', "");
+                    }else{
+                        $templateProcessor->setValue('10f1', "");
+                        $templateProcessor->setValue('10f0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110f', $caSKFF__);
+
+                    $model->save();
+                    DB::commit();                    
+                    // dd($id_daftar_rekomen);                                        
+                }
+
+                $fileName = 'FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi ('.$data['id_registrasi'].').docx';
+                $templateProcessor->saveAs("storage/laporan/download/Daftar Periksa Dan Rekomendasi/Isian/".$fileName);
+        
+                $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+                return response()->download('storage/laporan/download/Daftar Periksa Dan Rekomendasi/Isian/'.$fileName);
+            
+        }else{
+            if(Auth::user()->usergroup_id == '10' || Auth::user()->usergroup_id == '11' || Auth::user()->usergroup_id == '12'){
+
+                foreach($dataRekomen as $id){
+                    foreach($id as $id_daftar_periksa_rekomendasi){
+                        $id_daftar_rekomen = $id_daftar_periksa_rekomendasi;
+                    }
+                }
+
+                // dd($id_daftar_rekomen);
+                    $d = $model->find($id_daftar_rekomen);
+
+                    DB::beginTransaction();
+                    $d->nama_rekomendasi_tr = $data['nama_tr'];
+                    $templateProcessor->setValue('nama_rekomendasi', $data['nama_tr']);
+                    $templateProcessor->setValue('nama_rekomendasi2', '');
+
+                    $d->tgl_rekomendasi_tr = $data['tanggal_rekomendasi_tr'];
+                    $templateProcessor->setValue('tgl_rekomendasi', $data['tanggal_rekomendasi_tr']);
+                    $templateProcessor->setValue('tgl_rekomendasi2', '');
+
+                    $d->status_rekomendasi_tr = $data['kesiapanrekomen_tr'];
+                    if($data['kesiapanrekomen_tr'] == 'siap'){                        
+                        $templateProcessor->setValue('siap', 'Siap');
+
+                        $inline = new TextRun();
+                        $inline->addText('Belum Siap', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('belum_siap', $inline);                        
+                    }else{                        
+                        $templateProcessor->setValue('belum_siap', 'Belum Siap');
+
+                        $inline = new TextRun();
+                        $inline->addText('Siap', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('siap', $inline);
+                    }     
+                    $templateProcessor->setValue('siap2', 'Siap');
+                    $templateProcessor->setValue('belum_siap2', 'Belum Siap');
+
+                    $d->id_registrasi = $data['id_registrasi'];
+
+                    $d->status1 = $data['rbpenawaran'];
+                    $caPenawaran = htmlspecialchars(str_replace("\n","<w:br/>",$data['capenawaran']));
+                    $caPenawaran_ = str_replace("&lt;","<",$caPenawaran);
+                    $caPenawaran__ = str_replace("&gt;",">",$caPenawaran_);
+                    $d->catatan1 = $data['capenawaran'];
+
+                    if($data['rbpenawaran'] == 'ada'){
+                        $templateProcessor->setValue('11', "&#8730;");
+                        $templateProcessor->setValue('10', "");
+                    }else{
+                        $templateProcessor->setValue('11', "");
+                        $templateProcessor->setValue('10', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan11', $caPenawaran__);
+
+                    $d->status2 = $data['rbkonfirmasi'];
+                    $caKonfirmasi = htmlspecialchars(str_replace("\n","<w:br/>",$data['cakonfirmasi']));
+                    $caKonfirmasi_ = str_replace("&lt;","<",$caKonfirmasi);
+                    $caKonfirmasi__ = str_replace("&gt;",">",$caKonfirmasi_);
+                    $d->catatan2 = $data['cakonfirmasi'];
+
+                    if($data['rbkonfirmasi'] == 'ada'){
+                        $templateProcessor->setValue('21', "&#8730;");
+                        $templateProcessor->setValue('20', "");
+                    }else{
+                        $templateProcessor->setValue('21', "");
+                        $templateProcessor->setValue('20', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan12', $caKonfirmasi__);
+
+                    $d->status3 = $data['rbst'];
+                    $caST = htmlspecialchars(str_replace("\n","<w:br/>",$data['cast']));
+                    $caST_ = str_replace("&lt;","<",$caST);
+                    $caST__ = str_replace("&gt;",">",$caST_);
+                    $d->catatan3 = $data['cast'];
+
+                    if($data['rbst'] == 'ada'){
+                        $templateProcessor->setValue('31', "&#8730;");
+                        $templateProcessor->setValue('30', "");
+                    }else{
+                        $templateProcessor->setValue('31', "");
+                        $templateProcessor->setValue('30', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan13', $caST__);
+
+                    $d->status4 = $data['rbap'];
+                    $caAP = htmlspecialchars(str_replace("\n","<w:br/>",$data['caap']));
+                    $caAP_ = str_replace("&lt;","<",$caAP);
+                    $caAP__ = str_replace("&gt;",">",$caAP_);
+                    $d->catatan4 = $data['caap'];
+
+                    if($data['rbap'] == 'ada'){
+                        $templateProcessor->setValue('41', "&#8730;");
+                        $templateProcessor->setValue('40', "");
+                    }else{
+                        $templateProcessor->setValue('41', "");
+                        $templateProcessor->setValue('40', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan14', $caAP__);
+
+                    $d->status5 = $data['rbaudit1'];
+                    $caAudit1 = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit1']));
+                    $caAudit1_ = str_replace("&lt;","<",$caAudit1);
+                    $caAudit1__ = str_replace("&gt;",">",$caAudit1_);
+                    $d->catatan5 = $data['caaudit1'];
+
+                    if($data['rbaudit1'] == 'ada'){
+                        $templateProcessor->setValue('51', "&#8730;");
+                        $templateProcessor->setValue('50', "");
+                    }else{
+                        $templateProcessor->setValue('51', "");
+                        $templateProcessor->setValue('50', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan15', $caAP__);
+                    $templateProcessor->setValue('catatan25', "");
+
+                    $d->status6a = $data['rbaudit2a'];
+                    $caAudit2a = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2a']));
+                    $caAudit2a_ = str_replace("&lt;","<",$caAudit2a);
+                    $caAudit2a__ = str_replace("&gt;",">",$caAudit2a_);
+                    $d->catatan6a = $data['caaudit2a'];
+
+                    if($data['rbaudit2a'] == 'ada'){
+                        $templateProcessor->setValue('6a1', "&#8730;");
+                        $templateProcessor->setValue('6a0', "");
+                    }else{
+                        $templateProcessor->setValue('6a1', "");
+                        $templateProcessor->setValue('6a0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16a', $caAudit2a__);
+                    $templateProcessor->setValue('catatan26a', "");
+
+                    $d->status6b = $data['rbaudit2b'];
+                    $caAudit2b = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2b']));
+                    $caAudit2b_ = str_replace("&lt;","<",$caAudit2b);
+                    $caAudit2b__ = str_replace("&gt;",">",$caAudit2b_);
+                    $d->catatan6b = $data['caaudit2b'];
+
+                    if($data['rbaudit2b'] == 'ada'){
+                        $templateProcessor->setValue('6b1', "&#8730;");
+                        $templateProcessor->setValue('6b0', "");
+                    }else{
+                        $templateProcessor->setValue('6b1', "");
+                        $templateProcessor->setValue('6b0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16b', $caAudit2a__);
+                    $templateProcessor->setValue('catatan26b', "");
+
+                    $d->status6c = $data['rbaudit2c'];
+                    $caAudit2c = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2c']));
+                    $caAudit2c_ = str_replace("&lt;","<",$caAudit2c);
+                    $caAudit2c__ = str_replace("&gt;",">",$caAudit2c_);
+                    $d->catatan6c = $data['caaudit2c'];
+
+                    if($data['rbaudit2c'] == 'ada'){
+                        $templateProcessor->setValue('6c1', "&#8730;");
+                        $templateProcessor->setValue('6c0', "");
+                    }else{
+                        $templateProcessor->setValue('6c1', "");
+                        $templateProcessor->setValue('6c0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16c', $caAudit2c__);
+                    $templateProcessor->setValue('catatan26c', "");
+
+                    $d->status6d = $data['rbaudit2d'];
+                    $caAudit2d = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2d']));
+                    $caAudit2d_ = str_replace("&lt;","<",$caAudit2d);
+                    $caAudit2d__ = str_replace("&gt;",">",$caAudit2d_);
+                    $d->catatan6d = $data['caaudit2d'];
+
+                    if($data['rbaudit2d'] == 'ada'){
+                        $templateProcessor->setValue('6d1', "&#8730;");
+                        $templateProcessor->setValue('6d0', "");
+                    }else{
+                        $templateProcessor->setValue('6d1', "");
+                        $templateProcessor->setValue('6d0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16d', $caAudit2d__);
+                    $templateProcessor->setValue('catatan26d', "");
+
+                    $d->status7 = $data['rbbap'];
+                    $caBAP = htmlspecialchars(str_replace("\n","<w:br/>",$data['cabap']));
+                    $caBAP_ = str_replace("&lt;","<",$caBAP);
+                    $caBAP__ = str_replace("&gt;",">",$caBAP_);
+                    $d->catatan7 = $data['cabap'];
+
+                    if($data['rbbap'] == 'ada'){
+                        $templateProcessor->setValue('71', "&#8730;");
+                        $templateProcessor->setValue('70', "");
+                    }else{
+                        $templateProcessor->setValue('71', "");
+                        $templateProcessor->setValue('70', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan17', $caBAP__);
+                    $templateProcessor->setValue('catatan27', "");
+
+                    $d->status8 = $data['rbbaps'];
+                    $caBAPS = htmlspecialchars(str_replace("\n","<w:br/>",$data['cabaps']));
+                    $caBAPS_ = str_replace("&lt;","<",$caBAPS);
+                    $caBAPS__ = str_replace("&gt;",">",$caBAPS_);
+                    $d->catatan8 = $data['cabaps'];
+
+                    if($data['rbbaps'] == 'ada'){
+                        $templateProcessor->setValue('81', "&#8730;");
+                        $templateProcessor->setValue('80', "");
+                    }else{
+                        $templateProcessor->setValue('81', "");
+                        $templateProcessor->setValue('80', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan18', $caBAPS__);
+                    $templateProcessor->setValue('catatan28', "");
+
+                    $d->status9 = $data['rbdh'];
+                    $caDH = htmlspecialchars(str_replace("\n","<w:br/>",$data['cadh']));
+                    $caDH_ = str_replace("&lt;","<",$caDH);
+                    $caDH__ = str_replace("&gt;",">",$caDH_);
+                    $d->catatan9 = $data['cadh'];
+
+                    if($data['rbdh'] == 'ada'){
+                        $templateProcessor->setValue('91', "&#8730;");
+                        $templateProcessor->setValue('90', "");
+                    }else{
+                        $templateProcessor->setValue('91', "");
+                        $templateProcessor->setValue('90', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan19', $caDH__);
+                    $templateProcessor->setValue('catatan29', "");
+
+                    $d->status10a = $data['rbskfa'];
+                    $caSKFA = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfa']));
+                    $caSKFA_ = str_replace("&lt;","<",$caSKFA);
+                    $caSKFA__ = str_replace("&gt;",">",$caSKFA_);
+                    $d->catatan4 = $data['caskfa'];
+
+                    if($data['rbskfa'] == 'ada'){
+                        $templateProcessor->setValue('10a1', "&#8730;");
+                        $templateProcessor->setValue('10a0', "");
+                    }else{
+                        $templateProcessor->setValue('10a1', "");
+                        $templateProcessor->setValue('10a0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110a', $caDH__);
+
+                    $d->status10b = $data['rbskfb'];
+                    $caSKFB = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfb']));
+                    $caSKFB_ = str_replace("&lt;","<",$caSKFB);
+                    $caSKFB__ = str_replace("&gt;",">",$caSKFB_);
+                    $d->catatan10b = $data['caskfb'];
+
+                    if($data['rbskfb'] == 'ada'){
+                        $templateProcessor->setValue('10b1', "&#8730;");
+                        $templateProcessor->setValue('10b0', "");
+                    }else{
+                        $templateProcessor->setValue('10b1', "");
+                        $templateProcessor->setValue('10b0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110b', $caSKFB__);
+
+                    $d->status10c = $data['rbskfc'];
+                    $caSKFC = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfc']));
+                    $caSKFC_ = str_replace("&lt;","<",$caSKFC);
+                    $caSKFC__ = str_replace("&gt;",">",$caSKFC_);
+                    $d->catatan10c = $data['caskfc'];
+
+                    if($data['rbskfc'] == 'ada'){
+                        $templateProcessor->setValue('10c1', "&#8730;");
+                        $templateProcessor->setValue('10c0', "");
+                    }else{
+                        $templateProcessor->setValue('10c1', "");
+                        $templateProcessor->setValue('10c0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110c', $caSKFC__);
+
+                    $d->status10d = $data['rbskfd'];
+                    $caSKFD = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfd']));
+                    $caSKFD_ = str_replace("&lt;","<",$caSKFD);
+                    $caSKFD__ = str_replace("&gt;",">",$caSKFD_);
+                    $d->catatan10d = $data['caskfd'];
+
+                    if($data['rbskfd'] == 'ada'){
+                        $templateProcessor->setValue('10d1', "&#8730;");
+                        $templateProcessor->setValue('10d0', "");
+                    }else{
+                        $templateProcessor->setValue('10d1', "");
+                        $templateProcessor->setValue('10d0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110d', $caSKFD__);
+
+                    $d->status10e = $data['rbskfe'];
+                    $caSKFE = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfe']));
+                    $caSKFE_ = str_replace("&lt;","<",$caSKFE);
+                    $caSKFE__ = str_replace("&gt;",">",$caSKFE_);
+                    $d->catatan10e = $data['caskfe'];
+
+                    if($data['rbskfe'] == 'ada'){
+                        $templateProcessor->setValue('10e1', "&#8730;");
+                        $templateProcessor->setValue('10e0', "");
+                    }else{
+                        $templateProcessor->setValue('10e1', "");
+                        $templateProcessor->setValue('10e0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110e', $caSKFE__);
+
+                    $d->status10f = $data['rbskff'];
+                    $caSKFF = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskff']));
+                    $caSKFF_ = str_replace("&lt;","<",$caSKFF);
+                    $caSKFF__ = str_replace("&gt;",">",$caSKFF_);
+                    $d->catatan10f = $data['caskff'];
+
+                    if($data['rbskff'] == 'ada'){
+                        $templateProcessor->setValue('10f1', "&#8730;");
+                        $templateProcessor->setValue('10f0', "");
+                    }else{
+                        $templateProcessor->setValue('10f1', "");
+                        $templateProcessor->setValue('10f0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110f', $caSKFF__);
+
+                    $d->save();
+                    DB::commit();
+
+                    $fileName = 'FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi ('.$data['id_registrasi'].').docx';
+                    $templateProcessor->saveAs("storage/laporan/download/Daftar Periksa Dan Rekomendasi/Isian/".$fileName);
+            
+                    $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+                    return response()->download('storage/laporan/download/Daftar Periksa Dan Rekomendasi/Isian/'.$fileName);
+                
+            }else{
+                foreach($dataRekomen as $id){
+                    foreach($id as $id_daftar_periksa_rekomendasi){
+                        $id_daftar_rekomen = $id_daftar_periksa_rekomendasi;
+                    }
+                }
+
+                // dd($id_daftar_rekomen);
+                    $d = $model->find($id_daftar_rekomen);
+
+                    DB::beginTransaction();
+                    $d->nama_rekomendasi_tr = $data['nama_tr'];
+                    $d->nama_rekomendasi_ks = $data['nama_ks'];
+                    $templateProcessor->setValue('nama_rekomendasi', $data['nama_tr']);
+                    $templateProcessor->setValue('nama_rekomendasi2', $data['nama_ks']);
+
+                    $d->tgl_rekomendasi_tr = $data['tanggal_rekomendasi_tr'];
+                    $d->tgl_rekomendasi_ks = $data['tanggal_rekomendasi_ks'];
+                    $templateProcessor->setValue('tgl_rekomendasi', $data['tanggal_rekomendasi_tr']);
+                    $templateProcessor->setValue('tgl_rekomendasi2', $data['tanggal_rekomendasi_ks']);
+
+                    $d->status_rekomendasi_tr = $data['kesiapanrekomen_tr'];
+                    if($data['kesiapanrekomen_tr'] == 'siap'){                        
+                        $templateProcessor->setValue('siap', 'Siap');
+
+                        $inline = new TextRun();
+                        $inline->addText('Belum Siap', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('belum_siap', $inline);                        
+                    }else{                        
+                        $templateProcessor->setValue('belum_siap', 'Belum Siap');
+
+                        $inline = new TextRun();
+                        $inline->addText('Siap', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('siap', $inline);
+                    }
+
+                    $d->status_rekomendasi_ks = $data['kesiapanrekomen_ks'];
+                    if($data['kesiapanrekomen_ks'] == 'siap'){
+                        $templateProcessor->setValue('siap2', 'Siap');
+
+                        $inline = new TextRun();
+                        $inline->addText('Belum Siap', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('belum_siap2', $inline);
+                    }else{                        
+                        $templateProcessor->setValue('belum_siap2', 'Belum Siap');
+
+                        $inline = new TextRun();
+                        $inline->addText('Siap', array('strikethrough' => true));
+                        $templateProcessor->setComplexValue('siap2', $inline);
+                    }
+
+                    $d->id_registrasi = $data['id_registrasi'];
+
+                    $d->status1 = $data['rbpenawaran'];
+                    $caPenawaran = htmlspecialchars(str_replace("\n","<w:br/>",$data['capenawaran']));
+                    $caPenawaran_ = str_replace("&lt;","<",$caPenawaran);
+                    $caPenawaran__ = str_replace("&gt;",">",$caPenawaran_);
+                    $d->catatan1 = $data['capenawaran'];
+
+                    if($data['rbpenawaran'] == 'ada'){
+                        $templateProcessor->setValue('11', "&#8730;");
+                        $templateProcessor->setValue('10', "");
+                    }else{
+                        $templateProcessor->setValue('11', "");
+                        $templateProcessor->setValue('10', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan11', $caPenawaran__);
+
+                    $d->status2 = $data['rbkonfirmasi'];
+                    $caKonfirmasi = htmlspecialchars(str_replace("\n","<w:br/>",$data['cakonfirmasi']));
+                    $caKonfirmasi_ = str_replace("&lt;","<",$caKonfirmasi);
+                    $caKonfirmasi__ = str_replace("&gt;",">",$caKonfirmasi_);
+                    $d->catatan2 = $data['cakonfirmasi'];
+
+                    if($data['rbkonfirmasi'] == 'ada'){
+                        $templateProcessor->setValue('21', "&#8730;");
+                        $templateProcessor->setValue('20', "");
+                    }else{
+                        $templateProcessor->setValue('21', "");
+                        $templateProcessor->setValue('20', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan12', $caKonfirmasi__);
+
+                    $d->status3 = $data['rbst'];
+                    $caST = htmlspecialchars(str_replace("\n","<w:br/>",$data['cast']));
+                    $caST_ = str_replace("&lt;","<",$caST);
+                    $caST__ = str_replace("&gt;",">",$caST_);
+                    $d->catatan3 = $data['cast'];
+
+                    if($data['rbst'] == 'ada'){
+                        $templateProcessor->setValue('31', "&#8730;");
+                        $templateProcessor->setValue('30', "");
+                    }else{
+                        $templateProcessor->setValue('31', "");
+                        $templateProcessor->setValue('30', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan13', $caST__);
+
+                    $d->status4 = $data['rbap'];
+                    $caAP = htmlspecialchars(str_replace("\n","<w:br/>",$data['caap']));
+                    $caAP_ = str_replace("&lt;","<",$caAP);
+                    $caAP__ = str_replace("&gt;",">",$caAP_);
+                    $d->catatan4 = $data['caap'];
+
+                    if($data['rbap'] == 'ada'){
+                        $templateProcessor->setValue('41', "&#8730;");
+                        $templateProcessor->setValue('40', "");
+                    }else{
+                        $templateProcessor->setValue('41', "");
+                        $templateProcessor->setValue('40', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan14', $caAP__);
+
+                    $d->status5 = $data['rbaudit1'];
+                    $caAudit1 = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit1']));
+                    $caAudit1_ = str_replace("&lt;","<",$caAudit1);
+                    $caAudit1__ = str_replace("&gt;",">",$caAudit1_);
+                    $d->catatan5 = $data['caaudit1'];
+
+                    $caAudit1KS = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit1_ks']));
+                    $caAudit1KS_ = str_replace("&lt;","<",$caAudit1KS);
+                    $caAudit1KS__ = str_replace("&gt;",">",$caAudit1KS_);
+                    $d->catatan5_2 = $data['caaudit1_ks'];
+
+                    if($data['rbaudit1'] == 'ada'){
+                        $templateProcessor->setValue('51', "&#8730;");
+                        $templateProcessor->setValue('50', "");
+                    }else{
+                        $templateProcessor->setValue('51', "");
+                        $templateProcessor->setValue('50', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan15', $caAudit1__);
+                    $templateProcessor->setValue('catatan25', $caAudit1KS__);
+
+                    $d->status6a = $data['rbaudit2a'];
+                    $caAudit2a = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2a']));
+                    $caAudit2a_ = str_replace("&lt;","<",$caAudit2a);
+                    $caAudit2a__ = str_replace("&gt;",">",$caAudit2a_);
+                    $d->catatan6a = $data['caaudit2a'];
+
+                    $caAudit2aKS = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2a_ks']));
+                    $caAudit2aKS_ = str_replace("&lt;","<",$caAudit2aKS);
+                    $caAudit2aKS__ = str_replace("&gt;",">",$caAudit2aKS_);
+                    $d->catatan6a_2 = $data['caaudit2a_ks'];
+
+                    if($data['rbaudit2a'] == 'ada'){
+                        $templateProcessor->setValue('6a1', "&#8730;");
+                        $templateProcessor->setValue('6a0', "");
+                    }else{
+                        $templateProcessor->setValue('6a1', "");
+                        $templateProcessor->setValue('6a0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16a', $caAudit2a__);
+                    $templateProcessor->setValue('catatan26a', $caAudit2aKS__);
+
+                    $d->status6b = $data['rbaudit2b'];
+                    $caAudit2b = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2b']));
+                    $caAudit2b_ = str_replace("&lt;","<",$caAudit2b);
+                    $caAudit2b__ = str_replace("&gt;",">",$caAudit2b_);
+                    $d->catatan6b = $data['caaudit2b'];
+
+                    $caAudit2bKS = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2b_ks']));
+                    $caAudit2bKS_ = str_replace("&lt;","<",$caAudit2bKS);
+                    $caAudit2bKS__ = str_replace("&gt;",">",$caAudit2bKS_);
+                    $d->catatan6b_2 = $data['caaudit2b_ks'];
+
+                    if($data['rbaudit2b'] == 'ada'){
+                        $templateProcessor->setValue('6b1', "&#8730;");
+                        $templateProcessor->setValue('6b0', "");
+                    }else{
+                        $templateProcessor->setValue('6b1', "");
+                        $templateProcessor->setValue('6b0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16b', $caAudit2a__);
+                    $templateProcessor->setValue('catatan26b', $caAudit2bKS__);
+
+                    $d->status6c = $data['rbaudit2c'];
+                    $caAudit2c = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2c']));
+                    $caAudit2c_ = str_replace("&lt;","<",$caAudit2c);
+                    $caAudit2c__ = str_replace("&gt;",">",$caAudit2c_);
+                    $d->catatan6c = $data['caaudit2c'];
+
+                    $caAudit2cKS = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2c_ks']));
+                    $caAudit2cKS_ = str_replace("&lt;","<",$caAudit2cKS);
+                    $caAudit2cKS__ = str_replace("&gt;",">",$caAudit2cKS_);
+                    $d->catatan6c_2 = $data['caaudit2c_ks'];
+
+                    if($data['rbaudit2c'] == 'ada'){
+                        $templateProcessor->setValue('6c1', "&#8730;");
+                        $templateProcessor->setValue('6c0', "");
+                    }else{
+                        $templateProcessor->setValue('6c1', "");
+                        $templateProcessor->setValue('6c0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16c', $caAudit2c__);
+                    $templateProcessor->setValue('catatan26c', $caAudit2cKS__);
+
+                    $d->status6d = $data['rbaudit2d'];
+                    $caAudit2d = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2d']));
+                    $caAudit2d_ = str_replace("&lt;","<",$caAudit2d);
+                    $caAudit2d__ = str_replace("&gt;",">",$caAudit2d_);
+                    $d->catatan6d = $data['caaudit2d'];
+
+                    $caAudit2dKS = htmlspecialchars(str_replace("\n","<w:br/>",$data['caaudit2d_ks']));
+                    $caAudit2dKS_ = str_replace("&lt;","<",$caAudit2dKS);
+                    $caAudit2dKS__ = str_replace("&gt;",">",$caAudit2dKS_);
+                    $d->catatan6d_2 = $data['caaudit2d_ks'];
+
+                    if($data['rbaudit2d'] == 'ada'){
+                        $templateProcessor->setValue('6d1', "&#8730;");
+                        $templateProcessor->setValue('6d0', "");
+                    }else{
+                        $templateProcessor->setValue('6d1', "");
+                        $templateProcessor->setValue('6d0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan16d', $caAudit2d__);
+                    $templateProcessor->setValue('catatan26d', $caAudit2dKS__);
+
+                    $d->status7 = $data['rbbap'];
+                    $caBAP = htmlspecialchars(str_replace("\n","<w:br/>",$data['cabap']));
+                    $caBAP_ = str_replace("&lt;","<",$caBAP);
+                    $caBAP__ = str_replace("&gt;",">",$caBAP_);
+                    $d->catatan7 = $data['cabap'];
+
+                    $caBAPKS = htmlspecialchars(str_replace("\n","<w:br/>",$data['cabap_ks']));
+                    $caBAPKS_ = str_replace("&lt;","<",$caBAPKS);
+                    $caBAPKS__ = str_replace("&gt;",">",$caBAPKS_);
+                    $d->catatan7_2 = $data['cabap_ks'];
+
+                    if($data['rbbap'] == 'ada'){
+                        $templateProcessor->setValue('71', "&#8730;");
+                        $templateProcessor->setValue('70', "");
+                    }else{
+                        $templateProcessor->setValue('71', "");
+                        $templateProcessor->setValue('70', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan17', $caBAP__);
+                    $templateProcessor->setValue('catatan27', $caBAPKS__);
+
+                    $d->status8 = $data['rbbaps'];
+                    $caBAPS = htmlspecialchars(str_replace("\n","<w:br/>",$data['cabaps']));
+                    $caBAPS_ = str_replace("&lt;","<",$caBAPS);
+                    $caBAPS__ = str_replace("&gt;",">",$caBAPS_);
+                    $d->catatan8 = $data['cabaps'];
+
+                    $caBAPSKS = htmlspecialchars(str_replace("\n","<w:br/>",$data['cabaps_ks']));
+                    $caBAPSKS_ = str_replace("&lt;","<",$caBAPSKS);
+                    $caBAPSKS__ = str_replace("&gt;",">",$caBAPSKS_);
+                    $d->catatan8_2 = $data['cabaps_ks'];
+
+                    if($data['rbbaps'] == 'ada'){
+                        $templateProcessor->setValue('81', "&#8730;");
+                        $templateProcessor->setValue('80', "");
+                    }else{
+                        $templateProcessor->setValue('81', "");
+                        $templateProcessor->setValue('80', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan18', $caBAPS__);
+                    $templateProcessor->setValue('catatan28', $caBAPSKS__);
+
+                    $d->status9 = $data['rbdh'];
+                    $caDH = htmlspecialchars(str_replace("\n","<w:br/>",$data['cadh']));
+                    $caDH_ = str_replace("&lt;","<",$caDH);
+                    $caDH__ = str_replace("&gt;",">",$caDH_);
+                    $d->catatan9 = $data['cadh'];
+
+                    $caDHKS = htmlspecialchars(str_replace("\n","<w:br/>",$data['cadh_ks']));
+                    $caDHKS_ = str_replace("&lt;","<",$caDHKS);
+                    $caDHKS__ = str_replace("&gt;",">",$caDHKS_);
+                    $d->catatan9_2 = $data['cadh_ks'];
+
+                    if($data['rbdh'] == 'ada'){
+                        $templateProcessor->setValue('91', "&#8730;");
+                        $templateProcessor->setValue('90', "");
+                    }else{
+                        $templateProcessor->setValue('91', "");
+                        $templateProcessor->setValue('90', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan19', $caDH__);
+                    $templateProcessor->setValue('catatan29', $caDHKS__);
+
+                    $d->status10a = $data['rbskfa'];
+                    $caSKFA = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfa']));
+                    $caSKFA_ = str_replace("&lt;","<",$caSKFA);
+                    $caSKFA__ = str_replace("&gt;",">",$caSKFA_);
+                    $d->catatan10a = $data['caskfa'];
+
+                    if($data['rbskfa'] == 'ada'){
+                        $templateProcessor->setValue('10a1', "&#8730;");
+                        $templateProcessor->setValue('10a0', "");
+                    }else{
+                        $templateProcessor->setValue('10a1', "");
+                        $templateProcessor->setValue('10a0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110a', $caDH__);
+
+                    $d->status10b = $data['rbskfb'];
+                    $caSKFB = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfb']));
+                    $caSKFB_ = str_replace("&lt;","<",$caSKFB);
+                    $caSKFB__ = str_replace("&gt;",">",$caSKFB_);
+                    $d->catatan10b = $data['caskfb'];
+
+                    if($data['rbskfb'] == 'ada'){
+                        $templateProcessor->setValue('10b1', "&#8730;");
+                        $templateProcessor->setValue('10b0', "");
+                    }else{
+                        $templateProcessor->setValue('10b1', "");
+                        $templateProcessor->setValue('10b0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110b', $caSKFB__);
+
+                    $d->status10c = $data['rbskfc'];
+                    $caSKFC = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfc']));
+                    $caSKFC_ = str_replace("&lt;","<",$caSKFC);
+                    $caSKFC__ = str_replace("&gt;",">",$caSKFC_);
+                    $d->catatan10c = $data['caskfc'];
+
+                    if($data['rbskfc'] == 'ada'){
+                        $templateProcessor->setValue('10c1', "&#8730;");
+                        $templateProcessor->setValue('10c0', "");
+                    }else{
+                        $templateProcessor->setValue('10c1', "");
+                        $templateProcessor->setValue('10c0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110c', $caSKFC__);
+
+                    $d->status10d = $data['rbskfd'];
+                    $caSKFD = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfd']));
+                    $caSKFD_ = str_replace("&lt;","<",$caSKFD);
+                    $caSKFD__ = str_replace("&gt;",">",$caSKFD_);
+                    $d->catatan10d = $data['caskfd'];
+
+                    if($data['rbskfd'] == 'ada'){
+                        $templateProcessor->setValue('10d1', "&#8730;");
+                        $templateProcessor->setValue('10d0', "");
+                    }else{
+                        $templateProcessor->setValue('10d1', "");
+                        $templateProcessor->setValue('10d0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110d', $caSKFD__);
+
+                    $d->status10e = $data['rbskfe'];
+                    $caSKFE = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskfe']));
+                    $caSKFE_ = str_replace("&lt;","<",$caSKFE);
+                    $caSKFE__ = str_replace("&gt;",">",$caSKFE_);
+                    $d->catatan10e = $data['caskfe'];
+
+                    if($data['rbskfe'] == 'ada'){
+                        $templateProcessor->setValue('10e1', "&#8730;");
+                        $templateProcessor->setValue('10e0', "");
+                    }else{
+                        $templateProcessor->setValue('10e1', "");
+                        $templateProcessor->setValue('10e0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110e', $caSKFE__);
+
+                    $d->status10f = $data['rbskff'];
+                    $caSKFF = htmlspecialchars(str_replace("\n","<w:br/>",$data['caskff']));
+                    $caSKFF_ = str_replace("&lt;","<",$caSKFF);
+                    $caSKFF__ = str_replace("&gt;",">",$caSKFF_);
+                    $d->catatan10f = $data['caskff'];
+
+                    if($data['rbskff'] == 'ada'){
+                        $templateProcessor->setValue('10f1', "&#8730;");
+                        $templateProcessor->setValue('10f0', "");
+                    }else{
+                        $templateProcessor->setValue('10f1', "");
+                        $templateProcessor->setValue('10f0', "&#8730;");
+                    }
+                    $templateProcessor->setValue('catatan110f', $caSKFF__);
+
+                    $d->save();
+                    DB::commit();
+
+                    $fileName = 'FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi ('.$data['id_registrasi'].').docx';
+                    $templateProcessor->saveAs("storage/laporan/download/Daftar Periksa Dan Rekomendasi/Isian2/".$fileName);
+            
+                    $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+                    return response()->download('storage/laporan/download/Daftar Periksa Dan Rekomendasi/Isian2/'.$fileName);
+            }
+        }
     }
     
 }

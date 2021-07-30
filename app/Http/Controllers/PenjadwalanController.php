@@ -1558,10 +1558,32 @@ class PenjadwalanController extends Controller
         return view('penjadwalan.listPersiapanSidang');
     }
 
-   
+    public function daftarPeriksaRekomendasi($id_registrasi){
 
+        // dd($id_registrasi);
 
-   
+        $model2 = new Registrasi();
+        $model3 = new KelompokProduk();        
+        
+        $dataRegis = DB::table('registrasi')                                      
+             ->select('registrasi.*','ruang_lingkup.ruang_lingkup','penjadwalan.skema', 'penjadwalan.mulai_audit1', 'penjadwalan.selesai_audit2', 'penjadwalan.pelaksana1_audit2','pelaksana2_audit2', 'kelompok_produk.kelompok_produk')
+             ->where('registrasi.id',$id_registrasi)
+             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+             ->join('users','registrasi.id_user','=','users.id')
+             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')                          
+             ->get(); 
+
+        $daftarPeriksaRekomendasi = DB::table('daftar_periksa_rekomendasi')
+            ->select('daftar_periksa_rekomendasi.*')
+            ->where('daftar_periksa_rekomendasi.id_registrasi', $id_registrasi)
+            ->get();
+        // $reg = $model2->find($id_registrasi);
+        $dataRegis = json_decode($dataRegis, true);
+        $dataPeriksaRekomendasi = json_decode($daftarPeriksaRekomendasi, true);
+        // dd($dataRegis);
+        return view('penjadwalan.daftarPeriksaRekomendasi',compact('dataRegis','dataPeriksaRekomendasi'));
+    }
 
     public function dataAudit1(Request $request){
         $gdata = $request->except('_token','_method');
@@ -1786,6 +1808,279 @@ class PenjadwalanController extends Controller
       
         return view('penjadwalan.viewer', compact('datkey','hpas'));
     }
+
+    public function berkasView($id_regis, $id_user, $file){
+        // dd($file);
+        if($file == 'penawaran_harga'){
+            $data = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($data as $key ) {
+                $penawaranHarga = $key;
+            }
+
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('penawaranHarga'));
+        }else if($file == 'konfirmasi_sk'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi = $key;
+            }
+
+            $data = DB::table('laporan_audit2')
+                ->where('id_registrasi', $id_regis)
+                ->select('*')
+                ->get();
+            
+            foreach ($data as $key ) {
+                $konfirmasiSK = $key;
+            }
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi','konfirmasiSK'));
+        }else if($file == 'surat_tugas'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi = $key;
+            }
+
+            $data = DB::table('laporan_audit2')
+                ->where('id_registrasi', $id_regis)
+                ->select('*')
+                ->get();
+            
+            foreach ($data as $key ) {
+                $suratTugas = $key;
+            }
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi','suratTugas'));
+        }else if($file == 'audit_plan'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi = $key;
+            }
+
+            $data = DB::table('laporan_audit2')
+                ->where('id_registrasi', $id_regis)
+                ->select('*')
+                ->get();
+            
+            foreach ($data as $key ) {
+                $auditPlan = $key;
+            }
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi','auditPlan'));
+        }else if($file == 'laporan_audit_tahap1'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi = $key;
+            }
+
+            $data = DB::table('laporan_audit1')
+                ->where('id_registrasi', $id_regis)
+                ->select('*')
+                ->get();
+            
+            foreach ($data as $key ) {
+                $audit1 = $key;
+            }
+    
+            // dd($datkey);
+            // return view('penjadwalan.viewerBerkas', compact('dataRegistrasi','audit1'));
+            return response()->download('storage/laporan/download/Laporan Audit1/'.$audit1->file_laporan_audit1);
+        }else if($file == 'laporan_audit_tahap2'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi = $key;
+            }
+
+            $data = DB::table('laporan_audit2')
+                ->where('id_registrasi', $id_regis)
+                ->select('*')
+                ->get();
+            
+            foreach ($data as $key ) {
+                $audit2 = $key;
+            }
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi','audit2'));
+        }else if($file == 'bap'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi = $key;
+            }
+
+            $data = DB::table('laporan_audit2')
+                ->where('id_registrasi', $id_regis)
+                ->select('*')
+                ->get();
+            
+            foreach ($data as $key ) {
+                $bap = $key;
+            }
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi','bap'));
+        }else if($file == 'baps'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi = $key;
+            }
+
+            $data = DB::table('laporan_audit2')
+                ->where('id_registrasi', $id_regis)
+                ->select('*')
+                ->get();
+            
+            foreach ($data as $key ) {
+                $baps = $key;
+            }
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi','baps'));
+        }else if($file == 'daftarHadir'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi = $key;
+            }
+
+            $data = DB::table('laporan_audit2')
+                ->where('id_registrasi', $id_regis)
+                ->select('*')
+                ->get();
+            
+            foreach ($data as $key ) {
+                $daftarHadir = $key;
+            }
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi','daftarHadir'));
+        }else if($file == 'suratPermohonan'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi1 = $key;
+            }            
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi1'));
+        }else if($file == 'daftarHadirSidang'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi2 = $key;
+            }            
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi2'));
+        }else if($file == 'beritaAcaraSidang'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi3 = $key;
+            }            
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi3'));
+        }else if($file == 'tandaTerima'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi4 = $key;
+            }            
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi4'));
+        }else if($file == 'keputusanFatwa'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi5 = $key;
+            }            
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi5'));
+        }else if($file == 'dokumentasiSidang'){
+
+            $dataRegis = DB::table('registrasi')
+                ->where('id', $id_regis)
+                ->select('*')
+                ->get();
+
+            foreach ($dataRegis as $key ) {
+                $dataRegistrasi6 = $key;
+            }            
+    
+            // dd($datkey);
+            return view('penjadwalan.viewerBerkas', compact('dataRegistrasi6'));
+        }
+                    //  dd($datkey);         
+     }
 
     public function view($id_user,$id_regis, $hpas){
 

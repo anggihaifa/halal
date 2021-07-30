@@ -72,7 +72,7 @@
                         <th class="valign-middle text-center">No. Registrasi</th>
                         <th class="valign-middle text-center">Perusahaan</th>
                         <th class="valign-middle text-center">Jenis Produk</th>
-                        <th class="valign-middle text-center" >Unduh</th>
+                        {{-- <th class="valign-middle text-center" >Unduh</th> --}}
                         <th class="valign-middle text-center" >Status Pembayaran</th>
                         
                         <th class="valign-middle text-center" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -263,124 +263,7 @@
                 {"data":"nama_perusahaan"},
                 {"data":"kelompok"},
                 
-               
-                {
-                    "data":null,
-                    "searchable":false,
-                    "orderable":false,
-                    "render":function (data,type,full,meta) {
-
-                        //var checklist = `<i class="ion-ios-checkmark-circle" style='color:green;'></i>`;
-
-                        //var form_report = `<button class="btn btn-succes btn-xs"  href="">Form Laporan</a>`;
-
-                        if(full.file_laporan_audit1 ){
-
-                            var unduhLaporan1 = `<a href="{{ url('').Storage::url('public/laporan/download/Laporan Audit1/`+full.file_laporan_audit1+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit1&nbsp;&nbsp;</a>`;
-
-                                                                    
-                        }else{
-                            var unduhLaporan1 = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan Audit1&nbsp;&nbsp;</a>`;
-
-                        }
-                        if(full.file_laporan_tr ){
-
-                            var unduhLaporanTR = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tehnical Review/`+full.file_laporan_tr+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan TR&nbsp;&nbsp;</a>`;
-
-                                                                    
-                        }else{
-                            var unduhLaporanTR = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan TR&nbsp;&nbsp;</a>`;
-
-                        }
-                        if(full.file_laporan_tinjauan ){
-
-                            var unduhLaporanKS = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Tinjauan Komite/`+full.file_laporan_tinjauan+`') }}" class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan KS&nbsp;&nbsp;</a>`;
-
-                                                                    
-                        }else{
-                            var unduhLaporanKS = `<a  href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbspLaporan KS&nbsp;&nbsp;</a>`;
-
-                        }
-                        
-
-                        if(full.file_laporan_audit_tahap_2 ){
-
-                            var unduhLaporan2 = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Audit Tahap 2/`+full.file_laporan_audit_tahap_2+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Audit2&nbsp;&nbsp;</a>`;
                             
-                                                                            
-                        }else{
-                            var unduhLaporan2 = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Audit2&nbsp;&nbsp;</a>`;
-                            
-                        }
-
-                        if(full.file_bap ){
-
-                            var unduhBAP = `<a href="{{ url('').Storage::url('public/laporan/upload/BAP/`+full.file_bap+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                                                                        
-                        }else{
-                            var unduhBAP = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;BAP&nbsp;&nbsp;</a>`;
-
-                        }
-                        if(full.file_laporan_ketidaksesuaian ){
-
-                            var unduhTS = `<a href="{{ url('').Storage::url('public/laporan/upload/Laporan Ketidaksesuaian/`+full.file_laporan_ketidaksesuaian+`') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                                                                        
-                            }else{
-                            var unduhTS = `<a href="" class="btn-red btn-xs text-center align-midle" disableButton>&nbsp;&nbsp;Laporan Ketidaksesuaian&nbsp;&nbsp;</a>`;
-
-                        }
-
-                        var unduhDPR = `<a href="{{ url('').Storage::url('public/laporan/fix/FOR-HALAL-OPS-13 Daftar Periksa dan Rekomendasi.docx') }}"class="btn-green btn-xs text-center align-midle" download>&nbsp;&nbsp;Daftar Periksa&nbsp;&nbsp;</a>`;
-
-                        // if(full.status_dpra == '0'){
-
-                        //     var dpra = ` <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                                                                        
-                        // }else{
-                        //     var dpra = `<button class="btn btn-xs btn-grey m-r-5" data-toggle='modal' data-id='`+full.id+`' data-target='#modaldpra' >Unggah</button>`;
-
-                        // }
-
-                        return `<table class="table-xs table-borderless" style="width: 100%">
-                                    <tr>
-                                        <td class="text-center">
-                                            `+unduhLaporan1+`
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center ">
-                                            `+unduhLaporan2+`
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            `+unduhBAP+`
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            `+unduhTS+`
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            `+unduhLaporanTR+`
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            `+unduhLaporanKS+`
-                                        </td>
-                                    </tr>
-                                    
-                                </table>`
-                                    
-                        
-                    }
-                },
                 {
                     "data":null,
                     "searchable":false,
@@ -427,6 +310,7 @@
                                     <tr class="text-center align-midle">
                                         <td class="text-center">
                                             <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan_persiapan_sidang='`+full.catatan_persiapan_sidang+`' data-status-laporan_persiapan_sidang='`+full.status_persiapan_sidang+`'  data-target='#modalpersiapansidang' >Hasil Review</button>
+                                            <a class="btn btn-xs btn-primary m-r-5" href="{{url('daftar_periksa_rekomendasi')}}/`+full.id_regis+`">View Dokumen</a>
                                         </td>
                                     </tr>
                                 </table>`

@@ -72,8 +72,13 @@
 											<td><p><b>Telepon Pabrik : </b><br>{{$value['telepon_pabrik']}}</p></td>
 										</tr>
 										<tr>
-											<td><p><b>Contact Person : </b>{{$value['contact_person']}}</p></td>
-											<td><p><b>Email : </b>{{$value['email']}}</p></td>											
+											<td><p><b>Contact Person : </b><br>{{$value['contact_person']}}</p></td>
+											<td><p><b>Email : </b><br>{{$value['email']}}</p></td>
+											<td><p><b>Skala Usaha : </b><br>{{$value['skala_usaha']}}</p></td>
+											<td><p><b>Jumlah Karyawan : </b><br>{{$value['jumlah_karyawan']}}</p></td>
+										</tr>
+										<tr>
+											<td><p><b>Provinsi : </b><br>{{$value['provinsi']}}</p></td>
 										</tr>
 										<tr>											
 											<td colspan="2"><h5>Data KTP & NPWP</h5></td>

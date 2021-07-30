@@ -1682,6 +1682,19 @@
                                                                 <table class="table table-borderless">
                                                                     <tr>
                                                                         <td class="text-center">
+                                                                            <div class="btn-group m-r-5 show">
+                                                                                <a href="#" data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" aria-expanded="true">
+                                                                                    
+                                                                                    upload
+                                                                                </a>
+                                                                                <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end"> `
+                                                                                    +ksb+
+                                                                                `</div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center">
                                                                         `+unduhBAP+`
                                                                         </td>
                                                                     </tr>

@@ -71,6 +71,8 @@ Route::post('download_laporan_audit_fasilitas_produksi_fix','PHPWordController@d
 Route::post('download_laporan_produk','PHPWordController@downloadLaporanProduk')->name('downloadlaporanproduk');
 Route::post('download_laporan_produk_fix','PHPWordController@downloadLaporanProdukFix')->name('downloadlaporanprodukfix');
 
+Route::post('upload_daftar_periksa_rekomendasi','PHPWordController@uploadDaftarPeriksaRekomendasi')->name('uploaddaftarperiksarekomendasi')->middleware('role:6,9,10,11,12,13');
+
 //verifikator kebutuhan waktu audit
 Route::get('review_kebutuhan_waktu_audit','ReviewerController@reviewKebutuhanWaktuAudit')->name('reviewkebutuhanwaktuaudit');
 Route::get('data_review_kebutuhan_waktu_audit','ReviewerController@dataReviewKebutuhanWaktuAudit')->name('datareviewkebutuhanwaktuaudit');
@@ -120,6 +122,8 @@ Route::put('tinjauan', 'PenjadwalanController@tinjauan')->name('tinjauan')->midd
 Route::get('penjadwalan_viewer/{id_regis}/{hpas}','PenjadwalanController@dokumenView')->name('penjadwalan.viewer')->middleware('role:1,3,6,9,10,11,12,13,2');
 
 Route::get('penjadwalan_viewer_doc/{id_user}/{id_regis}/{hpas}','PenjadwalanController@view')->name('penjadwalan.view')->middleware('role:1,3,6,9,10,11,12,13');
+
+Route::get('penjadwalan_viewer_berkas/{id_regis}/{id_user}/{file}','PenjadwalanController@berkasView')->name('penjadwalan.viewer')->middleware('role:1,3,6,9,10,11,12,13,2');
 
 
 ////////////////End OF Penjadwalan
@@ -277,6 +281,8 @@ Route::get('delete_dokumen_sertifikasi/{id}','RegistrasiController@deleteDokumen
 //admin
 Route::get('verifikasi_dokumen_sertifikasi/{id_registrasi}','RegistrasiController@verifikasiDokumenSertifikasi')->name('verifikasidokumensertifikasi')->middleware('role:1,2,3,6,9,10,11,12,13');
 Route::put('update_status_verifikasi_dokumen/{id}','RegistrasiController@updateStatusVerifikasiDokumen')->name('updatestatusverifikasidokumen')->middleware('role:1,2,3,6,9,10,11,12,13');
+
+Route::get('daftar_periksa_rekomendasi/{id_registrasi}','PenjadwalanController@daftarPeriksaRekomendasi')->name('daftarperiksarekomendasi')->middleware('role:6,9,10,11,12,13');
 
 //audit tahap 1
 //pelanggan

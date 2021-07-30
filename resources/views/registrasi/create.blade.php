@@ -113,13 +113,13 @@
                             </fieldset>
                             <fieldset>
                                 <div class="form-card row">
-                                    <div class="wrapper col-lg-12">
+                                        <div class="wrapper col-lg-12">
                                         <div class="row">
                                             <label class="col-12"><h4>Data Perusahaan</h4></label>
                                         </div>
-                                    </div>
+                                        </div>
 
-                                    <div class="wrapper col-lg-12">
+                                        <div class="wrapper col-lg-12">
                                         <div class="row">
                                             @component('components.inputtext',['name'=> 'nama_perusahaan','label' => 'Nama Perusahaan *','required'=>true,'placeholder'=>'Nama Perusahaan'])@endcomponent
                                         </div>
@@ -165,7 +165,66 @@
                                         <div class="row">
                                             @component('components.inputemail',['name'=> 'email','label' => 'Email Contact Person*','required'=>true,'placeholder'=>'Email Contact Person','id'=>'emailCP'])@endcomponent
                                         </div>
-                                    </div>   
+                                        </div> 
+
+                                        <div class="wrapper col-lg-12" id="label-prov">
+                                            <div class="row">
+                                                <label class="col-lg-4 col-form-label">Provinsi</label>
+                                                <div class="col-lg-8">
+                                                    <select id="prov_kantor" name="provinsi" class="selectpicker form-control" data-size="10" data-live-search="true" data-style="btn-white">
+                                                        <option value="">== Pilih Provinsi ==</option>
+                                                        @php
+                                                        foreach ($dataProvinsi as $provinsi) {
+                                                            echo "<option value='$provinsi->nama_provinsi'>$provinsi->nama_provinsi</option>";
+                                                        }                                    
+                                                        @endphp                             
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+        
+                                        {{-- <div class="wrapper col-lg-12" id="label-kot">
+                                            <div class="row">
+                                                <label class="col-lg-4 col-form-label">Kota/Kabupaten</label>
+                                                <div class="col-lg-8">
+                                                    <select id="kotkantor" name="kota" class="selectpicker form-control" data-size="100" data-live-search="true" data-style="btn-white">
+                                                        <option value="">==Pilih Kota/Kabupaten==</option>
+                                                    </select>
+                                                </div> 
+                                            </div>   
+                                        </div>                         --}}
+
+                                        <div class="wrapper col-lg-12">
+                                            <div class="row">
+                                                <label class="col-lg-4 col-form-label">Skala usaha*</label>
+                                                <div class="col-lg-8">
+                                                    <div style="margin-bottom:7px;">
+                                                        <div class="radio radio-css radio-inline">
+                                                            <input type="radio" name="skala_usaha" id="skalaUsaha1" value="mikro" checked />
+                                                            <label for="skalaUsaha1" class="text-dark"><b>Mikro</b></label>
+                                                        </div>
+                                                        <div class="radio radio-css radio-inline">
+                                                            <input type="radio" name="skala_usaha" id="skalaUsaha2"  value="kecil" />
+                                                            <label for="skalaUsaha2" class="text-dark"><b>Kecil</b></label>
+                                                        </div>
+                                                        <div class="radio radio-css radio-inline">
+                                                            <input type="radio" name="skala_usaha" id="skalaUsaha3"  value="menengah" />
+                                                            <label for="skalaUsaha3" class="text-dark"><b>Menengah</b></label>                                                
+                                                        </div>
+                                                        <div class="radio radio-css radio-inline">
+                                                            <input type="radio" name="skala_usaha" id="skalaUsaha4"  value="besar" />
+                                                            <label for="skalaUsaha4" class="text-dark"><b>Besar</b></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="wrapper col-lg-12">
+                                            <div class="row">
+                                                @component('components.inputtext',['name'=> 'jumlah_karyawan','label' => 'Total Jumlah Karyawan *','required'=>true,'placeholder'=>'Total Jumlah Karyawan','id'=>'jmlKaryawan'])@endcomponent
+                                            </div>
+                                        </div>
                                 </div>    
                                 
                                 <div class="text-center">
@@ -180,24 +239,26 @@
                                 <div class="form-card row">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-12"><h4>Data KTP & NPWP</h4></label>
+                                            <label class="col-12"><h4>Data KTP & NPWP Pelaku Usaha/ Perusahaan</h4></label>
                                         </div>
                                     </div>
 
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">KTP Pelaku Usaha*</label>
+                                            <label class="col-4 col-form-label">KTP Pelaku Usaha/ Perusahaan*</label>
                                             <div class="col-lg-8"><div>                                            
                                                 <input type="file" name="ktp" accept="image/*" onChange="getValue('ktp')" id="ktp" required>
+                                                <span class="text-dark font-weight-bold">(Format Gambar : .jpg atau .png)</span>
                                             </div></div>
                                         </div>
                                     </div>
     
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">NPWP Pelaku Usaha*</label>
+                                            <label class="col-4 col-form-label">NPWP Pelaku Usaha/ Perusahaan*</label>
                                             <div class="col-lg-8"><div>                                            
                                                 <input type="file" name="npwp" accept="image/*" onChange="getValue('npwp')" id="npwp" required>
+                                                <span class="text-dark font-weight-bold">(Format Gambar : .jpg atau .png)</span>
                                             </div></div>
                                         </div>
                                     </div>                                                                    
@@ -314,7 +375,8 @@
                                 </div>
                                 
                                 <div class="text-center">
-                                    <input type="button" name="previous" class="previous action-button-previous" value="Kembali" /> <button type="submit" class="action-button">Kirim</button>
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Kembali" /> 
+                                    <button type="submit" class="action-button">Kirim</button>
                                 </div>
                             </fieldset>
                         </div>
@@ -1656,7 +1718,7 @@
                         $('#id_rincian_kelompok_produk1').selectpicker('refresh');
                     }                   
                 })
-            });
+            });            
         });
 
     </script> 

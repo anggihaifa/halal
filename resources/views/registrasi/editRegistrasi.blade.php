@@ -190,7 +190,79 @@
                                         <div class="row">
                                             @component('components.inputemail',['name'=> 'email','label' => 'Email Contact Person*','required'=>true,'placeholder'=>'Email Contact Person','id'=>'emailCP','value'=>$data['email']])@endcomponent
                                         </div>
-                                    </div>   
+                                        </div>
+
+                                        <div class="wrapper col-lg-12" id="label-prov">
+                                            <div class="row">
+                                                <label class="col-lg-4 col-form-label">Provinsi</label>
+                                                <div class="col-lg-8">
+                                                    <select id="prov_kantor" name="provinsi" class="selectpicker form-control" data-size="10" data-live-search="true" data-style="btn-white">
+                                                        <option value="">== Pilih Provinsi ==</option>
+                                                        @php
+                                                        foreach ($dataProvinsi as $provinsi) {
+                                                            if($data['provinsi'] == $provinsi->nama_provinsi){
+                                                                echo "<option value='$provinsi->nama_provinsi' selected>$provinsi->nama_provinsi</option>";
+                                                            }else{
+                                                                echo "<option value='$provinsi->nama_provinsi'>$provinsi->nama_provinsi</option>";
+                                                            }
+                                                        }                                    
+                                                        @endphp                             
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="wrapper col-lg-12">
+                                            <div class="row">
+                                                <label class="col-lg-4 col-form-label">Skala usaha*</label>
+                                                <div class="col-lg-8">
+                                                    <div style="margin-bottom:7px;">
+                                                        <div class="radio radio-css radio-inline">
+                                                            @if ($data['skala_usaha'] == 'mikro')
+                                                                <input type="radio" name="skala_usaha" id="skalaUsaha1" value="mikro" checked />
+                                                                <label for="skalaUsaha1" class="text-dark"><b>Mikro</b></label>
+                                                            @else
+                                                                <input type="radio" name="skala_usaha" id="skalaUsaha1" value="mikro"/>
+                                                                <label for="skalaUsaha1" class="text-dark"><b>Mikro</b></label>
+                                                            @endif                                                            
+                                                        </div>
+                                                        <div class="radio radio-css radio-inline">
+                                                            @if ($data['skala_usaha'] == 'kecil')
+                                                                <input type="radio" name="skala_usaha" id="skalaUsaha2"  value="kecil" checked/>
+                                                                <label for="skalaUsaha2" class="text-dark"><b>Kecil</b></label>
+                                                            @else
+                                                                <input type="radio" name="skala_usaha" id="skalaUsaha2"  value="kecil"/>
+                                                                <label for="skalaUsaha2" class="text-dark"><b>Kecil</b></label>
+                                                            @endif
+                                                        </div>
+                                                        <div class="radio radio-css radio-inline">
+                                                            @if ($data['skala_usaha'] == 'menengah')
+                                                                <input type="radio" name="skala_usaha" id="skalaUsaha3"  value="menengah" checked/>
+                                                                <label for="skalaUsaha3" class="text-dark"><b>Menengah</b></label>    
+                                                            @else                                            
+                                                                <input type="radio" name="skala_usaha" id="skalaUsaha3"  value="menengah" />
+                                                                <label for="skalaUsaha3" class="text-dark"><b>Menengah</b></label>    
+                                                            @endif
+                                                        </div>
+                                                        <div class="radio radio-css radio-inline">
+                                                            @if ($data['skala_usaha'] == 'besar')
+                                                                <input type="radio" name="skala_usaha" id="skalaUsaha4"  value="besar" checked/>
+                                                                <label for="skalaUsaha4" class="text-dark"><b>Besar</b></label>
+                                                            @else
+                                                                <input type="radio" name="skala_usaha" id="skalaUsaha4"  value="besar" />
+                                                                <label for="skalaUsaha4" class="text-dark"><b>Besar</b></label>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="wrapper col-lg-12">
+                                            <div class="row">
+                                                @component('components.inputtext',['name'=> 'jumlah_karyawan','label' => 'Total Jumlah Karyawan *','required'=>true,'placeholder'=>'Total Jumlah Karyawan','id'=>'jmlKaryawan','value'=>$data['jumlah_karyawan']])@endcomponent
+                                            </div>
+                                        </div>
                                 </div>    
                                 
                                 <div class="text-center">
@@ -205,13 +277,13 @@
                                 <div class="form-card row">
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-12"><h4>Data KTP & NPWP (Lewati jika tidak akan diubah)</h4></label>
+                                            <label class="col-12"><h4>Data KTP & NPWP Pelaku Usaha/ Perusahaan (Lewati jika tidak akan diubah)</h4></label>
                                         </div>
                                     </div>                                    
 
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">KTP Pelaku Usaha*</label>
+                                            <label class="col-4 col-form-label">KTP Pelaku Usaha Pelaku Usaha/ Perusahaan</label>
                                             <div class="col-lg-8"><div>                                            
                                                 <img src="{{url('') .Storage::url('ktp/'.$data['id_user'].'/'.$data['ktp']) }}" style="width: 30%">
                                             </div></div>
@@ -222,14 +294,15 @@
                                         <div class="row">
                                             <label class="col-4 col-form-label"></label>
                                             <div class="col-lg-8"><div>                                            
-                                                <input type="file" name="ktp" accept="image/*" onChange="getValue('ktp')" id="ktp">                                                
+                                                <input type="file" name="ktp" accept="image/*" onChange="getValue('ktp')" id="ktp">
+                                                <span class="text-dark font-weight-bold">(Format Gambar : .jpg atau .png)</span>
                                             </div></div>
                                         </div>
                                     </div>
     
                                     <div class="wrapper col-lg-12">
                                         <div class="row">
-                                            <label class="col-4 col-form-label">NPWP Pelaku Usaha*</label>
+                                            <label class="col-4 col-form-label">NPWP Pelaku Usaha Pelaku Usaha/ Perusahaan</label>
                                             <div class="col-lg-8"><div>                                            
                                                 <img src="{{url('') .Storage::url('npwp/'.$data['id_user'].'/'.$data['npwp']) }}" style="width: 30%">
                                             </div></div>
@@ -241,6 +314,7 @@
                                             <label class="col-4 col-form-label"></label>
                                             <div class="col-lg-8"><div>                                            
                                                 <input type="file" name="npwp" accept="image/*" onChange="getValue('npwp')" id="npwp">
+                                                <span class="text-dark font-weight-bold">(Format Gambar : .jpg atau .png)</span>
                                             </div></div>
                                         </div>
                                     </div>                                                                    
@@ -291,9 +365,13 @@
                                                     $rjp = explode(",",$data['rincian_jenis_produk']);
                                                 @endphp
                                                 <p style="color: black; font-weight: bold">Data Sebelumnya:</p>
+                                                <input type="text" id="jml_data_sebelumnya" value="{{count($rjp)}}" hidden>
                                                 @for ($x=0; $x< count($rjp); $x++)
-                                                    <p style="color: black;font-weight: bold">{{$x+1}}) {{$rjp[$x]}} </p>
-                                                @endfor                                                
+                                                    <p style="color: black;font-weight: bold">{{$x+1}}) {{$rjp[$x]}} </p>                                                    
+
+                                                    @php $id = explode(". ",$rjp[$x]); @endphp
+                                                    <input type="text" id="data_sebelumnya{{$x}}" value="{{$id[0]}}" hidden>
+                                                @endfor
                                             </div>   
                                         </div>
                                     </div>
@@ -321,7 +399,7 @@
                                     </div>
                                     
                                     <div id="wrapperdataproduk" class="wrapper col-lg-12 row">                                        
-                                            <div class="wrapper col-lg-12">
+                                            <div class="wrapper col-lg-12" style="display: none">
                                                 <div class="row">
                                                     <label class="col-4 col-form-label">Merk/Brand (harap isi kembali data merk)*</label>
                                                     <div class="col-lg-8"><div>
@@ -329,15 +407,18 @@
                                                             $nmp = explode(",",$data['nama_merk_produk']);
                                                         @endphp
                                                         <p style="color: black;font-weight: bold">Data Sebelumnya:</p>
+                                                        <input type="text" id="jml_data_sebelumnya2" value="{{count($nmp)}}" hidden>
                                                         @for ($x=0; $x< count($nmp); $x++)
                                                             <p style="color: black;font-weight: bold">{{$x+1}}) {{$nmp[$x]}} </p>
+
+                                                            <input type="text" id="data_produk_sebelumnya{{$x}}" value="{{$nmp[$x]}}" hidden>
                                                         @endfor                                                
                                                     </div></div>
                                                 </div>
                                             </div>
                                             <div class="wrapper col-lg-12">
                                                 <div class="row">
-                                                    <label class="col-4 col-form-label"></label><div class="col-lg-8"><div><input class="form-control" id="merk" name="merk[]" type="text" label="Merk/Brand" placeholder="Merk/Brand" required></div></div>
+                                                    <label class="col-4 col-form-label">Merk/Brand</label><div class="col-lg-8"><div><input class="form-control" id="merk" name="merk[]" type="text" label="Merk/Brand" placeholder="Merk/Brand" value="{{$nmp[0]}}" required></div></div>
                                                 </div>
                                             </div>
                                             <div class="wrapper col-lg-12">
@@ -432,7 +513,17 @@
         var detaildataproduk = document.getElementById('detail_dataproduk');
         var detaildatarincian = document.getElementById('detail_datarincian');
         detaildataproduk.style.display = 'block';
-        detaildatarincian.style.display = 'block';        
+        detaildatarincian.style.display = 'block';   
+
+        var jml = $('#jml_data_sebelumnya').val();     
+        var jml2 = $('#jml_data_sebelumnya2').val();
+        var datasebelumnya = $('#data_sebelumnya0').val();  
+        
+        for($x=1; $x<jml2; $x++){
+            detaildataproduk.style.display = 'block';
+            // alert($('#data_produk_sebelumnya'+$x).val());
+            adddataproduk2($('#data_produk_sebelumnya'+$x).val());
+        }      
         
 
         $('#tam_data_produk').on('click', function(){             
@@ -440,7 +531,7 @@
 
             detaildataproduk.style.display = 'block';
 
-            adddataproduk();       
+            adddataproduk();
         });        
 
         $('#tam_data_rincian').on('click', function(){
@@ -457,6 +548,13 @@
             jumlahdataproduk+=1;            
         }
 
+        function adddataproduk2($merk){
+            var data_produk = '<div> <div class="wrapper col-lg-12"><div class="row"><label class="col-4 col-form-label"></label><div class="col-lg-7"><input class="form-control" id="merk" name="merk[]" type="text" label="Merk/Brand" placeholder="Merk/Brand" value="'+$merk+'" required></div> <div class="col-lg-1"><a id="hapus_dataproduk" class="btn btn-sm btn-danger m-r-5" style="color:white">X</a></div> </div> </div> </div>';
+            // var data_produk = '<div>q</div>';
+            $('.detail_dataproduk').append(data_produk);
+            jumlahdataproduk+=1;            
+        }
+
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
         });            
@@ -466,13 +564,13 @@
             method: 'POST',
             data: {id: $id = document.getElementById("id_kelompok_produk").value},
             success: function (response) {                                                
-                $('#id_rincian_kelompok_produk'+jumlahdatarincian).empty();                           
+                $('#id_rincian_kelompok_produk1').empty();
                 $.each(response, function (rincian_kelompok_produk, kode_klasifikasi) {                            
                     $("#id_rincian_kelompok_produk1").append(new Option(kode_klasifikasi+' | '+rincian_kelompok_produk, kode_klasifikasi+'. '+rincian_kelompok_produk))
                 })
                 $('#id_rincian_kelompok_produk1').selectpicker('refresh');
             }                   
-        });                       
+        });          
 
         function adddatarincian(){
             var data_rincian = '<div id="rincian'+(jumlahdatarincian+1)+'"><div class="wrapper col-lg-12"><div class="row"><label for="kelompok" class="col-lg-4 col-form-label"></label><div class="col-lg-7"><select id="id_rincian_kelompok_produk'+(jumlahdatarincian+1)+'" name="id_rincian_kelompok_produk[]" class="form-control selectpicker" data-size="30" data-live-search="true" data-style="btn-white"><option value="">--Pilih Jenis Produk--</option></select></div> <div class="col-lg-1"><a onClick="hapusRincian('+(jumlahdatarincian+1)+')" class="btn btn-sm btn-danger m-r-5" style="color:white">X</a></div>   </div></div> </div>';
