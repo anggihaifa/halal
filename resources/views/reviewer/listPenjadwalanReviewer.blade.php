@@ -662,7 +662,7 @@
                      '</tr>'+
                      '<tr>'+
                          '<td class="valign-middle text-center">C</td>'+
-                         '<td class="valign-middle text-center">Technical Review/td>'+
+                         '<td class="valign-middle text-center">Technical Review</td>'+
                          '<td class="valign-middle text-center">-</td>'+
                          '<td class="valign-middle text-center" >-</td>'+    
                          '<td class="valign-middle text-center" >'+d.pelaksana1_tr+'<br>'+d.pelaksana2_tr+'</td>'+ 

@@ -17,6 +17,7 @@ use App\Models\Akad;
 use App\Models\System\User;
 use App\Models\KebutuhanWaktuAudit;
 use App\Models\LaporanAudit1;
+use App\DaftarPeriksaRekomendasi;
 use App\Jobs\SendEmailAuditor;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
@@ -505,10 +506,16 @@ class ReviewerController extends Controller
         $model2 = new Penjadwalan;
         $model3 = new User;
         $model4 = new LaporanAudit1;
+        $model5 = new DaftarPeriksaRekomendasi;
 
         $e = $model->find($data['id']);
         $j = $model2->find($e->id_penjadwalan);
         $l = $model4->find($e->id_laporan_audit1);
+
+        $daftarPeriksaRekomendasi = DB::table('daftar_periksa_rekomendasi')
+        ->select('daftar_periksa_rekomendasi.*')
+        ->where('daftar_periksa_rekomendasi.id_registrasi', $e->id)
+        ->get(); 
 
 
         //dd($j);
@@ -590,6 +597,14 @@ class ReviewerController extends Controller
                 $u2 = $model3->find($str2[0]);
                 
                 SendEmailAuditor::dispatch($u2,$e,$j,'tr');
+            }
+
+            if(isset($daftarPeriksaRekomendasi[0])){
+
+            }else{
+                //dd("masuk");
+                $model5->id_registrasi = $e->id;
+                $model5->save();
             }
 
             $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 11, "Menyetujui penjadwalan technical review", Auth::user()->usergroup_id);

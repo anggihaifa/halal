@@ -1627,11 +1627,20 @@ class PenjadwalanController extends Controller
             ->select('daftar_periksa_rekomendasi.*')
             ->where('daftar_periksa_rekomendasi.id_registrasi', $id_registrasi)
             ->get();
+
+        //dd($daftarPeriksaRekomendasi);
+        if(isset($daftarPeriksaRekomendasi[0])){
+            $dataRegis = json_decode($dataRegis, true);
+            $dataPeriksaRekomendasi = json_decode($daftarPeriksaRekomendasi, true);
+            // dd($dataRegis);
+            return view('penjadwalan.daftarPeriksaRekomendasi',compact('dataRegis','dataPeriksaRekomendasi'));
+        }else{
+
+            Session::flash('error', "data belum tersedia!"); 
+            return redirect()->back();
+        }
         // $reg = $model2->find($id_registrasi);
-        $dataRegis = json_decode($dataRegis, true);
-        $dataPeriksaRekomendasi = json_decode($daftarPeriksaRekomendasi, true);
-        // dd($dataRegis);
-        return view('penjadwalan.daftarPeriksaRekomendasi',compact('dataRegis','dataPeriksaRekomendasi'));
+      
     }
 
     public function dataAudit1(Request $request){
