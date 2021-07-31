@@ -11690,6 +11690,7 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('storage/laporan/fix/FOR-HALAL-OPS-08 Laporan Temuan Ketidaksesuaian Isian.docx');
 
         $templateProcessor->setValue('nama_organisasi', $data['nama_perusahaan']);
+        $templateProcessor->setValue('perusahaan', $data['nama_perusahaan']);
         $templateProcessor->setValue('no_id_bpjph', $data['no_id_bpjph']);
         $templateProcessor->setValue('standar_acuan', $data['standar_acuan']);
         $templateProcessor->setValue('nama_auditor', $data['nama_auditor']);
