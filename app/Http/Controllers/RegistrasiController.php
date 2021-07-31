@@ -2808,7 +2808,7 @@ class RegistrasiController extends Controller
                 $f->updated_at =  $currentDateTime;
                 //$f->status_laporan_audit1 = 1;
                 $f->status = '8_1';
-                dd("masuk 1");
+                // dd("masuk 1");
                 $e->save();
                 $f->save();
                 DB::commit();
@@ -2915,6 +2915,7 @@ class RegistrasiController extends Controller
                     }
 
                     $templateProcessor->setValue('nama_organisasi', $f->nama_perusahaan);
+                    $templateProcessor->setValue('merk_dagang', $f->nama_merk_produk);
                     $templateProcessor->setValue('no_id_bpjph', $f->no_registrasi_bpjph);
                     $templateProcessor->setValue('alamat', $f->alamat_perusahaan);
                     $templateProcessor->setValue('no_audit', $f->no_registrasi);
@@ -3024,7 +3025,7 @@ class RegistrasiController extends Controller
                     $f->updated_at =  $currentDateTime;                 
                     //$f->status = '8_3'; 
                     $f->status = '9'; 
-                    dd("masuk 3");
+                    // dd("masuk 3");
                     $e->save();
                     $f->save();
 
@@ -3086,6 +3087,7 @@ class RegistrasiController extends Controller
                 }
 
                 $templateProcessor->setValue('nama_organisasi', $f->nama_perusahaan);
+                $templateProcessor->setValue('merk_dagang', $f->nama_merk_produk);
                 $templateProcessor->setValue('no_id_bpjph', $f->no_registrasi_bpjph);
                 $templateProcessor->setValue('alamat', $f->alamat_perusahaan);
                 $templateProcessor->setValue('no_audit', $f->no_registrasi);

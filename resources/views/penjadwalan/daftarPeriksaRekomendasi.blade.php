@@ -845,7 +845,7 @@
                                 </div>
                                 <div class=" offset-md-5">
                                     <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
-                                    <button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;" onclick="return confirm('Note: Catatan hanya boleh diisi apabila terdapat berkas yang tidak memenuhi namun akan dilanjutkan ke tahapan audit tahap 2')" {{Auth::user()->usergroup_id != 11 && Auth::user()->usergroup_id != 12 ? 'hidden' : '' }}>Submit</button>
+                                    <button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;" onclick="return confirm('Note: Catatan hanya boleh diisi apabila terdapat berkas yang tidak memenuhi namun akan dilanjutkan ke tahapan audit tahap 2')" {{Auth::user()->usergroup_id != 11 && Auth::user()->usergroup_id != 12 && Auth::user()->usergroup_id != 13 ? 'hidden' : '' }}>Submit</button>
                                 </div>		
                             </form>
 						</div>

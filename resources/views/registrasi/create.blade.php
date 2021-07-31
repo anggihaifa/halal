@@ -1762,7 +1762,7 @@
                     });
                 }
             }else if(jml == 2){
-                if(document.getElementById('nama_perusahaan').value == "" || document.getElementById('alamat_perusahaan').value == "" || document.getElementById('telepon_perusahaan').value == "" || document.getElementById('alamat_pabrik').value == "" || document.getElementById('telepon_pabrik').value == "" || document.getElementById('nama_contact_person').value == "" || document.getElementById('contact_person').value == "" || document.getElementById('email').value == ""){
+                if(document.getElementById('nama_perusahaan').value == "" || document.getElementById('alamat_perusahaan').value == "" || document.getElementById('telepon_perusahaan').value == "" || document.getElementById('alamat_pabrik').value == "" || document.getElementById('telepon_pabrik').value == "" || document.getElementById('nama_contact_person').value == "" || document.getElementById('contact_person').value == "" || document.getElementById('email').value == "" || document.getElementById('jumlah_karyawan').value == ""){
                     alert("Dimohon harap data diisi dengan benar.");
                 }else{
                     jml++;

@@ -64,7 +64,7 @@
                     @elseif (isset($dataRegistrasi4))
                         <object type="application/pdf;base64" data="{{url('') .Storage::url('public/Berkas Sidang Fatwa Halal/'.$dataRegistrasi4->id_user.'/'.$dataRegistrasi4->file_tanda_terima_sidang.'')}}" class ="embed-responsive-item">
                     @elseif (isset($dataRegistrasi5))
-                        <object type="application/pdf;base64" data="{{url('') .Storage::url('public/Berkas Sidang Fatwa Halal/'.$dataRegistrasi5->id_user.'/'.$dataRegistrasi6->file_dokumentasi_sidang.'')}}" class ="embed-responsive-item">
+                        <object type="application/pdf;base64" data="{{url('') .Storage::url('public/Berkas Sidang Fatwa Halal/'.$dataRegistrasi5->id_user.'/'.$dataRegistrasi5->file_keputusan_sidang.'')}}" class ="embed-responsive-item">
                     @elseif (isset($dataRegistrasi6))
                         <object type="application/pdf;base64" data="{{url('') .Storage::url('public/Berkas Sidang Fatwa Halal/'.$dataRegistrasi6->id_user.'/'.$dataRegistrasi6->file_dokumentasi_sidang.'')}}" class ="embed-responsive-item">
                     @endif

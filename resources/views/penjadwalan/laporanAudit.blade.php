@@ -47,9 +47,9 @@
                         <li class="nav-item text-center">      
                             <a class="nav-link" data-toggle="tab" href="#card-tab-8">Form Temuan Ketidaksesuaian</a>
                         </li>
-                        <li class="nav-item text-center">                        
+                        {{-- <li class="nav-item text-center">                        
                             <a class="nav-link" data-toggle="tab" href="#card-tab-7">Laporan Audit Tahap 2</a>
-                        </li>                                                
+                        </li>                                                 --}}
                     </ul>
                 </div>
                 <div class="card-body table-responsive-lg ">

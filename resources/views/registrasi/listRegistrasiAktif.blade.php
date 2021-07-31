@@ -316,7 +316,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                        <h4 class="modal-title">Penjadwalan Technical Review/h4>
+                        <h4 class="modal-title">Penjadwalan Technical Review </h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                     </div>
@@ -1679,7 +1679,7 @@
                             if(full.status == 7 || full.status == '7_1' || full.status == '7_2' || full.status == '7_3' ){
                                   var penjadwalan = audit1  ;
                             }else if(full.status == 9 || full.status == '9_1' || full.status == '9_2' || full.status == '9_3' ){
-                                var penjadwalan = audit2+ksb;
+                                var penjadwalan = audit2;
                             }else if(full.status == 11 || full.status == '11_1' || full.status == '11_2' || full.status == '11_3'||full.status == 12 || full.status == '12_1' || full.status == '12_2' || full.status == '12_3' ){
                                 var penjadwalan = technicalReview;
                             }else if(full.status == 13 || full.status == '13_1' || full.status == '13_2' || full.status == '13_3' ){

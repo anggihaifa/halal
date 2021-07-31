@@ -1,6 +1,6 @@
 @extends('layouts.default', ['boxedLayout' => false], ['sidebarLight' => true], ['sidebarWide' => true])
 
-@section('title', 'Laporan Audit Tahap 1')
+@section('title', 'Detail Unggah Data Sertifikasi')
 
 @push('css')
 	<link href="{{asset('/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -11,12 +11,12 @@
 @section('content')
 	<!-- begin breadcrumb -->
 	<ol class="breadcrumb float-xl-right">
-		<li class="breadcrumb-item"><a href="#">Audit</a></li>
-		<li class="breadcrumb-item active">Laporan Audit Tahap 1</li>
+		<li class="breadcrumb-item"><a href="#">Registrasi</a></li>
+		<li class="breadcrumb-item active">Detail Unggah Data Sertifikasi</li>
 	</ol>
 	<!-- end breadcrumb -->
 	<!-- begin page-header -->
-	<h1 class="page-header">Laporan Audit Tahap 1  <small>{{$dataRegis[0]['nama_perusahaan']}}</small></h1>
+	<h1 class="page-header">Unggah Data Sertifikasi  <small>{{$dataRegis[0]['nama_perusahaan']}}</small></h1>
 	<!-- end page-header -->
 	<!-- begin panel -->
 	<div class="panel panel-inverse">
@@ -31,109 +31,75 @@
 		</div>
 		<!-- end panel-heading -->
 		<!-- begin panel-body -->
-		<div class="card-header tab-overflow p-t-0 p-b-0">
-			<ul class="nav nav-tabs card-header-tabs">
-				<li class="nav-item text-center">
-					<a class="nav-link active" data-toggle="tab" href="#card-tab-1">Unggah Form Laporan</a>
-				</li>                    
-				<li class="nav-item text-center">                        
-					<a class="nav-link" data-toggle="tab" href="#card-tab-2">Isi Form Laporan</a>
-				</li>                                            
-			</ul>
-		</div>
 		<div class="panel-body ">
 
-			<div class="card-body table-responsive-lg ">
-
-				<div class="tab-content p-0 m-0">
-					<div class="tab-pane active show fade" id="card-tab-1">
-				
-					<form action="{{route('uploadfilelaporanaudit1',['id' => $laporanAudit1[0]['id']])}}" method="post"  class="form-horizontal form-bordered" enctype="multipart/form-data">
-						@csrf
-						@method('PUT')
-						<div class="form-group row" >
-							<label class="col-lg-4 col-form-label">No Registrasi</label>
-							<div class="col-lg-8">
-								
-								<input type="text" class="form-control" name='no_registrasi' value="{{$dataRegis[0]['no_registrasi']}}" readonly disabled/>
-							</div>							
-							
-								<!--Auto Download-->
-							<label class="col-lg-4 col-form-label">Download Form Laporan Audit Tahap 1</label>
-							<div id="sh" class="col-lg-8">
-								<div class="form-control" readonly>
-									<a href="{{url('') .Storage::url('public/laporan/fix/FOR-HALAL-OPS-05 Laporan Audit Tahap I.docx') }}" download>Template Form Laporan Audit Tahap 1</a>
-								</div>
-							</div>
-							<label class="col-lg-4 col-form-label">Unggah Laporan Audit Tahap 1</label>
-							<div class="col-lg-8">
-								<input type="file"  name="file" id="file" oninvalid="this.setCustomValidity('File laporan audit tahap 1 masih kosong')" oninput="setCustomValidity('')" accept="application/pdf,application/word" required />
-							</div>
-
-							<label class="col-lg-4 col-form-label">Laporan Audit Tahap 1 Terupload</label>
-							<div id="sh" class="col-lg-8">
-								<div class="form-control" readonly>
-									<a href="{{url('') .Storage::url('public/laporan/upload/Audit Tahap 1/'.$dataRegis[0]['id_user'].'/'.$laporanAudit1[0]['file_laporan_audit1']) }}" download>{{$laporanAudit1[0]['file_laporan_audit1']}}</a>
-								</div>
-							</div>
+		
+			
+			<div class="table-responsive">
+					<div class="tab-content p-0 m-0">
+						<div class="tab-pane fade active show" id="card-tab-1">
+							@php
+								$regId = Auth::user()->registrasi_id;
+								$fieldSudah = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:#2fca2f"></i></td>';
+								$fieldBelum = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:grey"></i></td>';
+								$buttonUnduhDisabled = '<td class="valign-middle text-center"><a href="#" ><i class="fa fa-eye" style="color:grey;"></i></a></td>';
+								$buttonUnduh = '<td class="valign-middle text-center"><a href="#"><i class="fa fa-eye"></i></a></td>';
 						
-						
-							<div style="margin-bottom:10px; margin-top:50px;">
-								<div>
-									<label><b>Catatan:</b></label>
-
-									<label><b>Organisasi/ Pelaku usaha harus menyerahkan tambahan/ perbaikan dokumen kepada LPH dengan tembusan kepada BPJPH dalam jangka waktu paling lama 5 (lima) hari kerja sejak permintaan tambahan dokumen diterima. Apabila melebihi dari 5 hari kerja maka permohonan sertifikat halal tidak dapat diproses lebih lanjut.</b></label>
-								</div>
-								<div class="radio radio-css ">
-									<input type="radio" name="status_memenuhi" id="memenuhi" value="memenuhi" checked/>
-									<label for="memenuhi"><b>Audit Tahap II dapat dilaksanakan</b></label>
-								</div>
-
-								<div class="radio radio-css ">
-									<input  type="radio" name="status_memenuhi" id="tidak_memenuhi" value="tidak memenuhi" />
-									<label for="tidak_memenuhi"><b>Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan 5 hari setelah pemeriksaan audit tahap 1</b></label>
-
-								</div>
-
-								
-								<div>
-									<label><b>Syarat Untuk Lanjut Ke Audit Tahap 2</b></label>
-								</div>
-
-								<div class="col-lg-12">
-									
-									<textarea class="col-lg-12" name="catatan_akhir_audit1" id="catatan_akhir_audit1" placeholder="Masukan catatan disini apabila pelaku usaha dapat lanjut ke tahap dua namun masih ada dokumen yang tidak memenuhi" ></textarea>
-									
-
-								</div>
-							</div>
+							@endphp
 							
-							<div class="col-md-12 offset-md-5">									
-							
-								@component('components.buttonback',['href' => route("listaudit1")])@endcomponent											
-								
-								<button type="submit" class="btn btn-sm btn-primary m-r-5" onclick="confirm('Apakah anda yakin ingin Mengunggah Laporan Audit Tahap 1???')">Unggah</button>
+							<h5>Dokumen Lengkap</h5>
 																
-								
-							</div>
-						</div>
-					</form>
-						
-							
-					</div>
-					<div class="tab-pane fade" id="card-tab-2">
-					
-						<div class="table-responsive">
-							<div class="tab-content p-0 m-0">
-								<div class="tab-pane fade active show" id="card-tab-1">
-									@php
-										$regId = Auth::user()->registrasi_id;
-										$fieldSudah = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:#2fca2f"></i></td>';
-										$fieldBelum = '<td class="text-nowrap valign-middle text-center"><i class="fas fa-upload" style="color:grey"></i></td>';
-										$buttonUnduhDisabled = '<td class="valign-middle text-center"><a href="#" ><i class="fa fa-eye" style="color:grey;"></i></a></td>';
-										$buttonUnduh = '<td class="valign-middle text-center"><a href="#"><i class="fa fa-eye"></i></a></td>';
-								
-									@endphp
+							@foreach($dataHas as $has => $value)
+								<form action="{{route('updatestatusaudittahap1',$laporanAudit1[0]['id'])}}" method="post" class="form-horizontal form-bordered" enctype="multipart/form-data">
+							@endforeach
+								@csrf
+								@method('PUT')
+
+								<div class="panel-body panel-form">
+									<div class="wrapper col-lg-12">
+                                        <div class="row">
+                                            @component('components.inputtext',['label' => 'Tujuan Audit','required'=>true,'placeholder'=>'Tujuan Audit','name'=>'tujuan_audit'])@endcomponent
+                                        </div>
+                                    </div>
+									<div class="wrapper col-lg-12">
+                                        <div class="row">
+											@component('components.inputtext',['label' => 'Lokasi Audit','required'=>true,'placeholder'=>'Lokasi Audit','name'=>'lokasi_audit'])@endcomponent
+                                        </div>
+                                    </div>
+									<div class="wrapper col-lg-12">
+                                        <div class="row">
+											@component('components.inputtext',['label' => 'Lingkup Audit','required'=>true,'placeholder'=>'Lingkup Audit','name'=>'lingkup_audit', 'value'=>$dataRegis[0]['ruang_lingkup'],'readonly'=>'true'])@endcomponent
+                                        </div>
+                                    </div>
+									<div class="wrapper col-lg-12">
+                                        <div class="row">
+											@component('components.inputtext',['label' => 'Tanggal Audit','required'=>true,'placeholder'=>'Tanggal Audit','name'=>'mulai_audit1', 'value'=>$dataRegis[0]['mulai_audit1'],'readonly'=>'true'])@endcomponent
+                                        </div>
+                                    </div>
+									<div class="wrapper col-lg-12">
+										@php
+											if($dataRegis[0]['pelaksana1_audit1']){
+												$str =  explode("_",$dataRegis[0]['pelaksana1_audit1']);
+												$dataRegis[0]['pelaksana1_audit1'] = $str[1];
+											}
+											if($dataRegis[0]['pelaksana2_audit1']){
+												$str2 =  explode("_",$dataRegis[0]['pelaksana2_audit1']);
+												$dataRegis[0]['pelaksana2_audit1'] = $str2[1];
+											}
+											
+										
+											
+										@endphp
+										
+											
+										
+
+                                        <div class="row">
+											@component('components.inputtext',['label' => 'Ketua Tim Audit','required'=>true,'placeholder'=>'Ketua Tim Audit','name'=>'pelaksana1_audit1', 'value'=>$dataRegis[0]['pelaksana1_audit1'],'readonly'=>'true'])@endcomponent
+                                        </div>
+                                    </div>
+									<div class="wrapper col-lg-12">
+                                        <div class="row">
 									
 											@component('components.inputtext',['label' => 'Auditor','required'=>true,'placeholder'=>'Auditor','name'=>'pelaksana2_audit1', 'value'=>$dataRegis[0]['pelaksana2_audit1'],'readonly'=>'true'])@endcomponent
                                         </div>
@@ -420,6 +386,15 @@
 												<textarea class="form-control" type="text" name="review_perbaikan_3" >{{$laporanAudit1[0]['review_perbaikan_3']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+											<tr class="even">
+												<td class="text-nowrap valign-middle text-center">4</td>
+												<td class="valign-middle">Data Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
+												@if($value['has_4'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_4')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
@@ -440,10 +415,19 @@
 													<textarea class="form-control" id="review_perbaikan_4" type="text" name="review_perbaikan_4" >{{$laporanAudit1[0]['review_perbaikan_4']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+											<tr class="odd">
+												<td class="text-nowrap valign-middle text-center">5</td>
+												<td class="valign-middle">Data Bahan Baku, Bahan Tambahan dan Bahan Penolong</td>
+												@if($value['has_5'] !== null)
+												<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_5')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_5" name="status_has_5" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_5"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_5"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_5"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_5" name="status_has_5" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_5"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_5"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_5"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_5"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_5"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_5"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -459,10 +443,18 @@
 													<textarea class="form-control" id="review_perbaikan_5" type="text" name="review_perbaikan_5" >{{$laporanAudit1[0]['review_perbaikan_5']}}
 													</textarea>
 													
+
+												</td>
+											<tr class="even">
+												<td class="text-nowrap valign-middle text-center">6</td>
+												<td class="valign-middle">Sertifikat Halal Sebelumnya (Jika Ada)</td>
+												@if($value['has_6'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_6')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_6" name="status_has_6" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_6"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_6"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_6"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_6" name="status_has_6" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_6"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_6"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_6"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_6"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_6"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_6"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -478,10 +470,19 @@
 													<textarea class="form-control" id="review_perbaikan_6" type="text" name="review_perbaikan_6" >{{$laporanAudit1[0]['review_perbaikan_6']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+											<tr class="odd">
+												<td class="text-nowrap valign-middle text-center">7</td>
+												<td class="valign-middle">Copy Sertifikat Halal Pada Produk Konsinyasi/Titipan (Khusus Restoran/Catering)</td>
+												@if($value['has_7'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_7')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_7" name="status_has_7" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_1"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_1"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_1"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_7" name="status_has_7" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_1"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_1"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_1"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_7"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_7"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_7"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -497,10 +498,18 @@
 													<textarea class="form-control" id="review_perbaikan_7" type="text" name="review_perbaikan_7" >{{$laporanAudit1[0]['review_perbaikan_7']}}
 													</textarea>
 													
+
+												</td>
+											<tr class="even">
+												<td class="text-nowrap valign-middle text-center">8</td>
+												<td class="valign-middle">Informasi Formula/Resep Produk Tanpa Gramasi Yang Disahkan Oleh Personil Yang Berwenang</td>
+												@if($value['has_8'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_8')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_8" name="status_has_8" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_8"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_8"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_8"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_8" name="status_has_8" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_8"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_8"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_8"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_8"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_8"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_8"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -516,10 +525,19 @@
 													<textarea class="form-control" id="review_perbaikan_8" type="text" name="review_perbaikan_8" >{{$laporanAudit1[0]['review_perbaikan_8']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+											<tr class="odd">
+												<td class="text-nowrap valign-middle text-center">9</td>
+												<td class="valign-middle">Diagram Alir Proses Untuk Produk Yang disertifikasi</td>
+												@if($value['has_9'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_9')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_9" name="status_has_9" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_9"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_9"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_9"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_9" name="status_has_9" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_9"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_9"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_9"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_9"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_9"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_9"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -535,10 +553,19 @@
 													<textarea class="form-control" id="review_perbaikan_9" type="text" name="review_perbaikan_9" >{{$laporanAudit1[0]['review_perbaikan_9']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+											<tr class="even">
+												<td class="text-nowrap valign-middle text-center">10</td>
+												<td class="valign-middle">Pernyataan Dari Pemilik Fasilitas Produksi Bahwa Fasilitas Produksi (Termasuk Peralatan Pembantu) Tidak Digunakan Secara Bergantian Untuk Proses Produk Halal Dengan Produk  Yang Mengandung Babi/Turunannya</td>
+												@if($value['has_10'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_10')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_10" name="status_has_10" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_10"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_10"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_10"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_10" name="status_has_10" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_10"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_10"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_10"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_10"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_10"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_10"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -568,7 +595,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_11" name="status_has_11" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_11"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_11"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_11"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_11" name="status_has_11" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_11"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_11"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_11"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_11"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_11"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_11"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -584,10 +611,20 @@
 													<textarea class="form-control" id="review_perbaikan_11" type="text" name="review_perbaikan_11" >{{$laporanAudit1[0]['review_perbaikan_11']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+
+											<tr class="even">
+												<td class="text-nowrap valign-middle text-center">12</td>
+												<td class="valign-middle">Bukti Sosialisasi Dan Komunikasi Kebijakan Halal Kepada Seluruh Pihak Terkait</td>
+												@if($value['has_12'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_12')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_12" name="status_has_12" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_12"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_12"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_12"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_12" name="status_has_12" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_12"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_12"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_12"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_12"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_12"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_12"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -603,10 +640,20 @@
 													<textarea class="form-control" id="review_perbaikan_12" type="text" name="review_perbaikan_12" >{{$laporanAudit1[0]['review_perbaikan_12']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+
+											<tr class="even">
+												<td class="text-nowrap valign-middle text-center">13</td>
+												<td class="valign-middle">Bukti Sertifikat Pelatihan Penyelia Halal</td>
+												@if($value['has_13'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_13')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_13" name="status_has_13" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_13"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_13"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_13"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_13" name="status_has_13" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_13"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_13"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_13"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_13"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_13"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_13"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -622,10 +669,20 @@
 													<textarea class="form-control" id="review_perbaikan_13" type="text" name="review_perbaikan_13" >{{$laporanAudit1[0]['review_perbaikan_13']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+
+											<tr class="even">
+												<td class="text-nowrap valign-middle text-center">14</td>
+												<td class="valign-middle">Bukti Pelaksanaan Pelatihan Internal</td>
+												@if($value['has_14'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_14')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_14" name="status_has_14" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_14"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_14"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_14"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_14" name="status_has_14" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_14"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_14"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_14"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_14"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_14"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_14"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -641,10 +698,20 @@
 													<textarea class="form-control" id="review_perbaikan_14" type="text" name="review_perbaikan_14" >{{$laporanAudit1[0]['review_perbaikan_14']}}
 													</textarea>
 													
+
+												</td>
+											</tr>
+
+											<tr class="even">
+												<td class="text-nowrap valign-middle text-center">15</td>
+												<td class="valign-middle">Bukti Pelaksanaan Audit Internal</td>
+												@if($value['has_15'] !== null)
+													<td class="text-nowrap valign-middle text-center"><a href="{{url('penjadwalan_viewer/'.$laporanAudit1[0]['id_registrasi'].'/has_15')}}"><i class="fa fa-eye"></i></a></td>
+												@else
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_15" name="status_has_15" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_15"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_15"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_15"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_15" name="status_has_15" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_15"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_15"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_15"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_15"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_15"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_15"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -672,7 +739,7 @@
 													{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_16" name="status_has_16" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_16"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_16"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_16"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_16" name="status_has_16" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_16"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_16"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_16"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_16"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_16"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 					                                    <option value="2" {{$laporanAudit1[0]["status_has_16"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -701,7 +768,7 @@
 												{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_17" name="status_has_17" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_17"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_17"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_17"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_17" name="status_has_17" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_17"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_17"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_17"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_17"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_17"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 														<option value="2" {{$laporanAudit1[0]["status_has_17"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -730,7 +797,7 @@
 												{!! $buttonUnduhDisabled !!}
 												@endif
 												<td>
-													<select id="status_has_18" name="status_has_18" class="form-control selectpicker" data-size="10" data-live-search="true"@if($laporanAudit1[0]["status_has_18"] == 1) data-style="btn-green btn-sm";@elseif($laporanAudit1[0]["status_has_18"] == 3) data-style="btn-grey btn-sm";@elseif($laporanAudit1[0]["status_has_18"] == 2) data-style="btn-red btn-sm";@else data-style="btn-white btn-sm" @endif>
+													<select id="status_has_18" name="status_has_18" class="form-control selectpicker" data-size="10" data-live-search="true" @if($laporanAudit1[0]["status_has_18"] == 1) data-style="btn-green btn-sm"; @elseif($laporanAudit1[0]["status_has_18"] == 3) data-style="btn-grey btn-sm"; @elseif($laporanAudit1[0]["status_has_18"] == 2) data-style="btn-red btn-sm"; @else data-style="btn-white btn-sm" @endif>
 														<option value="" {{$laporanAudit1[0]["status_has_18"] == null ? 'selected' : ''}}>Belum Diperiksa</option>
 														<option value="1" {{$laporanAudit1[0]["status_has_18"] == 1 ? 'selected' : ''}}>Memenuhi</option>
 														<option value="2" {{$laporanAudit1[0]["status_has_18"] == 2 ? 'selected' : ''}}>Tidak Memenuhi</option>
@@ -772,47 +839,30 @@
 
                                     </div>
 
-												<label><b>Organisasi/ Pelaku usaha harus menyerahkan tambahan/ perbaikan dokumen kepada LPH dengan tembusan kepada BPJPH dalam jangka waktu paling lama 5 (lima) hari kerja sejak permintaan tambahan dokumen diterima. Apabila melebihi dari 5 hari kerja maka permohonan sertifikat halal tidak dapat diproses lebih lanjut.</b></label>
-											</div>
-											<div class="radio radio-css ">
-												<input type="radio" name="status_memenuhi" id="memenuhi" value="memenuhi" checked/>
-												<label for="memenuhi"><b>Audit Tahap II dapat dilaksanakan</b></label>
-											</div>
+									
+									<div>
+										<label><b>Syarat Untuk Lanjut Ke Audit Tahap 2</b></label>
+									</div>
 
-											<div class="radio radio-css ">
-												<input  type="radio" name="status_memenuhi" id="tidak_memenuhi" value="tidak memenuhi" />
-												<label for="tidak_memenuhi"><b>Audit Tahap II dapat dilaksanakan setelah semua tindak lanjut temuan sudah dinyatakan memenuhi, dengan batas maksimal penyerahan dokumen perbaikan 5 hari setelah pemeriksaan audit tahap 1</b></label>
-
-											</div>
-
-											
-											<div>
-												<label><b>Syarat Untuk Lanjut Ke Audit Tahap 2</b></label>
-											</div>
-
-											<div class="col-lg-12">
-												
-												<textarea class="col-lg-12" name="catatan_akhir_audit1" id="catatan_akhir_audit1" placeholder="Masukan catatan disini apabila pelaku usaha dapat lanjut ke tahap dua namun masih ada dokumen yang tidak memenuhi" ></textarea>
-												
-
-											</div>
-										</div>
-										<div class=" offset-md-5">
-										<a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
-											@if($dataHas !== null)
-												<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;" onclick="return confirm('Note: Catatan hanya boleh diisi apabila terdapat berkas yang tidak memenuhi namun akan dilanjutkan ke tahapan audit tahap 2')">Submit</button>
-
-												
-											@endif
-											
-										</div>		
+									<div class="col-lg-12">
 										
-									</form>	
+										<textarea class="col-lg-12" name="catatan_akhir_audit1" id="catatan_akhir_audit1" placeholder="Masukan catatan disini apabila pelaku usaha dapat lanjut ke tahap dua namun masih ada dokumen yang tidak memenuhi" ></textarea>
+										
+
+                                    </div>
 								</div>
-							</div>
+								<div class=" offset-md-5">
+					               <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
+					                @if($dataHas !== null)
+										<button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;" onclick="return confirm('Note: Catatan hanya boleh diisi apabila terdapat berkas yang tidak memenuhi namun akan dilanjutkan ke tahapan audit tahap 2')">Submit</button>
+
+										
+									@endif
+									
+					            </div>		
+								
+							</form>	
 						</div>
-						
-					</div>
 				</div>
 			</div>
 		</div>
