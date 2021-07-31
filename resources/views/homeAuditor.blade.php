@@ -140,8 +140,8 @@
 				<div class="stats-icon"><i class="fa fa-book text-white"></i></div>
 				<div class="stats-info">
 					<h4>JUMLAH AUDIT 1 / 2</h4>
-					<a href="{{route('listaudit1')}}" class="text-white"><span style="font-size: 23px">{{$dataAudit1}}</span></a> / 
-                    <a href="{{route('listaudit2')}}" class="text-white"><span style="font-size: 23px"> {{$dataAudit2}}</span></a>
+					<a href="{{route('listaudit1')}}" class="text-white"><span style="font-size: 23px">{{$dataAudit_1}}</span></a> / 
+                    <a href="{{route('listaudit2')}}" class="text-white"><span style="font-size: 23px"> {{$dataAudit_2}}</span></a>
 				</div>
 				<div class="stats-link">
 					<a href="javascript:;" target="_top"><!--Lihat Detail <i class="fa fa-arrow-alt-circle-right"></i>--></a>
