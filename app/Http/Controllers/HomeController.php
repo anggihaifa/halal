@@ -74,7 +74,7 @@ class HomeController extends Controller
         // dd($statistikpelanggan);
 
         $logKegiatan = DB::table('users')
-                            ->select('users.registrasi_id','log_kegiatan.*','users.name as nama',)                            
+                            ->select('users.registrasi_id','log_kegiatan.*','users.name as nama',)
                             ->join('log_kegiatan','log_kegiatan.id_registrasi','=','users.registrasi_id')
                             ->where('users.id',Auth::user()->id)
                             ->where('log_kegiatan.usergroup_id','=','2')
@@ -97,48 +97,48 @@ class HomeController extends Controller
         }
 
         $id_user = Auth::user()->id;
-        $cekAudit = DB::table('registrasi')
-             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-             ->join('users','registrasi.id_user','=','users.id')
-             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
-            ->where(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
-                $query->where('penjadwalan.status_penjadwalan_audit1','=',3);
+        // $cekAudit = DB::table('registrasi')
+        //      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+        //      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+        //      ->join('users','registrasi.id_user','=','users.id')
+        //      ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
+        //     ->where(function($query) use ($id_user){
+        //         $query->where('registrasi.status_cancel','=',0)  ;  
+        //         $query->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%');
+        //         $query->where('penjadwalan.status_penjadwalan_audit1','=',3);
   
-            })    
-            ->orWhere(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana2_audit1','LIKE','%'.$id_user.'%');
-                $query->where('penjadwalan.status_penjadwalan_audit1','=',3);
+        //     })    
+        //     ->orWhere(function($query) use ($id_user){
+        //         $query->where('registrasi.status_cancel','=',0)  ;  
+        //         $query->where('penjadwalan.pelaksana2_audit1','LIKE','%'.$id_user.'%');
+        //         $query->where('penjadwalan.status_penjadwalan_audit1','=',3);
   
-            })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*')
-             ->get();
+        //     })               
+        //      ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*')
+        //      ->get();
         
-        $cekAudit2 = DB::table('registrasi')
-             ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
-             ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
-             ->join('users','registrasi.id_user','=','users.id')
-             ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
-            ->where(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana1_audit2','LIKE','%'.$id_user.'%');
-                $query->where('penjadwalan.status_penjadwalan_audit2','=',3);
+        // $cekAudit2 = DB::table('registrasi')
+        //      ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+        //      ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
+        //      ->join('users','registrasi.id_user','=','users.id')
+        //      ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')
+        //     ->where(function($query) use ($id_user){
+        //         $query->where('registrasi.status_cancel','=',0)  ;  
+        //         $query->where('penjadwalan.pelaksana1_audit2','LIKE','%'.$id_user.'%');
+        //         $query->where('penjadwalan.status_penjadwalan_audit2','=',3);
   
-            })    
-            ->orWhere(function($query) use ($id_user){
-                $query->where('registrasi.status_cancel','=',0)  ;  
-                $query->where('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
-                $query->where('penjadwalan.status_penjadwalan_audit2','=',3);
+        //     })    
+        //     ->orWhere(function($query) use ($id_user){
+        //         $query->where('registrasi.status_cancel','=',0)  ;  
+        //         $query->where('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
+        //         $query->where('penjadwalan.status_penjadwalan_audit2','=',3);
   
-            })               
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*')
-             ->get();
+        //     })               
+        //      ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*')
+        //      ->get();
 
-        $dataAudit = count($cekAudit);
-        $dataAudit2 = count($cekAudit2);
+        // $dataAudit = count($cekAudit);
+        // $dataAudit2 = count($cekAudit2);
         // dd($dataAudit);
 
         $verifikasi = DB::table('registrasi')
@@ -171,7 +171,6 @@ class HomeController extends Controller
             ->where(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0);
                 $query->where('registrasi.status','=',8);
-  
             })    
             ->orWhere(function($query) use ($id_user){
                 $query->where('registrasi.status_cancel','=',0);
@@ -315,7 +314,7 @@ class HomeController extends Controller
         if(Auth::user()->usergroup_id == 1 || Auth::user()->usergroup_id == 3 || Auth::user()->usergroup_id == 4 || Auth::user()->usergroup_id == 5 || Auth::user()->usergroup_id == 6 || Auth::user()->usergroup_id == 7 || Auth::user()->usergroup_id == 8 ||  Auth::user()->usergroup_id == 13 || Auth::user()->usergroup_id == 14){
             return view('home',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan'));
         }else if(Auth::user()->usergroup_id == 10 || Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12){
-            return view('homeAuditor',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan','dataAudit','dataAudit2'));
+            return view('homeAuditor',compact('dataRegistrasi','dataUser','dataRegistrasiAktif','dataPelanggan','statistikregistrasi','statistikpelanggan','dataAudit1','dataAudit2'));
         }else if(Auth::user()->usergroup_id == 9){            
             return view('homeApprover',compact('dataVerifikasi','dataAudit1','dataAudit2','dataSidangFatwa','dataKetetapanHalal','statistikregistrasi','statistikpelanggan','dataPenjadwalan1'));
         }else if(Auth::user()->usergroup_id == 2){

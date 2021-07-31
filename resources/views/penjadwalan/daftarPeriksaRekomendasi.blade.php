@@ -89,7 +89,7 @@
 												$str2 =  explode("_",$dataRegis[0]['pelaksana2_audit2']);
 												$dataRegis[0]['pelaksana2_audit2'] = $str2[1];
 											}																																
-										@endphp																															
+										@endphp
                                         <div class="row">
 											@component('components.inputtext',['label' => 'Tim Audit','required'=>true,'placeholder'=>'Ketua Tim Audit','name'=>'pelaksana1_audit1', 'value'=>$dataRegis[0]['pelaksana1_audit2'].' & '.$dataRegis[0]['pelaksana2_audit2'],'readonly'=>'true'])@endcomponent
                                         </div>
@@ -116,7 +116,7 @@
                                                     <label class=" control-label font-weight-bold" for="id">1</label>
                                                 </td>
                                                 <td class="valign-middle">
-                                                    <label class=" control-label font-weight-bold" for="id">Penawaran Harga</label>                                                    
+                                                    <label class=" control-label font-weight-bold" for="id">Penawaran Harga</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/penawaran_harga') }}"><i class="fa fa-eye text-primary"></i></a>
@@ -711,7 +711,7 @@
                                             <tr>
                                                 <td colspan="4" class="valign-middle">
                                                     <div class="row">
-                                                        @if (Auth::user()->name == $dataRegis[0]['pelaksana1_audit2'])
+                                                        {{-- @if (Auth::user()->name == $dataRegis[0]['pelaksana1_audit2'])
                                                             @php
                                                                 $nama_rekomen = $dataRegis[0]['pelaksana1_audit2'];
                                                             @endphp
@@ -719,12 +719,16 @@
                                                             @php
                                                                 $nama_rekomen = $dataRegis[0]['pelaksana2_audit2'];
                                                             @endphp
-                                                        @endif
+                                                        @endif --}}
 
                                                         @if($dataPeriksaRekomendasi[0]['nama_rekomendasi_tr'] != null)
                                                             @component('components.inputtext',['label' => 'Nama :','required'=>true,'placeholder'=>'Nama', 'value'=>$dataPeriksaRekomendasi[0]['nama_rekomendasi_tr'],'name'=>'nama_tr','readonly'=>'true'])@endcomponent
                                                         @else
-                                                            @component('components.inputtext',['label' => 'Nama :','required'=>true,'placeholder'=>'Nama', 'value'=>$nama_rekomen,'name'=>'nama_tr','readonly'=>'true'])@endcomponent
+                                                            @if (Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12)
+                                                                @component('components.inputtext',['label' => 'Nama :','required'=>true,'placeholder'=>'Nama', 'value'=>Auth::user()->name,'name'=>'nama_tr','readonly'=>'true'])@endcomponent
+                                                            @else
+                                                                @component('components.inputtext',['label' => 'Nama :','required'=>true,'placeholder'=>'Nama', 'value'=>'','name'=>'nama_tr','readonly'=>'true'])@endcomponent
+                                                            @endif
                                                         @endif
                                                     </div>
                                                 </td>

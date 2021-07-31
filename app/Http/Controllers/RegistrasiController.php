@@ -1159,15 +1159,17 @@ class RegistrasiController extends Controller
                 $a->save();                                
             DB::commit();
 
-            $model2 = new LogKegiatan();            
-                $model2->id_registrasi = $data['id_registrasi'];
-                $model2->id_user = Auth::user()->id;
-                $model2->nama_user = Auth::user()->name;
-                $model2->usergroup_id = Auth::user()->usergroup_id;
-                $model2->id_kegiatan = 1;
-                $model2->judul_kegiatan = "Mengupdate Data Registrasi";
-                $model2->save();
-            DB::commit();
+            $this->LogKegiatan($data['id_registrasi'], Auth::user()->id, Auth::user()->name, 1, "Mengupdate Data Registrasi",Auth::user()->usergroup_id);
+
+            // $model2 = new LogKegiatan();            
+            //     $model2->id_registrasi = $data['id_registrasi'];
+            //     $model2->id_user = Auth::user()->id;
+            //     $model2->nama_user = Auth::user()->name;
+            //     $model2->usergroup_id = Auth::user()->usergroup_id;
+            //     $model2->id_kegiatan = 1;
+            //     $model2->judul_kegiatan = "Mengupdate Data Registrasi";
+            //     $model2->save();
+            // DB::commit();
                 
 
             Session::flash('success', "data berhasil disimpan!");            
@@ -6287,13 +6289,13 @@ class RegistrasiController extends Controller
 
     public function LogKegiatan($id_registrasi, $id_user, $nama, $id_kegiatan, $judul_kegiatan, $usergroup_id){
         $model3 = new LogKegiatan();
-        DB::beginTransaction();
+        DB::beginTransaction();            
             $model3->id_registrasi = $id_registrasi;
             $model3->id_user = $id_user;
             $model3->nama_user = $nama;
             $model3->id_kegiatan = $id_kegiatan;
             $model3->usergroup_id = $usergroup_id;
-            $model3->judul_kegiatan = $judul_kegiatan;            
+            $model3->judul_kegiatan = $judul_kegiatan;
             $model3->save();
         DB::commit();
     }
