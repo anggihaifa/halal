@@ -324,7 +324,7 @@
                             return `<table class="table-xs table-borderless text-center">
                                         <tr class="text-center align-midle">
                                             <td class="text-center">
-                                                <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan-tinjauan='`+full.catatan_tinjauan+`' data-status-laporan-tinjauan='`+full.status_laporan_tinjauan+`'  data-target='#modalks' > Upload File Tinjauan Komite Sertifikasi</button>
+                                                
                                                 <a class="btn btn-xs btn-primary m-r-5" href="{{url('daftar_periksa_rekomendasi')}}/`+full.id_regis+`">Isi Daftar Periksa dan Rekomendasi</a>
                                             </td>
                                         </tr>

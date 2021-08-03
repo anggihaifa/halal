@@ -685,7 +685,7 @@
                         return `<table class="table-xs table-borderless text-center">
                                     <tr class="text-center align-midle">
                                         <td class="text-center">
-                                            <button class="btn btn-xs btn-primary m-r-5" data-toggle='modal' data-id='`+full.id_regis+`' data-catatan-tr='`+full.catatan_tr+`' data-status-laporan-tr='`+full.status_laporan_tr+`' data-status-lanjut-ks='`+full.status_lanjut_ks+`' data-target='#modaltr' > Upload Review Laporan Audit</button>
+                                            
                                             <a class="btn btn-xs btn-primary m-r-5" href="{{url('daftar_periksa_rekomendasi')}}/`+full.id_regis+`">Isi Daftar Periksa dan Rekomendasi</a>
                                         </td>
                                     </tr>

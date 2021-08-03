@@ -821,7 +821,19 @@
 
     
 
-     
+    @elseif($status== '17')
+
+        <h3 style="text-align: center">Seetifikasi Halal Sudah Selesai</h3>
+
+        <br/>
+
+        <p>Anda menerima email ini dikarenakan registrasi sertifikasi halal anda sudah selesai pada proses ketetapan halal</p>
+
+
+        <p>
+            <button class="btn btn-green"><a href="{{url('')}}">WEBSITE LPH SUCOFINDO</a></button>
+        </p>
+        <br/> 
                
      
     @endif

@@ -574,7 +574,8 @@
                                                             <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="true"><b class="ion-ios-arrow-down"></b>
                                                             </a>
                                                             <div class="dropdown-menu dropdown-menu-right dropdownIcon" x-placement="top-end">
-
+                                                            <a href="{{url('verifikasi_dokumen_sertifikasi')}}/`+full.id+`" class="dropdown-item" >Lihat Dokumen Pelaku Usaha
+                                                            </a>
                                                             <div class="dropdown-button-title">Update Progress</div>`+uploadAkad+`
                                                             </div> 
                                                         </div>

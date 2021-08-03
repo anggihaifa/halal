@@ -72,6 +72,8 @@
                         <th class="valign-middle text-center">No. Registrasi</th>
                         <th class="valign-middle text-center">Perusahaan</th>
                         <th class="valign-middle text-center">Jenis Produk</th>
+                        <th class="valign-middle text-center">Jenis Pendanaan</th>
+                        <th class="valign-middle text-center">Fasilitator</th>
                         {{-- <th class="valign-middle text-center" >Unduh</th> --}}
                         <th class="valign-middle text-center" >Status Pembayaran</th>
                         
@@ -262,6 +264,8 @@
                 {"data":"no_registrasi"},
                 {"data":"nama_perusahaan"},
                 {"data":"kelompok"},
+                {"data":"jenis_pendanaan"},
+                {"data":"nama_fasilitator"},
                 
                             
                 {

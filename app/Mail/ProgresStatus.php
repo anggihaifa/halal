@@ -189,7 +189,7 @@ class ProgresStatus extends Mailable
 
         }
         elseif($this->status == 17){
-            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Sudah Selesai Proses Sertifikasi');  
+            $this->subject('Registrasi Dengan No registrasi '.$this->registrasi['no_registrasi'].' - Ketetapan Halal Sudah Keluar');  
 
         }
 

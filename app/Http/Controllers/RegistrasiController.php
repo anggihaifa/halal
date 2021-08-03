@@ -2470,7 +2470,7 @@ class RegistrasiController extends Controller
                     $e->save();
                     $f->save();
                     DB::commit();                    
-                    SendEmailP::dispatch($u,$f,null,$f->status);
+                    SendEmailP::dispatch($f,$u,null,$f->status);
                     Session::flash('success', "Status berhasil diupdate");
 
                     $this->LogKegiatan($e->id_registrasi, Auth::user()->id, Auth::user()->name, 2, "Admin telah memeriksa berkas, namun ada berkas yang belum memenuhi. Silahkan untuk diperbaiki.", Auth::user()->usergroup_id);
@@ -2505,7 +2505,7 @@ class RegistrasiController extends Controller
                     
                    
                   
-                    SendEmailP::dispatch($u,$f,null,$f->status);
+                    SendEmailP::dispatch($f,$u,null,$f->status);
                     $e->save();
                     if($f->status == '2' ||$f->status == '2_0' ||$f->status == '2_1'|| $f->status == '2_2'||$f->status == '2_3'||$f->status == '2_4'){
                         $f->status = '3';
@@ -2918,7 +2918,7 @@ class RegistrasiController extends Controller
                     $templateProcessor->setValue('merk_dagang', $f->nama_merk_produk);
                     $templateProcessor->setValue('no_id_bpjph', $f->no_registrasi_bpjph);
                     $templateProcessor->setValue('alamat', $f->alamat_perusahaan);
-                    $templateProcessor->setValue('no_audit', $f->no_registrasi);
+                    $templateProcessor->setValue('no_audit', "");
                     $templateProcessor->setValue('jenis_produk', $f->rincian_jenis_produk);
                     $templateProcessor->setValue('status_registrasi', $f->status_sertifikasi);
                     $templateProcessor->setValue('lokasi_audit1', $dataTemp['lokasi_audit']);
@@ -3090,7 +3090,7 @@ class RegistrasiController extends Controller
                 $templateProcessor->setValue('merk_dagang', $f->nama_merk_produk);
                 $templateProcessor->setValue('no_id_bpjph', $f->no_registrasi_bpjph);
                 $templateProcessor->setValue('alamat', $f->alamat_perusahaan);
-                $templateProcessor->setValue('no_audit', $f->no_registrasi);
+                $templateProcessor->setValue('no_audit', "");
                 $templateProcessor->setValue('jenis_produk', $f->rincian_jenis_produk);
                 $templateProcessor->setValue('status_registrasi', $f->status_sertifikasi);
                 $templateProcessor->setValue('lokasi_audit1', $dataTemp['lokasi_audit']);
@@ -4745,9 +4745,10 @@ class RegistrasiController extends Controller
             $e->save();
             DB::commit();
 
+            SendEmailP::dispatch($e,$u,null,$e->status);
             $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 17, "Upload Berkas Kelengkapan Ketetapan Halal",Auth::user()->usergroup_id);
 
-            Session::flash('success', "Berkas Kelengkapan Ketetapan Halal");
+            Session::flash('success', "Berkas Kelengkapan Ketetapan Halal Berhasil Diupdate");
                 
         }catch (\Exception $e){
             DB::rollBack();

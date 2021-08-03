@@ -41,9 +41,9 @@
                         <li class="nav-item text-center">                        
                             <a class="nav-link active" data-toggle="tab" href="#card-tab-5">Form Audit Tahap 2</a>
                         </li>
-                        <li class="nav-item text-center">      
+                        {{--<li class="nav-item text-center">      
                             <a class="nav-link" data-toggle="tab" href="#card-tab-6">Form Checklist Audit Tahap 2</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item text-center">      
                             <a class="nav-link" data-toggle="tab" href="#card-tab-8">Form Temuan Ketidaksesuaian</a>
                         </li>
