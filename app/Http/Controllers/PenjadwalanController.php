@@ -1615,9 +1615,11 @@ class PenjadwalanController extends Controller
         $model3 = new KelompokProduk();        
         
         $dataRegis = DB::table('registrasi')                                      
-             ->select('registrasi.*','ruang_lingkup.ruang_lingkup','penjadwalan.skema', 'penjadwalan.mulai_audit1', 'penjadwalan.selesai_audit2', 'penjadwalan.pelaksana1_audit2','pelaksana2_audit2', 'kelompok_produk.kelompok_produk')
+             ->select('registrasi.*','ruang_lingkup.ruang_lingkup','penjadwalan.skema', 'penjadwalan.mulai_audit1', 'penjadwalan.selesai_audit2', 'penjadwalan.pelaksana1_audit2','pelaksana2_audit2', 'kelompok_produk.kelompok_produk', 'laporan_audit1.file_laporan_audit1', 'laporan_audit2.file_konfirmasi_sk_audit','laporan_audit2.file_surat_tugas','laporan_audit2.file_rencana_audit','laporan_audit2.file_laporan_audit_tahap_2','laporan_audit2.file_bap','laporan_audit2.file_bap_sampel','laporan_audit2.file_daftar_hadir')
              ->where('registrasi.id',$id_registrasi)
              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
+             ->join('laporan_audit2','registrasi.id','=','laporan_audit2.id_registrasi')
+             ->join('laporan_audit1','registrasi.id','=','laporan_audit1.id_registrasi')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
              ->join('users','registrasi.id_user','=','users.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id')                          

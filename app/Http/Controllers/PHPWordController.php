@@ -11949,7 +11949,8 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
     public function uploadDaftarPeriksaRekomendasi(Request $request){
         $data = $request->except('_token','_method');
 
-        $model = new DaftarPeriksaRekomendasi();        
+        $model = new DaftarPeriksaRekomendasi();
+        $model2 = new Registrasi();
 
         $dataRekomen = DB::table('daftar_periksa_rekomendasi')
             ->where('id_registrasi',$data['id_registrasi'])
@@ -12307,6 +12308,23 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
 
                 // dd($id_daftar_rekomen);
                     $d = $model->find($id_daftar_rekomen);
+                    $e = $model2->find($data['id_registrasi']);
+
+                    DB::beginTransaction();                    
+
+                    if($data['kesiapanrekomen_tr'] == 'siap'){
+                        if($data['kesiapansidang_tr'] == 'ks'){                            
+                            $e->status = 13;
+                        }else{                            
+                            $e->status = 15;
+                        }      
+                    }else{                        
+                        $e->status = '10_1';
+                    }
+                    
+                    $e->save();
+                    DB::commit();
+
 
                     DB::beginTransaction();
                     $d->nama_rekomendasi_tr = $data['nama_tr'];
@@ -12632,6 +12650,18 @@ $model2->id_penjadwalan = $data['id_penjadwalan'];
 
                 // dd($id_daftar_rekomen);
                     $d = $model->find($id_daftar_rekomen);
+                    $e = $model2->find($data['id_registrasi']);
+
+                    DB::beginTransaction();                    
+
+                    if($data['kesiapanrekomen_ks'] == 'siap'){
+                        $e->status = 15;
+                    }else{                        
+                        $e->status = '10_1';
+                    }
+                    
+                    $e->save();
+                    DB::commit();
 
                     DB::beginTransaction();
                     $d->nama_rekomendasi_tr = $data['nama_tr'];

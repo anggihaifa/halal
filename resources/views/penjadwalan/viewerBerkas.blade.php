@@ -36,7 +36,7 @@
                 <div id="pdf" class="panel-body panel-form embed-responsive embed-responsive-1by1" style="position: relative; z-index: 1;">
 
                     @if (isset($penawaranHarga))
-                        <object type="application/pdf;base64" data="{{url('') .Storage::url('public/buktiAkad/'.$penawaranHarga->id_user.'/'.$penawaranHarga->file_akad.'')}}" class ="embed-responsive-item">
+                        <object type="application/pdf;base64" data="{{url('') .Storage::url('public/buktiakad/'.$penawaranHarga->id_user.'/'.$penawaranHarga->file_akad.'')}}" class ="embed-responsive-item">
                     @elseif (isset($konfirmasiSK))
                         <object type="application/pdf;base64" data="{{url('') .Storage::url('public/laporan/upload/Konfirmasi SK Audit/'.$konfirmasiSK->file_konfirmasi_sk_audit.'')}}" class ="embed-responsive-item">
                     @elseif (isset($suratTugas))
