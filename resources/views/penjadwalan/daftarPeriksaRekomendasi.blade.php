@@ -33,10 +33,26 @@
 		<!-- end panel-heading -->
 		<!-- begin panel-body -->
 		<div class="panel-body ">
+            @if (Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12 || Auth::user()->usergroup_id == 13)
+            <div class="card-header tab-overflow p-t-0 p-b-0">
+                <ul class="nav nav-tabs card-header-tabs">                                                
+                    <li class="nav-item text-center">                        
+                        <a class="nav-link active" data-toggle="tab" href="#card-tab-1">Form Daftar Periksa dan Rekomendasi</a>
+                    </li>                    
+                    <li class="nav-item text-center">  
+                        @if (Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12)
+                            <a class="nav-link" data-toggle="tab" href="#card-tab-2">Upload Form</a>
+                        @else
+                            <a class="nav-link" data-toggle="tab" href="#card-tab-3">Upload Form</a>
+                        @endif                        
+                    </li>                    
+                </ul>
+            </div>
+            @endif
 
 		
 			
-			<div class="table-responsive">
+			<div class="card-body table-responsive">
 					<div class="tab-content p-0 m-0">
 						<div class="tab-pane fade active show" id="card-tab-1">
 							@php
@@ -119,7 +135,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Penawaran Harga</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/penawaran_harga') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_akad'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else                                                    
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/penawaran_harga') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">                                                        
@@ -150,7 +170,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Konfirmasi Jadwal, Syarat & Ketentuan Audit</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/konfirmasi_sk') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_konfirmasi_sk_audit'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else                                                    
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/konfirmasi_sk') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -180,7 +204,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Surat Tugas</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/surat_tugas') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_surat_tugas'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else                                                        
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/surat_tugas') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -210,7 +238,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Audit Plan</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/audit_plan') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_rencana_audit'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else                                                        
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/audit_plan') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -240,7 +272,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Laporan Audit Tahap 1</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/laporan_audit_tahap1') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_laporan_audit1'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else                                                    
+                                                        <a class="btn btn-xs" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/laporan_audit_tahap1') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -274,7 +310,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Laporan Audit Tahap 2</label>
                                                 </td>     
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/laporan_audit_tahap2') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_laporan_audit_tahap_2'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else                                                    
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/laporan_audit_tahap2') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>                                           
                                             </tr>
                                             <tr>
@@ -421,7 +461,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Berita Acara Pemeriksaan</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/bap') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_bap'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/bap') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -455,7 +499,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Berita Acara Pengambilan Sampel</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/baps') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_bap_sampel'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/baps') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                                                                        
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -489,7 +537,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">Daftar Hadir Opening & Closing Meeting</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/daftarHadir') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_daftar_hadir'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else                                                    
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/daftarHadir') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                                                                                                                            
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -531,7 +583,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">a.	Surat Permohonan Sidang Fatwa Halal</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/suratPermohonan') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_surat_permohonan_sidang'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/suratPermohonan') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -561,7 +617,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">b.	Daftar Hadir Sidang Fatwa Halal</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/daftarHadirSidang') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_daftar_hadir_sidang'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/daftarHadirSidang') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -591,7 +651,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">c.	Berita Acara Sidang Fatwa Halal</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/beritaAcaraSidang') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_berita_acara_sidang'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/beritaAcaraSidang') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -621,7 +685,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">d.	Tanda Terima Dokumen dan Sampel</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/tandaTerima') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_tanda_terima_sidang'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/tandaTerima') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -651,7 +719,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">e.	Keputusan Fatwa MUI</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/keputusanFatwa') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_keputusan_sidang'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/keputusanFatwa') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -681,7 +753,11 @@
                                                     <label class=" control-label font-weight-bold" for="id">f.	Dokumentasi Sidang Fatwa (foto pelaksanaan)</label>
                                                 </td>
                                                 <td class="valign-middle text-center">
-                                                    <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/dokumentasiSidang') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @if ($dataRegis[0]['file_dokumentasi_sidang'] == null)
+                                                        <a class="btn btn-xs" disabled><i class="fa fa-eye text-grey"></i></a>
+                                                    @else
+                                                        <a class="btn btn-xs" target="blank_" href="{{ url('penjadwalan_viewer_berkas/'.$dataRegis[0]['id'].'/'.$dataRegis[0]['id_user'].'/dokumentasiSidang') }}"><i class="fa fa-eye text-primary"></i></a>
+                                                    @endif                                                    
                                                 </td>
                                                 <td class="valign-middle text-center">
                                                     <div class="radio">
@@ -704,7 +780,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" rowspan="4" class="valign-middle">
+                                                <td colspan="2" rowspan="5" class="valign-middle">
                                                     <label class=" control-label font-weight-bold" for="id">Rekomendasi</label>
                                                 </td>                                                
                                             </tr>
@@ -804,7 +880,7 @@
                                                     @if (Auth::user()->usergroup_id == 13)                                                                
                                                         <input type="text" name="kesiapanrekomen_tr" value='{{$dataPeriksaRekomendasi[0]['status_rekomendasi_tr']}}' style="cursor: pointer;" id="siap" required hidden/>
                                                     @endif
-                                                    <label class="col-lg-12 col-form-label">diajukan ke Sidang Komisi Fatwa</label>
+                                                    <label class="col-lg-12 col-form-label">lanjut ke tahapan berikutnya</label>
                                                 </td>
                                                 <td colspan="3" class="valign-middle">
                                                     <div class="row">
@@ -840,15 +916,248 @@
                                                     </div>
                                                 </td>
                                             </tr>                                            
+                                            <tr>
+                                                <td colspan="4" class="valign-middle"> 
+                                                    <label class="col-lg-12 col-form-label">Lanjut ke tahapan </label>
+                                                    <div id="shb" class="col-lg-12">
+                                                        <div class="input-group date">
+                                                            <div class="radio radio-css radio-inline">                                         
+                                                                <input type="radio" name="kesiapansidang_tr" value="ks" style="cursor: pointer;" id="ks" required {{Auth::user()->usergroup_id != 11 && Auth::user()->usergroup_id != 12 ? 'disabled' : '' }}/>
+                                                                <label for="ks">Komite Sertifikasi</label>                                                                
+                                                            </div>
+                                                            <div class="radio radio-css radio-inline">                                         
+                                                                <input type="radio" name="kesiapansidang_tr" value="sidang" style="cursor: pointer;" id="sidang" {{Auth::user()->usergroup_id != 11 && Auth::user()->usergroup_id != 12 ? 'disabled' : '' }}/> 
+                                                                <label for="sidang">Persiapan Sidang</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                    
+                                                </td>
+                                                <td colspan="3" class="valign-middle">                                                    
+                                                </td>
+                                            </tr>                                            
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class=" offset-md-5">
                                     <a type="button"  href="{{url()->previous()}}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Kembali</a>
-                                    <button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;" onclick="return confirm('Note: Catatan hanya boleh diisi apabila terdapat berkas yang tidak memenuhi namun akan dilanjutkan ke tahapan audit tahap 2')" {{Auth::user()->usergroup_id != 11 && Auth::user()->usergroup_id != 12 && Auth::user()->usergroup_id != 13 ? 'hidden' : '' }}>Submit</button>
+                                    <button type="submit" class="btn btn-md btn-lime offset-md-1" style="z-index: 100;" {{Auth::user()->usergroup_id != 11 && Auth::user()->usergroup_id != 12 && Auth::user()->usergroup_id != 13 ? 'hidden' : '' }} onclick= "return confirm('Apakah anda yakin ?? Jika Siap maka proses akan dilanjutkan ke tahapan berikutnya, apabila belum siap maka akan dikembalikan ke proses audit tahap 2')">Submit</button>
                                 </div>		
                             </form>
 						</div>
+                        <div class="tab-pane fade show" id="card-tab-2">
+                        
+                                    <form action="{{route('storelaporantr')}}" method="post"  enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                                                                    
+                        
+                                            <div class = "modal-body">
+                                                
+                        
+                                                <div>
+                                                    <table class="table  table-sm table-borderless border-none">
+                                                    
+                                                        <thead class="table-success">   
+                                                        <th >Upload File</th>
+                        
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                    <label class="control-label font-weight-bold" for="id">ID</label>  
+                                                                    <div >
+                                                                        <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly>
+                                                                    
+                                                                    </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                    <label class=" control-label font-weight-bold" for="id">Review Laporan Audit</label>  
+                                                                    <div >
+                                                                        <input id="file_laporan_tr"  name="file_laporan_tr" type="file" placeholder="" >
+                                                                    
+                                                                    </div>
+                                                                    </div
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                        
+                                                </div>
+                        
+                                                <div>
+                                                    <table class="table  table-sm table-borderless border-none">
+                                                    
+                                                        <thead class="table-success">   
+                                                        <th >Hasil Technical Review Review</th>
+                        
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <label class=" control-label font-weight-bold" for="id">Catatan Technical Review</label>  
+                                                                        <div >
+                                                                            <input type="text" id="catatan_tr" class="form-control"  name="catatan_tr" placeholder="" >
+                                                                        
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                    <label class=" control-label font-weight-bold" for="id">Hasil</label>  
+                                                                    <select id="status_laporan_tr" name="status_laporan_tr" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" requied>
+                                                                        <option value="">==Pilih==</option>
+                                                                        <option value="1">Lanjut Ke Tahapan Berikutnya</option>
+                                                                        <option value="0">Perbaikan</option>                                                               
+                                                                    </select>
+                                                                    </div
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                        
+                                                </div>
+                        
+                                            <div>
+                                                <table class="table  table-sm">
+                                                
+                                                    <thead class="table-success">   
+                                                    <th >Apakah Membutuhkan Tahapan Komite Sertifikasi ?</th>
+                        
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <select id="status_lanjut_ks" name="status_lanjut_ks" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" requied>
+                                                                    <option value="">==Pilih==</option>
+                                                                    <option value="1">Ya</option>
+                                                                    <option value="0">Tidak, Lanjutkan Persiapan Sidang Fatwa Halal</option>                                                               
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                
+                                                    
+                                            </div>
+                        
+                                              
+                                            </div>
+                                         
+                                            <div class = "modal-footer">
+                                                <div >
+                                                    <button class="btn btn-sm btn-success" type="submit" >Submit</button>
+                                                
+                                                </div>
+                                            </div>
+                                        
+                                    </form>
+                                                                                                                                                       
+                        </div>
+                        <div class="tab-pane fade show" id="card-tab-3">                                                    
+                                    <form action="{{route('storelaporanks')}}" method="post"  enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        
+                        
+                                            <div class = "modal-body">
+                                                
+                        
+                                                <div>
+                                                    <table class="table  table-sm table-borderless border-none">
+                                                    
+                                                        <thead class="table-success">   
+                                                        <th >Upload File</th>
+                        
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                    <label class="control-label font-weight-bold" for="id">ID</label>  
+                                                                    <div >
+                                                                        <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly>
+                                                                    
+                                                                    </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                    <label class=" control-label font-weight-bold" for="id">File Tinjauan Komite Sertifikasi</label>  
+                                                                    <div >
+                                                                        <input id="file_laporan_tinjauan"  name="file_laporan_tinjauan" type="file" placeholder="" >
+                                                                    
+                                                                    </div>
+                                                                    </div
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                        
+                                                </div>
+                        
+                                                <div>
+                                                    <table class="table  table-sm table-borderless border-none">
+                                                    
+                                                        <thead class="table-success">   
+                                                        <th >Hasil Tinjauan Komite Sertifikasi</th>
+                        
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <label class=" control-label font-weight-bold" for="id">Catatan Tinjauan Komite Sertifikasi</label>  
+                                                                        <div >
+                                                                            <input type="text" id="catatan_tinjauan" class="form-control"  name="catatan_tinjauan" placeholder="" >
+                                                                        
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                    <label class=" control-label font-weight-bold" for="id">Hasil</label>  
+                                                                    <select id="status_laporan_tinjauan" name="status_laporan_tinjauan" class="form-control selectpicker" data-size="100" data-live-search="true" data-style="btn-white" required>
+                                                                        <option value="">==Pilih==</option>
+                                                                        <option value="1">Lanjut Ke Tahapan Bertikutnya</option>
+                                                                        <option value="0">Perbaikan</option>                                                               
+                                                                    </select>
+                                                                    </div
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                        
+                                                </div>
+                        
+                        
+                        
+                                              
+                                            </div>
+                                         
+                                            <div class = "modal-footer">
+                                                <div >
+                                                    <button class="btn btn-sm btn-success" type="submit" >Submit</button>
+                                                
+                                                </div>
+                                            </div>                                        
+                                    </form>                                                                                                                                  
+                        </div>
 				</div>
 			</div>
 		</div>
