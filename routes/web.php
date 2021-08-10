@@ -93,8 +93,10 @@ Route::get('list_persiapan_sidang','PenjadwalanController@listPersiapanSidang')-
 
 Route::get('list_log','PenjadwalanController@listLog')->name('listlog')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('data_log','PenjadwalanController@dataLog')->name('datalog');
+Route::get('data_log2','PenjadwalanController@dataLog2')->name('datalog2');
 Route::get('list_monitoring_log/{id}','PenjadwalanController@listMonitoringLog')->name('listmonitoringlog')->middleware('role:1,3,6,9,10,11,12,13');
 Route::get('data_monitoring_log/{id}','PenjadwalanController@dataMonitoringLog')->name('datamonitoringlog');
+Route::get('data_monitoring_log2/{id}','PenjadwalanController@dataMonitoringLog2')->name('datamonitoringlog2');
 
 Route::get('data_penjadwalan_reviewer','ReviewerController@dataPenjadwalanReviewer')->name('datapenjadwalanreviewer');
 Route::put('approve_penjadwalan_reviewer','ReviewerController@approvePenjadwalanReviewer')->name('approvepenjadwalanreviewer');

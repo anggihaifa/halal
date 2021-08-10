@@ -29,53 +29,51 @@
         <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body table-responsive">
-            <div class="forFilter panel-inverse" >
-                <div id="dtransfer">
-                    <div id="accordionFilter" class="accordion">
-                        <!-- begin card -->
-                        <div class="card">
-                            <div class="card-header pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseFilter" style="cursor: pointer; padding: 2px 5px">
-                                <img class="animated bounceIn " src="{{asset('/assets/img/user/halal-search.png')}}" alt="" style="height: 30px;margin-right: 10px;"> 
-                                <span class="faq-ask">Filter</span>
-                            </div>
-                            <div id="collapseFilter" class="collapse" data-parent="#accordionFilter">
-                                <div class="card-body" style="overflow: auto;">
-                                    <form id="search-form" class="form-horizontal form-bordered" enctype="multipart/form-data">
-                                        <div class="form-group row">
-                                            @component('components.inputfilter',['name'=> 'no_registrasi','label' => 'No Registrasi'])@endcomponent
-                                            
-                                            @component('components.inputfilter',['name'=> 'nama_perusahaan','label' => 'Perusahaan'])@endcomponent   
-                                            
-                                            <label class="col-lg-2 col-form-label">Bulan Audit</label>
-                                            <div class="col-lg-4">
-                                                <input id="f_mulai"  name="f_mulai" class="form-control" class="form-control">
-                                                </input>
-                                                <span id="btncalendar" class="add-on">
-                                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                                                    </i>
-                                                </span>   
-                                                
-                                            </div>
-                                    
-                                            
-                                            <div>
-                                                @component('components.buttonsearch')@endcomponent
-                                            </div>
-                                        </div>
-                                    </form>            
-                                </div>
-                            </div>
+            
+            <div class="card-header tab-overflow p-t-0 p-b-0">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item text-center">
+                        <a class="nav-link active" data-toggle="tab" href="#card-tab-1">Audit Tahap 1</a>
+                    </li>                    
+                    <li class="nav-item text-center">                        
+                        <a class="nav-link" data-toggle="tab" href="#card-tab-2">Audit Tahap 2</a>
+                    </li>                                            
+                </ul>
+            </div>
+            <div class="panel-body ">
+
+                <div class="card-body table-responsive-lg ">
+
+                    <div class="tab-content p-0 m-0">
+                        <div class="tab-pane active show fade" id="card-tab-1">
+                            <table id="table" class="table table-bordered" cellspacing="0" style="width:100%">
+                                <thead style="display: none;">
+                                    <tr>
+                                        <th ></th>                         
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="card-tab-2">
+                            <table id="table2" class="table table-bordered" cellspacing="0" style="width:100%">
+                                <thead style="display: none;">
+                                    <tr>
+                                        <th ></th>                         
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
+
+          
+
+            <div class="col-md-12 offset-md-5">									
+								
+                @component('components.buttonback',['href' => route("detailpelaksana.index")])@endcomponent											
+                   						
+                
             </div>
-            <table id="table" class="table table-bordered" cellspacing="0" style="width:100%">
-                <thead style="display: none;">
-                    <tr>
-                        <th ></th>                         
-                    </tr>
-                </thead>
-            </table>
             
           
             
@@ -169,13 +167,7 @@
         var xTable = $('#table').DataTable({
             ajax:{
                 url:"{{route('datalog')}}",
-                data:function(d){
-                    d.no_registrasi = $('#no_registrasi').val();
-                    d.mulai = $('#f_mulai').val();
-                    d.nama_perusahaan = $('#nama_perusahaan').val();
-    
-
-                }
+               
             },
             
             columns:[
@@ -235,7 +227,7 @@
                                     <div class="col-lg-7" style="padding-left:10%; padding-top:2%">
                                         <label class="inline text-center">
 
-                                            <i class="fa fa-calendar text-primary" style="font-size:600%"></i>
+                                            <i class="fa fa-calendar text-primary" style="font-size:500%"></i>
                                             <br>
                                             <h3 class="text-grey" style=>`+full.mulai+`</h3>
                                             
@@ -271,9 +263,131 @@
                                                 <li>
                                                     Skema: `+full.skema+`
                                                 </li>
-                                                    <li>
-                                                    Jenis: `+jenis+`
+                                                    
+                                                
+                                            </span> 
+                                    </div>
+
+                                </div>`  
+                    }
+                }
+            ],
+
+            
+            
+            
+            
+            processing:true,
+            serverSide:true,
+            order:[[0,'asc']],
+            bFilter: false,
+            bSortable: false,
+            bInfo: false,
+            lengthChange: false,
+            ordering: false
+
+        });
+
+        var xTable = $('#table2').DataTable({
+            ajax:{
+                url:"{{route('datalog2')}}",
+                
+            },
+            
+            columns:[
+                
+                {
+                    "data":null,
+                    "searchable":false,
+                    "orderable":false,
+                    "render":function (data,type,full,meta) {
+
+                    if(!full.pelaksana2){
+                        var jumlah = 1;
+                    }else{
+                        var jumlah = 2;
+                    }
+
+                    /* var mulai = full.mulai.split(" ");
+                    var selesai = full.selesai.split(" ");*/
+
+                    var date1 = new Date(full.mulai); 
+                    var date2 = new Date(full.selesai); 
+                        
+                    // To calculate the time difference of two dates 
+                    
+
+                    var p1 = full.pelaksana1.split("_");
+                    if(full.pelaksana2){
+                        var p2 = full.pelaksana2.split("_");
+                    }
+                    
+
+                    if(id_user == p1[0]){
+                        var peran = 'Ketua';
+                    }else{
+                        var peran = 'Anggota';
+                    }
+
+                    if(p1[2] == 'tahap1'){
+                        var jenis = "Tahap1 - Remote";
+
+                    }else if(p1[2] == 'tahap2'){
+                            var jenis = "Tahap2 - " +full.ktg;
+
+                    }else if(p1[2] == 'tr'){
+                            var jenis = "Technical Review - Remote";
+
+                    }else if(p1[2] == 'tinjauan'){
+                            var jenis = "Tijauan Komite Sertifikasi - Remote";
+
+                    }
+
+                    
+                        
+                        return `<div class="col-lg-12 row border-left rounded-lg border-primary" >
+                                    
+                                        
+                                    <div class="col-lg-7" style="padding-left:10%; padding-top:2%">
+                                        <label class="inline text-center">
+
+                                            <i class="fa fa-calendar text-primary" style="font-size:500%"></i>
+                                            <br>
+                                            <h3 class="text-grey" style=>`+full.mulai+`</h3>
+                                            
+                                           
+                                            <span class="label label-success"><a style="color: white;">NOMOR AUDIT:`+full.no_registrasi+`</a></span>
+                                            
+
+                                            
+                                        </label>
+                                    </div>
+                                    
+
+                                    <div class="col-lg-4 >
+
+                                            <span class="lbl">
+                                                <br><i class="fa fa-building text-primary" ></i> 
+                                                `+full.nama_perusahaan+`<br>
+                                                
+                                            
+                                            </span>    
+
+                                        
+                                            <span>
+                                                <i class="fa fa-bars text-primary" >
+                                                </i> Detail Audit<br>
+
+                                                <li>
+                                                    Jumlah Auditor: `+jumlah+`
                                                 </li>
+                                                <li>
+                                                    Peran: `+peran+`
+                                                </li>
+                                                <li>
+                                                    Skema: `+full.skema+`
+                                                </li>
+                                                
                                                 
                                             </span> 
                                     </div>

@@ -357,7 +357,7 @@
 							@endif --}}
 
 							@if ($status == 'a_15')
-								<li id="personal" class="notyet"><strong>Proses Persiapan Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="personal" class="notyet"><strong>Proses Persiapan Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_15_0')
 								<li id="personal" class="notyet"><strong>Reviewer Belum Mereview Laporan Hasil Akhir Audit</strong></li>
 							@elseif ($status == 'a_15_1')
@@ -365,70 +365,108 @@
 							@elseif ($status == 'a_16')
 								<li id="personal" class="confirming"><strong>Proses Sidang Fatwa</strong></li>							
 							@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3' || $status == 'a_5_4')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_8' || $status == 'a_8_1' || $status == 'a_8_2' || $status == 'a_8_3')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_9' || $status == 'a_9_0' || $status == 'a_9_1' || $status == 'a_9_2' || $status == 'a_9_3')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_10' || $status == 'a_10_0' || $status == 'a_10_1' || $status == 'a_10_2' || $status == 'a_10_3' || $status == 'a_10_4' || $status == 'a_10_5' || $status == 'a_10_6' || $status == 'a_10_7' || $status == 'a_10_8')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_11' || $status == 'a_11_0' || $status == 'a_11_1' || $status == 'a_11_2')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_12' || $status == 'a_12_0' || $status == 'a_12_1' || $status == 'a_12_2' || $status == 'a_12_3')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_13' || $status == 'a_13_0' || $status == 'a_13_1' || $status == 'a_13_2' || $status == 'a_13_3')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@elseif ($status == 'a_14' || $status == 'a_14_0' || $status == 'a_14_1')
-								<li id="account"><strong>Sidang Penetapan Kehalalan Produk</strong></li>
+								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
 							@else
 								<li id="account" class="confirming"><strong>Proses Sidang Fatwa</strong></li>
 							@endif
 
 							@if ($status == 'a_17')
-								<li id="account" class="confirming"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account" class="confirming"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3' || $status == 'a_5_4')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_8' || $status == 'a_8_1' || $status == 'a_8_2' || $status == 'a_8_3')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_9' || $status == 'a_9_0' || $status == 'a_9_1' || $status == 'a_9_2' || $status == 'a_9_3')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_10' || $status == 'a_10_0' || $status == 'a_10_1' || $status == 'a_10_2' || $status == 'a_10_3' || $status == 'a_10_4' || $status == 'a_10_5' || $status == 'a_10_6' || $status == 'a_10_7' || $status == 'a_10_8')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_11' || $status == 'a_11_0' || $status == 'a_11_1' || $status == 'a_11_2')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_12' || $status == 'a_12_0' || $status == 'a_12_1' || $status == 'a_12_2' || $status == 'a_12_3')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_13' || $status == 'a_13_0' || $status == 'a_13_1' || $status == 'a_13_2' || $status == 'a_13_3')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_14' || $status == 'a_14_0' || $status == 'a_14_1')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_15' || $status == 'a_15_0' || $status == 'a_15_1')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@elseif ($status == 'a_16')
-								<li id="account"><strong>Sidang Fatwa Halal</strong></li>
+								<li id="account"><strong>Ketetapan Halal</strong></li>
 							@else
-								<li id="account" class="confirming"><strong>Sidang Fatwa Halal</strong></li>
-							@endif							
+								<li id="account" class="confirming"><strong>Ketetapan Halal</strong></li>
+							@endif	
+							
+							@if ($status == 'a_18')
+								<li id="account" class="confirming"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_1' || $status == 'a_2' || $status == 'a_2_0' || $status == 'a_2_1' || $status == 'a_2_2' || $status == 'a_2_3')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_3' || $status == 'a_3_0' || $status == 'a_3_1' || $status == 'a_3_2' || $status == 'a_3_3')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_4' || $status == 'a_4_0' || $status == 'a_4_1' || $status == 'a_4_2' || $status == 'a_4_3')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_5' || $status == 'a_5_0' || $status == 'a_5_1' || $status == 'a_5_2' || $status == 'a_5_3' || $status == 'a_5_4')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_6' || $status == 'a_6_0' || $status == 'a_6_1' || $status == 'a_6_2' || $status == 'a_6_3' || $status == 'a_6_4')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_7' || $status == 'a_7_0' || $status == 'a_7_1' || $status == 'a_7_2' || $status == 'a_7_3')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_8' || $status == 'a_8_1' || $status == 'a_8_2' || $status == 'a_8_3')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_9' || $status == 'a_9_0' || $status == 'a_9_1' || $status == 'a_9_2' || $status == 'a_9_3')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_10' || $status == 'a_10_0' || $status == 'a_10_1' || $status == 'a_10_2' || $status == 'a_10_3' || $status == 'a_10_4' || $status == 'a_10_5' || $status == 'a_10_6' || $status == 'a_10_7' || $status == 'a_10_8')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_11' || $status == 'a_11_0' || $status == 'a_11_1' || $status == 'a_11_2')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_12' || $status == 'a_12_0' || $status == 'a_12_1' || $status == 'a_12_2' || $status == 'a_12_3')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_13' || $status == 'a_13_0' || $status == 'a_13_1' || $status == 'a_13_2' || $status == 'a_13_3')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_14' || $status == 'a_14_0' || $status == 'a_14_1')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_15' || $status == 'a_15_0' || $status == 'a_15_1')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@elseif ($status == 'a_16')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+                            @elseif ($status == 'a_17')
+								<li id="account"><strong>Sertifikat Halal</strong></li>
+							@else
+								<li id="account" class="confirming"><strong>Sertifikat Halal</strong></li>
+							@endif	
 													
 						@endforeach
 					@endif	                                                                																														

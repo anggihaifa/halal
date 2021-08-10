@@ -1708,7 +1708,7 @@ class PenjadwalanController extends Controller
             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','registrasi.kode_wilayah','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*','laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2','laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.file_laporan_tinjauan','laporan_tehnical_review.catatan_tr','laporan_tinjauan.catatan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang','registrasi.alamat_perusahaan')
             //  ->join('laporan_audit1','registrasi.id_laporan_audit1','=','laporan_audit1.id')
             ->where('registrasi.status_cancel','=',0)
-            ->where('registrasi.status','!=',17)
+            ->where('registrasi.status','!=',18)
             ->where('penjadwalan.status_penjadwalan_audit2','=',3)
             ->where(function($query) use ($id_user){
                
@@ -1832,7 +1832,7 @@ class PenjadwalanController extends Controller
              ->leftjoin('laporan_persiapan_sidang','registrasi.id_persiapan_sidang','=','laporan_persiapan_sidang.id')
              ->join('penjadwalan','registrasi.id_penjadwalan','=','penjadwalan.id') 
              ->leftjoin('pembayaran','registrasi.id','=','pembayaran.id_registrasi') 
-             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.file_laporan_tinjauan','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang', 'laporan_persiapan_sidang.status_persiapan_sidang','laporan_audit2.file_laporan_ketidaksesuaian','laporan_audit2.file_bap', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3')
+             ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan','penjadwalan.*', 'laporan_audit1.file_laporan_audit1','laporan_audit2.file_laporan_audit_tahap_2', 'laporan_tehnical_review.file_laporan_tr','laporan_tinjauan.file_laporan_tinjauan','laporan_tinjauan.catatan_tinjauan', 'laporan_tinjauan.status_laporan_tinjauan','laporan_persiapan_sidang.catatan_persiapan_sidang', 'laporan_persiapan_sidang.status_persiapan_sidang','laporan_audit2.file_laporan_ketidaksesuaian','laporan_audit2.file_bap', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3', 'registrasi.jenis_pendanaan','registrasi.nama_fasilitator')
 
              ->where('registrasi.status_cancel','=',0)      
              ->where('registrasi.status','=',15);
@@ -2256,8 +2256,41 @@ class PenjadwalanController extends Controller
             ->where('registrasi.status_cancel','=',0)  
             ->where('penjadwalan.pelaksana1_audit1','LIKE','%'.$id_user.'%')
         
-            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit1 as mulai','penjadwalan.selesai_audit1 as selesai','penjadwalan.pelaksana1_audit1 as pelaksana1','penjadwalan.pelaksana2_audit1 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg');
+            ->select('registrasi.id as id_regis', 'registrasi.no_registrasi as no_registrasi','registrasi.status as status','registrasi.nama_perusahaan as nama_perusahaan','ruang_lingkup.ruang_lingkup as jenisR','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.id as id_user','penjadwalan.mulai_audit1 as mulai','penjadwalan.selesai_audit1 as selesai','penjadwalan.pelaksana1_audit1 as pelaksana1','penjadwalan.pelaksana2_audit1 as pelaksana2', 'penjadwalan.skema as skema', 'penjadwalan.ktg_audit2 as ktg')
+            ->orderBy('mulai','desc');
 
+        
+
+       
+        
+       
+               
+       
+        // if(isset($gdata['no_registrasi'])){
+
+        //     $dataAudit1 = $dataAudit1->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+           
+        // }
+        // if(isset($gdata['nama_perusahaan'])){
+        //     $dataAudit1 = $dataAudit1->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
+           
+            
+        // }
+        // if(isset($gdata['mulai'])){
+        //     $dataAudit1 = $dataAudit1->where('penjadwalan.mulai_audit1','LIKE','%'.$gdata['mulai'].'%');
+        // }
+
+        $xdata = $dataAudit1
+        ->get();
+
+      
+        return Datatables::of($xdata)->make();
+    }
+    public function dataMonitoringLog2(Request $request, $id){
+        $gdata = $request->except('_token','_method');
+        $id_user = $id;
+        //start
+       
         
 
         $dataAudit2 = DB::table('registrasi')
@@ -2273,31 +2306,28 @@ class PenjadwalanController extends Controller
                 ->orWhere('penjadwalan.pelaksana2_audit2','LIKE','%'.$id_user.'%');
                 //$query->where('penjadwalan.status_penjadwalan_audit2','=', 4);
   
-            }) ;
+            })
+            ->orderBy('mulai','desc');
         
        
                
        
-        if(isset($gdata['no_registrasi'])){
+        // if(isset($gdata['no_registrasi'])){
 
-            $dataAudit1 = $dataAudit1->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-            $dataAudit2 = $dataAudit2->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['nama_perusahaan'])){
-            $dataAudit1 = $dataAudit1->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
-            $dataAudit2 = $dataAudit2->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
+           
+        //     $dataAudit2 = $dataAudit2->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
+        // }
+        // if(isset($gdata['nama_perusahaan'])){
+           
+        //     $dataAudit2 = $dataAudit2->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
             
-        }
-        if(isset($gdata['mulai'])){
-            $dataAudit1 = $dataAudit1->where('penjadwalan.mulai_audit1','LIKE','%'.$gdata['mulai'].'%')
-            ->orWhere('penjadwalan.mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
+        // }
+        // if(isset($gdata['mulai'])){
+        //     $dataAudit2 = $dataAudit2->where('penjadwalan.mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
 
-            $dataAudit2 = $dataAudit2->where('penjadwalan.mulai_audit1','LIKE','%'.$gdata['mulai'].'%')
-            ->orWhere('penjadwalan.mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
+        // }
 
-        }
-
-        $xdata = $dataAudit1->union($dataAudit2)
+        $xdata = $dataAudit2
         ->get();
 
       
@@ -2326,6 +2356,19 @@ class PenjadwalanController extends Controller
 
         
 
+       
+
+        $xdata = $dataAudit1->get();
+
+      
+        return Datatables::of($xdata)->make();
+    }
+    public function dataLog2(Request $request){
+        $gdata = $request->except('_token','_method');
+        $id_user = Auth::user()->id;
+        //start
+        
+
         $dataAudit2 = DB::table('registrasi')
              ->join('ruang_lingkup','registrasi.id_ruang_lingkup','=','ruang_lingkup.id')
              ->join('kelompok_produk','registrasi.jenis_produk','=','kelompok_produk.id')
@@ -2344,27 +2387,9 @@ class PenjadwalanController extends Controller
        
                
        
-        if(isset($gdata['no_registrasi'])){
+      
 
-            $dataAudit1 = $dataAudit1->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-            $dataAudit2 = $dataAudit2->where('registrasi.no_registrasi','LIKE','%'.$gdata['no_registrasi'].'%');
-        }
-        if(isset($gdata['nama_perusahaan'])){
-            $dataAudit1 = $dataAudit1->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
-            $dataAudit2 = $dataAudit2->where('registrasi.nama_perusahaan','LIKE','%'.$gdata['nama_perusahaan'].'%');
-            
-        }
-        if(isset($gdata['mulai'])){
-            $dataAudit1 = $dataAudit1->where('penjadwalan.mulai_audit1','LIKE','%'.$gdata['mulai'].'%')
-            ->orWhere('penjadwalan.mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
-
-            $dataAudit2 = $dataAudit2->where('penjadwalan.mulai_audit1','LIKE','%'.$gdata['mulai'].'%')
-            ->orWhere('penjadwalan.mulai_audit2','LIKE','%'.$gdata['mulai'].'%');
-
-        }
-
-        $xdata = $dataAudit1->union($dataAudit2)
-        ->get();
+        $xdata = $dataAudit2->get();
 
       
         return Datatables::of($xdata)->make();

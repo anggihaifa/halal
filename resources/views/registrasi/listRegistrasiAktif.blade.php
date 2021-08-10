@@ -68,6 +68,7 @@
                                                     <option value="15">Persiapan Sidang Fatwa Halal</option>
                                                     <option value="16">Sidang Fatwa Halal</option>
                                                     <option value="17">Ketetapan Halal</option>
+                                                    <option value="18">Sertifikat Halal</option>
                                                 </select>
                                             </div>                                                                                                                    
                                             <div>
@@ -529,6 +530,13 @@
                             
                             </div>
                         </div>
+                        <div class="form-group" style="display:none" hidden>
+                            <label class="control-label" for="id">Tipe</label>  
+                            <div >
+                                <input id="tipe"  name="tipe" type="text" placeholder="" value="KH" class="form-control " readonly >
+                            
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label" for="nomor_kh">Nomor Ketetapan Halal *</label>  
@@ -550,37 +558,6 @@
                             <label class=" control-label" for="file_sh">File Ketetapan Halal <b>*pdf</b></label>  
                             <div >
                                 <input id="file_sh"  name="file_sh" type="file" placeholder=""  required >
-                            
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="nomor_sh">Nomor Sertifikat Halal *</label>  
-                            <div >
-                                <input id="nomor_sh"  name="nomor_sh" type="text" placeholder="" class="form-control " required >
-                            
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="tgl_terbit_sh">Tanggal Terbit Sertifikat Halal *</label>  
-                            <div >
-                                <input id="tgl_terbit_sh"  name="tgl_terbit_sh" type="date" placeholder="" class="form-control " required >
-                            
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="tgl_akhir_sh">Tanggal Akhir Masa Berlaku Sertifikat Halal *</label>  
-                            <div >
-                                <input id="tgl_akhir_sh"  name="tgl_akhir_sh" type="date" placeholder="" class="form-control " required >
-                            
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class=" control-label" for="file_sh">File Sertifikat Halal <b>*pdf</b></label>  
-                            <div >
-                                <input id="file_sh"  name="file_sh" type="file" placeholder="" required >
                             
                             </div>
                         </div>
@@ -641,6 +618,81 @@
             </form>
         </div>
     </div>
+    <div id="modalSH" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            
+            <form  action="{{route('ketetapanhalal')}}" method="post"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <form id="formSH">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Ketetapan Halal</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class = "modal-body">
+                        <div class="form-group" style="display:none" hidden>
+                            <label class="control-label" for="id">ID</label>  
+                            <div >
+                                <input id="id"  name="id" type="text" placeholder="" class="form-control " readonly >
+                            
+                            </div>
+                        </div>
+                        <div class="form-group" style="display:none" hidden>
+                            <label class="control-label" for="id">Tipe</label>  
+                            <div >
+                                <input id="tipe"  name="tipe" type="text" placeholder="" value="SH" class="form-control " readonly >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="nomor_sh">Nomor Sertifikat Halal *</label>  
+                            <div >
+                                <input id="nomor_sh"  name="nomor_sh" type="text" placeholder="" class="form-control " required >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="tgl_terbit_sh">Tanggal Terbit Sertifikat Halal *</label>  
+                            <div >
+                                <input id="tgl_terbit_sh"  name="tgl_terbit_sh" type="date" placeholder="" class="form-control " required >
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="tgl_akhir_sh">Tanggal Akhir Masa Berlaku Sertifikat Halal *</label>  
+                            <div >
+                                <input id="tgl_akhir_sh"  name="tgl_akhir_sh" type="date" placeholder="" class="form-control " required >
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class=" control-label" for="file_sh">File Sertifikat Halal <b>*pdf</b></label>  
+                            <div >
+                                <input id="file_sh"  name="file_sh" type="file" placeholder="" required >
+                            
+                            </div>
+                        </div>
+                  
+                        
+
+                    </div>
+                    <div class = "modal-footer">
+                        <div >
+                            <button class="btn btn-sm btn-success" type="submit" >Unggah</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     
 @endsection
 @push('scripts')
@@ -663,6 +715,7 @@
             $('#modalPenjadwalan4').find('form').trigger('reset');
             $('#modaljadwal').removeData();
             $('#modalKH').removeData();
+            $('#modalSH').removeData();
 
         });
 
@@ -687,6 +740,9 @@
         })
 
         $('#modalKH').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+        $('#modalSH').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');
         })
 
@@ -715,6 +771,22 @@
 
             modal.find('#id').val(id);
             modal.find('#formKH').attr('action', function (i,old) {
+                   return old + '/' + id;
+            });
+
+        });
+         $('#modalSH').on('show.bs.modal', function(e) {
+
+
+
+            var $this = $(e.relatedTarget);
+            
+            var id = $this.data('id');
+           
+            var modal = $('#modalSH');
+
+            modal.find('#id').val(id);
+            modal.find('#formSH').attr('action', function (i,old) {
                    return old + '/' + id;
             });
 
@@ -1605,6 +1677,8 @@
 
                             var status17 = (full.status == 17) ? dButton('Ketetapan Halal'):`<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalKH' style="cursor:pointer">Ketetapan Halal</a>`;
 
+                            var status18 = (full.status == 18) ? dButton('Sertifikat Halal'):`<a class="dropdown-item"  data-toggle='modal' data-id=`+full.id+` data-target='#modalSH' style="cursor:pointer">Sertifikat Halal</a>`;
+
                           
 
 
@@ -1811,7 +1885,7 @@
                                                                 </a>
                                                                 <div class="dropdown-divider"></div>
 
-                                                                <div class="dropdown-button-title">Update Progress</div>`+status1+status2+status3+status4+status5+status6+status7+status8+status9+status10+status11+status12+status13+status14+status15+status16+status17+`
+                                                                <div class="dropdown-button-title">Update Progress</div>`+status1+status2+status3+status4+status5+status6+status7+status8+status9+status10+status11+status12+status13+status14+status15+status16+status17+status18+`
                                                             </div> 
                                                         </div>
                                                         </td>

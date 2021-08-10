@@ -288,6 +288,7 @@ function checkProgress(data){
             
             :(data==16)? 'Proses Sidang Fatwa Halal'
             :(data==17)? 'Ketetapan Halal'
+            :(data==18)? 'Sertifikat Halal'
             :'_';
 }
 
@@ -373,6 +374,7 @@ function notifProgress(data){
             
             :(data==16)? 'Proses Sidang Fatwa Halal'
             :(data==17)? 'Ketetapan Halal'
+            :(data==17)? 'Sertifikat Halal'
             :'_';
            
 }

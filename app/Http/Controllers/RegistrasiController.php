@@ -199,7 +199,7 @@ class RegistrasiController extends Controller
         ->leftJoin('penjadwalan','registrasi.id', '=', 'penjadwalan.id_registrasi')
        //  ->join('registrasi_alamatkantor', 'registrasi.id','=','registrasi_alamatkantor.id_registrasi')        
 
-        ->where('registrasi.status','!=',17)
+        ->where('registrasi.status','!=',18)
         ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','kelompok_produk.kelompok_produk as kelompok','users.name as name','users.perusahaan as perusahaan', 'pembayaran.status_tahap1 as status_tahap1','pembayaran.status_tahap2 as status_tahap2','pembayaran.status_tahap3 as status_tahap3','pembayaran.bb_tahap1 as bb_tahap1','pembayaran.bb_tahap2 as bb_tahap2','pembayaran.bb_tahap3 as bb_tahap3','pembayaran.nominal_tahap1 as nominal_tahap1', 'pembayaran.nominal_tahap2 as nominal_tahap2', 'pembayaran.nominal_tahap3 as nominal_tahap3','penjadwalan.status_penjadwalan_audit1 as status_penjadwalan_audit1', 'penjadwalan.status_penjadwalan_audit2 as status_penjadwalan_audit2', 'penjadwalan.status_penjadwalan_tr as status_penjadwalan_tr', 'penjadwalan.status_penjadwalan_tinjauan as status_penjadwalan_tinjauan', 'penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana2_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.pelaksana1_tr','penjadwalan.pelaksana2_tr','penjadwalan.pelaksana3_tr','penjadwalan.pelaksana1_tinjauan','penjadwalan.pelaksana2_tinjauan','penjadwalan.pelaksana3_tinjauan','penjadwalan.mulai_audit1','penjadwalan.mulai_audit2','penjadwalan.selesai_audit1','penjadwalan.selesai_audit2','penjadwalan.mulai_tr','penjadwalan.mulai_tinjauan','penjadwalan.ktg_audit2','laporan_audit2.file_bap','laporan_audit2.file_surat_tugas','laporan_audit2.file_konfirmasi_sk_audit', 'penjadwalan.catatan_penjadwalan_audit1','penjadwalan.catatan_penjadwalan_audit2','penjadwalan.catatan_penjadwalan_tr','penjadwalan.catatan_penjadwalan_tinjauan');
 
         if($kodewilayah == '119'){            
@@ -3227,7 +3227,7 @@ class RegistrasiController extends Controller
             //dd($data);
             $e->status_memenuhi = $data['status_memenuhi'];
             if($data['catatan_akhir_audit1']){
-                $e->catatan_akhir_audit = $data['catatan_akhir_audit1'];
+                $e->catatan_akhir_audit1 = $data['catatan_akhir_audit1'];
             }
             
            
@@ -4310,7 +4310,7 @@ class RegistrasiController extends Controller
                      ->leftjoin('log_kegiatan','registrasi.id','=','log_kegiatan.id_registrasi')                    
                      ->leftjoin('penjadwalan','registrasi.id','=','penjadwalan.id_registrasi') 
                      ->leftjoin('pembayaran','registrasi.id','=','pembayaran.id_registrasi')                                 
-                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3','penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2');
+                     ->select('registrasi.*','ruang_lingkup.ruang_lingkup as jenis','users.name as name','users.perusahaan as perusahaan','log_kegiatan.nama_user as nama_user_log','log_kegiatan.id_kegiatan as id_kegiatan_log','log_kegiatan.judul_kegiatan as judul_kegiatan_log','log_kegiatan.created_at as created_at_log','log_kegiatan.updated_at as updated_at_log','log_kegiatan.id_user as id_user_log', 'penjadwalan.mulai_audit1', 'penjadwalan.mulai_audit2','penjadwalan.mulai_tr', 'penjadwalan.mulai_tinjauan', 'penjadwalan.skema','users.kota', 'pembayaran.status_tahap1','pembayaran.status_tahap2','pembayaran.status_tahap3','penjadwalan.pelaksana1_audit1','penjadwalan.pelaksana1_audit2','penjadwalan.pelaksana2_audit2','penjadwalan.ktg_audit2');
                      
         if($kodewilayah == '119'){ 
             $xdata= $xdata->orderBy('registrasi.updated_at','desc')
@@ -4658,13 +4658,22 @@ class RegistrasiController extends Controller
             date_default_timezone_set('Asia/Jakarta');
             $today = Carbon::now()->toDateTimeString();
             
+            if($data['tipe']== 'KH'){
+                $e->status = 17;
+                $e->nomor_kh = $data['nomor_kh'];
+                $e->tgl_kh = $data['tgl_kh'];
+                $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 17, "Upload Berkas Kelengkapan Ketetapan Halal",Auth::user()->usergroup_id);
+            }elseif($data['tipe']== 'SH'){
+                $e->status = 18;
+                $e->nomor_sh = $data['nomor_sh'];
+                $e->tgl_terbit_sh = $data['tgl_terbit_sh'];
+                $e->tgl_akhir_sh = $data['tgl_akhir_sh'];
+                $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 18, "Upload Berkas Kelengkapan Sertifikat Halal",Auth::user()->usergroup_id);
+            }
             $e->updated_at = $today;
-            $e->status = 17;
-            $e->nomor_sh = $data['nomor_sh'];
-            $e->tgl_terbit_sh = $data['tgl_terbit_sh'];
-            $e->tgl_akhir_sh = $data['tgl_akhir_sh'];
-            $e->nomor_kh = $data['nomor_kh'];
-            $e->tgl_kh = $data['tgl_kh'];
+            
+            
+           
 
 
             
@@ -4746,7 +4755,7 @@ class RegistrasiController extends Controller
             DB::commit();
 
             SendEmailP::dispatch($e,$u,null,$e->status);
-            $this->LogKegiatan($data['id'], Auth::user()->id, Auth::user()->name, 17, "Upload Berkas Kelengkapan Ketetapan Halal",Auth::user()->usergroup_id);
+           
 
             Session::flash('success', "Berkas Kelengkapan Ketetapan Halal Berhasil Diupdate");
                 

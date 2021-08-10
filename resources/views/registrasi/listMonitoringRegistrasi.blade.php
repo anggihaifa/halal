@@ -69,6 +69,7 @@
                                                     <option value="15">Persiapan Sidang Fatwa Halal</option>
                                                     <option value="16">Sidang Fatwa Halal</option>
                                                     <option value="17">Ketetapan Halal</option>
+                                                    <option value="18">Sertifikat Halal</option>
                                                 </select>
                                             </div>
                                             <label class="col-lg-2 col-form-label">Status Aktif</label>
@@ -125,7 +126,7 @@
                     <th class=" valign-middle text-center" style="display:none">Jenis Pendanaan</th>
                     <th class=" valign-middle text-center" style="display:none">Nama Fasilitator</th>
                     <th class=" valign-middle text-center" style="display:none">Provinsi</th>
-                    <th class=" valign-middle text-center" style="width:10%">Audior</th>             
+                    <th class=" valign-middle text-center" style="width:10%">Auditor</th>             
                     <th class=" valign-middle text-center">Monitoring</th>
                 </tr>
                 </thead>
@@ -299,7 +300,7 @@
                         }else{
                             full.pelaksana2_audit2 ="-";
                         }
-                       return`<strong>Tahap 1 </strong><br>`+full.mulai_audit1+`<br><strong> KTA: </strong>`+` <br>`+full.pelaksana1_audit1+`<br>`+`<strong>Tahap 2 </strong><br>`+full.mulai_audit2+`<br><strong> KTA: </strong>`+full.pelaksana1_audit2+`<br> <strong>Tim Audit: <strong>`+full.pelaksana2_audit2
+                       return`<strong>Tahap 1 </strong><br>`+full.mulai_audit1+`<br><strong> KTA: </strong>`+` <br>`+full.pelaksana1_audit1+`<br>`+`<strong>Tahap 2 </strong><br>`+full.mulai_audit2+`<br><strong> KTA: </strong>`+full.pelaksana1_audit2+`<br> <strong>Tim Audit: </strong>`+full.pelaksana2_audit2+`<br><strong>Ktg: </strong>`+full.ktg_audit2
                     }
                 }, 
                
@@ -443,6 +444,7 @@
                             var status16 = (full.status == 16) ? dButton('Proses Sidang Fatwa Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/16" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Proses Sidang Fatwa Halal??')">Proses Sidang Fatwa Halal</a>`;
 
                             var status17 = (full.status == 17) ? dButton('Ketetapan Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/17" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Ketetapan Halal??')">Ketetapan Halal</a>`;
+                            var status18 = (full.status == 18) ? dButton('Sertifikat Halal'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/18" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengupdate ke tahapan Sertifikat Halal??')">Sertifikat Halal</a>`;
                             var status20 = (full.status == 20) ? dButton('Cancel'):`<a href="{{url('update_status_registrasi')}}/`+full.id+`/`+full.no_registrasi+`/`+full.id_user+`/20" class="dropdown-item" onclick= "return confirm('Apakah anda yakin untuk mengcance registrasi ini??')">Cancel Registrasi</a>`;
                             
                             if(role == 3){

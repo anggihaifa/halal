@@ -42,7 +42,7 @@
                     <li class="nav-item text-center">  
                         @if (Auth::user()->usergroup_id == 11 || Auth::user()->usergroup_id == 12)
                             <a class="nav-link" data-toggle="tab" href="#card-tab-2">Upload Form</a>
-                        @else
+                        @else 
                             <a class="nav-link" data-toggle="tab" href="#card-tab-3">Upload Form</a>
                         @endif                        
                     </li>                    
